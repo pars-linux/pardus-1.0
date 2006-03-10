@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>bluez-utils</Name>
+        <Homepage>http://bluez.sf.net</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>daemon</IsA>
+        <IsA>app:console</IsA>
+        <Summary>Bluetooth Tools and System Daemons for using Bluetooth under Linux</Summary>
+        <Summary xml:lang="tr">Bluetooth araçları ve sistem sunucuları</Summary>
+        <Description>Bluetooth Tools and System Daemons for using Bluetooth under Linux</Description>
+        <Description xml:lang="tr">Bluetooth araçları ve sistem sunucuları</Description>
+        <Archive sha1sum="935b18eddda878e63199dd94140bae0a505c26a6" type="targz">http://bluez.sf.net/download/bluez-utils-2.22.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="2.22">bluez-libs</Dependency>
+            <Dependency>libusb</Dependency>
+            <Dependency>cups</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency versionFrom="0.31">dbus</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>bluez-utils</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="2.22">bluez-libs</Dependency>
+            <Dependency>cups</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency versionFrom="0.31">dbus</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/lib/cups/backend</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/var/lib/bluetooth</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/bluetooth">bluez-utils-init.d</AdditionalFile>
+            <AdditionalFile owner="root" permission="0600" target="/etc/bluetooth/pin">bluez-utils-pin</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/bluetooth/pin-helper">bluez-utils-pin-helper.sh</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-10</Date>
+            <Version>2.22</Version>
+            <Comment>First release</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

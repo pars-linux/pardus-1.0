@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>imlib</Name>
+        <Homepage>http://developer.gnome.org/arch/imaging/imlib.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>General image loading and rendering library</Summary>
+        <Summary xml:lang="tr">Genel görüntü yükleme ve işleme kütüphanesi</Summary>
+        <Description>General image loading and rendering library</Description>
+        <Description xml:lang="tr">Genel görüntü yükleme ve işleme kütüphanesi</Description>
+        <Archive sha1sum="92eb60b4b45443d6ab5ed2e4672808c91845ab9d" type="tarbz2">ftp://ftp.gnome.org/pub/gnome/sources/imlib/1.9/imlib-1.9.14.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>gtk1</Dependency>
+            <Dependency versionFrom="3.5.5">tiff</Dependency>
+            <Dependency versionFrom="4.1.0">giflib</Dependency>
+            <Dependency versionFrom="1.2.1">libpng</Dependency>
+            <Dependency>jpeg</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">imlib-1.9.14-bound.patch</Patch>
+            <Patch level="1">imlib-1.9.14-sec2.patch</Patch>
+            <Patch level="1">imlib-config.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>imlib</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk1</Dependency>
+            <Dependency versionFrom="3.5.5">tiff</Dependency>
+            <Dependency versionFrom="4.1.0">giflib</Dependency>
+            <Dependency versionFrom="1.2.1">libpng</Dependency>
+            <Dependency>jpeg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/imlib</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-13</Date>
+            <Version>1.9.14</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>Compress-Zlib</Name>
+        <Homepage>http://search.cpan.org/~pmqs/Compress-Zlib-1.41/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Summary>Perl interface to most of the zlib compression library</Summary>
+        <Description>Perl interface to most of the zlib compression library</Description>
+        <Summary xml:lang="tr">Zlib sıkıştırma kütüphanesi için Perl arayüzü</Summary>
+        <Description xml:lang="tr">Zlib sıkıştırma kütüphanesi için Perl arayüzü</Description>
+        <Archive sha1sum="0a0aea0fe460956d71db0a0f571d67078ca1dc94" type="targz">http://www.cpan.org/modules/by-category/17_Archiving_and_Compression/Compress/Compress-Zlib-1.41.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>Compress-Zlib</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-12</Date>
+            <Version>1.41</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

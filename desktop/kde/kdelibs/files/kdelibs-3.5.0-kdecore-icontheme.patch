@@ -1,0 +1,12 @@
+diff -ur kdelibs-3.4.92.orig/kdecore/kicontheme.cpp kdelibs-3.4.92/kdecore/kicontheme.cpp
+--- kdelibs-3.4.92.orig/kdecore/kicontheme.cpp	2005-09-10 11:27:12.000000000 +0300
++++ kdelibs-3.4.92/kdecore/kicontheme.cpp	2005-10-20 03:57:00.000000000 +0300
+@@ -489,7 +489,7 @@
+ // static
+ QString KIconTheme::defaultThemeName()
+ {
+-    return QString::fromLatin1("crystalsvg");
++    return QString::fromLatin1("Tulliana-1.0");
+ }
+ 
+ /*** KIconThemeDir ***/

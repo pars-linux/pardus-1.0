@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libsndfile</Name>
+        <Homepage>http://www.mega-nerd.com/libsndfile/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>library</IsA>
+        <Summary>A C library for reading and writing files containing sampled sound</Summary>
+        <Summary xml:lang="tr">Örneklenmiş ses verileri içeren dosyalar yazmak ve okumak için C dili kütüphanesi.</Summary>
+        <Description>A C library for reading and writing files containing sampled sound</Description>
+        <Description xml:lang="tr">Örneklenmiş ses verileri içeren dosyalar yazmak ve okumak için C dili kütüphanesi.</Description>
+        <Archive sha1sum="16372a7814530178a2642bd22f203641e0392ebb" type="targz">http://www.mega-nerd.com/libsndfile/libsndfile-1.0.11.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>libsndfile</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/octave/site/m</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-08</Date>
+            <Version>1.0.11</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

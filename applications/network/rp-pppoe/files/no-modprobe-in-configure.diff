@@ -1,0 +1,18 @@
+--- rp-pppoe-3.6/src/configure.in	2005-08-10 04:50:46.000000000 +0300
++++ rp-pppoe-work/src/configure.in	2005-11-16 01:43:41.000000000 +0200
+@@ -134,15 +134,6 @@
+ AC_MSG_CHECKING(for Linux 2.4.X kernel-mode PPPoE support)
+ AC_CACHE_VAL(ac_cv_linux_kernel_pppoe,[
+ if test "`uname -s`" = "Linux" ; then
+-if test $cross_compiling = "no"; then
+-
+-dnl Do a bunch of modprobes.  Can't hurt; might help.
+-modprobe ppp_generic > /dev/null 2>&1
+-modprobe ppp_async > /dev/null 2>&1
+-modprobe n_hdlc > /dev/null 2>&1
+-modprobe ppp_synctty > /dev/null 2>&1
+-modprobe pppoe > /dev/null 2>&1
+-fi
+ AC_TRY_RUN([#include <sys/socket.h>
+ #include <net/ethernet.h>
+ #include <linux/if.h>

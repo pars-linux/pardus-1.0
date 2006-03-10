@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pyrex</Name>
+        <Homepage>http://www.cosc.canterbury.ac.nz/~greg/python/Pyrex</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>library</IsA>
+        <Summary>A language for writing Python extension modules</Summary>
+        <Description>A language for writing Python extension modules</Description>
+        <Summary xml:lang="tr">Python modülleri için kullanılan bir dil</Summary>
+        <Description xml:lang="tr">Python modülleri için kullanılan bir dil</Description>
+        <Archive sha1sum="bbd534b1905de5f3ad445c6d30a2fd57a4b362be" type="targz">http://www.cosc.canterbury.ac.nz/%7Egreg/python/Pyrex/Pyrex-0.9.3.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="2.3">python</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">pyrex-0.9.3-python24_distutils.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>pyrex</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-16</Date>
+            <Version>0.9.3</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>nvidia</Name>
+        <Homepage>http://www.nvidia.com</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>EULA</License>
+        <IsA>library</IsA>
+        <Summary>nVIDIA kernel and glx drivers</Summary>
+        <Summary xml:lang="tr">nVIDIA ekran kartı sürücüleri</Summary>
+        <Description>nVIDIA kernel and glx drivers giving optimized 2d/3d performance on Linux</Description>
+        <Description xml:lang="tr">2B/3B başarımı için gerekli nVIDIA sürücüleri</Description>
+        <Archive sha1sum="d3b43eb3db6769c9c5f3c5f879664ca5bb1222f5" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/NVIDIA-Linux-x86-1.0-8178-pkg1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>kernel-source</Dependency>
+            <Dependency>xorg</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>power-management.diff</Patch>
+            <Patch>vm-insert-page.diff</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>nvidia-kernel</Name>
+        <Summary>nVIDIA kernel driver</Summary>
+        <Description>nVIDIA kernel driver for low level infrastracture.</Description>
+        <Files>
+            <Path fileType="all" permanent="true">/lib/modules</Path>
+        </Files>
+        <Provides>
+            <COMAR script="kernel-module.py">System.Package</COMAR>
+        </Provides>                                 
+    </Package>
+  
+    <Package>
+        <Name>nvidia-glx</Name>
+        <Summary>nVIDIA glx module for X.org</Summary>
+        <Description>nVIDIA glx module for X.org for optimized 2d/3d performance.</Description>
+        <RuntimeDependencies>
+            <Dependency>nvidia-kernel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <Provides>
+            <COMAR script="opengl-update.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <Package>
+        <Name>nvidia-tools</Name>
+        <Summary>nvidia-settings and nvidia-xconfig tools</Summary>
+        <Description>GUI tool nvidia-settings for nVIDIA cards and a command line tool named nvidia-xconfig for X.org configuration</Description>
+        <RuntimeDependencies>
+            <Dependency>nvidia-glx</Dependency>
+            <Dependency>gtk2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-12-25</Date>
+            <Version>1.0-8178</Version>
+            <Comment>New stable release</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-12-06</Date>
+            <Version>1.0-8174</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

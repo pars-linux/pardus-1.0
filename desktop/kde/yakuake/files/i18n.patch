@@ -1,0 +1,430 @@
+diff -Nur yakuake-2.7.3.orig/po/Makefile.am yakuake-2.7.3/po/Makefile.am
+--- yakuake-2.7.3.orig/po/Makefile.am	1970-01-01 02:00:00.000000000 +0200
++++ yakuake-2.7.3/po/Makefile.am	2005-12-19 02:04:55.000000000 +0200
+@@ -0,0 +1 @@
++SUBDIRS = $(AUTODIRS)
+diff -Nur yakuake-2.7.3.orig/po/tr/Makefile.am yakuake-2.7.3/po/tr/Makefile.am
+--- yakuake-2.7.3.orig/po/tr/Makefile.am	1970-01-01 02:00:00.000000000 +0200
++++ yakuake-2.7.3/po/tr/Makefile.am	2005-12-19 02:05:13.000000000 +0200
+@@ -0,0 +1,2 @@
++KDE_LANG=tr
++POFILES=AUTO
+diff -Nur yakuake-2.7.3.orig/po/tr/yakuake.po yakuake-2.7.3/po/tr/yakuake.po
+--- yakuake-2.7.3.orig/po/tr/yakuake.po	1970-01-01 02:00:00.000000000 +0200
++++ yakuake-2.7.3/po/tr/yakuake.po	2005-12-19 02:17:46.000000000 +0200
+@@ -0,0 +1,131 @@
++# translation of turkish.po to
++# This file is put in the public domain.
++#
++# Görkem Çetin <gorkem@uludag.org.tr>, 2005.
++msgid ""
++msgstr ""
++"Project-Id-Version: turkish\n"
++"Report-Msgid-Bugs-To: \n"
++"POT-Creation-Date: 2005-12-19 01:35+0200\n"
++"PO-Revision-Date: 2005-12-19 01:43+0200\n"
++"Last-Translator: Görkem Çetin <gorkem@uludag.org.tr>\n"
++"Language-Team:  <tr@li.org>\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
++"X-Generator: KBabel 1.11\n"
++
++#: main.cpp:32
++msgid "Yet Another KDE konsole which resembles those found in Quake."
++msgstr "Bir başka KDE konsol programı"
++
++#: main.cpp:44
++msgid "YaKuake"
++msgstr "YaKuake"
++
++#: main_window.cpp:83
++msgid "Access key"
++msgstr "Erişim tuşu"
++
++#: main_window.cpp:84
++msgid "Toggles the state of YaKuake"
++msgstr "YaKuake'nin durumunu açar / kapatır"
++
++#: main_window.cpp:92
++msgid "Add"
++msgstr "Ekle"
++
++#: main_window.cpp:95
++msgid "Remove"
++msgstr "Sil"
++
++#: main_window.cpp:99
++msgid "Next"
++msgstr "İleri"
++
++#: main_window.cpp:102
++msgid "Previous"
++msgstr "Geri"
++
++#: main_window.cpp:105
++msgid "Paste clipboard"
++msgstr "Panoyu yapıştır"
++
++#: main_window.cpp:121
++msgid ""
++"Application successfully started !\n"
++"Press "
++msgstr "Program başarıyla başlatıldı.<br>Başlatmak için "
++
++#: main_window.cpp:122
++msgid "AccessKey"
++msgstr "AccessKey"
++
++#: main_window.cpp:122
++msgid " to use it..."
++msgstr " tuşuna basın..."
++
++#: main_window.cpp:181
++msgid "YaKuake Notification"
++msgstr "YaKuake Bilgilendirmesi"
++
++#: main_window.cpp:417
++msgid "Properties"
++msgstr "Özellikler"
++
++#: main_window.cpp:423
++msgid "Screen: "
++msgstr "Ekran:"
++
++#: main_window.cpp:426
++msgid "Use mouse location"
++msgstr "Fare konumunu kullan"
++
++#: main_window.cpp:430
++msgid "Screen display"
++msgstr "Ekran görüntüsü"
++
++#: main_window.cpp:441
++msgid "Terminal width"
++msgstr "Uçbirim genişliği"
++
++#: main_window.cpp:450
++msgid "Terminal height"
++msgstr "Uçbirim yüksekliği"
++
++#: main_window.cpp:459
++msgid "Horizontal location"
++msgstr "Yatay konum"
++
++#: main_window.cpp:469
++msgid "Animation duration"
++msgstr "Animasyon süresi"
++
++#: main_window.cpp:474
++msgid "Options"
++msgstr "Seçenekler"
++
++#: main_window.cpp:476
++msgid "Show the tabs bar"
++msgstr "Sekme çubuğunu göster"
++
++#: main_window.cpp:477
++msgid "Retract when loose focus"
++msgstr "Odaktan çıkınca kaybol"
++
++#: main_window.cpp:478
++msgid "Force background refresh"
++msgstr "Arkaplan tazelemesini zorla"
++
++#: main_window.cpp:482
++msgid "Shortcuts"
++msgstr "Kısayollar"
++
++#: main_window.cpp:484
++msgid "Change access key..."
++msgstr "Erişim tuşunu değiştir..."
++
++#: main_window.cpp:485
++msgid "Change control keys..."
++msgstr "Kontrol tuşlarını değiştir..."
++
+diff -Nur yakuake-2.7.3.orig/po/yakuake.pot yakuake-2.7.3/po/yakuake.pot
+--- yakuake-2.7.3.orig/po/yakuake.pot	1970-01-01 02:00:00.000000000 +0200
++++ yakuake-2.7.3/po/yakuake.pot	2005-12-19 02:00:22.000000000 +0200
+@@ -0,0 +1,130 @@
++# SOME DESCRIPTIVE TITLE.
++# This file is put in the public domain.
++# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
++#
++#, fuzzy
++msgid ""
++msgstr ""
++"Project-Id-Version: PACKAGE VERSION\n"
++"Report-Msgid-Bugs-To: \n"
++"POT-Creation-Date: 2005-12-19 02:00+0200\n"
++"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
++"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
++"Language-Team: LANGUAGE <LL@li.org>\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=CHARSET\n"
++"Content-Transfer-Encoding: 8bit\n"
++
++#: main.cpp:32
++msgid "Yet Another KDE konsole which resembles those found in Quake."
++msgstr ""
++
++#: main.cpp:44
++msgid "YaKuake"
++msgstr ""
++
++#: main_window.cpp:83
++msgid "Access key"
++msgstr ""
++
++#: main_window.cpp:84
++msgid "Toggles the state of YaKuake"
++msgstr ""
++
++#: main_window.cpp:92
++msgid "Add"
++msgstr ""
++
++#: main_window.cpp:95
++msgid "Remove"
++msgstr ""
++
++#: main_window.cpp:99
++msgid "Next"
++msgstr ""
++
++#: main_window.cpp:102
++msgid "Previous"
++msgstr ""
++
++#: main_window.cpp:105
++msgid "Paste clipboard"
++msgstr ""
++
++#: main_window.cpp:121
++msgid ""
++"Application successfully started !\n"
++"Press "
++msgstr ""
++
++#: main_window.cpp:122
++msgid "AccessKey"
++msgstr ""
++
++#: main_window.cpp:122
++msgid " to use it..."
++msgstr ""
++
++#: main_window.cpp:181
++msgid "YaKuake Notification"
++msgstr ""
++
++#: main_window.cpp:417
++msgid "Properties"
++msgstr ""
++
++#: main_window.cpp:423
++msgid "Screen: "
++msgstr ""
++
++#: main_window.cpp:426
++msgid "Use mouse location"
++msgstr ""
++
++#: main_window.cpp:430
++msgid "Screen display"
++msgstr ""
++
++#: main_window.cpp:441
++msgid "Terminal width"
++msgstr ""
++
++#: main_window.cpp:450
++msgid "Terminal height"
++msgstr ""
++
++#: main_window.cpp:459
++msgid "Horizontal location"
++msgstr ""
++
++#: main_window.cpp:469
++msgid "Animation duration"
++msgstr ""
++
++#: main_window.cpp:474
++msgid "Options"
++msgstr ""
++
++#: main_window.cpp:476
++msgid "Show the tabs bar"
++msgstr ""
++
++#: main_window.cpp:477
++msgid "Retract when loose focus"
++msgstr ""
++
++#: main_window.cpp:478
++msgid "Force background refresh"
++msgstr ""
++
++#: main_window.cpp:482
++msgid "Shortcuts"
++msgstr ""
++
++#: main_window.cpp:484
++msgid "Change access key..."
++msgstr ""
++
++#: main_window.cpp:485
++msgid "Change control keys..."
++msgstr ""
+diff -Nur yakuake-2.7.3.orig/src/main_window.cpp yakuake-2.7.3/src/main_window.cpp
+--- yakuake-2.7.3.orig/src/main_window.cpp	2005-10-17 23:23:16.000000000 +0300
++++ yakuake-2.7.3/src/main_window.cpp	2005-12-19 01:36:38.000000000 +0200
+@@ -89,20 +89,20 @@
+ 
+     // Initializes controls keys ------------------------
+ 
+-    action_new = new KAction("Add", SHIFT + Key_Up,
++    action_new = new KAction(i18n("Add"), SHIFT + Key_Up,
+                              this, SLOT(slotAddSession()),
+                              actionCollection(), "Add a tab");
+-    action_del = new KAction("Remove", SHIFT + Key_Down,
++    action_del = new KAction(i18n("Remove"), SHIFT + Key_Down,
+                              this, SLOT(slotRemoveSession()),
+                              actionCollection(), "Remove current tab");
+ 
+-    action_next = new KAction("Next", SHIFT + Key_Right,
++    action_next = new KAction(i18n("Next"), SHIFT + Key_Right,
+                               tabs_bar, SLOT(slotSelectNextItem()),
+                               actionCollection(), "Next tab");
+-    action_prev = new KAction("Previous", SHIFT + Key_Left,
++    action_prev = new KAction(i18n("Previous"), SHIFT + Key_Left,
+                               tabs_bar, SLOT(slotSelectPreviousItem()),
+                               actionCollection(), "Previous tab");
+-    action_paste = new KAction("Paste clipboard", SHIFT + Key_Insert,
++    action_paste = new KAction(i18n("Paste clipboard"), SHIFT + Key_Insert,
+                                this, SLOT(slotPasteClipboard()),
+                                actionCollection(), "Paste clipboard");
+ 
+@@ -118,8 +118,8 @@
+ 
+     // Displays a popup window ----------------------------
+ 
+-    showPopup("Application successfully started !\nPress " +
+-              global_key->shortcut("AccessKey").toString() + " to use it...");
++    showPopup(i18n("Application successfully started !\nPress ") +
++              global_key->shortcut(i18n("AccessKey")).toString() + i18n(" to use it..."));
+ }
+ 
+ MainWindow::~MainWindow()
+@@ -178,7 +178,7 @@
+ 
+ void    MainWindow::showPopup(const QString & caption, int time)
+ {
+-    popup.setView("YaKuake Notification", caption, KApplication::kApplication()->miniIcon());
++    popup.setView(i18n("YaKuake Notification"), caption, KApplication::kApplication()->miniIcon());
+     popup.setTimeout(time);
+     popup.show();
+ }
+@@ -414,20 +414,20 @@
+ {
+     menu = new KPopupMenu();
+ 
+-    menu->insertTitle("Properties");
++    menu->insertTitle(i18n("Properties"));
+ 
+     // Creates the screen menu ----------------------------
+ 
+     screen_menu = new KPopupMenu(menu);
+     for (int i = 1; i <= QApplication::desktop()->numScreens(); i++)
+-        screen_menu->insertItem("Screen: " + QString::number(i), i);
++        screen_menu->insertItem(i18n("Screen: ") + QString::number(i), i);
+ 
+     screen_menu->insertSeparator();
+-    screen_menu->insertItem("Use mouse location", 0);
++    screen_menu->insertItem(i18n("Use mouse location"), 0);
+ 
+     if (QApplication::desktop()->numScreens() > 1)
+     {
+-        menu->insertItem("Screen display", screen_menu);
++        menu->insertItem(i18n("Screen display"), screen_menu);
+         connect(screen_menu, SIGNAL(activated(int)), this, SLOT(slotSetScreen(int)));
+     }
+ 
+@@ -438,7 +438,7 @@
+     for (int i = 10; i <= 100; i += 10)
+         sizeW_menu->insertItem(QString::number(i) + "%", i);
+ 
+-    menu->insertItem("Terminal width", sizeW_menu);
++    menu->insertItem(i18n("Terminal width"), sizeW_menu);
+     connect(sizeW_menu, SIGNAL(activated(int)), this, SLOT(slotSetSizeW(int)));
+ 
+     // Creates the sizeH menu -----------------------------
+@@ -447,7 +447,7 @@
+     for (int i = 10; i <= 100; i += 10)
+         sizeH_menu->insertItem(QString::number(i) + "%", i);
+ 
+-    menu->insertItem("Terminal height", sizeH_menu);
++    menu->insertItem(i18n("Terminal height"), sizeH_menu);
+     connect(sizeH_menu, SIGNAL(activated(int)), this, SLOT(slotSetSizeH(int)));
+ 
+     // Creates the locationH menu -------------------------
+@@ -456,7 +456,7 @@
+     for (int i = 0; i <= 100; i += 10)
+         locationH_menu->insertItem(QString::number(i) + "%", i);
+ 
+-    menu->insertItem("Horizontal location", locationH_menu);
++    menu->insertItem(i18n("Horizontal location"), locationH_menu);
+     connect(locationH_menu, SIGNAL(activated(int)), this, SLOT(slotSetLocationH(int)));
+ 
+     // Creates the speed menu -----------------------------
+@@ -466,23 +466,23 @@
+     for (int i = 50; i <= 500; i += 50)
+         speed_menu->insertItem("~" + QString::number(i) + "ms", i/10);
+ 
+-    menu->insertItem("Animation duration", speed_menu);
++    menu->insertItem(i18n("Animation duration"), speed_menu);
+     connect(speed_menu, SIGNAL(activated(int)), this, SLOT(slotSetSpeed(int)));
+ 
+     // Adds the options modifier --------------------------
+ 
+-    menu->insertTitle("Options");
++    menu->insertTitle(i18n("Options"));
+ 
+-    menu->insertItem("Show the tabs bar", this, SLOT(slotSetTabsPolicy()), 0, 1);
+-    menu->insertItem("Retract when loose focus", this, SLOT(slotSetFocusPolicy()), 0, 2);
+-    menu->insertItem("Force background refresh", this, SLOT(slotSetBackgroundPolicy()), 0, 3);
++    menu->insertItem(i18n("Show the tabs bar"), this, SLOT(slotSetTabsPolicy()), 0, 1);
++    menu->insertItem(i18n("Retract when loose focus"), this, SLOT(slotSetFocusPolicy()), 0, 2);
++    menu->insertItem(i18n("Force background refresh"), this, SLOT(slotSetBackgroundPolicy()), 0, 3);
+ 
+     // Adds the shortcuts modifiers -----------------------
+ 
+-    menu->insertTitle("Shortcuts");
++    menu->insertTitle(i18n("Shortcuts"));
+ 
+-    menu->insertItem("Change access key...", this, SLOT(slotSetAccessKey()));
+-    menu->insertItem("Change control keys...", this, SLOT(slotSetControlKeys()));
++    menu->insertItem(i18n("Change access key..."), this, SLOT(slotSetAccessKey()));
++    menu->insertItem(i18n("Change control keys..."), this, SLOT(slotSetControlKeys()));
+ }
+ 
+ 
+diff -Nur yakuake-2.7.3.orig/src/Makefile.am yakuake-2.7.3/src/Makefile.am
+--- yakuake-2.7.3.orig/src/Makefile.am	2005-10-18 19:40:06.000000000 +0300
++++ yakuake-2.7.3/src/Makefile.am	2005-12-19 01:37:15.000000000 +0200
+@@ -6,10 +6,9 @@
+ 
+ # let automoc handle all of the meta source files (moc)
+ 
+-
+-messages: rc.cpp
+-	$(EXTRACTRC) `find . -name \*.ui -o -name \*.rc` > rc.cpp
+-	$(XGETTEXT) *.cpp -o $(podir)/yakuake.pot
++COMMAND=$(XGETTEXT) --foreign-user -C -ci18n -ki18n -ktr2i18n -kI18N_NOOP -kI18N_NOOP2 -kaliasLocale
++messages:
++	$(XGETTEXT) *.cpp -o ../po/yakuake.pot
+ 
+ KDE_ICON = AUTO
+ 

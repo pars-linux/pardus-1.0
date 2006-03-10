@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>reiserfsprogs</Name>
+        <Homepage>http://www.namesys.com/</Homepage>
+        <Packager>
+            <Name>Gökçen Eraslan</Name>
+            <Email>gokcene@anadolu.edu.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Reiserfs Utilities</Summary>
+        <Summary xml:lang="tr">Reiserfs dosya sistemi oluşturmak, bu dosya sistemini kontrol etmek, boyutlandırmak ve hatalarını ayıklamak için gereken araçlar.</Summary>
+        <Description>Reiserfs Utilities</Description>
+        <Description xml:lang="tr">Reiserfs dosya sistemi oluşturmak, bu dosya sistemini kontrol etmek, boyutlandırmak ve hatalarını ayıklamak için gereken araçlar. Linux çekirdeği 2.4.1 sürümünden sonra bütünleşik olarak reiserfs desteği sunmamaktadır. Bu paket, reiserfs dosya sistemi ile çalışmak isterseniz (2.4.1'den sonraki Linux sürümlerinden birini kullanıyosanız) ve eğer sistem çekirdeğinize(kernel) reiserfs yaması yapılmamışsa gerekmektedir.</Description>
+        <Archive sha1sum="7ddec6e79579976f5af81c8a7e6d5f338d1b37f6" type="targz">http://www.namesys.com/pub/reiserfsprogs/reiserfsprogs-3.6.18.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>reiserfsprogs</Name>
+        <Files>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-17</Date>
+            <Version>3.6.18</Version>
+            <Comment>First release.</Comment>
+            <Name>Gökçen Eraslan</Name>
+            <Email>gokcene@anadolu.edu.tr</Email>
+        </Update>
+    </History>
+</PISI>

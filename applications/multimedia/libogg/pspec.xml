@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libogg</Name>
+        <Homepage>http://www.vorbis.com</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>library</IsA>
+        <Description>The Ogg media file format library</Description>
+        <Description xml:lang="tr">Ogg biçimli dosya kütüphanesi</Description>
+        <Summary>The Ogg media file format library</Summary>
+        <Summary xml:lang="tr">Ogg biçimli dosya kütüphanesi</Summary>
+        <Archive sha1sum="518569a6be397f3903d86ca8c83b943ec0e4e713" type="targz">http://downloads.xiph.org/releases/ogg/libogg-1.1.2.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>libogg</Name>
+        <Files>
+          <Path fileType="library">/usr/lib</Path>
+          <Path fileType="doc">/usr/share/doc</Path>
+          <Path fileType="header">/usr/include</Path>
+          <Path fileType="data">/usr/share/aclocal</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-07</Date>
+            <Version>1.1.2</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

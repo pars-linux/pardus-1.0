@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>icecream</Name>
+        <Homepage>http://wiki.kde.org/icecream</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>daemon</IsA>
+        <Summary>Icecream is a program for distributed compiling of C(++) code across several machines based on ideas and code by distcc.</Summary>
+        <Summary xml:lang="tr">Icecream; C(++) kaynak kodunun, birden fazla makinede dağıtık olarak derlenmesi fikrine dayanan distcc kodu temelinde yazılmış bir uygulamadır</Summary>
+        <Description>Icecream is a program for distributed compiling of C(++) code across several machines based on ideas and code by distcc.</Description>
+        <Description xml:lang="tr">Icecream; C(++) kaynak kodunun, birden fazla makinede dağıtık olarak derlenmesi fikrine dayanan distcc kodu temelinde yazılmış bir uygulamadır.</Description>
+        <Archive sha1sum="84fd01ddf8356b7c9371966ec5472d2ffdecbe5b" type="tarbz2">ftp://ftp.suse.com/pub/projects/icecream/icecream-0.6-20050413.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>kdelibs</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>icecream</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/opt/icecream/bin</Path>
+            <Path fileType="executable">/opt/icecream/sbin</Path>
+            <Path fileType="library">/opt/icecream/lib</Path>
+            <Path fileType="data">/opt/icecream/share</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/icecreamdaemon">icecreamdaemon</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/icecreamscheduler">icecreamscheduler</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-24</Date>
+            <Version>0.6-20050413</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

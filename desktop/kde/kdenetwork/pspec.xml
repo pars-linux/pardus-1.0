@@ -1,0 +1,131 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kdenetwork</Name>
+        <Homepage>http://www.kde.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>KDE network apps: kopete, kppp, kget...</Summary>
+        <Description>KDE network apps: kopete, kppp, kget...</Description>
+        <Summary xml:lang="tr">KDE ağ uygulamaları: kopete, kppp, kget...</Summary>
+        <Description xml:lang="tr">KDE ağ uygulamaları: kopete, kppp, kget...</Description>
+        <Archive sha1sum="38c7c021e324e2c3dd222dfc716a511e44d066c7" type="tarbz2">ftp://ftp.kde.org/pub/kde/stable/3.5/src/kdenetwork-3.5.0.tar.bz2</Archive>
+        <Patches>
+            <Patch>kde-3.5-kopete-faster-addaccount.diff</Patch>
+            <Patch>kwifimanager-memcpy.diff</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency version="3.5.0">kdebase</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency>libxml2</Dependency> 
+            <Dependency>openslp</Dependency>
+            <Dependency>wireless-tools</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>kdenetwork</Name>
+        <RuntimeDependencies>
+            <Dependency version="3.5.0">kdebase</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>openslp</Dependency>
+            <Dependency versionFrom="1.4.1">rdesktop</Dependency> 
+            <Dependency>qca-tls</Dependency>
+            <Dependency>IO-Socket-SSL</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="library">/usr/kde/3.5/lib</Path>
+            <Path fileType="data">/usr/kde/3.5/share</Path>
+            <Path fileType="header">/usr/kde/3.5/include</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/lisa">lisa</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/reslisa">reslisa</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/lisa">lisa.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/reslisa">reslisa.conf</AdditionalFile>
+            <!-- Pure Style, http://www.kde-look.org/content/show.php?content=23473 -->
+            <AdditionalFile owner="root" permission="0644" target="/usr/kde/3.5/share/apps/kopete/styles/Pure.xsl">Pure.xsl</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/kde/3.5/share/apps/kopete/styles/Pure_single.xsl">Pure_single.xsl</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/kde/3.5/share/apps/kopete/styles/data/Pure/action.png">action.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/kde/3.5/share/apps/kopete/styles/data/Pure/arrow0.png">arrow0.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/kde/3.5/share/apps/kopete/styles/data/Pure/arrow1.png">arrow1.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/kde/3.5/share/apps/kopete/styles/data/Pure/clock.png">clock.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/kde/3.5/share/apps/kopete/styles/data/Pure/contact.png">contact.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/kde/3.5/share/apps/kopete/styles/data/Pure/corner-bl.png">corner-bl.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/kde/3.5/share/apps/kopete/styles/data/Pure/corner-br.png">corner-br.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/kde/3.5/share/apps/kopete/styles/data/Pure/corner-tl.png">corner-tl.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/kde/3.5/share/apps/kopete/styles/data/Pure/corner-tr.png">corner-tr.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/kde/3.5/share/apps/kopete/styles/data/Pure/important.png">important.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/kde/3.5/share/apps/kopete/styles/data/Pure/myself.png">myself.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/kde/3.5/share/apps/kopete/styles/data/Pure/system.png">system.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    
+    <History>
+        <Update release="8">
+            <Date>2005-12-08</Date>
+            <Version>3.5.0</Version>
+            <Comment>Fix #943</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="7">
+            <Date>2005-11-29</Date>
+            <Version>3.5.0</Version>
+            <Comment>Version bump to stable release</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-11-21</Date>
+            <Version>3.5.0_rc2</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-11-15</Date>
+            <Version>3.5.0_rc1</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-11-10</Date>
+            <Version>3.5.0_beta2</Version>
+            <Comment>Disable ksirc from compilation</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-05</Date>
+            <Version>3.5.0_beta2</Version>
+            <Comment>fix #455</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-15</Date>
+            <Version>3.5.0_beta2</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-05</Date>
+            <Version>3.4.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

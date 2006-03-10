@@ -1,0 +1,40 @@
+diff -ur bash-3.0.orig/lib/readline/display.c bash-3.0/lib/readline/display.c
+--- bash-3.0.orig/lib/readline/display.c	2004-10-30 16:28:14.000000000 +0300
++++ bash-3.0/lib/readline/display.c	2004-10-30 16:31:01.552871888 +0300
+@@ -1414,7 +1414,7 @@
+ 	      insert_some_chars (nfd, lendiff, col_lendiff);
+ 	      _rl_last_c_pos += col_lendiff;
+ 	    }
+-	  else if (*ols == 0 && lendiff > 0)
++	  else if ((MB_CUR_MAX == 1 || rl_byte_oriented != 0) && *ols == 0 && col_lendiff > 0)
+ 	    {
+ 	      /* At the end of a line the characters do not have to
+ 		 be "inserted".  They can just be placed on the screen. */
+diff -ur bash-3.0.orig/lib/readline/histexpand.c bash-3.0/lib/readline/histexpand.c
+--- bash-3.0.orig/lib/readline/histexpand.c	2004-03-22 15:27:31.000000000 +0200
++++ bash-3.0/lib/readline/histexpand.c	2004-10-30 16:30:09.149838360 +0300
+@@ -206,6 +206,7 @@
+ 
+   /* Only a closing `?' or a newline delimit a substring search string. */
+   for (local_index = i; c = string[i]; i++)
++  {
+ #if defined (HANDLE_MULTIBYTE)
+     if (MB_CUR_MAX > 1 && rl_byte_oriented == 0)
+       {
+@@ -222,7 +223,6 @@
+ 	    continue;
+ 	  }
+       }
+-    else
+ #endif /* HANDLE_MULTIBYTE */
+       if ((!substring_okay && (whitespace (c) || c == ':' ||
+ 	  (history_search_delimiter_chars && member (c, history_search_delimiter_chars)) ||
+@@ -230,7 +230,7 @@
+ 	  string[i] == '\n' ||
+ 	  (substring_okay && string[i] == '?'))
+ 	break;
+-
++  }
+   which = i - local_index;
+   temp = (char *)xmalloc (1 + which);
+   if (which)

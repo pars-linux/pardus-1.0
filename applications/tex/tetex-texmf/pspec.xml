@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>tetex-texmf</Name>
+        <Homepage>http://tug.org/teTeX/</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>plugin</IsA>
+        <Summary>The complete fonts/macros subtree for tetex</Summary>
+        <Description>The complete fonts/macros subtree for tetex</Description>
+        <Summary xml:lang="tr">tetex için yetkin bir yazıtipi/makro altdizini</Summary>
+        <Description xml:lang="tr">tetex için yetkin bir yazıtipi/makro altdizini</Description>
+        <Archive sha1sum="10f7d2fa007c95ca066d899fca0e9a8446108824" type="targz">ftp://tug.ctan.org/tex-archive/systems/unix/teTeX/current/distrib/tetex-texmf-3.0.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>tetex-extra</Name>
+        <Summary>Optional TeTeX documentation</Summary>
+        <Summary xml:lang="tr">TeTeX belgeleri (İsteğe bağlı)</Summary>
+        <IsA>doc</IsA>
+        <Files>
+            <Path fileType="doc">/usr/share/texmf-dist/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>tetex-texmf</Name>
+        <Summary>TeTeX macros and fonts necessary for generating documents</Summary>
+        <Summary xml:lang="tr">Belge oluşturmak için gerekli TeTeX makro ve yazıtipleri</Summary>
+        <Files>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-10</Date>
+            <Version>3.0</Version>
+            <Comment>Split documents into another package.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-08</Date>
+            <Version>3.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

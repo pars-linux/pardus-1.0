@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libperl</Name>
+        <Homepage>http://www.perl.org</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>Larry Wall's Practical Extraction and Reporting Language library</Summary>
+        <Description>Larry Wall's Practical Extraction and Reporting Language library</Description>
+        <Summary xml:lang="tr">Larry Wall'ın Perl uygulama geliştirme dili kütüphanesi</Summary>
+        <Description xml:lang="tr">Perl; C, sed, awk, sh ve başka pek çok dilin önemli ve güçlü özelliklerini bünyesinde 
+        barındıran ileri seviye bir programlama dilidir.</Description>
+        <Archive sha1sum="c9477c6fe76b200033694bdc555a0276523d4228" type="tarbz2">http://www.cpan.org/src/perl-5.8.7.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>groff</Dependency>
+            <Dependency>db4</Dependency>
+            <Dependency versionFrom="1.8.0">gdbm</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>libperl-5.8.5-create-libperl-soname.patch</Patch>
+            <Patch>perl-5.8.5-prelink-lpthread.patch</Patch>
+            <Patch>perl-5.8.5-perldoc-emptydirs.patch</Patch>
+            <Patch>perl-5.8.5-picdl.patch</Patch>
+            <Patch level="1">perl-5.8.5-noksh.patch</Patch>
+            <Patch>perl-5.8.7-CAN-2005-0448.patch</Patch>
+            <Patch>perl-5.8.5-reorder-INC.patch</Patch>
+            <Patch>perl-5.8.7-tempfiles.patch</Patch>
+            <Patch level="1">perl-5.8.7-CVE-2005-3962_3912.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>libperl</Name>
+        <RuntimeDependencies>
+            <Dependency>db4</Dependency>
+            <Dependency versionFrom="1.8.0">gdbm</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3" type="security">
+            <Date>2005-12-13</Date>
+            <Version>5.8.7</Version>
+            <Comment>Sync with perl package</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-27</Date>
+            <Version>5.8.7</Version>
+            <Comment>Update to version 5.8.7</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-16</Date>
+            <Version>5.8.5</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,11 @@
+--- ./wget-1.10/po/Makefile.in.in	2005-05-31 21:43:24.000000000 +0200
++++ ./wget-1.10-/po/Makefile.in.in	2005-06-27 20:06:56.000000000 +0200
+@@ -67,7 +67,7 @@
+ 	$(MSGMERGE) $< $(srcdir)/$(PACKAGE).pot -o $*.pox
+ 
+ .po.mo:
+-	$(MSGFMT) -o $@ $<
++	LANG=C LANGUAGE=C $(MSGFMT) -o $@ $<
+ 
+ .po.gmo:
+ 	file=$(srcdir)/`echo $* | sed 's,.*/,,'`.gmo \

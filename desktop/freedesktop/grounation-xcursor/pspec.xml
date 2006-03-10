@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>grounation-xcursors</Name>
+        <Homepage>http://www.kde-look.org/content/show.php?content=14484</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>plugin</IsA>
+        <IsA>data</IsA>
+        <Summary>Moshi's Grounation cursors</Summary>
+        <Summary xml:lang="tr">KDE masaüstü için imleç teması</Summary>
+        <Description>Moshi's Grounation cursors</Description>
+        <Description xml:lang="tr">KDE masaüstü için imleç teması</Description>
+        <Archive sha1sum="41d6a7abd8bc6fb90d66aaa00f6b287bbc52c984" type="tarbz2">http://www.kde-look.org/content/files/14484-Grounation-0.3.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>grounation-xcursors</Name>
+        <Files>
+            <Path fileType="data">/usr/share/cursors/xorg-x11</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-04</Date>
+            <Version>0.3</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

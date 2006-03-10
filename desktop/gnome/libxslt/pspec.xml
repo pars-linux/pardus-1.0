@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libxslt</Name>
+        <Homepage>http://www.xmlsoft.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>MIT</License>
+        <IsA>library</IsA>
+        <Summary>XSLT libraries and tools</Summary>
+        <Summary xml:lang="tr">XSLT kütüphane ve araçları</Summary>
+        <Description>XSLT libraries and tools</Description>
+        <Description xml:lang="tr">XSLT kütüphane ve araçları</Description>
+        <Archive sha1sum="9b6d3c417b943ad11abaa6fb8e2f936107e63899" type="tarbz2">http://ftp.gnome.org/pub/GNOME/sources/libxslt/1.1/libxslt-1.1.14.tar.bz2</Archive>
+        <Patches>
+            <Patch>libxslt.m4-libxslt-1.1.8.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency versionFrom="2.6.17">libxml2</Dependency>
+            <Dependency versionFrom="1.1.92">libgcrypt</Dependency>
+            <Dependency>python</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libxslt</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="2.6.17">libxml2</Dependency>
+            <Dependency versionFrom="1.1.92">libgcrypt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-06</Date>
+            <Version>1.1.14</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

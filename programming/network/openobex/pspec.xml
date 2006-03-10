@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>openobex</Name>
+        <Homepage>http://sourceforge.net/projects/openobex</Homepage>
+        <Packager>
+            <Name>Gökçen Eraslan</Name>
+            <Email>gokcene@anadolu.edu.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <License>LGPL-2.1</License>
+        <IsA>library</IsA>
+        <Summary>An implementation of the OBEX protocol used for transferring data to mobile devices</Summary>
+        <Summary xml:lang="tr">Mobil cihazlara veri göndermek için kullanılan OBEX protokolünün işlevlerini yerine getiren bir yazılımdır.</Summary>
+        <Description>An implementation of the OBEX protocol used for transferring data to mobile devices</Description>
+        <Description xml:lang="tr">Mobil cihazlara veri göndermek için kullanılan OBEX protokolünün işlevlerini yerine getiren bir yazılımdır.</Description>
+        <Archive sha1sum="aa73b3f9e345088e8f1c070e0e727f586820d20e" type="targz">http://easynews.dl.sourceforge.net/sourceforge/openobex/openobex-1.0.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="1.2">glib1</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>openobex</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="1.2">glib1</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-10</Date>
+            <Version>1.0.1</Version>
+            <Comment>Missing path entries fixed :(</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-11</Date>
+            <Version>1.0.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Gökçen Eraslan</Name>
+            <Email>gokcene@anadolu.edu.tr</Email>
+        </Update>
+    </History>
+</PISI>

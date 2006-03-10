@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libcroco</Name>
+        <Homepage>http://www.freespiders.org/projects/libcroco/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <IsA>library</IsA>
+        <Summary xml:lang="en">Generic Cascading Style Sheet (CSS) parsing and manipulation toolkit</Summary>
+        <Description xml:lang="en">Generic Cascading Style Sheet (CSS) parsing and manipulation toolkit</Description>
+        <Summary xml:lang="tr">Genel CSS kütüphanesi</Summary>
+        <Description xml:lang="en">Genel CSS kütüphanesi</Description>
+        <Archive sha1sum="d4732f044d4a309e909b36a5e306a7440e8498ca" type="tarbz2">ftp://ftp.gnome.org/pub/GNOME/sources/libcroco/0.6/libcroco-0.6.0.tar.bz2</Archive> 
+        <BuildDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency>libxml2</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libcroco</Name>
+        <RuntimeDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency>libxml2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2005-10-20</Date>
+            <Version>0.6.0</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

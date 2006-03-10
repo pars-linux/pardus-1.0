@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>DBD-mysql</Name>
+        <Homepage>http://search.cpan.org/dist/DBD-mysql/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Summary>MySQL driver for the Perl5 Database Interface (DBI)</Summary>
+        <Description>MySQL driver for the Perl5 Database Interface (DBI)</Description>
+        <Summary xml:lang="tr">Perl5 veritabanı arayüzü için MySQL sürücüsü</Summary>
+        <Description xml:lang="tr">Perl5 veritabanı arayüzü için MySQL sürücüsü</Description>
+        <Archive sha1sum="2be3348a20ad95b1761dd8fe399b5d0b8d82cb7c" type="targz">http://search.cpan.org/CPAN/authors/id/C/CA/CAPTTOFU/DBD-mysql-3.0002.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+            <Dependency>DBI</Dependency>
+            <Dependency>mysql-lib</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>DBD-mysql</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+            <Dependency>DBI</Dependency>
+            <Dependency>mysql-lib</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-23</Date>
+            <Version>3.0002</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

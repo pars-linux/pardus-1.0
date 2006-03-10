@@ -1,0 +1,67 @@
+Index: juk/playlist.cpp
+===================================================================
+--- juk/playlist.cpp	(.../tags/KDE/3.5.0/kdemultimedia/juk)	(revision 488256)
++++ juk/playlist.cpp	(.../branches/KDE/3.5/kdemultimedia/juk)	(revision 488256)
+@@ -438,7 +438,7 @@
+     // Since this method gets a lot of traffic, let's optimize for such.
+ 
+     if(!m_addTime.isEmpty()) {
+-	for(QValueList<PlaylistItem::Pointer>::ConstIterator it = m_addTime.begin();
++	for(PlaylistItemList::ConstIterator it = m_addTime.begin();
+ 	    it != m_addTime.end(); ++it)
+ 	{
+ 	    if(*it)
+@@ -449,7 +449,7 @@
+     }
+ 
+     if(!m_subtractTime.isEmpty()) {
+-	for(QValueList<PlaylistItem::Pointer>::ConstIterator it = m_subtractTime.begin();
++	for(PlaylistItemList::ConstIterator it = m_subtractTime.begin();
+ 	    it != m_subtractTime.end(); ++it)
+ 	{
+ 	    if(*it)
+@@ -574,6 +574,8 @@
+     m_search.clearItem(item);
+ 
+     m_history.remove(item);
++    m_addTime.remove(item);
++    m_subtractTime.remove(item);
+ 
+     delete item;
+     if(emitChanged)
+@@ -1291,12 +1293,19 @@
+ 
+ void Playlist::insertItem(QListViewItem *item)
+ {
++    // Because we're called from the PlaylistItem ctor, item may not be a
++    // PlaylistItem yet (it would be QListViewItem when being inserted.  But,
++    // it will be a PlaylistItem by the time it matters, but be careful if
++    // you need to use the PlaylistItem from here.
++
+     m_addTime.append(static_cast<PlaylistItem *>(item));
+     KListView::insertItem(item);
+ }
+ 
+ void Playlist::takeItem(QListViewItem *item)
+ {
++    // See the warning in Playlist::insertItem.
++
+     m_subtractTime.append(static_cast<PlaylistItem *>(item));
+     KListView::takeItem(item);
+ }
+Index: juk/playlist.h
+===================================================================
+--- juk/playlist.h	(.../tags/KDE/3.5.0/kdemultimedia/juk)	(revision 488256)
++++ juk/playlist.h	(.../branches/KDE/3.5/kdemultimedia/juk)	(revision 488256)
+@@ -647,8 +647,8 @@
+     bool m_disableColumnWidthUpdates;
+ 
+     mutable int m_time;
+-    mutable QValueList<PlaylistItem::Pointer> m_addTime;
+-    mutable QValueList<PlaylistItem::Pointer> m_subtractTime;
++    mutable PlaylistItemList m_addTime;
++    mutable PlaylistItemList m_subtractTime;
+ 
+     /**
+      * The average minimum widths of columns to be used in balancing calculations.
+

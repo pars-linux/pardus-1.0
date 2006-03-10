@@ -1,0 +1,12 @@
+diff -Nur faad2-old/common/mp4v2/mp4atom.h faad2/common/mp4v2/mp4atom.h
+--- faad2-old/common/mp4v2/mp4atom.h	2005-10-03 17:51:20.000000000 +0300
++++ faad2/common/mp4v2/mp4atom.h	2005-10-03 17:53:29.000000000 +0300
+@@ -88,7 +88,7 @@
+ 		return m_type;
+ 	};
+ 	void SetType(const char* type) {
+-		if (type) {
++		if (type && *type != '\0') {
+ 			ASSERT(strlen(type) == 4);
+ 			memcpy(m_type, type, 4);
+ 			m_type[4] = '\0';

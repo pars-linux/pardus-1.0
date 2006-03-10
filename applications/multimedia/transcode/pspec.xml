@@ -1,0 +1,108 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>transcode</Name>
+        <Homepage>http://www.transcoding.org/cgi-bin/transcode</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>video stream processing tool</Summary>
+        <Summary xml:lang="tr">Transcode çeşitli görüntü ve ses kodlayıcıları için dönüştürme araçlarından oluşmaktadır</Summary>
+        <Description>video stream processing tool</Description>
+        <Description xml:lang="tr">Transcode çeşitli görüntü ve ses kodlayıcıları için dönüştürme araçlarından oluşmaktadır. Mpeg-1/2,Mpeg-4(DivX ve Xvid),Quicktime/Mpeg-ps,Mpeg-1-layer-1/2/3 ses,AC3 ses formatlarını birbirine dönüştürebilmektedir.</Description>
+        <Archive sha1sum="52f071e380285eebe52248b3adeb3a0fc7f45030" type="targz">http://www.jakemsr.com/transcode/transcode-0.6.14.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>freetype</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>libexif</Dependency>
+            <Dependency>libmpeg3</Dependency>
+            <Dependency>libogg</Dependency>
+            <Dependency>libsdl</Dependency>
+            <Dependency>libtheora</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>netpbm</Dependency>
+            <Dependency versionFrom="0.4.9_pre1">ffmpeg</Dependency>
+            <Dependency versionFrom="0.7.41.20041001">avifile</Dependency>
+            <Dependency versionFrom="0.7.4">a52dec</Dependency>
+            <Dependency versionFrom="0.9.0">libdvdread</Dependency>
+            <Dependency versionFrom="0.9.1">libfame</Dependency>
+            <Dependency versionFrom="0.9.3">libquicktime</Dependency>
+            <Dependency versionFrom="0.99">libdv</Dependency>
+            <Dependency versionFrom="1.0.2">xvid</Dependency>
+            <Dependency versionFrom="1.08">lzo</Dependency>
+            <Dependency versionFrom="1.6.2">mjpegtools</Dependency>
+            <Dependency versionFrom="20030428">divx4linux</Dependency>
+            <Dependency versionFrom="3.93">lame</Dependency>
+            <Dependency versionFrom="5.5.6.0">imagemagick</Dependency>
+            <Dependency>xorg</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch level="1">00_all_libquicktime094.patch</Patch>
+            <Patch level="1">02_all_newffmpeg.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>transcode</Name>
+        <RuntimeDependencies>
+            <Dependency>freetype</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>libexif</Dependency>
+            <Dependency>libmpeg3</Dependency>
+            <Dependency>libogg</Dependency>
+            <Dependency>libsdl</Dependency>
+            <Dependency>libtheora</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>netpbm</Dependency>
+            <Dependency versionFrom="0.4.9_pre1">ffmpeg</Dependency>
+            <Dependency versionFrom="0.7.41.20041001">avifile</Dependency>
+            <Dependency versionFrom="0.7.4">a52dec</Dependency>
+            <Dependency versionFrom="0.9.0">libdvdread</Dependency>
+            <Dependency versionFrom="0.9.1">libfame</Dependency>
+            <Dependency versionFrom="0.9.3">libquicktime</Dependency>
+            <Dependency versionFrom="0.99">libdv</Dependency>
+            <Dependency versionFrom="1.0.2">xvid</Dependency>
+            <Dependency versionFrom="1.08">lzo</Dependency>
+            <Dependency versionFrom="1.6.2">mjpegtools</Dependency>
+            <Dependency versionFrom="20030428">divx4linux</Dependency>
+            <Dependency versionFrom="3.93">lame</Dependency>
+            <Dependency versionFrom="5.5.6.0">imagemagick</Dependency>
+            <Dependency>xorg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/transcode</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-10-25</Date>
+            <Version>0.6.14</Version>
+            <Comment>ffmpeg fix</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-25</Date>
+            <Version>0.6.14</Version>
+            <Comment>Disable ugly gtk interface</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-14</Date>
+            <Version>0.6.14</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>procps</Name>
+        <Homepage>http://procps.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Standard informational utilities and process-handling tools</Summary>
+        <Summary xml:lang="tr">Geleneksel bilgilendirme yardımcı programları ve süreç işleme araçları</Summary>
+        <Description>Standard informational utilities and process-handling tools</Description>
+        <Description xml:lang="tr">Geleneksel bilgilendirme yardımcı programları ve süreç işleme araçları</Description>
+        <Archive sha1sum="593ba9c66027f505c1228f1107bfb12cd0b898f6" type="targz">http://procps.sf.net/procps-3.2.4.tar.gz</Archive>
+        <Patches>
+            <Patch>3.2.4-linux26-slab.patch</Patch>
+            <Patch>procps-3.2.5-proc-mount.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>procps</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-09</Date>
+            <Version>3.2.4</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

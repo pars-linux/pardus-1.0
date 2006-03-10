@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PSPEC SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>giftcurs</Name>
+        <Homepage>http://www.nongnu.org/giftcurs/</Homepage>
+        <Packager>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>A ncurses frontend to the giFT daemon</Summary>
+        <Summary xml:lang="tr">giFT hizmetleri için bir ncurse önyüzü</Summary>
+        <Description>A ncurses frontend to the giFT daemon</Description>
+        <Description xml:lang="tr">giFT hizmetleri için bir ncurse önyüzü</Description>
+        <Archive sha1sum="f690ec39f3ed43b68c4927cf2a238fa8d5055a14" type="targz">http://savannah.nongnu.org/download/giftcurs/giFTcurs-0.6.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency>ncurses</Dependency>
+            <Dependency>gpm</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>giftcurs</Name>
+        <RuntimeDependencies>
+            <Dependency>gpm</Dependency>             
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>                                  
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-29</Date>
+            <Version>0.6.2</Version>
+            <Comment>First release.</Comment>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>t1lib</Name>
+        <Homepage>ftp://metalab.unc.edu/pub/Linux/libs/graphics/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>A Type 1 Font Rasterizer Library for UNIX/X11</Summary>
+        <Summary xml:lang="tr">UNIX/X11 sistemler için Tip-1 yazıtipi işleme kütüphanesi</Summary>
+        <Description>A Type 1 Font Rasterizer Library for UNIX/X11</Description>
+        <Description xml:lang="tr">UNIX/X11 sistemler için Tip-1 yazıtipi işleme kütüphanesi</Description>
+        <Archive sha1sum="71a6ec6c84a2e28a21f261be865e0dabe52daeb5" type="targz">http://ftp.belnet.be/mirror/rsync.gentoo.org/gentoo/distfiles/t1lib-5.0.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>xorg</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch level="1">t1lib-5.0.2-gentoo.diff</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>t1lib</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc/t1lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-30</Date>
+            <Version>5.0.2</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

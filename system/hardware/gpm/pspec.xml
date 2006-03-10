@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gpm</Name>
+        <Homepage>http://linux.schottelius.org/gpm/</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>daemon</IsA>
+        <Summary>Console-based mouse driver</Summary>
+        <Summary xml:lang="tr">Konsol tabanlı fare sürücüsü</Summary>
+        <Description>Console-based mouse driver</Description>
+        <Description xml:lang="tr">GPM, konsoldayken fare olaylarını yakalayıp uygulamalara gönderebilen bir programcıktır.</Description>
+        <Archive sha1sum="c48d937e62abb438c2f6439b34ef3332c89af8d1" type="tarbz2">ftp://arcana.linux.it/pub/gpm/gpm-1.20.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>ncurses</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch compressionType="bz2" level="1">01_all_info.patch.bz2</Patch>
+            <Patch compressionType="bz2" level="1">03_all_DESTDIR.patch.bz2</Patch>
+            <Patch compressionType="bz2" level="1">04_all_root.patch.bz2</Patch>
+            <Patch compressionType="bz2" level="1">05_all_serialconsole.patch.bz2</Patch>
+            <Patch compressionType="bz2" level="1">08_all_nodebug.patch.bz2</Patch>
+            <Patch compressionType="bz2" level="1">09_all_logfillup.patch.bz2</Patch>
+            <Patch compressionType="bz2" level="1">10_all_link.patch.bz2</Patch>
+            <Patch compressionType="bz2" level="1">11_all_lib_segv.patch.bz2</Patch>
+            <Patch compressionType="bz2" level="0">12_all_linux26-dependcache.patch.bz2</Patch>
+            <Patch compressionType="bz2" level="1">20_all_gpm-1.20.1-subscript.patch.bz2</Patch>
+            <Patch compressionType="bz2" level="1">21_all_synps2-four-way-button.patch.bz2</Patch>
+            <Patch compressionType="bz2" level="1">30_all_gpm-1.20.1-weak-wgetch.patch.bz2</Patch>
+            <Patch compressionType="bz2" level="0">60_all_parallel-build.patch.bz2</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>gpm</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="config">/etc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/gpm">gpm.rc6</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/gpm">gpm.conf.d</AdditionalFile>
+        </AdditionalFiles>
+   </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-09</Date>
+            <Version>1.20.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

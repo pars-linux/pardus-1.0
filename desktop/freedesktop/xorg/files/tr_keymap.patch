@@ -1,0 +1,477 @@
+diff -Nur xc.orig/programs/xkbcomp/rules/xorg.lst xc/programs/xkbcomp/rules/xorg.lst
+--- xc.orig/programs/xkbcomp/rules/xorg.lst	2005-08-12 13:50:44.000000000 +0300
++++ xc/programs/xkbcomp/rules/xorg.lst	2005-12-19 14:51:14.000000000 +0200
+@@ -171,7 +171,9 @@
+   tj              Tajikistan
+   lk              Sri Lanka
+   th              Thailand
+-  tr              Turkish 
++  trq             Turkish Q
++  trf             Turkish F
++  tralt           Turkish Alt 
+   ua              Ukraine
+   gb              United Kingdom
+   uz              Uzbekistan
+@@ -322,8 +324,6 @@
+   sin_phonetic    lk: Sinhala phonetic
+   tis             th: TIS-820.2538
+   pat             th: Pattachote
+-  f               tr: (F)
+-  alt             tr: Alt-Q
+   phonetic        ua: Phonetic
+   typewriter      ua: Typewriter
+   winkeys         ua: Winkeys
+diff -Nur xc.orig/programs/xkbcomp/rules/xorg.xml xc/programs/xkbcomp/rules/xorg.xml
+--- xc.orig/programs/xkbcomp/rules/xorg.xml	2005-08-12 14:38:38.000000000 +0300
++++ xc/programs/xkbcomp/rules/xorg.xml	2005-12-19 14:50:20.000000000 +0200
+@@ -6476,7 +6476,7 @@
+     </layout>
+     <layout>
+       <configItem>
+-        <name>tr</name>
++        <name>trq</name>
+         <shortDescription>Tur</shortDescription>
+         <shortDescription xml:lang="af">Tur</shortDescription>
+         <shortDescription xml:lang="az">Tür</shortDescription>
+@@ -6496,31 +6496,58 @@
+         <shortDescription xml:lang="uk">Тур</shortDescription>
+         <shortDescription xml:lang="vi">Tur</shortDescription>
+         <shortDescription xml:lang="zh_CN">Tur</shortDescription>
+-        <description>Turkish </description>
++        <description>Turkish Q</description>
++      </configItem>
++    </layout>
++    <layout>
++      <configItem>
++        <name>trf</name>
++        <shortDescription>Tur</shortDescription>
++        <shortDescription xml:lang="af">Tur</shortDescription>
++        <shortDescription xml:lang="az">Tür</shortDescription>
++        <shortDescription xml:lang="cs">Tur</shortDescription>
++        <shortDescription xml:lang="da">Tyr</shortDescription>
++        <shortDescription xml:lang="el">Του</shortDescription>
++        <shortDescription xml:lang="en_GB">Tur</shortDescription>
++        <shortDescription xml:lang="fr">Tur</shortDescription>
++        <shortDescription xml:lang="hu">Tur</shortDescription>
++        <shortDescription xml:lang="nl">Tur</shortDescription>
++        <shortDescription xml:lang="ru">Тур</shortDescription>
++        <shortDescription xml:lang="sk">Tur</shortDescription>
++        <shortDescription xml:lang="sq">Tur</shortDescription>
++        <shortDescription xml:lang="sr">тур</shortDescription>
++        <shortDescription xml:lang="sv">Tur</shortDescription>
++        <shortDescription xml:lang="tr">Trk</shortDescription>
++        <shortDescription xml:lang="uk">Тур</shortDescription>
++        <shortDescription xml:lang="vi">Tur</shortDescription>
++        <shortDescription xml:lang="zh_CN">Tur</shortDescription>
++        <description>Turkish F</description>
++      </configItem>
++    </layout>
++    <layout>
++      <configItem>
++        <name>tralt</name>
++        <shortDescription>Tur</shortDescription>
++        <shortDescription xml:lang="af">Tur</shortDescription>
++        <shortDescription xml:lang="az">Tür</shortDescription>
++        <shortDescription xml:lang="cs">Tur</shortDescription>
++        <shortDescription xml:lang="da">Tyr</shortDescription>
++        <shortDescription xml:lang="el">Του</shortDescription>
++        <shortDescription xml:lang="en_GB">Tur</shortDescription>
++        <shortDescription xml:lang="fr">Tur</shortDescription>
++        <shortDescription xml:lang="hu">Tur</shortDescription>
++        <shortDescription xml:lang="nl">Tur</shortDescription>
++        <shortDescription xml:lang="ru">Тур</shortDescription>
++        <shortDescription xml:lang="sk">Tur</shortDescription>
++        <shortDescription xml:lang="sq">Tur</shortDescription>
++        <shortDescription xml:lang="sr">тур</shortDescription>
++        <shortDescription xml:lang="sv">Tur</shortDescription>
++        <shortDescription xml:lang="tr">Trk</shortDescription>
++        <shortDescription xml:lang="uk">Тур</shortDescription>
++        <shortDescription xml:lang="vi">Tur</shortDescription>
++        <shortDescription xml:lang="zh_CN">Tur</shortDescription>
++        <description>Turkish Alt</description>
+       </configItem>
+-      <variantList>
+-        <variant>
+-          <configItem>
+-            <name>f</name>
+-            <description>(F)</description>
+-            <description xml:lang="en_GB">(F)</description>
+-            <description xml:lang="nl">(F)</description>
+-            <description xml:lang="ru">(F)</description>
+-            <description xml:lang="vi">(F)</description>
+-          </configItem>
+-        </variant>
+-        <variant>
+-          <configItem>
+-            <name>alt</name>
+-            <description>Alt-Q</description>
+-            <description xml:lang="el">Alt-Q</description>
+-            <description xml:lang="en_GB">Alt-Q</description>
+-            <description xml:lang="nl">Alt-Q</description>
+-            <description xml:lang="ru">Alt-Q</description>
+-            <description xml:lang="vi">Alt-Q</description>
+-          </configItem>
+-        </variant>
+-      </variantList>
+     </layout>
+     <layout>
+       <configItem>
+diff -Nur xc.orig/programs/xkbcomp/symbols/pc/Imakefile xc/programs/xkbcomp/symbols/pc/Imakefile
+--- xc.orig/programs/xkbcomp/symbols/pc/Imakefile	2005-10-09 21:05:42.000000000 +0300
++++ xc/programs/xkbcomp/symbols/pc/Imakefile	2005-12-19 14:51:48.000000000 +0200
+@@ -19,7 +19,7 @@
+ 		pc pk pl pt \
+ 		ro ru \
+ 		se si sk srp sy \
+-		th tj tr \
++		th tj trq trf tralt \
+ 		ua us uz \
+ 		vn 
+ 
+diff -Nur xc.orig/programs/xkbcomp/symbols/pc/tr xc/programs/xkbcomp/symbols/pc/tr
+--- xc.orig/programs/xkbcomp/symbols/pc/tr	2005-08-12 14:08:49.000000000 +0300
++++ xc/programs/xkbcomp/symbols/pc/tr	1970-01-01 02:00:00.000000000 +0200
+@@ -1,158 +0,0 @@
+-// $XdotOrg: xc/programs/xkbcomp/symbols/pc/tr,v 1.3 2005/08/12 11:08:49 pascal Exp $
+-
+-// based on
+-// Turkish keyboard symbols for PC and xkb
+-// This file distributed without any expressed or implied warranty
+-// Nilgün Belma Bugüner <nilgun@belgeler.org>, 2005
+-//
+-// $XFree86: xc/programs/xkbcomp/symbols/tr,v 1.5 2003/04/19 12:22:12 pascal Exp $
+-
+-//Default Layout (Turkish Q)
+-default partial
+-xkb_symbols "basic" {
+-
+-    include "pc/latin"
+-
+-    name[Group1]="Turkish";
+-
+-    key <AE01>	{ [         1,    exclam,    onesuperior,    exclamdown ] };
+-    key <AE02>	{ [         2, apostrophe,      sterling,   twosuperior ] };
+-    key <AE03>	{ [        3, asciicircum,    numbersign, threesuperior ] };
+-    key <AE04>	{ [         4,       plus,        dollar,    onequarter ] };
+-    key <AE06>	{ [         6,  ampersand, threequarters,    VoidSymbol ] };
+-    key <AE07>	{ [         7,      slash,     braceleft,    VoidSymbol ] };
+-    key <AE08>	{ [         8,  parenleft,   bracketleft,    VoidSymbol ] };
+-    key <AE09>	{ [         9, parenright,  bracketright,     plusminus ] };
+-    key <AE10>	{ [         0,      equal,    braceright,        degree ] };
+-    key <AE11>	{ [  asterisk,   question,     backslash,  questiondown ] };
+-    key <AE12>	{ [     minus, underscore,      division,    VoidSymbol ] };
+-
+-    key <AD02>	{ [         w,          W,   VoidSymbol,   VoidSymbol ]	};
+-    key <AD03>	{ [         e,          E,     EuroSign,   VoidSymbol ]	};
+-    key <AD05>	{ [         t,          T,    trademark,   VoidSymbol ]	};
+-    key <AD07>	{ [         u,          U,  ucircumflex,  Ucircumflex ]	};
+-    key <AD08>	{ type[group1] = "FOUR_LEVEL_ALPHABETIC",
+-                  [  idotless,          I,  icircumflex,  Icircumflex ] };
+-    key <AD09>	{ [         o,          O,  ocircumflex,  Ocircumflex ]	};
+-    key <AD10>	{ [         p,          P,   VoidSymbol,   VoidSymbol ]	};
+-    key <AD11>	{ [    gbreve,     Gbreve ] };
+-    key <AD12>	{ [udiaeresis, Udiaeresis,   asciitilde,  dead_macron ]	};
+-
+-    key <AC01>	{ [         a,          A,  acircumflex,  Acircumflex ]	};
+-    key <AC02>	{ [         s,          S,      section,   VoidSymbol ]	};
+-    key <AC03>	{ [         d,          D,   VoidSymbol,   VoidSymbol ]	};
+-    key <AC04>	{ [         f,          F,  ordfeminine,   VoidSymbol ]	};
+-    key <AC05>	{ [         g,          G,   VoidSymbol,   VoidSymbol ]	};
+-    key <AC06>	{ [         h,          H,   VoidSymbol,   VoidSymbol ]	};
+-    key <AC08>	{ [         k,          K,   VoidSymbol,   VoidSymbol ]	};
+-    key <AC09>	{ [         l,          L,   VoidSymbol,   VoidSymbol ]	};
+-    key <AC10>	{ [  scedilla,   Scedilla,        acute,   dead_acute ]	};
+-    key <AC11>	{ type[group1] = "FOUR_LEVEL_SEMIALPHABETIC", 
+-                  [ i,  Iabovedot,   apostrophe,   dead_caron ]	};
+-    key <TLDE>	{ [  quotedbl,  backslash,    plusminus,       degree ]	};
+-
+-    key <BKSL>	{ [     comma,  semicolon,        grave,   dead_grave ]	};
+-    key <LSGT>	{ [      less,    greater,          bar,    brokenbar ]	};
+-    key <AB08>	{ [odiaeresis, Odiaeresis,     multiply,   VoidSymbol ]	};
+-    key <AB09>	{ [  ccedilla,   Ccedilla, periodcentered,     division ] };
+-    key <AB10>	{ [    period,      colon, dead_abovedot, dead_abovedot ] };
+-    key <SPCE>	{ [     space,      space, nobreakspace,   nobreakspace ] };
+-
+-    include "level3(ralt_switch)"
+-};
+-
+-
+-// Turkish F Layout
+-partial
+-xkb_symbols "f" {
+-
+-    include "pc/latin"
+-
+-    name[Group1]="Turkish - (F)";
+-
+-    key <AE01>	{ [         1,     exclam,  onesuperior,   exclamdown ]	};
+-    key <AE02>	{ [         2,   quotedbl,  twosuperior,   VoidSymbol ]	};
+-    key <AE03>	{ [         3, asciicircum, numbersign, threesuperior ] };
+-    key <AE04>	{ [         4,     dollar,   onequarter,   VoidSymbol ]	};
+-    key <AE06>	{ [         6,  ampersand, threequarters,  VoidSymbol ]	};
+-    key <AE07>	{ [         7, apostrophe,    braceleft,   VoidSymbol ]	};
+-    key <AE08>	{ [         8,  parenleft,  bracketleft,   VoidSymbol ]	};
+-    key <AE09>	{ [         9, parenright, bracketright,    plusminus ]	};
+-    key <AE10>	{ [         0,      equal,   braceright,       degree ]	};
+-    key <AE11>	{ [     slash,   question,    backslash, questiondown ]	};
+-    key <AE12>	{ [     minus, underscore,     division,   VoidSymbol ]	};
+-
+-    key <AD01>	{ [         f,          F,           at,   VoidSymbol ]	};
+-    key <AD02>	{ [         g,          G,   VoidSymbol,   VoidSymbol ]	};
+-    key <AD03>	{ [    gbreve,     Gbreve,   VoidSymbol,   VoidSymbol ]	};
+-    key <AD04>	{ type[group1] = "FOUR_LEVEL_SEMIALPHABETIC",
+-                  [  idotless,          I,    paragraph,   VoidSymbol ]	};
+-    key <AD05>	{ [         o,          O,  ocircumflex,  Ocircumflex ]	};
+-    key <AD06>	{ [         d,          D,          yen,   VoidSymbol ]	};
+-    key <AD07>	{ [         r,          R,   registered,   VoidSymbol ]	};
+-    key <AD08>	{ [         n,          N,   VoidSymbol,   VoidSymbol ]	};
+-    key <AD09>	{ [         h,          H,       degree,   VoidSymbol ]	};
+-    key <AD10>	{ [         p,          P,     sterling,   VoidSymbol ]	};
+-    key <AD11>	{ [         q,          Q, dead_diaeresis, dead_abovering ] };
+-    key <AD12>	{ [         w,          W,   asciitilde,   dead_breve ]	};
+-
+-    key <AC01>	{ [         u,          U,  ucircumflex,  Ucircumflex ]	};
+-    key <AC02>	{ type[group1] = "FOUR_LEVEL_ALPHABETIC",
+-                  [         i,  Iabovedot,  icircumflex,  Icircumflex ]	};
+-    key <AC03>	{ [         e,          E,     EuroSign,   VoidSymbol ]	};
+-    key <AC04>	{ [         a,          A,  acircumflex,  Acircumflex ]	};
+-    key <AC05>	{ [udiaeresis, Udiaeresis,  ucircumflex,  Ucircumflex ]	};
+-    key <AC06>	{ [         t,          T,    trademark,   VoidSymbol ]	};
+-    key <AC07>	{ [         k,          K,   VoidSymbol,   VoidSymbol ]	};
+-    key <AC08>	{ [         m,          M,           mu,   VoidSymbol ]	};
+-    key <AC09>	{ [         l,          L,   VoidSymbol,   VoidSymbol ]	};
+-    key <AC10>	{ [         y,          Y,        acute,   dead_acute ]	};
+-    key <AC11>	{ [  scedilla,   Scedilla,   numbersign,   dead_caron ]	};
+-    key <TLDE>	{ [      plus,   asterisk,      notsign,    plusminus ]	};
+-
+-    key <BKSL>	{ [         x,          X,        grave,   dead_grave ]	};
+-    key <AB01>	{ [         j,          J, guillemotleft,  VoidSymbol ]	};
+-    key <AB02>	{ [odiaeresis, Odiaeresis, guillemotright, VoidSymbol ]	};
+-    key <AB03>	{ [         v,          V, leftdoublequotemark, VoidSymbol ] };
+-    key <AB04>	{ [         c,          C,         cent,    copyright ]	};
+-    key <AB05>	{ [  ccedilla,   Ccedilla, rightdoublequotemark, VoidSymbol] };
+-    key <AB06>	{ [         z,          Z,   VoidSymbol,   VoidSymbol ]	};
+-    key <AB07>	{ [         s,          S,      section,   VoidSymbol ]	};
+-    key <AB08>	{ [         b,          B,     multiply, nobreakspace ]	};
+-    key <AB09>	{ [    period,      colon,     division, dead_abovedot]	};
+-    key <AB10>	{ [     comma,  semicolon, periodcentered, VoidSymbol ]	};
+-    key <SPCE>	{ [    space,       space, nobreakspace, nobreakspace ]	};
+-    key <LSGT>	{ [     less,     greater,          bar,    brokenbar ]	};
+-   
+-    include "level3(ralt_switch)"
+-};
+-
+-// Turkish Alt-Q Layout
+-partial
+-xkb_symbols "alt" {
+-
+-    include "pc/latin"
+-
+-    name[Group1]="Turkish - Alt-Q";
+-
+-    key <AE07>  { [         7,   ampersand,  lowleftcorner,  upleftcorner ] };
+-    key <AE08>  { [         8,    asterisk,          leftt,          topt ] };
+-    key <AE09>  { [         9,   parenleft,         rightt,          bott ] };
+-    key <AE10>  { [         0,  parenright, lowrightcorner, uprightcorner ] };
+-    key <AE11>  { [     minus,  underscore, horizlinescan5,      vertbar  ] };
+-    key <AE12>  { [     equal,        plus,  crossinglines  ] };
+-
+-    key <AD03>  { [         e,           E,     EuroSign,   VoidSymbol ] };
+-//    key <AD05>        { [         t,           T,    trademark,   VoidSymbol >
+-    key <AD07>  { [         u,           U,   udiaeresis,   Udiaeresis ] };
+-    key <AD08>  { [         i,           I,     idotless,    Iabovedot ] };
+-    key <AD09>  { [         o,           O,   odiaeresis,   Odiaeresis ] };
+-    key <AC01>  { [         a,           A,  acircumflex,  Acircumflex ] };
+-    key <AC02>  { [         s,           S,     scedilla,     Scedilla ] };
+-    key <AC05>  { [         g,           G,       gbreve,       Gbreve ] };
+-
+-    key <AB03>  { [         c,           C,     ccedilla,     Ccedilla ] };
+-    key <SPCE>  { [     space,       space, nobreakspace, nobreakspace ] };
+-
+-    include "level3(ralt_switch)"
+-};
+diff -Nur xc.orig/programs/xkbcomp/symbols/pc/tralt xc/programs/xkbcomp/symbols/pc/tralt
+--- xc.orig/programs/xkbcomp/symbols/pc/tralt	1970-01-01 02:00:00.000000000 +0200
++++ xc/programs/xkbcomp/symbols/pc/tralt	2005-12-19 14:52:38.000000000 +0200
+@@ -0,0 +1,38 @@
++// $XdotOrg$
++
++// based on
++// Turkish keyboard symbols for PC and xkb
++// This file distributed without any expressed or implied warranty
++// Nilgün Belma Bugüner <nilgun@belgeler.org>, 2005
++//
++// $XFree86: xc/programs/xkbcomp/symbols/tr,v 1.5 2003/04/19 12:22:12 pascal Exp $
++
++// Turkish Alt-Q Layout
++default partial
++xkb_symbols "basic" {
++
++    include "pc/latin"
++
++    name[Group1]="Turkish - Alt-Q";
++
++    key <AE07>  { [         7,   ampersand,  lowleftcorner,  upleftcorner ] };
++    key <AE08>  { [         8,    asterisk,          leftt,          topt ] };
++    key <AE09>  { [         9,   parenleft,         rightt,          bott ] };
++    key <AE10>  { [         0,  parenright, lowrightcorner, uprightcorner ] };
++    key <AE11>  { [     minus,  underscore, horizlinescan5,      vertbar  ] };
++    key <AE12>  { [     equal,        plus,  crossinglines  ] };
++
++    key <AD03>  { [         e,           E,     EuroSign,   VoidSymbol ] };
++//    key <AD05>        { [         t,           T,    trademark,   VoidSymbol >
++    key <AD07>  { [         u,           U,   udiaeresis,   Udiaeresis ] };
++    key <AD08>  { [         i,           I,     idotless,    Iabovedot ] };
++    key <AD09>  { [         o,           O,   odiaeresis,   Odiaeresis ] };
++    key <AC01>  { [         a,           A,  acircumflex,  Acircumflex ] };
++    key <AC02>  { [         s,           S,     scedilla,     Scedilla ] };
++    key <AC05>  { [         g,           G,       gbreve,       Gbreve ] };
++
++    key <AB03>  { [         c,           C,     ccedilla,     Ccedilla ] };
++    key <SPCE>  { [     space,       space, nobreakspace, nobreakspace ] };
++
++    include "level3(ralt_switch)"
++};
+diff -Nur xc.orig/programs/xkbcomp/symbols/pc/trf xc/programs/xkbcomp/symbols/pc/trf
+--- xc.orig/programs/xkbcomp/symbols/pc/trf	1970-01-01 02:00:00.000000000 +0200
++++ xc/programs/xkbcomp/symbols/pc/trf	2005-12-19 14:52:19.000000000 +0200
+@@ -0,0 +1,73 @@
++// $XdotOrg$
++
++// based on
++// Turkish keyboard symbols for PC and xkb
++// This file distributed without any expressed or implied warranty
++// Nilgün Belma Bugüner <nilgun@belgeler.org>, 2005
++//
++// $XFree86: xc/programs/xkbcomp/symbols/tr,v 1.5 2003/04/19 12:22:12 pascal Exp $
++
++// Turkish F Layout
++default partial
++xkb_symbols "basic" {
++
++    include "pc/latin"
++
++    name[Group1]="Turkish - (F)";
++
++    key <AE01>	{ [         1,     exclam,  onesuperior,   exclamdown ]	};
++    key <AE02>	{ [         2,   quotedbl,  twosuperior,   VoidSymbol ]	};
++    key <AE03>	{ [         3, asciicircum, numbersign, threesuperior ] };
++    key <AE04>	{ [         4,     dollar,   onequarter,   VoidSymbol ]	};
++    key <AE06>	{ [         6,  ampersand, threequarters,  VoidSymbol ]	};
++    key <AE07>	{ [         7, apostrophe,    braceleft,   VoidSymbol ]	};
++    key <AE08>	{ [         8,  parenleft,  bracketleft,   VoidSymbol ]	};
++    key <AE09>	{ [         9, parenright, bracketright,    plusminus ]	};
++    key <AE10>	{ [         0,      equal,   braceright,       degree ]	};
++    key <AE11>	{ [     slash,   question,    backslash, questiondown ]	};
++    key <AE12>	{ [     minus, underscore,     division,   VoidSymbol ]	};
++
++    key <AD01>	{ [         f,          F,           at,   VoidSymbol ]	};
++    key <AD02>	{ [         g,          G,   VoidSymbol,   VoidSymbol ]	};
++    key <AD03>	{ [    gbreve,     Gbreve,   VoidSymbol,   VoidSymbol ]	};
++    key <AD04>	{ type[group1] = "FOUR_LEVEL_SEMIALPHABETIC",
++                  [  idotless,          I,    paragraph,   VoidSymbol ]	};
++    key <AD05>	{ [         o,          O,  ocircumflex,  Ocircumflex ]	};
++    key <AD06>	{ [         d,          D,          yen,   VoidSymbol ]	};
++    key <AD07>	{ [         r,          R,   registered,   VoidSymbol ]	};
++    key <AD08>	{ [         n,          N,   VoidSymbol,   VoidSymbol ]	};
++    key <AD09>	{ [         h,          H,       degree,   VoidSymbol ]	};
++    key <AD10>	{ [         p,          P,     sterling,   VoidSymbol ]	};
++    key <AD11>	{ [         q,          Q, dead_diaeresis, dead_abovering ] };
++    key <AD12>	{ [         w,          W,   asciitilde,   dead_breve ]	};
++
++    key <AC01>	{ [         u,          U,  ucircumflex,  Ucircumflex ]	};
++    key <AC02>	{ type[group1] = "FOUR_LEVEL_ALPHABETIC",
++                  [         i,  Iabovedot,  icircumflex,  Icircumflex ]	};
++    key <AC03>	{ [         e,          E,     EuroSign,   VoidSymbol ]	};
++    key <AC04>	{ [         a,          A,  acircumflex,  Acircumflex ]	};
++    key <AC05>	{ [udiaeresis, Udiaeresis,  ucircumflex,  Ucircumflex ]	};
++    key <AC06>	{ [         t,          T,    trademark,   VoidSymbol ]	};
++    key <AC07>	{ [         k,          K,   VoidSymbol,   VoidSymbol ]	};
++    key <AC08>	{ [         m,          M,           mu,   VoidSymbol ]	};
++    key <AC09>	{ [         l,          L,   VoidSymbol,   VoidSymbol ]	};
++    key <AC10>	{ [         y,          Y,        acute,   dead_acute ]	};
++    key <AC11>	{ [  scedilla,   Scedilla,   numbersign,   dead_caron ]	};
++    key <TLDE>	{ [      plus,   asterisk,      notsign,    plusminus ]	};
++
++    key <BKSL>	{ [         x,          X,        grave,   dead_grave ]	};
++    key <AB01>	{ [         j,          J, guillemotleft,  VoidSymbol ]	};
++    key <AB02>	{ [odiaeresis, Odiaeresis, guillemotright, VoidSymbol ]	};
++    key <AB03>	{ [         v,          V, leftdoublequotemark, VoidSymbol ] };
++    key <AB04>	{ [         c,          C,         cent,    copyright ]	};
++    key <AB05>	{ [  ccedilla,   Ccedilla, rightdoublequotemark, VoidSymbol] };
++    key <AB06>	{ [         z,          Z,   VoidSymbol,   VoidSymbol ]	};
++    key <AB07>	{ [         s,          S,      section,   VoidSymbol ]	};
++    key <AB08>	{ [         b,          B,     multiply, nobreakspace ]	};
++    key <AB09>	{ [    period,      colon,     division, dead_abovedot]	};
++    key <AB10>	{ [     comma,  semicolon, periodcentered, VoidSymbol ]	};
++    key <SPCE>	{ [    space,       space, nobreakspace, nobreakspace ]	};
++    key <LSGT>	{ [     less,     greater,          bar,    brokenbar ]	};
++   
++    include "level3(ralt_switch)"
++};
+diff -Nur xc.orig/programs/xkbcomp/symbols/pc/trq xc/programs/xkbcomp/symbols/pc/trq
+--- xc.orig/programs/xkbcomp/symbols/pc/trq	1970-01-01 02:00:00.000000000 +0200
++++ xc/programs/xkbcomp/symbols/pc/trq	2005-12-19 14:51:58.000000000 +0200
+@@ -0,0 +1,62 @@
++// $XdotOrg$
++
++// based on
++// Turkish keyboard symbols for PC and xkb
++// This file distributed without any expressed or implied warranty
++// Nilgün Belma Bugüner <nilgun@belgeler.org>, 2005
++//
++// $XFree86: xc/programs/xkbcomp/symbols/tr,v 1.5 2003/04/19 12:22:12 pascal Exp $
++
++//Default Layout (Turkish Q)
++default partial
++xkb_symbols "basic" {
++
++    include "pc/latin"
++
++    name[Group1]="Turkish";
++
++    key <AE01>	{ [         1,    exclam,    onesuperior,    exclamdown ] };
++    key <AE02>	{ [         2, apostrophe,      sterling,   twosuperior ] };
++    key <AE03>	{ [        3, asciicircum,    numbersign, threesuperior ] };
++    key <AE04>	{ [         4,       plus,        dollar,    onequarter ] };
++    key <AE06>	{ [         6,  ampersand, threequarters,    VoidSymbol ] };
++    key <AE07>	{ [         7,      slash,     braceleft,    VoidSymbol ] };
++    key <AE08>	{ [         8,  parenleft,   bracketleft,    VoidSymbol ] };
++    key <AE09>	{ [         9, parenright,  bracketright,     plusminus ] };
++    key <AE10>	{ [         0,      equal,    braceright,        degree ] };
++    key <AE11>	{ [  asterisk,   question,     backslash,  questiondown ] };
++    key <AE12>	{ [     minus, underscore,      division,    VoidSymbol ] };
++
++    key <AD02>	{ [         w,          W,   VoidSymbol,   VoidSymbol ]	};
++    key <AD03>	{ [         e,          E,     EuroSign,   VoidSymbol ]	};
++    key <AD05>	{ [         t,          T,    trademark,   VoidSymbol ]	};
++    key <AD07>	{ [         u,          U,  ucircumflex,  Ucircumflex ]	};
++    key <AD08>	{ type[group1] = "FOUR_LEVEL_ALPHABETIC",
++                  [  idotless,          I,  icircumflex,  Icircumflex ] };
++    key <AD09>	{ [         o,          O,  ocircumflex,  Ocircumflex ]	};
++    key <AD10>	{ [         p,          P,   VoidSymbol,   VoidSymbol ]	};
++    key <AD11>	{ [    gbreve,     Gbreve ] };
++    key <AD12>	{ [udiaeresis, Udiaeresis,   asciitilde,  dead_macron ]	};
++
++    key <AC01>	{ [         a,          A,  acircumflex,  Acircumflex ]	};
++    key <AC02>	{ [         s,          S,      section,   VoidSymbol ]	};
++    key <AC03>	{ [         d,          D,   VoidSymbol,   VoidSymbol ]	};
++    key <AC04>	{ [         f,          F,  ordfeminine,   VoidSymbol ]	};
++    key <AC05>	{ [         g,          G,   VoidSymbol,   VoidSymbol ]	};
++    key <AC06>	{ [         h,          H,   VoidSymbol,   VoidSymbol ]	};
++    key <AC08>	{ [         k,          K,   VoidSymbol,   VoidSymbol ]	};
++    key <AC09>	{ [         l,          L,   VoidSymbol,   VoidSymbol ]	};
++    key <AC10>	{ [  scedilla,   Scedilla,        acute,   dead_acute ]	};
++    key <AC11>	{ type[group1] = "FOUR_LEVEL_SEMIALPHABETIC", 
++                  [ i,  Iabovedot,   apostrophe,   dead_caron ]	};
++    key <TLDE>	{ [  quotedbl,  backslash,    plusminus,       degree ]	};
++
++    key <BKSL>	{ [     comma,  semicolon,        grave,   dead_grave ]	};
++    key <LSGT>	{ [      less,    greater,          bar,    brokenbar ]	};
++    key <AB08>	{ [odiaeresis, Odiaeresis,     multiply,   VoidSymbol ]	};
++    key <AB09>	{ [  ccedilla,   Ccedilla, periodcentered,     division ] };
++    key <AB10>	{ [    period,      colon, dead_abovedot, dead_abovedot ] };
++    key <SPCE>	{ [     space,      space, nobreakspace,   nobreakspace ] };
++
++    include "level3(ralt_switch)"
++};

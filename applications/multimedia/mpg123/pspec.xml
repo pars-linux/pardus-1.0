@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>mpg123</Name>
+        <Homepage>http://www.mpg123.de/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:console</IsA>
+        <Description xml:lang="en">Real Time mp3 player</Description>
+        <Description xml:lang="tr">Gerçek zamanlı bir mp3 oynatıcı</Description>
+        <Summary xml:lang="en">Real Time mp3 player</Summary>
+        <Summary xml:lang="tr">Gerçek zamanlı bir mp3 oynatıcı</Summary>
+        <Archive type="targz" sha1sum="7e521785dc3a9015f4228f0a118bf36856884b67">http://www.mpg123.de/mpg123/mpg123-pre0.59s.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">mpg123-0.59_CAN-2003-0577.patch</Patch>
+            <Patch level="1">mpg123-0.59_CAN-2003-0865.patch</Patch>
+            <Patch level="1">mpg123-0.59_CAN-2004-0805.patch</Patch>
+            <Patch level="1">mpg123-0.59_CAN-2004-0982.patch</Patch>
+            <Patch level="1">mpg123-0.59_CAN-2004-0991.patch</Patch>
+            <Patch level="1">mpg123-0.59_cleanup.patch</Patch>
+            <Patch level="1">mpg123-0.59_GLSA_200412-22.patch</Patch>
+            <Patch level="1">mpg123-0.59_long2int.patch</Patch>
+            <Patch level="1">mpg123-0.59_Makefile.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>mpg123</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc/mpg123-0.59s-1</Path>
+            <Path fileType="man">/usr/share/man/man1</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-20</Date>
+            <Version>0.59s</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

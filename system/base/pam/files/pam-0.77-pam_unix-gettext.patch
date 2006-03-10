@@ -1,0 +1,300 @@
+diff -ur Linux-PAM-0.77/modules/pam_unix/Makefile /home/baris/Linux-PAM-0.77/modules/pam_unix/Makefile
+--- Linux-PAM-0.77/modules/pam_unix/Makefile	2004-10-19 15:02:47.000000000 +0300
++++ /home/baris/Linux-PAM-0.77/modules/pam_unix/Makefile	2004-11-12 09:54:27.694556200 +0200
+@@ -87,7 +87,7 @@
+ 
+ ########################### don't edit below #######################
+ 
+-all: dirs $(PLUS) $(LIBSHARED) $(LIBSTATIC) $(CHKPWD) $(BIGCRYPT) register
++all: dirs $(PLUS) $(LIBSHARED) $(LIBSTATIC) $(CHKPWD) $(BIGCRYPT) register po
+ 
+ dynamic/%.o : %.c
+ 	$(CC) $(CFLAGS) $(DYNAMIC) $(CPPFLAGS) $(TARGET_ARCH) -c $< -o $@
+@@ -157,6 +157,9 @@
+ 	$(CC) $(CFLAGS) $(CPPFLAGS) -D'MD5Name(x)=Broken##x' \
+ 		$(TARGET_ARCH) -c $< -o $@
+ 
++po: tr.po
++	msgfmt tr.po -o tr.mo
++
+ install: all
+ 	mkdir -p $(FAKEROOT)$(SECUREDIR)
+ ifdef DYNAMIC
+@@ -166,6 +169,8 @@
+ endif
+ 	$(MKDIR) $(FAKEROOT)$(SUPLEMENTED)
+ 	install -m 4555 $(CHKPWD) $(FAKEROOT)$(SUPLEMENTED)
++	mkdir -p $(FAKEROOT)usr/share/locale/tr/LC_MESSAGES/
++	install -m 4644 tr.mo $(FAKEROOT)usr/share/locale/tr/LC_MESSAGES/pam_unix.mo
+ 
+ remove:
+ 	rm -f $(FAKEROOT)$(SECUREDIR)/$(LIBSHARED)
+Yalnızca /home/baris/Linux-PAM-0.77/modules/pam_unix'da: messages.mo
+diff -ur Linux-PAM-0.77/modules/pam_unix/pam_unix_acct.c /home/baris/Linux-PAM-0.77/modules/pam_unix/pam_unix_acct.c
+--- Linux-PAM-0.77/modules/pam_unix/pam_unix_acct.c	2004-10-19 15:02:47.000000000 +0300
++++ /home/baris/Linux-PAM-0.77/modules/pam_unix/pam_unix_acct.c	2004-11-12 09:39:34.996266968 +0200
+@@ -144,7 +144,7 @@
+ 			 ,"account %s has expired (account expired)"
+ 			 ,uname);
+ 		_make_remark(pamh, ctrl, PAM_ERROR_MSG,
+-			    "Your account has expired; please contact your system administrator");
++			     _("Your account has expired; please contact your system administrator"));
+ 		D(("account expired"));
+ 		return PAM_ACCT_EXPIRED;
+ 	}
+@@ -155,7 +155,7 @@
+ 		    ,"account %s has expired (failed to change password)"
+ 			 ,uname);
+ 		_make_remark(pamh, ctrl, PAM_ERROR_MSG,
+-			    "Your account has expired; please contact your system administrator");
++			     _("Your account has expired; please contact your system administrator"));
+ 		D(("account expired 2"));
+ 		return PAM_ACCT_EXPIRED;
+ 	}
+@@ -165,7 +165,7 @@
+ 			 ,"expired password for user %s (root enforced)"
+ 			 ,uname);
+ 		_make_remark(pamh, ctrl, PAM_ERROR_MSG,
+-			    "You are required to change your password immediately (root enforced)");
++			     _("You are required to change your password immediately (root enforced)"));
+ 		D(("need a new password"));
+ 		return PAM_NEW_AUTHTOK_REQD;
+ 	}
+@@ -174,7 +174,7 @@
+ 			 ,"expired password for user %s (password aged)"
+ 			 ,uname);
+ 		_make_remark(pamh, ctrl, PAM_ERROR_MSG,
+-			    "You are required to change your password immediately (password aged)");
++			     _("You are required to change your password immediately (password aged)"));
+ 		D(("need a new password 2"));
+ 		return PAM_NEW_AUTHTOK_REQD;
+ 	}
+@@ -184,8 +184,8 @@
+ 		_log_err(LOG_DEBUG, pamh
+ 			 ,"password for user %s will expire in %d days"
+ 			 ,uname, daysleft);
+-		snprintf(buf, 80, "Warning: your password will expire in %d day%.2s",
+-			 daysleft, daysleft == 1 ? "" : "s");
++		snprintf(buf, 80, _("Warning: your password will expire in %d day%.2s"),
++			 daysleft, daysleft == 1 ? _("") : _("s"));
+ 		_make_remark(pamh, ctrl, PAM_TEXT_INFO, buf);
+ 	}
+ 
+diff -ur Linux-PAM-0.77/modules/pam_unix/pam_unix_auth.c /home/baris/Linux-PAM-0.77/modules/pam_unix/pam_unix_auth.c
+--- Linux-PAM-0.77/modules/pam_unix/pam_unix_auth.c	2004-10-19 15:02:47.000000000 +0300
++++ /home/baris/Linux-PAM-0.77/modules/pam_unix/pam_unix_auth.c	2004-11-12 09:42:11.071539920 +0200
+@@ -156,7 +156,7 @@
+ 	}
+ 	/* get this user's authentication token */
+ 
+-	retval = _unix_read_password(pamh, ctrl, NULL, "Password: ", NULL
++	retval = _unix_read_password(pamh, ctrl, NULL, _("Password: "), NULL
+ 				     ,_UNIX_AUTHTOK, &p);
+ 	if (retval != PAM_SUCCESS) {
+ 		if (retval != PAM_CONV_AGAIN) {
+diff -ur Linux-PAM-0.77/modules/pam_unix/pam_unix_passwd.c /home/baris/Linux-PAM-0.77/modules/pam_unix/pam_unix_passwd.c
+--- Linux-PAM-0.77/modules/pam_unix/pam_unix_passwd.c	2004-10-19 15:02:47.000000000 +0300
++++ /home/baris/Linux-PAM-0.77/modules/pam_unix/pam_unix_passwd.c	2004-11-12 09:47:32.336700192 +0200
+@@ -771,7 +771,7 @@
+ 	/*
+ 	 * First get the name of a user
+ 	 */
+-	retval = pam_get_user(pamh, &user, "Username: ");
++	retval = pam_get_user(pamh, &user, _("Username: "));
+ 	if (retval == PAM_SUCCESS) {
+ 		/*
+ 		 * Various libraries at various times have had bugs related to
+@@ -848,8 +848,8 @@
+ 		} else if (off(UNIX__IAMROOT, ctrl)) {
+ 
+ 			/* instruct user what is happening */
+-#define greeting "Changing password for "
+-			Announce = (char *) malloc(sizeof(greeting) + strlen(user));
++#define greeting _("Changing password for ")
++			Announce = (char *) malloc(strlen(greeting) + strlen(user));
+ 			if (Announce == NULL) {
+ 				_log_err(LOG_CRIT, pamh,
+ 				         "password - out of memory");
+@@ -866,7 +866,7 @@
+ 			set(UNIX__OLD_PASSWD, lctrl);
+ 			retval = _unix_read_password(pamh, lctrl
+ 						     ,Announce
+-					     ,"(current) UNIX password: "
++						     ,_("(current) UNIX password: ")
+ 						     ,NULL
+ 						     ,_UNIX_OLD_AUTHTOK
+ 					     ,(const char **) &pass_old);
+@@ -907,7 +907,7 @@
+ 		if (retval == PAM_AUTHTOK_ERR) {
+ 			if (off(UNIX__IAMROOT, ctrl))
+ 				_make_remark(pamh, ctrl, PAM_ERROR_MSG,
+-					    "You must wait longer to change your password");
++					     _("You must wait longer to change your password"));
+ 			else
+ 				retval = PAM_SUCCESS;
+ 		}
+@@ -977,8 +977,8 @@
+ 
+ 			retval = _unix_read_password(pamh, lctrl
+ 						     ,NULL
+-					     ,"Enter new UNIX password: "
+-					    ,"Retype new UNIX password: "
++						     ,_("Enter new UNIX password: ")
++						     ,_("Retype new UNIX password: ")
+ 						     ,_UNIX_NEW_AUTHTOK
+ 					     ,(const char **) &pass_new);
+ 
+diff -ur Linux-PAM-0.77/modules/pam_unix/pam_unix.pot /home/baris/Linux-PAM-0.77/modules/pam_unix/pam_unix.pot
+--- Linux-PAM-0.77/modules/pam_unix/pam_unix.pot	2004-11-12 10:02:56.157258120 +0200
++++ /home/baris/Linux-PAM-0.77/modules/pam_unix/pam_unix.pot	2004-11-12 09:56:04.846786816 +0200
+@@ -0,0 +1,67 @@
++# SOME DESCRIPTIVE TITLE.
++# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
++# This file is distributed under the same license as the PACKAGE package.
++# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
++#
++#: pam_unix_acct.c:188
++#, fuzzy
++msgid ""
++msgstr ""
++"Project-Id-Version: PACKAGE VERSION\n"
++"Report-Msgid-Bugs-To: \n"
++"POT-Creation-Date: 2004-11-12 09:56+0200\n"
++"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
++"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
++"Language-Team: LANGUAGE <LL@li.org>\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=CHARSET\n"
++"Content-Transfer-Encoding: 8bit\n"
++
++#: pam_unix_passwd.c:774
++msgid "Username: "
++msgstr ""
++
++#: pam_unix_passwd.c:851
++msgid "Changing password for "
++msgstr ""
++
++#: pam_unix_passwd.c:869
++msgid "(current) UNIX password: "
++msgstr ""
++
++#: pam_unix_passwd.c:910
++msgid "You must wait longer to change your password"
++msgstr ""
++
++#: pam_unix_passwd.c:980
++msgid "Enter new UNIX password: "
++msgstr ""
++
++#: pam_unix_passwd.c:981
++msgid "Retype new UNIX password: "
++msgstr ""
++
++#: pam_unix_auth.c:159
++msgid "Password: "
++msgstr ""
++
++#: pam_unix_acct.c:147 pam_unix_acct.c:158
++msgid "Your account has expired; please contact your system administrator"
++msgstr ""
++
++#: pam_unix_acct.c:168
++msgid "You are required to change your password immediately (root enforced)"
++msgstr ""
++
++#: pam_unix_acct.c:177
++msgid "You are required to change your password immediately (password aged)"
++msgstr ""
++
++#: pam_unix_acct.c:187
++#, c-format
++msgid "Warning: your password will expire in %d day%.2s"
++msgstr ""
++
++#: pam_unix_acct.c:188
++msgid "s"
++msgstr ""
+diff -ur Linux-PAM-0.77/modules/pam_unix/support.h /home/baris/Linux-PAM-0.77/modules/pam_unix/support.h
+--- Linux-PAM-0.77/modules/pam_unix/support.h	2004-10-19 15:02:47.000000000 +0300
++++ /home/baris/Linux-PAM-0.77/modules/pam_unix/support.h	2004-11-12 09:38:04.391041056 +0200
+@@ -7,6 +7,9 @@
+ 
+ #include <pwd.h>
+ 
++#include <libintl.h>
++#define _(String) dgettext("pam_unix", String)
++
+ /*
+  * here is the string to inform the user that the new passwords they
+  * typed were not the same.
+diff -ur Linux-PAM-0.77/modules/pam_unix/tr.po /home/baris/Linux-PAM-0.77/modules/pam_unix/tr.po
+--- Linux-PAM-0.77/modules/pam_unix/tr.po	2004-11-12 10:02:52.185861864 +0200
++++ /home/baris/Linux-PAM-0.77/modules/pam_unix/tr.po	2004-11-12 10:02:21.051594992 +0200
+@@ -0,0 +1,66 @@
++# SOME DESCRIPTIVE TITLE.
++# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
++# This file is distributed under the same license as the PACKAGE package.
++# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
++#
++#: pam_unix_acct.c:188
++msgid ""
++msgstr ""
++"Project-Id-Version: pam_unix\n"
++"Report-Msgid-Bugs-To: \n"
++"POT-Creation-Date: 2004-11-12 09:56+0200\n"
++"PO-Revision-Date: 2004-11-12 09:56+0200\n"
++"Last-Translator: Baris Metin <baris@uludag.org.tr>\n"
++"Language-Team: Turkish <tr@li.org>\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
++
++#: pam_unix_passwd.c:774
++msgid "Username: "
++msgstr "Kullanıcı adı: "
++
++#: pam_unix_passwd.c:851
++msgid "Changing password for "
++msgstr "Parola değiştiriliyor: "
++
++#: pam_unix_passwd.c:869
++msgid "(current) UNIX password: "
++msgstr "(şu anki) UNIX parolanız: "
++
++#: pam_unix_passwd.c:910
++msgid "You must wait longer to change your password"
++msgstr "Parolanızı değiştirmek için daha uzun süre beklemelisiniz"
++
++#: pam_unix_passwd.c:980
++msgid "Enter new UNIX password: "
++msgstr "Yeni UNIX parolanız: "
++
++#: pam_unix_passwd.c:981
++msgid "Retype new UNIX password: "
++msgstr "Yeni UNIX parolanız (tekrar): "
++
++#: pam_unix_auth.c:159
++msgid "Password: "
++msgstr "Parola: "
++
++#: pam_unix_acct.c:147 pam_unix_acct.c:158
++msgid "Your account has expired; please contact your system administrator"
++msgstr "Kullanıcı hesabınız kapatıldı; lütfen sistem yöneticisine haber verin"
++
++#: pam_unix_acct.c:168
++msgid "You are required to change your password immediately (root enforced)"
++msgstr "Parolanızı değiştirmeniz gerekiyor (sistem yöneticisi istiyor)"
++
++#: pam_unix_acct.c:177
++msgid "You are required to change your password immediately (password aged)"
++msgstr "Parolanızı değiştirmeniz gerekiyor (parolanın süresi doldu)"
++
++#: pam_unix_acct.c:187
++#, c-format
++msgid "Warning: your password will expire in %d day%.2s"
++msgstr "Uyarı: parolanız süresi %d gün%.2s sonra dolacak"
++
++#: pam_unix_acct.c:188
++msgid "s"
++msgstr " "

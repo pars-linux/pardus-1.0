@@ -1,0 +1,40 @@
+#!/sbin/runscript
+# Copyright © 2005  TUBITAK/UEKAE
+# Licensed under the GNU General Public License, version 2.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+#
+# Original work belongs Gentoo Linux
+
+DAEMON=/usr/sbin/cpufreqd
+
+depend() {
+	need localmount
+}
+
+checkconfig() {
+	if [ ! -e /proc/cpufreq -a ! -e /sys/devices/system/cpu/cpu0/cpufreq ] ; then
+	
+		eerror "CPUFreq support has not been compiled into the kernel"
+		return 1
+	fi
+}
+
+start() {
+	checkconfig || return 1
+	ebegin "Starting cpufreqd"
+	start-stop-daemon --start --quiet --exec $DAEMON
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping cpufreqd"
+	start-stop-daemon --stop --quiet --exec $DAEMON
+	eend $?
+}
+
+reload() {
+	ebegin "Reloading cpufreq configuration"
+	start-stop-daemon --stop --signal 1 --quiet --exec $DAEMON
+	eend $?
+}
+

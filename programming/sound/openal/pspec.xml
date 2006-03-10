@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>openal</Name>
+        <Homepage>http://www.openal.org</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <IsA>library</IsA>
+        <Summary>Open Audio Library is a vendor-neutral API for interactive spatialized audio</Summary>
+        <Summary xml:lang="tr">Açık ses kütüphanesi</Summary>
+        <Description>Open Audio Library is a vendor-neutral API for interactive spatialized audio</Description>
+        <Description xml:lang="tr">Açık ses kütüphanesi</Description>
+        <Archive type="tarbz2" sha1sum="0f7f508bb057735aef0587e2a27c4aef148d1b30">http://dev.gentoo.org/~eradicator/openal/openal-20050504.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">openal-20050504-alsa_capture.patch</Patch>
+            <Patch level="2">openal-20050504-alsa_dmix.patch</Patch>
+            <Patch level="1">openal-20050504-destdir.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>openal</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="1.0.2">alsa-lib</Dependency>
+            <Dependency>arts</Dependency>
+            <Dependency>esound</Dependency>
+            <Dependency>libsdl</Dependency>
+            <Dependency>libvorbis</Dependency>
+<!--FIXME            <Dependency>smpeg</Dependency> -->
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+            <Path fileType="header">/usr/include/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-29</Date>
+            <Version>20050504</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

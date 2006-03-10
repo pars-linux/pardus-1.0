@@ -1,0 +1,21 @@
+diff -ur kdebase-3.5.0.orig/ksplashml/kcmksplash/installer.cpp kdebase-3.5.0/ksplashml/kcmksplash/installer.cpp
+--- kdebase-3.5.0.orig/ksplashml/kcmksplash/installer.cpp	2005-12-05 22:21:30.000000000 +0200
++++ kdebase-3.5.0/ksplashml/kcmksplash/installer.cpp	2005-12-05 22:23:52.000000000 +0200
+@@ -248,7 +248,7 @@
+ //-----------------------------------------------------------------------------
+ void SplashInstaller::defaults()
+ {
+-  mThemesList->setCurrentItem(findTheme("Default"));
++  mThemesList->setCurrentItem(findTheme("Pardus"));
+   emit changed( true );
+ }
+ 
+@@ -256,7 +256,7 @@
+ {
+   KConfig cnf("ksplashrc");
+   cnf.setGroup("KSplash");
+-  QString curTheme = cnf.readEntry("Theme","Default");
++  QString curTheme = cnf.readEntry("Theme","Pardus");
+   mThemesList->setCurrentItem(findTheme(curTheme));
+   emit changed( false );
+ }

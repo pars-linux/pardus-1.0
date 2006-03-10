@@ -1,0 +1,337 @@
+Index: kcontrol/clock/tzone.cpp
+===================================================================
+--- kcontrol/clock/tzone.cpp	(revision 470311)
++++ kcontrol/clock/tzone.cpp	(working copy)
+@@ -58,7 +58,8 @@
+ 
+     load();
+ 
+-    tzonelist->setEnabled(getuid() == 0);
++    com = comar_connect();
++    tzonelist->setEnabled(com ? true : false);
+ }
+ 
+ void Tzone::load()
+@@ -80,117 +81,31 @@
+     m_local->setText(localZone.arg(KTimezoneWidget::displayName(m_zoneDb.local())).arg(result));
+ }
+ 
+-// FIXME: Does the logic in this routine actually work correctly? For example,
+-// on non-Solaris systems which do not use /etc/timezone?
+ void Tzone::save()
+ {
+-    QStringList selectedZones(tzonelist->selection());
++	    
++  QStringList selectedZones(tzonelist->selection());
++  if (selectedZones.count() <= 0)
++    return;
+ 
+-    if (selectedZones.count() > 0)
+-    {
+-      // Find untranslated selected zone
+-      QString selectedzone(selectedZones[0]);
++  // Find untranslated selected zone
++  QString selectedzone(selectedZones[0]);
++      
++  int cmd;	
++  unsigned int id;
++  char *ret;
+ 
+-#if defined(USE_SOLARIS)	// MARCO
+-
+-        KTempFile tf( locateLocal( "tmp", "kde-tzone" ) );
+-        tf.setAutoDelete( true );
+-        QTextStream *ts = tf.textStream();
+-
+-        QFile fTimezoneFile(INITFILE);
+-        bool updatedFile = false;
+-
+-        if (tf.status() == 0 && fTimezoneFile.open(IO_ReadOnly))
+-        {
+-            bool found = false;
+-
+-            QTextStream is(&fTimezoneFile);
+-
+-            for (QString line = is.readLine(); !line.isNull();
+-                 line = is.readLine())
+-            {
+-                if (line.find("TZ=") == 0)
+-                {
+-                    *ts << "TZ=" << selectedzone << endl;
+-                    found = true;
+-                }
+-                else
+-                {
+-                    *ts << line << endl;
+-                }
+-            }
+-
+-            if (!found)
+-            {
+-                *ts << "TZ=" << selectedzone << endl;
+-            }
+-
+-            updatedFile = true;
+-            fTimezoneFile.close();
+-        }
+-
+-        if (updatedFile)
+-        {
+-            ts->device()->reset();
+-            fTimezoneFile.remove();
+-
+-            if (fTimezoneFile.open(IO_WriteOnly | IO_Truncate))
+-            {
+-                QTextStream os(&fTimezoneFile);
+-
+-                for (QString line = ts->readLine(); !line.isNull();
+-                     line = ts->readLine())
+-                {
+-                    os << line << endl;
+-                }
+-
+-                fchmod(fTimezoneFile.handle(),
+-                       S_IXUSR | S_IRUSR | S_IRGRP | S_IXGRP |
+-                       S_IROTH | S_IXOTH);
+-                fTimezoneFile.close();
+-            }
+-        }
+-
+-
+-        QString val = selectedzone;
+-#else
+-        QFile fTimezoneFile("/etc/timezone");
+-
+-        if (fTimezoneFile.open(IO_WriteOnly | IO_Truncate) )
+-        {
+-            QTextStream t(&fTimezoneFile);
+-            t << selectedzone;
+-            fTimezoneFile.close();
+-        }
+-
+-        QString tz = "/usr/share/zoneinfo/" + selectedzone;
+-
+-        kdDebug() << "Set time zone " << tz << endl;
+-
+-	if (!QFile::remove("/etc/localtime"))
+-	{
+-		//After the KDE 3.2 release, need to add an error message
+-	}
+-	else
+-		if (!KIO::NetAccess::file_copy(KURL(tz),KURL("/etc/localtime")))
+-			KMessageBox::error( 0,  i18n("Error setting new timezone."),
+-                        		    i18n("Timezone Error"));
+-
+-        QString val = ":" + tz;
+-#endif // !USE_SOLARIS
+-
+-        setenv("TZ", val.ascii(), 1);
+-        tzset();
+-
+-    } else {
+-#if !defined(USE_SOLARIS) // Do not update the System!
+-        unlink( "/etc/timezone" );
+-        unlink( "/etc/localtime" );
+-
+-        setenv("TZ", "", 1);
+-        tzset();
+-#endif // !USE SOLARIS
+-    }
+-
+-    currentZone();
++  // Comar stuff
++  comar_send_start(com, 0, COMAR_CALL);
++  comar_send_arg(com, "Time.Clock.setTimeZone", 0);
++  comar_send_arg(com, "zone", 0);
++  comar_send_arg(com, selectedzone.local8Bit(), 0);
++  comar_send_finish(com);
++  comar_wait(com, -1);
++  comar_read(com, &cmd, &id, &ret);
++    
++  setenv("TZ",selectedzone.local8Bit(),1);
++  tzset();
++  currentZone();
+ }
++
+Index: kcontrol/clock/clock.desktop
+===================================================================
+--- kcontrol/clock/clock.desktop	(revision 470311)
++++ kcontrol/clock/clock.desktop	(working copy)
+@@ -7,8 +7,6 @@
+ 
+ 
+ X-KDE-Library=clock
+-X-KDE-RootOnly=true
+-X-KDE-SubstituteUID=true
+ X-KDE-ParentApp=kcontrol
+ 
+ Name=Date & Time
+Index: kcontrol/clock/dtime.cpp
+===================================================================
+--- kcontrol/clock/dtime.cpp	(revision 470311)
++++ kcontrol/clock/dtime.cpp	(working copy)
+@@ -173,7 +173,8 @@
+ 
+   load();
+ 
+-  if (getuid() != 0)
++  com = comar_connect();
++  if (!com)
+     {
+       cal->setEnabled(false);
+       hour->setEnabled(false);
+@@ -182,6 +183,7 @@
+       timeServerList->setEnabled(false);
+       setDateTimeAuto->setEnabled(false);
+     }
++
+   kclock->setEnabled(false);
+ }
+ 
+@@ -302,40 +304,38 @@
+     }
+   }
+   else {
+-    // User time setting
+-    KProcess c_proc;
++    // Comar stuff 
++    int cmd;
++    unsigned int id;
++    char *ret;
++    comar_t* com2 = comar_connect();
++    
++    comar_send_start(com, 0, COMAR_CALL);
++    comar_send_arg(com, "Time.Clock.setDate", 0);
++    comar_send_arg(com, "month", 0);
++    comar_send_arg(com, QString::number(date.month()).ascii(), 0);
++    comar_send_arg(com, "day", 0);
++    comar_send_arg(com, QString::number(date.day()).ascii(), 0);
++    comar_send_arg(com, "hour", 0);
++    comar_send_arg(com, QString::number(hour->value()).ascii(), 0);
++    comar_send_arg(com, "minute", 0);
++    comar_send_arg(com, QString::number(minute->value()).ascii(), 0);
++    comar_send_arg(com, "year", 0);
++    comar_send_arg(com, QString::number(date.year()).ascii(), 0);
++    comar_send_arg(com, "second", 0);
++    comar_send_arg(com, QString::number(second->value()).ascii(), 0);
++    comar_send_finish(com);
++   
++    comar_wait(com, -1);
++    comar_read(com, &cmd, &id, &ret);
+ 
+-  // BSD systems reverse year compared to Susv3
+-#if defined(__OpenBSD__) || defined(__FreeBSD__) || defined(__NetBSD__)
+-    BufS.sprintf("%04d%02d%02d%02d%02d.%02d",
+-               date.year(),
+-               date.month(), date.day(),
+-               hour->value(), minute->value(), second->value());
+-#else
+-    BufS.sprintf("%02d%02d%02d%02d%04d.%02d",
+-               date.month(), date.day(),
+-               hour->value(), minute->value(),
+-               date.year(), second->value());
+-#endif
++    comar_send_start(com2, 0, COMAR_CALL);
++    comar_send_arg(com2, "Time.Clock.setDate", 0);
++    comar_send_arg(com2, "saveToHW", 0);
++    comar_send_finish(com2);
+ 
+-    kdDebug() << "Set date " << BufS << endl;
+-
+-    c_proc << "date" << BufS;
+-    c_proc.start( KProcess::Block );
+-    int result = c_proc.exitStatus();
+-    if (result != 0
+-#if defined(__OpenBSD__) || defined(__FreeBSD__) || defined(__NetBSD__)
+-  	  && result != 2	// can only set local date, which is okay
+-#endif
+-      ) {
+-      KMessageBox::error( this, i18n("Can not set date."));
+-      return;
+-    }
+-
+-    // try to set hardware clock. We do not care if it fails
+-    KProcess hwc_proc;
+-    hwc_proc << "hwclock" << "--systohc";
+-    hwc_proc.start(KProcess::Block);
++    comar_wait(com2, -1);
++    comar_read(com2, &cmd, &id, &ret);
+   }
+ 
+   // restart time
+Index: kcontrol/clock/tzone.h
+===================================================================
+--- kcontrol/clock/tzone.h	(revision 470311)
++++ kcontrol/clock/tzone.h	(working copy)
+@@ -22,6 +22,8 @@
+ #ifndef tzone_included
+ #define tzone_included
+ 
++#include <comar.h>
++
+ #include <ktimezones.h>
+ #include <ktimezonewidget.h>
+ #include <qvgroupbox.h>
+@@ -50,6 +52,7 @@
+   KTimezones m_zoneDb;
+   QLabel *m_local;
+   KTimezoneWidget *tzonelist;
++  comar_t* com;
+ };
+ 
+ #endif // tzone_included
+Index: kcontrol/clock/dtime.h
+===================================================================
+--- kcontrol/clock/dtime.h	(revision 470311)
++++ kcontrol/clock/dtime.h	(working copy)
+@@ -22,6 +22,8 @@
+ #ifndef dtime_included
+ #define dtime_included
+ 
++#include <comar.h>
++
+ #include <qdatetime.h> 
+ #include <qlineedit.h> 
+ #include <qspinbox.h> 
+@@ -92,6 +94,8 @@
+   int		BufI;
+   bool		refresh;
+   bool		ontimeout;
++
++  comar_t*      com;
+ };
+ 
+ class Kclock : public QWidget
+Index: kcontrol/clock/Makefile.am
+===================================================================
+--- kcontrol/clock/Makefile.am	(revision 470311)
++++ kcontrol/clock/Makefile.am	(working copy)
+@@ -3,7 +3,7 @@
+ kcm_clock_la_SOURCES = dtime.cpp tzone.cpp main.cpp 
+ 
+ kcm_clock_la_LDFLAGS = $(all_libraries) -module -avoid-version -no-undefined
+-kcm_clock_la_LIBADD = $(LIB_KIO)
++kcm_clock_la_LIBADD = $(LIB_KIO) -lcomar
+ 
+ AM_CPPFLAGS = $(all_includes)
+  
+Index: kicker/applets/clock/clock.cpp
+===================================================================
+--- kicker/applets/clock/clock.cpp	(revision 479742)
++++ kicker/applets/clock/clock.cpp	(working copy)
+@@ -1422,11 +1422,10 @@
+             preferences();
+             break;
+         case 103:
+-            proc << locate("exe", "kdesu");
+-            proc << "--nonewdcop";
+-            proc << QString("%1 kde-clock.desktop --lang %2")
+-                .arg(locate("exe", "kcmshell"))
+-                .arg(KGlobal::locale()->language());
++	    proc << "kcmshell";
++	    proc << "kde-clock.desktop";
++	    proc << "--lang";
++	    proc << KGlobal::locale()->language();
+             proc.start(KProcess::DontCare);
+             break;
+         case 104:

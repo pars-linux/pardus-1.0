@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>normalize</Name>
+        <Homepage>http://www.cs.columbia.edu/~cvaill/normalize</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Audio file volume normalizer</Summary>
+        <Summary xml:lang="tr">Ses dosyalarının ses düzeyini normalleştirir</Summary>
+        <Description>Audio file volume normalizer</Description>
+        <Description xml:lang="tr">Ses dosyalarının ses düzeyini normalleştirir</Description>
+        <Archive sha1sum="14557781e37c38fa4842ee0a496934eafae8e842" type="tarbz2">http://www1.cs.columbia.edu/~cvaill/normalize/normalize-0.7.6.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="0.14.2b">madplay</Dependency>
+            <Dependency versionFrom="0.2.3">audiofile</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>normalize</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.14.2b">madplay</Dependency>
+            <Dependency versionFrom="0.2.3">audiofile</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-13</Date>
+            <Version>0.7.6</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

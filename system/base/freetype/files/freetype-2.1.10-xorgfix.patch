@@ -1,0 +1,16 @@
+--- freetype-2.1.10/src/sfnt/sfdriver.c.xorgfix	2005-08-03 19:10:58.867654076 +0200
++++ freetype-2.1.10/src/sfnt/sfdriver.c	2005-08-03 19:11:43.083188865 +0200
+@@ -367,8 +367,13 @@
+     /* see `ttsbit.h' and `sfnt.h' */
+     tt_face_set_sbit_strike,
+     tt_face_load_sbit_strikes,
++#ifdef FT_OPTIMIZE_MEMORY
+     0 /* tt_find_sbit_image */,
+     0 /* tt_load_sbit_metrics */,
++#else
++    tt_find_sbit_image,
++    tt_load_sbit_metrics,
++#endif
+     tt_face_load_sbit_image,
+     tt_face_free_sbit_strikes,
+ 

@@ -1,0 +1,22 @@
+
+pardus-devel, Pardus için geliştirilmekte olan paketlerin bulunduğu
+alandır. Paket depoları ile ilgili detaylı bilgi için Pardus Depo
+Politikası belgesini inceleyebilirsiniz
+(http://www.uludag.org.tr/projeler/pisi/depo/index.html).
+
+1.0 sürecinde öncelikli olarak "packages" dosyasında listelenen
+yazılımların paketlenmesi gerekmektedir.
+
+Depo tutarlılığını sağlamak için; istede olmayan bir paketi hazırlamak
+isteyen bir geliştirici;
+
+  1. Paketin ne olduğunu, ne iş yaptığını?
+  2. Neden o paketin gerekli olduğunu?
+  3. Depoda aynı işi yapan başka paket olup olmadığını?
+  4. Hangi bağımlılıkları getirdiğini ve hangi paketler ile çakıştığını.
+  5. Başka paketleri etkileyip etkilmediğini
+
+anlatan kısa bir e-postayı pisi@uludag.org.tr listesine gönderip, 24
+saat içinde gelen tepkilere göre hareket etmelidir.
+
+İyi eğlenceler :).

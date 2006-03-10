@@ -1,0 +1,10 @@
+--- libiberty/Makefile.in
++++ libiberty/Makefile.in
+@@ -224,6 +224,7 @@ $(TARGETLIB): $(REQUIRED_OFILES) $(EXTRA
+ 	  $(AR) $(AR_FLAGS) $(TARGETLIB) \
+ 	    $(REQUIRED_OFILES) $(EXTRA_OFILES) $(LIBOBJS); \
+ 	  $(RANLIB) $(TARGETLIB); \
++	  cp $(TARGETLIB) ../ ; \
+ 	  cd ..; \
+ 	else true; fi
+ 

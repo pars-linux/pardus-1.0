@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>libmng</Name>
+        <Homepage>http://www.libmng.com/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>library</IsA>
+        <Description>Multiple Image Networkgraphics lib (animated png's)</Description>
+        <Description xml:lang="tr">Çoklu resim Networkgraphics (Animasyonlu png)</Description>
+        <Summary>Multiple Image Networkgraphics lib (animated png's)</Summary>
+        <Summary xml:lang="tr">Çoklu resim Networkgraphics (Animasyonlu png)</Summary>
+        <Archive sha1sum="b31bbc21fe3590b75bbf44abc7b89e3871f12154" type="targz">http://umn.dl.sourceforge.net/sourceforge/libmng/libmng-1.0.4.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency versionFrom="1.1.4">zlib</Dependency>
+            <Dependency versionFrom="1.0.8">lcms</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libmng</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="header">/usr/include/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-31</Date>
+            <Version>1.0.4</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

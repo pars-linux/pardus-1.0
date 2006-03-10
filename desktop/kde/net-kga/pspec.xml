@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>net-kga</Name>
+        <Homepage>http://www.uludag.org.tr/</Homepage>
+        <Packager>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary xml:lang="en">Network configuration gui</Summary>
+        <Description xml:lang="en">Network configuration gui</Description>
+        <Summary xml:lang="tr">Ağ yapılandırma arayüzü</Summary>
+        <Description xml:lang="tr">Ağ yapılandırma arayüzü</Description>
+        <Archive sha1sum="c5c886b6b8e1d6254004e60bd1dc14a34d430f28" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/net-kga-1.0.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>python</Dependency>
+            <Dependency>PyQt</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>PyKDE</Dependency>
+            <Dependency>PyKDEeXtensions</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>net-kga</Name>
+        <RuntimeDependencies>
+            <Dependency>PyQt</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>PyKDE</Dependency>
+            <Dependency>PyKDEeXtensions</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/kde/3.5/share/applications/kde/net_kga.desktop</Path>
+            <Path fileType="data">/usr/kde/3.5/share/apps/net_kga/net-down.png</Path>
+            <Path fileType="data">/usr/kde/3.5/share/apps/net_kga/net-up.png</Path>
+            <Path fileType="executable">/usr/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="4">
+            <Date>2005-12-26</Date>
+            <Version>1.0</Version>
+            <Comment>Release</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-12-25</Date>
+            <Version>1.0_beta2</Version>
+            <Comment>Beta 2.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-12-24</Date>
+            <Version>1.0_beta1</Version>
+            <Comment>Beta.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-12-19</Date>
+            <Version>1.0_alpha1</Version>
+            <Comment>First release.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

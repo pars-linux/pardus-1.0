@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>m4</Name>
+        <Homepage>http://www.gnu.org/software/m4/m4.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>GNU macro processor</Summary>
+        <Summary xml:lang="tr">GNU makro işleyicisi</Summary>
+        <Description>GNU macro processor</Description>
+        <Description xml:lang="tr">GNU makro işleyicisi</Description>
+        <Archive sha1sum="60353e84a9d534dcc43aea3bb6370ed8c1164cd4" type="targz">http://ftp.gnu.org/gnu/m4/m4-1.4.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>m4</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-22</Date>
+            <Version>1.4.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,21 @@
+diff -Nur old/etc/mplayer.desktop new/etc/mplayer.desktop
+--- old/etc/mplayer.desktop	2005-09-23 23:11:39.000000000 +0300
++++ new/etc/mplayer.desktop	2005-12-21 18:46:49.000000000 +0200
+@@ -2,12 +2,14 @@
+ Type=Application
+ Encoding=UTF-8
+ Name=MPlayer
+-GenericName=Multimedia player
+-Comment=Multimedia player
+-Comment[de]=Multimedia-Player
++GenericName=Multimedia Player
++GenericName[tr]=Medya Oynatıcı
++Comment=Multimedia Player
++Comment[de]=Multimedia Player
+ Comment[es]=Reproductor multimedia
+ Comment[fr]=Lecteur multimedia
+ Comment[it]=Lettore multimediale
++Comment[tr]=Medya Oynatıcı
+ Icon=mplayer-desktop.xpm
+ TryExec=gmplayer
+ Exec=gmplayer

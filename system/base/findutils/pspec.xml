@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>findutils</Name>
+        <Homepage>http://www.gnu.org/software/findutils/findutils.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>GNU utilities to find files</Summary>
+        <Description>GNU utilities to find files</Description>
+        <Summary xml:lang="tr">Dosya bulmak için kullanılan GNU uygulamaları</Summary>
+        <Description xml:lang="tr">Findutils, sisteminizdeki dosyaların yerini bulmanıza yardım eden programları içerir. Arama (find) uygulaması belirlenen kriterlere göre (dosya adı gibi) dizin hiyerarşisini araştırmaktadır.</Description>
+        <Archive sha1sum="9a2d5f8981f6f5bbdcfa956737658cb5e9051a17" type="targz">ftp://alpha.gnu.org/gnu/findutils/findutils-4.1.20.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="4">sed</Dependency>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">findutils-env-size.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>findutils</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-22</Date>
+            <Version>4.1.20</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

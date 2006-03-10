@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>thunderbird</Name>
+        <Homepage>http://www.mozilla.org/projects/thunderbird/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>MPL-1.1</License>
+        <License>NPL-1.1</License>
+        <IsA>app:gui</IsA>
+        <Summary xml:lang="en">Thunderbird Mail Client</Summary>
+        <Description xml:lang="en">Thunderbird Mail Client</Description>
+        <Archive type="tarbz2"
+        sha1sum="d14172e08e36eed8730f5d2a74315a9fb7e38448">http://ftp.mozilla.org/pub/mozilla.org/thunderbird/releases/1.5rc2/source/thunderbird-1.5rc2-source.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>xorg</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency versionFrom="1.1.4">zlib</Dependency>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency versionFrom="1.0.0">libmng</Dependency>
+            <Dependency versionFrom="1.2.1">libpng</Dependency>
+            <Dependency>expat</Dependency> 
+            <Dependency>zip</Dependency> 
+            <Dependency>unzip</Dependency>
+            <Dependency versionFrom="2.8.7">gtk2</Dependency>
+            <Dependency versionFrom="2.8.3">glib2</Dependency>
+            <Dependency versionFrom="1.10.0">pango</Dependency>
+            <Dependency versionFrom="0.8.0">libIDL</Dependency>
+            <Dependency>cairo</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch compressionType="bz2">tr-cvs-trans-11112005-0215.patch.bz2</Patch>
+            <Patch level="1">embed-typeaheadfind.patch</Patch>
+            <Patch level="1">mozconfig.patch</Patch>
+            <Patch level="1">firefox-nopangoxft.patch</Patch>
+            <Patch level="1">zemberek-thunderbird.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>thunderbird</Name>
+        <RuntimeDependencies>
+            <Dependency>xorg</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency versionFrom="1.0.0">libmng</Dependency>
+            <Dependency versionFrom="1.2.1">libpng</Dependency>
+            <Dependency versionFrom="2.8.7">gtk2</Dependency>
+            <Dependency versionFrom="2.8.3">glib2</Dependency>
+            <Dependency versionFrom="1.10.0">pango</Dependency>
+            <Dependency versionFrom="0.8.0">libIDL</Dependency>
+            <Dependency>cairo</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/lib/MozillaThunderbird</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <!-- wrapper -->
+            <AdditionalFile target="/usr/bin/thunderbird" permission="0755" owner="root">thunderbird</AdditionalFile>
+            <!-- Default options -->
+            <AdditionalFile target="/usr/lib/MozillaThunderbird/greprefs/all-pardus.js" permission="0644" owner="root">default-prefs.js</AdditionalFile>
+            <AdditionalFile target="/usr/lib/MozillaThunderbird/defaults/pref/all-pardus.js" permission="0644" owner="root">default-prefs.js</AdditionalFile>
+            <!-- env.d -->
+            <AdditionalFile target="/etc/env.d/10MozillaThunderbird" permission="0644" owner="root">10MozillaThunderbird</AdditionalFile>
+            <!-- Desktop file -->
+            <AdditionalFile target="/usr/share/applications/mozillathunderbird.desktop" permission="0755" owner="root">mozillathunderbird.desktop</AdditionalFile>
+            <!-- Default Mimetypes -->
+            <AdditionalFile target="/usr/lib/MozillaThunderbird/defaults/profile/mimeTypes.rdf" permission="0644" owner="root">mimeTypes.rdf</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <History>
+        <Update release="6">
+            <Date>2005-12-25</Date>
+            <Version>1.5_rc2</Version>
+            <Comment>New release</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-11-28</Date>
+            <Version>1.5_rc1</Version>
+            <Comment>Really fix http://bugs.uludag.org.tr/show_bug.cgi?id=770</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-11-25</Date>
+            <Version>1.5_rc1</Version>
+            <Comment>Default mimetypes for Thunderbird</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-18</Date>
+            <Version>1.5_rc1</Version>
+            <Comment>Fix GTK+ 2.8 problems</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-05</Date>
+            <Version>1.5_rc1</Version>
+            <Comment>Update to version 1.5rc1, update translations and fix #501</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-17-10</Date>
+            <Version>1.5_beta2</Version>
+            <Comment>Initial import</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

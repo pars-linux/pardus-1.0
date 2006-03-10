@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>klibc</Name>
+        <Homepage>http://www.zytor.com/mailman/listinfo/klibc</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary xml:lang="en">A minimal libc subset for use with initramfs.</Summary>
+        <Description xml:lang="en">A minimal libc subset for use with initramfs.</Description>
+        <Archive type="tarbz2" sha1sum="167832f15b48f0d7eda160eee4b05b9afa446a69">ftp://ftp.kernel.org/pub/linux/libs/klibc/klibc-1.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>klibc</Name>
+        <Files>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/lib/klibc/bin</Path>
+            <Path fileType="header">/usr/lib/klibc/include</Path>
+            <Path fileType="library">/usr/lib/klibc/lib</Path>
+            <Path fileType="man">/usr/man/man1</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="doc">/usr/share/doc/klibc-1.1-1</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/aclocal/klibc.m4" permission="0644" owner="root">klibc.m4</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-25</Date>
+            <Version>1.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

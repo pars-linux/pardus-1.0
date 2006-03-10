@@ -1,0 +1,20 @@
+--- freetype-2.1.10/src/autofit/aflatin.c.fixaliasing	2005-09-26 09:46:52.000000000 +0200
++++ freetype-2.1.10/src/autofit/aflatin.c	2005-09-26 09:50:29.000000000 +0200
+@@ -1311,6 +1311,8 @@
+ 
+     mode = metrics->root.scaler.render_mode;
+ 
++    hints->other_flags = 0;
++
+     /*
+      *  We snap the width of vertical stems for the monochrome and
+      *  horizontal LCD rendering targets only.
+@@ -1407,7 +1407,7 @@
+     AF_LatinAxis     axis     = & metrics->axis[dim];
+     FT_Pos           dist     = width;
+     FT_Int           sign     = 0;
+-    FT_Int           vertical = AF_HINTS_DO_VERTICAL( hints );
++    FT_Int           vertical = dim == AF_DIMENSION_VERT;
+ 
+ 
+     if ( !AF_LATIN_HINTS_DO_STEM_ADJUST( hints ) )

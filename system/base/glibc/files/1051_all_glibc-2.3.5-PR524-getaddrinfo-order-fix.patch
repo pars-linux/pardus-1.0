@@ -1,0 +1,26 @@
+http://bugs.gentoo.org/86313
+http://sources.redhat.com/bugzilla/show_bug.cgi?id=524
+
+2005-09-26  Ulrich Drepper  <drepper@redhat.com>
+ 
+	[BZ #524]
+	* sysdeps/posix/getaddrinfo.c (match_prefix): Fix matching loop of
+	number of bits is multiple of 8.
+	Patch by Fredrik Tolf <fredrik@dolda2000.com>.
+
+===================================================================
+RCS file: /cvs/glibc/libc/sysdeps/posix/getaddrinfo.c,v
+retrieving revision 1.87
+retrieving revision 1.88
+diff -u -r1.87 -r1.88
+--- libc/sysdeps/posix/getaddrinfo.c	2005/05/18 19:22:50	1.87
++++ libc/sysdeps/posix/getaddrinfo.c	2005/09/26 16:10:03	1.88
+@@ -1266,7 +1266,7 @@
+       uint8_t *mask = list[idx].prefix.s6_addr;
+       uint8_t *val = in6->sin6_addr.s6_addr;
+ 
+-      while (bits > 8)
++      while (bits >= 8)
+ 	{
+ 	  if (*mask != *val)
+ 	    break;

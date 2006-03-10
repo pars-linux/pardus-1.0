@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>make</Name>
+        <Homepage>http://www.gnu.org/software/make/make.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA> 
+        <Summary>Standard tool to compile source trees</Summary>
+        <Summary xml:lang="tr">Geleneksel kaynak kod ağaçlarını derleme aracı</Summary>
+        <Description>Standard tool to compile source trees</Description>
+        <Description xml:lang="tr">Geleneksel kaynak kod ağaçlarını derleme aracı</Description>
+        <Archive sha1sum="d2085842f08e57d58d3e1cd75a5f0342a60e5f45" type="tarbz2">ftp://ftp.gnu.org/gnu/make/make-3.80.tar.bz2</Archive>
+        <Patches>
+            <Patch>3.80-memory.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+            <Dependency>gnuconfig</Dependency>
+            <Dependency>patch</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>make</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="header">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-25</Date>
+            <Version>3.80</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

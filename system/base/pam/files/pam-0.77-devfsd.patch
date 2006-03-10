@@ -1,0 +1,442 @@
+--- Linux-PAM-0.77/modules/pam_console/Makefile.devfsd	2003-07-08 05:16:28.000000000 +0200
++++ Linux-PAM-0.77/modules/pam_console/Makefile	2003-07-12 23:36:52.000000000 +0200
+@@ -40,7 +40,7 @@
+ 
+ ####################### don't edit below #######################
+ 
+-all: dirs $(LIBSHARED) $(LIBSTATIC) register $(BINARY)
++all: dirs $(LIBSHARED) pam_console_apply_devfsd.so $(LIBSTATIC) register $(BINARY)
+ 
+ dynamic/%.o : %.c
+ 	$(CC) $(CFLAGS) $(DYNAMIC) $(TARGET_ARCH) -c $< -o $@
+@@ -72,6 +72,8 @@
+ $(LIBSHARED):	$(LIBOBJD)
+ 	$(LD_D) -o $@ $(LIBOBJD) $(LIBS) $(NEED_LINK_LIB_C)
+ 
++pam_console_apply_devfsd.so:	dynamic/pam_console_apply_devfsd.o
++	$(LD_D) -o $@ dynamic/pam_console_apply_devfsd.o -Wl,-Bstatic $(LIBS) -L../../libpam -lpam -Wl,-Bdynamic $(NEED_LINK_LIB_C)
+ endif
+ 
+ ifdef STATIC
+@@ -87,6 +89,7 @@
+ 	$(MKDIR) $(FAKEROOT)$(SECUREDIR)
+ ifdef DYNAMIC
+ 	$(INSTALL) -m $(SHLIBMODE) $(LIBSHARED) $(FAKEROOT)$(SECUREDIR)
++	$(INSTALL) -m $(SHLIBMODE) pam_console_apply_devfsd.so $(FAKEROOT)$(SECUREDIR)
+ endif
+ ifdef MAN3
+ 	test -d $(FAKEROOT)$(MANDIR)/man3 || $(MKDIR) $(FAKEROOT)$(MANDIR)/man3
+@@ -128,3 +131,4 @@
+ 
+ $(LIBSRC): pam_console.h chmod.c modechange.c regerr.c config.lex.c config.tab.c
+ $(BINSRC): pam_console.h chmod.c modechange.c regerr.c config.lex.c config.tab.c
++pam_console_apply_devfsd.c: pam_console.h chmod.c modechange.c regerr.c config.lex.c config.tab.c
+--- Linux-PAM-0.77/modules/pam_console/chmod.c.devfsd	2003-07-12 23:36:34.000000000 +0200
++++ Linux-PAM-0.77/modules/pam_console/chmod.c	2003-07-12 23:36:34.000000000 +0200
+@@ -92,19 +92,12 @@
+   unsigned short newmode;
+   int errors = 0;
+ 
++  if ((errors = change_via_fstab (file, changes, user, group)) >= 0)
++    return errors;
++
++  errors = 0;
+   if (lstat (file, &file_stats) == -1)
+-    {
+-      if (errno == ENOENT)
+-        {
+-          /* doesn't exist, check fstab */
+-          errors |= change_via_fstab (file, changes, user, group);
+-          return errors;
+-	}
+-      else
+-        {
+-          return 1;
+-        }
+-    }
++    return 1;
+ 
+   if (S_ISLNK (file_stats.st_mode))
+     {
+@@ -117,9 +110,7 @@
+ 
+   newmode = mode_adjust (file_stats.st_mode, changes);
+ 
+-  if (S_ISDIR (file_stats.st_mode))
+-    errors |= change_via_fstab (file, changes, user, group);
+-  else
++  if (!S_ISDIR (file_stats.st_mode))
+     {
+       if (newmode != (file_stats.st_mode & 07777))
+         {
+@@ -131,7 +122,7 @@
+       errors |= chown (file, user, group);
+     }
+ 
+-  return errors;
++  return errors ? 1 : 0;
+ }
+ 
+ static void
+@@ -141,6 +132,74 @@
+ }
+ 
+ 
++static char *
++get_mnt_dev(struct mntent *mnt)
++{
++  char *dev = g_strdup(mnt->mnt_fsname);
++
++  if (strcmp(mnt->mnt_type, "supermount") == 0 && (strcmp(dev, "none") == 0 || strcmp(dev,mnt->mnt_dir) == 0)) {
++    char *q, *p = strstr(mnt->mnt_opts, "dev=");
++    if (p) {
++      g_free(dev);
++      q = strchr(p+4, ',');
++      if (q)
++	dev = g_strndup(p+4, q-p-4);
++      else
++	dev = g_strdup(p+4);
++    }
++  }
++
++  return dev;
++}
++
++static char *
++check_fstab_entry(char *fname)
++{
++  FILE *fstab;
++  struct mntent *mntent;
++  struct stat devst, mntst;
++  char *mntdev = NULL;
++  char *dirname = NULL;
++
++  fstab = setmntent(fstab_filename, "r");
++
++  if (fstab == NULL)
++    return NULL;
++
++  if (stat(fname, &devst) || !S_ISBLK(devst.st_mode)) {
++    endmntent(fstab);
++    return NULL;
++  }
++
++  for(mntent = getmntent(fstab); mntent != NULL; mntent = getmntent(fstab))
++    {
++      if(mntent->mnt_dir &&
++         mntent->mnt_fsname &&
++	 (strcmp(mntent->mnt_fsname, "none") ||
++	  strcmp(mntent->mnt_type, "supermount") == 0))
++        {
++	  g_free(mntdev);
++	  mntdev = get_mnt_dev(mntent);
++
++	  if (stat(mntdev, &mntst))
++	    continue;
++	  if (!S_ISBLK(mntst.st_mode))
++	    continue;
++	  if (devst.st_dev == mntst.st_dev && devst.st_ino == mntst.st_ino) {
++	    dirname = g_strdup(mntent->mnt_dir);
++	    break;
++	  }
++	}
++
++    }
++
++  endmntent(fstab);
++  g_free(mntdev);
++
++  return dirname;
++}
++
++
+ /* If the directory spec given matches a filesystem listed in /etc/fstab,
+  * modify the device special associated with that filesystem. */
+ static int
+@@ -148,6 +207,7 @@
+ 		  uid_t user, gid_t group)
+ {
+   int errors = 0;
++  int found = 0;
+   FILE *fstab;
+   struct mntent *mntent;
+ 
+@@ -155,22 +215,31 @@
+ 
+   if (fstab == NULL)
+     {
+-      return 1;
++      return -1;
+     }
+ 
+   for(mntent = getmntent(fstab); mntent != NULL; mntent = getmntent(fstab))
+     {
+       if(mntent->mnt_dir &&
+          mntent->mnt_fsname &&
+-	 (fnmatch(dir, mntent->mnt_dir, 0) == 0))
++	 (strcmp(mntent->mnt_fsname, "none") ||
++	  strcmp(mntent->mnt_type, "supermount") == 0) &&
++	 fnmatch(dir, mntent->mnt_dir, 0) == 0)
+         {
+-          errors |= change_file(mntent->mnt_fsname, changes, TRUE, user, group);
++	  char *dev = get_mnt_dev(mntent);
++
++	  if (strcmp(dir, dev)) {
++	    found = 1;
++	    errors |= change_file(dev, changes, TRUE, user, group);
++	  }
++
++	  g_free(dev);
+         }
+     }
+ 
+   endmntent(fstab);
+ 
+-  return errors;
++  return found ? errors : -1;
+ }
+ 
+ /* Parse the ASCII mode into a linked list
+--- Linux-PAM-0.77/modules/pam_console/config.y.devfsd	2003-07-08 05:16:28.000000000 +0200
++++ Linux-PAM-0.77/modules/pam_console/config.y	2003-07-12 23:36:34.000000000 +0200
+@@ -13,6 +13,7 @@
+ #include <stdio.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
++#include <fnmatch.h>
+ #include <security/pam_modules.h>
+ #include <security/_pam_modutil.h>
+ 
+@@ -265,6 +266,7 @@
+     if (consoleHash) {
+ 	g_hash_table_destroy(consoleHash);
+ 	consoleHash = NULL;
++	consoleNameCache = NULL;
+     }
+     return 0;
+ }
+@@ -298,6 +300,104 @@
+ }
+ 
+ STATIC int
++set_permissions_single(const char *consolename, const char *username, int nonroot_ok, char *fname) {
++    struct passwd *p;
++    config *c;
++    GSList *cl;
++    GSList *dcl;
++    char *dirname;
++
++    if (!consoleNameCache || strcmp(consolename, consoleNameCache)) {
++	if (!check_console_name(consolename, nonroot_ok)) return -1;
++    }
++
++    p = getpwnam(username);
++    if (!p) {
++	_pam_log(LOG_ERR, FALSE, "getpwnam failed for \"%s\"", username);
++	return -1;
++    }
++
++    dirname = check_fstab_entry(fname);
++    for (cl = configList; cl; cl = cl->next) {
++	c = cl->data;
++	if (g_hash_table_lookup(consoleHash, c->console_class)) {
++	    if (c->device_class->list)
++		for (dcl = c->device_class->list; dcl; dcl = dcl->next) {
++		    if (fnmatch(dcl->data, fname, FNM_PATHNAME) == 0)
++			chmod_files(c->mode, p->pw_uid, -1, fname, NULL);
++		    else if (dirname && fnmatch(dcl->data, dirname, FNM_PATHNAME) == 0)
++			chmod_files(c->mode, p->pw_uid, -1, fname, NULL);
++		}
++	    else
++		if (fnmatch(c->device_class->name, fname, FNM_PATHNAME) == 0)
++		    chmod_files(c->mode, p->pw_uid, -1, fname, NULL);
++		else if (dirname && fnmatch(c->device_class->name, dirname, FNM_PATHNAME) == 0)
++		    chmod_files(c->mode, p->pw_uid, -1, fname, NULL);
++	}
++    }
++    g_free(dirname);
++    return 0;
++}
++
++STATIC int
++reset_permissions_single(const char *consolename, int nonroot_ok, char *fname) {
++    GSList *cl;
++    char *dirname;
++    int ret = 0;
++
++    if (!consoleNameCache || strcmp(consolename, consoleNameCache)) {
++	if (!check_console_name(consolename, nonroot_ok)) return -1;
++    }
++
++    dirname = check_fstab_entry(fname);
++    for (cl = configList; cl; cl = cl->next) {
++	struct passwd *p;
++	struct group *g;
++	GSList *dcl;
++	int found = 0;
++	config *c = cl->data;
++
++	if (!g_hash_table_lookup(consoleHash, c->console_class))
++	    continue;
++
++	if (c->device_class->list) {
++	    for (dcl = c->device_class->list; !found && dcl; dcl = dcl->next)
++		if (fnmatch(dcl->data, fname, FNM_PATHNAME) == 0) 
++		    found = 1;
++		else if (dirname && fnmatch(dcl->data, dirname, FNM_PATHNAME) == 0)
++		    found = 1;
++	} else {
++	    if (fnmatch(c->device_class->name, fname, FNM_PATHNAME) == 0)
++		found = 1;
++	    else if (dirname && fnmatch(c->device_class->name, dirname, FNM_PATHNAME) == 0)
++		found = 1;
++	}
++	if (!found)
++	    continue;
++
++	p = getpwnam(c->revert_owner ? c->revert_owner : "root");
++	if (!p) {
++	    _pam_log(LOG_ERR, FALSE, "getpwnam failed for %s",
++		     c->revert_owner ? c->revert_owner : "root");
++	    ret = -1;
++	    break;
++	}
++	g = getgrnam(c->revert_group ? c->revert_group : "root");
++	if (!g) {
++	    _pam_log(LOG_ERR, FALSE, "getgrnam failed for %s",
++		     c->revert_group ? c->revert_group : "root");
++	    ret = -1;
++	    break;
++	}
++
++	chmod_files(c->mode, p->pw_uid, g->gr_gid, fname, NULL);
++    }
++    g_free(dirname);
++    return ret;
++}
++
++
++STATIC int
+ reset_permissions(pam_handle_t *pamh, const char *consolename, int nonroot_ok) {
+     struct passwd *pwd;
+     struct group *grp;
+--- Linux-PAM-0.77/modules/pam_console/pam_console.h.devfsd	2003-07-08 05:16:28.000000000 +0200
++++ Linux-PAM-0.77/modules/pam_console/pam_console.h	2003-07-12 23:36:34.000000000 +0200
+@@ -43,4 +43,10 @@
+ STATIC int
+ reset_permissions(pam_handle_t *pamh, const char *consolename, int allow_nonroot);
+ 
++STATIC int
++set_permissions_single(const char *consolename, const char *username, int allow_nonroot, char *dname);
++
++STATIC int
++reset_permissions_single(const char *consolename, int allow_nonroot, char *dname);
++
+ #endif /* _PAM_CONSOLE_H */
+--- Linux-PAM-0.77/modules/pam_console/pam_console_apply_devfsd.c.devfsd	2003-07-12 23:36:34.000000000 +0200
++++ Linux-PAM-0.77/modules/pam_console/pam_console_apply_devfsd.c	2003-07-12 23:36:34.000000000 +0200
+@@ -0,0 +1,104 @@
++/*
++ * Read in the file, and grant ownerships to whoever has the lock.
++ */
++
++#include <errno.h>
++#include <glib.h>
++#include <pwd.h>
++#include <stdlib.h>
++#include <string.h>
++#include <syslog.h>
++#include <sys/types.h>
++#include <sys/stat.h>
++#include <sys/types.h>
++#include <fcntl.h>
++#include <unistd.h>
++#include <stdio.h>
++#define STATIC static
++#include "pam_console.h"
++
++#define PAM_GETPWNAM_R
++#define PAM_GETPWUID_R
++#define PAM_GETGRNAM_R
++#include "../../libpam/include/security/_pam_macros.h"
++
++#define CAST_ME_HARDER (const void**)
++
++static char consolelock[PATH_MAX] = LOCKDIR ".lock";
++static char consoleperms[PATH_MAX] = "/etc/security/console.perms";
++static int debug = 0;
++
++static void *
++_do_malloc(size_t req)
++{
++	void *ret;
++	ret = malloc(req);
++	if (!ret) abort();
++	return ret;
++}
++
++static void
++_pam_log(int err, int debug_p, const char *format, ...)
++{
++	va_list args;
++	if (debug_p && !debug) return;
++        va_start(args, format);
++	fprintf(stderr, format, args);
++	va_end(args);
++}
++
++int
++pam_console_apply_single(char *dname)
++{
++	int fd;
++	int i, c;
++	struct stat st;
++	char *consoleuser = NULL;
++	enum {Set, Reset} sense = Set;
++	static int parsed = 0;
++
++	if (!parsed) {
++	    parse_file(consoleperms);
++	    parsed++;
++	}
++        fd = open(consolelock, O_RDONLY);
++	if (fd != -1) {
++		if (fstat (fd, &st)) {
++			fprintf(stderr,
++			       "\"impossible\" fstat error on %s", consolelock);
++			goto return_error;
++		}
++		if (st.st_size) {
++			consoleuser = _do_malloc(st.st_size+1);
++			memset(consoleuser, '\0', st.st_size);
++			if ((i = read (fd, consoleuser, st.st_size)) == -1) {
++				fprintf(stderr,
++				       "\"impossible\" read error on %s",
++				       consolelock);
++				goto return_error;
++			}
++			consoleuser[i] = '\0';
++		}
++		close (fd);
++	} else {
++		sense = Reset;
++	}
++	if((sense == Set) && (consoleuser != NULL)) {
++		set_permissions_single("tty0", consoleuser, TRUE, dname);
++	}
++	if(sense == Reset) {
++		reset_permissions_single("tty0", TRUE, dname);
++	}
++	return 0;
++
++return_error:
++	return  1;
++}
++
++/* supporting functions included from other .c files... */
++
++#include "regerr.c"
++#include "chmod.c"
++#include "modechange.c"
++#include "config.lex.c"
++#include "config.tab.c"

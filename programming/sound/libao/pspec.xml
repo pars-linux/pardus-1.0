@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libao</Name>
+        <Homepage>http://www.xiph.org/ao/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>The audio output library</Summary>
+        <Summary xml:lang="tr">Ses çıktısı kütüphanesi</Summary>
+        <Description>The audio output library</Description>
+        <Description xml:lang="tr">Ses çıktısı kütüphanesi</Description>
+        <Archive sha1sum="b7dcceec8a021de2534b26135ce33646634eefd6" type="targz">http://www.xiph.org/ao/src/libao-0.8.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>arts</Dependency>
+            <Dependency>nas</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libao</Name>
+        <RuntimeDependencies>
+            <Dependency>nas</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include/ao</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-12-05</Date>
+            <Version>0.8.5</Version>
+            <Comment>nas support</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-01</Date>
+            <Version>0.8.5</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

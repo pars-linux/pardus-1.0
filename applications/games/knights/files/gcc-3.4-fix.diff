@@ -1,0 +1,11 @@
+--- knights/audio.h.orig	2005-11-09 23:38:16.000000000 +0200
++++ knights/audio.h	2005-11-09 23:37:00.000000000 +0200
+@@ -43,7 +43,7 @@
+ const int DrawOffer       = 0x0053;
+ const int Say             = 0x0054;
+ const int Promote         = 0x0055;
+-};
++}
+ 
+ class audioPrivate;
+ class audio

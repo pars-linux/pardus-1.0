@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>emacs-cvs</Name>
+        <Homepage>http://www.gnu.org/software/emacs</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <IsA>app:console</IsA>
+        <Summary>Emacs is the extensible, customizable, self-documenting real-time display editor.</Summary>
+        <Summary xml:lang="tr">Emacs, gelişmiş, özelleştirilebilir ve esnek metin düzenleyicidir</Summary>
+        <Description>Emacs is the extensible, customizable, self-documenting real-time display editor.</Description>
+<!--
+tarball created with:
+export CVS_RSH="ssh"
+cvs -z3 -d:pserver:anonymous@cvs.savannah.gnu.org:/sources/emacs co emacs
+
+# I'm not using XFT branch for stability isues :(.
+# But can be optained with the following command:
+cvs up -Pd -r XFT_JHD_BRANCH
+-->
+        <Archive sha1sum="e36c0a202942eb795d7bd0551d3ffcaf7e861b91" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/emacs-cvs-12212005.tar.bz2</Archive>
+        <Patches>
+            <Patch level="0">emacs-gif.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>xorg</Dependency>
+            <Dependency>ncurses</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>giflib</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>gtk2</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>emacs-cvs</Name>
+        <RuntimeDependencies>
+            <Dependency>xorg</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>giflib</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>gtk2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/libexec/emacs/22.0.50/i686-pc-linux-gnu</Path>
+            <Path fileType="doc">/usr/share/doc/emacs-cvs-22.0.50-2</Path>
+            <Path fileType="data">/usr/share/emacs/22.0.50</Path>
+            <Path fileType="data">/usr/share/emacs/site-lisp</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="man">/usr/share/man/man1</Path>
+            <Path fileType="data">/var/lib/games/</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/emacs/22.0.50/site-lisp/site-start.el">site-start.el</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-12-04</Date>
+            <Version>22.0.50</Version>
+            <Comment>New CVS checkout and disable XFT support</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-12-04</Date>
+            <Version>22.0.50</Version>
+            <Comment>New CVS checkout and XFT support</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-08</Date>
+            <Version>22.0.50</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

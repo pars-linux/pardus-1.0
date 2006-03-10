@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libart_lgpl</Name>
+        <Homepage>http://www.levien.com/libart</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>library</IsA>
+        <Description>a LGPL version of libart</Description>
+        <Description xml:lang="tr">libart'ın LGPL sürümü</Description>
+        <Summary>a LGPL version of libart</Summary>
+        <Summary xml:lang="tr">libart'ın LGPL sürümü</Summary>
+        <Archive sha1sum="263fa5d1efe0679e2378efa875e5da195d5c8091" type="tarbz2">http://ftp.gnome.org/pub/GNOME/sources/libart_lgpl/2.3/libart_lgpl-2.3.16.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="4">sed</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libart_lgpl</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="header">/usr/include/libart-2.0</Path>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="data">/var/lib</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-15</Date>
+            <Version>2.3.16</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

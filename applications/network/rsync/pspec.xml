@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>rsync</Name>
+        <Homepage>http://rsync.samba.org/</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>daemon</IsA>
+        <IsA>app:console</IsA>
+        <Summary>File transfer program to keep remote files into sync</Summary>
+        <Summary xml:lang="tr">Dosya yedekleme ve eşleme uygulaması</Summary>
+        <Description>File transfer program to keep remote files into sync</Description>
+        <Description xml:lang="tr">Uzaktaki bilgisayarlarla yerel sistem arasında dosyaları yedekleme ve eşleme uygulamasıdır. rsync ile bir dosyanın sadece değişen bölümleri alınacağından son derece hızlı veri yedeklenir.</Description>
+        <Archive sha1sum="46b4d296b41d0d7ece667b704f809168dd9f3843" type="targz">http://rsync.samba.org/ftp/rsync/rsync-2.6.6.tar.gz</Archive>
+        <BuildDependencies>
+           <Dependency>popt</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>rsync</Name>
+        <Files>
+            <Path fileType="executable">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/rsyncd.conf">rsyncd.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/rsyncd">rsyncd.conf.d</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/rsyncd">rsyncd.init.d</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-16</Date>
+            <Version>2.6.6</Version>
+            <Comment>
+                Upgraded to latest version due to security issues.
+                Added init scripts and config files for daemon.
+            </Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-16</Date>
+            <Version>2.6.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

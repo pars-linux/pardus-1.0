@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>python-docs</Name>
+        <Homepage>http://www.python.org/doc/2.4.2/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>PSF-2.2</License>
+        <IsA>doc</IsA>
+        <Summary xml:lang="en">HTML documentation for Python</Summary>
+        <Description xml:lang="en">HTML documentation for Python</Description>
+        <Summary xml:lang="tr">Python için HTML dökümanları</Summary>
+        <Description xml:lang="tr">Python için HTML dökümanları</Description>
+        <Archive type="tarbz2" sha1sum="82cf2584b898c1d65073302f5bf50600dc66217c">http://www.python.org/ftp/python/doc/2.4.2/html-2.4.2.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>python-docs</Name>
+        <Files>
+            <Path fileType="config">/etc/env.d</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/env.d/50python-docs">50python-docs</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-08</Date>
+            <Version>2.4.2</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

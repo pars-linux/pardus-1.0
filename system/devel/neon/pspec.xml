@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>neon</Name>
+        <Homepage>http://www.webdav.org/neon/</Homepage>
+        <Packager>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>HTTP and WebDAV client library</Summary>
+        <Summary xml:lang="tr">C arayüzü ile birlikte gelen, Http ve WebDAV için istemci kütüphanesi.</Summary>
+        <Description>HTTP and WebDAV client library</Description>
+        <Description xml:lang="tr">C arayüzü ile birlikte gelen, Http ve WebDAV için istemci kütüphanesi.</Description>
+        <Archive sha1sum="51e556790c79eed99ba8328e79eb7fe996cc34ea" type="targz">http://www.webdav.org/neon/neon-0.24.7.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libxml2</Dependency>
+            <Dependency versionFrom="0.9.6f">openssl</Dependency>
+            <Dependency>zlib</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>neon</Name>
+        <RuntimeDependencies>
+            <Dependency>libxml2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-16</Date>
+            <Version>0.24.7</Version>
+            <Comment>First release.</Comment>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Update>
+    </History>
+</PISI>

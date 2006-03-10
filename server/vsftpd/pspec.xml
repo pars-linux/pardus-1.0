@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>vsftpd</Name>
+        <Homepage>http://vsftpd.beasts.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>daemon</IsA>
+        <Summary>Very Secure FTP Daemon written with speed, size and security in mind</Summary>
+        <Summary xml:lang="tr">Hızlı, küçük ve ileri derecede güvenli bir ftp sunucusu</Summary>
+        <Description>Very Secure FTP Daemon written with speed, size and security in mind</Description>
+        <Description xml:lang="tr">Hızlı, küçük ve ileri derecede güvenli bir ftp sunucusu</Description>
+        <Archive sha1sum="ac29192b3be7148f84b7bd5b240cc1c10ba3720e" type="targz">ftp://vsftpd.beasts.org/users/cevans/vsftpd-2.0.3.tar.gz</Archive> 
+        <Patches>
+            <Patch>vsftpd-2.0.3-pardus.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>pam</Dependency>
+            <Dependency>tcp-wrappers</Dependency>
+            <Dependency>openssl</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>vsftpd</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="data">/home/ftp</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/vsftpd/empty</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/vsftpd">vsftpd.init</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/ftp">ftp-pamd</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/vsftpd/vsftpd.conf">vsftpd.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/ftpusers">ftpusers</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-12-21</Date>
+            <Version>2.0.3</Version>
+            <Comment>Fix #1281</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-17</Date>
+            <Version>2.0.3</Version>
+            <Comment>Fix #817</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-16</Date>
+            <Version>2.0.3</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

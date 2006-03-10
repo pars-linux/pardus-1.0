@@ -1,0 +1,18 @@
+diff -Nuar lib.orig/readline/readline.c lib/readline/readline.c
+--- lib.orig/readline/readline.c	2005-11-08 23:33:43.000000000 +0200
++++ lib/readline/readline.c	2005-11-08 23:35:09.000000000 +0200
+@@ -893,10 +893,10 @@
+ #endif
+ 
+ /* GHISTORY */
+-  /* UP */
+-  rl_bind_keyseq_if_unbound ("\033[A", rl_get_previous_ghistory);
+-  /* DOWN */
+-  rl_bind_keyseq_if_unbound ("\033[B", rl_get_next_ghistory);
++  /* CTRL-UP */
++  rl_bind_keyseq_if_unbound ("\033[1;5A", rl_get_previous_ghistory);
++  /* CTRL-DOWN */
++  rl_bind_keyseq_if_unbound ("\033[1;5B", rl_get_next_ghistory);
+ 
+   /* CTRL-F4 */
+   rl_bind_keyseq_if_unbound ("\033O5S", rl_ghistory_search_backward);

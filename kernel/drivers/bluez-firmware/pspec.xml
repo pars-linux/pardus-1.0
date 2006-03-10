@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>bluez-firmware</Name>
+        <Homepage>http://bluez.sf.net</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>data</IsA>
+        <Summary>Firmware for Broadcom BCM203x Blutonium devices</Summary>
+        <Summary xml:lang="tr">Broadcom BCM203x Blutonium aygıtlar için firmware</Summary>
+        <Description>Firmware for Broadcom BCM203x Blutonium devices</Description>
+        <Description xml:lang="tr">Broadcom BCM203x Blutonium aygıtlar için firmware</Description>
+        <Archive sha1sum="e42c126e21119e7f87b750ca6a60475b6b201c5f" type="targz">http://bluez.sf.net/download/bluez-firmware-1.1.tar.gz</Archive>
+    </Source>
+    
+    <Package>
+        <Name>bluez-firmware</Name>
+        <Files>
+            <Path fileType="data">/lib/firmware</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-10</Date>
+            <Version>1.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

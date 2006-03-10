@@ -1,0 +1,10 @@
+--- pm_config.in.h	2005-04-25 05:21:43.000000000 +0300
++++ pm_config.in.h~	2005-11-22 04:08:44.000000000 +0200
+@@ -173,6 +173,7 @@
+    But we're going to wait a while in case our uint32_t strategy doesn't
+    work.  04.08.24.
+ */
++#include <stdint.h>
+ typedef uint32_t uint32n;
+ typedef int32_t int32n;
+ 

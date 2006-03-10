@@ -1,0 +1,68 @@
+# Copyright 1999-2005 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+#
+# Author: Michal Januszewski <spock@gentoo.org>
+# Maintainer: Michal Januszewski <spock@gentoo.org>
+#
+# This file is a part of splashutils.
+#
+# NOTE: The code here has to be compatible with ash and with the busybox
+#       versions of all the standard system utilities. That means: no 
+#       extended regular expressions, no pattern substitution in variables,
+#       and no fancy GNU command line options.
+
+splash() {
+	local cmd="$1"
+	splash_setup
+	
+	[ ! -x /sbin/splash_helper ] && return
+	[ "${SPLASH_MODE_REQ}" != 'silent' ] && return
+
+	case "${cmd}" in
+		set_msg)
+			export BOOT_MSG="$2" 
+			/sbin/splash_helper 2 'repaint'
+			;;
+		init)	
+			if [ -n "$2" ]; then
+				export BOOT_MSG="$2"
+			elif [ "${CDROOT}" -eq '1' ]; then
+				export BOOT_MSG="Preparing the LiveCD environment... Press Alt+F1 for verbose mode."
+			else
+				export BOOT_MSG="Preparing the system for boot... Press Alt+F1 for verbose mode."
+			fi
+			/sbin/splash_helper 2 'repaint'
+			;;
+		verbose)
+			/bin/chvt 1
+			echo "verbose"
+			;;
+	esac
+}
+
+splash_setup() {
+	# If it's already set up, let's not waste time on parsing the config 
+	# files again
+	if [ "${SPLASH_THEME}" != '' -a "${SPLASH_TTY}" != '' -a "$1" != 'force' ]; then
+		return 0
+	fi
+	
+	export SPLASH_MODE_REQ="off"
+	export SPLASH_THEME="default"
+	export SPLASH_TTY="16"
+	export SPLASH_KDMODE="TEXT"
+
+	if [ -f /proc/cmdline ]; then
+		options=$(sed -e 's/.*splash=\([^ ]*\).*/\1/' -e 's/,/ /g' /proc/cmdline)
+	
+		for i in ${options} ; do
+			case ${i%:*} in
+				theme)		SPLASH_THEME=${i#*:} ;;
+				tty)		SPLASH_TTY=${i#*:} ;;
+				verbose) 	SPLASH_MODE_REQ="verbose" ;;
+				silent)		SPLASH_MODE_REQ="silent" ;;
+				kdgraphics)	SPLASH_KDMODE="GRAPHICS" ;;
+			esac
+		done
+	fi
+}

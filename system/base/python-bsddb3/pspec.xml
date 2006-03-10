@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>python-bsddb3</Name>
+        <Homepage>http://pybsddb.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Eray Özkural</Name>
+            <Email>eray@uludag.org.tr</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>library</IsA>
+        <Summary>Python bindings for Berkeley DB</Summary>
+        <Summary xml:lang="tr">Berkeley DB için python bağları</Summary>
+        <Description xml:lang="en">The new version of the python adaptor library for berkeley db</Description>
+        <Description xml:lang="tr">Python ile birlikte gelen berkeley db python adaptörünün yeni versiyonudur</Description>
+        <Archive sha1sum="e8fd20c540fa3f5120627f3f3829773380521d90" type="targz">http://switch.dl.sourceforge.net/sourceforge/pybsddb/bsddb3-4.3.3.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">db-4.2.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>python</Dependency>
+            <Dependency>db4</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>python-bsddb3</Name>
+        <RuntimeDependencies>
+            <Dependency>python</Dependency>
+            <Dependency>db4</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-07</Date>
+            <Version>4.3.3</Version>
+            <Comment>First release.</Comment>
+            <Name>Eray Özkural</Name>
+            <Email>eray@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,52 @@
+
+[global]
+workgroup = Pardus
+server string = %h - is istasyonu
+security = share
+log file = /var/log/samba.log
+max log size = 50
+dns proxy = no
+
+#============================ Paylasim Ornekleri ==============================
+;[evdizinleri]
+;   comment = Ev Dizinleri
+;   browseable = no
+;   writable = yes
+
+# Un-comment the following and create the netlogon directory for Domain Logons
+; [netlogon]
+;   comment = Network Logon Service
+;   path = /usr/local/samba/lib/netlogon
+;   guest ok = yes
+;   writable = no
+;   share modes = no
+
+[yazicilar]
+comment = Tum Yazicilar
+path = /var/spool/samba
+browseable = no
+# Misafir kullanicilar icin public = yes olarak tanimlayin.
+guest ok = no
+printable = yes
+
+# /tmp dizini altindan dosya paylasimi yapabilmek icin.
+;[tmp]
+;   comment = Gecici dosyalar
+;   path = /tmp
+;   read only = no
+;   public = yes
+
+# Herkesin erisebildigi bir paylasim ornegi.
+;[public]
+;   path = /usr/somewhere/else/public
+;   public = yes
+;   only guest = yes
+;   writable = yes
+;   printable = no
+
+[paylasim]
+comment = Ortak Paylasim Alani
+path = /home/samba
+read only = no
+guest ok = yes
+create mask = 0777

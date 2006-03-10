@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ipodslave</Name>
+        <Homepage>http://www.kde-apps.org/content/show.php?content=11962</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <IsA>plugin</IsA>
+        <Summary>This ioslave enables KIO aware apps like konqueror or amarok to access the Music stored on an Apple iPod.</Summary>
+        <Description>This ioslave enables KIO aware apps like konqueror or amarok to access the Music stored on an Apple iPod.</Description>
+        <Summary xml:lang="tr">KDE uygulamarının iPod ile iletişim kurmasını sağlayan uygulama</Summary>
+        <Description xml:lang="tr">Konqueror veya Amarok gibi uygulamaların Apple iPod içinde depolanmış verilere erişmesini sağlayan uygulama</Description>
+        <Archive sha1sum="97303b1dbb1cef1dd1d449586fc81132cb3914de" type="tarbz2">http://ovh.dl.sourceforge.net/sourceforge/kpod/ipodslave-0.7.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>kdebase</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ipodslave</Name>
+        <RuntimeDependencies>
+            <Dependency>kdebase</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="header">/usr/kde/3.5/include</Path>
+            <Path fileType="library">/usr/kde/3.5/lib</Path>
+            <Path fileType="doc">/usr/kde/3.5/share/doc/</Path>
+            <Path fileType="data">/usr/kde/3.5/share/services</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-12-09</Date>
+            <Version>0.7</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-21</Date>
+            <Version>20051024</Version>
+            <Comment>3.4 to 3.5</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-28</Date>
+            <Version>20051024</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

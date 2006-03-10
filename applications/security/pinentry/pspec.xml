@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>pinentry</Name>
+        <Homepage>http://www.gnupg.org/aegypten/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Collection of simple PIN or passphrase entry dialogs which utilize the Assuan protocol</Summary>
+        <Summary xml:lang="tr">Assuan protokolünün kullanımı için basit PIN veya parola-kelimesi girişi arabirimleri</Summary>
+        <Description>Collection of simple PIN or passphrase entry dialogs which utilize the Assuan protocol</Description>
+        <Description xml:lang="tr">Assuan protokolünün kullanımı için basit PIN veya parola-kelimesi girişi arabirimler topluluğu</Description>
+        <Archive sha1sum="aa113b08e315d22b6f70a634f459fdfbaa4dcaba" type="targz">ftp://ftp.gnupg.org/gcrypt/pinentry/pinentry-0.7.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>qt</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>pinentry</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-02</Date>
+            <Version>0.7.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

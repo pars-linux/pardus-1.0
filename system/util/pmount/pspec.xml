@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pmount</Name>
+        <Homepage>http://www.piware.de/projects.shtml</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Policy based mounter that gives the ability to mount removable devices as a user</Summary>
+        <Summary xml:lang="tr">Taşınabilir donanımların kullanıcı olarak bağlanabilmelerini sağlar</Summary>
+        <Description>Policy based mounter that gives the ability to mount removable devices as a user</Description>
+        <Description xml:lang="tr">Bu program, taşınabilir donanımların kullanıcı olarak baglanabilmelerini sağlar</Description>
+        <Archive sha1sum="1a9bc03f156b993224fc48a2fd5ee46ad4e069ae" type="targz">http://www.piware.de/projects/pmount-0.9.7.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>sysfsutils</Dependency>
+            <Dependency>dbus</Dependency>
+            <Dependency versionFrom="0.5.1">hal</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">skip_whitelist.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>pmount</Name>
+        <RuntimeDependencies>
+            <Dependency>sysfsutils</Dependency>
+            <Dependency>dbus</Dependency>
+            <Dependency versionFrom="0.5.1">hal</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/media</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-12-21</Date>
+            <Version>0.9.7</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-12-01</Date>
+            <Version>0.9.3</Version>
+            <Comment>Dep fix.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-03</Date>
+            <Version>0.9.3</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

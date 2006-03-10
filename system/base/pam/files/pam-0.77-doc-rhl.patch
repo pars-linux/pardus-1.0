@@ -1,0 +1,11 @@
+--- Linux-PAM-0.77/doc/pam_source.sgml	2002-07-11 01:43:50.000000000 -0400
++++ Linux-PAM-0.77/doc/pam_source.sgml	2003-06-27 17:54:37.000000000 -0400
+@@ -268,7 +268,7 @@
+       be used, including RADIUS, NIS, NCP (which means that Novell
+       password databases can be used).
+ 
+-   o  pppd has a PAMified version (available from RedHat)  Now it is
++   o  pppd has a PAMified version (available from Red Hat)  Now it is
+       possible to use a series of databases to authenticate ppp users.
+       In addition to the normal Linux-based password databases (such
+       as /etc/passwd and /etc/shadow), you can use PAM modules to 

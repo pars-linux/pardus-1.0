@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>subversion</Name>
+        <Homepage>http://subversion.tigris.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>Apache-1.1</License>
+        <IsA>app:console</IsA>
+        <Summary>A compelling replacement for CVS</Summary>
+        <Summary xml:lang="tr">CVS yerine kullanılan ve daha gelişmiş özellikleri olan bir sürüm kontrol sistemidir.</Summary>
+        <Description>A compelling replacement for CVS</Description>
+        <Description xml:lang="tr">CVS yerine kullanılan ve daha gelişmiş özellikleri olan bir sürüm kontrol sistemidir.</Description>
+        <Archive sha1sum="513a217ba4a8045ea3daba5c3b0816f80ce0041b" type="tarbz2">http://subversion.tigris.org/downloads/subversion-1.2.3.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">subversion-db4.patch</Patch>
+            <Patch level="1">subversion-1.1.1-perl-vendor.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency version="1.3.21">swig</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency versionFrom="0.24.7">neon</Dependency>
+            <Dependency>db4</Dependency>
+            <Dependency>autoconf2_59</Dependency>
+            <Dependency>patch</Dependency>
+            <Dependency>apr</Dependency>
+            <Dependency>apr-util</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>subversion</Name>
+        <RuntimeDependencies>
+            <Dependency version="1.3.21">swig</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency versionFrom="0.24.7">neon</Dependency>
+            <Dependency>db4</Dependency>
+            <Dependency>patch</Dependency>
+            <Dependency>apr</Dependency>
+            <Dependency>apr-util</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/build</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/svnserve">svnserve.initd</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/svnserve">svnserve.confd</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/colorsvn">colorsvn</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="4">
+            <Date>2005-10-23</Date>
+            <Version>1.2.3</Version>
+            <Comment>Update to version 1.2.3</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-10-15</Date>
+            <Version>1.1.3</Version>
+            <Comment>Fixed to use apr and apr-util packages, instead of building it's own.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-09</Date>
+            <Version>1.1.3</Version>
+            <Comment>colorsvn script (from KDE SVN) added to package</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-16</Date>
+            <Version>1.1.3</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>lsof</Name>
+        <Homepage>ftp://vic.cc.purdue.edu/pub/tools/unix/lsof/README</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary xml:lang="en">Lists open files for running Unix processes</Summary>
+        <Description xml:lang="en">Lists open files for running Unix processes</Description>
+        <Archive sha1sum="27f71c919a6071b623c42540066957839c033854" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/lsof_4.75.tar.gz</Archive>
+        <Patches>
+            <Patch>4.73-answer-config.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>lsof</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/lsof</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-07</Date>
+            <Version>4.75</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

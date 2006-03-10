@@ -1,0 +1,28 @@
+--- xc/programs/xcursorgen/xcursorgen.c.xcursorgen-check-malloc-return	2004-02-25 17:08:37.000000000 -0500
++++ xc/programs/xcursorgen/xcursorgen.c	2004-02-25 17:17:01.000000000 -0500
+@@ -103,7 +103,11 @@
+ 	}
+       }
+ 
+-      curr = malloc (sizeof (struct flist));
++      if (NULL == (curr = malloc (sizeof (struct flist))))
++      {
++          fprintf (stderr, "malloc() failed\n");
++          return 1;
++      }
+ 
+       curr->size = size;
+       curr->xhot = xhot;
+@@ -190,7 +194,11 @@
+ 
+   if (prefix)
+     {
+-      file = malloc (strlen (prefix) + 1 + strlen (list->pngfile) + 1);
++      if (NULL == (file = malloc (strlen (prefix) + 1 + strlen (list->pngfile) + 1)))
++      {
++          fprintf (stderr, "malloc() failed\n");
++          return 1;
++      }
+       strcpy (file, prefix);
+       strcat (file, "/");
+       strcat (file, list->pngfile);

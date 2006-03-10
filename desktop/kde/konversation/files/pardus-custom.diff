@@ -1,0 +1,45 @@
+diff -ur konversation-0.18/konversation/src/preferences.cpp konversation-0.18-work/konversation/src/preferences.cpp
+--- konversation-0.18/konversation/src/preferences.cpp	2005-06-07 09:34:47.000000000 +0300
++++ konversation-0.18-work/konversation/src/preferences.cpp	2005-11-15 14:37:10.000000000 +0200
+@@ -164,9 +164,9 @@
+   setUseClickableNicks(true);
+ 
+   // On Screen Display
+-  setOSDUsage(false);
+-  setOSDShowOwnNick(false);
+-  setOSDShowQuery(false);
++  setOSDUsage(true);
++  setOSDShowOwnNick(true);
++  setOSDShowQuery(true);
+   setOSDShowChannelEvent(false);
+   setOSDTextColor("#ffffff");
+   setOSDDuration(3000);
+@@ -224,8 +224,8 @@
+   nickColorList.append("#0FB39A");
+   nickColorList.append("#3176B3");
+   nickColorList.append("#000000");
+-  setUseColoredNicks(false);
+-  setUseBoldNicks(false);
++  setUseColoredNicks(true);
++  setUseBoldNicks(true);
+   setUseLiteralModes(false);
+ 
+   setNickCompletionMode(2);
+@@ -242,14 +242,14 @@
+ 
+   // Web Browser
+   setWebBrowserUseKdeDefault(true);
+-  setWebBrowserCmd("mozilla \'%u\'");
++  setWebBrowserCmd("firefox \'%u\'");
+ 
+   setRedirectToStatusPane(false);
+   
+   setOpenWatchedNicksAtStartup(false);
+ 
+   // Themes
+-  setIconTheme("default");
++  setIconTheme("smiling");
+   
+   setDisableNotifyWhileAway(false);
+ }
+Yalnızca konversation-0.18-work/konversation/src'da: preferences.cpp~

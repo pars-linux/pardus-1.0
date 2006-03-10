@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>automake1_8</Name>
+        <Homepage>http://sources.redhat.com/automake/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>category</IsA>
+        <Summary>Used to generate Makefile.in from Makefile.am</Summary>
+        <Summary xml:lang="tr">Makefile.am dosyalarından Makefile.in dosyası üreten program</Summary>
+        <Description>Used to generate Makefile.in from Makefile.am</Description>
+        <Description xml:lang="tr">Makefile.am yapılandırma dosyalarından Makefile.in dosyası üreten program</Description>
+        <Archive sha1sum="2ed5a20fd22bf1c2f4e2375ac8f2debfdc2b75c7" type="targz">http://ftp.gnu.org/gnu/automake/automake-1.8.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>autoconf2_59</Dependency>
+            <Dependency>gnuconfig</Dependency>
+            <Dependency>patch</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">automake-1.8.2-infopage-namechange.patch</Patch>
+        </Patches>
+        
+    </Source>
+
+    <Package>
+        <Name>automake1_8</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>autoconf2_59</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/automake-1.8</Path>
+            <Path fileType="data">/usr/share/aclocal-1.8</Path>
+        </Files>
+   </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-21</Date>
+            <Version>1.8.5</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

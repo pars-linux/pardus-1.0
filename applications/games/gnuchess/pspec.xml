@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gnuchess</Name>
+        <Homepage>http://www.gnu.org/software/chess/chess.html</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Console based chess interface</Summary>
+        <Summary xml:lang="tr">Konsol tabanlı bir satranç programı</Summary>
+        <Description>GNU Chess lets most modern computers play a full game of chess. It has a plain terminal interface but supports visual interfaces such as X-Windows xboard.</Description>
+        <Description xml:lang="tr">Konsol tabanlı bir satranç programı</Description>
+        <Archive sha1sum="7dbaf957bfea9cf37fe393e1fec7306de0162a16" type="targz">http://ftp.gnu.org/pub/gnu/chess/gnuchess-5.07.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>readline</Dependency>
+        </BuildDependencies>        
+    </Source>
+
+    <Package>
+        <Name>gnuchess</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-08</Date>
+            <Version>5.07</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

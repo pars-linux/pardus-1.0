@@ -1,0 +1,6 @@
+<PISI>
+    <Name>system</Name>
+    <LocalName xml:lang="tr">Sistem Programları</LocalName>
+    <Summary xml:lang="tr">Pardus sisteminin temel bileşenleri</Summary>
+    <Description xml:lang="tr">Taban sistem, geliştirme sistemi ve diğer önemli sistem araçlarını içerir</Description>
+</PISI>

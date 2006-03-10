@@ -1,0 +1,33 @@
+diff -Nur mplayer-20051019-old/configure mplayer-20051019/configure
+--- mplayer-20051019-old/configure	2005-10-19 00:48:09.000000000 +0300
++++ mplayer-20051019/configure	2005-10-20 02:08:34.000000000 +0300
+@@ -694,29 +694,6 @@
+ EOF
+     die "Bad gcc version"
+   fi
+-else
+-cat <<EOF
+-
+-******************************************************************************
+-
+-Hmm. You really want to compile MPlayer with an *UNSUPPORTED* C compiler?
+-Ok. You know. Do it. Did you read DOCS/HTML/en/users-vs-dev.html???
+-
+-DO NOT SEND BUGREPORTS OR COMPLAIN, it's *YOUR* compiler's fault!
+-Get ready for mysterious crashes, no-picture bugs, strange noises... REALLY!
+-Lame which is used by mencoder produces weird errors, too.
+-
+-If you have any problem, install a GCC 2.95.x or 3.x version and try again.
+-If the problem _still_ exists, then read DOCS/HTML/en/bugreports.html !
+-
+-  *** DO NOT SEND BUG REPORTS OR COMPLAIN it's *YOUR* compiler's fault! ***
+-
+-******************************************************************************
+-
+-EOF
+-
+-read _answer
+-
+ fi
+ echocheck "host cc"
+ test "$_host_cc" || _host_cc=$_cc

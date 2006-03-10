@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>rdesktop</Name>
+        <Homepage>http://rdesktop.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>A Remote Desktop Protocol Client</Summary>
+        <Summary xml:lang="tr">Rdesktop, Windows NT/2000 terminal sunucuları için açık kaynak kodlu bir istemcidir</Summary>
+        <Description>A Remote Desktop Protocol Client</Description>
+        <Description xml:lang="tr">Rdesktop, Windows NT/2000 terminal sunucuları için açık kaynak kodlu bir istemcidir. RDP protokolünü kullanarak NT/2000 masaüstüne erişim sağlarken herhangi bir ek sunucu eklenisi gerektirmemektedir.</Description>
+        <Archive sha1sum="412ffa06dc216cc7ce1082a8a4912778f82425d9" type="targz">http://mesh.dl.sourceforge.net/sourceforge/rdesktop/rdesktop-1.4.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>xorg</Dependency>
+            <Dependency versionFrom="0.9.6b">openssl</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch level="1">configure.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>rdesktop</Name>
+        <RuntimeDependencies>
+            <Dependency>xorg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/rdesktop/keymaps</Path>
+        </Files>
+  </Package>
+
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-07</Date>
+            <Version>1.4.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

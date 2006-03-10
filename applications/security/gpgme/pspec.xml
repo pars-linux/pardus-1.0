@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gpgme</Name>
+        <Homepage>http://www.gnupg.org/(en)/related_software/gpgme/index.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>GnuPG Made Easy is a library for making GnuPG easier to use</Summary>
+        <Summary xml:lang="tr">GnuPG Made Easy, GnuPG kullanmayı kolaylaştıran bir kütüphanedir</Summary>
+        <Description>GnuPG Made Easy is a library for making GnuPG easier to use</Description>
+        <Description xml:lang="tr">GnuPG Made Easy, GnuPG kullanmayı kolaylaştıran bir kütüphanedir</Description>
+        <Archive sha1sum="5ca592b6a8ec64e92fa64402a15ea3ee37ad3fab" type="targz">ftp://ftp.gnupg.org/gcrypt/gpgme/gpgme-1.0.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="1.2.2">gnupg</Dependency>
+            <Dependency>gawk</Dependency>
+            <Dependency versionFrom="0.5">libgpg-error</Dependency>
+            <Dependency>pth</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gpgme</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="1.2.2">gnupg</Dependency>
+            <Dependency>gawk</Dependency>
+            <Dependency>libtool</Dependency>
+            <Dependency versionFrom="0.5">libgpg-error</Dependency>
+            <Dependency>pth</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-07</Date>
+            <Version>1.0.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

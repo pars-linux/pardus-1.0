@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libidn</Name>
+        <Homepage>http://www.gnu.org/software/libidn/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>library</IsA>
+        <Summary>Internationalized Domain Names (IDN) implementation</Summary>
+        <Description>Internationalized Domain Names (IDN) implementation</Description>
+        <Summary xml:lang="tr">Uluslararası Alan Adları (IDN) destek kütüphanesi</Summary>
+        <Description xml:lang="tr">GNU Libidn, uluslararası alan adları için kullanılan IETF Uluslararası Alan Adları
+        çalışma grubu tarafından tanımlanan Stringrep, Punycode ve IDNA spesifikasyonlarının bir uygulamasıdır.</Description>        
+        <Archive sha1sum="5ae48379a40e7e6976c680d4fd1d977224d6c589" type="targz">http://josefsson.org/libidn/releases/libidn-0.5.19.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>libidn</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-03</Date>
+            <Version>0.5.19</Version>
+            <Comment>Update to version 0.5.19</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-08</Date>
+            <Version>0.5.13</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

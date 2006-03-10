@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>sqlite</Name>
+        <Homepage>http://www.sqlite.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:console</IsA>
+        <Summary>SQLite: A SQL Database Engine in a C Library</Summary>
+        <Description>SQLite: A SQL Database Engine in a C Library</Description>
+        <Summary xml:lang="tr">SQLite: Bir c kütüphanesi içindeki bir SQL veritabanı motoru</Summary>
+        <Description xml:lang="tr">SQLite: Bir c kütüphanesi içindeki bir SQL veritabanı motoru</Description>
+        <Archive sha1sum="370095ce08b0f70754e034b2f07915c07f74ac11" type="targz">http://www.sqlite.org/sqlite-3.2.7.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>sqlite</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-11</Date>
+            <Version>3.2.7</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

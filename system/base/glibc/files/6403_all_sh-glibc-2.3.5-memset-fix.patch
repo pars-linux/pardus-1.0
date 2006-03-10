@@ -1,0 +1,22 @@
+SUGIOKA Toshinobu <sugioka@itonet.co.jp>
+
+	* sysdeps/sh/memset.S (memset): Correct 2nd argument handling.
+
+http://sources.redhat.com/ml/libc-alpha/2005-07/msg00051.html
+
+Index: sysdeps/sh/memset.S
+===================================================================
+RCS file: /cvs/glibc/libc/sysdeps/sh/memset.S,v
+retrieving revision 1.4
+retrieving revision 1.5
+diff -u -p -r1.4 -r1.5
+--- sysdeps/sh/memset.S	29 Apr 2003 22:47:18 -0000	1.4
++++ sysdeps/sh/memset.S	24 Jul 2005 22:54:32 -0000	1.5
+@@ -28,6 +28,7 @@ ENTRY(memset)
+ 	bt.s	L_byte_loop_init
+ 	mov	r4,r7
+ 
++	extu.b	r5,r5
+ 	swap.b	r5,r1
+ 	or	r1,r5
+ 	swap.w	r5,r1

@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>foomatic-filters</Name>
+        <Homepage>http://www.linuxprinting.org/foomatic</Homepage>
+        <Packager>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>category</IsA>
+        <Summary>Foomatic wrapper scripts</Summary>
+        <Summary xml:lang="tr">Foomatic betikleri</Summary>
+        <Description>Foomatic wrapper scripts</Description>
+        <Description xml:lang="tr">Foomatic, çok kullanılan yazıcıları Debian ile daha kolay ayarlamak ve kullanmak için tasarlanmış bir yazdırma sistemidir. Yazıcınız ve yazdırma kuyruğu arasında, bilgisayarınıza yazıcıya gönderilen dosyaları nasıl işleyeceğini söyleyerek bağlantı sağlar.</Description>
+        <Archive sha1sum="6d949949f432212632c704904272bc32f287b577" type="targz">http://www.linuxprinting.org/download/foomatic/foomatic-filters-3.0.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>ghostscript</Dependency>
+            <Dependency versionFrom="1.1.19">cups</Dependency>
+        </BuildDependencies>
+        
+    </Source>
+    <Package>
+        <Name>foomatic-filters</Name>
+        <RuntimeDependencies>
+            <Dependency>ghostscript</Dependency>
+            <Dependency versionFrom="1.1.19">cups</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/foomatic</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-16</Date>
+            <Version>3.0.2</Version>
+            <Comment>First release.</Comment>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Update>
+    </History>
+</PISI>

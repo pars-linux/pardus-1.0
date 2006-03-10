@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>4suite</Name>
+        <Homepage>http://www.4suite.org</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>4Suite</License>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <Summary>4Suite</Summary>
+        <Summary xml:lang="tr">XML işleme ve XML veritabanları için Python araçları ve kitaplıkları</Summary>
+        <Description>4Suite</Description>
+        <Description xml:lang="tr">4Suite paketi Python ile kullanılmak üzere XML ile ilgili araçlar ve kitaplıklar içerir. Bu araçlar: 4DOM, 4XSLT, 4XPath, 4RDF, ve 4XPointer'dır</Description>
+        <Archive sha1sum="2e78bab8860c8031b74f44be65d1914f2b7ede20" type="targz">http://puzzle.dl.sourceforge.net/sourceforge/foursuite/4Suite-XML-1.0b2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>python</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">4Suite-1.0b2-install_root.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>4suite</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/4Suite</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-24</Date>
+            <Version>1.0_beta2</Version>
+            <Comment>Install into /usr not /usr/local</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-12</Date>
+            <Version>1.0_beta2</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,56 @@
+--- kcm_gtk/kcmgtk.cpp
++++ kcm_gtk/kcmgtk.cpp	2005/04/27 14:48:09
+@@ -376,7 +376,7 @@
+ 			KListViewItem* i = new KListViewItem(w->profilesList);
+ 			i->setPixmap(0, icon);
+ 			i->setText(0, (p->type ? i18n("Thunderbird") : i18n("Firefox")) + " - " + p->name);
+-			i->setText(1, QString::number((int)p));
++			i->setText(1, QString::number((long)p));
+ 		}
+ 		
+ 		dialog->setMainWidget(w);
+--- kcm_gtk/kcmgtk.desktop
++++ kcm_gtk/kcmgtk.desktop	2005/04/27 14:47:42
+@@ -3,7 +3,7 @@
+ Comment=Control the style and fonts used by GTK applications
+ Exec=kcmshell kcmgtk
+ Terminal=false
+-Icon=gnome_apps.png
++Icon=gnome_apps
+ Hidden=true
+ 
+ Encoding=UTF-8
+--- kcm_gtk/kcmgtk-xdg.desktop
++++ kcm_gtk/kcmgtk-xdg.desktop	2005/04/27 14:47:42
+@@ -3,7 +3,7 @@
+ Comment=Control the style and fonts used by GTK applications
+ Exec=kcmshell kcmgtk
+ Terminal=false
+-Icon=gnome_apps.png
++Icon=gnome_apps
+ 
+ Encoding=UTF-8
+ Keywords=kcmgtk,gtk,style,font
+--- Makefile.am
++++ Makefile.am	2005/04/27 14:47:42
+@@ -1,4 +1,4 @@
+-SUBDIRS = $(TOPSUBDIRS) po
++SUBDIRS = kcm_gtk src po
+ 
+ $(top_srcdir)/acinclude.m4: $(top_srcdir)/admin/acinclude.m4.in $(top_srcdir)/admin/libtool.m4.in
+ 	@cd $(top_srcdir) && cat admin/acinclude.m4.in admin/libtool.m4.in > acinclude.m4
+--- src/qt_theme_draw.c
++++ src/qt_theme_draw.c	2005/04/27 14:47:42
+@@ -1809,9 +1809,9 @@
+   GdkPixmap* pix_test;
+   
+   /* What kind of horrible person would store a pointer to a widget here... */
+-  GtkWidget* parent = 0;
+-  gdk_window_get_user_data(window, (void **) &parent);
+-  if (GTK_IS_MENU(parent))
++  void* parent = 0;
++  gdk_window_get_user_data(window, &parent);
++  if (GTK_IS_MENU((GtkWidget*) parent))
+   {
+     pix_test = QTENGINE_STYLE(style)->menuBackground;
+   }

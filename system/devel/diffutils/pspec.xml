@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>diffutils</Name>
+        <Homepage>http://www.gnu.org/software/diffutils/diffutils.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Tools to make diffs and compare files</Summary>
+        <Summary xml:lang="tr">Dosyaları karşılaştırmak ve fark dosyaları oluşturmak için kullanılan araçlar</Summary>
+        <Description>Tools to make diffs and compare files</Description>
+        <Description xml:lang="tr">Dosyaları karşılaştırmak ve fark dosyaları oluşturmak için kullanılan araçlar</Description>
+        <Archive sha1sum="b05cfdd651137d46d97872dd646db0dd92077f0d" type="targz">ftp://alpha.gnu.org/gnu/diffutils/diffutils-2.8.7.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">diffutils-2.8.4-sdiff-no-waitpid.patch</Patch>
+            <Patch level="1">diffutils-2.8.7-i18n.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+            <Dependency>patch</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>diffutils</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-21</Date>
+            <Version>2.8.7</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

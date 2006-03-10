@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>device-mapper</Name>
+        <Homepage>http://sources.redhat.com/dm/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary xml:lang="en">Device mapper ioctl library for use with LVM2 utilities.</Summary>
+        <Description xml:lang="en">Device mapper ioctl library for use with LVM2 utilities.</Description>
+        <Archive type="targz" sha1sum="8b28c277ceb11f8a78f5e91b95036f5a563c7fa9">ftp://sources.redhat.com/pub/dm/device-mapper.1.01.05.tgz</Archive>
+    </Source>
+
+    <Package>
+        <Name>device-mapper</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc/device-mapper-1.01.05-1</Path>
+            <Path fileType="man">/usr/share/man/man8</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/dmtab">dmtab</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/lib/rcscripts/addons/dm-start.sh">dm-start.sh</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-24</Date>
+            <Version>1.01.05</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

@@ -1,0 +1,53 @@
+diff -ur mc-4.6.0/edit/edit.c mc-4.6.0-patched/edit/edit.c
+--- mc-4.6.0/edit/edit.c	2005-10-14 09:23:12.000000000 +0300
++++ mc-4.6.0-patched/edit/edit.c	2005-10-14 09:45:02.000000000 +0300
+@@ -43,7 +43,7 @@
+ int option_fill_tabs_with_spaces = 0;
+ int option_return_does_auto_indent = 1;
+ int option_backspace_through_tabs = 0;
+-int option_fake_half_tabs = 1;
++int option_fake_half_tabs = 0;
+ int option_save_mode = EDIT_QUICK_SAVE;
+ int option_save_position = 1;
+ int option_backup_ext_int = -1;
+diff -ur mc-4.6.0/src/layout.c mc-4.6.0-patched/src/layout.c
+--- mc-4.6.0/src/layout.c	2005-10-14 09:23:12.000000000 +0300
++++ mc-4.6.0-patched/src/layout.c	2005-10-14 09:38:07.000000000 +0300
+@@ -96,7 +96,7 @@
+ int keybar_visible = 1;
+ 
+ /* Set if the nice message (hint) bar is visible */
+-int message_visible = 1;
++int message_visible = 0;
+ 
+ /* Set to show current working dir in xterm window title */
+ int xterm_title = 1;
+diff -ur mc-4.6.0/src/main.c mc-4.6.0-patched/src/main.c
+--- mc-4.6.0/src/main.c	2005-10-14 09:23:12.000000000 +0300
++++ mc-4.6.0-patched/src/main.c	2005-10-14 09:44:24.000000000 +0300
+@@ -174,7 +174,7 @@
+ int mouse_move_pages = 1;
+ 
+ /* If true: l&r arrows are used to chdir if the input line is empty */
+-int navigate_with_arrows = 0;
++int navigate_with_arrows = 1;
+ 
+ /* If true use +, -, | for line drawing */
+ int force_ugly_line_drawing = 0;
+@@ -221,14 +221,14 @@
+ int confirm_execute = 0;
+ 
+ /* Asks for confirmation before leaving the program */
+-int confirm_exit = 1;
++int confirm_exit = 0;
+ 
+ /* Asks for confirmation when using F3 to view a directory and there
+    are tagged files */
+ int confirm_view_dir = 0;
+ 
+ /* This flag indicates if the pull down menus by default drop down */
+-int drop_menus = 0;
++int drop_menus = 1;
+ 
+ /* The dialog handle for the main program */
+ Dlg_head *midnight_dlg;

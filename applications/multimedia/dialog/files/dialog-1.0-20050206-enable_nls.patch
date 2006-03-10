@@ -1,0 +1,12 @@
+diff -ur dialog-1.0-20050206/makefile.in dialog-1.0-20050206.orig/makefile.in
+--- dialog-1.0-20050206/makefile.in	2005-04-22 14:51:27.000000000 +0300
++++ dialog-1.0-20050206.orig/makefile.in	2005-02-07 02:50:22.000000000 +0200
+@@ -27,7 +27,7 @@
+ localedir       = $(prefix)/@DATADIRNAME@/locale
+ 
+ CFLAGS		= @CFLAGS@
+-CPPFLAGS	= @CPPFLAGS@ @DEFS@ -I. -I$(srcdir) -DLOCALEDIR=\"$(localedir)\"
++CPPFLAGS	= @CPPFLAGS@ @DEFS@ -I. -I$(srcdir) -DLOCALEDIR=\"$(localedir)\" -DENABLE_NLS
+ EXTRA_CFLAGS	= @EXTRA_CFLAGS@
+ CC		= @CC@
+ AR		= @AR@

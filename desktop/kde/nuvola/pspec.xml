@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>nuvola</Name>
+        <Homepage>http://www.kde-look.org/content/show.php?content=5358</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <IsA>plugin</IsA>
+        <IsA>data</IsA>
+        <Summary>Nuvola SVG evolution of SKY icon theme.</Summary>
+        <Description>Nuvola SVG evolution of SKY icon theme.</Description>
+        <Summary xml:lang="tr">Nuvola simge seti</Summary>
+        <Description xml:lang="tr">KDE üzerinde en çok tercih edilen simge setlerinden birisidir</Description>
+        <Archive sha1sum="c485c9ac12019c984eb1ad9f2d46a6eab9e18a22" type="targz">http://www.icon-king.com/files/nuvola-1.0.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>nuvola</Name>
+        <Files>
+            <Path fileType="data">/usr/share/icons/Nuvola</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-04</Date>
+            <Version>1.0</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

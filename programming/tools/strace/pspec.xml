@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>strace</Name>
+        <Homepage>http://sourceforge.net/projects/strace/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:console</IsA>
+        <Summary xml:lang="en">A useful diagnostic, instructional, and debugging tool</Summary>
+        <Description xml:lang="en">A useful diagnostic, instructional, and debugging tool</Description>
+        <Archive sha1sum="13d09ca492c8a68eccfe7490d4663638e7e9777e" type="tarbz2">http://ovh.dl.sourceforge.net/sourceforge/strace/strace-4.5.11.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>strace</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-07</Date>
+            <Version>4.5.11</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

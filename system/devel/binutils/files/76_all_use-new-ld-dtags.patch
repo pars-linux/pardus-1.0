@@ -1,0 +1,11 @@
+--- binutils-2.14.90.0.8.orig/ld/ldmain.c	2004-01-14 21:07:52.000000000 +0000
++++ binutils-2.14.90.0.8/ld/ldmain.c	2004-02-25 07:38:52.000000000 +0000
+@@ -296,7 +296,7 @@ main (int argc, char **argv)
+   link_info.keep_memory = TRUE;
+   link_info.notice_all = FALSE;
+   link_info.nocopyreloc = FALSE;
+-  link_info.new_dtags = FALSE;
++  link_info.new_dtags = TRUE;
+   link_info.combreloc = TRUE;
+   link_info.eh_frame_hdr = FALSE;
+   link_info.strip_discarded = TRUE;

@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cpufreqd</Name>
+        <Homepage>http://cpufreqd.sf.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>daemon</IsA>
+        <Summary>Daemon to adjust CPU frequency for power saving</Summary>
+        <Summary xml:lang="tr">Akıllı güç kullanımı için işlemci çalışma hızını ayarlama hizmeti</Summary>
+        <Description>Daemon to adjust CPU frequency for power saving</Description>
+        <Description xml:lang="tr">Akıllı güç kullanımı için işlemci çalışma hızını ayarlama hizmeti</Description>
+        <Archive sha1sum="8b23e86c012b6f7280605ed58e93c94194339010" type="targz">http://easynews.dl.sourceforge.net/sourceforge/cpufreqd/cpufreqd-1.2.3.tar.gz</Archive>
+    </Source>
+    
+    <Package>
+        <Name>cpufreqd</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/cpufreqd.conf">cpufreqd.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/cpufreqd">cpufreqd</AdditionalFile>
+        </AdditionalFiles>
+  </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-09</Date>
+            <Version>1.2.3</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

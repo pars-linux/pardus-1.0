@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ffmpeg</Name>
+        <Homepage>http://ffmpeg.sourceforge.net</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL</License>
+        <IsA>app:console</IsA>
+        <Description>FFmpeg is a complete solution to record, convert and stream audio and video. It includes libavcodec, the leading audio/video codec library.FFmpeg is developed under Linux, but it can compiled under most operating systems, including Windows.</Description>
+        <Description xml:lang="tr">FFmpeg ses ve görüntü dosyalarını kaydedebilen,dönüştürebilen ve açabilen komple bir çözüm. libavcodec ve birçok popüler ses/görüntü codeclerini içerir.FFmpeg linux altında geliştirilmiş olmasına rağmen windows'un da dahil olduğu birçok işletim sistemi altında derlenip çalıştırılabilir</Description>
+        <Summary>FFmpeg is a complete solution to record, convert and stream audio and video</Summary>
+        <Summary xml:lang="tr">FFmpeg ses ve görüntü dosyalarını kaydedebilen, dönüştürebilen ve açabilen yazılımdır</Summary>
+        <Archive sha1sum="227d8ef6994a17e6b32fc3dd8ee707a13ffad328" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/ffmpeg-20051122.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>faac</Dependency>
+            <Dependency>faad2</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>imlib2</Dependency>
+            <Dependency>lame</Dependency>
+            <Dependency>libdts</Dependency>
+            <Dependency>libogg</Dependency>
+            <Dependency>libdc1394</Dependency>
+            <Dependency>libsdl</Dependency>
+            <Dependency>libraw1394</Dependency>
+            <Dependency>libtheora</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>perl</Dependency>
+            <Dependency>x264</Dependency>
+            <Dependency>xvid</Dependency>
+            <Dependency>zlib</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>default_get_buffer-overflow.diff</Patch>
+        </Patches>
+    </Source>
+    
+    <Package>
+        <Name>ffmpeg</Name>
+        <RuntimeDependencies>
+            <Dependency>faac</Dependency>
+            <Dependency>faad2</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>imlib2</Dependency>
+            <Dependency>lame</Dependency>
+            <Dependency>libdts</Dependency>
+            <Dependency>libogg</Dependency>
+            <Dependency>libdc1394</Dependency>
+            <Dependency>libsdl</Dependency>
+            <Dependency>libraw1394</Dependency>
+            <Dependency>libtheora</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>x264</Dependency>
+            <Dependency>xvid</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="config">/etc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="3" type="security">
+            <Date>2005-12-02</Date>
+            <Version>20051122</Version>
+            <Comment>Apply a patch from upstream to fix possible overflow in default_get_buffer</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-22</Date>
+            <Version>20051122</Version>
+            <Comment>Version bump</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-16</Date>
+            <Version>20051016</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

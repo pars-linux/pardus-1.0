@@ -1,0 +1,479 @@
+2005-02-08  H.J. Lu  <hongjiu.lu@intel.com>
+
+	PR c++/19664
+	* g++.special/inline-hidden-1.cc: New file.
+	* g++.special/inline-hidden-1.x: Likewise.
+	* g++.special/inline-hidden-2.cc: Likewise.
+	* g++.special/inline-hidden-2.x: Likewise.
+	* g++.special/inline-hidden-3.x: Likewise.
+	* g++.special/inline-hidden-3a.cc: Likewise.
+	* g++.special/inline-hidden-3b.cc: Likewise.
+	* g++.special/special.exp: Likewise.
+
+	PR target/19520
+	* gcc.special/protfunc-1-dso.c: New file.
+	* gcc.special/protfunc-1-main.c: Likewise.
+	* gcc.special/protfunc-1.x: Likewise.
+	* gcc.special/special.exp: Likewise.
+
+	* lib/gcc-special.exp: New file.
+
+	* lib/target-supports.exp (is-shared-library-supported): New.
+	(get-compile-shared-library-option): Likewise.
+	(get-build-shared-library-option): Likewise.
+
+--- gcc-3.4.4/gcc/testsuite/lib/target-supports.exp.visibility5	2004-08-24 06:15:10.000000000 -0400
++++ gcc-3.4.4/gcc/testsuite/lib/target-supports.exp	2005-03-08 11:01:59.161054233 -0500
+@@ -289,3 +289,53 @@ proc check_vmx_hw_available { } {
+ 
+     return $vmx_hw_available_saved
+ }
++
++# Return 1 if the target support shared library.
++
++proc is-shared-library-supported { } {
++    # Shared library is only supported on a couple of ELF platforms.
++    if { ![istarget hppa*64*-*-hpux*] \
++	 && ![istarget hppa*-*-linux*] \
++	 && ![istarget i?86-*-sysv4*] \
++	 && ![istarget i?86-*-unixware] \
++	 && ![istarget i?86-*-elf*] \
++	 && ![istarget i?86-*-linux*] \
++	 && ![istarget ia64-*-elf*] \
++	 && ![istarget ia64-*-linux*] \
++	 && ![istarget m68k-*-linux*] \
++	 && ![istarget mips*-*-irix5*] \
++	 && ![istarget mips*-*-linux*] \
++	 && ![istarget powerpc-*-elf*] \
++	 && ![istarget powerpc-*-linux*] \
++	 && ![istarget powerpc-*-sysv4*] \
++	 && ![istarget sparc*-*-elf] \
++	 && ![istarget sparc*-*-solaris2*] \
++	 && ![istarget sparc*-*-linux*] \
++	 && ![istarget arm*-*-linux*] \
++	 && ![istarget alpha*-*-linux*] \
++	 && ![istarget s390*-*-linux*] \
++	 && ![istarget x86_64-*-linux*] } {
++	return 0
++    }
++
++    if { [istarget *-*-linux*aout*] \
++	 || [istarget *-*-linux*oldld*] } {
++	return 0
++    }
++
++    return 1
++}
++
++# Return gcc option to compile .o file for shared library.
++
++proc get-compile-shared-library-option { } {
++    set picflag "-fPIC"
++    return $picflag
++}
++
++# Return gcc option to build shared library.
++
++proc get-build-shared-library-option { } {
++    set ldflag "-shared"
++    return $ldflag
++}
+--- gcc-3.4.4/gcc/testsuite/gcc/testsuite/g++.special/inline-hidden-1.cc.visibility5	2005-03-08 11:01:45.593317329 -0500
++++ gcc-3.4.4/gcc/testsuite/gcc/testsuite/g++.special/inline-hidden-1.cc	2005-03-08 11:01:45.593317329 -0500
+@@ -0,0 +1,16 @@
++#pragma GCC visibility push(default)
++template<typename CharT>
++struct VisTest
++{
++  inline VisTest ();
++};
++template<typename CharT>
++inline VisTest<CharT>::VisTest()
++{}
++extern template class VisTest<char>;
++#pragma GCC visibility pop
++int some_function( int do_something )
++{
++  VisTest<char> a;
++  return 0;
++}
+--- gcc-3.4.4/gcc/testsuite/gcc/testsuite/g++.special/inline-hidden-1.x.visibility5	2005-03-08 11:01:45.594317530 -0500
++++ gcc-3.4.4/gcc/testsuite/gcc/testsuite/g++.special/inline-hidden-1.x	2005-03-08 11:01:45.593317329 -0500
+@@ -0,0 +1,9 @@
++if ![is-shared-library-supported] {
++    return
++}
++
++#
++# build shared libray
++#
++gcc-special-compile $srcdir/$subdir/inline-hidden-1.cc \
++	"-shared -fPIC -fvisibility-inlines-hidden" "" "no"
+--- gcc-3.4.4/gcc/testsuite/gcc/testsuite/g++.special/inline-hidden-2.cc.visibility5	2005-03-08 11:01:45.594317530 -0500
++++ gcc-3.4.4/gcc/testsuite/gcc/testsuite/g++.special/inline-hidden-2.cc	2005-03-08 11:01:45.594317530 -0500
+@@ -0,0 +1,14 @@
++template<typename CharT>
++struct VisTest
++{
++  inline VisTest ();
++};
++template<typename CharT>
++inline VisTest<CharT>::VisTest()
++{}
++extern template class VisTest<char>;
++int some_function( int do_something )
++{
++  VisTest<char> a;
++  return 0;
++}
+--- gcc-3.4.4/gcc/testsuite/gcc/testsuite/g++.special/inline-hidden-2.x.visibility5	2005-03-08 11:01:45.594317530 -0500
++++ gcc-3.4.4/gcc/testsuite/gcc/testsuite/g++.special/inline-hidden-2.x	2005-03-08 11:01:45.594317530 -0500
+@@ -0,0 +1,9 @@
++if ![is-shared-library-supported] {
++    return
++}
++
++#
++# build shared libray
++#
++gcc-special-compile $srcdir/$subdir/inline-hidden-2.cc \
++	"-shared -fPIC -fvisibility-inlines-hidden" "" "yes"
+--- gcc-3.4.4/gcc/testsuite/gcc/testsuite/g++.special/inline-hidden-3.x.visibility5	2005-03-08 11:01:45.595317732 -0500
++++ gcc-3.4.4/gcc/testsuite/gcc/testsuite/g++.special/inline-hidden-3.x	2005-03-08 11:01:45.594317530 -0500
+@@ -0,0 +1,11 @@
++if ![is-shared-library-supported] {
++    return
++}
++
++#
++# build shared libray
++#
++set obj [gcc-special-compile "$srcdir/$subdir/inline-hidden-3a.cc" \
++	 "-fPIC -fvisibility-inlines-hidden" "" "no"]
++gcc-special-compile $srcdir/$subdir/inline-hidden-3b.cc \
++	"-shared -fPIC" "$obj" "no"
+--- gcc-3.4.4/gcc/testsuite/gcc/testsuite/g++.special/inline-hidden-3a.cc.visibility5	2005-03-08 11:01:45.595317732 -0500
++++ gcc-3.4.4/gcc/testsuite/gcc/testsuite/g++.special/inline-hidden-3a.cc	2005-03-08 11:01:45.595317732 -0500
+@@ -0,0 +1,14 @@
++template<typename CharT>
++struct VisTest
++{
++  inline VisTest ();
++};
++template<typename CharT>
++inline VisTest<CharT>::VisTest()
++{}
++extern template class VisTest<char>;
++int some_function( int do_something )
++{
++  VisTest<char> a;
++  return 0;
++}
+--- gcc-3.4.4/gcc/testsuite/gcc/testsuite/g++.special/inline-hidden-3b.cc.visibility5	2005-03-08 11:01:45.595317732 -0500
++++ gcc-3.4.4/gcc/testsuite/gcc/testsuite/g++.special/inline-hidden-3b.cc	2005-03-08 11:01:45.595317732 -0500
+@@ -0,0 +1,9 @@
++template<typename CharT>
++struct VisTest
++{
++  inline VisTest ();
++};
++template<typename CharT>
++inline VisTest<CharT>::VisTest()
++{}
++template class VisTest<char>;
+--- gcc-3.4.4/gcc/testsuite/gcc/testsuite/g++.special/special.exp.visibility5	2005-03-08 11:01:45.596317934 -0500
++++ gcc-3.4.4/gcc/testsuite/gcc/testsuite/g++.special/special.exp	2005-03-08 11:01:45.595317732 -0500
+@@ -0,0 +1,30 @@
++# Copyright (C) 2005 Free Software Foundation, Inc.
++
++# This program is free software; you can redistribute it and/or modify
++# it under the terms of the GNU General Public License as published by
++# the Free Software Foundation; either version 2 of the License, or
++# (at your option) any later version.
++# 
++# This program is distributed in the hope that it will be useful,
++# but WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++# GNU General Public License for more details.
++# 
++# You should have received a copy of the GNU General Public License
++# along with this program; if not, write to the Free Software
++# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. 
++
++if $tracelevel then {
++    strace $tracelevel
++}
++
++# load support procs
++load_lib gcc-special.exp
++
++#
++# run special tests 
++#
++
++foreach src [lsort [glob -nocomplain $srcdir/$subdir/*.x]] {
++    source $src
++}
+--- gcc-3.4.4/gcc/testsuite/gcc/testsuite/gcc.special/protfunc-1-dso.c.visibility5	2005-03-08 11:01:45.596317934 -0500
++++ gcc-3.4.4/gcc/testsuite/gcc/testsuite/gcc.special/protfunc-1-dso.c	2005-03-08 11:01:45.596317934 -0500
+@@ -0,0 +1,13 @@
++void
++__attribute__ ((visibility ("protected")))
++foo ()
++{
++}
++
++void (*foo_p) () = foo;
++
++void *
++bar (void)
++{
++  return foo;
++}
+--- gcc-3.4.4/gcc/testsuite/gcc/testsuite/gcc.special/protfunc-1-main.c.visibility5	2005-03-08 11:01:45.596317934 -0500
++++ gcc-3.4.4/gcc/testsuite/gcc/testsuite/gcc.special/protfunc-1-main.c	2005-03-08 11:01:45.596317934 -0500
+@@ -0,0 +1,14 @@
++extern void (*foo_p) (void);
++extern void foo (void);
++extern void* bar (void);
++
++int
++main ()
++{
++  void *p;
++  p = bar ();
++  if (p == foo && p == foo_p)
++    return 0;
++  else
++    return 1;
++}
+--- gcc-3.4.4/gcc/testsuite/gcc/testsuite/gcc.special/protfunc-1.x.visibility5	2005-03-08 11:01:45.597318136 -0500
++++ gcc-3.4.4/gcc/testsuite/gcc/testsuite/gcc.special/protfunc-1.x	2005-03-08 11:01:45.596317934 -0500
+@@ -0,0 +1,14 @@
++if ![is-shared-library-supported] {
++    return
++}
++
++#
++# build shared libray
++#
++set dso [gcc-special-compile $srcdir/$subdir/protfunc-1-dso.c \
++	 "-fPIC -shared -O" "" "no"]
++
++#
++# build and run executable
++#
++gcc-special-execute $srcdir/$subdir/protfunc-1-main.c $dso "-O"
+--- gcc-3.4.4/gcc/testsuite/gcc/testsuite/gcc.special/special.exp.visibility5	2005-03-08 11:01:45.597318136 -0500
++++ gcc-3.4.4/gcc/testsuite/gcc/testsuite/gcc.special/special.exp	2005-03-08 11:01:45.597318136 -0500
+@@ -0,0 +1,30 @@
++# Copyright (C) 2005 Free Software Foundation, Inc.
++
++# This program is free software; you can redistribute it and/or modify
++# it under the terms of the GNU General Public License as published by
++# the Free Software Foundation; either version 2 of the License, or
++# (at your option) any later version.
++# 
++# This program is distributed in the hope that it will be useful,
++# but WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++# GNU General Public License for more details.
++# 
++# You should have received a copy of the GNU General Public License
++# along with this program; if not, write to the Free Software
++# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. 
++
++if $tracelevel then {
++    strace $tracelevel
++}
++
++# load support procs
++load_lib gcc-special.exp
++
++#
++# run special tests 
++#
++
++foreach src [lsort [glob -nocomplain $srcdir/$subdir/*.x]] {
++    source $src
++}
+--- gcc-3.4.4/gcc/testsuite/gcc/testsuite/lib/gcc-special.exp.visibility5	2005-03-08 11:01:45.597318136 -0500
++++ gcc-3.4.4/gcc/testsuite/gcc/testsuite/lib/gcc-special.exp	2005-03-08 11:01:45.597318136 -0500
+@@ -0,0 +1,177 @@
++# Copyright (C) 2005 Free Software Foundation, Inc.
++
++# This program is free software; you can redistribute it and/or modify
++# it under the terms of the GNU General Public License as published by
++# the Free Software Foundation; either version 2 of the License, or
++# (at your option) any later version.
++#
++# This program is distributed in the hope that it will be useful,
++# but WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++# GNU General Public License for more details.
++#
++# You should have received a copy of the GNU General Public License
++# along with this program; if not, write to the Free Software
++# Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++
++# Based on c-torture.exp.
++
++load_lib file-format.exp
++load_lib target-supports.exp
++
++#
++# gcc-special-compile -- compile source file or build shared library.
++#
++# SRC is the full pathname of the testcase.
++# OPTIONS is the specific compiler flag we're testing (eg: -O2).
++# OBJ is the additional object.
++# XFAIL is to indicate if it should fail.
++#
++proc gcc-special-compile { src options obj xfail } {
++    global tool
++    global output
++    global srcdir tmpdir
++    global host_triplet
++
++    if [string match "yes" $xfail] {
++	setup_xfail "*-*-*"
++    }
++
++    set shared "no"
++    set option ""
++    foreach opt $options {
++	if [string match "-shared" $opt] {
++	    lappend option [get-build-shared-library-option]
++	    set shared "yes"
++	} elseif [string match "-fPIC" $opt] {
++	    lappend option [get-compile-shared-library-option]
++	} else {
++	    lappend option "$opt"
++	}
++    }
++
++    if [string match "yes" $shared] {
++	set type "executable"
++	set output "$tmpdir/[file tail [file rootname $src]].so"
++    } else {
++	set type "object"
++	set output "$tmpdir/[file tail [file rootname $src]].o"
++    }
++
++    regsub "^$srcdir/?" $src "" testcase
++    # If we couldn't rip $srcdir out of `src' then just do the best we can.
++    # The point is to reduce the unnecessary noise in the logs.  Don't strip
++    # out too much because different testcases with the same name can confuse
++    # `test-tool'.
++    if [string match "/*" $testcase] {
++	set testcase "[file tail [file dirname $src]]/[file tail $src]"
++    }
++
++    verbose "Testing $testcase, $option" 1
++
++    # Run the compiler and analyze the results.
++    set options ""
++    lappend options "additional_flags=-w $option $obj"
++
++    set comp_output [${tool}_target_compile "$src" "$output" $type $options];
++    if [${tool}_check_compile $testcase $option $output $comp_output] {
++	if [string match "yes" $xfail] {
++	    fail "$testcase, $option"
++	} else {
++	    foreach file "$obj" {
++		remote_file build delete $file
++	    }
++	}
++    } elseif [string match "yes" $xfail] {
++	foreach file "$obj" {
++	    remote_file build delete $file
++	}
++    }
++    return $output
++}
++
++#
++# gcc-special-execute -- utility to compile and execute a testcase
++#
++# SOURCES is a list of full pathnames to the test source files.
++# The first filename in this list forms the "testcase".
++#
++# If the testcase has an associated .x file, we source that to run the
++# test instead.  We use .x so that we don't lengthen the existing filename
++# to more than 14 chars.
++#
++proc gcc-special-execute { sources shlib additional_flags } {
++    global tmpdir tool srcdir output compiler_conditional_xfail_data
++
++    # Use the first source filename given as the filename under test.
++    set src [lindex $sources 0]
++
++    set option ""
++
++    # Check for alternate driver.
++    if [file exists [file rootname $src].x] {
++	verbose "Using alternate driver [file rootname [file tail $src]].x" 2
++	set done_p 0
++	catch "set done_p \[source [file rootname $src].x\]"
++	if { $done_p } {
++	    return
++	}
++    }
++
++    set executable $tmpdir/[file tail [file rootname $src].x]
++
++    regsub "^$srcdir/?" $src "" testcase
++    # If we couldn't rip $srcdir out of `src' then just do the best we can.
++    # The point is to reduce the unnecessary noise in the logs.  Don't strip
++    # out too much because different testcases with the same name can confuse
++    # `test-tool'.
++    if [string match "/*" $testcase] {
++	set testcase "[file tail [file dirname $src]]/[file tail $src]"
++    }
++
++    # torture_{compile,execute}_xfail are set by the .x script
++    # (if present)
++    if [info exists torture_compile_xfail] {
++	setup_xfail $torture_compile_xfail
++    }
++
++    # torture_execute_before_{compile,execute} can be set by the .x script
++    # (if present)
++    if [info exists torture_eval_before_compile] {
++	set ignore_me [eval $torture_eval_before_compile]
++    }
++
++    verbose "Testing $testcase, $option" 1
++
++    set options ""
++    lappend options "additional_flags=-w $option $shlib"
++    if { $additional_flags != "" } {
++	lappend options "additional_flags=$additional_flags";
++    }
++
++    set comp_output [${tool}_target_compile "$sources" "${executable}" executable $options];
++
++    if ![${tool}_check_compile "$testcase compilation" $option $executable $comp_output] {
++	unresolved "$testcase execution, $option"
++	remote_file build delete $executable
++	return
++    }
++
++    if [info exists torture_execute_xfail] {
++	setup_xfail $torture_execute_xfail
++    }
++
++    if [info exists torture_eval_before_execute] {
++	set ignore_me [eval $torture_eval_before_execute]
++    }
++
++    set result [${tool}_load "$executable" "" ""]
++    set status [lindex $result 0];
++    set output [lindex $result 1];
++    $status "$testcase execution, $option"
++    if { $status == "pass" } {
++	foreach file "$executable $shlib" {
++	    remote_file build delete $file
++	}
++    }
++}

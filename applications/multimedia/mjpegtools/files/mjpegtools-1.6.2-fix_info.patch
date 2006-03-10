@@ -1,0 +1,57 @@
+diff -Nur mjpegtools-1.6.2-old/docs/hede mjpegtools-1.6.2/docs/hede
+--- mjpegtools-1.6.2-old/docs/hede	1970-01-01 02:00:00.000000000 +0200
++++ mjpegtools-1.6.2/docs/hede	2005-10-19 14:09:39.000000000 +0300
+@@ -0,0 +1,9 @@
++#!/bin/bash
++
++for infofile in mjpeg*info*; do
++    echo "INFO-DIR-SECTION Miscellaneous" >> ${infofile}
++    echo "START-INFO-DIR-ENTRY" >> ${infofile}
++    echo "* mjpeg-howto: (mjpeg-howto).                  How to use the mjpeg-tools" >> ${infofile}
++    echo "END-INFO-DIR-ENTRY" >> ${infofile}
++done
++
+diff -Nur mjpegtools-1.6.2-old/docs/mjpeg-howto.info mjpegtools-1.6.2/docs/mjpeg-howto.info
+--- mjpegtools-1.6.2-old/docs/mjpeg-howto.info	2005-10-19 14:00:30.000000000 +0300
++++ mjpegtools-1.6.2/docs/mjpeg-howto.info	2005-10-19 14:09:44.000000000 +0300
+@@ -80,3 +80,7 @@
+ Node: Interoperability112640
+ 
+ End Tag Table
++INFO-DIR-SECTION Miscellaneous
++START-INFO-DIR-ENTRY
++* mjpeg-howto: (mjpeg-howto).                  How to use the mjpeg-tools
++END-INFO-DIR-ENTRY
+diff -Nur mjpegtools-1.6.2-old/docs/mjpeg-howto.info-1 mjpegtools-1.6.2/docs/mjpeg-howto.info-1
+--- mjpegtools-1.6.2-old/docs/mjpeg-howto.info-1	2005-10-19 14:00:30.000000000 +0300
++++ mjpegtools-1.6.2/docs/mjpeg-howto.info-1	2005-10-19 14:09:44.000000000 +0300
+@@ -1334,3 +1334,7 @@
+ handed over to mp2enc.  You do NOT have to create an edited stream with
+ lavtrans to get it converted properly.
+ 
++INFO-DIR-SECTION Miscellaneous
++START-INFO-DIR-ENTRY
++* mjpeg-howto: (mjpeg-howto).                  How to use the mjpeg-tools
++END-INFO-DIR-ENTRY
+diff -Nur mjpegtools-1.6.2-old/docs/mjpeg-howto.info-2 mjpegtools-1.6.2/docs/mjpeg-howto.info-2
+--- mjpegtools-1.6.2-old/docs/mjpeg-howto.info-2	2005-10-19 14:00:30.000000000 +0300
++++ mjpegtools-1.6.2/docs/mjpeg-howto.info-2	2005-10-19 14:09:44.000000000 +0300
+@@ -1105,3 +1105,7 @@
+ not exactly synchronized with the carrier signal, you wont see that on
+ TV.
+ 
++INFO-DIR-SECTION Miscellaneous
++START-INFO-DIR-ENTRY
++* mjpeg-howto: (mjpeg-howto).                  How to use the mjpeg-tools
++END-INFO-DIR-ENTRY
+diff -Nur mjpegtools-1.6.2-old/docs/mjpeg-howto.info-3 mjpegtools-1.6.2/docs/mjpeg-howto.info-3
+--- mjpegtools-1.6.2-old/docs/mjpeg-howto.info-3	2005-10-19 14:00:30.000000000 +0300
++++ mjpegtools-1.6.2/docs/mjpeg-howto.info-3	2005-10-19 14:09:44.000000000 +0300
+@@ -515,3 +515,7 @@
+ hints, `thanks'
+ 
+ 
++INFO-DIR-SECTION Miscellaneous
++START-INFO-DIR-ENTRY
++* mjpeg-howto: (mjpeg-howto).                  How to use the mjpeg-tools
++END-INFO-DIR-ENTRY

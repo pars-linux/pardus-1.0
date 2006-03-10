@@ -1,0 +1,31 @@
+#!/sbin/runscript
+# Copyright © 2005  TUBITAK/UEKAE
+# Licensed under the GNU General Public License, version 2.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+#
+# Original work belongs Gentoo Linux
+
+opts="${opts} reload"
+
+depend() {
+	use logger dns ypbind amavisd mysql postgresql antivirus postfix_greylist net
+	provide mta
+}
+
+start() {
+	ebegin "Starting postfix"
+	/usr/sbin/postfix start &>/dev/null
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping postfix"
+	/usr/sbin/postfix stop &>/dev/null
+	eend $?
+}
+
+reload() {
+	ebegin "Reloading postfix"
+	/usr/sbin/postfix reload &>/dev/null
+	eend $?
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>iputils</Name>
+        <Homepage>ftp://ftp.inr.ac.ru/ip-routing</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>app:console</IsA>
+        <Summary>Network monitoring tools including ping and ping6</Summary>
+        <Description>Network monitoring tools including ping and ping6</Description>
+        <Summary xml:lang="tr">ping ve ping6 uygulamalarını da içeren ağ izleme araçları</Summary>
+        <Description xml:lang="tr">IPutils, ping gibi temel ağ izleme araçlarını içerir. Ping komutu ICMP 
+        protokolünü kullanarak hedef bilgisayara bir seri ECHO_REQUEST paketi göndererek bilgisayarın aktif
+        olup olmadığını ve gönderilen paketlerin hedef bilgisayara erişim süresini hesaplar.</Description>
+        <Archive sha1sum="8e695eb45d7f63fe2321b59b8cb64bff1078a03a" type="tarbz2">ftp://ftp.inr.ac.ru/ip-routing/iputils-ss021109-try.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>linux-headers</Dependency> 
+            <Dependency>openssl</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>021109-gcc34.patch</Patch>
+            <Patch>021109-no-pfkey-search.patch</Patch>
+            <Patch level="1">iputils-021109-pfkey.patch</Patch>
+            <Patch level="1">iputils-021109-linux-udp-header.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>iputils</Name>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2005-07-27</Date>
+            <Version>021109</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

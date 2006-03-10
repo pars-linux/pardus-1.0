@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libgphoto2</Name>
+        <Homepage>http://www.gphoto.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>Library that implements support for numerous digital cameras</Summary>
+        <Description>Library that implements support for numerous digital cameras</Description>
+        <Summary xml:lang="tr">Dijital kameralara erişimi sağlayan kütüphane</Summary>
+        <Description xml:lang="tr">Uygulamaların yaklaşık 300 ayrı dijital kameraya kamera bağımsızı erişimi sağlayan kütüphanedir</Description>
+        <Archive sha1sum="22be325303fa10a4a3f519d71b25364b3f84d653" type="targz">http://ovh.dl.sourceforge.net/sourceforge/gphoto/libgphoto2-2.1.6.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">libgphoto2-2.1.2-norpm.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency versionFrom="0.1.8">libusb</Dependency>
+            <Dependency versionFrom="0.11">usbutils</Dependency> 
+            <Dependency>hotplug</Dependency>
+            <Dependency versionFrom="0.5.9">libexif</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libgphoto2</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.5.9">libexif</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include/gphoto2</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/libgphoto2</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-25</Date>
+            <Version>2.1.6</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-13</Date>
+            <Version>2.1.4</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

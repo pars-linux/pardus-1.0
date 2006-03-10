@@ -1,0 +1,69 @@
+--- coreutils-5.92/m4/jm-macros.m4.getgrouplist	2005-09-25 06:57:46.000000000 +0100
++++ coreutils-5.92/m4/jm-macros.m4	2005-10-25 14:28:45.000000000 +0100
+@@ -105,6 +105,7 @@
+     fchmod \
+     fchown \
+     ftruncate \
++    getgrouplist \
+     hasmntopt \
+     isascii \
+     iswspace \
+--- coreutils-5.92/lib/getugroups.c.getgrouplist	2005-09-22 07:47:18.000000000 +0100
++++ coreutils-5.92/lib/getugroups.c	2005-10-25 14:28:02.000000000 +0100
+@@ -23,6 +23,9 @@
+ # include <config.h>
+ #endif
+ 
++/* We do not need this code if getgrouplist(3) is available.  */
++#ifndef HAVE_GETGROUPLIST
++
+ #include <sys/types.h>
+ #include <stdio.h> /* grp.h on alpha OSF1 V2.0 uses "FILE *". */
+ #include <grp.h>
+@@ -105,3 +108,4 @@
+ 
+   return count;
+ }
++#endif	/* have getgrouplist */
+--- coreutils-5.92/src/id.c.getgrouplist	2005-08-11 22:02:57.000000000 +0100
++++ coreutils-5.92/src/id.c	2005-10-25 14:30:41.000000000 +0100
+@@ -253,7 +253,14 @@
+   if (!username)
+     max_n_groups = getgroups (0, NULL);
+   else
+-    max_n_groups = getugroups (0, NULL, username, gid);
++    {
++#ifdef HAVE_GETGROUPLIST
++      max_n_groups = 0;
++      getgrouplist (username, gid, NULL, &max_n_groups);
++#else
++      max_n_groups = getugroups (0, NULL, username, gid);
++#endif
++    }
+ 
+   if (max_n_groups < 0)
+     ng = -1;
+@@ -263,7 +270,22 @@
+       if (!username)
+ 	ng = getgroups (max_n_groups, g);
+       else
+-	ng = getugroups (max_n_groups, g, username, gid);
++	{
++#ifdef HAVE_GETGROUPLIST
++	  int e;
++	  ng = max_n_groups;
++	  while ((e = getgrouplist (username, gid, g, &ng)) == -1
++		 && ng > max_n_groups)
++	    {
++	      max_n_groups = ng;
++	      g = xrealloc (g, max_n_groups * sizeof (GETGROUPS_T));
++	    }
++	  if (e == -1)
++	    ng = -1;
++#else
++	  ng = getugroups (max_n_groups, g, username, gid);
++#endif
++	}
+     }
+ 
+   if (ng < 0)

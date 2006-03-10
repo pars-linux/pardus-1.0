@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>slocate</Name>
+        <Homepage>http://www.geekreview.org/slocate/</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Secure way to index and quickly search for files on your system</Summary>
+        <Summary xml:lang="tr">Sisteminizdeki dosyaların hızlı bir şekilde aranabilmesi için güvenli bir yol sunar</Summary>
+        <Description>Secure way to index and quickly search for files on your system</Description>
+        <Description xml:lang="tr">Sisteminizdeki dosyaların indekslenerek hızlı bir şekilde bulunabilmeleri için güvenli bir yol sunar</Description>
+        <Archive sha1sum="b5de4668b61b137f3f5fa9f17b334f56b9424f90" type="targz">http://fresh.t-systems-sfr.com/unix/src/misc/slocate-2.7.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>shadow</Dependency>
+            <Dependency versionFrom="4">sed</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>slocate</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/var/lib/slocate</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/updatedb.conf">updatedb.conf</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-10-16</Date>
+            <Version>2.7</Version>
+            <Comment>COMARized file ownership assignments.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-13</Date>
+            <Version>2.7</Version>
+            <Comment>Added missing group ownership assignment.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-13</Date>
+            <Version>2.7</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

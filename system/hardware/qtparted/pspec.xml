@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>qtparted</Name>
+        <Homepage>http://qtparted.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Fatih Aşıcı</Name>
+            <Email>fasici@linux-sevenler.org</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Qt Partition tool based on GNU-Parted</Summary>
+        <Summary xml:lang="tr">GNU-Parted temelinde Qt Partition yazılımı</Summary>
+        <Description>Qt Partition tool based on GNU-Parted</Description>
+        <Description xml:lang="tr">GNU-Parted temelinde Qt Partition yazılımı</Description>
+        <Archive type="tarbz2" sha1sum="01bf8d1c7866544b410e5be14e2cfcaa5c16cd3d">http://heanet.dl.sourceforge.net/sourceforge/qtparted/qtparted-0.4.5.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency versionFrom="1.6.6">parted</Dependency>
+            <Dependency versionFrom="1.33">e2fsprogs</Dependency>
+            <Dependency versionFrom="2.3.9">xfsprogs</Dependency>
+            <Dependency versionFrom="1.1.2">jfsutils</Dependency>
+            <Dependency versionFrom="1.7.1">ntfsprogs</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch compressionType="bz2" level="1">qtparted-turkish-translation.patch.bz2</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>qtparted</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency versionFrom="1.6.6">parted</Dependency>
+            <Dependency versionFrom="1.33">e2fsprogs</Dependency>
+            <Dependency versionFrom="2.3.9">xfsprogs</Dependency>
+            <Dependency versionFrom="1.1.2">jfsutils</Dependency>
+            <Dependency versionFrom="1.7.1">ntfsprogs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType='executable'>/usr/sbin</Path>
+            <Path fileType='data'>/usr/share/applications</Path>
+            <Path fileType='data'>/usr/share/pixmaps</Path>
+            <Path fileType='data'>/usr/share/qtparted</Path>
+            <Path fileType='localedata'>/usr/share/qtparted/locale</Path>
+            <Path fileType='man'>/usr/share/man</Path>
+            <Path fileType='doc'>/usr/share/doc</Path>
+        </Files>
+   </Package>
+
+   <History>
+        <Update release="2">
+            <Date>2005-11-20</Date>
+            <Version>0.4.5</Version>
+            <Comment>Depend on jfsutils and ntfsprogs.</Comment>
+            <Name>Fatih Aşıcı</Name>
+            <Email>fasici@linux-sevenler.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-17</Date>
+            <Version>0.4.5</Version>
+            <Comment>First release.</Comment>
+            <Name>Fatih Aşıcı</Name>
+            <Email>fasici@linux-sevenler.org</Email>
+        </Update>
+    </History>
+</PISI>

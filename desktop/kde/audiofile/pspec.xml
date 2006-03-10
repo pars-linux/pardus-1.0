@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>audiofile</Name>
+        <Homepage>http://www.68k.org/~michael/audiofile/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>An elegant API for accessing audio files</Summary>
+        <Description>An elegant API for accessing audio files</Description>
+        <Summary xml:lang="tr">Ses dosyalarına erişim için zarif bir API</Summary>
+        <Description xml:lang="tr">AIFF/AIFF-C, WAVE, NeXT/Sun .snd/.au, Berkeley/IRCAM/CARL Sound File, Audio Visual Research, Amiga IFF/8SVX, and NIST SPHERE gibi ses dosyalarına erişim için zarif bir API</Description>
+        <Archive sha1sum="94a6ab8e5122bc1971cf186e5a52d032811c9bc5" type="targz">http://www.68k.org/~michael/audiofile/audiofile-0.2.6.tar.gz</Archive>
+        <Patches>
+            <Patch>sfconvert-eradicator.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>audiofile</Name>
+        <Summary>An elegant API for accessing audio files</Summary>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-01</Date>
+            <Version>0.2.6</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

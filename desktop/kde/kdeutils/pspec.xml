@@ -1,0 +1,105 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kdeutils</Name>
+        <Homepage>http://www.kde.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>KDE utilities</Summary>
+        <Description>KDE utilities</Description>
+        <Summary xml:lang="tr">KDE yardımcı uygulamaları</Summary>
+        <Description xml:lang="tr">KDE yardımcı uygulamaları</Description>
+        <Archive sha1sum="194d20c78d61b41dda6c3a6f55f0e10b4718d0a8" type="tarbz2">ftp://ftp.kde.org/pub/kde/stable/3.5/src/kdeutils-3.5.0.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency version="3.5.0">kdebase</Dependency>
+            <Dependency version="3.5.0">kdelibs</Dependency>
+            <Dependency>gmp</Dependency>
+            <Dependency>perl</Dependency>
+            <Dependency>lirc</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kdeutils</Name>
+        <RuntimeDependencies>
+            <Dependency version="3.5.0">kdebase</Dependency>
+            <Dependency>gnupg</Dependency>
+            <Dependency>gmp</Dependency>
+            <Dependency>lirc</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="library">/usr/kde/3.5/lib</Path>
+            <Path fileType="data">/usr/kde/3.5/share</Path>
+            <Path fileType="header">/usr/kde/3.5/include</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile mode="0644" owner="root" target="/usr/kde/3.5/share/applications/kde/kwalletmanager.desktop">kwalletmanager.desktop</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="8">
+            <Date>2005-12-12</Date>
+            <Version>3.5.0</Version>
+            <Comment>Enable kdelirc compiling, we have lirc now in repo</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="7">
+            <Date>2005-12-10</Date>
+            <Version>3.5.0</Version>
+            <Comment>Disable some applications from compiling</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-11-29</Date>
+            <Version>3.5.0</Version>
+            <Comment>Version bump to stable release</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-11-21</Date>
+            <Version>3.5.0_rc2</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-10-15</Date>
+            <Version>3.5.0_rc1</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-01</Date>
+            <Version>3.5.0_beta2</Version>
+            <Comment>Fix #651</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-15</Date>
+            <Version>3.5.0_beta2</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-06</Date>
+            <Version>3.4.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

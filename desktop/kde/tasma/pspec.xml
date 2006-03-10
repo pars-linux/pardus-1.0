@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>tasma</Name>
+        <Homepage>http://www.uludag.org.tr</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Pardus Configuration Center</Summary>
+        <Description>Pardus Configuration Center</Description>
+        <Summary xml:lang="tr">Pardus yapılandırma merkezi</Summary>
+        <Description xml:lang="tr">İçerisinde PiSi kullanıcı grafik arayüzü ve diğer genel yapılandırma arayüzlerini barındıran, Pardus'un öntanımlı yapılandırma merkezi</Description>
+        <Archive sha1sum="2d2780e987d05e415d395a21234ae44934a11d96" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/tasma-1.0.2.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>kdelibs</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>tasma</Name>
+        <RuntimeDependencies>
+            <Dependency>kdebase</Dependency>
+            <Dependency>kdeutils</Dependency>
+            <Dependency>pisi-kga</Dependency>
+            <Dependency>net-kga</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/kde/3.5/lib/kde3</Path>
+            <Path fileType="config">/usr/kde/3.5/etc/</Path>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="data">/usr/kde/3.5/share</Path>
+        </Files>
+    </Package>
+
+
+    <History>
+        <Update release="4">
+            <Date>2005-12-25</Date>
+            <Version>1.0.2</Version>
+            <Comment>Minor update</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-12-24</Date>
+            <Version>1.0.1</Version>
+            <Comment>New stable release</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-12-25</Date>
+            <Version>1.0</Version>
+            <Comment>Update to 1.0 release</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-04</Date>
+            <Version>1.0_alpha1</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

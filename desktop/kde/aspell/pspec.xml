@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>aspell</Name>
+        <Homepage>http://aspell.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>A spell checker replacement for ispell</Summary>
+        <Summary xml:lang="tr">GNU Aspell, yazım kontrolü aracı.</Summary>
+        <Description>A spell checker replacement for ispell</Description>
+        <Description xml:lang="tr">GNU Aspell, yalnız başına çalışabilen veya diğer programlara gömülebilen bir yazım kontrol aracıdır.</Description>
+        <Archive sha1sum="0b17272e1773ef133775d5e6be9fbccc8689ff58" type="targz">ftp://ftp.gnu.org/gnu/aspell/aspell-0.50.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+            <Dependency>gpm</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch level="1">aspell-0.50.5-charcount.patch</Patch>
+            <Patch>aspell-quotechar-fix.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>aspell</Name>
+        <RuntimeDependencies>
+            <Dependency>gpm</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/aspell</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+  </Package>
+
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-09</Date>
+            <Version>0.50.5</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

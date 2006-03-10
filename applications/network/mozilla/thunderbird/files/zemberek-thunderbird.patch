@@ -1,0 +1,1245 @@
+Index: mozilla/mail/components/compose/content/EdSpellCheck.js
+===================================================================
+RCS file: /cvsroot/mozilla/mail/components/compose/content/EdSpellCheck.js,v
+retrieving revision 1.4
+diff -u -r1.4 mozilla/mail/components/compose/content/EdSpellCheck.js 
+--- mozilla/mail/components/compose/content/EdSpellCheck.js	2005-12-23 21:36:18.000000000 +0200
++++ mozilla/mail/components/compose/content/EdSpellCheck.js	2005-12-23 21:43:41.000000000 +0200
+@@ -206,7 +206,11 @@
+       // a key is not found in the bundle. In that
+       // case, just use the original dictList string.
+ 
+-      dictList[i][0] = dictList[i][1];
++      //regionBundle does not have Turkiye. Why? Later...
++      if (dictList[i][1] == "tr-TR")
++        dictList[i][0] = "Türkçe/Türkiye";
++      else
++        dictList[i][0] = dictList[i][1];
+     }
+   }
+   
+
+Index: mozilla/mail/components/compose/content/MsgComposeCommands.js
+===================================================================
+RCS file: /cvsroot/mozilla/mail/components/compose/content/MsgComposeCommands.js,v
+retrieving revision 1.72.2.6
+diff -u -r1.72.2.6 components/compose/content/MsgComposeCommands.js
+--- mozilla/mail/components/compose/content/MsgComposeCommands.js	11 Oct 2005 22:07:42 -0000	1.72.2.6
++++ mozilla/mail/components/compose/content/MsgComposeCommands.js	22 Dec 2005 23:17:06 -0000
+@@ -2154,7 +2154,7 @@
+   var languageMenuList = document.getElementById('LanguageMenulist');
+   if (!languageMenuList) return;
+ 
+-  var spellChecker = Components.classes['@mozilla.org/spellchecker/myspell;1'].getService(Components.interfaces.mozISpellCheckingEngine);
++  var spellChecker = Components.classes['@mozilla.org/spellchecker/zemberek;1'].getService(Components.interfaces.mozISpellCheckingEngine);
+   var o1 = {};
+   var o2 = {};
+ 
+@@ -2234,10 +2234,18 @@
+   // We need to change the dictionary language and if we are using inline spell check,
+   // recheck the message
+ 
++  var editorSpellChecker = null;
+   var spellChecker = Components.classes['@mozilla.org/spellchecker/myspell;1'].getService(Components.interfaces.mozISpellCheckingEngine);
+   if (spellChecker.dictionary != event.target.value)
+   {
+     spellChecker.dictionary = event.target.value;
++
++    if (event.target.value == "tr-TR")
++      spellChecker = Components.classes['@mozilla.org/spellchecker/zemberek;1'].getService(Components.interfaces.mozISpellCheckingEngine);
++
++    editorSpellChecker = InlineSpellChecker.inlineSpellChecker.spellChecker;
++    editorSpellChecker.SetCurrentDictionary(event.target.value);
++
+     var str = Components.classes["@mozilla.org/supports-string;1"]
+               .createInstance(Components.interfaces.nsISupportsString);
+     str.data = event.target.value;
+
+Index: mozilla/mail/components/preferences/compose.js
+===================================================================
+RCS file: /cvsroot/mozilla/mail/components/preferences/compose.js,v
+retrieving revision 1.2.4.3
+diff -u -r1.2.4.3 compose.js
+--- mozilla/mail/components/preferences/compose.js	4 Oct 2005 16:30:37 -0000	1.2.4.3
++++ mozilla/mail/components/preferences/compose.js	22 Dec 2005 23:05:50 -0000
+@@ -303,7 +303,7 @@
+ 
+   initLanguageMenu: function ()
+   {
+-    this.mSpellChecker = Components.classes['@mozilla.org/spellchecker/myspell;1'].getService(Components.interfaces.mozISpellCheckingEngine);
++    this.mSpellChecker = Components.classes['@mozilla.org/spellchecker/zemberek;1'].getService(Components.interfaces.mozISpellCheckingEngine);
+     var o1 = {};
+     var o2 = {};
+     var languageMenuList = document.getElementById('LanguageMenulist');
+@@ -358,7 +358,11 @@
+         // a key is not found in the bundle. In that
+         // case, just use the original dictList string.
+ 
+-        dictList[i][0] = dictList[i][1];
++          //regionBundle does not have Turkiye. Why? Later...
++          if (dictList[i][1] == "tr-TR")
++              dictList[i][0] = "Türkçe/Türkiye";
++          else
++              dictList[i][0] = dictList[i][1];
+       }
+     }
+   
+Index: config/basemail-unix
+===================================================================
+RCS file: /cvsroot/mozilla/mail/config/basemail-unix,v
+retrieving revision 1.29
+diff -u -r1.29 basemail-unix
+--- mozilla/mail/config/basemail-unix	11 Jul 2005 22:16:14 -0000	1.29
++++ mozilla/mail/config/basemail-unix	22 Dec 2005 23:05:53 -0000
+@@ -98,6 +98,7 @@
+ 
+ ; spellchecker (may not be present)
+ components/libmyspell.so
++components/libzemberek.so
+ components/spellchecker.xpt
+ components/libspellchecker.so
+ ;; XXX these two files are bogus, they should not be in components/myspell...
+
+diff -uNr mozilla/extensions/spellcheck/Makefile.in mozilla/extensions/spellcheck/Makefile.in
+--- mozilla/extensions/spellcheck/Makefile.in	2005-07-16 21:45:12.000000000 +0300
++++ mozilla/extensions/spellcheck/Makefile.in	2005-12-23 00:52:25.000000000 +0200
+@@ -42,7 +42,7 @@
+ include $(DEPTH)/config/autoconf.mk
+ 
+ MODULE		= spellchecker
+-DIRS		= src idl myspell locales
++DIRS		= src idl myspell zemberek locales
+ 
+ include $(topsrcdir)/config/rules.mk
+ 
+diff -uNr mozilla/extensions/spellcheck/myspell/src/mozMySpell.cpp mozilla/extensions/spellcheck/myspell/src/mozMySpell.cpp
+--- mozilla/extensions/spellcheck/myspell/src/mozMySpell.cpp	2005-08-19 00:25:03.000000000 +0300
++++ mozilla/extensions/spellcheck/myspell/src/mozMySpell.cpp	2005-12-23 01:59:02.000000000 +0200
+@@ -250,6 +250,8 @@
+   if (!tmpPtr)
+     return NS_ERROR_OUT_OF_MEMORY;
+ 
++  tmpPtr[tempCount++] = ToNewUnicode(NS_LITERAL_STRING("tr-TR"));
++
+   PRBool hasMore = PR_FALSE;
+   while (NS_SUCCEEDED(dirEntries->HasMoreElements(&hasMore)) && hasMore) {
+     nsCOMPtr<nsISupports> nextItem;
+diff -uNr mozilla/extensions/spellcheck/src/mozSpellChecker.cpp mozilla/extensions/spellcheck/src/mozSpellChecker.cpp
+--- mozilla/extensions/spellcheck/src/mozSpellChecker.cpp	2005-05-09 20:42:10.000000000 +0300
++++ mozilla/extensions/spellcheck/src/mozSpellChecker.cpp	2005-12-23 02:08:00.000000000 +0200
+@@ -51,7 +51,7 @@
+   if (NS_FAILED(rv)) {
+     NS_ERROR("Could not get personal Dictionary");
+   }
+-  mSpellCheckingEngine = do_GetService("@mozilla.org/spellchecker/myspell;1",&rv);
++  mSpellCheckingEngine = do_GetService("@mozilla.org/spellchecker/zemberek;1",&rv);
+   if (NS_FAILED(rv)) {
+     NS_ERROR("Could not get spell checker");
+   }
+@@ -319,9 +319,20 @@
+ NS_IMETHODIMP 
+ mozSpellChecker::SetCurrentDictionary(const nsAString &aDictionary)
+ {
++  nsresult  rv;
+   if(!mSpellCheckingEngine)
+     return NS_ERROR_NULL_POINTER;
+  
++  if (aDictionary.Equals(NS_LITERAL_STRING("tr-TR").get()))
++  {
++    mSpellCheckingEngine = do_GetService("@mozilla.org/spellchecker/zemberek;1",&rv);
++  }
++  else
++  {
++    mSpellCheckingEngine = do_GetService("@mozilla.org/spellchecker/myspell;1",&rv);
++  }
++  mSpellCheckingEngine->SetPersonalDictionary(mPersonalDictionary);
++                                   
+   nsresult res;
+   res = mSpellCheckingEngine->SetDictionary(PromiseFlatString(aDictionary).get());
+   if(NS_FAILED(res)){
+diff -uNr mozilla/extensions/spellcheck/src/spellcheck.pkg mozilla/extensions/spellcheck/src/spellcheck.pkg
+--- mozilla/extensions/spellcheck/src/spellcheck.pkg	2004-01-07 03:21:29.000000000 +0200
++++ mozilla/extensions/spellcheck/src/spellcheck.pkg	2005-12-18 19:48:50.000000000 +0200
+@@ -1,6 +1,7 @@
+ [spellcheck]
+ dist/bin/components/@SHARED_LIBRARY@
+ dist/bin/components/@DLLP@myspell@DLLS@
++dist/bin/components/@DLLP@zemberek@DLLS@
+ !xpt dist/bin/components/spellchecker.xpt
+ 
+ [spellcheck-enUS]
+diff -uNr mozilla/extensions/spellcheck/zemberek/Makefile.in mozilla/extensions/spellcheck/zemberek/Makefile.in
+--- mozilla/extensions/spellcheck/zemberek/Makefile.in	1970-01-01 02:00:00.000000000 +0200
++++ mozilla/extensions/spellcheck/zemberek/Makefile.in	2005-12-15 23:57:40.000000000 +0200
+@@ -0,0 +1,34 @@
++# ***** BEGIN LICENSE BLOCK *****
++#
++# Copyright (c) 2004, TUBITAK/UEKAE
++#
++# This program is free software; you can redistribute it and/or modify
++# it under the terms of the GNU General Public License as published by
++# the Free Software Foundation; either version 2 of the License, or
++# (at your option) any later version.
++#  Please read the COPYING file.
++#
++# The Original Code is Mozilla Spellchecker Component.
++#
++# The Initial Developer of the Original Code is David Einstein.
++# Portions created by the Initial Developer are Copyright (C) 2001
++# the Initial Developer. All Rights Reserved.
++#
++# Mozilla Zemberek Client library is based on zpspell. The Initial Developer
++# of the zpspell code is Baris Metin. Portions created by the Initial Developer
++# Copyright (c) 2004, TUBITAK/UEKAE. All Rights Reserved.
++#
++# ***** END LICENSE BLOCK *****
++
++DEPTH		= ../../..
++topsrcdir	= @top_srcdir@
++srcdir		= @srcdir@
++VPATH		= @srcdir@
++
++include $(DEPTH)/config/autoconf.mk
++
++MODULE		= zemberek 
++DIRS		= src
++
++include $(topsrcdir)/config/rules.mk
++
+diff -uNr mozilla/extensions/spellcheck/zemberek/src/Makefile.in mozilla/extensions/spellcheck/zemberek/src/Makefile.in
+--- mozilla/extensions/spellcheck/zemberek/src/Makefile.in	1970-01-01 02:00:00.000000000 +0200
++++ mozilla/extensions/spellcheck/zemberek/src/Makefile.in	2005-12-22 00:12:19.000000000 +0200
+@@ -0,0 +1,62 @@
++# ***** BEGIN LICENSE BLOCK *****
++#
++# Copyright (c) 2004, TUBITAK/UEKAE
++#
++# This program is free software; you can redistribute it and/or modify
++# it under the terms of the GNU General Public License as published by
++# the Free Software Foundation; either version 2 of the License, or
++# (at your option) any later version.
++#  Please read the COPYING file.
++#
++# The Original Code is Mozilla Spellchecker Component.
++#
++# The Initial Developer of the Original Code is David Einstein.
++# Portions created by the Initial Developer are Copyright (C) 2001
++# the Initial Developer. All Rights Reserved.
++#
++# Mozilla Zemberek Client library is based on zpspell. The Initial Developer
++# of the zpspell code is Baris Metin. Portions created by the Initial Developer
++# Copyright (c) 2004, TUBITAK/UEKAE. All Rights Reserved.
++#
++# ***** END LICENSE BLOCK *****
++
++DEPTH		= ../../../..
++topsrcdir	= @top_srcdir@
++srcdir		= @srcdir@
++VPATH		= @srcdir@
++
++include $(DEPTH)/config/autoconf.mk
++
++MODULE		= zemberek
++LIBRARY_NAME	= zemberek
++# Do not set EXPORT_LIBRARY as we do not want zemberek in the static libs list
++#EXPORT_LIBRARY  = 1
++FORCE_SHARED_LIB = 1
++IS_COMPONENT	= 1
++# Do not set MODULE_NAME as we do not want the entry points
++# for this module translated in static builds
++#MODULE_NAME	= mozMyZemberekModule
++MOZILLA_INTERNAL_API = 1
++
++REQUIRES	= xpcom \
++		  string \
++		  uconv \
++		  unicharutil \
++		  spellchecker \
++		  $(NULL)
++
++CPPSRCS = zsconn.cpp \
++	  zstring.cpp \
++	  zemberek.cpp \
++	  mozZemberek.cpp \
++	  mozZemberekFactory.cpp \
++          $(NULL)
++
++EXTRA_DSO_LDOPTS = \
++		$(LIBS_DIR) \
++		$(XPCOM_LIBS) \
++		$(NSPR_LIBS) \
++		$(MOZ_UNICHARUTIL_LIBS) \
++		$(NULL)
++
++include $(topsrcdir)/config/rules.mk
+diff -uNr mozilla/extensions/spellcheck/zemberek/src/mozZemberek.cpp mozilla/extensions/spellcheck/zemberek/src/mozZemberek.cpp
+--- mozilla/extensions/spellcheck/zemberek/src/mozZemberek.cpp	1970-01-01 02:00:00.000000000 +0200
++++ mozilla/extensions/spellcheck/zemberek/src/mozZemberek.cpp	2005-12-23 02:12:15.000000000 +0200
+@@ -0,0 +1,355 @@
++/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
++/* ***** BEGIN LICENSE BLOCK *****
++
++Copyright (c) 2004, TUBITAK/UEKAE
++
++This program is free software; you can redistribute it and/or modify
++it under the terms of the GNU General Public License as published by
++the Free Software Foundation; either version 2 of the License, or
++(at your option) any later version.
++
++Please read the COPYING file.
++
++The Original Code is Mozilla Spellchecker Component.
++
++The Initial Developer of the Original Code is David Einstein.
++Portions created by the Initial Developer are Copyright (C) 2001
++the Initial Developer. All Rights Reserved.
++
++Mozilla Zemberek Client library is based on zpspell. The Initial Developer
++of the zpspell code is Baris Metin. Portions created by the Initial Developer
++Copyright (c) 2004, TUBITAK/UEKAE. All Rights Reserved.
++
++***** END LICENSE BLOCK ***** */
++
++#include "mozZemberek.h"
++#include "nsReadableUtils.h"
++#include "nsXPIDLString.h"
++#include "nsISimpleEnumerator.h"
++#include "nsDirectoryService.h"
++#include "nsDirectoryServiceDefs.h"
++#include "mozISpellI18NManager.h"
++#include "nsICharsetConverterManager.h"
++#include "nsUnicharUtilCIID.h"
++#include "nsUnicharUtils.h"
++#include "nsCRT.h"
++#include <stdlib.h>
++
++const PRInt32 kFirstDirSize=8;
++static NS_DEFINE_CID(kCharsetConverterManagerCID, NS_ICHARSETCONVERTERMANAGER_CID);
++static NS_DEFINE_CID(kUnicharUtilCID, NS_UNICHARUTIL_CID);
++
++NS_IMPL_ISUPPORTS1(mozZemberek, mozISpellCheckingEngine)
++
++  mozZemberek::mozZemberek()
++{
++  mZemberek = NULL;
++}
++
++mozZemberek::~mozZemberek()
++{
++  mPersonalDictionary = nsnull;
++  delete mZemberek;
++}
++
++/* attribute wstring dictionary; */
++NS_IMETHODIMP mozZemberek::GetDictionary(PRUnichar **aDictionary)
++{
++  NS_ENSURE_ARG_POINTER(aDictionary);
++
++  *aDictionary = ToNewUnicode(mDictionary);
++  return *aDictionary ? NS_OK : NS_ERROR_OUT_OF_MEMORY;
++}
++
++/* set the Dictionary.
++ * This also Loads the dictionary and initializes the converter using the dictionaries converter
++ */
++NS_IMETHODIMP mozZemberek::SetDictionary(const PRUnichar *aDictionary)
++{
++  NS_ENSURE_ARG_POINTER(aDictionary);
++
++  nsresult rv = NS_OK;
++  
++  if (*aDictionary && !mDictionary.Equals(aDictionary)) {
++    mDictionary = aDictionary;
++    
++    nsAutoString affFileName, dictFileName;
++
++    // XXX This isn't really good. nsIFile->Path isn't xp save etc.
++    // see nsIFile.idl
++    // A better way would be to QU ti nsILocalFile, and get a filehandle
++    // from there. Only problem is that myspell wants a path
++
++    nsCOMPtr<nsIFile> file;
++    nsresult rv = NS_GetSpecialDirectory(NS_XPCOM_COMPONENT_DIR, getter_AddRefs(file));
++    NS_ENSURE_SUCCESS(rv, rv);
++    if (!file)
++      return NS_ERROR_FAILURE;
++    rv = file->Append(NS_LITERAL_STRING("myspell"));
++    NS_ENSURE_SUCCESS(rv, rv);
++    rv = file->Append(mDictionary + NS_LITERAL_STRING(".aff"));
++    NS_ENSURE_SUCCESS(rv, rv);
++    file->GetPath(affFileName);
++
++    rv = NS_GetSpecialDirectory(NS_XPCOM_COMPONENT_DIR, getter_AddRefs(file));
++    NS_ENSURE_SUCCESS(rv, rv);
++    if (!file)
++      return NS_ERROR_FAILURE;
++    rv = file->Append(NS_LITERAL_STRING("myspell"));
++    NS_ENSURE_SUCCESS(rv, rv);
++    rv = file->Append(mDictionary + NS_LITERAL_STRING(".dic"));
++    NS_ENSURE_SUCCESS(rv, rv);
++    file->GetPath(dictFileName);
++
++    // SetDictionary can be called multiple times, so we might have a valid mZemberek instance 
++    // which needs cleaned up.
++    if (mZemberek)
++      delete mZemberek;
++
++    mZemberek = new Zemberek();
++    if (!mZemberek)
++      return NS_ERROR_FAILURE;
++
++    nsCOMPtr<nsICharsetConverterManager> ccm = do_GetService(kCharsetConverterManagerCID, &rv);
++    NS_ENSURE_SUCCESS(rv, rv);
++
++    rv = ccm->GetUnicodeDecoder(mZemberek->get_dic_encoding(), getter_AddRefs(mDecoder));
++    NS_ENSURE_SUCCESS(rv, rv);
++    rv = ccm->GetUnicodeEncoder(mZemberek->get_dic_encoding(), getter_AddRefs(mEncoder));
++    if (mEncoder && NS_SUCCEEDED(rv)) {
++      mEncoder->SetOutputErrorBehavior(mEncoder->kOnError_Signal, nsnull, '?');
++    }
++
++    NS_ENSURE_SUCCESS(rv, rv);
++
++    //TODO: mLanguage a ne set ediliyor
++    mLanguage.Assign(NS_LITERAL_STRING("tr"));      
++    /*
++      PRInt32 pos = mDictionary.FindChar('-');
++      if (pos == -1)
++      mLanguage.Assign(NS_LITERAL_STRING("en"));      
++      else
++      mLanguage = Substring(mDictionary, 0, pos);
++    */
++  }
++    
++  return rv;
++}
++
++/* readonly attribute wstring language; */
++// TODO: getLanguage should always return tr
++NS_IMETHODIMP mozZemberek::GetLanguage(PRUnichar **aLanguage)
++{
++  NS_ENSURE_ARG_POINTER(aLanguage);
++
++  *aLanguage = ToNewUnicode(mLanguage);
++  return *aLanguage ? NS_OK : NS_ERROR_OUT_OF_MEMORY;
++}
++
++/* readonly attribute boolean providesPersonalDictionary; */
++NS_IMETHODIMP mozZemberek::GetProvidesPersonalDictionary(PRBool *aProvidesPersonalDictionary)
++{
++  NS_ENSURE_ARG_POINTER(aProvidesPersonalDictionary);
++
++  *aProvidesPersonalDictionary = PR_FALSE;
++  return NS_OK;
++}
++
++/* readonly attribute boolean providesWordUtils; */
++NS_IMETHODIMP mozZemberek::GetProvidesWordUtils(PRBool *aProvidesWordUtils)
++{
++  NS_ENSURE_ARG_POINTER(aProvidesWordUtils);
++
++  *aProvidesWordUtils = PR_FALSE;
++  return NS_OK;
++}
++
++/* readonly attribute wstring name; */
++NS_IMETHODIMP mozZemberek::GetName(PRUnichar * *aName)
++{
++  return NS_ERROR_NOT_IMPLEMENTED;
++}
++
++/* readonly attribute wstring copyright; */
++NS_IMETHODIMP mozZemberek::GetCopyright(PRUnichar * *aCopyright)
++{
++  return NS_ERROR_NOT_IMPLEMENTED;
++}
++
++/* attribute mozIPersonalDictionary personalDictionary; */
++NS_IMETHODIMP mozZemberek::GetPersonalDictionary(mozIPersonalDictionary * *aPersonalDictionary)
++{
++  *aPersonalDictionary = mPersonalDictionary;
++  NS_IF_ADDREF(*aPersonalDictionary);
++  return NS_OK;
++}
++
++NS_IMETHODIMP mozZemberek::SetPersonalDictionary(mozIPersonalDictionary * aPersonalDictionary)
++{
++  mPersonalDictionary = aPersonalDictionary;
++  return NS_OK;
++}
++
++/* void GetDictionaryList ([array, size_is (count)] out wstring dictionaries, out PRUint32 count); */
++NS_IMETHODIMP mozZemberek::GetDictionaryList(PRUnichar ***aDictionaries, PRUint32 *aCount)
++{
++  if (!aDictionaries || !aCount)
++    return NS_ERROR_NULL_POINTER;
++
++  *aDictionaries = 0;
++  *aCount = 0;
++  PRInt32 tempCount=0, arraySize = kFirstDirSize;
++  PRUnichar **newPtr;
++
++  nsCOMPtr<nsIFile> file;
++  nsresult rv = NS_GetSpecialDirectory(NS_XPCOM_COMPONENT_DIR, getter_AddRefs(file));
++  NS_ENSURE_SUCCESS(rv, rv);
++  if (!file)
++    return NS_ERROR_FAILURE;
++
++  rv = file->Append(NS_LITERAL_STRING("myspell"));
++  NS_ENSURE_SUCCESS(rv, rv);
++
++  nsCOMPtr<nsISimpleEnumerator> dirEntries;
++  rv = file->GetDirectoryEntries(getter_AddRefs(dirEntries));
++  NS_ENSURE_SUCCESS(rv, rv);
++  if (!dirEntries)
++    return NS_ERROR_FAILURE;
++
++  PRUnichar **tmpPtr = (PRUnichar **)nsMemory::Alloc(sizeof(PRUnichar *) * kFirstDirSize);
++  if (!tmpPtr)
++    return NS_ERROR_OUT_OF_MEMORY;
++
++  PRBool hasMore = PR_FALSE;
++
++  tmpPtr[tempCount++] = ToNewUnicode(NS_LITERAL_STRING("tr-TR"));
++
++  while (NS_SUCCEEDED(dirEntries->HasMoreElements(&hasMore)) && hasMore) {
++    nsCOMPtr<nsISupports> nextItem;
++
++    dirEntries->GetNext(getter_AddRefs(nextItem));
++    nsCOMPtr<nsIFile> theFile = do_QueryInterface(nextItem);
++    
++    if (theFile) {
++      nsAutoString fileName;
++      theFile->GetLeafName(fileName);
++      PRInt32 dotLocation = fileName.FindChar('.');
++      if ((dotLocation != -1) &&
++          Substring(fileName,dotLocation,4).EqualsLiteral(".dic")) {
++        if (tempCount >= arraySize) {
++          arraySize = 2 * tempCount;
++          newPtr = (PRUnichar **)nsMemory::Alloc(sizeof(PRUnichar *) * arraySize);
++          if (!newPtr){
++            NS_FREE_XPCOM_ALLOCATED_POINTER_ARRAY(tempCount, tmpPtr);
++            return NS_ERROR_OUT_OF_MEMORY;
++          }
++          for (PRInt32 i = 0; i < tempCount; ++i){
++            newPtr[i] = tmpPtr[i];
++          }
++          nsMemory::Free(tmpPtr);
++          tmpPtr=newPtr;
++        }
++        tmpPtr[tempCount++] = ToNewUnicode(Substring(fileName,0,dotLocation));
++      }
++
++    }
++  }
++
++  *aDictionaries = tmpPtr;
++  *aCount = tempCount;
++
++  return NS_OK;
++}
++
++/* boolean Check (in wstring word); */
++NS_IMETHODIMP mozZemberek::Check(const PRUnichar *aWord, PRBool *aResult)
++{
++  NS_ENSURE_ARG_POINTER(aWord);
++  NS_ENSURE_ARG_POINTER(aResult);
++    
++  if (!mZemberek)
++    return NS_ERROR_FAILURE;
++    
++  PRInt32 inLength = nsCRT::strlen(aWord);
++  PRInt32 outLength;
++    
++  nsresult rv = mEncoder->GetMaxLength(aWord, inLength, &outLength);
++  // NS_ERROR_UENC_NOMAPPING is a NS_SUCCESS, no error.
++  if (NS_FAILED(rv) || rv == NS_ERROR_UENC_NOMAPPING) {
++    // not a word in the current charset, so likely not
++    // a word in the current language
++    return PR_FALSE;
++  }
++    
++  char *charsetWord = (char *) nsMemory::Alloc(sizeof(char) * (outLength+1));
++  NS_ENSURE_TRUE(charsetWord, NS_ERROR_OUT_OF_MEMORY);
++    
++  rv = mEncoder->Convert(aWord, &inLength, charsetWord, &outLength);
++  charsetWord[outLength] = '\0';
++
++  *aResult = mZemberek->spellCheck(charsetWord);
++
++  if (!*aResult) {
++    rv = mPersonalDictionary->Check(aWord, mLanguage.get(), aResult);
++    NS_ENSURE_SUCCESS(rv, rv);
++  }
++    
++  return NS_OK;
++}
++
++/* void Suggest (in wstring word, [array, size_is (count)] out wstring suggestions, out PRUint32 count); */
++NS_IMETHODIMP mozZemberek::Suggest(const PRUnichar *aWord, PRUnichar ***aSuggestions, PRUint32 *aSuggestionCount)
++{
++  NS_ENSURE_ARG_POINTER(aSuggestions);
++  NS_ENSURE_ARG_POINTER(aSuggestionCount);
++
++  if (!mZemberek)
++    return NS_ERROR_FAILURE;
++
++  PRInt32 inLength = nsCRT::strlen(aWord);
++  PRInt32 outLength;
++
++  nsresult rv = mEncoder->GetMaxLength(aWord, inLength, &outLength);
++  if (NS_FAILED(rv) || rv == NS_ERROR_UENC_NOMAPPING)
++    return PR_FALSE;
++
++  char *charsetWord = (char *) nsMemory::Alloc(sizeof(char) * (outLength+1));
++  NS_ENSURE_TRUE(charsetWord, NS_ERROR_OUT_OF_MEMORY);
++
++  rv = mEncoder->Convert(aWord, &inLength, charsetWord, &outLength);
++  charsetWord[outLength] = '\0';
++
++  char ** wlst;
++  *aSuggestionCount = mZemberek->getSuggestions(&wlst, charsetWord);
++
++  if (*aSuggestionCount) {
++    PRUnichar **tmpPtr = (PRUnichar **)nsMemory::Alloc(*aSuggestionCount * sizeof(PRUnichar *));
++    if (!tmpPtr)
++      return NS_ERROR_OUT_OF_MEMORY;
++
++    for (PRUint32 i = 0; i < *aSuggestionCount; ++i) {
++      // Convert the suggestion to utf16     
++
++      PRInt32 inLength = PL_strlen(wlst[i]);
++      PRInt32 outLength;
++
++      nsresult rv = mDecoder->GetMaxLength(wlst[i], inLength, &outLength);
++      NS_ENSURE_SUCCESS(rv, rv);
++      PRUnichar *dest = (PRUnichar *)malloc(sizeof(PRUnichar) * (outLength + 1));
++      if (!dest)
++        return NS_ERROR_OUT_OF_MEMORY;
++      rv = mDecoder->Convert(wlst[i], &inLength, dest, &outLength);
++      NS_ENSURE_SUCCESS(rv, rv);
++      dest[outLength] = 0;
++      free(wlst[i]);
++
++      // XXX ewwww.
++      tmpPtr[i] = ToNewUnicode(nsDependentString(dest));
++      free(dest);
++    }
++    *aSuggestions = tmpPtr;
++  }
++
++  return NS_OK;
++}
++
+diff -uNr mozilla/extensions/spellcheck/zemberek/src/mozZemberekFactory.cpp mozilla/extensions/spellcheck/zemberek/src/mozZemberekFactory.cpp
+--- mozilla/extensions/spellcheck/zemberek/src/mozZemberekFactory.cpp	1970-01-01 02:00:00.000000000 +0200
++++ mozilla/extensions/spellcheck/zemberek/src/mozZemberekFactory.cpp	2005-12-15 23:57:55.000000000 +0200
+@@ -0,0 +1,64 @@
++/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
++/* ***** BEGIN LICENSE BLOCK *****
++ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
++ *
++ * The contents of this file are subject to the Mozilla Public License Version
++ * 1.1 (the "License"); you may not use this file except in compliance with
++ * the License. You may obtain a copy of the License at
++ * http://www.mozilla.org/MPL/
++ *
++ * Software distributed under the License is distributed on an "AS IS" basis,
++ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
++ * for the specific language governing rights and limitations under the
++ * License.
++ *
++ * The Original Code is Mozilla Spellchecker Component.
++ *
++ * The Initial Developer of the Original Code is
++ * David Einstein.
++ * Portions created by the Initial Developer are Copyright (C) 2001
++ * the Initial Developer. All Rights Reserved.
++ *
++ * Contributor(s): David Einstein <Deinst@world.std.com>
++ *
++ * Alternatively, the contents of this file may be used under the terms of
++ * either the GNU General Public License Version 2 or later (the "GPL"), or
++ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
++ * in which case the provisions of the GPL or the LGPL are applicable instead
++ * of those above. If you wish to allow use of your version of this file only
++ * under the terms of either the GPL or the LGPL, and not to allow others to
++ * use your version of this file under the terms of the MPL, indicate your
++ * decision by deleting the provisions above and replace them with the notice
++ * and other provisions required by the GPL or the LGPL. If you do not delete
++ * the provisions above, a recipient may use your version of this file under
++ * the terms of any one of the MPL, the GPL or the LGPL.
++ *
++ * ***** END LICENSE BLOCK ***** */
++
++#include "nsIGenericFactory.h"
++
++#include "mozZemberek.h"
++
++////////////////////////////////////////////////////////////////////////
++// Define the contructor function for the objects
++//
++// NOTE: This creates an instance of objects by using the default constructor
++//
++
++NS_GENERIC_FACTORY_CONSTRUCTOR(mozZemberek)
++
++////////////////////////////////////////////////////////////////////////
++// Define a table of CIDs implemented by this module along with other
++// information like the function to create an instance, contractid, and
++// class name.
++//
++static nsModuleComponentInfo components[] = {
++  { NULL, MOZ_ZEMBEREK_CID, MOZ_ZEMBEREK_CONTRACTID, mozZemberekConstructor }
++};
++
++////////////////////////////////////////////////////////////////////////
++// Implement the NSGetModule() exported function for your module
++// and the entire implementation of the module object.
++//
++NS_IMPL_NSGETMODULE(mozZemberekModule, components)
++    
+diff -uNr mozilla/extensions/spellcheck/zemberek/src/mozZemberek.h mozilla/extensions/spellcheck/zemberek/src/mozZemberek.h
+--- mozilla/extensions/spellcheck/zemberek/src/mozZemberek.h	1970-01-01 02:00:00.000000000 +0200
++++ mozilla/extensions/spellcheck/zemberek/src/mozZemberek.h	2005-12-23 02:11:49.000000000 +0200
+@@ -0,0 +1,61 @@
++/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
++/* ***** BEGIN LICENSE BLOCK ***** *
++
++  Copyright (c) 2004, TUBITAK/UEKAE
++
++  This program is free software; you can redistribute it and/or modify
++  it under the terms of the GNU General Public License as published by
++  the Free Software Foundation; either version 2 of the License, or
++  (at your option) any later version.
++
++  Please read the COPYING file.
++
++  The Original Code is Mozilla Spellchecker Component.
++
++  The Initial Developer of the Original Code is David Einstein.
++  Portions created by the Initial Developer are Copyright (C) 2001
++  the Initial Developer. All Rights Reserved.
++
++  Mozilla Zemberek Client library is based on zpspell. The Initial Developer
++  of the zpspell code is Baris Metin. Portions created by the Initial Developer
++  Copyright (c) 2004, TUBITAK/UEKAE. All Rights Reserved.
++
++* ***** END LICENSE BLOCK ***** */
++
++#ifndef mozZemberek_h__
++#define mozZemberek_h__
++
++#include "zemberek.h"
++#include "mozISpellCheckingEngine.h"
++#include "mozIPersonalDictionary.h"
++#include "nsString.h"
++#include "nsCOMPtr.h"
++#include "nsIUnicodeEncoder.h"
++#include "nsIUnicodeDecoder.h"
++
++#define MOZ_ZEMBEREK_CONTRACTID "@mozilla.org/spellchecker/zemberek;1"
++#define MOZ_ZEMBEREK_CID         \
++{ /* 15DDAC0D-D94C-4fc1-8F48-E1BB04A6F380} */  \
++0x15DDAC0D, 0xD94C, 0x4fc1,                    \
++{ 0x8F, 0x48, 0xE1, 0xBB, 0x04, 0xA6, 0xF3, 0x80} }
++
++class mozZemberek : public mozISpellCheckingEngine
++{
++public:
++  NS_DECL_ISUPPORTS
++  NS_DECL_MOZISPELLCHECKINGENGINE
++  
++  mozZemberek();
++  virtual ~mozZemberek();
++
++protected:
++ 
++  nsCOMPtr<mozIPersonalDictionary> mPersonalDictionary;
++  nsCOMPtr<nsIUnicodeEncoder>      mEncoder; 
++  nsCOMPtr<nsIUnicodeDecoder>      mDecoder; 
++  nsString  mDictionary;
++  nsString  mLanguage;
++  Zemberek *mZemberek;
++};
++
++#endif
+diff -uNr mozilla/extensions/spellcheck/zemberek/src/zemberek.cpp mozilla/extensions/spellcheck/zemberek/src/zemberek.cpp
+--- mozilla/extensions/spellcheck/zemberek/src/zemberek.cpp	1970-01-01 02:00:00.000000000 +0200
++++ mozilla/extensions/spellcheck/zemberek/src/zemberek.cpp	2005-12-23 01:41:14.000000000 +0200
+@@ -0,0 +1,67 @@
++/*
++  Copyright (c) 2004, TUBITAK/UEKAE
++
++  This program is free software; you can redistribute it and/or modify
++  it under the terms of the GNU General Public License as published by
++  the Free Software Foundation; either version 2 of the License, or
++  (at your option) any later version.
++
++  Mozilla Zemberek Client library is based on zpspell. The Initial Developer
++  of the zpspell code is Baris Metin.
++*/
++
++#include <iostream>
++#include <vector>
++
++#include "zsconn.h"
++#include "zstring.h"
++#include "zemberek.h"
++
++/* use myspell's limit for maxSug */
++Zemberek::Zemberek() : maxSug(25)
++{
++    zsconn = new ZSConn();
++}
++
++Zemberek::~Zemberek()
++{
++    delete zsconn;
++}
++
++int Zemberek::spellCheck(const char *word) const
++{
++    ZString zstr = zsconn->checkString(word, 0);
++    return (zstr.status() == Z_TRUE);
++}
++
++int Zemberek::getSuggestions(char ***suggestions, const char *word) const
++{
++    int ns = 0;
++    ZString zstr = zsconn->checkString(word, 0);
++
++    *suggestions = NULL;
++
++    if (zstr.status() != Z_SUGGESTION)
++	return 0;
++
++    char **wlst = (char **)calloc(maxSug, sizeof(char *));
++    if (wlst == NULL) 
++      return 0;
++    
++    vector<string>::const_iterator words_iter;
++    const vector<string> &words = zstr.suggestions();
++
++    for (words_iter = words.begin(); words_iter != words.end() && ns < maxSug; words_iter++, ns++) {
++	wlst[ns] = strdup((*words_iter).c_str());
++    }
++
++    if (ns > 0)
++	*suggestions = wlst;
++
++    return ns;
++}
++
++char *Zemberek::get_dic_encoding()
++{
++    return strdup("UTF-8");
++}
+diff -uNr mozilla/extensions/spellcheck/zemberek/src/zemberek.h mozilla/extensions/spellcheck/zemberek/src/zemberek.h
+--- mozilla/extensions/spellcheck/zemberek/src/zemberek.h	1970-01-01 02:00:00.000000000 +0200
++++ mozilla/extensions/spellcheck/zemberek/src/zemberek.h	2005-12-23 01:41:14.000000000 +0200
+@@ -0,0 +1,34 @@
++/*
++  Copyright (c) 2004, TUBITAK/UEKAE
++
++  This program is free software; you can redistribute it and/or modify
++  it under the terms of the GNU General Public License as published by
++  the Free Software Foundation; either version 2 of the License, or
++  (at your option) any later version.
++
++  Please read the COPYING file.
++*/
++
++#ifndef ZEMBEREK_H
++#define ZEMBEREK_H
++
++#include "zsconn.h"
++
++using namespace std;
++
++class Zemberek
++{
++public:
++    Zemberek();
++    ~Zemberek();
++
++    int getSuggestions(char ***suggestions, const char *word) const;
++    int spellCheck(const char *word) const;
++    char *get_dic_encoding();
++
++private:
++    const short maxSug;
++    ZSConn *zsconn;
++};
++
++#endif
+diff -uNr mozilla/extensions/spellcheck/zemberek/src/zsconn.cpp mozilla/extensions/spellcheck/zemberek/src/zsconn.cpp
+--- mozilla/extensions/spellcheck/zemberek/src/zsconn.cpp	1970-01-01 02:00:00.000000000 +0200
++++ mozilla/extensions/spellcheck/zemberek/src/zsconn.cpp	2005-12-23 01:51:00.000000000 +0200
+@@ -0,0 +1,185 @@
++/*
++  Copyright (c) 2004, TUBITAK/UEKAE
++
++  This program is free software; you can redistribute it and/or modify
++  it under the terms of the GNU General Public License as published by
++  the Free Software Foundation; either version 2 of the License, or
++  (at your option) any later version.
++
++  Please read the COPYING file.
++*/
++
++#include <iostream>
++#include <sstream>
++#include <sys/types.h>
++#include <sys/socket.h>
++#include <netinet/in.h>
++#include <netdb.h>
++
++#include "zsconn.h"
++
++#define HOST "localhost"
++#define ZPORT 10444
++
++
++ZSConn::ZSConn()
++{
++    struct hostent *he;
++    struct sockaddr_in saddr;
++
++    if ( ( he = (struct hostent *)gethostbyname(HOST) ) == NULL ) {
++	perror( "gethostbyname()" );
++    }
++
++    if ( ( _conn = socket(AF_INET, SOCK_STREAM, 0) ) == -1 ) {
++	perror( "socket()" );
++    }
++
++    saddr.sin_family = AF_INET;
++    saddr.sin_port = htons( (uint16_t)ZPORT );
++    saddr.sin_addr = *( (struct in_addr *)he->h_addr );
++    memset( &(saddr.sin_zero), '\0', 8 );
++
++    if ( connect(_conn, (struct sockaddr *)&saddr, sizeof(struct sockaddr)) == -1) {
++        perror("zemberek-server hatası");
++    }
++}
++
++ZSConn::~ZSConn()
++{
++    if ( _conn ) {
++        shutdown( _conn, SHUT_RDWR );
++        close( _conn );
++    }
++}
++
++
++ZString ZSConn::checkString( const string& str, int offset ) const
++{
++    ZString zstr( str, offset );
++
++    // pislikleri temizle, bunlar ispell'e gönderilen komutlar.
++    // şimdilik işimiz yok bunlarla
++    // bir de ^ var ama o kullanılıyor bizim için...
++    string flags( "*&@+-~#!%`" );
++    string::iterator it = flags.begin();
++    string::iterator end = flags.end();
++    for ( ; it != end; ++it ) {
++        if ( str[0] == *it ) {
++            zstr.setStatus( Z_UNKNOWN );
++            return zstr;
++        }
++    }
++
++
++    zstr.setStatus( spellCheck( zstr.str() ) );
++
++    if ( zstr.status() == Z_FALSE ) {
++        zstr.setSuggestions( getSuggestions( zstr.str() ) );
++        if ( zstr.suggestionCount() != 0 ) {
++            zstr.setStatus( Z_SUGGESTION );
++        }
++    }
++
++    return zstr;
++}
++
++enum Z_CHECK_RESULT ZSConn::spellCheck( const string& str ) const
++{
++    stringstream strstream;
++    strstream << str.length()+2 << " * " << str;
++    string checkStr = strstream.str();
++    if ( send(_conn, checkStr.c_str(), checkStr.length(), 0) == -1) {
++	perror("zemberek-server hatası");
++	return Z_TRUE;
++    }
++
++    switch ( recvResult()[0] ) {
++    case '*':
++        return Z_TRUE;
++        break;
++    case '#':
++        return Z_FALSE;
++        break;
++    default:
++        return Z_UNKNOWN;
++        break;
++    }
++}
++
++vector<string> ZSConn::getSuggestions(const string& str ) const
++{
++    stringstream strstream;
++    vector<string> suggestions;
++
++    strstream << str.length()+2 << " & " << str;
++    string checkStr = strstream.str();
++    if ( send( _conn, checkStr.c_str(), checkStr.length(), 0 ) == -1 ) {
++	perror("zemberek-server hatası");
++	return suggestions;
++    }
++
++    string result = recvResult();
++
++    if ( result[0] != '&' ) {
++        return suggestions;
++    }
++
++    string::iterator it = result.begin();
++    string::iterator end = result.end();
++    bool start = false;
++    string tmp;
++    for ( ; it != end; ++it ) {
++        if ( *it == '(' ) {
++            start = true;
++            continue;
++        }
++
++        if ( !start ) continue;
++
++
++        if ( *it == ',' ) {
++            suggestions.push_back( tmp );
++            tmp.erase();
++            continue;
++        } else if ( *it == ')' ) {
++            suggestions.push_back( tmp );
++            break;
++        }
++
++        tmp += *it;
++    }
++
++    return suggestions;
++}
++
++
++string ZSConn::recvResult() const
++{
++    int numbytes = 0;
++    string buf("");
++
++    int size = 0;
++    while (true) {
++        char s;
++        numbytes = recv (_conn, &s, 1, 0);
++
++        // ' ' boşluk karakteri hiç gelmezse???
++        if (s == ' ') {
++            char *endptr;
++            size = strtol (buf.c_str() , &endptr, 0);
++            buf.erase();
++            break;
++        }
++
++        buf += s;
++    }
++    char *ret = new char[size+1];
++    numbytes = recv (_conn, ret, size, 0);
++    ret[numbytes]='\0';
++
++    string result = ret;
++    delete ret;
++
++    return result;
++}
+diff -uNr mozilla/extensions/spellcheck/zemberek/src/zsconn.h mozilla/extensions/spellcheck/zemberek/src/zsconn.h
+--- mozilla/extensions/spellcheck/zemberek/src/zsconn.h	1970-01-01 02:00:00.000000000 +0200
++++ mozilla/extensions/spellcheck/zemberek/src/zsconn.h	2005-12-20 00:25:17.000000000 +0200
+@@ -0,0 +1,39 @@
++/*
++  Copyright (c) 2004, TUBITAK/UEKAE
++
++  This program is free software; you can redistribute it and/or modify
++  it under the terms of the GNU General Public License as published by
++  the Free Software Foundation; either version 2 of the License, or
++  (at your option) any later version.
++
++  Please read the COPYING file.
++*/
++
++/*
++  ZemberekServer Connection.
++*/
++
++#ifndef ZSCONN_H
++#define ZSCONN_H
++
++#include "zstring.h"
++
++using namespace std;
++
++class ZSConn
++{
++public:
++    ZSConn();
++    ~ZSConn();
++
++    ZString checkString( const string& str, int offset ) const;
++
++private:
++    int _conn;
++
++    enum Z_CHECK_RESULT spellCheck( const string& str ) const;
++    vector<string> getSuggestions (const string& str ) const;
++    string recvResult() const;
++};
++
++#endif
+diff -uNr mozilla/extensions/spellcheck/zemberek/src/zstring.cpp mozilla/extensions/spellcheck/zemberek/src/zstring.cpp
+--- mozilla/extensions/spellcheck/zemberek/src/zstring.cpp	1970-01-01 02:00:00.000000000 +0200
++++ mozilla/extensions/spellcheck/zemberek/src/zstring.cpp	2005-12-14 22:54:25.000000000 +0200
+@@ -0,0 +1,80 @@
++/*
++  Copyright (c) 2004, TUBITAK/UEKAE
++
++  This program is free software; you can redistribute it and/or modify
++  it under the terms of the GNU General Public License as published by
++  the Free Software Foundation; either version 2 of the License, or
++  (at your option) any later version.
++
++  Please read the COPYING file.
++*/
++
++#include <iostream>
++#include <sstream>
++
++#include "zstring.h"
++
++ZString::ZString(const string& str, int offset )
++    : _str(str), _offset(offset),
++      _status(Z_UNKNOWN)
++{}
++
++
++/* set */
++void ZString::setStatus( enum Z_CHECK_RESULT status )
++{
++    _status = status;
++}
++
++void ZString::setSuggestions( const vector<string>& suggestions)
++{
++    _suggestions = suggestions;
++}
++
++void ZString::addSuggestion( const string& suggestion )
++{
++    _suggestions.push_back( suggestion );
++}
++
++/* get */
++int ZString::offset() const
++{
++    return _offset;
++}
++
++const string& ZString::str() const
++{
++    return _str;
++}
++
++enum Z_CHECK_RESULT ZString::status() const
++{
++    return _status;
++}
++
++int ZString::suggestionCount() const
++{
++    return _suggestions.size();
++}
++
++const string ZString::suggestionString() const
++{
++    stringstream sstr;
++
++    vector<string>::const_iterator it = _suggestions.begin();
++    int len = _suggestions.size();
++    for (int i=0 ; i < len ; ++i, ++it ) {
++        sstr << *it;
++        if ( i < len-1 ) {
++            sstr << ", ";
++        }
++    }
++
++    return sstr.str();
++}
++
++const vector<string>& ZString::suggestions() const
++{
++    return _suggestions;
++}
++
+diff -uNr mozilla/extensions/spellcheck/zemberek/src/zstring.h mozilla/extensions/spellcheck/zemberek/src/zstring.h
+--- mozilla/extensions/spellcheck/zemberek/src/zstring.h	1970-01-01 02:00:00.000000000 +0200
++++ mozilla/extensions/spellcheck/zemberek/src/zstring.h	2005-12-14 22:54:25.000000000 +0200
+@@ -0,0 +1,50 @@
++/*
++  Copyright (c) 2004, TUBITAK/UEKAE
++
++  This program is free software; you can redistribute it and/or modify
++  it under the terms of the GNU General Public License as published by
++  the Free Software Foundation; either version 2 of the License, or
++  (at your option) any later version.
++
++  Please read the COPYING file.
++*/
++
++#ifndef ZSTRING_H
++#define ZSTRING_H
++
++#include <string>
++#include <vector>
++
++using namespace std;
++
++enum Z_CHECK_RESULT {
++    Z_TRUE = 0,
++    Z_FALSE,
++    Z_SUGGESTION,
++    Z_UNKNOWN
++};
++
++class ZString
++{
++public:
++    ZString(const string& str, int offset );
++
++    void setStatus( enum Z_CHECK_RESULT status );
++    void setSuggestions( const vector<string>& suggestions);
++    void addSuggestion( const string& suggestion );
++
++    int offset() const;
++    const string& str() const;
++    enum Z_CHECK_RESULT status() const;
++    const vector<string>& suggestions() const;
++    int suggestionCount() const;
++    const string suggestionString() const;
++
++private:
++    int _offset;
++    enum Z_CHECK_RESULT _status;
++    const string _str;
++    vector<string> _suggestions;
++};
++
++#endif // ZSTRING_H

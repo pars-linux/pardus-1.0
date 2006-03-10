@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>hsfmodem</Name>
+        <Homepage>http://www.linuxant.com/drivers/hsf/index.php</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>Conexant</License>
+        <IsA>library</IsA>
+        <Summary xml:lang="en">Linuxant's modem driver for Conexant HSF chipset</Summary>
+        <Description xml:lang="en">Linuxant's modem driver for Conexant HSF chipset</Description>
+        <Archive type="targz" sha1sum="1bb3f9f7d5f27c3e6c6c94dba3cd04602b04efb6">http://www.linuxant.com/drivers/hsf/full/archive/hsfmodem-7.18.00.07full/hsfmodem-7.18.00.07full.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">hsf-7.18.00.07-class_device_parent.patch</Patch>
+            <Patch level="1">hsf-7.18.00.07-refrigerator_modified.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>cpio</Dependency>
+            <Dependency>kernel-source</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>hsfmodem</Name>
+        <RuntimeDependencies>
+            <Dependency>diffutils</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library" permanent="true">/lib/modules</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-12-19</Date>
+            <Version>7.18.00.07</Version>
+            <Comment>Remove addition of init script to runlevels</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-12-08</Date>
+            <Version>7.18.00.07</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

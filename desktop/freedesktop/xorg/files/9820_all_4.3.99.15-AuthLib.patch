@@ -1,0 +1,11 @@
+--- xc-old/programs/Xserver/Imakefile	2003-11-02 02:57:52.000000000 -0500
++++ xc/programs/Xserver/Imakefile	2003-11-02 02:59:17.000000000 -0500
+@@ -187,7 +187,7 @@
+ #if BuildLBX || GzipFontCompression
+            ZLIB = GzipLibrary
+ #endif
+-             OS = os/LibraryTargetName(os)
++             OS = os/LibraryTargetName(os) ../../exports/lib/libXau.a
+         BSDEMUL = $(DEPXBSDLIB)
+ #if DoLoadableServer
+             MFB = mfb/ModuleLibraryTargetName(mfb)

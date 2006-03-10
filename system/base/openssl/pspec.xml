@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>openssl</Name>
+        <Homepage>http://www.openssl.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <Summary>Toolkit for SSL v2/v3 and TLS v1</Summary>
+        <Description>Toolkit for SSL v2/v3 and TLS v1</Description>
+        <Summary xml:lang="tr">SSL v2/v3 ve TLS v1 için araç kiti</Summary>
+        <Description xml:lang="tr">SSL (Secure Socket Layer) versiyon 2/3 ve TLS (Transport Layer Security) versiyon 1 için gerekli araç takımı.</Description>
+        <Archive type="targz" sha1sum="4c23925744d43272fa19615454da44e01465eb06">http://www.openssl.org/source/openssl-0.9.7i.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5">perl</Dependency>
+            <Dependency versionFrom="4">sed</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">openssl-0.9.7e-pardus.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>openssl</Name>
+        <Files>
+            <Path fileType="config">/etc/ssl</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="4">
+            <Date>2005-11-17</Date>
+            <Version>0.9.7i</Version>
+            <Comment>Enable no-executable-stack</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-10-15</Date>
+            <Version>0.9.7i</Version>
+            <Comment>Compatibility fix</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-12</Date>
+            <Version>0.9.7h</Version>
+            <Comment>Update to openssl-0.9.7h fixing security problems</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+             <Update release="1">
+            <Date>2005-08-14</Date>
+            <Version>0.9.7e</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

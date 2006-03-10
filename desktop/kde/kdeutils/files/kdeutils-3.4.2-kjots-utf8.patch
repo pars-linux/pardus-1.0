@@ -1,0 +1,31 @@
+diff -ur kdeutils-3.3.2.orig/kjots/kjotsentry.cpp kdeutils-3.3.2/kjots/kjotsentry.cpp
+--- kdeutils-3.3.2.orig/kjots/kjotsentry.cpp	2004-12-22 16:24:11.998045856 +0200
++++ kdeutils-3.3.2/kjots/kjotsentry.cpp	2004-12-22 16:27:24.295812152 +0200
+@@ -42,7 +42,7 @@
+     text.replace("<", "&lt;");
+     text.replace(">", "&gt;");
+     text.replace("\n", "<br>");
+-    return text;
++    return text.utf8();
+ }
+ 
+ QString htmlHeader(const QString& title)
+@@ -330,7 +330,8 @@
+ {
+     QDir dir = QDir(locateLocal("appdata",""));
+     QString fileName = dir.absPath();
+-    fileName += '/' + QFile::encodeName(newSubject);
++    fileName += '/';
++    fileName += newSubject;
+ 
+     if (QFile::exists(fileName))
+     {
+@@ -421,7 +422,7 @@
+         }
+ 
+         stream << "<h1>" + subjectText + "</h1>";
+-        stream << "<h3>" + i18n("Table of Contents") + "</h3><ul>" + TOC + "</ul><hr>";
++        stream << "<h3>" + prepForHTML( i18n( "Table of Contents" ) ) + "</h3><ul>" + TOC + "</ul><hr>";
+     }
+ 
+     KJotsSubject* entry = 0;

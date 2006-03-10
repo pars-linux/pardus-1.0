@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>attr</Name>
+        <Homepage>http://acl.bestbits.at/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>app:console</IsA>
+        <Summary>Extended attributes tools</Summary>
+        <Summary xml:lang="tr">Gelişkin öznitelikler araçları</Summary>
+        <Description>Extended attributes tools</Description>
+        <Description xml:lang="tr">Gelişkin öznitelikler araçları</Description>
+        <Archive sha1sum="af62988c07d2aabf9def02144408f8dcb03805cf" type="targz">ftp://oss.sgi.com/projects/xfs/download/cmd_tars/attr-2.4.24.src.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>attr</Name>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/libexec</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/man</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2005-11-03</Date>
+            <Version>2.4.24</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

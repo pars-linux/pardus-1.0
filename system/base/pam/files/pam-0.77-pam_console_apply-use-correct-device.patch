@@ -1,0 +1,64 @@
+--- Linux-PAM-0.75/modules/pam_console/pam_console_apply.c.orig	2002-12-16 22:22:20.000000000 +0100
++++ Linux-PAM-0.75/modules/pam_console/pam_console_apply.c	2002-12-16 22:20:56.000000000 +0100
+@@ -56,6 +56,7 @@
+ 	int i, c;
+ 	struct stat st;
+ 	char *consoleuser = NULL;
++	char *consoledev = NULL;
+ 	enum {Set, Reset} sense = Set;
+ 
+ 	while((c = getopt(argc, argv, "c:f:r")) != -1) {
+@@ -99,11 +100,19 @@
+ 	} else {
+ 		sense = Reset;
+ 	}
++	/*
++	   Devices tty0 (without devfs) and vc/0 (with devfs)
++	   should be devices associated with the console
++	   in the configuration.
++	   Check both, as either may exist depending on
++	   the presence or configuration of devfs.
++	*/
++	consoledev = check_console_name("vc/0", TRUE)?"vc/0":"tty0";
+ 	if((sense == Set) && (consoleuser != NULL)) {
+-		set_permissions(NULL, "tty0", consoleuser, TRUE);
++		set_permissions(NULL, consoledev, consoleuser, TRUE);
+ 	}
+ 	if(sense == Reset) {
+-		reset_permissions(NULL, "tty0", TRUE);
++		reset_permissions(NULL, consoledev, TRUE);
+ 	}
+ 	return 0;
+ 
+--- Linux-PAM-0.75/modules/pam_console/pam_console_apply_devfsd.c.orig	2002-12-16 22:22:20.000000000 +0100
++++ Linux-PAM-0.75/modules/pam_console/pam_console_apply_devfsd.c	2002-12-16 22:20:51.000000000 +0100
+@@ -54,6 +54,7 @@
+ 	int i, c;
+ 	struct stat st;
+ 	char *consoleuser = NULL;
++	char *consoledev = NULL;
+ 	enum {Set, Reset} sense = Set;
+ 	static int parsed = 0;
+ 
+@@ -83,11 +84,19 @@
+ 	} else {
+ 		sense = Reset;
+ 	}
++	/*
++           Devices tty0 (without devfs) and vc/0 (with devfs)
++           should be devices associated with the console
++           in the configuration.
++           Check both, as either may exist depending on
++           the presence or configuration of devfs.
++        */
++        consoledev = check_console_name("vc/0", TRUE)?"vc/0":"tty0";
+ 	if((sense == Set) && (consoleuser != NULL)) {
+-		set_permissions_single("tty0", consoleuser, TRUE, dname);
++		set_permissions_single(consoledev, consoleuser, TRUE, dname);
+ 	}
+ 	if(sense == Reset) {
+-		reset_permissions_single("tty0", TRUE, dname);
++		reset_permissions_single(consoledev, TRUE, dname);
+ 	}
+ 	return 0;
+ 

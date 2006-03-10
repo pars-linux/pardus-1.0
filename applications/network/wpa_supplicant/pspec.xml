@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>wpa_supplicant</Name>
+        <Homepage>http://hostap.epitest.fi/wpa_supplicant/</Homepage>
+        <Packager>
+            <Name>Furkan Duman</Name>
+            <Email>coderlord@gmail.com</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <License>BSD</License>
+        <IsA>daemon</IsA>
+        <IsA>app:gui</IsA>
+        <IsA>app:console</IsA>
+        <Summary>IEEE 802.1X/WPA supplicant for secure wireless transfers</Summary>
+        <Summary xml:lang="tr">Güvenli kablosuz erişim için IEEE 802.1X/WPA sağlayıcı</Summary>
+        <Description>IEEE 802.1X/WPA supplicant for secure wireless transfers</Description>
+        <Description xml:lang="tr">Güvenli kablosuz erişim için IEEE 802.1X/WPA sağlayıcı</Description>
+        <Archive sha1sum="11baed902523e86f18b17103f71b582e126a9bbc" type="targz">http://hostap.epitest.fi/releases/wpa_supplicant-0.4.7.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>readline</Dependency>
+            <Dependency>openssl</Dependency>
+            <Dependency>qt</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>wpa_supplicant</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+        <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/etc/wpa_supplicant.conf" permission="0600" owner="root">wpa_supplicant.conf</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-11-24</Date>
+            <Version>0.4.7</Version>
+            <Comment>Bağımlılık, lisans ve ayar dosyası güncellemesi, kablolu ağ desteği.</Comment>
+            <Name>Furkan Duman</Name>
+            <Email>coderlord@gmail.com</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-23</Date>
+            <Version>0.4.7</Version>
+            <Comment>0.3.9 to 0.4.7</Comment>
+            <Name>Furkan Duman</Name>
+            <Email>coderlord@gmail.com</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-10</Date>
+            <Version>0.3.9</Version>
+            <Comment>First release</Comment>
+            <Name>Furkan Duman</Name>
+            <Email>coderlord@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

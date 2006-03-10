@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# Set up default runlevel symlinks
+if [[ -z $(/bin/ls /etc/runlevels 2>/dev/null) ]]; then
+    for x in boot default nonetwork single; do
+        mkdir -p /etc/runlevels/${x}
+        for y in $(</usr/share/baselayout/rc-lists/${x}); do
+            if [[ ! -e /etc/init.d/${y} ]]; then
+                echo "init.d/${y} not found -- ignoring"
+            else
+                ln -sfn /etc/init.d/${y} \
+                /etc/runlevels/${x}/${y}
+            fi
+        done
+    done
+fi
+
+# Create /etc/hosts so we don't overwrite an existing file during bootstrap
+if [[ ! -e /etc/hosts ]]; then
+    cp /usr/share/baselayout/hosts /etc
+fi
+
+# Touching /etc/passwd and /etc/shadow after install can be fatal, as many
+# new users do not update them properly...  
+if [[ ! -e /etc/passwd ]]; then
+    cp /usr/share/baselayout/passwd /etc
+fi
+
+if [[ ! -e /etc/shadow ]]; then
+    cp /usr/share/baselayout/shadow /etc
+fi
+
+if [[ ! -e /etc/group ]]; then
+    cp /usr/share/baselayout/group /etc
+fi
+
+if [[ ! -e /etc/fstab ]]; then
+    cp /usr/share/baselayout/fstab /etc
+fi
+
+if [[ -L /etc/mtab ]]; then
+    rm -f "/etc/mtab"
+    cp /proc/mounts "/etc/mtab"
+fi
+
+# We should only install empty files if these files don't already exist.
+[[ -e /var/log/lastlog ]] || \
+    touch "/var/log/lastlog"
+[[ -e /var/run/utmp ]] || \
+    install -m 0664 -g utmp /dev/null "/var/run/utmp"
+[[ -e /var/log/wtmp ]] || \
+    install -m 0664 -g utmp /dev/null "/var/log/wtmp"
+
+# Reload init to fix unmounting problems of / on next reboot.
+# This is really needed, as without the new version of init cause init
+# not to quit properly on reboot, and causes a fsck of / on next reboot.
+#    # Regenerate init.d dependency tree
+/sbin/depscan.sh &>/dev/null
+
+# Regenerate /etc/modules.conf, else it will fail at next boot
+/sbin/modules-update force &>/dev/null
+
+# Enable shadow groups 
+if [[ ! -f /etc/gshadow && -x /usr/sbin/grpck && -x /usr/sbin/grpconv ]]
+then
+    if /usr/sbin/grpck -r &>/dev/null; then
+        /usr/sbin/grpconv
+    fi
+fi

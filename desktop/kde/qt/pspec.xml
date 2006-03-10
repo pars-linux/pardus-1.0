@@ -1,0 +1,174 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>qt</Name>
+        <Homepage>http://www.trolltech.com/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>QPL-1.0</License>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>Qt version 3.3.5</Summary>
+        <Description>Qt version 3.3.5</Description>
+        <Summary xml:lang="tr">Qt versiyon 3.3.5</Summary>
+        <Description xml:lang="tr">Qt, kullanıcı grafik arayüzü geliştirmek için kullanılan çapraz platform grafik kullanıcı arayüz araçları bütünüdür. Qt daha çok K Masaüstü Ortamında kullanılmaktadır.</Description>
+        <Archive sha1sum="8d7c7ba0b39848ef60b3cd93fc1d33e9527694ec" type="tarbz2">ftp://ftp.trolltech.com/qt/source/qt-x11-free-3.3.5.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>xorg</Dependency>
+            <Dependency>libpng</Dependency> 
+            <Dependency>jpeg</Dependency>
+            <Dependency>libmng</Dependency> 
+            <Dependency>freetype</Dependency> 
+            <Dependency>cups</Dependency>
+            <Dependency>zlib</Dependency> 
+            <Dependency>sqlite</Dependency> 
+        </BuildDependencies>
+        <Patches>
+            <Patch>0001-dnd_optimization.patch</Patch>
+            <Patch>0002-dnd_active_window_fix.patch</Patch>
+            <Patch>0005-qpixmap_mitshm.patch</Patch>
+            <Patch>0007-qpixmap_constants.patch</Patch>
+            <Patch>0015-qiconview-finditem.patch</Patch>
+            <Patch>0016-qiconview-rebuildcontainer.patch</Patch>
+            <Patch>0017-qiconview-ctrl_rubber.patch</Patch>
+            <Patch>0020-designer-deletetabs.patch</Patch>
+            <Patch>0035-qvaluelist-streaming-operator.patch</Patch>
+            <Patch>0036-qprogressbar-optimization.patch</Patch>
+            <Patch>0038-dragobject-dont-prefer-unknown.patch</Patch>
+            <Patch>0048-qclipboard_hack_80072.patch</Patch>
+            <Patch>0051-qtoolbar_77047.patch</Patch>
+            <Patch>0056-khotkeys_input_84434.patch</Patch>
+            <Patch>0059-qpopup_has_mouse.patch</Patch>
+            <Patch>0060-qpopup_ignore_mousepos.patch</Patch>
+            <Patch>0061-qscrollview-propagate-horizontal-wheelevent.patch</Patch>
+            <Patch>qt-x11-rubberband.diff</Patch>
+            <Patch level="1" compressionType="gz">qt-internal-freetype-headers.diff.gz</Patch>
+            <Patch>uic.patch</Patch>
+            <Patch level="1">qlistview.patch</Patch>
+            <Patch>0066-fcsort2fcmatch.patch</Patch>
+            <Patch>0067-nofclist.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>qt</Name>
+        <RuntimeDependencies>
+            <Dependency>xorg</Dependency>
+            <Dependency>libpng</Dependency> 
+            <Dependency>jpeg</Dependency>
+            <Dependency>libmng</Dependency> 
+            <Dependency>freetype</Dependency> 
+            <Dependency>cups</Dependency>
+            <Dependency>sqlite</Dependency> 
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/env.d</Path>
+            <Path fileType="config">/usr/qt/3/etc</Path>
+            <Path fileType="executable">/usr/qt/3/bin</Path>
+            <Path fileType="header">/usr/qt/3/include</Path>
+            <Path fileType="library">/usr/qt/3/lib</Path>
+            <Path fileType="data">/usr/qt/3/mkspecs</Path>
+            <Path fileType="data">/usr/qt/3/plugins</Path>
+            <Path fileType="data">/usr/qt/3/phrasebooks</Path>
+            <Path fileType="data">/usr/qt/3/templates</Path>
+            <Path fileType="localedata">/usr/qt/3/translations</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/env.d/45qt3">45qt3</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/env.d/50qtdir3">50qtdir3</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/qt/3/etc/qtrc">qtrc</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+  
+    <Package>
+        <Name>qt-doc</Name>
+        <Files>
+            <Path fileType="doc">/usr/qt/3/doc</Path>
+            <Path fileType="doc">/usr/qt/3/examples</Path>
+            <Path fileType="doc">/usr/qt/3/tutorial</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="11">
+            <Date>2005-12-15</Date>
+            <Version>3.3.5</Version>
+            <Comment>Add fontconfig optimization patches from Lubos Lunak</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="10">
+            <Date>2005-12-13</Date>
+            <Version>3.3.5</Version>
+            <Comment>Remove Network Transparency support</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="9">
+            <Date>2005-12-05</Date>
+            <Version>3.3.5</Version>
+            <Comment>Network Transparency support</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="8">
+            <Date>2005-11-30</Date>
+            <Version>3.3.5</Version>
+            <Comment>QListView::clear method doesn't reset d->highlighted to NULL</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="7">
+            <Date>2005-11-26</Date>
+            <Version>3.3.5</Version>
+            <Comment>Backport from 3.3.6 snapshot to disable usage of internal freetype headers</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-11-24</Date>
+            <Version>3.3.5</Version>
+            <Comment>Added a patch to enable WindowsXP/MacOSX like round password characters</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-11-17</Date>
+            <Version>3.3.5</Version>
+            <Comment>Add qt defaults, enable anti-aliasing (fix #634)</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-11-11</Date>
+            <Version>3.3.5</Version>
+            <Comment>Enable sqlite and minor dep fix</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-10-15</Date>
+            <Version>3.3.5</Version>
+            <Comment>Version bump, sync with qt-copy of KDE</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-12</Date>
+            <Version>3.3.4</Version>
+            <Comment>dosed function in action.py fixed.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-30</Date>
+            <Version>3.3.4</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

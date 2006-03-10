@@ -1,0 +1,25 @@
+--- xc/programs/Xserver/include/Imakefile.orig	2003-08-13 14:47:45.000000000 +0100
++++ xc/programs/Xserver/include/Imakefile	2003-09-05 16:01:14.199619784 +0100
+@@ -29,11 +29,14 @@
+ InstallDriverSDKNonExecFile(XIstubs.h,$(DRIVERSDKINCLUDEDIR))
+ InstallDriverSDKNonExecFile(bstore.h,$(DRIVERSDKINCLUDEDIR))
+ InstallDriverSDKNonExecFile(bstorestr.h,$(DRIVERSDKINCLUDEDIR))
++InstallDriverSDKNonExecFile(closure.h,$(DRIVERSDKINCLUDEDIR))
+ InstallDriverSDKNonExecFile(colormap.h,$(DRIVERSDKINCLUDEDIR))
+ InstallDriverSDKNonExecFile(colormapst.h,$(DRIVERSDKINCLUDEDIR))
+ InstallDriverSDKNonExecFile(cursor.h,$(DRIVERSDKINCLUDEDIR))
+ InstallDriverSDKNonExecFile(cursorstr.h,$(DRIVERSDKINCLUDEDIR))
+ InstallDriverSDKNonExecFile(dix.h,$(DRIVERSDKINCLUDEDIR))
++InstallDriverSDKNonExecFile(dixfont.h,$(DRIVERSDKINCLUDEDIR))
++InstallDriverSDKNonExecFile(dixfontstr.h,$(DRIVERSDKINCLUDEDIR))
+ InstallDriverSDKNonExecFile(dixstruct.h,$(DRIVERSDKINCLUDEDIR))
+ InstallDriverSDKNonExecFile(extension.h,$(DRIVERSDKINCLUDEDIR))
+ InstallDriverSDKNonExecFile(extnsionst.h,$(DRIVERSDKINCLUDEDIR))
+@@ -53,6 +56,7 @@
+ InstallDriverSDKNonExecFile(region.h,$(DRIVERSDKINCLUDEDIR))
+ InstallDriverSDKNonExecFile(regionstr.h,$(DRIVERSDKINCLUDEDIR))
+ InstallDriverSDKNonExecFile(resource.h,$(DRIVERSDKINCLUDEDIR))
++InstallDriverSDKNonExecFile(selection.h,$(DRIVERSDKINCLUDEDIR))
+ InstallDriverSDKNonExecFile(screenint.h,$(DRIVERSDKINCLUDEDIR))
+ InstallDriverSDKNonExecFile(scrnintstr.h,$(DRIVERSDKINCLUDEDIR))
+ InstallDriverSDKNonExecFile(servermd.h,$(DRIVERSDKINCLUDEDIR))

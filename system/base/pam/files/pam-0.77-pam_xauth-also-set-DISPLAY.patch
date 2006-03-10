@@ -1,0 +1,49 @@
+--- Linux-PAM-0.77/modules/pam_xauth/pam_xauth.c	2004-11-30 08:24:17.094555800 +0200
++++ Linux-PAM-0.77.az/modules/pam_xauth/pam_xauth.c	2004-11-30 08:32:42.829672376 +0200
+@@ -59,6 +59,7 @@
+ #define DATANAME "pam_xauth_cookie_file"
+ #define XAUTHBIN "/usr/X11R6/bin/xauth"
+ #define XAUTHENV "XAUTHORITY"
++#define DISPLAYENV "DISPLAY"
+ #define HOMEENV  "HOME"
+ #define XAUTHDEF ".Xauthority"
+ #define XAUTHTMP ".xauthXXXXXX"
+@@ -272,7 +273,8 @@ pam_sm_open_session(pam_handle_t *pamh, 
+ {
+ 	char xauthpath[] = XAUTHBIN;
+ 	char *cookiefile = NULL, *xauthority = NULL,
+-	     *cookie = NULL, *display = NULL, *tmp = NULL;
++	     *cookie = NULL, *display = NULL, *_display = NULL,
++	     *tmp = NULL;
+ 	const char *user, *xauth = xauthpath;
+ 	struct passwd *tpwd, *rpwd;
+ 	int fd, i, debug = 0;
+@@ -505,6 +507,17 @@ pam_sm_open_session(pam_handle_t *pamh, 
+ 		strcat(xauthority, "/");
+ 		strcat(xauthority, XAUTHTMP);
+ 
++		/* Generate the environment variable
++		 * "DISPLAY=<display>". */
++		_display = malloc(strlen(DISPLAYENV) + 1 +
++				  strlen(display) + 1);
++		if (_display == NULL && debug) {
++			syslog(LOG_DEBUG, "pam_xauth: no free memory to store DISPLAY");
++		}
++		strcpy(_display, DISPLAYENV);
++		strcat(_display, "=");
++		strcat(_display, display);
++
+ 		/* Generate a new file to hold the data. */
+ 		euid = geteuid();
+ 		setfsuid(tpwd->pw_uid);
+@@ -549,6 +562,10 @@ pam_sm_open_session(pam_handle_t *pamh, 
+ 		/* Set the new variable in the environment. */
+ 		pam_putenv(pamh, xauthority);
+ 		putenv(xauthority); /* The environment owns this string now. */
++		if (_display != NULL) {
++			pam_putenv(pamh, _display);
++			putenv(_display);
++		}
+ 
+ 		/* Merge the cookie we read before into the new file. */
+ 		if (debug) {

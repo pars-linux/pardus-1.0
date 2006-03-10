@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>foomatic-db-engine</Name>
+        <Homepage>http://www.linuxprinting.org/foomatic</Homepage>
+        <Packager>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Foomatic printer database engine</Summary>
+        <Summary xml:lang="tr">Foomatic yazıcı veritabanı motoru</Summary>
+        <Description>Foomatic printer database engine</Description>
+        <Description xml:lang="tr">Foomatic, çok kullanılan yazıcıları daha kolay ayarlamak ve kullanmak için tasarlanmış bir yazdırma sistemidir. Yazıcınız ve yazdırma kuyruğu arasında, bilgisayarınıza yazıcıya gönderilen dosyaları nasıl işleyeceğini söyleyerek bağlantı sağlar.</Description>
+        <Archive sha1sum="6c3d228cfe7d698e63575b6311ab485ebe7c3e61" type="targz">http://www.linuxprinting.org/download/foomatic/foomatic-db-engine-3.0.2.tar.gz</Archive>
+        <Patches>
+            <Patch>perl-module-3.0.1.diff</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>libxml2 </Dependency>
+            <Dependency>foomatic-filters</Dependency>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>foomatic-db-engine</Name>
+        <RuntimeDependencies>
+            <Dependency>libxml2 </Dependency>
+            <Dependency>foomatic-filters</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/foomatic</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="data">/usr/share/foomatic/templates</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-12-25</Date>
+            <Version>3.0.2</Version>
+            <Comment>Install perl modules, blah</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-12-13</Date>
+            <Version>3.0.2</Version>
+            <Comment>Fix dependencies</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-16</Date>
+            <Version>3.0.2</Version>
+            <Comment>First release.</Comment>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Update>
+    </History>
+</PISI>

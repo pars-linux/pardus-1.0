@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ncurses</Name>
+        <Homepage>http://www.gnu.org/software/ncurses/ncurses.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>MIT</License>
+        <IsA>library</IsA>
+        <Summary>console display library</Summary>
+        <Summary xml:lang="tr">Konsol görsel kütüphanesi</Summary>
+        <Description>console display library</Description>
+        <Description xml:lang="tr">Konsolda metin kipindeki karakterler ile görsellik sağlayan kitaplık</Description>
+        <Archive sha1sum="46414a72e91a62f63a8c9af00f0d65497f5ecc5a" type="targz">http://ftp.gnu.org/gnu/ncurses/ncurses-5.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gnuconfig</Dependency>
+        </BuildDependencies>
+        
+    </Source>
+
+    <Package>
+        <Name>ncurses</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/terminfo</Path>
+            <Path fileType="data">/usr/share/tabset</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-22</Date>
+            <Version>5.5</Version>
+            <Comment>Update to version 5.5</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-03</Date>
+            <Version>5.4</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>irqbalance</Name>
+        <Homepage>http://people.redhat.com/arjanv/irqbalance</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>OSL-1.1</License>
+        <IsA>daemon</IsA>
+        <Summary>Distribute hardware interrupts across processors on a multiprocessor system</Summary>
+        <Summary xml:lang="tr">Çok işlemcili sistemlerde, işlemciler arası donanım kesmelerini (irq) dağıtır</Summary>
+        <Description>Daemon to balance irq's across multiple CPUs on systems with the 2.4 or 2.6 kernel. This can lead to better performance and IO balance on SMP systems.</Description>
+        <Description xml:lang="tr">2.4 veya 2.6 çekirdekte, çoklu işlemciler arasındaki donanım kesmelerinin (irq) dengesini sağlayan artalan süreci. Bu SMP(simetrik çoklu işlemciler) sistemlerde daha iyi performans ve G/Ç dengesi sağlar.</Description>
+        <Archive sha1sum="ac9c810f5acb5b84cb929158bc58e7378f7e0044" type="targz">http://people.redhat.com/arjanv/irqbalance/irqbalance-0.12.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>irqbalance</Name>
+        <Files>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-05</Date>
+            <Version>0.12</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

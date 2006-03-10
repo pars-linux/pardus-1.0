@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gdb</Name>
+        <Homepage>http://www.gnu.org/software/gdb/gdb.html</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <License>LGPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary xml:lang="en">GNU debugger</Summary>
+        <Description xml:lang="en">GNU debugger</Description>
+        <Archive sha1sum="d76a6e6bbdc4163f5908b0f9790bfb685e6f70aa" type="tarbz2">http://mirrors.rcn.net/pub/sourceware/gdb/releases/gdb-6.3.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>readline</Dependency>
+            <Dependency>ncurses</Dependency>
+            <Dependency>gettext</Dependency>
+            <Dependency>gmp</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">10.selected-frame.patch</Patch>
+            <Patch level="1">13.use-dynamic-readline.patch</Patch>
+            <Patch level="1">24.tracepoint-segv.patch</Patch>
+            <Patch>bfd-malloc-wrap.patch</Patch>
+            <Patch level="1">bfd-no-kylix-crash.patch</Patch>
+            <Patch level="1">bfd-security-fixes.patch</Patch>
+            <Patch level="1">cp-pass-by-reference.patch</Patch>
+            <Patch level="1">disable-linux-fork-messages.patch</Patch>
+            <Patch level="1">dwarf-cfa-restore.patch</Patch>
+            <Patch level="1">dwarf2-frame-signal-unwinder.patch</Patch>
+            <Patch>gdb-6.2.1-libiberty-pic.patch</Patch>
+            <Patch>gdb-6.2.1-pass-libdir.patch</Patch>
+            <Patch>gdb-6.3-gdbinit-stat.patch</Patch>
+            <Patch level="1">gdb-fix-tracefork-check.patch</Patch>
+            <Patch level="1">gdb-6.3-relative-paths.patch</Patch>
+            <Patch level="1">gdb-6.3-scanmem.patch</Patch>
+            <Patch level="1">gdbinit-ownership.patch</Patch>
+            <Patch level="1">linux-use-underscore-exit.patch</Patch>
+            <Patch level="1">make-cv-type-crash.patch</Patch>
+            <Patch level="1">member-field-symtab.patch</Patch>
+            <Patch level="1">sim-destdir.patch</Patch>
+            <Patch level="1">static-thread-db.patch</Patch>
+            <Patch level="1">thread-db-multiple-libraries.patch</Patch>
+            <Patch level="1">vsyscall-bfd-close-result.patch</Patch>
+            <Patch level="1">vsyscall-gdb-support.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>gdb</Name>
+        <Files>
+            <Path fileType="config">/etc/skel</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="config">/etc/skel</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    <AdditionalFiles>
+        <AdditionalFile owner="root" permission="0644" target="/etc/skel/.gdbinit">gdbinit</AdditionalFile>
+    </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-12</Date>
+            <Version>6.3</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

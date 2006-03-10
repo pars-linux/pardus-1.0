@@ -1,0 +1,22 @@
+--- lib/Makefile.am
++++ lib/Makefile.am
+@@ -22,7 +22,7 @@
+ noinst_PROGRAMS = t-fpending
+ LDADD = $(noinst_LIBRARIES)
+ 
+-AM_CPPFLAGS = -I.. -I$(srcdir)
++AM_CPPFLAGS = -I.. -I$(srcdir) -fpie
+ DEFS += -DLIBDIR=\"$(libdir)\"
+ 
+ ## Put relatively complex files at the beginning of the list so
+--- src/Makefile.am
++++ src/Makefile.am
+@@ -91,6 +91,8 @@
+ uptime_LDADD = $(LDADD) $(GETLOADAVG_LIBS)
+ 
+ su_LDADD = $(LDADD) $(LIB_CRYPT)
++su_LDFLAGS = -pie
++su_CFLAGS = -fpie
+ 
+ $(PROGRAMS): ../lib/libcoreutils.a
+ 

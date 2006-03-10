@@ -1,0 +1,12 @@
+diff -ur kdebase-3.5.0.orig/kxkb/rules.cpp kdebase-3.5.0/kxkb/rules.cpp
+--- kdebase-3.5.0.orig/kxkb/rules.cpp	2005-11-20 12:51:49.000000000 +0200
++++ kdebase-3.5.0/kxkb/rules.cpp	2005-11-24 10:33:20.000000000 +0200
+@@ -17,7 +17,7 @@
+ 
+ #include "rules.h"
+ 
+-const char* X11DirList[3] = {"/usr/X11R6/lib/X11/", "/usr/local/X11R6/lib/X11/", "/usr/share/X11/"};
++const char* X11DirList[3] = {"/usr/lib/X11/", "/usr/X11R6/lib/X11/", "/usr/share/X11/"};
+ const char* rulesFileList[2] = {"xkb/rules/xorg", "xkb/rules/xfree86"};
+ 
+ KeyRules::KeyRules():

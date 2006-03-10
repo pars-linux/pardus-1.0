@@ -1,0 +1,93 @@
+#!/sbin/runscript
+# Copyright © 2005  TUBITAK/UEKAE
+# Licensed under the GNU General Public License, version 2.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+#
+# Original work belongs Gentoo Linux
+
+opts="${opts} reload configtest"
+
+# cannot use $1 in local scope in selectconfig
+FILENAME=`basename $1`
+
+# this next comment is important, don't remove it - it has to be somewhere in 
+# the init script to kill off a warning that doesn't apply to us
+# svc_start svc_stop   
+
+depend() {
+	need net
+	use mysql dns logger netmount postgresql
+	after sshd
+}
+
+configtest() {
+	ebegin "Checking Apache Configuration"
+	checkconfig
+	eend $?
+}
+
+checkconfig() {
+
+	SERVERROOT="${SERVERROOT:-/usr/lib/apache2}"
+	if [ ! -d ${SERVERROOT} ]; then
+		eerror "SERVERROOT does not exist: ${SERVERROOT}"
+		return 1
+	fi
+	
+	CONFIGFILE="${CONFIGFILE:-/etc/apache2/httpd.conf}"
+	[ ${CONFIGFILE:0:1} != "/" ] && CONFIGFILE="${SERVERROOT}/${CONFIGFILE}"
+	if [ ! -r "${CONFIGFILE}" ]; then
+		eerror "Unable to read configuration file: ${CONFIGFILE}"
+		return 1
+	fi
+	
+	[ -n "${SERVERROOT}" ] && APACHE2_OPTS="${APACHE2_OPTS} -d ${SERVERROOT}"
+	[ -n "${CONFIGFILE}" ] && APACHE2_OPTS="${APACHE2_OPTS} -f ${CONFIGFILE}"
+	[ -n "${STARTUPERRORLOG}" ] && APACHE2_OPTS="${APACHE2_OPTS} -E ${STARTUPERRORLOG}"
+
+	# set a sane default for KEEPENV and OLDENV
+	KEEPENV=${KEEPENV:-PATH}
+	OLDENV=
+
+	for env_var in ${KEEPENV}; do
+		OLDENV="${OLDENV} ${env_var}=`printenv ${env_var}`"
+	done
+
+	APACHE2="env -i ${OLDENV} /usr/sbin/apache2"
+	
+	$APACHE2 ${APACHE2_OPTS} -t 1>/dev/null 2>&1
+	ret=$?
+	if [ $ret -ne 0 ]; then
+		eerror "Apache2 has detected a syntax error in your configuration files:"
+		${APACHE2} ${APACHE2_OPTS} -t
+	fi
+	
+	return $ret
+}
+
+start() {
+	checkconfig || return 1
+	ebegin "Starting apache2"
+	[ -f /var/log/apache2/ssl_scache ] && rm /var/log/apache2/ssl_scache
+	[ -f /usr/lib/apache2/build/envvars ] && . /usr/lib/apache2/build/envvars
+	${APACHE2} ${APACHE2_OPTS} -k start
+	eend $?
+}
+
+stop() {
+	checkconfig || return 1
+	ebegin "Stopping apache2"
+	${APACHE2} ${APACHE2_OPTS} -k stop
+	eend $?
+}
+
+reload() {
+	if ! service_started "${myservice}" ; then
+		eerror "Apache is not running! Please start it before trying to reload it."
+	else
+		checkconfig || return 1
+		ebegin "Reloading apache2"
+		${APACHE2} ${APACHE2_OPTS} -k graceful
+		eend $?
+	fi
+}

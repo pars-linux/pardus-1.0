@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Kaptan Desktop
+Name[tr]=Kaptan Masaüstü
+Exec=kaptan
+Icon=kaptan
+Type=Application
+OnlyShowIn=KDE;
+Categories=Qt;KDE;System
+X-KDE-autostart-condition=kaptanrc:General:RunOnStart:true

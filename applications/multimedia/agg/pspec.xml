@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>agg</Name>
+        <Homepage>http://www.antigrain.com/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <License>non-commercial</License>
+        <IsA>library</IsA>
+        <Description xml:lang="en">A High Quality Rendering Engine for C++</Description>
+        <Description xml:lang="tr">C++ için yüksek kaliteli render motoru</Description>
+        <Summary xml:lang="en">A High Quality Rendering Engine for C++</Summary>
+        <Summary xml:lang="tr">C++ için yüksek kaliteli render motoru</Summary>
+        <Archive sha1sum="27eca2d7d7254242e5ee5e62a0959cf22024f09c" type="targz">http://www.antigrain.com/agg23.tar.gz</Archive> 
+        <BuildDependencies>
+            <Dependency>freetype</Dependency>
+            <Dependency>xorg</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>agg</Name>
+        <RuntimeDependencies>
+            <Dependency>freetype</Dependency>
+            <Dependency>xorg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share</Path>
+        </Files>
+   </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-20</Date>
+            <Version>2.3</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

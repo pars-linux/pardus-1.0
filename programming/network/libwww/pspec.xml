@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libwww</Name>
+        <Homepage>http://www.w3.org/Library/</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>W3C</License>
+        <IsA>library</IsA>
+        <Summary>A general-purpose client side WEB API</Summary>
+        <Description>A general-purpose client side WEB API</Description>
+        <Summary xml:lang="tr">Genel amaçlı istemci taraflı bir web API'si</Summary>
+        <Description xml:lang="tr">Genel amaçlı istemci taraflı bir web API'si</Description>
+        <Archive sha1sum="2394cb4e0dc4e2313a9a0ddbf508e4b726e9af63" type="targz">http://www.w3.org/Library/Distribution/w3c-libwww-5.4.0.tgz</Archive>
+        <Patches>
+            <Patch level="0">libwww-config-liborder.patch</Patch>
+            <Patch compressionType="bz2" level="1">libwww-5.4.0-debian-autoconf-2.5.patch.bz2</Patch>
+            <Patch level="1">libwww-5.4.0-autoconf-gentoo.diff</Patch>
+            <Patch level="0">libwww-5.4.0-automake-gentoo.diff</Patch>
+            <Patch level="0">libwww-5.4.0-disable-ndebug-gentoo.diff</Patch>
+            <Patch level="1">libwww-5.4.0-mysql-4.1.patch</Patch>
+            <Patch level="1">w3c-libwww-5.4.0-htbound.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency versionFrom="1.1.4">zlib</Dependency>
+            <Dependency versionFrom="0.9.6">openssl</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>libwww</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">w3c-libwww</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="2" type="security">
+            <Date>2005-11-10</Date>
+            <Version>5.4.0</Version>
+            <Comment>Fix CAN-2005-3183</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-03</Date>
+            <Version>5.4.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

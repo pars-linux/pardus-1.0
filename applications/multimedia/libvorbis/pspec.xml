@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libvorbis</Name>
+        <Homepage>http://www.vorbis.com</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>library</IsA>
+        <Summary>the Ogg Vorbis sound file format library</Summary>
+        <Summary xml:lang="tr">Tamamen açık kaynaklı ve patent problemleri olmayan Ogg Vorbis formatındaki ses dosyaları için gereken kütüphane.</Summary>
+        <Description>the Ogg Vorbis sound file format library</Description>
+        <Description xml:lang="tr">Tamamen açık kaynaklı ve patent problemleri olmayan Ogg Vorbis formatındaki ses dosyaları için gereken kütüphane.</Description>
+        <Archive sha1sum="6fb534be6635f8577d868798d5b1b92c26c9b13d" type="targz">http://downloads.xiph.org/releases/vorbis/libvorbis-1.1.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="1.0">libogg</Dependency>
+            <Dependency>sed</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libvorbis</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="1.0">libogg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="2">
+            <Date>2005-10-28</Date>
+            <Version>1.1.1</Version>
+            <Comment>Update to version 1.1.1</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-07</Date>
+            <Version>1.1.0</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

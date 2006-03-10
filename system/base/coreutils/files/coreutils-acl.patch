@@ -1,0 +1,1040 @@
+--- /dev/null	2005-10-10 09:36:06.437701000 +0100
++++ coreutils-5.92/m4/posix_acl.m4	2005-10-27 11:44:29.000000000 +0100
+@@ -0,0 +1,28 @@
++#serial 1
++
++dnl Written by Andreas Gruenbacher <a.gruenbacher@computer.org>.
++
++dnl Posix 1003.1e draft standard 17 (abandoned) and similar
++dnl access control list support
++AC_DEFUN([ag_POSIX_ACL],
++[
++  AC_CHECK_HEADERS(sys/acl.h)
++  AC_CHECK_LIB(acl, main, cu_cv_lacl=yes, cu_cv_lacl=no)
++  if test "$cu_cv_lacl" = yes; then
++    LIBACL=-lacl
++  else
++    LIBACL=
++  fi
++  AC_SUBST(LIBACL)
++  OLDLIBS="$LIBS"
++  LIBS="$LIBS $LIBACL"
++  AC_CHECK_FUNCS(acl_get_file acl_set_file acl_free acl_to_text \
++                 acl_from_text acl_delete_def_file)
++  # Linux specific extensions:
++  AC_CHECK_FUNCS(acl_entries acl_extended_file)
++  LIBS="$OLDLIBS"
++
++  if test $ac_cv_header_sys_acl_h = yes; then
++    AC_DEFINE(USE_ACL, 1, [Define if you want access control list support.])
++  fi
++])
+--- coreutils-5.92/lib/acl.h.acl	2005-05-14 08:58:06.000000000 +0100
++++ coreutils-5.92/lib/acl.h	2005-10-27 11:44:29.000000000 +0100
+@@ -18,11 +18,16 @@
+ 
+    Written by Paul Eggert.  */
+ 
+-#if HAVE_SYS_ACL_H && HAVE_ACL
++#if HAVE_SYS_ACL_H
+ # include <sys/acl.h>
+ #endif
++#if HAVE_SYS_TYPES_H
++# include <sys/types.h>
++#endif
+ #if ! defined GETACLCNT && defined ACL_CNT
+ # define GETACLCNT ACL_CNT
+ #endif
+ 
+ int file_has_acl (char const *, struct stat const *);
++int copy_acl (char const *, char const *, mode_t);
++int set_acl (char const *, mode_t);
+--- coreutils-5.92/lib/acl.c.acl	2005-09-22 07:47:18.000000000 +0100
++++ coreutils-5.92/lib/acl.c	2005-10-27 11:44:29.000000000 +0100
+@@ -22,18 +22,30 @@
+ # include <config.h>
+ #endif
+ 
++#if ENABLE_NLS
++# include <libintl.h>
++# define _(Text) gettext (Text)
++#else
++# define _(Text) Text
++#endif
++
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #ifndef S_ISLNK
+ # define S_ISLNK(Mode) 0
+ #endif
+ 
++#include <stdlib.h>
++
+ #include "acl.h"
+ 
+ #include <errno.h>
+ #ifndef ENOSYS
+ # define ENOSYS (-1)
+ #endif
++#ifndef ENOTSUP
++# define ENOTSUP (-1)
++#endif
+ 
+ #ifndef MIN_ACL_ENTRIES
+ # define MIN_ACL_ENTRIES 4
+@@ -45,19 +57,201 @@
+ int
+ file_has_acl (char const *file, struct stat const *filestat)
+ {
+-  /* FIXME: This implementation should work on recent-enough versions
+-     of HP-UX, Solaris, and Unixware, but it simply returns 0 with
+-     POSIX 1003.1e (draft 17 -- abandoned), AIX, GNU/Linux, Irix, and
+-     Tru64.  Please see Samba's source/lib/sysacls.c file for
+-     fix-related ideas.  */
+-
+ #if HAVE_ACL && defined GETACLCNT
++  /* This implementation should work on recent-enough versions of HP-UX,
++     Solaris, and Unixware.  */
++
+   if (! S_ISLNK (filestat->st_mode))
+     {
+       int n = acl (file, GETACLCNT, 0, NULL);
+       return n < 0 ? (errno == ENOSYS ? 0 : -1) : (MIN_ACL_ENTRIES < n);
+     }
++#elif HAVE_ACL_EXTENDED_FILE
++
++  /* Linux specific.  */
++
++  if (! S_ISLNK (filestat->st_mode))
++    {
++      int ret = acl_extended_file (file);
++      if (ret < 0)
++	return (errno == ENOSYS || errno == ENOTSUP) ? 0 : -1;
++      return ret;
++    }
++#else
++  /* FIXME: Add support for AIX, Irix, and Tru64, FreeBSD, etc.
++     Please see Samba's source/lib/sysacls.c file for fix-related ideas.  */
+ #endif
+ 
+   return 0;
+ }
++
++/* Copy the permissions from SRC_PATH to DST_PATH, including access control
++   lists on systems where this is supported. MODE is the file mode for
++   DST_PATH, including the file type.
++   Also sets special bits in MODE on DST_PATH.  */
++
++int
++copy_acl (char const *src_path, char const *dst_path, mode_t mode)
++{
++#if HAVE_ACL_GET_FILE && HAVE_ACL_SET_FILE && HAVE_ACL_FREE && \
++    HAVE_ACL_ENTRIES
++
++  /* Linux specific. Will work on all POSIX 1003.1e draft 17 (abandoned)
++     compliant systems if the acl_entries() function is implemented.  */
++
++  acl_t acl = acl_get_file (src_path, ACL_TYPE_ACCESS);
++  if (acl == NULL)
++    {
++      if (errno == ENOSYS || errno == ENOTSUP)
++	return set_acl (dst_path, mode);
++      else
++        {
++	  error (0, errno, "%s", quote (src_path));
++	  return -1;
++	}
++    }
++
++  if (acl_set_file (dst_path, ACL_TYPE_ACCESS, acl))
++    {
++      int saved_errno = errno;
++
++      if (errno == ENOSYS || errno == ENOTSUP)
++        {
++	  int n = acl_entries (acl);
++
++	  acl_free (acl);
++	  if (n == 3)
++	    {
++	      if (chmod (dst_path, mode))
++		saved_errno = errno;
++	      else
++		return 0;
++	    }
++	  else
++	    chmod (dst_path, mode);
++	}
++      else
++	{
++	  acl_free (acl);
++	  chmod (dst_path, mode);
++	}
++      error (0, saved_errno, _("preserving permissions for %s"),
++	     quote (dst_path));
++      return -1;
++    }
++  acl_free (acl);
++
++  if (mode & (S_ISUID | S_ISGID | S_ISVTX))
++    {
++      /* We did not call chmod so far, so the special bits have not yet
++         been set.  */
++
++      if (chmod (dst_path, mode))
++	{
++	  error (0, errno, _("preserving permissions for %s"),
++	  	 quote (dst_path));
++	  return -1;
++	}
++    }
++
++  if (S_ISDIR (mode))
++    {
++      acl = acl_get_file (src_path, ACL_TYPE_DEFAULT);
++      if (acl == NULL)
++	{
++	  error (0, errno, "%s", quote (src_path));
++	  return -1;
++	}
++
++      if (acl_set_file (dst_path, ACL_TYPE_DEFAULT, acl))
++	{
++	  error (0, errno, _("preserving permissions for %s"),
++		 quote (dst_path));
++	  acl_free(acl);
++	  return -1;
++	}
++      else
++        acl_free(acl);
++    }
++  return 0;
++#else
++  int ret = chmod (dst_path, mode);
++  if (ret)
++    error (0, errno, _("preserving permissions for %s"), quote (dst_path));
++  return ret;
++#endif
++}
++
++/* Set the permissions of PATH, overwriting access control lists, on systems
++   where this is supported. MODE is the file mode for PATH, including the
++   file type. Also sets special bits in MODE on PATH.  */
++
++int
++set_acl (char const *path, mode_t mode)
++{
++#if HAVE_ACL_FROM_TEXT && HAVE_ACL_SET_FILE && HAVE_ACL_FREE && \
++       HAVE_ACL_DELETE_DEF_FILE
++  char acl_text[] = "u::---,g::---,o::---";
++  acl_t acl;
++
++  if (mode & S_IRUSR) acl_text[ 3] = 'r';
++  if (mode & S_IWUSR) acl_text[ 4] = 'w';
++  if (mode & S_IXUSR) acl_text[ 5] = 'x';
++  if (mode & S_IRGRP) acl_text[10] = 'r';
++  if (mode & S_IWGRP) acl_text[11] = 'w';
++  if (mode & S_IXGRP) acl_text[12] = 'x';
++  if (mode & S_IROTH) acl_text[17] = 'r';
++  if (mode & S_IWOTH) acl_text[18] = 'w';
++  if (mode & S_IXOTH) acl_text[19] = 'x';
++
++  acl = acl_from_text(acl_text);
++  if (!acl)
++    {
++      error (0, errno, "%s", quote (path));
++      return -1;
++    }
++
++  if (acl_set_file(path, ACL_TYPE_ACCESS, acl))
++    {
++      int saved_errno = errno;
++      acl_free (acl);
++
++      if (errno == ENOTSUP || errno == ENOSYS)
++	{
++	  if (chmod (path, mode))
++	    saved_errno = errno;
++	  else
++	    return 0;
++	}
++      error (0, saved_errno, _("setting permissions for %s"), quote (path));
++      return -1;
++    }
++  acl_free (acl);
++
++  if (mode & (S_ISUID | S_ISGID | S_ISVTX))
++    {
++      /* We did not call chmod so far, so the special bits have not yet
++         been set.  */
++
++      if (chmod (path, mode))
++	{
++	  error (0, errno, _("preserving permissions for %s"),
++	  	 quote (path));
++	  return -1;
++	}
++    }
++
++  if (S_ISDIR (mode) && acl_delete_def_file (path))
++    {
++      error (0, errno, _("setting permissions for %s"), quote (path));
++      return -1;
++    }
++  return 0;
++#else
++  int ret = chmod (path, mode);
++  if (ret)
++    error (0, errno, _("setting permissions for %s"), quote (path));
++  return ret;
++#endif
++}
++
+--- coreutils-5.92/src/mv.c.acl	2005-07-03 17:55:19.000000000 +0100
++++ coreutils-5.92/src/mv.c	2005-10-27 11:44:29.000000000 +0100
+@@ -135,12 +135,6 @@
+   x->mode = 0;
+   x->stdin_tty = isatty (STDIN_FILENO);
+ 
+-  /* Find out the current file creation mask, to knock the right bits
+-     when using chmod.  The creation mask is set to be liberal, so
+-     that created directories can be written, even if it would not
+-     have been allowed with the mask this process was started with.  */
+-  x->umask_kill = ~ umask (0);
+-
+   x->update = false;
+   x->verbose = false;
+   x->dest_info = NULL;
+--- coreutils-5.92/src/ls.c.acl	2005-10-27 11:44:29.000000000 +0100
++++ coreutils-5.92/src/ls.c	2005-10-27 11:44:29.000000000 +0100
+@@ -193,13 +193,13 @@
+ 
+     enum filetype filetype;
+ 
+-#if HAVE_ACL
++#if HAVE_ACL || USE_ACL
+     /* For long listings, true if the file has an access control list.  */
+     bool have_acl;
+ #endif
+   };
+ 
+-#if HAVE_ACL
++#if HAVE_ACL || USE_ACL
+ # define FILE_HAS_ACL(F) ((F)->have_acl)
+ #else
+ # define FILE_HAS_ACL(F) 0
+@@ -334,7 +334,7 @@
+ /* Whether any of the files has an ACL.  This affects the width of the
+    mode column.  */
+ 
+-#if HAVE_ACL
++#if HAVE_ACL || USE_ACL
+ static bool any_has_acl;
+ #else
+ enum { any_has_acl = false };
+@@ -2582,7 +2582,7 @@
+ 	  return 0;
+ 	}
+ 
+-#if HAVE_ACL
++#if HAVE_ACL || USE_ACL
+       if (format == long_format)
+ 	{
+ 	  int n = file_has_acl (absolute_name, &f->stat);
+--- coreutils-5.92/src/install.c.acl	2005-09-23 21:58:37.000000000 +0100
++++ coreutils-5.92/src/install.c	2005-10-27 11:44:29.000000000 +0100
+@@ -153,7 +153,6 @@
+   x->mode = S_IRUSR | S_IWUSR;
+   x->stdin_tty = false;
+ 
+-  x->umask_kill = 0;
+   x->update = false;
+   x->verbose = false;
+   x->dest_info = NULL;
+--- coreutils-5.92/src/cp.c.acl	2005-09-16 08:51:01.000000000 +0100
++++ coreutils-5.92/src/cp.c	2005-10-27 11:44:29.000000000 +0100
+@@ -56,7 +56,8 @@
+    need to be fixed after copying. */
+ struct dir_attr
+ {
+-  bool is_new_dir;
++  int mode_valid;
++  mode_t mode;
+   size_t slash_offset;
+   struct dir_attr *next;
+ };
+@@ -327,9 +328,14 @@
+ 	    }
+ 	}
+ 
+-      if (x->preserve_mode | p->is_new_dir)
+-	{
+-	  if (chmod (dst_name, src_sb.st_mode & x->umask_kill))
++      if (x->preserve_mode)
++        {
++          if (copy_acl (src_name, dst_name, src_sb.st_mode))
++            return 1;
++        }
++      else if (p->mode_valid)
++        {
++          if (chmod (dst_name, p->mode))
+ 	    {
+ 	      error (0, errno, _("failed to preserve permissions for %s"),
+ 		     quote (dst_name));
+@@ -347,8 +353,7 @@
+ 
+    SRC_OFFSET is the index in CONST_DIR (which is a destination
+    directory) of the beginning of the source directory name.
+-   Create any leading directories that don't already exist,
+-   giving them permissions MODE.
++   Create any leading directories that don't already exist.
+    If VERBOSE_FMT_STRING is nonzero, use it as a printf format
+    string for printing a message after successfully making a directory.
+    The format should take two string arguments: the names of the
+@@ -364,15 +369,20 @@
+ 
+ static bool
+ make_dir_parents_private (char const *const_dir, size_t src_offset,
+-			  mode_t mode, char const *verbose_fmt_string,
++			  char const *verbose_fmt_string,
+ 			  struct dir_attr **attr_list, bool *new_dst,
+-			  int (*xstat) ())
++			  const struct cp_options *x)
+ {
+   struct stat stats;
+   char *dir;		/* A copy of CONST_DIR we can change.  */
+   char *src;		/* Source name in DIR.  */
+   char *dst_dir;	/* Leading directory of DIR.  */
+   size_t dirlen;	/* Length of DIR.  */
++  mode_t mode;
++  int (*xstat)() = (x->dereference == DEREF_COMMAND_LINE_ARGUMENTS
++		    || x->dereference == DEREF_ALWAYS
++		    ? stat
++		    : lstat);
+ 
+   ASSIGN_STRDUPA (dir, const_dir);
+ 
+@@ -407,12 +417,20 @@
+ 	  if ((*xstat) (dir, &stats))
+ 	    {
+ 	      /* This component does not exist.  We must set
+-		 *new_dst and new->is_new_dir inside this loop because,
++		 *new_dst inside this loop because,
+ 		 for example, in the command `cp --parents ../a/../b/c e_dir',
+ 		 make_dir_parents_private creates only e_dir/../a if
+ 		 ./b already exists. */
+ 	      *new_dst = true;
+-	      new->is_new_dir = true;
++
++	      if ((*xstat) (src, &stats))
++		{
++		  error (0, errno, _("failed to get attributes of %s"),
++			 quote (src));
++		  return 1;
++		}
++	      mode = stats.st_mode;
++
+ 	      if (mkdir (dir, mode))
+ 		{
+ 		  error (0, errno, _("cannot make directory %s"),
+@@ -424,6 +442,46 @@
+ 		  if (verbose_fmt_string != NULL)
+ 		    printf (verbose_fmt_string, src, dir);
+ 		}
++
++	      /* We need search and write permissions to the new directory
++	         for adding the directory's contents. Check if these
++		 permissions are already there.  */
++
++	      if (lstat (dir, &stats))
++	        {
++		  error (0, errno, _("failed to get attributes of %s"),
++		         quote (dir));
++		  return 1;
++		}
++	      else
++		{
++		  if (x->preserve_mode && mode != stats.st_mode)
++		    {
++		      new->mode = mode;
++		      new->mode_valid = 1;
++		    }
++		  else
++		    new->mode_valid = 0;
++
++		  if ((stats.st_mode & S_IRWXU) != S_IRWXU)
++		    {
++		      /* Make the new directory writable and searchable. The
++		         original permissions will be restored later.  */
++
++		      if (!new->mode_valid)
++			{
++			  new->mode = stats.st_mode;
++			  new->mode_valid = 1;
++			}
++
++		      if (chmod (dir, stats.st_mode | S_IRWXU))
++			{
++			  error (0, errno, _("setting permissions for %s"),
++			         quote (dir));
++			  return 1;
++			}
++		    }
++		}
+ 	    }
+ 	  else if (!S_ISDIR (stats.st_mode))
+ 	    {
+@@ -433,7 +491,7 @@
+ 	    }
+ 	  else
+ 	    {
+-	      new->is_new_dir = false;
++	      new->mode_valid = false;
+ 	      *new_dst = false;
+ 	    }
+ 	  *slash++ = '/';
+@@ -536,10 +594,6 @@
+ 	 Copy the files `file1' through `filen'
+ 	 to the existing directory `edir'. */
+       int i;
+-      int (*xstat)() = (x->dereference == DEREF_COMMAND_LINE_ARGUMENTS
+-			|| x->dereference == DEREF_ALWAYS
+-			? stat
+-			: lstat);
+ 
+       /* Initialize these hash tables only if we'll need them.
+ 	 The problems they're used to detect can arise only if
+@@ -585,9 +639,9 @@
+ 	         leading directories. */
+ 	      parent_exists =
+ 		(make_dir_parents_private
+-		 (dst_name, arg_in_concat - dst_name, S_IRWXU,
++		 (dst_name, arg_in_concat - dst_name,
+ 		  (x->verbose ? "%s -> %s\n" : NULL),
+-		  &attr_list, &new_dst, xstat));
++		  &attr_list, &new_dst, x));
+ 	    }
+ 	  else
+ 	    {
+@@ -697,12 +751,6 @@
+   /* Not used.  */
+   x->stdin_tty = false;
+ 
+-  /* Find out the current file creation mask, to knock the right bits
+-     when using chmod.  The creation mask is set to be liberal, so
+-     that created directories can be written, even if it would not
+-     have been allowed with the mask this process was started with.  */
+-  x->umask_kill = ~ umask (0);
+-
+   x->update = false;
+   x->verbose = false;
+   x->dest_info = NULL;
+@@ -987,9 +1035,6 @@
+ 				   version_control_string)
+ 		   : no_backups);
+ 
+-  if (x.preserve_mode)
+-    x.umask_kill = ~ (mode_t) 0;
+-
+   if (x.dereference == DEREF_UNDEFINED)
+     {
+       if (x.recursive)
+--- coreutils-5.92/src/copy.h.acl	2005-07-03 10:45:51.000000000 +0100
++++ coreutils-5.92/src/copy.h	2005-10-27 11:44:29.000000000 +0100
+@@ -165,9 +165,6 @@
+      Create destination directories as usual. */
+   bool symbolic_link;
+ 
+-  /* The bits to preserve in created files' modes. */
+-  mode_t umask_kill;
+-
+   /* If true, do not copy a nondirectory that has an existing destination
+      with the same or newer modification time. */
+   bool update;
+--- coreutils-5.92/src/copy.c.acl	2005-09-25 06:57:47.000000000 +0100
++++ coreutils-5.92/src/copy.c	2005-10-27 11:57:41.000000000 +0100
+@@ -101,26 +101,6 @@
+ /* The invocation name of this program.  */
+ extern char *program_name;
+ 
+-/* Encapsulate selection of the file mode to be applied to
+-   new non-directories.  */
+-
+-static mode_t
+-get_dest_mode (const struct cp_options *option, mode_t mode)
+-{
+-  /* In some applications (e.g., install), use precisely the
+-     specified mode.  */
+-  if (option->set_mode)
+-    return option->mode;
+-
+-  /* Honor the umask for `cp', but not for `mv' or `cp -p'.
+-     In addition, `cp' without -p must clear the set-user-ID and set-group-ID
+-     bits.  POSIX requires it do that when creating new files.  */
+-  if (!option->move_mode && !option->preserve_mode)
+-    mode &= (option->umask_kill & ~(S_ISUID | S_ISGID));
+-
+-  return mode;
+-}
+-
+ /* FIXME: describe */
+ /* FIXME: rewrite this to use a hash table so we avoid the quadratic
+    performance hit that's probably noticeable only on trees deeper
+@@ -460,18 +440,41 @@
+      succeeded, because the chown must have reset those bits.  */
+   if (!(*new_dst
+ 	&& !(*chown_succeeded && (src_sb->st_mode & ~S_IRWXUGO)))
+-      && (x->preserve_mode || *new_dst)
+       && (x->copy_as_regular || S_ISREG (src_sb->st_mode)))
+     {
+-      if (fchmod (dest_desc, get_dest_mode (x, src_sb->st_mode)) != 0)
++      if (x->preserve_mode || x->move_mode)
++	{
++	  if (copy_acl (src_name, dst_name, src_sb->st_mode))
++	    {
++	      error (0, errno, _("preserving ACL for %s"), quote (dst_name));
++	      if (x->set_mode || x->require_preserve)
++	      {
++	        return_val = false;
++	        goto close_src_and_dst_desc;
++	      }
++	    }
++	}
++      else if (x->set_mode)
+ 	{
+-	  error (0, errno, _("setting permissions for %s"), quote (dst_name));
+-	  if (x->set_mode || x->require_preserve)
++	  if (set_acl (dst_name, x->mode))
+ 	    {
++	      error (0, errno, _("setting ACL for %s"), quote (dst_name));
+ 	      return_val = false;
+ 	      goto close_src_and_dst_desc;
+ 	    }
+ 	}
++      else if (src_sb->st_mode & (S_ISUID | S_ISGID))
++	{
++          if (fchmod (dest_desc, sb.st_mode | (src_sb->st_mode & (S_ISUID | S_ISGID))) != 0)
++	    {
++	      error (0, errno, _("setting permissions for %s"), quote (dst_name));
++	      if (x->set_mode || x->require_preserve)
++	        {
++	          return_val = false;
++	          goto close_src_and_dst_desc;
++	        }
++	    }
++	}
+     }
+ #endif
+ 
+@@ -908,13 +911,14 @@
+   struct stat src_sb;
+   struct stat dst_sb;
+   mode_t src_mode;
+-  mode_t src_type;
++  mode_t dst_mode;
+   char *earlier_file = NULL;
+   char *dst_backup = NULL;
+   bool backup_succeeded = false;
+   bool delayed_ok;
+   bool copied_as_regular = false;
+   bool chown_succeeded = false;
++  bool dst_mode_valid = 0;
+   bool preserve_metadata;
+ 
+   if (x->move_mode && rename_succeeded)
+@@ -928,11 +932,9 @@
+       return false;
+     }
+ 
+-  src_type = src_sb.st_mode;
+-
+   src_mode = src_sb.st_mode;
+ 
+-  if (S_ISDIR (src_type) && !x->recursive)
++  if (S_ISDIR (src_mode) && !x->recursive)
+     {
+       error (0, 0, _("omitting directory %s"), quote (src_name));
+       return false;
+@@ -1001,7 +1003,7 @@
+ 
+ 	  if (!S_ISDIR (dst_sb.st_mode))
+ 	    {
+-	      if (S_ISDIR (src_type))
++	      if (S_ISDIR (src_mode))
+ 		{
+ 		  error (0, 0,
+ 		     _("cannot overwrite non-directory %s with directory %s"),
+@@ -1027,7 +1029,7 @@
+ 		}
+ 	    }
+ 
+-	  if (!S_ISDIR (src_type))
++	  if (!S_ISDIR (src_mode))
+ 	    {
+ 	      if (S_ISDIR (dst_sb.st_mode))
+ 		{
+@@ -1067,7 +1069,7 @@
+ 	     This may be due to an interactive `negative' reply to the
+ 	     prompt about the existing file.  It may also be due to the
+ 	     use of the --reply=no option.  */
+-	  if (!S_ISDIR (src_type))
++	  if (!S_ISDIR (src_mode))
+ 	    {
+ 	      /* cp and mv treat -i and -f differently.  */
+ 	      if (x->move_mode)
+@@ -1181,7 +1183,7 @@
+   /* If the source is a directory, we don't always create the destination
+      directory.  So --verbose should not announce anything until we're
+      sure we'll create a directory. */
+-  if (x->verbose && !S_ISDIR (src_type))
++  if (x->verbose && !S_ISDIR (src_mode))
+     {
+       printf ("%s -> %s", quote_n (0, src_name), quote_n (1, dst_name));
+       if (backup_succeeded)
+@@ -1229,7 +1231,7 @@
+ 		|| (command_line_arg
+ 		    && x->dereference == DEREF_COMMAND_LINE_ARGUMENTS)
+ 		|| x->dereference == DEREF_ALWAYS))
+-	   || (x->recursive && S_ISDIR (src_type)))
++	   || (x->recursive && S_ISDIR (src_mode)))
+     {
+       earlier_file = remember_copied (dst_name, src_sb.st_ino, src_sb.st_dev);
+     }
+@@ -1242,7 +1244,7 @@
+       /* Avoid damaging the destination file system by refusing to preserve
+ 	 hard-linked directories (which are found at least in Netapp snapshot
+ 	 directories).  */
+-      if (S_ISDIR (src_type))
++      if (S_ISDIR (src_mode))
+ 	{
+ 	  /* If src_name and earlier_file refer to the same directory entry,
+ 	     then warn about copying a directory into itself.  */
+@@ -1292,7 +1294,7 @@
+     {
+       if (rename (src_name, dst_name) == 0)
+ 	{
+-	  if (x->verbose && S_ISDIR (src_type))
++	  if (x->verbose && S_ISDIR (src_mode))
+ 	    printf ("%s -> %s\n", quote_n (0, src_name), quote_n (1, dst_name));
+ 	  if (rename_succeeded)
+ 	    *rename_succeeded = true;
+@@ -1405,7 +1407,7 @@
+      In such cases, set this variable to zero.  */
+   preserve_metadata = true;
+ 
+-  if (S_ISDIR (src_type))
++  if (S_ISDIR (src_mode))
+     {
+       struct dir_list *dir;
+ 
+@@ -1430,16 +1432,38 @@
+ 
+       if (new_dst || !S_ISDIR (dst_sb.st_mode))
+ 	{
+-	  /* Create the new directory writable and searchable, so
+-             we can create new entries in it.  */
+-
+-	  if (mkdir (dst_name, (src_mode & x->umask_kill) | S_IRWXU) != 0)
++	  if (mkdir (dst_name, src_mode) != 0)
+ 	    {
+ 	      error (0, errno, _("cannot create directory %s"),
+ 		     quote (dst_name));
+ 	      goto un_backup;
+ 	    }
+ 
++	  /* We need search and write permissions to the new directory
++	     for adding the directory's contents. Check if these permissions
++	     are already there.  */
++
++	  if (lstat (dst_name, &dst_sb))
++	    {
++	      error (0, errno, _("cannot stat %s"), quote (dst_name));
++	      delayed_ok = false;
++	    }
++	  else if ((dst_sb.st_mode & S_IRWXU) != S_IRWXU)
++	    {
++	      /* Make the new directory writable and searchable. The original
++	         permissions will be restored later.  */
++
++	      dst_mode_valid = 1;
++	      dst_mode = dst_sb.st_mode;
++
++	      if (chmod (dst_name, dst_mode | S_IRWXU))
++	        {
++		  error (0, errno, _("setting permissions for %s"),
++		         quote (dst_name));
++		  goto un_backup;
++		}
++	    }
++
+ 	  /* Insert the created directory's inode and device
+              numbers into the search structure, so that we can
+              avoid copying it again.  */
+@@ -1515,23 +1539,24 @@
+ 	  goto un_backup;
+ 	}
+     }
+-  else if (S_ISREG (src_type)
+-	   || (x->copy_as_regular && !S_ISLNK (src_type)))
++  else if (S_ISREG (src_mode)
++	   || (x->copy_as_regular && !S_ISDIR (src_mode)
++	       && !S_ISLNK (src_mode)))
+     {
+       copied_as_regular = true;
+       /* POSIX says the permission bits of the source file must be
+ 	 used as the 3rd argument in the open call, but that's not consistent
+ 	 with historical practice.  */
+       if (! copy_reg (src_name, dst_name, x,
+-		      get_dest_mode (x, src_mode), &new_dst, &chown_succeeded,
++		      src_mode, &new_dst, &chown_succeeded,
+ 		      &src_sb, &dst_sb))
+ 	goto un_backup;
+     }
+   else
+ #ifdef S_ISFIFO
+-  if (S_ISFIFO (src_type))
++  if (S_ISFIFO (src_mode))
+     {
+-      if (mkfifo (dst_name, get_dest_mode (x, src_mode)))
++      if (mkfifo (dst_name, src_mode))
+ 	{
+ 	  error (0, errno, _("cannot create fifo %s"), quote (dst_name));
+ 	  goto un_backup;
+@@ -1539,10 +1564,10 @@
+     }
+   else
+ #endif
+-    if (S_ISBLK (src_type) || S_ISCHR (src_type)
+-	|| S_ISSOCK (src_type))
++    if (S_ISBLK (src_mode) || S_ISCHR (src_mode)
++	|| S_ISSOCK (src_mode))
+     {
+-      if (mknod (dst_name, get_dest_mode (x, src_mode), src_sb.st_rdev))
++      if (mknod (dst_name, src_mode, src_sb.st_rdev))
+ 	{
+ 	  error (0, errno, _("cannot create special file %s"),
+ 		 quote (dst_name));
+@@ -1551,7 +1576,7 @@
+     }
+   else
+ #ifdef S_ISLNK
+-  if (S_ISLNK (src_type))
++  if (S_ISLNK (src_mode))
+     {
+       char *src_link_val = xreadlink (src_name, src_sb.st_size);
+       if (src_link_val == NULL)
+@@ -1654,6 +1679,25 @@
+   if (!(copied_as_regular && HAVE_FCHOWN) && x->preserve_ownership
+       && (new_dst || !SAME_OWNER_AND_GROUP (src_sb, dst_sb)))
+     {
++      /* The chown() system call may clear the SUID and SGID bits, so we
++         need to set them again later. (But we don't care if we will
++	 overwrite the permissions of the destination file anyway.)  */
++	 
++      if ((src_mode & (S_ISUID | S_ISGID))
++	  && !x->preserve_mode && !x->move_mode && !x->set_mode)
++	{
++	  if (lstat (dst_name, &dst_sb))
++	    {
++	      error (0, errno, _("cannot stat %s"), quote (dst_name));
++	      delayed_ok = false;
++	    }
++	  else
++	    {
++	      dst_mode_valid = 1;
++	      dst_mode = dst_sb.st_mode;
++	    }
++	}
++
+       if (chown (dst_name, src_sb.st_uid, src_sb.st_gid) == 0)
+ 	chown_succeeded = true;
+       else if (! chown_failure_ok (x))
+@@ -1682,21 +1726,23 @@
+   }
+ #endif
+ 
+-  /* Permissions of newly-created regular files are set by open and/or fchmod
+-     in copy_reg.  But don't return early if there were any special bits and
+-     chown succeeded, because the chown must have reset those bits.  */
+-  if (copied_as_regular
+-      && (HAVE_FCHMOD
+-	  || (new_dst && !(chown_succeeded && (src_mode & ~S_IRWXUGO)))))
+-    return delayed_ok;
+-
+-  if ((x->preserve_mode || new_dst)
+-      && (x->copy_as_regular || S_ISREG (src_type) || S_ISDIR (src_type)))
++  if (x->preserve_mode || x->move_mode)
+     {
+-      if (chmod (dst_name, get_dest_mode (x, src_mode)) != 0)
+-	{
+-	  error (0, errno, _("setting permissions for %s"), quote (dst_name));
+-	  if (x->set_mode || x->require_preserve)
++      if (copy_acl (src_name, dst_name, src_mode) && x->require_preserve)
++	return false;
++    }
++  else if (x->set_mode)
++    {
++      if (set_acl (dst_name, x->mode) && x->require_preserve)
++	return false;
++    }
++  else if (dst_mode_valid)
++    {
++      if (chmod (dst_name, dst_mode))
++        {
++	  error (0, errno, _("preserving permissions for %s"),
++	         quote (dst_name));
++	  if (x->require_preserve)
+ 	    return false;
+ 	}
+     }
+--- coreutils-5.92/src/Makefile.am.acl	2005-09-29 11:28:37.000000000 +0100
++++ coreutils-5.92/src/Makefile.am	2005-10-27 11:44:29.000000000 +0100
+@@ -50,9 +50,9 @@
+ LDADD = ../lib/libcoreutils.a $(LIBINTL) ../lib/libcoreutils.a
+ 
+ # for eaccess in lib/euidaccess.c.
+-cp_LDADD = $(LDADD) $(LIB_EACCESS)
+-ginstall_LDADD = $(LDADD) $(LIB_EACCESS)
+-mv_LDADD = $(LDADD) $(LIB_EACCESS)
++cp_LDADD = $(LDADD) $(LIB_EACCESS) @LIBACL@
++ginstall_LDADD = $(LDADD) $(LIB_EACCESS) @LIBACL@
++mv_LDADD = $(LDADD) $(LIB_EACCESS) @LIBACL@
+ pathchk_LDADD = $(LDADD) $(LIB_EACCESS)
+ rm_LDADD = $(LDADD) $(LIB_EACCESS)
+ test_LDADD = $(LDADD) $(LIB_EACCESS)
+@@ -61,11 +61,11 @@
+ 
+ # for clock_gettime and fdatasync
+ dd_LDADD = $(LDADD) $(LIB_GETHRXTIME) $(LIB_FDATASYNC)
+-dir_LDADD = $(LDADD) $(LIB_CLOCK_GETTIME)
+-ls_LDADD = $(LDADD) $(LIB_CLOCK_GETTIME)
++dir_LDADD = $(LDADD) $(LIB_CLOCK_GETTIME) @LIBACL@
++ls_LDADD = $(LDADD) $(LIB_CLOCK_GETTIME) @LIBACL@
+ pr_LDADD = $(LDADD) $(LIB_CLOCK_GETTIME)
+ shred_LDADD = $(LDADD) $(LIB_GETHRXTIME) $(LIB_FDATASYNC)
+-vdir_LDADD = $(LDADD) $(LIB_CLOCK_GETTIME)
++vdir_LDADD = $(LDADD) $(LIB_CLOCK_GETTIME) @LIBACL@
+ 
+ ## If necessary, add -lm to resolve use of pow in lib/strtod.c.
+ sort_LDADD = $(LDADD) $(POW_LIB)
+--- coreutils-5.92/configure.ac.acl	2005-10-22 19:12:36.000000000 +0100
++++ coreutils-5.92/configure.ac	2005-10-27 11:44:30.000000000 +0100
+@@ -251,6 +251,8 @@
+ AM_GNU_GETTEXT([external], [need-ngettext])
+ AM_GNU_GETTEXT_VERSION(0.13.1)
+ 
++ag_POSIX_ACL
++
+ AC_CONFIG_FILES(
+   Makefile
+   doc/Makefile
+--- coreutils-5.92/config.hin.acl	2005-10-22 19:14:08.000000000 +0100
++++ coreutils-5.92/config.hin	2005-10-27 11:44:30.000000000 +0100
+@@ -101,6 +101,30 @@
+ /* Define to 1 if you have the `acl' function. */
+ #undef HAVE_ACL
+ 
++/* Define to 1 if you have the `acl_delete_def_file' function. */
++#undef HAVE_ACL_DELETE_DEF_FILE
++
++/* Define to 1 if you have the `acl_entries' function. */
++#undef HAVE_ACL_ENTRIES
++
++/* Define to 1 if you have the `acl_extended_file' function. */
++#undef HAVE_ACL_EXTENDED_FILE
++
++/* Define to 1 if you have the `acl_free' function. */
++#undef HAVE_ACL_FREE
++
++/* Define to 1 if you have the `acl_from_text' function. */
++#undef HAVE_ACL_FROM_TEXT
++
++/* Define to 1 if you have the `acl_get_file' function. */
++#undef HAVE_ACL_GET_FILE
++
++/* Define to 1 if you have the `acl_set_file' function. */
++#undef HAVE_ACL_SET_FILE
++
++/* Define to 1 if you have the `acl_to_text' function. */
++#undef HAVE_ACL_TO_TEXT
++
+ /* Define to 1 if you have the `alarm' function. */
+ #undef HAVE_ALARM
+ 
+@@ -589,6 +613,9 @@
+ /* Define to 1 if you have the `lchown' function. */
+ #undef HAVE_LCHOWN
+ 
++/* Define to 1 if you have the `acl' library (-lacl). */
++#undef HAVE_LIBACL
++
+ /* Define to 1 if you have the `dgc' library (-ldgc). */
+ #undef HAVE_LIBDGC
+ 
+@@ -1496,6 +1523,9 @@
+    safe for multithreaded apps. */
+ #undef USE_UNLOCKED_IO
+ 
++/* Define if you want access control list support. */
++#undef USE_ACL
++
+ /* Version number of package */
+ #undef VERSION
+ 
+--- coreutils-5.92/NEWS.acl	2005-10-22 19:11:56.000000000 +0100
++++ coreutils-5.92/NEWS	2005-10-27 11:44:30.000000000 +0100
+@@ -1,3 +1,6 @@
++[4.5.3acl]
++* ACL framework and Linux ACL support.
++* `cp -p' and `mv' now preserve ACLs
+ GNU coreutils NEWS                                    -*- outline -*-
+ 
+ * Major changes in release 5.92 (2005-10-22) [stable]
+--- coreutils-5.92/ChangeLog.acl	2005-10-22 19:12:51.000000000 +0100
++++ coreutils-5.92/ChangeLog	2005-10-27 11:44:30.000000000 +0100
+@@ -0,0 +1,45 @@
++2002-07-01  Bernhard Rosenkraenzer <bero@bero.org>
++	* Port the following patch to 4.1.9:
++
++2002-04-10  Andreas Gruenbacher  <a.gruenbacher@computer.org>
++
++	* Version 4.1.8acl.
++
++	* src/copy.c (get_dest_mode): Remove.
++	* src/copy.c (copy_internal): Merge src_mode and src_type.
++	* src/copy.c (copy_internal): Add dst_mode and dst_mode_valid,
++	which are set when the destination file mode is changed temporarily.
++	* src/copy.c (copy_internal): Check effective permissions after
++	mkdir(). Add S_IRWXU only after saving the default permissions, so
++	the default permissions can be restored. This is needed with
++	default ACLs on some systems.
++	* src/copy.c (copy_internal): Use dst_mode and dst_mode_valid for
++	ran_chown. Save the current permissions if needed before chown().
++	* src/copy.c (copy_internal): Clean up the final permission setting
++	code and prepare for copy/set ACL support.
++	* src/cp.c, src/install.c, src/mv.c, src/copy.h: Remove umask_kill,
++	and never change the startup umask. The functions creating files need
++	the original umask to be active to create the correct permissions
++	inside directories with default ACLs; umask_kill no longer works.
++	* src/cp.c (struct dir_attr, re_protect, make_path_private): Remove
++	is_new_dir and add mode and mode_valid instead.
++	* src/cp.c (make_path_private): Remove the mode parameter. Pass in
++	cp_options, instead of cp_options->xstat only. Stat the source dir,
++	and create the destination dir with the source dir's mode as create
++	mode (see analog change to src/copy.c (copy_internal)). Check if the
++	effective permissions include S_IRWXU. Remember the original code only
++	if needed later.
++	* lib/acl.h, lib/acl.c (copy_acl, set_acl): Add these functions,
++	initially with the bare non-ACL functionality.
++	* src/copy.c (copy_internal): Use copy_acl and set_acl instead of chmod.
++	* src/cp.c (re_protect): Use copy_acl instead of chmod.
++	* m4/posix_acl.m4, configure.ac (ag_POSIX_ACL): Add POSIX ACL tests.
++	* lib/acl.h: Remove HAVE_ACL symbol; <sys/acl.h> is needed for POSIX
++	ACLs even if there is no acl system call.
++	* lib/acl.c (ENOTSUP): Provide default value.
++	* lib/acl.c (file_has_acl, copy_acl, set_acl): Add Linux ACL
++	implementations.
++	* src/ls.c: change `HAVE_ACL' to `HAVE_ACL || USE_ACL' for POSIX ACLs:
++	there is no acl system call for POSIX ACLs.
++	* tests/misc: Add my own small test suite so it doesn't get lost.
++

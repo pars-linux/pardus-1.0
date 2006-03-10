@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>db4</Name>
+        <Homepage>http://www.sleepycat.com/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>DB</License>
+        <IsA>app:console</IsA>
+        <Summary>Berkeley DB</Summary>
+        <Description>Berkeley DB</Description>
+        <Summary xml:lang="tr">Berkeley Veritabanı</Summary>
+        <Description xml:lang="tr">Berkeley veritabanı, geleneksel istemci/sunucu uygulamaları için gömülü veritabanı desteği veren programlanabilir bir araç kit'idir. Veritabanı B+tree, genişletilmiş lineer özetleme (extended linear hashing), sabit ve değişken uzunlukta kayıt erişim methodları, işlem hareketleri, kilitleme, loglama, paylaşımlı hafıza ön bellekleme (shared memory caching) ve veritabanı kurtarma özelliklerini içerir. Berkeley veritabanı ayrıca C, C++, Java ve Perl API'lerini de desteklemektedir.</Description>
+        <Archive sha1sum="12d21a58efd7b5fd35b56815a8fb1ac2cbab2e5c" type="targz">ftp://ftp.sleepycat.com/releases/db-4.2.52.tar.gz</Archive>
+        <Patches>
+            <Patch>patch.4.2.52.1</Patch>
+            <Patch>patch.4.2.52.2</Patch>
+            <Patch>patch.4.2.52.4</Patch>
+            <Patch level="1">db-4.0.14-fix-dep-link.patch</Patch>
+            <Patch level="1">db-4.2-libtool.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>db4</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>db4-doc</Name>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-12-07</Date>
+            <Version>4.2.52_p4</Version>
+            <Comment>Sync with offical patches (http://www.sleepycat.com/update/4.2.52/patch.4.2.52.html)</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-14</Date>
+            <Version>4.2.52_p2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

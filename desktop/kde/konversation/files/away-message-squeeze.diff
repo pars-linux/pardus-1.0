@@ -1,0 +1,19 @@
+--- konversation-0.18konversation/src/query.cpp	2005-06-07 09:34:47.000000000 +0300
++++ konversation-fixed/konversation/src/query.cpp	2005-12-25 02:04:01.000000000 +0200
+@@ -25,6 +25,7 @@
+ #include <kstandarddirs.h>
+ #include <kdebug.h>
+ #include <kmessagebox.h>
++#include <kstringhandler.h>
+ 
+ #include "channel.h"
+ #include "query.h"
+@@ -306,7 +307,7 @@
+       text += " - ";
+     text += m_nickInfo->getHostmask();
+     if(m_nickInfo->isAway() )
+-      text += " (" + m_nickInfo->getAwayMessage() + ") ";
++      text += " (" + KStringHandler::rsqueeze(m_nickInfo->getAwayMessage(),100) + ") ";
+     queryHostmask->setText(Konversation::removeIrcMarkup(text));
+  
+     KABC::Picture pic = m_nickInfo->getAddressee().photo();

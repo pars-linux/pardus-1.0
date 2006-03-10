@@ -1,0 +1,36 @@
+--- unzip-5.52/unix/unix.c	2005-02-26 19:43:42.000000000 +0000
++++ unzip/unix/unix.c	2005-10-27 07:58:09.000000000 +0000
+@@ -1042,6 +1042,16 @@
+     ush z_uidgid[2];
+     int have_uidgid_flg;
+ 
++/*---------------------------------------------------------------------------
++    Change the file permissions from default ones to those stored in the
++    zipfile.
++  ---------------------------------------------------------------------------*/
++	  
++#ifndef NO_CHMOD
++    if (fchmod(fileno(G.outfile), 0xffff & G.pInfo->file_attr))
++        perror("chmod (file attributes) error");
++#endif
++
+     fclose(G.outfile);
+ 
+ /*---------------------------------------------------------------------------
+@@ -1151,16 +1161,6 @@
+ #endif /* ?AOS_VS */
+     }
+ 
+-/*---------------------------------------------------------------------------
+-    Change the file permissions from default ones to those stored in the
+-    zipfile.
+-  ---------------------------------------------------------------------------*/
+-
+-#ifndef NO_CHMOD
+-    if (chmod(G.filename, filtattr(__G__ G.pInfo->file_attr)))
+-        perror("chmod (file attributes) error");
+-#endif
+-
+ } /* end function close_outfile() */
+ 
+ #endif /* !MTS */

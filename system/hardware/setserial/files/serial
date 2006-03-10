@@ -1,0 +1,51 @@
+#!/sbin/runscript
+# Copyright © 2005  TUBITAK/UEKAE
+# Licensed under the GNU General Public License, version 2.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+#
+# Original work belongs Gentoo Linux
+
+depend() {
+	need localmount
+}
+
+moduleinserted() {
+	local res=$(grep 'serial' /proc/modules | cut -f1 -d" ")
+	[[ ${res} == "serial" ]] && return 1
+}
+
+setports() {
+	#if serial module exists, and it's not inserted, insert it permanently
+	if [[ -f /lib/modules/$(uname -r)/misc/serial.o ]] ; then
+		moduleinserted
+		if [[ $? -eq 0 ]] ; then
+			/sbin/insmod serial 1>&2
+		fi
+	fi
+
+	if [[ -e /etc/serial.conf ]] ; then
+		grep -v "^#\|^ \|^$" /etc/serial.conf | while read device args
+		do
+			ebegin "Setting $device to $args"
+			${SETSERIAL} -b $device $args 1>&2
+			if [[ $? -gt 0 ]] ; then
+				eend 1 "Error setting serial port $device $args"
+				no_errs=0
+			else
+				eend 0
+				done="${done} /dev/$1"
+			fi
+		done
+	fi
+}
+
+start() {
+	SETSERIAL="/bin/setserial"
+	no_errs=1
+	done=""
+	setports
+	return
+}
+
+
+# vim:ts=4

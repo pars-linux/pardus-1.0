@@ -1,0 +1,20 @@
+(#70712) Enable deadkeys for gb keymap.
+-Donnie Berkholz <spyderous@gentoo.org>
+
+diff -urN xc.orig/programs/xkbcomp/symbols/pc/gb xc/programs/xkbcomp/symbols/pc/gb
+--- xc.orig/programs/xkbcomp/symbols/pc/gb	2004-04-23 12:54:55.000000000 -0700
++++ xc/programs/xkbcomp/symbols/pc/gb	2005-01-12 19:39:23.024005776 -0800
+@@ -59,3 +59,13 @@
+ 
+     include "level3(ralt_switch_multikey)"
+ };
++
++partial alphanumeric_keys
++xkb_symbols "nodeadkeys" {
++
++    // modify the default GB layout to not have any dead keys
++
++    include "pc/latin(nodeadkeys)"
++    include "pc/gb(basic)"
++
++};

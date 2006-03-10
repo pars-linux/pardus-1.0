@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>usbutils</Name>
+        <Homepage>http://usb.cs.tum.edu/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>USB enumeration utilities</Summary>
+        <Summary xml:lang="tr">USB listeleme araçları</Summary>
+        <Description>USB enumeration utilities</Description>
+        <Description xml:lang="tr">Bu paketteki uygulamalar USB veriyolundaki aygıt ağacını gösterir. Takılı olan aygıtların grafik sunumunu gösterir, USB veri yolunun topolojisini göstermektedir. Ayrıca takılı olan her bir özgün aygıt için bilgi de verir.</Description>
+        <Archive sha1sum="6e4a3ae72de11c40d90c4cf472ad09e0a80f178c" type="targz">http://downloads.openwrt.org/sources/usbutils-0.71.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libusb</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>usbutils</Name>
+        <Files>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/misc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-19</Date>
+            <Version>0.71</Version>
+            <Comment>Version bump</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-15</Date>
+            <Version>0.11</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

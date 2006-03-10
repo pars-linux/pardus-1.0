@@ -1,0 +1,42 @@
+backport fix from gcc-4 branch
+http://bugs.gentoo.org/102244
+http://gcc.gnu.org/bugzilla/show_bug.cgi?id=18300
+
+2004-11-13  Zak Kipling  <zak@transversal.com>
+
+	PR target/18300
+	* config/i386/i386.c (classify_argument): Fix infinite loop when
+	passing object with 3 or more base classes by value.
+
+--- gcc/gcc/config/i386/i386.c
++++ gcc/gcc/config/i386/i386.c
+@@ -2026,11 +2026,11 @@ classify_argument (enum machine_mode mod
+ 	    {
+ 	      tree bases = TYPE_BINFO_BASETYPES (type);
+ 	      int n_bases = TREE_VEC_LENGTH (bases);
+-	      int i;
++	      int basenum;
+ 
+-	      for (i = 0; i < n_bases; ++i)
++	      for (basenum = 0; basenum < n_bases; ++basenum)
+ 		{
+-		   tree binfo = TREE_VEC_ELT (bases, i);
++		   tree binfo = TREE_VEC_ELT (bases, basenum);
+ 		   int num;
+ 		   int offset = tree_low_cst (BINFO_OFFSET (binfo), 0) * 8;
+ 		   tree type = BINFO_TYPE (binfo);
+@@ -2114,11 +2114,11 @@ classify_argument (enum machine_mode mod
+ 	    {
+ 	      tree bases = TYPE_BINFO_BASETYPES (type);
+ 	      int n_bases = TREE_VEC_LENGTH (bases);
+-	      int i;
++	      int basenum;
+ 
+-	      for (i = 0; i < n_bases; ++i)
++	      for (basenum = 0; basenum < n_bases; ++basenum)
+ 		{
+-		   tree binfo = TREE_VEC_ELT (bases, i);
++		   tree binfo = TREE_VEC_ELT (bases, basenum);
+ 		   int num;
+ 		   int offset = tree_low_cst (BINFO_OFFSET (binfo), 0) * 8;
+ 		   tree type = BINFO_TYPE (binfo);

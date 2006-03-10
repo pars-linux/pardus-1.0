@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>users-kga</Name>
+        <Homepage>http://www.uludag.org.tr/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary xml:lang="en">User Management GUI</Summary>
+        <Description xml:lang="en">User Management GUI</Description>
+        <Summary xml:lang="tr">Kullanıcı Yönetim Arayüzü</Summary>
+        <Description xml:lang="tr">Kullanıcı yönetimi için grafik bir arayüz</Description>
+        <Archive sha1sum="0a0b84dc945d103859d588cb22039e1e213c9a20" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/users-kga-0.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>python</Dependency>
+            <Dependency>PyQt</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>PyKDE</Dependency>
+            <Dependency>PyKDEeXtensions</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>rootmode.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>users-kga</Name>
+        <RuntimeDependencies>
+            <Dependency>PyQt</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>PyKDE</Dependency>
+            <Dependency>PyKDEeXtensions</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="library">/usr/kde/3.5/lib/kde3</Path>
+            <Path fileType="localedata">/usr/kde/3.5/share/locale</Path>
+            <Path fileType="data">/usr/kde/3.5/share/applications/kde</Path>
+            <Path fileType="data">/usr/kde/3.5/share/apps/users_kga</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-26</Date>
+            <Version>0.1</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

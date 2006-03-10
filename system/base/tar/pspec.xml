@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>tar</Name>
+        <Homepage>http://www.gnu.org/software/tar/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Use this to make tarballs :)</Summary>
+        <Description>Use this to make tarballs :)</Description>
+        <Summary xml:lang="tr">Tar arşivleri üretmek için kullanılır.</Summary>
+        <Description xml:lang="tr">Bu uygulama yardımı ile birden fazla dosya ya da dizin tek bir arşiv dosyası haline getirilebilir ve bir arşiv içerisindeki dosyalar teker teker geri yükleyebilir.</Description>
+        <Archive sha1sum="f861b7524a0867833056dc382e68085234cae6ff" type="tarbz2">http://ftp.gnu.org/gnu/tar/tar-1.15.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>gzip</Dependency>
+            <Dependency>bzip2</Dependency>
+            <Dependency>ncompress</Dependency>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>1.15.1-flex-arg.patch</Patch>
+            <Patch level="1">tar-1.15.1-gcc4-test.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>tar</Name>
+        <RuntimeDependencies>
+            <Dependency>gzip</Dependency>
+            <Dependency>bzip2</Dependency> 
+            <Dependency>ncompress</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="doc">/usr/share/locale</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/man/man1/tar.1">tar.1</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-15</Date>
+            <Version>1.15.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

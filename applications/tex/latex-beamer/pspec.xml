@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>latex-beamer</Name>
+        <Homepage>http://latex-beamer.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>plugin</IsA>
+        <Summary>LaTeX class for creating presentations using a video projector.</Summary>
+        <Summary xml:lang="tr">Video yansıtıcı kullanarak sunumlar yaratmak için bir LaTeX sınıfı</Summary>
+        <Description>The beamer class is a LaTeX class that allows you to create a beamer presentation. It can also be used to create slide
+s.</Description>
+        <Description xml:lang="tr">Video yansıtıcı kullanarak sunumlar veya slayt yaratmak için bir LaTeX sınıfı</Description>
+        <Archive sha1sum="021c7840bc5c0d15a54cc7d022317e6e5abee9be" type="targz">http://optusnet.dl.sourceforge.net/sourceforge/latex-beamer/latex-beamer-3.06.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>tetex-texmf</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>latex-beamer</Name>
+        <RuntimeDependencies>
+            <Dependency>tetex-texmf</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-30</Date>
+            <Version>3.06</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

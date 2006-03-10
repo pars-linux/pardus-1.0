@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>IP-Country</Name>
+        <Homepage>http://search.cpan.org/~nwetters/IP-Country-2.20/lib/IP/Country.pm</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Summary>Fast lookup of country codes from IP addresses</Summary>
+        <Description>Fast lookup of country codes from IP addresses</Description>
+        <Summary xml:lang="tr">IP adreslerinden ülke kodlarına erişim için kullanılan bir kütüphane</Summary>
+        <Description xml:lang="tr">IP adreslerinden ülke kodlarına erişim için kullanılan bir kütüphane</Description>
+        <Archive sha1sum="b051b02f7885ea5156ec25c9c334f03ffbcc799d" type="targz">http://search.cpan.org/CPAN/authors/id/N/NW/NWETTERS/IP-Country-2.20.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </BuildDependencies>        
+    </Source>
+
+    <Package>
+        <Name>IP-Country</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-10</Date>
+            <Version>2.20</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

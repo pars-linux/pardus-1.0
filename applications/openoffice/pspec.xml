@@ -1,0 +1,179 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>openoffice</Name>
+        <Homepage>http://www.openoffice.org</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL</License>
+        <IsA>app:gui</IsA>
+        <Summary>OpenOffice.org office suite</Summary>
+        <Summary xml:lang="tr">OpenOffice.org Türkçe ofis yazılımı</Summary>
+        <Description>OpenOffice.org the product is a multi-platform office productivity suite. It includes the key desktop applications, such as a word processor, spreadsheet, presentation manager, and drawing program, with a user interface and feature set similar to other office suites. Sophisticated and flexible, OpenOffice.org also works transparently with a variety of file formats, including those of Microsoft Office.</Description>
+        <Description xml:lang="tr">OpenOffice.org, pek çok farklı işletim sisteminde çalışabilen açık kaynak kodlu bir yazılım projesidir. OpenOffice.org'un tüm arayüzleri ve XML tabanlı dosya biçimi açık standartlara sahiptir. OpenOffice.org ürünleri olan kelime işlemci, hesap tablosu, sunum ve çizim programları, her zaman alışılan ofis programlarıyla tam uyumluluk sağlar. 
+        </Description>
+        <Archive sha1sum="7b1ed8d868cf4549321da9011a25d4bc427070db" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/ooo-build-2.0.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>Archive-Zip</Dependency>
+            <Dependency>ant</Dependency>
+            <!-- FIXME: VirtualDependency -->
+            <Dependency versionFrom="1.4.2.03">blackdown-jdk</Dependency>
+            <Dependency>expat</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency>curl</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency>libsndfile</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>firefox-devel</Dependency>
+            <Dependency>tcsh</Dependency>
+            <Dependency>neon</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>wget</Dependency>
+            <Dependency>perl</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>zip</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>cups</Dependency>
+            <Dependency>pam</Dependency>
+            <Dependency>agg</Dependency>
+            <Dependency>startup-notification-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+   
+    <Package>
+        <Name>openoffice-clipart</Name>
+        <Files>
+            <Path fileType="data">/opt/OpenOffice.org/lib/ooo-2.0/share/gallery/openclipart</Path>
+        </Files>
+    </Package>
+         
+    <Package>
+        <Name>openoffice</Name>
+        <RuntimeDependencies>
+            <!-- FIXME: VirtualDependency -->
+            <Dependency>blackdown-jre</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency>libsndfile</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>firefox</Dependency>
+            <Dependency>neon</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>cups</Dependency>
+            <Dependency>agg</Dependency>
+            <Dependency>zemberek-server</Dependency>
+            <Dependency>kio-to-local</Dependency>
+            <Dependency>startup-notification</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/opt/OpenOffice.org/bin</Path>
+            <Path fileType="library">/opt/OpenOffice.org/lib/ooo-2.0</Path>
+            <Path fileType="man">/opt/OpenOffice.org/man</Path>
+            <Path fileType="executable">/opt/OpenOffice.org/sbin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="data">/usr/bin</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/applications/ooo-database.desktop" permission="0644" owner="root">database.desktop</AdditionalFile>
+            <AdditionalFile target="/usr/share/applications/ooo-drawing.desktop" permission="0644" owner="root">drawing.desktop</AdditionalFile>
+            <AdditionalFile target="/usr/share/applications/ooo-formula.desktop" permission="0644" owner="root">formula.desktop</AdditionalFile>
+            <AdditionalFile target="/usr/share/applications/ooo-presentation.desktop" permission="0644" owner="root">presentation.desktop</AdditionalFile>
+            <AdditionalFile target="/usr/share/applications/ooo-spreadsheet.desktop" permission="0644" owner="root">spreadsheet.desktop</AdditionalFile>
+            <AdditionalFile target="/usr/share/applications/ooo-textdoc.desktop" permission="0644" owner="root">textdoc.desktop</AdditionalFile>
+            <AdditionalFile target="/etc/preload.d/OpenOffice.preload_phase2" permission="0644" owner="root">OpenOffice.preload_phase2</AdditionalFile>
+            <AdditionalFile target="/opt/OpenOffice.org/lib/ooo-2.0/share/psprint/psprint.conf" permission="0644" owner="root">psprint.conf</AdditionalFile>
+            <AdditionalFile target="/opt/OpenOffice.org/bin/ooo-wrapper2.0" permission="0755" owner="root">pardus-wrapper</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+    
+    <History>
+        <Update release="10">
+            <Date>2005-12-24</Date>
+            <Version>2.0.1</Version>
+            <Comment>2.0.1 final stable release</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="9">
+            <Date>2005-12-20</Date>
+            <Version>2.0.1_m1</Version>
+            <Comment>Version bump</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="8">
+            <Date>2005-12-07</Date>
+            <Version>2.0.1_rc1</Version>
+            <Comment>Version bump</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="7">
+            <Date>2005-12-05</Date>
+            <Version>2.0.0</Version>
+            <Comment>Split OO.org and its clipart</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-12-02</Date>
+            <Version>2.0.0</Version>
+            <Comment>Add media:/, system:/ kioslave support</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-11-20</Date>
+            <Version>2.0.0</Version>
+            <Comment>Fix not starting unless run as root once</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-11-01</Date>
+            <Version>2.0.0</Version>
+            <Comment>Install symlinks under /usr/bin</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-01</Date>
+            <Version>2.0.0</Version>
+            <Comment>Add preload support for rootfs 0.2</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-26</Date>
+            <Version>2.0.0</Version>
+            <Comment>Fix installation of clipart</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-14</Date>
+            <Version>2.0.0</Version>
+            <Comment>Initial import</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

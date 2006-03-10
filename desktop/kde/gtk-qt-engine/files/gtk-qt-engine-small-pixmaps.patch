@@ -1,0 +1,286 @@
+diff -pruN gtk-qt-engine-old/src/qt_qt_wrapper.cpp gtk-qt-engine/src/qt_qt_wrapper.cpp
+--- gtk-qt-engine-old/src/qt_qt_wrapper.cpp	2005-02-23 11:57:22.000000000 +0100
++++ gtk-qt-engine/src/qt_qt_wrapper.cpp	2005-09-07 18:16:51.573554934 +0200
+@@ -528,6 +528,9 @@ void drawButton(GdkWindow* window, GtkSt
+ 	if (!gtkQtEnable)
+ 		return;
+ 	
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	QPixmap     pixmap(w, h);
+ 	QPainter    painter(&pixmap);
+ 	QPushButton button(meepWidget);	
+@@ -577,6 +580,10 @@ void drawToolbar(GdkWindow* window, GtkS
+ 		h1 = h * 3;
+ 	}
+ 
++	if ((w1 < 1) || (h1 < 1) ||
++	    (w < 1) || (h < 1))
++		return;
++
+ 	QPixmap     pixmap(w1, h1);
+ 	QPixmap     p(w, h);
+ 	QPainter    painter(&pixmap);
+@@ -628,6 +635,10 @@ void drawMenubar(GdkWindow* window, GtkS
+ 		h1 = h * 3;
+ 	}
+ 
++	if ((w1 < 1) || (h1 < 1) ||
++	    (w < 1) || (h < 1))
++		return;
++
+ 	QPixmap     pixmap(w1, h1);
+ 	QPixmap     p(w, h);
+ 	QPainter    painter(&pixmap);
+@@ -652,6 +663,9 @@ void drawTab(GdkWindow* window, GtkStyle
+ 	if (!gtkQtEnable)
+ 		return;
+ 
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	QPixmap pixmap(w,h);
+ 	QPainter painter(&pixmap);
+ 	
+@@ -685,6 +699,9 @@ void drawVLine(GdkWindow* window, GtkSty
+ 	
+ 	if (width < 2) width = 2;
+ 
++	if ((width < 1) || (height < 1))
++		return;
++
+ 	QPixmap pixmap(width, height);
+ 	QPainter painter(&pixmap);
+ 
+@@ -707,6 +724,9 @@ void drawHLine(GdkWindow* window, GtkSty
+ 	int width = abs(xSource-xDest);
+ 	int height = style->ythickness;
+ 
++	if ((width < 1) || (height < 1))
++		return;
++
+ 	QPixmap pixmap(width, height);
+ 	QPainter painter(&pixmap);
+ 
+@@ -726,6 +746,9 @@ void drawLineEdit(GdkWindow* window, Gtk
+ 	if (!gtkQtEnable)
+ 		return;
+ 
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	QPixmap pixmap(w, h);
+ 	QPainter painter(&pixmap);
+ 
+@@ -773,6 +796,9 @@ void drawComboBox(GdkWindow* window, Gtk
+ 	if (!gtkQtEnable)
+ 		return;
+ 
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	QPixmap pixmap(w,h);
+ 	QPainter painter(&pixmap);
+ 	QComboBox cb(false, 0);
+@@ -801,6 +827,9 @@ void drawCheckBox(GdkWindow* window, Gtk
+ 	int realH = qApp->style().pixelMetric(QStyle::PM_IndicatorHeight);
+ 	int realW = qApp->style().pixelMetric(QStyle::PM_IndicatorWidth);
+ 
++	if ((realW < 1) || (realH < 1))
++		return;
++
+ 	QPixmap pixmap(realW, realH);
+ 	QPainter painter(&pixmap);
+ 	QCheckBox checkbox(0);
+@@ -834,6 +863,9 @@ void drawMenuCheck(GdkWindow* window, Gt
+ 	int w1 = checkbox.sizeHint().width();
+ 	int h1 = checkbox.sizeHint().height(); */
+ 
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	QPixmap pixmap(w,h);
+ 	QPainter painter(&pixmap);
+ 
+@@ -864,6 +896,9 @@ void drawRadioButton(GdkWindow* window, 
+ 	int realH = qApp->style().pixelMetric(QStyle::PM_IndicatorHeight);
+ 	int realW = qApp->style().pixelMetric(QStyle::PM_IndicatorWidth);
+ 
++	if ((realW < 1) || (realH < 1))
++		return;
++
+ 	QPixmap pixmap(realH, realW);
+ 	QPainter painter(&pixmap);
+ 	QRadioButton radio(0);
+@@ -896,6 +931,9 @@ void drawScrollBarSlider(GdkWindow* wind
+ 	if (!gtkQtEnable)
+ 		return;
+ 	
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	QPixmap pixmap(w, h);
+ 	QPainter painter(&pixmap);
+ 	
+@@ -915,6 +953,9 @@ void drawScrollBar(GdkWindow* window, Gt
+ 	if (!gtkQtEnable)
+ 		return;
+ 	
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	if (scrollBar != 0)
+ 		delete scrollBar;
+ 	scrollBar = new QScrollBar(NULL);
+@@ -955,6 +996,8 @@ void drawScrollBar(GdkWindow* window, Gt
+ 				scrollBar, QStyle::SC_ScrollBarSlider);
+ 		offset = r.y();
+ 		thumbSize = r.height();
++                if (thumbSize < 0)
++                  thumbSize = -thumbSize;
+ 		
+ 		if (!r.isValid()) // Fix a crash bug in Eclipse where it was trying to draw tiny scrollbars.
+ 			return;
+@@ -978,6 +1021,8 @@ void drawScrollBar(GdkWindow* window, Gt
+ 				scrollBar, QStyle::SC_ScrollBarSlider);
+ 		offset = r.x();
+ 		thumbSize = r.width();
++		if (thumbSize < 0)
++		  thumbSize = -thumbSize;
+ 
+ 		if (!r.isValid()) // Fix a crash bug in Eclipse when it was trying to draw tiny scrollbars.
+ 			return;
+@@ -1007,6 +1052,9 @@ void drawToolButton(GdkWindow* window, G
+ 	if (!gtkQtEnable)
+ 		return;
+ 
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	QToolButton button(NULL);
+ 	button.resize(w, h);
+ 	
+@@ -1043,6 +1091,9 @@ void drawMenuBarItem(GdkWindow* window, 
+ 	if (!gtkQtEnable)
+ 		return;
+ 
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	QPixmap pixmap(w, h);
+ 	QPainter painter(&pixmap);
+ 	QMenuItem mi;
+@@ -1062,6 +1113,9 @@ void drawMenuItem(GdkWindow* window, Gtk
+ 	if (!gtkQtEnable)
+ 		return;
+ 	
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	QPixmap pixmap(w,h);
+ 	QPainter painter(&pixmap);
+ 	QPopupMenu pm;
+@@ -1084,6 +1138,9 @@ void drawSplitter(GdkWindow* window, Gtk
+ 	if (!gtkQtEnable)
+ 		return;
+ 
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	QPixmap pixmap(w,h);
+ 	QPainter painter(&pixmap);
+ 
+@@ -1104,6 +1161,9 @@ void drawTabFrame(GdkWindow* window, Gtk
+ 	if (!gtkQtEnable)
+ 		return;
+ 	
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	QStyle::SFlags sflags = stateToSFlags(state);
+ 		
+ 	QPixmap pixmap(w, h);
+@@ -1123,9 +1183,10 @@ void drawTabFrame(GdkWindow* window, Gtk
+ 	// Drawing tab base
+         int th = qApp->style().pixelMetric(QStyle::PM_TabBarBaseHeight, meepTabBar);
+ 	int tw = w;
+-        if (!th || !tw)
+-                return;
+ 	
++	if ((tw < 1) || (th < 1))
++		return;
++
+         QPixmap pixmap1(tw,th);
+         QPainter painter1(&pixmap1);
+ 	if ((backgroundTile) && (!backgroundTile->isNull()))
+@@ -1158,6 +1219,9 @@ void drawMenu(GdkWindow* window, GtkStyl
+ 	if (!gtkQtEnable)
+ 		return;
+ 	
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	QPixmap pixmap(w, h);
+ 	QPainter painter(&pixmap);
+ 	QStyle::SFlags sflags = stateToSFlags(state);
+@@ -1207,6 +1271,9 @@ void drawProgressChunk(GdkWindow * windo
+ 	bar.setPercentageVisible(false);
+ 	bar.setFrameStyle(QFrame::NoFrame);
+ 	
++	if ((w2 < 1) || (h2 < 1))
++		return;
++
+ 	QPixmap pixmap(w2, h2);
+ 	QPainter painter(&pixmap);
+ 
+@@ -1304,6 +1371,9 @@ void drawSpinButton(GdkWindow * window, 
+ 	if (!gtkQtEnable)
+ 		return;
+ 	
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	QPixmap pixmap(w, h);
+ 	QPainter painter(&pixmap);
+ 
+@@ -1322,6 +1392,9 @@ void drawListHeader(GdkWindow* window, G
+ 	if (!gtkQtEnable)
+ 		return;
+ 
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	QPixmap pixmap(w,h);
+ 	QPainter painter(&pixmap);
+ 
+@@ -1341,6 +1414,9 @@ void drawListViewItem(GdkWindow* window,
+         if (!gtkQtEnable)
+                 return;
+ 
++	if ((w < 1) || (h < 1))
++		return;
++
+         QPixmap     pixmap(w, h);
+         QPainter    painter(&pixmap);
+ 
+@@ -1437,6 +1513,9 @@ void drawTabNG(GdkWindow *window, GtkSty
+ 		h -= 3;
+ 	}
+ 	
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	QPixmap pixmap(w,h);
+ 	QPainter painter(&pixmap);
+ 	
+@@ -1466,6 +1545,9 @@ void drawArrow(GdkWindow* window, GtkSty
+ 	if (!gtkQtEnable)
+ 		return;
+ 	
++	if ((w < 1) || (h < 1))
++		return;
++
+ 	QStyle::SFlags sflags = stateToSFlags(state);
+ 	if (state == GTK_STATE_INSENSITIVE)
+ 		sflags |= QStyle::Style_Off;

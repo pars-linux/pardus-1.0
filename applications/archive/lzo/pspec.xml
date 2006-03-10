@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>lzo</Name>
+        <Homepage>http://www.oberhumer.com/opensource/lzo/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>An extremely fast compression and decompression library</Summary>
+        <Summary xml:lang="tr">Çok hızlı bir sıkıştırma/açma kütüphanesi</Summary>
+        <Description>An extremely fast compression and decompression library</Description>
+        <Description xml:lang="tr">Çok hızlı bir sıkıştırma/açma kütüphanesi</Description>
+        <Archive sha1sum="ad1b458cf9d5d49153665d2adc25bd6129028221" type="targz">http://www.oberhumer.com/opensource/lzo/download/lzo-1.08.tar.gz</Archive>
+         <Patches>
+            <Patch>1.08-gcc3.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>lzo</Name>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-15</Date>
+            <Version>1.08</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

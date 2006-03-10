@@ -1,0 +1,65 @@
+Index: SetupUsers.py
+===================================================================
+--- SetupUsers.py	(revision 5763)
++++ SetupUsers.py	(working copy)
+@@ -18,6 +18,8 @@
+ import users
+ from setupuserswidget import SetupUsersWidget
+ 
++import posix
++
+ ##
+ # Partitioning screen.
+ class Widget(SetupUsersWidget):
+@@ -64,7 +66,7 @@
+ 
+     def reset(self):
+         self.editingMode = False
+-	self.username.setEnabled(True)
++        self.username.setEnabled(True)
+         self.username.clear()
+         self.realname.clear()
+         self.pass1.clear()
+@@ -91,7 +93,7 @@
+             self.pass_error.setText("")
+ 
+ 
+-        if self.username.text() and p1 and p2:
++        if self.username.text() and p1 and p2 and (posix.getuid() == 0):
+             self.createButton.setEnabled(True)
+         else:
+             self.createButton.setEnabled(False)
+Index: users_kga.py
+===================================================================
+--- users_kga.py	(revision 5763)
++++ users_kga.py	(working copy)
+@@ -10,6 +10,7 @@
+ #
+ 
+ import sys
++
+ from qt import *
+ from kdecore import *
+ from kdeui import *
+@@ -63,7 +64,7 @@
+         # load our icons and images.
+         KGlobal.iconLoader().addAppDir("users_kga")
+         
+-
++        
+         self.mainwidget = SetupUsers.Widget(self)
+ 
+         toplayout = QVBoxLayout( self, 0, KDialog.spacingHint() )
+Index: setupuserswidget.py
+===================================================================
+--- setupuserswidget.py	(revision 5763)
++++ setupuserswidget.py	(working copy)
+@@ -12,8 +12,6 @@
+ from kdecore import *
+ from kdeui import *
+ 
+-
+-
+ class SetupUsersWidget(QWidget):
+     def __init__(self,parent = None,name = None,fl = 0):
+         QWidget.__init__(self,parent,name,fl)

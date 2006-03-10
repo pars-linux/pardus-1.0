@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pam-login</Name>
+        <Homepage>http://www.thkukuk.de/pam/pam_login/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Based on the sources from util-linux, with added pam and shadow features</Summary>
+        <Summary xml:lang="tr">pam ve shadow özellikleri de dahil edilmiş, util-linux kaynağı temelinde uygulama</Summary>
+        <Description>Based on the sources from util-linux, with added pam and shadow features</Description>
+        <Description xml:lang="tr">util-linux kaynak kodu temelinde geliştirilmiş, pam ve shadow özellikleri de dahil edilmiş uygulama</Description>
+        <Archive sha1sum="7c492c2c545cb73446c932c9a5e173c361712231" type="tarbz2">ftp://ftp.suse.com/pub/people/kukuk/pam/pam_login/pam_login-3.14.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>pam</Dependency>
+            <Dependency versionFrom="4.0.2">shadow</Dependency> 
+        </BuildDependencies>
+        <Patches>
+            <Patch>pam-login-3.11-gcc33.patch</Patch>
+            <Patch level="1">pam-login-3.11-lastlog-fix.patch</Patch>
+            <Patch level="1">pam-login-tr.patch</Patch>
+            <Patch level="1">pam_login-3.14-gettexize-prompt.patch</Patch>
+         </Patches>
+    </Source>
+
+    <Package>
+        <Name>pam-login</Name>
+        <RuntimeDependencies>
+            <Dependency>pam</Dependency>
+            <Dependency versionFrom="4.0.2">shadow</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/login.defs">login.defs</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-15</Date>
+            <Version>3.14</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,14 @@
+diff -ur mingetty-1.00.uludag/mingetty.c mingetty-1.00/mingetty.c
+--- mingetty-1.00.uludag/mingetty.c	2004-11-05 11:35:10.012132976 +0200
++++ mingetty-1.00/mingetty.c	2004-11-05 11:36:53.175449768 +0200
+@@ -475,6 +475,10 @@
+ 	char *logname, *s;
+ 	int c;
+ 
++	/* Bad hack!... Should get the locale data somewhere
++	from the /etc */
++	putenv ("LC_ALL=tr_TR.UTF-8");
++
+ 	setlocale (LC_ALL, "");
+ 	bindtextdomain ("mingetty", LOCALEDIR);
+ 	textdomain ("mingetty");

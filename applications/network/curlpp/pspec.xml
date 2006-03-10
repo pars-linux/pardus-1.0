@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>curlpp</Name>
+        <Homepage>http://rrette.com/curlpp.html</Homepage>
+        <Packager>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>Curl C++ Library</Summary>
+        <Summary xml:lang="tr">Curl için C++ dili kütüphanesi</Summary>
+        <Description>Curl C++ Library</Description>
+        <Description xml:lang="tr">Curl için C++ kütüphanesi</Description>
+        <Archive sha1sum="3c32241fa38aa619362592f8e795c6077da46c0d" type="targz">http://rrette.com/curlpp-0.5.0-rc5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>curl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>curlpp</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+  </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-16</Date>
+            <Version>0.5.0_rc5</Version>
+            <Comment>First release.</Comment>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>which</Name>
+        <Homepage>http://www.xs4all.nl/~carlo17/which/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Prints out location of specified executables that are in your path</Summary>
+        <Summary xml:lang="tr">Belirtilmiş olan çalıştırılabilirin tam yolunu path de tanımlanmış önceliğe göre gösterir</Summary>
+        <Description>Prints out location of specified executables that are in your path</Description>
+        <Description xml:lang="tr">Komut satırına girdiğiniz program isimlerinin Bash tarafından hangi dosyayı çalıştırdığını görmek için which kullanabilirsiniz. örn: which ls</Description> 
+        <Archive sha1sum="247804c95e91583020b4d57ccb517a2997041bd5" type="targz">http://www.xs4all.nl/~carlo17/which/which-2.16.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">which-gentoo.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>which</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-25</Date>
+            <Version>2.16</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

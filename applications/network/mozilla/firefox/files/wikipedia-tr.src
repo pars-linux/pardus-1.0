@@ -1,0 +1,58 @@
+# Mycroft Search Plugin for Mozilla, Firebird, Netscape 6+, Beonix browsers 
+# Mycroft Homepage: http://mycroft.mozdev.org
+#
+# SearchSite: Turkish Wikipedia (tr.wikipedia.org)
+# Status: Working Semi
+#
+# Original Author: Carey Evans <careye@spamcop.net>.
+# This file is released to the public domain.
+# Created: 30 Jan, 2003
+# Modified: Can Alkan
+# Date: 06 Oct 2004
+# Reason: Added TR-Wikipedia Support
+#         
+#
+# Country: TR
+# Language: tr
+# Category: Reference
+#
+# Known issues: * There is no unique prefix for Wikipedia search, so "Edit page"
+#                        and other special pages will clear the search results.
+#                       Alan - The interpret section no longer parses to the sidebar but 
+#                                 the new page layout does not easily lend itself to sidebar
+#                                 results, hence classifying as a Semi.
+#
+
+<SEARCH
+    version = "7.1"
+   name="Wikipedia (TR)"
+   description="Vikipedi, Özgür Ansiklopedi"
+      method="GET"
+   action="http://tr.wikipedia.org/w/wiki.phtml"
+   queryCharset="ISO-8859-9"
+   searchForm="http://tr.wikipedia.org/"
+   routeType="internet"
+>
+
+<input name="search" user>
+<input name="go" value="Go">
+<input name="sourceid" value="Mozilla-search">
+<inputnext name="offset" factor="20">
+<inputprev name="offset" factor="20">
+
+<interpret
+   browserResultType="result"
+   charset="ISO-8859-9"
+   resultListStart="</h2>"
+   resultListEnd="<p>"
+   resultItemStart="<li>"
+   resultItemEnd="</li>"
+>
+
+</search>
+
+<browser
+   update="http://mycroft.mozdev.org/plugins/wikipedia-tr.src"
+   updateIcon="http://mycroft.mozdev.org/plugins/wikipedia-tr.png"
+   updateCheckDays="3"
+>

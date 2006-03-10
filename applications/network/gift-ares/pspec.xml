@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PSPEC SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gift-ares</Name>
+        <Homepage>http://gift-ares.berlios.de/</Homepage>
+        <Packager>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <IsA>plugin</IsA>
+        <Summary>Ares Plugin for giFT</Summary>
+        <Summary xml:lang="tr">giFT için Ares eklentisi</Summary>
+        <Description>Ares Plugin for giFT</Description>
+        <Description xml:lang="tr">giFT için Ares eklentisi</Description>
+        <Archive sha1sum="503b43dd4abab389043eefef1d2e893568e26837" type="tarbz2">http://download.berlios.de/gift-ares/gift-ares-0.2.2.tar.bz2</Archive>
+        <Patches>
+            <Patch>gift-ares-0.2.2-pardus.patch</Patch>
+        </Patches>
+    </Source>
+    
+    <Package>
+        <Name>gift-ares</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.11.8">gift</Dependency>
+        </RuntimeDependencies> 
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/giFT</Path>
+        </Files>                                                                        
+    </Package>                                                                
+    
+    <History>
+        <Update release="1">
+            <Date>2005-11-29</Date>
+            <Version>0.2.2</Version>
+            <Comment>First release.</Comment>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Update>
+    </History>
+</PISI>

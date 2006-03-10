@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>bash-completion-config</Name>
+        <Homepage>http://developer.berlios.de/projects/bashcomp-config</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>IsA</IsA>
+        <Summary>Utility to easily add/remove bash-completions to your environment</Summary>
+        <Description>Utility to easily add/remove bash-completions to your environment</Description>
+        <Summary xml:lang="tr">Kabukta çeşitli uygulamar için otomatik tamamlama özelliği eklenebilmesine olanak sağlayan bir uygulama</Summary>
+        <Description xml:lang="tr">Kabuğun zaten sahip olduğu ve TAB tuşuna basıldığında yararlanılabilen tamamlama özelliğinin, uygulamaların parametrelerini de destekleyecek şekilde genişletilebilmesine olanak sağlar</Description>
+        <Archive sha1sum="628af277b9d1eb5da5bc9ccf028de7b06cb9cd98" type="tarbz2">http://download.berlios.de/bashcomp-config/bashcomp-config-0.8.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>bash-completion-config</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/bash-completion/</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/bash-completion/bashcomp">bashcomp</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-13</Date>
+            <Version>0.8</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gstreamer</Name>
+        <Homepage>http://gstreamer.sourceforge.net</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <IsA>library</IsA>
+        <Summary>Streaming media framework</Summary>
+        <Summary xml:lang="tr">Müzik ve ses yayın sistemi</Summary>
+        <Description>Streaming media framework</Description>
+        <Description xml:lang="tr">Müzik ve ses yayın sistemi</Description>
+        <Archive sha1sum="01c5c420167d1238ecf5323bb418b02061a628ff" type="tarbz2">http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-0.8.8.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">gstreamer-0.8.3-jade_fix.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency versionFrom="2.4.9">libxml2</Dependency>
+            <Dependency versionFrom="1.6.3">popt</Dependency>
+            <Dependency versionFrom="0.11.5">gettext</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gstreamer</Name>
+        <RuntimeDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency versionFrom="2.4.9">libxml2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-06</Date>
+            <Version>0.8.8</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

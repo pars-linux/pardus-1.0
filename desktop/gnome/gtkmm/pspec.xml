@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gtkmm</Name>
+        <Homepage>http://gtkmm.sourceforge.net</Homepage>
+        <Packager>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>library</IsA>
+        <Summary>C++ binding for GTK+</Summary>
+        <Summary xml:lang="tr">GTK+ için C++ bağlamı</Summary>
+        <Description>C++ binding for GTK+</Description>
+        <Description xml:lang="tr">GTK+ için C++ bağlamı</Description>
+        <Archive sha1sum="00745d0f5b1932c8b0c4505a30dcd761424c95fd" type="tarbz2">http://ftp.acc.umu.se/pub/GNOME/sources/gtkmm/2.6/gtkmm-2.6.4.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="2.6">glibmm</Dependency>
+            <Dependency versionFrom="2.6">gtk2</Dependency>
+            <Dependency versionFrom="2.0">libsigc++</Dependency>
+            <Dependency versionFrom="1.9.1">atk</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gtkmm</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="2.6">glibmm</Dependency>
+            <Dependency versionFrom="2.6">gtk2</Dependency>
+            <Dependency versionFrom="2.0">libsigc++</Dependency>
+            <Dependency versionFrom="1.9.1">atk</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-16</Date>
+            <Version>2.6.4</Version>
+            <Comment>First release.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

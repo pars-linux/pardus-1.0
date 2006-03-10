@@ -1,0 +1,31 @@
+diff -Nur faad2-old/plugins/xmms/src/libmp4.c faad2/plugins/xmms/src/libmp4.c
+--- faad2-old/plugins/xmms/src/libmp4.c	2005-10-03 17:51:20.000000000 +0300
++++ faad2/plugins/xmms/src/libmp4.c	2005-10-03 17:51:59.000000000 +0300
+@@ -34,6 +34,9 @@
+ static int	mp4_isFile(char *);
+ static void*	mp4Decode(void *);
+ 
++void getMP4info(char* file);
++int getAACTrack(MP4FileHandle file);
++
+ InputPlugin mp4_ip =
+   {
+     0,	// handle
+@@ -112,11 +115,13 @@
+     gchar*	extention;
+ 
+     extention = strrchr(filename, '.');
++
+     if (extention &&
+-	!strcasecmp(extention, ".mp4") ||	// official extention
+-	!strcasecmp(extention, ".m4a") ||	// Apple mp4 extention
+-	!strcasecmp(extention, ".aac")		// old MPEG2/4-AAC extention
+-	){
++        (!strcasecmp(extention, ".mp4") ||	// official extention
++         !strcasecmp(extention, ".m4a") ||	// Apple mp4 extention
++         !strcasecmp(extention, ".aac")		  // old MPEG2/4-AAC extention
++        ))
++    {
+       return (1);
+     }
+   }

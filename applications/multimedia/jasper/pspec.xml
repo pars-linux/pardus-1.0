@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>jasper</Name>
+        <Homepage>http://www.ece.uvic.ca/~mdadams/jasper/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>JasPer</License>
+        <IsA>app:console</IsA>
+        <Description>JasPer is a software-based implementation of the codec specified in the emerging JPEG-2000 Part-1 standard</Description>
+        <Description xml:lang="tr">JasPer JPEG-2000 Part-1 codec standardı üzerinde konumlandırılmış bir yazılım</Description>
+        <Summary>JasPer is a software-based implementation of the codec specified in the emerging JPEG-2000 Part-1 standard</Summary>
+        <Summary xml:lang="tr">JasPer JPEG-2000 Part-1 codec standardı üzerinde konumlandırılmış bir yazılım</Summary>
+        <Archive sha1sum="e304457a3973c3a926792c3e25e16f05818634e4" type="zip">http://www.ece.uvic.ca/~mdadams/jasper/software/jasper-1.701.0.zip</Archive>
+        <BuildDependencies>
+            <Dependency>jpeg</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>jasper</Name>
+        <RuntimeDependencies>
+            <Dependency>jpeg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2005-09-07</Date>
+            <Version>1.701.0</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

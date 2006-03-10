@@ -1,0 +1,78 @@
+http://bugs.gentoo.org/97900
+http://sources.redhat.com/bugzilla/show_bug.cgi?id=1078
+
+2005-09-27  Ulrich Drepper  <drepper@redhat.com>
+
+	[BZ #1078]
+	* libio/fileops.c (_IO_new_file_xsputn): Determine amount of
+	available space in non-line-buffered buffer correctly.
+	* libio/oldfileops.c (_IO_old_file_xsputn): Likewise.
+
+===================================================================
+RCS file: /cvs/glibc/libc/libio/fileops.c,v
+retrieving revision 1.108
+retrieving revision 1.109
+diff -u -r1.108 -r1.109
+--- libc/libio/fileops.c	2005/09/04 20:07:40	1.108
++++ libc/libio/fileops.c	2005/09/27 18:49:43	1.109
+@@ -1281,7 +1281,7 @@
+   register const char *s = (const char *) data;
+   _IO_size_t to_do = n;
+   int must_flush = 0;
+-  _IO_size_t count;
++  _IO_size_t count = 0;
+ 
+   if (n <= 0)
+     return 0;
+@@ -1290,7 +1290,6 @@
+      (or the filebuf is unbuffered), use sys_write directly. */
+ 
+   /* First figure out how much space is available in the buffer. */
+-  count = f->_IO_write_end - f->_IO_write_ptr; /* Space available. */
+   if ((f->_flags & _IO_LINE_BUF) && (f->_flags & _IO_CURRENTLY_PUTTING))
+     {
+       count = f->_IO_buf_end - f->_IO_write_ptr;
+@@ -1308,6 +1307,9 @@
+ 	    }
+ 	}
+     }
++  else if (f->_IO_write_end > f->_IO_write_ptr)
++    count = f->_IO_write_end - f->_IO_write_ptr; /* Space available. */
++
+   /* Then fill the buffer. */
+   if (count > 0)
+     {
+===================================================================
+RCS file: /cvs/glibc/libc/libio/oldfileops.c,v
+retrieving revision 1.29
+retrieving revision 1.30
+diff -u -r1.29 -r1.30
+--- libc/libio/oldfileops.c	2005/09/04 20:09:33	1.29
++++ libc/libio/oldfileops.c	2005/09/27 18:48:29	1.30
+@@ -695,7 +695,7 @@
+   register const char *s = (char *) data;
+   _IO_size_t to_do = n;
+   int must_flush = 0;
+-  _IO_size_t count;
++  _IO_size_t count = 0;
+ 
+   if (n <= 0)
+     return 0;
+@@ -704,7 +704,6 @@
+      (or the filebuf is unbuffered), use sys_write directly. */
+ 
+   /* First figure out how much space is available in the buffer. */
+-  count = f->_IO_write_end - f->_IO_write_ptr; /* Space available. */
+   if ((f->_flags & _IO_LINE_BUF) && (f->_flags & _IO_CURRENTLY_PUTTING))
+     {
+       count = f->_IO_buf_end - f->_IO_write_ptr;
+@@ -722,6 +721,9 @@
+ 	    }
+ 	}
+     }
++  else if (f->_IO_write_end > f->_IO_write_ptr)
++    count = f->_IO_write_end - f->_IO_write_ptr; /* Space available. */
++
+   /* Then fill the buffer. */
+   if (count > 0)
+     {

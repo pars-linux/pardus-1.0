@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>Locale-gettext</Name>
+        <Homepage>http://www.han.de/~racke/pard/development.html#LOCALE::GETTEXT</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Summary>A Perl module for accessing the GNU locale utilities</Summary>
+        <Description>A Perl module for accessing the GNU locale utilities</Description>
+        <Summary xml:lang="tr">GNU yerel araçlarına erişim için Perl modülü</Summary>
+        <Description xml:lang="tr">GNU yerel araçlarına erişim için Perl modülü</Description>
+        <Archive sha1sum="32820cc58fd90b533508555724455149608ed104" type="targz">http://cpan.develooper.com/modules/by-module/Locale/gettext-1.01.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>Locale-gettext</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-10</Date>
+            <Version>1.01</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

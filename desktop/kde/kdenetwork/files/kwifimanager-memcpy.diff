@@ -1,0 +1,22 @@
+Index: wifi/interface_wireless_wirelessextensions.cpp
+===================================================================
+--- wifi/interface_wireless_wirelessextensions.cpp	(revision 486649)
++++ wifi/interface_wireless_wirelessextensions.cpp	(working copy)
+@@ -520,11 +520,12 @@
+   switch (event->cmd)
+     {
+     case SIOCGIWESSID:
+-	char
+-	  essid[IW_ESSID_MAX_SIZE + 1];
+-	if ((event->u.essid.pointer) && (event->u.essid.length))
+-	  memcpy (essid, event->u.essid.pointer, event->u.essid.length);
+-	essid[event->u.essid.length] = '\0';
++	char essid[IW_ESSID_MAX_SIZE + 1];
++	if ((event->u.essid.pointer) && (event->u.essid.length <= IW_ESSID_MAX_SIZE))
++	  {
++	    memcpy (essid, event->u.essid.pointer, event->u.essid.length);
++	    essid[event->u.essid.length] = '\0';
++	  }
+ 	if (event->u.essid.flags) {
+ 	  result = essid;
+ 	  }

@@ -1,0 +1,41 @@
+2005-05-12  Nick Clifton  <nickc@redhat.com>
+
+    * readelf.c (display_debug_lines): If pointer_size has not been
+    found then assume that it is 4 in order to prevent a seg fault
+    when process_extend_line_op attempts to read the line data.
+
+Index: readelf.c
+===================================================================
+RCS file: /cvs/src/src/binutils/readelf.c,v
+retrieving revision 1.289
+retrieving revision 1.291
+diff -u -r1.289 -r1.291
+--- binutils/readelf.c
++++ binutils/readelf.c
+@@ -9097,7 +9097,9 @@
+       printf (_("  Line Base:                   %d\n"), info.li_line_base);
+       printf (_("  Line Range:                  %d\n"), info.li_line_range);
+       printf (_("  Opcode Base:                 %d\n"), info.li_opcode_base);
+-      printf (_("  (Pointer size:               %u)\n"), pointer_size);
++      printf (_("  (Pointer size:               %u)%s\n"),
++	      pointer_size,
++	      warned_about_missing_comp_units ? " [assumed]" : "" );
+ 
+       end_of_sequence = data + info.li_length + initial_length_size;
+ 
+@@ -9188,8 +9190,14 @@
+ 	  else switch (op_code)
+ 	    {
+ 	    case DW_LNS_extended_op:
++	      if (pointer_size == 0)
++		{
++		  warn (_("Extend line ops need a valid pointer size, guessing at 4\n"));
++		  pointer_size = 4;
++		}
++
+ 	      data += process_extended_line_op (data, info.li_default_is_stmt,
+-						pointer_size);
++						  pointer_size);
+ 	      break;
+ 
+ 	    case DW_LNS_copy:

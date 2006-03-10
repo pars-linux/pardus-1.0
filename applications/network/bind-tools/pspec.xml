@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>bind-tools</Name>
+        <Homepage>http://www.isc.org/products/BIND/bind9-beta.html</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:console</IsA>
+        <Summary>bind tools: dig, nslookup, and host</Summary>
+        <Summary xml:lang="tr">DNS isim çözümleme araçları</Summary>
+        <Description>bind tools: dig, nslookup, and host</Description>
+        <Description xml:lang="tr">Verilen isimleri (www.uludag.org.tr gibi) ip adreslerine (193.140.100.210 gibi) çözen araçlardır. En yenisi digdir. Nslookup yerine dig kullanmanız önerilir.</Description>
+        <Archive sha1sum="99df8014e3b500c4d3a6652ec7b1c3cf7bba6f64" type="targz">ftp://ftp.isc.org/isc/bind9/9.3.1/bind-9.3.1.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">nslookup-pardus.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>openssl</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>bind-tools</Name>
+        <Files>
+          <Path fileType="executable">/usr/bin</Path>
+          <Path fileType="doc">/usr/share/doc</Path>
+          <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-12</Date>
+            <Version>9.3.1</Version>
+            <Comment>Version Upgrade</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-30</Date>
+            <Version>9.2.3</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

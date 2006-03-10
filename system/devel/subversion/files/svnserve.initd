@@ -1,0 +1,28 @@
+#!/sbin/runscript
+# Copyright © 2005  TUBITAK/UEKAE
+# Licensed under the GNU General Public License, version 2.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+#
+# Original work belongs Gentoo Linux
+
+depend() {
+	need net
+}
+
+start() {
+	ebegin "Starting svnserve"
+	# Ensure that we run from a readable working dir, and that we do not
+	# lock filesystems when being run from such a location.
+	cd /
+	start-stop-daemon --start --quiet --background --make-pidfile \
+		--pidfile /var/run/svnserve.pid --exec /usr/bin/svnserve \
+		--chuid ${SVNSERVE_USER:-apache}:${SVNSERVE_GROUP:-apache} -- \
+		--foreground --daemon ${SVNSERVE_OPTS:---root=/var/svn}
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping svnserve"
+	start-stop-daemon --stop --quiet --pidfile /var/run/svnserve.pid
+	eend $?
+}

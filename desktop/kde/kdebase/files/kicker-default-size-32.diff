@@ -1,0 +1,30 @@
+diff -ur kdebase-3.5.0.orig/kcontrol/kicker/positiontab_impl.cpp kdebase-3.5.0/kcontrol/kicker/positiontab_impl.cpp
+--- kdebase-3.5.0.orig/kcontrol/kicker/positiontab_impl.cpp	2005-11-30 17:59:45.000000000 +0200
++++ kdebase-3.5.0/kcontrol/kicker/positiontab_impl.cpp	2005-11-30 18:02:53.000000000 +0200
+@@ -204,7 +204,7 @@
+         m_panelAlign = AlignLeft;
+     }
+ 
+-    m_panelSize->setCurrentItem(KPanelExtension::SizeNormal);
++    m_panelSize->setCurrentItem(KPanelExtension::SizeCustom);
+ 
+     // update the magic drawing
+     lengthenPanel(-1);
+diff -ur kdebase-3.5.0.orig/kicker/kicker/core/extensionSettings.kcfg kdebase-3.5.0/kicker/kicker/core/extensionSettings.kcfg
+--- kdebase-3.5.0.orig/kicker/kicker/core/extensionSettings.kcfg	2005-11-30 17:59:45.000000000 +0200
++++ kdebase-3.5.0/kicker/kicker/core/extensionSettings.kcfg	2005-11-30 17:59:59.000000000 +0200
+@@ -101,12 +101,12 @@
+ 
+ <entry name="Size" type="Int">
+       <label>Size</label>
+-      <default code="true">KPanelExtension::SizeNormal</default>
++      <default code="true">KPanelExtension::SizeCustom</default>
+    </entry>
+ 
+ <entry name="CustomSize" type="Int" >
+       <label>Custom size</label>
+-      <default>58</default>
++      <default>32</default>
+       <min>16</min>
+    </entry>
+ 

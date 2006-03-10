@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>eric</Name>
+        <Homepage>http://www.die-offenbachs.de/detlev/eric3.html</Homepage>
+        <Packager>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Full featured Python IDE</Summary>
+        <Description>Full featured Python IDE</Description>
+        <Summary xml:lang="tr">Python programlama dili için bir grafik geliştirme ortamı</Summary>
+        <Description xml:lang="tr">Python programlama dili için bir grafik geliştirme ortamı</Description>
+        <Archive sha1sum="d6d45409f307d03cb8ced0c9c3a06b438f09dfdc" type="targz">http://easynews.dl.sourceforge.net/sourceforge/eric-ide/eric-3.8.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>python</Dependency>
+            <Dependency>PyQt</Dependency>
+            <Dependency>qscintilla</Dependency>
+            <Dependency>qt</Dependency>
+        </BuildDependencies>
+    </Source>
+   
+    <Package>
+        <Name>eric</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>PyQt</Dependency>
+            <Dependency>qscintilla</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="3">
+            <Date>2005-11-10</Date>
+            <Version>3.8.0</Version>
+            <Comment>Update to stable 3.8.0 release</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-05</Date>
+            <Version>3.8.0_rc2</Version>
+            <Comment>update</Comment>
+            <Name>Eray Özkural</Name>
+            <Email>eray@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-07</Date>
+            <Version>3.7.2</Version>
+            <Comment>First release.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

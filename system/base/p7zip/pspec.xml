@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>p7zip</Name>
+        <Homepage>http://p7zip.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>app:console</IsA>
+        <Summary xml:lang="en">Port of 7-Zip archiver for Unix</Summary>
+        <Description xml:lang="en">Port of 7-Zip archiver for Unix</Description>
+        <Archive type="tarbz2" sha1sum="16ea805087e2699106eda6d4adf0d254303e7395">http://easynews.dl.sourceforge.net/sourceforge/p7zip/p7zip_4.30_src_all.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">p7zip_4.30-lazy_mans_lame-sed_does_better.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>p7zip</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/7z">7z</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/7za">7za</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-15</Date>
+            <Version>4.30</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

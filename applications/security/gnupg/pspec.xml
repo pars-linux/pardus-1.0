@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gnupg</Name>
+        <Homepage>http://www.gnupg.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>The GNU Privacy Guard, a GPL pgp replacement</Summary>
+        <Summary xml:lang="tr">GNU Gizlilik Koruması</Summary>
+        <Description>The GNU Privacy Guard, a GPL pgp replacement</Description>
+        <Description xml:lang="tr">GnuPG, güvenli iletişim ve veri saklama için kullanılan bir GNU aracıdır. Verileri şifreleyebilir, dijital imza yaratabilir.</Description>
+        <Archive sha1sum="ebd16ef9d3fd3c38e38cf39e6347ed058fd12840" type="tarbz2">ftp://ftp.gnupg.org/gcrypt/gnupg/gnupg-1.4.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <!--FIXME <Dependency>openldap</Dependency>-->
+            <Dependency>bzip2</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>gettext</Dependency>
+            <Dependency>curl</Dependency>
+            <Dependency>readline</Dependency>
+            <Dependency>libusb</Dependency>
+         </BuildDependencies>
+         <Patches>
+            <Patch level="1">gnupg-1.4.1-colon-utf8.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>gnupg</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/libexec/gnupg</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/gnupg</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-07</Date>
+            <Version>1.4.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

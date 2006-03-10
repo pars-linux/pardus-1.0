@@ -1,0 +1,12 @@
+diff -ur pmount-0.9.7.orig/src/pmount.c pmount-0.9.7/src/pmount.c
+--- pmount-0.9.7.orig/src/pmount.c	2005-12-16 13:17:25.000000000 +0200
++++ pmount-0.9.7/src/pmount.c	2005-12-21 05:51:05.000000000 +0200
+@@ -93,7 +93,7 @@
+ {
+     int result = device_valid( device ) &&
+         !device_mounted( device, 0, NULL ) &&
+-        ( device_whitelisted( device ) || device_removable( device ) ) &&
++        ( 1 || device_removable( device ) ) &&
+         !device_locked( device ) &&
+         mntpt_valid( mntpt ) &&
+         !mntpt_mounted( mntpt, 0 );

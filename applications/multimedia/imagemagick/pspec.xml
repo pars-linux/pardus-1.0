@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>imagemagick</Name>
+        <Homepage>http://www.imagemagick.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:gui</IsA>
+        <Summary>A collection of tools and libraries for many image formats</Summary>
+        <Summary xml:lang="tr">Resimleri işlemek ve göstermek için bir X uygulaması</Summary>
+        <Description>A collection of tools and libraries for many image formats</Description>
+        <Description xml:lang="tr">ImageMagick, konsolda kullanılan bir resim gösterme ve işleme aracıdır. ImageMagick JPEG, TIFF, PNM, GIF vb gibi dosya biçemlerini okuyabilir ve yazabilir. Resimleri yeniden boyutlandırabilir, keser, özel efektler uygulayabilir veya desteklediği dosya biçimleri arasında dönüşüm yapabilir.
+        </Description>
+        <Archive sha1sum="d081ddbab2c0ac33a5ed565c3b6c790ac004234b" type="tarbz2">ftp://mirror.aarnet.edu.au/pub/ImageMagick/ImageMagick-6.2.5-4.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>bzip2</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency>ghostscript</Dependency>
+            <Dependency versionFrom="1.06">lcms</Dependency>
+            <Dependency versionFrom="12">mpeg2vidcodec</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency versionFrom="3.5.5">tiff</Dependency>
+            <Dependency versionFrom="2.4.10">libxml2</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency versionFrom="0.2.8">libwmf</Dependency>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency>perl</Dependency>
+            <Dependency>graphviz</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>imagemagick-6.2.5.4-docs.patch</Patch>
+            <Patch level="1">imagemagick-perlmagick.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>imagemagick</Name>
+        <RuntimeDependencies>
+            <Dependency>xorg</Dependency>
+            <Dependency>ghostscript</Dependency>
+            <Dependency versionFrom="1.06">lcms</Dependency>
+            <Dependency versionFrom="12">mpeg2vidcodec</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency versionFrom="3.5.5">tiff</Dependency>
+            <Dependency versionFrom="2.4.10">libxml2</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency versionFrom="0.2.8">libwmf</Dependency>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency>graphviz</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/ImageMagick-6.2.0</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2" type="security">
+            <Date>2005-11-24</Date>
+            <Version>6.2.5.4</Version>
+            <Comment>Update to version 6.2.5.4 to fix CAN-2005-1739</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-16</Date>
+            <Version>6.2.0.4</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

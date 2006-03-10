@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libsamplerate</Name>
+        <Homepage>http://www.mega-nerd.com/SRC/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Description>Secret Rabbit Code (aka libsamplerate) is a Sample Rate Converter for audio</Description>
+        <Description xml:lang="tr">libsamplerate ses dosyaları için basit bir örnekleme oranı dönüştürücü</Description>
+        <Summary>Secret Rabbit Code (aka libsamplerate) is a Sample Rate Converter for audio</Summary>
+        <Summary xml:lang="tr">libsamplerate ses dosyaları için basit bir örnekleme oranı dönüştürücü</Summary>
+        <Archive sha1sum="663ac147d1dfbe686bf687e78143259b5075fc13" type="targz">http://www.mega-nerd.com/SRC/libsamplerate-0.1.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="3.0.1">fftw3</Dependency>
+            <Dependency versionFrom="1.0.2">libsndfile</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libsamplerate</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="3.0.1">fftw3</Dependency>
+            <Dependency versionFrom="1.0.2">libsndfile</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-07</Date>
+            <Version>0.1.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

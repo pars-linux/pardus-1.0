@@ -1,0 +1,46 @@
+Index: kio/kio/kdirlister.cpp
+===================================================================
+--- kio/kio/kdirlister.cpp	(revision 486202)
++++ kio/kio/kdirlister.cpp	(revision 486203)
+@@ -824,6 +824,12 @@
+   return s_pSelf;
+ }
+ 
++bool KDirListerCache::exists()
++{
++  return s_pSelf != 0;
++}
++ 
++
+ // private slots
+ 
+ // _file can also be a directory being currently held!
+@@ -1799,9 +1805,12 @@
+ {
+   kdDebug(7003) << "-KDirLister" << endl;
+ 
+-  // Stop all running jobs
+-  stop();
+-  s_pCache->forgetDirs( this );
++  if ( KDirListerCache::exists() )
++  {
++    // Stop all running jobs
++    stop();
++    s_pCache->forgetDirs( this );
++  }
+ 
+   delete d;
+ }
+Index: kio/kio/kdirlister_p.h
+===================================================================
+--- kio/kio/kdirlister_p.h	(revision 486202)
++++ kio/kio/kdirlister_p.h	(revision 486203)
+@@ -181,6 +181,8 @@
+ 
+   static KDirListerCache *self();
+ 
++  static bool exists(); 
++
+ private slots:
+   void slotFileDirty( const QString &_file );
+   void slotFileCreated( const QString &_file );

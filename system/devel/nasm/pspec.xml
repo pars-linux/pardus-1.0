@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>nasm</Name>
+        <Homepage>http://nasm.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>app:console</IsA>
+        <Summary>groovy little assembler</Summary>
+        <Summary xml:lang="tr">Assembler dili</Summary>
+        <Description>groovy little assembler</Description>
+        <Description xml:lang="tr">Assembler dili</Description>
+        <Archive sha1sum="73d64812bb95774355f737c0fb0271382d23db67" type="tarbz2">http://ovh.dl.sourceforge.net/sourceforge/nasm/nasm-0.98.39.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>texinfo</Dependency>
+            <Dependency>gcc</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>nasm</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-25</Date>
+            <Version>0.98.39</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

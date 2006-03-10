@@ -1,0 +1,262 @@
+   This is the mail archive of the gcc-patches@gcc.gnu.org mailing list
+   for the [1]GCC project.
+     _________________________________________________________________
+
+   Index Nav: [[2]Date Index] [[3]Subject Index] [[4]Author Index]
+   [[5]Thread Index]
+   Message Nav: [[6]Date Prev] [[7]Date Next]
+   [[8]Thread Prev] [[9]Thread Next]
+   Other format: [[10]Raw text]
+
+ [PATCH] Put .gnu.linkonce.t.* owned jumptables into .gnu.linkonce.r.* instead
+                                  of .rodata
+
+     * From: Jakub Jelinek <jakub at redhat dot com>
+     * To: Richard Henderson <rth at redhat dot com>
+     * Cc: gcc-patches at gcc dot gnu dot org, hjl at lucon dot org
+     * Date: Wed, 11 Aug 2004 13:02:59 -0400
+     * Subject: [PATCH] Put .gnu.linkonce.t.* owned jumptables into
+       .gnu.linkonce.r.* instead of .rodata
+     * Reply-to: Jakub Jelinek <jakub at redhat dot com>
+     _________________________________________________________________
+
+Hi!
+
+With the latest binutils, it is impossible to link many bigger C++ programs,
+with errors like:
+`.LAAAA' referenced in section `.rodata' of BBBB.o: defined in discarded sectio
+n `.gnu.linkonce.t.CCCC' of DDDD.o
+I know H.J.Lu posted a patch which did the support using section groups,
+but that on the other side requires the very latest binutils,
+while using .gnu.linkonce.r.* should IMHO work even with older binutils.
+
+Is it enough like this or should function_readonly_data_section call
+a target hook, whose default implementation would do what is in ATM
+and targets whcih don't use default_unique_section_1 would override it
+to simple readonly_data_section () call (or something else if they prefer)?
+
+2004-08-11  Jakub Jelinek  <jakub@redhat.com>
+
+        PR c++/16276
+        * output.h (function_readonly_data_section): New prototype.
+        * varasm.c (function_readonly_data_section): New function.
+        * final.c (final_scan_insn): Call it instead of
+        readonly_data_section.
+
+        * g++.old-deja/g++.other/comdat4.C: New test.
+        * g++.old-deja/g++.other/comdat4-aux.cc: New.
+
+--- gcc/final.c.jj      2004-08-10 15:16:22.000000000 +0200
++++ gcc/final.c 2004-08-11 17:08:31.169998412 +0200
+@@ -1881,7 +1881,7 @@ final_scan_insn (rtx insn, FILE *file, i
+ 		{
+ 		  int log_align;
+
+-		  readonly_data_section ();
++		  function_readonly_data_section (current_function_decl);
+
+ #ifdef ADDR_VEC_ALIGN
+ 		  log_align = ADDR_VEC_ALIGN (NEXT_INSN (insn));
+--- gcc/varasm.c.jj     2004-08-05 12:06:06.000000000 +0200
++++ gcc/varasm.c        2004-08-11 17:59:49.359366083 +0200
+@@ -535,6 +535,45 @@ function_section (tree decl)
+     text_section ();
+ }
+
++/* Switch to read-only data section associated with function DECL.
++
++   If DECL is NULL_TREE, switch to readonly_data_section ().  */
++
++void
++function_readonly_data_section (tree decl)
++{
++  if (decl != NULL_TREE && DECL_SECTION_NAME (decl))
++    {
++      const char *name = TREE_STRING_POINTER (DECL_SECTION_NAME (decl));
++
++      /* For .gnu.linkonce.t.foo we want to use .gnu.linkonce.r.foo.  */
++      if (DECL_ONE_ONLY (decl) && strncmp (name, ".gnu.linkonce.t.", 16) == 0)
++       {
++         size_t len = strlen (name) + 1;
++         char *rname = alloca (len);
++
++         memcpy (rname, name, len);
++         rname[14] = 'r';
++         named_section_flags (rname, SECTION_LINKONCE);
++         return;
++       }
++      /* For .text.foo we want to use .rodata.foo.  */
++      else if (flag_function_sections && flag_data_sections
++              && strncmp (name, ".text.", 6) == 0)
++       {
++         size_t len = strlen (name) + 1;
++         char *rname = alloca (len + 2);
++
++         memcpy (rname, ".rodata", 7);
++         memcpy (rname + 7, name + 5, len - 5);
++         named_section_flags (rname, 0);
++         return;
++       }
++    }
++
++  readonly_data_section ();
++}
++
+ /* Switch to section for variable DECL.  RELOC is the same as the
+    argument to SELECT_SECTION.  */
+
+--- gcc/output.h.jj     2004-07-09 13:50:55.000000000 +0200
++++ gcc/output.h        2004-08-11 17:01:49.665156409 +0200
+@@ -213,6 +213,10 @@ extern void named_section (tree, const c
+ /* Tell assembler to switch to the section for function DECL.  */
+ extern void function_section (tree);
+
++/* Tell assembler to switch to the readonly data section associated
++   with function DECL.  */
++extern void function_readonly_data_section (tree);
++
+ /* Tell assembler to switch to the section for string merging.  */
+ extern void mergeable_string_section (tree, unsigned HOST_WIDE_INT,
+ 				      unsigned int);
+--- gcc/testsuite/g++.old-deja/g++.other/comdat4.C.jj   2004-08-11 11:56:16.000000000 +0200
++++ gcc/testsuite/g++.old-deja/g++.other/comdat4.C      2004-08-11 18:47:45.770243910 +0200
+@@ -0,0 +1,57 @@
++// PR c++/16276
++// { dg-do link }
++// { dg-additional-sources " comdat4-aux.cc" }
++// { dg-options "-O2" }
++
++extern void
++bar (int x);
++
++inline void
++foo (int i)
++{
++  switch (i)
++    {
++    case 3:
++    case 5:
++    case 6:
++    case 9:
++    case 15:
++      bar (1);
++      break;
++    case 2:
++    case 4:
++    case 7:
++    case 10:
++    case 11:
++    case 12:
++      bar (2);
++      break;
++    case 0:
++    case 1:
++    case 8:
++    case 13:
++    case 16:
++      bar (3);
++      break;
++    case 14:
++      bar (4);
++      break;
++    default:
++      bar (5);
++      break;
++    }
++}
++
++void *fooaddr = (void *) foo;
++
++void
++bar (int x)
++{
++  __asm __volatile ("" : : "r" (x));
++}
++
++int
++main (void)
++{
++  return 0;
++}
+--- gcc/testsuite/g++.old-deja/g++.other/comdat4-aux.cc.jj      2004-08-11 11:56:19.000000000 +0200
++++ gcc/testsuite/g++.old-deja/g++.other/comdat4-aux.cc 2004-08-11 11:56:47.000000000 +0200
+@@ -0,0 +1,40 @@
++extern void
++bar (int x);
++
++inline void
++foo (int i)
++{
++  switch (i)
++    {
++    case 3:
++    case 5:
++    case 6:
++    case 9:
++    case 15:
++      bar (1);
++      break;
++    case 2:
++    case 4:
++    case 7:
++    case 10:
++    case 11:
++    case 12:
++      bar (2);
++      break;
++    case 0:
++    case 1:
++    case 8:
++    case 13:
++    case 16:
++      bar (3);
++      break;
++    case 14:
++      bar (4);
++      break;
++    default:
++      bar (5);
++      break;
++    }
++}
++
++void *fooaddr2 = (void *) foo;
+
+        Jakub
+     _________________________________________________________________
+
+     * Follow-Ups:
+          + [11]Re: [PATCH] Put .gnu.linkonce.t.* owned jumptables into
+            .gnu.linkonce.r.* instead of .rodata
+               o From: H. J. Lu
+          + [12]Re: [PATCH] Put .gnu.linkonce.t.* owned jumptables into
+            .gnu.linkonce.r.* instead of .rodata
+               o From: Richard Henderson
+
+   Index Nav: [[13]Date Index] [[14]Subject Index] [[15]Author Index]
+   [[16]Thread Index]
+   Message Nav: [[17]Date Prev] [[18]Date Next]
+   [[19]Thread Prev] [[20]Thread Next]
+
+References
+
+   1. http://gcc.gnu.org/
+   2. http://gcc.gnu.org/ml/gcc-patches/2004-08/index.html#00653
+   3. http://gcc.gnu.org/ml/gcc-patches/2004-08/subjects.html#00653
+   4. http://gcc.gnu.org/ml/gcc-patches/2004-08/authors.html#00653
+   5. http://gcc.gnu.org/ml/gcc-patches/2004-08/threads.html#00653
+   6. http://gcc.gnu.org/ml/gcc-patches/2004-08/msg00652.html
+   7. http://gcc.gnu.org/ml/gcc-patches/2004-08/msg00654.html
+   8. http://gcc.gnu.org/ml/gcc-patches/2004-08/msg00652.html
+   9. http://gcc.gnu.org/ml/gcc-patches/2004-08/msg00656.html
+  10. http://gcc.gnu.org/cgi-bin/get-raw-msg?listname=gcc-patches&date=2004-08&msgid=20040811170254.GA22252%40devserv.devel.redhat.com
+  11. http://gcc.gnu.org/ml/gcc-patches/2004-08/msg00656.html
+  12. http://gcc.gnu.org/ml/gcc-patches/2004-08/msg00660.html
+  13. http://gcc.gnu.org/ml/gcc-patches/2004-08/index.html#00653
+  14. http://gcc.gnu.org/ml/gcc-patches/2004-08/subjects.html#00653
+  15. http://gcc.gnu.org/ml/gcc-patches/2004-08/authors.html#00653
+  16. http://gcc.gnu.org/ml/gcc-patches/2004-08/threads.html#00653
+  17. http://gcc.gnu.org/ml/gcc-patches/2004-08/msg00652.html
+  18. http://gcc.gnu.org/ml/gcc-patches/2004-08/msg00654.html
+  19. http://gcc.gnu.org/ml/gcc-patches/2004-08/msg00652.html
+  20. http://gcc.gnu.org/ml/gcc-patches/2004-08/msg00656.html

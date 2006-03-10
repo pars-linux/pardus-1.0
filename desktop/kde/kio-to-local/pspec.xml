@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kio-to-local</Name>
+        <Homepage>http://cekirdek.uludag.org.tr/~ismail</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>An application to convert local KIO urls to normal urls</Summary>
+        <Description>An application to convert local KIO urls to normal urls</Description>
+        <Summary xml:lang="tr">Lokal KIO url'lerini normal url'lere çeviren bir uygulama</Summary>
+        <Description xml:lang="tr">Lokal KIO url'lerini normal url'lere çeviren bir uygulama</Description>
+        <Archive sha1sum="5ff9edbe63176a794f14f8fd72b775b66848c692" type="tarbz2">http://cekirdek.uludag.org.tr/~ismail/kio-to-local.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>kio-to-local</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+        </Files>
+   </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-09</Date>
+            <Version>0.1</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

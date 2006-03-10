@@ -1,0 +1,6 @@
+<PISI>
+    <Name>system.devel</Name>
+    <LocalName xml:lang="tr">Geliştirme sistemi</LocalName>
+    <Summary xml:lang="tr">Paket derleme ve geliştirme için gerekli araçlar</Summary>
+    <Description xml:lang="tr">...</Description>
+</PISI>

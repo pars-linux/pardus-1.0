@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>indent</Name>
+        <Homepage>http://uludag.org.tr</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Indent program source files</Summary>
+        <Description>Indent program source files</Description>
+        <Summary xml:lang="tr">Indent programı kaynak dosyaları</Summary>
+        <Description xml:lang="tr">Indent programı kaynak dosyaları</Description>
+        <Archive sha1sum="9329422a366a77fca64102282a3ec99c0dd47b83" type="targz">ftp://ftp.gnu.org/pub/gnu/indent/indent-2.2.9.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">2.2.9-deb-gentoo.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>indent</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+   </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-27</Date>
+            <Version>2.2.9</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

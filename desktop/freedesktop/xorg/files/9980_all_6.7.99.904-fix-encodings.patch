@@ -1,0 +1,72 @@
+diff -Naur xc/fonts/encodings/iso8859-6.16.enc xc.new/fonts/encodings/iso8859-6.16.enc
+--- xc/fonts/encodings/iso8859-6.16.enc	2004-04-23 20:43:02.000000000 +0200
++++ xc.new/fonts/encodings/iso8859-6.16.enc	2004-08-25 23:14:17.438358768 +0200
+@@ -10,7 +10,7 @@
+ # $XdotOrg: xc/fonts/encodings/iso8859-6.16.enc,v 1.2 2004/04/23 18:43:02 eich Exp $
+ # $XFree86$
+ STARTMAPPING unicode
+-UNDEFINE 0x0000 0xFFFF
++UNDEFINE 0x00 0xFF
+ 0x41  0xFE80
+ 0x42  0xFE81
+ 0x43  0xFE83
+diff -Naur xc/fonts/encodings/iso8859-6.8x.enc xc.new/fonts/encodings/iso8859-6.8x.enc
+--- xc/fonts/encodings/iso8859-6.8x.enc	2004-04-23 20:43:02.000000000 +0200
++++ xc.new/fonts/encodings/iso8859-6.8x.enc	2004-08-25 23:13:57.794345112 +0200
+@@ -10,7 +10,7 @@
+ # $XdotOrg: xc/fonts/encodings/iso8859-6.8x.enc,v 1.2 2004/04/23 18:43:02 eich Exp $
+ # $XFree86$
+ STARTMAPPING unicode
+-UNDEFINE 0x0000 0xFFFF
++UNDEFINE 0x00 0xFF
+ 0x8D	0xFEEF
+ 0x8E	0xFE94
+ 0x8F	0xFEB2
+diff -Naur xc/fonts/encodings/large/cns11643-1.enc xc.new/fonts/encodings/large/cns11643-1.enc
+--- xc/fonts/encodings/large/cns11643-1.enc	2004-04-23 20:43:03.000000000 +0200
++++ xc.new/fonts/encodings/large/cns11643-1.enc	2004-08-25 23:20:01.499053592 +0200
+@@ -5,7 +5,7 @@
+ SIZE 0x7E 0x80
+ FIRSTINDEX 0x20 0x22
+ STARTMAPPING unicode
+-UNDEFINE 0x0000 0xFFFF
++UNDEFINE 0x0000 0x7E7F
+ 0x2122 0xFF0C
+ 0x2123 0x3001
+ 0x2124 0x3002
+diff -Naur xc/fonts/encodings/large/cns11643-2.enc xc.new/fonts/encodings/large/cns11643-2.enc
+--- xc/fonts/encodings/large/cns11643-2.enc	2004-04-23 20:43:03.000000000 +0200
++++ xc.new/fonts/encodings/large/cns11643-2.enc	2004-08-25 23:20:32.762300856 +0200
+@@ -5,7 +5,7 @@
+ SIZE 0x73 0x80
+ FIRSTINDEX 0x20 0x22
+ STARTMAPPING unicode
+-UNDEFINE 0x0000 0xFFFF
++UNDEFINE 0x0000 0x737F
+ 0x2122 0x4E5C
+ 0x2123 0x51F5
+ 0x2124 0x531A
+diff -Naur xc/fonts/encodings/large/cns11643-3.enc xc.new/fonts/encodings/large/cns11643-3.enc
+--- xc/fonts/encodings/large/cns11643-3.enc	2004-04-23 20:43:03.000000000 +0200
++++ xc.new/fonts/encodings/large/cns11643-3.enc	2004-08-25 23:20:49.764716096 +0200
+@@ -5,7 +5,7 @@
+ SIZE 0x63 0x80
+ FIRSTINDEX 0x20 0x22
+ STARTMAPPING unicode
+-UNDEFINE 0x0000 0xFFFF
++UNDEFINE 0x0000 0x637F
+ 0x2122 0x4e36
+ 0x2123 0x4e3f
+ 0x2124 0x4e85
+diff -Naur xc/fonts/encodings/suneu-greek.enc xc.new/fonts/encodings/suneu-greek.enc
+--- xc/fonts/encodings/suneu-greek.enc	2004-04-23 20:43:02.000000000 +0200
++++ xc.new/fonts/encodings/suneu-greek.enc	2004-08-25 23:23:35.175569824 +0200
+@@ -1,7 +1,7 @@
+ STARTENCODING suneu-greek
+ SIZE 0xFF
+ STARTMAPPING unicode
+-UNDEFINE 0x0000 0xFFFF
++UNDEFINE 0x00 0xFE
+ 0x21 0x0021
+ 0x22 0x0022
+ 0x23 0x0023

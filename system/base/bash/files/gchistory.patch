@@ -1,0 +1,664 @@
+diff -Naur ../bash-3.0/bashhist.c ./bashhist.c
+--- ../bash-3.0/bashhist.c	2005-08-30 17:48:14.000000000 -0500
++++ ./bashhist.c	2005-08-30 17:49:14.000000000 -0500
+@@ -700,6 +700,11 @@
+   hist_last_line_added = 1;
+   add_history (line);
+   history_lines_this_session++;
++/* GHISTORY */
++  /* Add the history entry into the history file too. */ 	
++  if (interactive_shell)
++  	maybe_save_shell_history();
++/* GHISTORY */
+ }
+ 
+ int
+diff -Naur ../bash-3.0/bashhist.h ./bashhist.h
+--- ../bash-3.0/bashhist.h	2005-08-30 17:48:14.000000000 -0500
++++ ./bashhist.h	2005-08-30 17:49:14.000000000 -0500
+@@ -21,7 +21,10 @@
+ #if !defined (_BASHHIST_H_)
+ #define _BASHHIST_H_
+ 
+-#include "stdc.h"
++/* GHISTORY */
++   /* originally, "stdc.h" */
++   #include "include/stdc.h"
++/* GHISTORY */
+ 
+ /* Flag values for history_control */
+ #define HC_IGNSPACE	0x01
+diff -Naur ../bash-3.0/builtins/history.def ./builtins/history.def
+--- ../bash-3.0/builtins/history.def	2005-08-30 17:48:14.000000000 -0500
++++ ./builtins/history.def	2005-08-30 17:49:14.000000000 -0500
+@@ -102,6 +102,12 @@
+   char *filename, *delete_arg;
+   intmax_t delete_offset;
+ 
++/* GHISTORY */
++   clear_history ();
++   filename = get_string_value ("HISTFILE");
++   load_history ();
++/* GHISTORY */
++
+   flags = 0;
+   reset_internal_getopt ();
+   while ((opt = internal_getopt (list, "acd:npsrw")) != -1)
+@@ -153,6 +159,10 @@
+   if (flags & CFLAG)
+     {
+       clear_history ();
++      /* GHISTORY */
++         if ( !(flags & WFLAG) )
++            result = write_history (filename);
++      /* GHISTORY */
+       if (list == 0)
+ 	return (EXECUTION_SUCCESS);
+     }
+@@ -161,6 +171,10 @@
+     {
+       if (list)
+ 	push_history (list);
++      /* GHISTORY */
++         if ( !(flags & WFLAG) )
++            result = write_history (filename);
++      /* GHISTORY */
+       return (EXECUTION_SUCCESS);
+     }
+ #if defined (BANG_HISTORY)
+@@ -186,6 +200,10 @@
+ 	 we delete the last history entry. */
+       if (where_history () > history_length)
+ 	history_set_pos (history_length);
++      /* GHISTORY */
++         if ( !(flags & WFLAG) )
++            result = write_history (filename);
++      /* GHISTORY */
+       return (result ? EXECUTION_SUCCESS : EXECUTION_FAILURE);
+     }
+   else if ((flags & (AFLAG|RFLAG|NFLAG|WFLAG|CFLAG)) == 0)
+diff -Naur ../bash-3.0/lib/readline/emacs_keymap.c ./lib/readline/emacs_keymap.c
+--- ../bash-3.0/lib/readline/emacs_keymap.c	2005-08-30 17:48:15.000000000 -0500
++++ ./lib/readline/emacs_keymap.c	2005-08-30 18:02:47.000000000 -0500
+@@ -51,8 +51,10 @@
+   { ISFUNC, (rl_command_func_t *)0x0 },		/* Control-o */
+   { ISFUNC, rl_get_previous_history },		/* Control-p */
+   { ISFUNC, rl_quoted_insert },			/* Control-q */
+-  { ISFUNC, rl_reverse_search_history },	/* Control-r */
+-  { ISFUNC, rl_forward_search_history },	/* Control-s */
++/* GHISTORY */
++  { ISFUNC, rl_reverse_search_ghistory },       /* Control-r */
++  { ISFUNC, rl_forward_search_ghistory },	/* Control-s */
++/* GHISTORY */
+   { ISFUNC, rl_transpose_chars },		/* Control-t */
+   { ISFUNC, rl_unix_line_discard },		/* Control-u */
+   { ISFUNC, rl_quoted_insert },			/* Control-v */
+diff -Naur ../bash-3.0/lib/readline/funmap.c ./lib/readline/funmap.c
+--- ../bash-3.0/lib/readline/funmap.c	2005-08-30 17:48:15.000000000 -0500
++++ ./lib/readline/funmap.c	2005-08-30 17:49:14.000000000 -0500
+@@ -95,6 +95,18 @@
+   { "forward-byte", rl_forward_byte },
+   { "forward-char", rl_forward_char },
+   { "forward-search-history", rl_forward_search_history },
++/* GHISTORY */
++  { "previous-ghistory", rl_get_previous_ghistory },
++  { "next-ghistory", rl_get_next_ghistory },
++  { "reverse-search-ghistory", rl_reverse_search_ghistory },
++  { "forward-search-ghistory", rl_forward_search_ghistory },
++  { "ghistory-search-backward", rl_ghistory_search_backward },
++  { "ghistory-search-forward", rl_ghistory_search_forward },
++  { "non-incremental-reverse-search-ghistory", rl_noninc_reverse_gsearch },
++  { "non-incremental-forward-search-ghistory", rl_noninc_forward_gsearch },
++  { "non-incremental-reverse-search-ghistory-again", rl_noninc_reverse_gsearch_again },
++  { "non-incremental-forward-search-ghistory-again", rl_noninc_forward_gsearch_again },
++/* GHISTORY */
+   { "forward-word", rl_forward_word },
+   { "history-search-backward", rl_history_search_backward },
+   { "history-search-forward", rl_history_search_forward },
+diff -Naur ../bash-3.0/lib/readline/history.c ./lib/readline/history.c
+--- ../bash-3.0/lib/readline/history.c	2005-08-30 17:48:15.000000000 -0500
++++ ./lib/readline/history.c	2005-08-30 20:40:19.000000000 -0500
+@@ -49,6 +49,12 @@
+ 
+ #include "xmalloc.h"
+ 
++/* GHISTORY */
++/* for accessing load_history() function,
++   needed for synchronizing history list and history file.	*/
++#include "bashhist.h"
++/* GHISTORY */
++
+ /* The number of slots to increase the_history by. */
+ #define DEFAULT_HISTORY_GROW_SIZE 50
+ 
+@@ -63,6 +69,10 @@
+ /* An array of HIST_ENTRY.  This is where we store the history. */
+ static HIST_ENTRY **the_history = (HIST_ENTRY **)NULL;
+ 
++/* GHISTORY */
++static HIST_ENTRY **ghistory = (HIST_ENTRY **)NULL;
++/* GHISTORY */
++
+ /* Non-zero means that we have enforced a limit on the amount of
+    history that we save. */
+ static int history_stifled;
+@@ -79,6 +89,11 @@
+    life easier for outside callers. */
+ int history_offset;
+ 
++/* GHISTORY */
++int ghistory_offset = -1;
++int ghistory_length = -1;
++/* GHISTORY */
++
+ /* The number of strings currently stored in the history list. */
+ int history_length;
+ 
+@@ -122,6 +137,10 @@
+ using_history ()
+ {
+   history_offset = history_length;
++
++/* GHISTORY */
++  ghistory_offset = ghistory_length;
++/* GHISTORY */
+ }
+ 
+ /* Return the number of bytes that the primary history entries are using.
+@@ -427,6 +446,97 @@
+   return (history_stifled);
+ }
+ 
++/* GHISTORY */
++void
++history_sync_with_file ()
++{
++    HISTORY_STATE *old_state = history_get_history_state();
++	int old_ghl = ghistory_length;
++	int old_gho = ghistory_offset;
++	
++    /* Synchronize history list with history file. */
++	load_history();
++	
++	/* To undo the effect of calling using_history() 
++	   from load_history(). */
++	ghistory_length = old_ghl;
++	ghistory_offset = old_gho;
++	
++	/* Adjust the offset to accomodate possible change 
++	   in history list contents and reinstall the state. */
++    HISTORY_STATE *new_state = history_get_history_state();
++    new_state->offset = (new_state->length - ghistory_length) + ghistory_offset;
++    history_set_history_state(new_state);
++    
++	/* free-up unused memory. */
++	xfree(old_state);
++    xfree(new_state);
++}
++
++HISTORY_STATE *
++copy_history()
++{
++	/* Variable declarations. */
++    int old_offset, old_length, old_size, old_flags;
++    HIST_ENTRY **old_entries;
++    
++	/* Store the current history state. 
++	   The state represents local history. */
++	HISTORY_STATE *old_state = history_get_history_state();
++    old_entries = old_state->entries;
++    old_offset = old_state->offset;
++    old_length = old_state->length;
++    old_size = old_state->size;
++    old_flags = old_state->flags;
++
++    /* Create a global history list and initialize it. */
++	if (ghistory_length == -1)	
++		ghistory_length = ghistory_offset = 0;
++
++    /* Install the global history list into the system. */
++	old_state->entries = ghistory;
++        old_state->length = 0;
++        old_state->offset = 0;
++        old_state->size = 0;
++    history_set_history_state(old_state);
++
++	/* Return the local history snapshot to the caller. 
++	   This will help the caller to restore the system 
++	   to local history when done with global operations. */
++	old_state->entries = old_entries;
++        old_state->length = old_length;
++        old_state->offset = old_offset;
++        old_state->size = old_size;
++	return (old_state);
++}
++
++void
++unwind_copy_history(old_state)
++	HISTORY_STATE *old_state;
++{
++	/* Varaible declarations. */
++	int idx;
++	/* Get the current state of the system. 
++	   This will contain the global history snapshot. */
++	HISTORY_STATE *temp_state = history_get_history_state();
++
++	/* free-up the memory used by global history list. */
++	for (idx = 0; idx < temp_state->length; idx++)
++		free_history_entry(temp_state->entries[idx]);
++	xfree(temp_state->entries);
++	ghistory = (HIST_ENTRY **) NULL;
++	
++	/* Chores needed to support global history feature. */
++	ghistory_offset = temp_state->offset;
++	ghistory_length = temp_state->length;
++	xfree(temp_state);
++    
++	/* Install the stored local history snapshot back. 
++	   Snapshot passed from the caller. */
++	history_set_history_state(old_state);
++}
++/* GHISTORY */
++
+ void
+ clear_history ()
+ {
+diff -Naur ../bash-3.0/lib/readline/history.h ./lib/readline/history.h
+--- ../bash-3.0/lib/readline/history.h	2005-08-30 17:48:15.000000000 -0500
++++ ./lib/readline/history.h	2005-08-30 17:49:14.000000000 -0500
+@@ -114,6 +114,17 @@
+ /* Return 1 if the history is stifled, 0 if it is not. */
+ extern int history_is_stifled PARAMS((void));
+ 
++/* GHISTORY */
++/* To synchronize history list with history file. */
++extern void history_sync_with_file PARAMS((void));
++
++/* To copy the_history into a new history list. */
++extern HISTORY_STATE *copy_history PARAMS((void));
++
++/* To unwind the effects of copy_history() */
++extern void unwind_copy_history PARAMS((HISTORY_STATE *));
++/* GHISTORY */
++
+ /* Information about the history list. */
+ 
+ /* Return a NULL terminated array of HIST_ENTRY which is the current input
+diff -Naur ../bash-3.0/lib/readline/isearch.c ./lib/readline/isearch.c
+--- ../bash-3.0/lib/readline/isearch.c	2005-08-30 17:48:15.000000000 -0500
++++ ./lib/readline/isearch.c	2005-08-30 17:55:10.000000000 -0500
+@@ -53,6 +53,10 @@
+ #include "rlprivate.h"
+ #include "xmalloc.h"
+ 
++/* GHISTORY */
++#include "unwind_prot.h"
++/* GHISTORY */
++
+ /* Variables exported to other files in the readline library. */
+ char *_rl_isearch_terminators = (char *)NULL;
+ 
+@@ -72,6 +76,23 @@
+ 
+ static char *default_isearch_terminators = "\033\012";
+ 
++/* GHISTORY */
++int
++rl_reverse_search_ghistory (sign, key)
++    int sign, key;
++{
++    int return_value;
++    HISTORY_STATE *curr_state = copy_history();
++    history_sync_with_file();
++	add_unwind_protect(unwind_copy_history, curr_state);
++    return_value = rl_reverse_search_history(sign, key);
++	remove_unwind_protect();
++    unwind_copy_history(curr_state);
++    xfree(curr_state);
++    return (return_value);
++}
++/* GHISTORY */
++
+ /* Search backwards through the history looking for a string which is typed
+    interactively.  Start with the current line. */
+ int
+@@ -81,6 +102,23 @@
+   return (rl_search_history (-sign, key));
+ }
+ 
++/* GHISTORY */
++int
++rl_forward_search_ghistory (sign, key)
++    int sign, key;
++{
++    int return_value;
++    HISTORY_STATE *curr_state = copy_history();
++    history_sync_with_file();
++	add_unwind_protect(unwind_copy_history, curr_state);
++    return_value = rl_forward_search_history(sign, key);
++	remove_unwind_protect();
++    unwind_copy_history(curr_state);
++    xfree(curr_state);
++    return (return_value);
++}
++/* GHISTORY */
++
+ /* Search forwards through the history looking for a string which is typed
+    interactively.  Start with the current line. */
+ int
+@@ -263,9 +301,11 @@
+ 	{
+ 	  f = _rl_keymap[c].function;
+ 
+-	  if (f == rl_reverse_search_history)
++/* GHISTORY */
++	  if (f == rl_reverse_search_ghistory)
+ 	    c = reverse ? -1 : -2;
+-	  else if (f == rl_forward_search_history)
++	  else if (f == rl_forward_search_ghistory)
++/* GHISTORY */
+ 	    c =  !reverse ? -1 : -2;
+ 	  else if (f == rl_rubout)
+ 	    c = -3;
+diff -Naur ../bash-3.0/lib/readline/misc.c ./lib/readline/misc.c
+--- ../bash-3.0/lib/readline/misc.c	2005-08-30 17:48:15.000000000 -0500
++++ ./lib/readline/misc.c	2005-08-30 17:49:14.000000000 -0500
+@@ -53,6 +53,10 @@
+ #include "rlshell.h"
+ #include "xmalloc.h"
+ 
++/* GHISTORY */
++#include "unwind_prot.h"
++/* GHISTORY */
++
+ static int rl_digit_loop PARAMS((void));
+ static void _rl_history_set_point PARAMS((void));
+ 
+@@ -393,6 +397,38 @@
+   return 0;
+ }
+ 
++/* GHISTORY */
++int
++rl_get_previous_ghistory(count, key)
++	 int count, key;
++{
++	int return_value;
++	HISTORY_STATE *curr_state = copy_history();
++	history_sync_with_file();
++	add_unwind_protect(unwind_copy_history, curr_state);
++	return_value = rl_get_previous_history(count, key);
++	remove_unwind_protect();
++	unwind_copy_history(curr_state);
++	xfree(curr_state);
++	return (return_value);
++}
++
++int
++rl_get_next_ghistory(count, key)
++	 int count, key;
++{
++	int return_value;
++	HISTORY_STATE *curr_state = copy_history();
++	history_sync_with_file();
++	add_unwind_protect(unwind_copy_history, curr_state);
++	return_value = rl_get_next_history(count, key);
++	remove_unwind_protect();
++	unwind_copy_history(curr_state);
++	xfree(curr_state);
++	return (return_value);
++}
++/* GHISTORY */
++
+ /* Get the previous item out of our interactive history, making it the current
+    line.  If there is no previous history, just ding. */
+ int
+diff -Naur ../bash-3.0/lib/readline/readline.c ./lib/readline/readline.c
+--- ../bash-3.0/lib/readline/readline.c	2005-08-30 17:48:15.000000000 -0500
++++ ./lib/readline/readline.c	2005-08-30 21:07:37.000000000 -0500
+@@ -892,6 +892,28 @@
+   rl_bind_keyseq_if_unbound ("\033[0D", rl_get_next_history);
+ #endif
+ 
++/* GHISTORY */
++  /* UP */
++  rl_bind_keyseq_if_unbound ("\033[A", rl_get_previous_ghistory);
++  /* DOWN */
++  rl_bind_keyseq_if_unbound ("\033[B", rl_get_next_ghistory);
++
++  /* CTRL-F4 */
++  rl_bind_keyseq_if_unbound ("\033O5S", rl_ghistory_search_backward);
++  /* CTRL-F5 */
++  rl_bind_keyseq_if_unbound ("\033[15;5~", rl_ghistory_search_forward);
++
++  /* CTRL-F6 */
++  rl_bind_keyseq_if_unbound ("\033[17;5~", rl_noninc_reverse_gsearch);
++  /* CTRL-F7 */
++  rl_bind_keyseq_if_unbound ("\033[18;5~", rl_noninc_forward_gsearch);
++  
++  /* CTRL-F8 */
++  rl_bind_keyseq_if_unbound ("\033[19;5~", rl_noninc_reverse_gsearch_again);
++  /* CTRL-F9 */
++  rl_bind_keyseq_if_unbound ("\033[20;5~", rl_noninc_forward_gsearch_again);
++/* GHISTORY */
++
+   rl_bind_keyseq_if_unbound ("\033[A", rl_get_previous_history);
+   rl_bind_keyseq_if_unbound ("\033[B", rl_get_next_history);
+   rl_bind_keyseq_if_unbound ("\033[C", rl_forward_char);
+diff -Naur ../bash-3.0/lib/readline/readline.h ./lib/readline/readline.h
+--- ../bash-3.0/lib/readline/readline.h	2005-08-30 17:48:15.000000000 -0500
++++ ./lib/readline/readline.h	2005-08-30 17:49:14.000000000 -0500
+@@ -130,6 +130,11 @@
+ extern int rl_get_next_history PARAMS((int, int));
+ extern int rl_get_previous_history PARAMS((int, int));
+ 
++/* GHISTORY */
++extern int rl_get_previous_ghistory PARAMS((int, int));
++extern int rl_get_next_ghistory PARAMS((int, int));
++/* GHISTORY */
++
+ /* Bindable commands for managing the mark and region. */
+ extern int rl_set_mark PARAMS((int, int));
+ extern int rl_exchange_point_and_mark PARAMS((int, int));
+@@ -179,6 +184,11 @@
+ extern int rl_reverse_search_history PARAMS((int, int));
+ extern int rl_forward_search_history PARAMS((int, int));
+ 
++/* GHISTORY */
++extern int rl_reverse_search_ghistory PARAMS((int, int));
++extern int rl_forward_search_ghistory PARAMS((int, int));
++/* GHISTORY */
++
+ /* Bindable keyboard macro commands. */
+ extern int rl_start_kbd_macro PARAMS((int, int));
+ extern int rl_end_kbd_macro PARAMS((int, int));
+@@ -207,6 +217,15 @@
+ extern int rl_noninc_forward_search_again PARAMS((int, int));
+ extern int rl_noninc_reverse_search_again PARAMS((int, int));
+ 
++/* GHISTORY */
++extern int rl_ghistory_search_backward PARAMS((int, int));
++extern int rl_ghistory_search_forward PARAMS((int, int));
++extern int rl_noninc_reverse_gsearch PARAMS((int, int));
++extern int rl_noninc_forward_gsearch PARAMS((int, int));
++extern int rl_noninc_reverse_gsearch_again PARAMS((int, int));
++extern int rl_noninc_forward_gsearch_again PARAMS((int, int));
++/* GHISTORY */
++
+ /* Bindable command used when inserting a matching close character. */
+ extern int rl_insert_close PARAMS((int, int));
+ 
+diff -Naur ../bash-3.0/lib/readline/search.c ./lib/readline/search.c
+--- ../bash-3.0/lib/readline/search.c	2005-08-30 17:48:15.000000000 -0500
++++ ./lib/readline/search.c	2005-08-30 17:49:14.000000000 -0500
+@@ -48,6 +48,10 @@
+ #include "rlprivate.h"
+ #include "xmalloc.h"
+ 
++/* GHISTORY */
++#include "unwind_prot.h"
++/* GHISTORY */
++
+ #ifdef abs
+ #  undef abs
+ #endif
+@@ -302,6 +306,23 @@
+   RL_UNSETSTATE(RL_STATE_NSEARCH);
+ }
+ 
++/* GHISTORY */
++int
++rl_noninc_forward_gsearch (count, key)
++     int count, key;
++{
++    int return_value;
++    HISTORY_STATE *curr_state = copy_history();
++    history_sync_with_file();
++	add_unwind_protect(unwind_copy_history, curr_state);
++    return_value = rl_noninc_forward_search(count, key);
++	remove_unwind_protect();
++    unwind_copy_history(curr_state);
++    xfree(curr_state);
++    return (return_value);
++}
++/* GHISTORY */
++
+ /* Search forward through the history list for a string.  If the vi-mode
+    code calls this, KEY will be `?'. */
+ int
+@@ -312,6 +333,23 @@
+   return 0;
+ }
+ 
++/* GHISTORY */
++int
++rl_noninc_reverse_gsearch (count, key)
++     int count, key;
++{
++    int return_value;
++    HISTORY_STATE *curr_state = copy_history();
++    history_sync_with_file();
++	add_unwind_protect(unwind_copy_history, curr_state);
++    return_value = rl_noninc_reverse_search(count, key);
++	remove_unwind_protect();
++    unwind_copy_history(curr_state);
++    xfree(curr_state);
++    return (return_value);
++}
++/* GHISTORY */
++
+ /* Reverse search the history list for a string.  If the vi-mode code
+    calls this, KEY will be `/'. */
+ int
+@@ -322,6 +360,23 @@
+   return 0;
+ }
+ 
++/* GHISTORY */
++int
++rl_noninc_forward_gsearch_again (count, key)
++     int count, key;
++{
++    int return_value;
++    HISTORY_STATE *curr_state = copy_history();
++    history_sync_with_file();
++	add_unwind_protect(unwind_copy_history, curr_state);
++    return_value = rl_noninc_forward_search_again(count, key);
++	remove_unwind_protect();
++    unwind_copy_history(curr_state);
++    xfree(curr_state);
++    return (return_value);
++}
++/* GHISTORY */
++
+ /* Search forward through the history list for the last string searched
+    for.  If there is no saved search string, abort. */
+ int
+@@ -337,6 +392,23 @@
+   return 0;
+ }
+ 
++/* GHISTORY */
++int
++rl_noninc_reverse_gsearch_again (count, key)
++     int count, key;
++{
++    int return_value;
++    HISTORY_STATE *curr_state = copy_history();
++    history_sync_with_file();
++	add_unwind_protect(unwind_copy_history, curr_state);
++    return_value = rl_noninc_reverse_search_again(count, key);
++	remove_unwind_protect();
++    unwind_copy_history(curr_state);
++    xfree(curr_state);
++    return (return_value);
++}
++/* GHISTORY */
++
+ /* Reverse search in the history list for the last string searched
+    for.  If there is no saved search string, abort. */
+ int
+@@ -436,6 +508,23 @@
+   _rl_free_saved_history_line ();
+ }
+ 
++/* GHISTORY */
++int
++rl_ghistory_search_forward (count, ignore)
++     int count, ignore;
++{
++    int return_value;
++    HISTORY_STATE *curr_state = copy_history();
++    history_sync_with_file();
++	add_unwind_protect(unwind_copy_history, curr_state);
++    return_value = rl_history_search_forward(count, ignore);
++	remove_unwind_protect();
++    unwind_copy_history(curr_state);
++    xfree(curr_state);
++    return (return_value);
++}
++/* GHISTORY */
++								 
+ /* Search forward in the history for the string of characters
+    from the start of the line to rl_point.  This is a non-incremental
+    search. */
+@@ -455,6 +544,23 @@
+   return (rl_history_search_internal (abs (count), (count > 0) ? 1 : -1));
+ }
+ 
++/* GHISTORY */
++int
++rl_ghistory_search_backward (count, ignore)
++     int count, ignore;
++{
++    int return_value;
++    HISTORY_STATE *curr_state = copy_history();
++    history_sync_with_file();
++	add_unwind_protect(unwind_copy_history, curr_state);
++    return_value = rl_history_search_backward(count, ignore);
++	remove_unwind_protect();
++    unwind_copy_history(curr_state);
++    xfree(curr_state);
++    return (return_value);
++}
++/* GHISTORY */
++								 
+ /* Search backward through the history for the string of characters
+    from the start of the line to rl_point.  This is a non-incremental
+    search. */
+diff -Naur ../bash-3.0/lib/readline/vi_keymap.c ./lib/readline/vi_keymap.c
+--- ../bash-3.0/lib/readline/vi_keymap.c	2005-08-30 17:48:15.000000000 -0500
++++ ./lib/readline/vi_keymap.c	2005-08-30 18:06:50.000000000 -0500
+@@ -51,8 +51,10 @@
+   { ISFUNC, (rl_command_func_t *)0x0 },		/* Control-o */
+   { ISFUNC, rl_get_previous_history },		/* Control-p */
+   { ISFUNC, rl_quoted_insert },			/* Control-q */
+-  { ISFUNC, rl_reverse_search_history },	/* Control-r */
+-  { ISFUNC, rl_forward_search_history },	/* Control-s */
++/* GHISTORY */
++  { ISFUNC, rl_reverse_search_ghistory },	/* Control-r */
++  { ISFUNC, rl_forward_search_ghistory },	/* Control-s */
++/* GHISTORY */
+   { ISFUNC, rl_transpose_chars },		/* Control-t */
+   { ISFUNC, rl_unix_line_discard },		/* Control-u */
+   { ISFUNC, rl_quoted_insert },			/* Control-v */

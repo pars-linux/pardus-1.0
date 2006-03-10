@@ -1,0 +1,24 @@
+#!/sbin/runscript
+# Copyright © 2005  TUBITAK/UEKAE
+# Licensed under the GNU General Public License, version 2.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+#
+# Original work belongs Gentoo Linux
+
+depend() {
+	use logger
+	need clock localmount
+	provide cron	
+}
+
+start() {
+	ebegin "Starting vixie-cron"
+	start-stop-daemon --start --quiet --exec /usr/sbin/cron
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping vixie-cron"
+	start-stop-daemon --stop --quiet --pidfile /var/run/cron.pid
+	eend $?
+}

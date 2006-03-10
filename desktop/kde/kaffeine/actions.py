@@ -1,0 +1,22 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*- 
+#
+# Copyright 2005 TUBITAK/UEKAE
+# Licensed under the GNU General Public License, version 2.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+#
+# Barış Metin <baris@uludag.org.tr>
+
+from pisi.actionsapi import kde
+
+WorkDir="kaffeine-20051201"
+
+def setup():
+    kde.configure()
+
+def build():
+    kde.make()
+
+def install():
+    kde.install()
+

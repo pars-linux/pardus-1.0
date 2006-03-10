@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kdebluetooth</Name>
+        <Homepage>http://kde-bluetooth.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <IsA>library</IsA>
+        <IsA>plugin</IsA>
+        <Summary>KDE Bluetooth Framework</Summary>
+        <Summary xml:lang="tr">KDE Bluetooth yazılımları ve kütüphaneleri</Summary>
+        <Description>KDE Bluetooth Framework</Description>
+        <Description xml:lang="tr">KDE Bluetooth yazılımları ve kütüphaneleri</Description>
+        <Archive sha1sum="58787b1d11ec98b1de52ebbe1f236218a78f5c13" type="tarbz2">http://easynews.dl.sourceforge.net/sourceforge/kde-bluetooth/kdebluetooth-1.0_beta1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>kdebase</Dependency>
+            <Dependency>bluez-libs</Dependency>
+            <Dependency>openobex</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kdebluetooth</Name>
+        <RuntimeDependencies>
+            <Dependency>kdebase</Dependency>
+            <Dependency>bluez-utils</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="header">/usr/kde/3.5/include</Path>
+            <Path fileType="library">/usr/kde/3.5/lib</Path>
+            <Path fileType="executable">/usr/kde/3.5/sbin</Path>
+            <Path fileType="data">/usr/kde/3.5/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-10</Date>
+            <Version>1.0_beta1</Version>
+            <Comment>3.4 to 3.5</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-10</Date>
+            <Version>1.0_beta1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

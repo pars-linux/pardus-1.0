@@ -1,0 +1,86 @@
+Index: kopete/kopete/kopetewindow.h
+===================================================================
+--- kopete/kopete/kopetewindow.h	(revision 474408)
++++ kopete/kopete/kopetewindow.h	(working copy)
+@@ -153,6 +153,11 @@
+ 	void showAddContactDialog();
+ 
+ 	/**
++	 * Show the Add Account wizard
++	 */
++	void showAddAccountDialog();
++
++	/**
+ 	 * Show the Export Contacts wizards
+ 	 */
+ 	void showExportDialog();
+@@ -169,6 +174,7 @@
+ 
+ 	// Some Actions
+ 	KAction* actionAddContact;
++	KAction* actionAddAccount;
+ 
+ 	//KActionMenu* actionConnectionMenu;
+ 	//KAction* actionConnect;
+Index: kopete/kopete/kopeteui.rc
+===================================================================
+--- kopete/kopete/kopeteui.rc	(revision 474408)
++++ kopete/kopete/kopeteui.rc	(working copy)
+@@ -1,11 +1,13 @@
+ <!DOCTYPE kpartgui>
+-<kpartgui name="kopete" version="22">
++<kpartgui name="kopete" version="23">
+ 	<MenuBar>
+ 		<Menu name="file" noMerge="1">
+ 			<text>&amp;File</text>
+ 			<!-- <Action name="Connection"/> -->
+ 			<Action name="Status"/>
+ 			<Separator lineSeparator="true"/>
++			<Action name="AddAccount" />
++			<Separator lineSeparator="true"/>
+ 			<Action name="AddContact"/>
+ 			<Action name="AddGroup"/>
+ 			<Action name="ExportContacts"/>
+Index: kopete/kopete/kopetewindow.cpp
+===================================================================
+--- kopete/kopete/kopetewindow.cpp	(revision 474408)
++++ kopete/kopete/kopetewindow.cpp	(working copy)
+@@ -46,6 +46,7 @@
+ #include <kinputdialog.h>
+ #include <kurl.h>
+ 
++#include "addaccountwizard.h"
+ #include "addcontactwizard.h"
+ #include "kabcexport.h"
+ #include "kopeteapplication.h"
+@@ -168,6 +169,10 @@
+ 		0, this, SLOT( showAddContactDialog() ),
+ 		actionCollection(), "AddContact" );
+ 
++	actionAddAccount = new KAction( i18n( "Add new account" ), "kopete",
++		0, this, SLOT( showAddAccountDialog() ),
++		actionCollection(), "AddAccount" );
++
+ 	/* ConnectAll is now obsolete.  "Go online" has replaced it.
+ 	actionConnect = new KAction( i18n( "&Connect Accounts" ), "connect_creating",
+ 		0, Kopete::AccountManager::self(), SLOT( connectAll() ),
+@@ -334,6 +339,7 @@
+ 	// NOTE: This is in reverse order because we insert
+ 	// at the top of the menu, not at bottom!
+ 	actionAddContact->plug( tm, 1 );
++	actionAddAccount->plug( tm, 1);
+ 	actionPrefs->plug( tm, 1 );
+ 	tm->insertSeparator( 1 );
+ 	actionAwayMenu->plug( tm, 1 );
+@@ -808,6 +814,11 @@
+ 	(new AddContactWizard(this))->show();
+ }
+ 
++void KopeteWindow::showAddAccountDialog()
++{
++        (new  AddAccountWizard(this))->show();
++}
++
+ void KopeteWindow::showExportDialog()
+ {
+ 	( new KabcExportWizard( this, "export_contact_dialog" ) )->show();

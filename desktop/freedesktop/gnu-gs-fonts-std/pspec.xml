@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gnu-gs-fonts-std</Name>
+        <Homepage>http://www.cups.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-1</License>
+        <IsA>data</IsA>
+        <Summary>Ghostscript Standard Fonts</Summary>
+        <Summary xml:lang="tr">Ghostscript standard yazıtipleri</Summary>
+        <Description>Ghostscript Standard Fonts</Description>
+        <Description xml:lang="tr">Ghostscript standard yazıtipleri</Description>
+        <Archive sha1sum="2a7198e8178b2e7dba87cb5794da515200b568f5" type="targz">http://mesh.dl.sourceforge.net/sourceforge/ghostscript/ghostscript-fonts-std-8.11.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>gnu-gs-fonts-std</Name>
+        <Files>
+            <Path fileType="data">/usr/share/fonts/default/ghostscript</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-26</Date>
+            <Version>8.11</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

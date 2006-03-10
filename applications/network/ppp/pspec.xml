@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>ppp</Name>
+        <Homepage>http://www.samba.org/ppp</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>BSD GPL-2</License>
+        <IsA>category</IsA>
+        <Summary xml:lang="en">Point-to-point protocol - patched for PPPOE</Summary>
+        <Summary xml:lang="tr">Modem ile internet erişimi için PPP (point to point protocol) noktadan noktaya erişim protokolü</Summary>
+        <Description xml:lang="en">Point-to-point protocol - patched for PPPOE</Description>
+        <Description xml:lang="tr">ADSL Modemler için PPPOE de bu protokole eklenmiştir. Dikkat !!! ADSL modemi tanıtmak için bu paket gerekmez.</Description>
+        <Archive type="targz" sha1sum="fc58efe96e3b8af281695d1e3a3d0c2176e8c0b7">ftp://ftp.samba.org/pub/ppp/ppp-2.4.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libpcap</Dependency>
+            <Dependency>pam</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">cbcp-dosfix.patch</Patch>
+            <Patch level="1">cflags.patch</Patch>
+            <Patch level="1">control_c.patch</Patch>
+            <Patch level="1">killaddr-smarter.patch</Patch>
+            <Patch level="1">mpls.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>ppp</Name>
+        <RuntimeDependencies>
+            <Dependency>libpcap</Dependency>
+        </RuntimeDependencies>
+        <Provides>
+            <COMAR script="link.py">Net.Link</COMAR>
+        </Provides>
+        <Files>
+            <Path fileType="config">/etc/conf.d</Path>
+            <Path fileType="executable">/etc/init.d</Path>
+            <Path fileType="config">/etc/modules.d</Path>
+            <Path fileType="config">/etc/pam.d</Path>
+            <Path fileType="config">/etc/ppp</Path>
+            <Path fileType="config">/etc/radiusclient</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc/ppp-2.4.2-1</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/etc/ppp/options-pptp" permission="0644" owner="root">options-pptp</AdditionalFile>
+            <AdditionalFile target="/etc/ppp/options-pppoe" permission="0644" owner="root">options-pppoe</AdditionalFile>
+            <AdditionalFile target="/etc/ppp/chat-default" permission="0644" owner="root">chat-default</AdditionalFile>
+            <AdditionalFile target="/etc/ppp/ip-up" permission="0755" owner="root">ip-up</AdditionalFile>
+            <AdditionalFile target="/etc/ppp/ip-down" permission="0755" owner="root">ip-down</AdditionalFile>
+            <AdditionalFile target="/etc/init.d/net.ppp0" permission="0755" owner="root">net.ppp0</AdditionalFile>
+            <AdditionalFile target="/etc/conf.d/net.ppp0" permission="0600" owner="root">confd.ppp0</AdditionalFile>
+            <AdditionalFile target="/etc/modules.d/ppp" permission="0644" owner="root">modules.ppp</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <History>
+        <Update release="3">
+            <Date>2005-12-26</Date>
+            <Version>2.4.2</Version>
+            <Comment>Comar betiği</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-16</Date>
+            <Version>2.4.2</Version>
+            <Comment>Fix deps</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-22</Date>
+            <Version>2.4.2</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gnuconfig</Name>
+        <Homepage>ftp://ftp.gnu.org/pub/gnu/config</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>data</IsA>
+        <Summary>Updated config.sub and config.guess file from GNU</Summary>
+        <Summary xml:lang="tr">Güncel GNU config.sub ve config.guess dosyaları</Summary>
+        <Description>Updated config.sub and config.guess file from GNU</Description>
+        <Description xml:lang="tr">Güncel GNU config.sub ve config.guess dosyaları</Description>
+        <Archive sha1sum="d749c18d4d6b4b0685edfaf2330e413b4f0b4df8" type="tarbz2">ftp://ftp.linux.org.tr/pub/gentoo/distfiles/gnuconfig-20050324.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>patch</Dependency>
+        </BuildDependencies>        
+    </Source>
+
+    <Package>
+        <Name>gnuconfig</Name>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/gnuconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-08</Date>
+            <Version>20050324</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

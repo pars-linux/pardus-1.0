@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>keychain</Name>
+        <Homepage>http://www.gentoo.org/proj/en/keychain/index.xml</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>ssh-agent manager</Summary>
+        <Summary xml:lang="tr">ssh-agent yöneticisi</Summary>
+        <Description>ssh-agent manager</Description>
+        <Description xml:lang="tr">ssh-agent yöneticisi</Description>
+        <Archive sha1sum="afe3801174d52bf87e75232b9e22648f983d3f91" type="tarbz2">http://dev.gentoo.org/~agriffis/keychain/keychain-2.5.5.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>keychain</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-28</Date>
+            <Version>2.5.5</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

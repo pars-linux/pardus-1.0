@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>fftw2</Name>
+        <Homepage>http://www.fftw.org</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL</License>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <Description>FFTW is a C subroutine library for computing the discrete Fourier transform (DFT) in one or more dimensions, of arbitrary input size, and of both real and complex data (as well as of even/odd data, i.e. the discrete cosine/sine transforms or DCT/DST).</Description>
+        <Description xml:lang="tr">Discrete Fourier Transform'lar (DFT) hesaplamak için C rutin kütüphanesi</Description>
+        <Summary>FFTW is a library for computing the discrete Fourier transform (DFT)</Summary>
+        <Summary xml:lang="tr">Discrete Fourier Transform'ları (DFT) hesaplamak için C rutin kütüphanesi</Summary>
+        <Archive sha1sum="12020b58edc1b0490a83db4aa912fac5dfdfb26b" type="targz">http://www.fftw.org/fftw-2.1.5.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>fftw2</Name>
+       <Files>      
+           <Path fileType="library">/usr/lib</Path>
+           <Path fileType="info">/usr/share/info</Path>
+           <Path fileType="executable">/usr/bin</Path>
+       </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-26</Date>
+            <Version>2.1.5</Version>
+            <Comment>Initial import</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>                                                                            
+    </History>
+</PISI>

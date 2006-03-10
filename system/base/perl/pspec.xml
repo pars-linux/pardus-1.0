@@ -1,0 +1,117 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl</Name>
+        <Homepage>http://www.perl.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Larry Wall's Practical Extraction and Reporting Language</Summary>
+        <Summary xml:lang="tr">Perl dili</Summary>
+        <Description>Larry Wall's Practical Extraction and Reporting Language</Description>
+        <Description xml:lang="tr">Perl dili</Description>
+        <Archive sha1sum="c9477c6fe76b200033694bdc555a0276523d4228" type="tarbz2">http://www.cpan.org/src/perl-5.8.7.tar.bz2</Archive>
+        <Patches>
+            <Patch>perl-5.8.5-prelink-lpthread.patch</Patch>
+            <Patch>perl-5.8.5-perldoc-emptydirs.patch</Patch>
+            <Patch>perl-5.8.5-picdl.patch</Patch>
+            <Patch level="1">perl-5.8.5-noksh.patch</Patch>
+            <Patch>perl-5.8.7-CAN-2005-0448.patch</Patch>
+            <Patch>perl-5.8.5-reorder-INC.patch</Patch>
+            <Patch>perl-5.8.7-tempfiles.patch</Patch>
+            <Patch level="1">perl-5.8.7-CVE-2005-3962_3912.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>groff</Dependency>
+            <Dependency>db4</Dependency>
+            <Dependency versionFrom="1.8.3">gdbm</Dependency>
+            <Dependency versionFrom="5.8.7">libperl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-doc</Name>
+            <Files>
+                <Path fileType="doc">/usr/share/doc/</Path>
+                <Path fileType="man">/usr/share/man/</Path>
+            </Files>
+    </Package>
+
+    <Package>
+        <Name>perl</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.8.7">libperl</Dependency>
+            <Dependency>db4</Dependency>
+            <Dependency versionFrom="1.8.3">gdbm</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="library">/usr/lib/perl5/</Path>
+            <Path fileType="executable">/var/lib/pisi/scripts</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/var/lib/pisi/scripts/perl.postinstall">perl.postinstall</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+    
+    <History>
+        <Update release="7">
+            <Date>2005-12-20</Date>
+            <Version>5.8.7</Version>
+            <Comment>Unnecessary .ph file generation at the postInstall removed.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+        <Update release="6" type="security">
+            <Date>2005-12-13</Date>
+            <Version>5.8.7</Version>
+            <Comment>Revise fix for CVE-2005-3962 and combine it with a fix for CVE-2005-3912</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="5" type="security">
+            <Date>2005-12-02</Date>
+            <Version>5.8.7</Version>
+            <Comment>Fix CVE-2005-3962</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-10-30</Date>
+            <Version>5.8.7</Version>
+            <Comment>typo fix</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3" type="security">
+            <Date>2005-10-27</Date>
+            <Version>5.8.7</Version>
+            <Comment>Update to version 5.8.7 and fix CAN-2005-0448</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-12</Date>
+            <Version>5.8.5</Version>
+            <Comment>dosed functions in action.py fixed.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-17</Date>
+            <Version>5.8.5</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

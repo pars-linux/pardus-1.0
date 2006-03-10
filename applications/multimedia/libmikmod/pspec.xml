@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libmikmod</Name>
+        <Homepage>http://mikmod.raphnet.net/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <License>LGPL-2</License>
+        <IsA>library</IsA>
+        <Description xml:lang="en">A library to play a wide range of module formats</Description>
+        <Description xml:lang="tr">birçok modül formatını çalabilen bir kütüphane</Description>
+        <Summary xml:lang="en">A library to play a wide range of module formats</Summary>
+        <Summary xml:lang="tr">birçok modül formatını çalabilen bir kütüphane</Summary>
+        <Archive type="targz" sha1sum="ca18fff19348d3bcf3550aa920b129b082c5069a">http://mikmod.raphnet.net/files/libmikmod-3.1.11.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="0.2.3">audiofile</Dependency>
+            <Dependency versionFrom="0.5.9">alsa-lib</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libmikmod</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.2.3">audiofile</Dependency>
+            <Dependency versionFrom="0.5.9">alsa-lib</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="doc">/usr/share/doc/libmikmod-3.1.11-1</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-19</Date>
+            <Version>3.1.11</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

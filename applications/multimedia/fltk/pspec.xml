@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>fltk</Name>
+        <Homepage>http://www.fltk.org</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <IsA>library</IsA>
+        <Summary>FLTK (pronounced "fulltick") is a cross-platform C++ GUI toolkit</Summary>
+        <Summary xml:lang="tr">FLTK, platformlar arası C++ kullanıcı arayüzü için bir araç takımı</Summary>
+        <Description>FLTK (pronounced "fulltick") is a cross-platform C++ GUI toolkit</Description>
+        <Description xml:lang="tr">FLTK, platformlar arası C++ kullanıcı arayüzü için bir araç takımı</Description>
+        <Archive sha1sum="769bc18ec5dcd771221c13760b9fc0618b0712d2" type="tarbz2">http://ftp.easysw.com/pub/fltk/1.1.6/fltk-1.1.6-source.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">libs-1.6.diff</Patch>
+            <Patch>Fl_Help_View.cxx.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>libpng</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>groff</Dependency>
+            <Dependency>xorg</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>fltk</Name>
+        <RuntimeDependencies>
+            <Dependency>libpng</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>xorg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="2">
+            <Date>2005-11-24</Date>
+            <Version>1.1.6</Version>
+            <Comment>Add some patches from Gentoo</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-27</Date>
+            <Version>1.1.6</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

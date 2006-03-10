@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>utempter</Name>
+        <Homepage>http://www.redhat.com/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>MIT</License>
+        <License>LGPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary xml:lang="en">App that allows non-privileged apps to write utmp (login) info</Summary>
+        <Description xml:lang="en">App that allows non-privileged apps to write utmp (login) info</Description>
+        <Archive sha1sum="5551f28c853700049330351a56f073fae5548d2f" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/utempter-0.5.5.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">utempter-0.5.5.5-soname-makefile-fix.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>utempter</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-30</Date>
+            <Version>0.5.5.5</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kbd</Name>
+        <Homepage>http://freshmeat.net/projects/kbd/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Keyboard and console utilities</Summary>
+        <Description>Keyboard and console utilities</Description>
+        <Summary xml:lang="tr">Klavye ve konsol araçları</Summary>
+        <Description xml:lang="tr">Kbd, konsol yapılandırmak için klavye ve ekran yazı tipi dosyalarının yanı sıra 
+        sanal uç birimler gibi uygulamaları içerir.</Description>
+        <Archive sha1sum="d4917da308e01e74d67d7b814bf527063b3919fc" type="targz">ftp://ftp.cwi.nl/pub/aeb/kbd/kbd-1.12.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+            <Dependency>gzip</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">kbd-1.08-terminal.patch</Patch>
+            <Patch level="1">kbd-1.12-find-map-fix.patch</Patch>
+            <Patch level="1">kbd-1.12-kbd_repeat-v2.patch</Patch>
+            <Patch level="1">kbd-1.12-debian.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>kbd</Name>
+        <RuntimeDependencies>
+            <Dependency>gettext</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/keymaps</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/unimaps</Path>
+            <Path fileType="data">/usr/share/consolefonts</Path>
+            <Path fileType="data">/usr/share/consoletrans</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2005-07-27</Date>
+            <Version>1.12</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

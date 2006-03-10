@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kile</Name>
+        <Homepage>http://kile.sourceforge.net</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>TeX/LaTeX editor for KDE</Summary>
+        <Summary xml:lang="tr">KDE için TeX/LaTeX düzenleyicisi</Summary>
+        <Description>Kile is a user friendly TeX/LaTeX editor for the KDE desktop environment</Description>
+        <Description xml:lang="tr">Kile, KDE için kullanıcı dostu bir TeX/LaTeX düzenleyicisidir.</Description>
+        <Archive sha1sum="aa1ec1a4e8c057809a57de9a22d235b4577b5352" type="tarbz2">http://ovh.dl.sourceforge.net/sourceforge/kile/kile-1.8.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>kdelibs</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1" compressionType="gz">kile-turkish-translation.patch.gz</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>kile</Name>
+        <RuntimeDependencies>
+            <Dependency>kdebase</Dependency>
+            <Dependency>tetex</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="data">/usr/kde/3.5/share/applications/</Path>
+            <Path fileType="data">/usr/kde/3.5/share/apps/</Path>
+            <Path fileType="config">/usr/kde/3.5/share/config.kcfg</Path>
+            <Path fileType="doc">/usr/kde/3.5/share/doc/</Path>
+            <Path fileType="data">/usr/kde/3.5/share/icons/</Path>
+            <Path fileType="localedata">/usr/kde/3.5/share/locale/</Path>
+            <Path fileType="data">/usr/kde/3.5/share/mimelnk/text</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-11-21</Date>
+            <Version>1.8.1</Version>
+            <Comment>3.4 to 2.5</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-31</Date>
+            <Version>1.8.1</Version>
+            <Comment>Added Turkish translation.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-28</Date>
+            <Version>1.8.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

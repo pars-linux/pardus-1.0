@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>openjade</Name>
+        <Homepage>http://openjade.sourceforge.net</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:console</IsA>
+        <Summary>Jade is an implementation of DSSSL - an ISO standard for formatting SGML and XML documents</Summary>
+        <Summary xml:lang="tr">Jade; SGML ve XML belgelerinin biçimlendirilmesinde ISO standartı olan bir DSSSL uyarlamasıdır</Summary>
+        <Description>Jade is an implementation of DSSSL - an ISO standard for formatting SGML and XML documents</Description>
+        <Description xml:lang="tr">Jade; SGML ve XML belgelerinin biçimlendirilmesinde ISO standartı olan bir DSSSL uyarlamasıdır</Description>
+        <Archive sha1sum="54e1999f41450fbd62c5d466002d79d3efca2321" type="targz">ftp://ftp.freestandards.org/pub/lsb/app-battery/packages/openjade-1.3.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>sgml-common</Dependency>
+            <Dependency versionFrom="1.5">opensp</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch>openjade-1.3.2-msggen.pl.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>openjade</Name>
+        <RuntimeDependencies>
+            <Dependency>sgml-common</Dependency>
+            <Dependency versionFrom="1.5">opensp</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/sgml</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="644" target="/usr/share/sgml/openjade-1.3.2-1/dsssl/catalog">openjade-1.3.2.dsssl-catalog</AdditionalFile>
+            <AdditionalFile owner="root" permission="644" target="/usr/share/sgml/openjade-1.3.2-1/catalog">openjade-1.3.2.catalog</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-30</Date>
+            <Version>1.3.2</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

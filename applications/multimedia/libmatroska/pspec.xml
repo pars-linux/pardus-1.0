@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>libmatroska</Name>
+        <Homepage>http://www.matroska.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Description>Extensible multimedia container format based on EBML</Description>
+        <Description xml:lang="tr">EBML üzerine konumlandırılmış genişletilebilir çokluortam taşıyıcısı</Description>
+        <Summary>Extensible multimedia container format based on EBML</Summary>
+        <Summary xml:lang="tr">EBML üzerine konumlandırılmış genişletilebilir çokluortam taşıyıcısı</Summary>
+        <Archive sha1sum="ab66651386d2b999c48680d664f3ecbd61efa7c1" type="tarbz2">http://dl.matroska.org/downloads/libmatroska/libmatroska-0.7.4.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="0.7.2">libebml</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">libmatroska-shared.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>libmatroska</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.7.2">libebml</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-07</Date>
+            <Version>0.7.4</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

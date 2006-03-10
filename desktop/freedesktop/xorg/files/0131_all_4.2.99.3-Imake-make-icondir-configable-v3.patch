@@ -1,0 +1,95 @@
+diff -urN xc.orig/config/cf/Imake.tmpl xc/config/cf/Imake.tmpl
+--- xc.orig/config/cf/Imake.tmpl	2004-03-13 21:52:53.000000000 -0500
++++ xc/config/cf/Imake.tmpl	2004-03-13 21:56:45.000000000 -0500
+@@ -923,6 +923,21 @@
+ #endif
+ #endif
+ 
++#ifndef IconDir
++# if NothingOutsideProjectRoot != YES
++#  define IconDir       /usr/share/cursors/xorg-x11
++#  ifndef XcursorPath
++#   define XcursorPath "~/.cursors:~/.icons:/usr/local/share/cursors/xorg-x11:/usr/share/cursors/xorg-x11:/usr/share/pixmaps/xorg-x11"
++#  endif
++# else
++#  define IconDir       Concat(ProjectRoot,/lib/X11/icons)
++# endif
++#endif
++ 
++#ifndef XcursorPath
++# define XcursorPath Concat(~/.cursors:~/.icons:/usr/local/share/cursors/xorg-x11:/usr/share/cursors/xorg-x11:/usr/share/pixmaps/xorg-x11:,IconDir)
++#endif
++
+ #ifndef LogDirectory
+ #if HasVarDirectory
+ #define LogDirectory $(VARDIR)/log
+@@ -1705,6 +1720,8 @@
+        FILEMANDIR = FileManDir		/* man pages for config files */
+        MISCMANDIR = MiscManDir		/* man pages for miscellaneous files */
+      DRIVERMANDIR = DriverManDir	/* man pages for drivers */
++          ICONDIR = IconDir		/* Xcursor cursors/icon directory */
++      XCURSORPATH = XcursorPath		/* Xcursor cursors path */
+      LOGDIRECTORY = LogDirectory	/* OS location of log files */
+ #ifdef VarRunDirectory
+         VARRUNDIR = VarRunDirectory	/* OS location of PID files */
+diff -urN xc.orig/lib/Xcursor/Imakefile xc/lib/Xcursor/Imakefile
+--- xc.orig/lib/Xcursor/Imakefile	2004-03-13 21:53:21.000000000 -0500
++++ xc/lib/Xcursor/Imakefile	2004-03-13 21:56:45.000000000 -0500
+@@ -42,9 +42,10 @@
+ 
+ RPATH_CFLAG = HardCodeLibdirFlag
+ 
+-ICONDIR=$(LIBDIR)/icons
++ICONDIRDEFS=-DICONDIR=\"$(ICONDIR)\"
++XCURSORPATHDEFS=-DXCURSORPATH=\"$(XCURSORPATH)\"
+ 
+-DEFINES=-DICONDIR=\"$(ICONDIR)\" $(XFIXES_DEFINES)
++DEFINES=$(ICONDIRDEFS) $(XCURSORPATHDEFS)
+ 
+ SRCS =	cursor.c display.c file.c library.c xlib.c
+ 
+diff -urN xc.orig/programs/xcursorgen/Imakefile xc/programs/xcursorgen/Imakefile
+--- xc.orig/programs/xcursorgen/Imakefile	2004-03-13 21:53:49.000000000 -0500
++++ xc/programs/xcursorgen/Imakefile	2004-03-13 21:56:51.000000000 -0500
+@@ -4,7 +4,6 @@
+ 
+         SUBDIRS = redglass whiteglass handhelds
+   DEFAULT_THEME = DefaultCursorTheme
+-        ICONDIR = $(LIBDIR)/icons
+        THEMEDIR = $(ICONDIR)/default
+        INCLUDES = $(LIBPNGINC)
+         DEPLIBS = $(DEPXLIB)
+diff -urN xc.orig/programs/xcursorgen/handhelds/Imakefile xc/programs/xcursorgen/handhelds/Imakefile
+--- xc.orig/programs/xcursorgen/handhelds/Imakefile	2004-03-13 21:53:49.000000000 -0500
++++ xc/programs/xcursorgen/handhelds/Imakefile	2004-03-13 21:56:51.000000000 -0500
+@@ -2,7 +2,6 @@
+ 
+ #define CursorSources(name) $(PNGDIR)/name-16.png
+ 
+-ICONDIR=$(LIBDIR)/icons
+ THEME=handhelds
+ PNGDIR=../redglass
+ THEMEDIR=$(ICONDIR)/$(THEME)/cursors
+diff -urN xc.orig/programs/xcursorgen/redglass/Imakefile xc/programs/xcursorgen/redglass/Imakefile
+--- xc.orig/programs/xcursorgen/redglass/Imakefile	2004-03-13 21:53:49.000000000 -0500
++++ xc/programs/xcursorgen/redglass/Imakefile	2004-03-13 21:56:51.000000000 -0500
+@@ -17,8 +17,6 @@
+               hourglass-full-24.png hourglass-full-32.png hourglass-full-48.png \
+               hourglass-full-64.png
+ 
+-
+-ICONDIR=$(LIBDIR)/icons
+ THEME=redglass
+ THEMEDIR=$(ICONDIR)/$(THEME)/cursors
+ 
+diff -urN xc.orig/programs/xcursorgen/whiteglass/Imakefile xc/programs/xcursorgen/whiteglass/Imakefile
+--- xc.orig/programs/xcursorgen/whiteglass/Imakefile	2004-03-13 21:53:49.000000000 -0500
++++ xc/programs/xcursorgen/whiteglass/Imakefile	2004-03-13 21:56:51.000000000 -0500
+@@ -2,7 +2,6 @@
+ 
+ #define CursorSources(name) name-16.png name-24.png name-32.png name-48.png name-64.png
+ 
+-ICONDIR=$(LIBDIR)/icons
+ THEME=whiteglass
+ THEMEDIR=$(ICONDIR)/$(THEME)/cursors
+ 

@@ -1,0 +1,794 @@
+<?xml version="1.0"?>
+<RDF:RDF xmlns:NC="http://home.netscape.com/NC-rdf#"
+         xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/mspowerpoint"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.presentation"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/x-msword "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.sun.xml.draw"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:application/xls "
+                   NC:value="application/xls "
+                   NC:editable="true"
+                   NC:description="Microsoft Excel Dökümanı"
+                   NC:fileExtensions="xls">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/xls "/>
+  </RDF:Description>
+  <RDF:Seq RDF:about="urn:mimetypes:root">
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.oasis.opendocument.chart"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.oasis.opendocument.formula"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.oasis.opendocument.graphics"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.oasis.opendocument.graphics-template"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.oasis.opendocument.image"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.oasis.opendocument.presentation"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.oasis.opendocument.presentation-template"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.oasis.opendocument.spreadsheet"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.oasis.opendocument.spreadsheet-template"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.oasis.opendocument.text"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.oasis.opendocument.text-template"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.sun.xml.base"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.sun.xml.calc"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.sun.xml.calc.template"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.sun.xml.draw"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.sun.xml.draw.template"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.sun.xml.impress"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.sun.xml.writer"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.sun.xml.writer.master"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.sun.xml.writer.template"/>
+    <RDF:li RDF:resource="urn:mimetype:application/msword"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.msword"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.ms-word "/>
+    <RDF:li RDF:resource="urn:mimetype:application/x-msword "/>
+    <RDF:li RDF:resource="urn:mimetype:application/doc "/>
+    <RDF:li RDF:resource="urn:mimetype:application/msexcel "/>
+    <RDF:li RDF:resource="urn:mimetype:application/x-msexcel "/>
+    <RDF:li RDF:resource="urn:mimetype:application/x-ms-excel "/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.ms-excel"/>
+    <RDF:li RDF:resource="urn:mimetype:application/x-excel"/>
+    <RDF:li RDF:resource="urn:mimetype:application/xls "/>
+    <RDF:li RDF:resource="urn:mimetype:application/x-xls "/>
+    <RDF:li RDF:resource="urn:mimetype:application/mspowerpoint"/>
+    <RDF:li RDF:resource="urn:mimetype:application/ms-powerpoint "/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd-mspowerpoint"/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.ms-powerpoint "/>
+    <RDF:li RDF:resource="urn:mimetype:application/powerpoint "/>
+    <RDF:li RDF:resource="urn:mimetype:application/x-powerpoint "/>
+    <RDF:li RDF:resource="urn:mimetype:application/x-mspowerpoint"/>
+    <RDF:li RDF:resource="urn:mimetype:application/msaccess "/>
+    <RDF:li RDF:resource="urn:mimetype:application/x-msaccess "/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.msaccess "/>
+    <RDF:li RDF:resource="urn:mimetype:application/vnd.ms-access "/>
+    <RDF:li RDF:resource="urn:mimetype:application/mdb "/>
+    <RDF:li RDF:resource="urn:mimetype:application/x-mdb "/>
+    <RDF:li RDF:resource="urn:mimetype:audio/mpegurl"/>
+    <RDF:li RDF:resource="urn:mimetype:audio/scpls"/>
+    <RDF:li RDF:resource="urn:mimetype:audio/x-mpegurl"/>
+    <RDF:li RDF:resource="urn:mimetype:application/x-pdf "/>
+    <RDF:li RDF:resource="urn:mimetype:application/pdf "/>
+    <RDF:li RDF:resource="urn:mimetype:application/postscript"/>
+    <RDF:li RDF:resource="urn:mimetype:application/x-tar"/>
+  </RDF:Seq>
+  <RDF:Description RDF:about="urn:mimetype:application/ms-powerpoint "
+                   NC:value="application/ms-powerpoint "
+                   NC:editable="true"
+                   NC:description="Microsoft Powerpoint Dökümanı"
+                   NC:fileExtensions="ppt">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/ms-powerpoint "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.sun.xml.calc.template"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/x-mdb "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.sun.xml.draw"
+                   NC:value="application/vnd.sun.xml.draw"
+                   NC:editable="true"
+                   NC:description="OpenOffice Çizimi"
+                   NC:fileExtensions="sxd">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.sun.xml.draw"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/x-ms-excel "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.ms-powerpoint "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.ms-powerpoint "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/msaccess "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:application/x-mdb "
+                   NC:value="application/x-mdb "
+                   NC:editable="true"
+                   NC:description="Microsoft Access Dökümanı"
+                   NC:fileExtensions="mdb">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-mdb "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.ms-powerpoint "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:application/msword"
+                   NC:value="application/msword"
+                   NC:editable="true"
+                   NC:description="Microsoft Word Dökümanı"
+                   NC:fileExtensions="doc">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/msword"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/powerpoint "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/powerpoint "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-msword "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-msword "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.sun.xml.calc"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.sun.xml.calc"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.oasis.opendocument.graphics-template"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.graphics-template"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.ms-excel"
+                   NC:value="application/vnd.ms-excel"
+                   NC:editable="true"
+                   NC:description="Microsoft Excel Dökümanı"
+                   NC:fileExtensions="xls">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.ms-excel"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.sun.xml.writer.master"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.sun.xml.writer.master"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.oasis.opendocument.image"
+                   NC:value="application/vnd.oasis.opendocument.image"
+                   NC:editable="true"
+                   NC:description="OpenOffice Resim"
+                   NC:fileExtensions="odi">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.oasis.opendocument.image"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.sun.xml.impress"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.sun.xml.impress"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.oasis.opendocument.spreadsheet"
+                   NC:value="application/vnd.oasis.opendocument.spreadsheet"
+                   NC:editable="true"
+                   NC:description="OpenOffice Hesap Tablosu"
+                   NC:fileExtensions="ods">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.oasis.opendocument.spreadsheet"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.oasis.opendocument.presentation"
+                   NC:value="application/vnd.oasis.opendocument.presentation"
+                   NC:editable="true"
+                   NC:description="OpenOffice Sunum"
+                   NC:fileExtensions="odp">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.oasis.opendocument.presentation"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.spreadsheet"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:audio/scpls"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:audio/scpls"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.oasis.opendocument.graphics"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.graphics"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.oasis.opendocument.spreadsheet-template"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.spreadsheet-template"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd-mspowerpoint"
+                   NC:value="application/vnd-mspowerpoint"
+                   NC:editable="true"
+                   NC:description="Microsoft Powerpoint Dökümanı"
+                   NC:fileExtensions="ppt">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd-mspowerpoint"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.oasis.opendocument.presentation-template"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.presentation-template"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.sun.xml.calc.template"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.sun.xml.calc.template"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.sun.xml.writer.master"
+                   NC:value="application/vnd.sun.xml.writer.master"
+                   NC:editable="true"
+                   NC:description="OpenOffice Ana Metin Belgesi"
+                   NC:fileExtensions="sxg">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.sun.xml.writer.master"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.msaccess "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/postscript"
+                   NC:path="/usr/kde/3.5/bin/kghostview"
+                   NC:prettyName="kghostview" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.msword"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.oasis.opendocument.image"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.image"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/x-tar"
+                   NC:value="application/x-tar"
+                   NC:editable="true"
+                   NC:description="Tar dosyası"
+                   NC:fileExtensions="tar">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-tar"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-tar"
+                   NC:saveToDisk="true"
+                   NC:alwaysAsk="true">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-tar"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.sun.xml.draw.template"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.oasis.opendocument.graphics"
+                   NC:value="application/vnd.oasis.opendocument.graphics"
+                   NC:editable="true"
+                   NC:description="OpenOffice Grafik"
+                   NC:fileExtensions="odg">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.oasis.opendocument.graphics"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.image"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/x-xls "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:application/x-mspowerpoint"
+                   NC:value="application/x-mspowerpoint"
+                   NC:editable="true"
+                   NC:description="Microsoft PowerPoint Dökümanı"
+                   NC:fileExtensions="ppt">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-mspowerpoint"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.oasis.opendocument.formula"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.formula"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.oasis.opendocument.text-template"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.text-template"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.sun.xml.calc.template"
+                   NC:value="application/vnd.sun.xml.calc.template"
+                   NC:editable="true"
+                   NC:description="OpenOffice Hesap Şablonu"
+                   NC:fileExtensions="stc">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.sun.xml.calc.template"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.oasis.opendocument.presentation-template"
+                   NC:value="application/vnd.oasis.opendocument.presentation-template"
+                   NC:editable="true"
+                   NC:description="OpenOffice Sunum Şablonu"
+                   NC:fileExtensions="otp">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.oasis.opendocument.presentation-template"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.sun.xml.draw.template"
+                   NC:value="application/vnd.sun.xml.draw.template"
+                   NC:editable="true"
+                   NC:description="OpenOffice Çizim Şablonu"
+                   NC:fileExtensions="std">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.sun.xml.draw.template"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.sun.xml.writer.template"
+                   NC:value="application/vnd.sun.xml.writer.template"
+                   NC:editable="true"
+                   NC:description="OpenOffice Metin Belgesi Şablonu"
+                   NC:fileExtensions="stw">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.sun.xml.writer.template"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.ms-word "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.ms-word "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.ms-word "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:audio/x-mpegurl"
+                   NC:path="/usr/kde/3.5/bin/kaffeine"
+                   NC:prettyName="kaffeine" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:audio/scpls"
+                   NC:path="/usr/kde/3.5/bin/kaffeine"
+                   NC:prettyName="kaffeine" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/mdb "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.presentation-template"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-ms-excel "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-ms-excel "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.ms-access "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.ms-access "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/doc "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/doc "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/x-tar"
+                   NC:path="/usr/kde/3.5/bin/ark"
+                   NC:prettyName="ark" />
+  <RDF:Description RDF:about="urn:mimetype:application/x-powerpoint "
+                   NC:value="application/x-powerpoint "
+                   NC:editable="true"
+                   NC:description="Microsoft PowerPoint Dökümanı"
+                   NC:fileExtensions="ppt">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-powerpoint "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.msaccess "
+                   NC:value="application/vnd.msaccess "
+                   NC:editable="true"
+                   NC:description="Microsoft Access Dökümanı"
+                   NC:fileExtensions="mdb">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.msaccess "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/powerpoint "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.sun.xml.writer.template"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.sun.xml.draw.template"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.sun.xml.draw.template"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.ms-excel"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.msword"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.msword"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/x-excel"
+                   NC:value="application/x-excel"
+                   NC:editable="true"
+                   NC:description="Microsoft Excel Dökümanı"
+                   NC:fileExtensions="xls">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-excel"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/msaccess "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/msaccess "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.msword"
+                   NC:value="application/vnd.msword"
+                   NC:editable="true"
+                   NC:description="Microsoft Word Dökümanı"
+                   NC:fileExtensions="doc">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.msword"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.sun.xml.base"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.ms-access "
+                   NC:value="application/vnd.ms-access "
+                   NC:editable="true"
+                   NC:description="Microsoft Access Dökümanı"
+                   NC:fileExtensions="mdb">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.ms-access "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.sun.xml.writer"
+                   NC:value="application/vnd.sun.xml.writer"
+                   NC:editable="true"
+                   NC:description="OpenOffice Metin Belgesi"
+                   NC:fileExtensions="sxw">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.sun.xml.writer"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/doc "
+                   NC:value="application/doc "
+                   NC:editable="true"
+                   NC:description="Microsoft Word Dökümanı"
+                   NC:fileExtensions="doc">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/doc "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.sun.xml.writer"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.sun.xml.writer"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/x-powerpoint "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.oasis.opendocument.chart"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.chart"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/x-msword "
+                   NC:value="application/x-msword "
+                   NC:editable="true"
+                   NC:description="Microsoft Word Dökümanı"
+                   NC:fileExtensions="doc">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-msword "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/msexcel "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/msexcel "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/postscript"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/postscript"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.sun.xml.impress"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.formula"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:application/mspowerpoint"
+                   NC:value="application/mspowerpoint"
+                   NC:editable="true"
+                   NC:description="Microsoft PowerPoint Dökümanı"
+                   NC:fileExtensions="ppt">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/mspowerpoint"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:audio/scpls"
+                   NC:value="audio/scpls"
+                   NC:editable="true"
+                   NC:description="Mp3 Listesi"
+                   NC:fileExtensions="pls">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:audio/scpls"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/doc "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.oasis.opendocument.chart"
+                   NC:value="application/vnd.oasis.opendocument.chart"
+                   NC:editable="true"
+                   NC:description="OASIS OpenDocument Çizelgesi"
+                   NC:fileExtensions="odc">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.oasis.opendocument.chart"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/x-pdf "
+                   NC:path="/usr/kde/3.5/bin/kpdf"
+                   NC:prettyName="kpdf" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.sun.xml.writer"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-xls "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-xls "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.text"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd-mspowerpoint"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-excel"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-excel"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/msaccess "
+                   NC:value="application/msaccess "
+                   NC:editable="true"
+                   NC:description="Microsoft Access Dökümanı"
+                   NC:fileExtensions="mdb">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/msaccess "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-mspowerpoint"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-mspowerpoint"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-msexcel "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-msexcel "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/powerpoint "
+                   NC:value="application/powerpoint "
+                   NC:editable="true"
+                   NC:description="Microsoft Powerpoint Dökümanı"
+                   NC:fileExtensions="ppt">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/powerpoint "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-msaccess "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-msaccess "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/pdf "
+                   NC:value="application/pdf "
+                   NC:editable="true"
+                   NC:description="PDF dosyası"
+                   NC:fileExtensions="pdf">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/pdf "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.ms-access "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd-mspowerpoint"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd-mspowerpoint"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/mspowerpoint"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/mspowerpoint"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.oasis.opendocument.text"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.text"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.oasis.opendocument.formula"
+                   NC:value="application/vnd.oasis.opendocument.formula"
+                   NC:editable="true"
+                   NC:description="OpenOffice Formül"
+                   NC:fileExtensions="odf">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.oasis.opendocument.formula"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/x-pdf "
+                   NC:value="application/x-pdf "
+                   NC:editable="true"
+                   NC:description="PDF dosyası"
+                   NC:fileExtensions="pdf">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-pdf "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/msword"
+                   NC:prettyName="ooo-wrapper2.0"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.chart"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-powerpoint "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-powerpoint "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:audio/x-mpegurl"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:audio/x-mpegurl"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/xls "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/x-msexcel "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.ms-word "
+                   NC:value="application/vnd.ms-word "
+                   NC:editable="true"
+                   NC:description="Microsoft Word Dökümanı"
+                   NC:fileExtensions="doc">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.ms-word "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:audio/x-mpegurl"
+                   NC:value="audio/x-mpegurl"
+                   NC:editable="true"
+                   NC:description="Mp3 Listesi"
+                   NC:fileExtensions="m3u">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:audio/x-mpegurl"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/ms-powerpoint "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.sun.xml.writer.template"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.sun.xml.writer.template"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/mdb "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/mdb "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.graphics-template"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:application/x-xls "
+                   NC:value="application/x-xls "
+                   NC:editable="true"
+                   NC:description="Microsoft Excel Dökümanı"
+                   NC:fileExtensions="xls">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-xls "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.graphics"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/ms-powerpoint "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/ms-powerpoint "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/x-ms-excel "
+                   NC:value="application/x-ms-excel "
+                   NC:editable="true"
+                   NC:description="Microsoft Excel Dökümanı"
+                   NC:fileExtensions="xls">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-ms-excel "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/pdf "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/pdf "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.sun.xml.base"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.sun.xml.base"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.sun.xml.writer.master"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.oasis.opendocument.graphics-template"
+                   NC:value="application/vnd.oasis.opendocument.graphics-template"
+                   NC:editable="true"
+                   NC:description="OpenOffice Grafik Şablonu"
+                   NC:fileExtensions="otg">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.oasis.opendocument.graphics-template"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/msexcel "
+                   NC:value="application/msexcel "
+                   NC:editable="true"
+                   NC:description="Microsoft Excel Dökümanı"
+                   NC:fileExtensions="xls">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/msexcel "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-pdf "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-pdf "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/msword"
+                   NC:alwaysAsk="false"
+                   NC:useSystemDefault="false"
+                   NC:saveToDisk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/msword"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/x-excel"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.msaccess "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.msaccess "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.oasis.opendocument.text"
+                   NC:value="application/vnd.oasis.opendocument.text"
+                   NC:editable="true"
+                   NC:description="OpenOffice Metin"
+                   NC:fileExtensions="odt">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.oasis.opendocument.text"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.spreadsheet-template"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:audio/mpegurl"
+                   NC:value="audio/mpegurl"
+                   NC:editable="true"
+                   NC:description="Mp3 Listesi"
+                   NC:fileExtensions="m3u">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:audio/mpegurl"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.oasis.opendocument.spreadsheet"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.spreadsheet"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetypes">
+    <NC:MIME-types RDF:resource="urn:mimetypes:root"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.oasis.opendocument.spreadsheet-template"
+                   NC:value="application/vnd.oasis.opendocument.spreadsheet-template"
+                   NC:editable="true"
+                   NC:description="OpenOffice Hesap Tablosu Şablonu"
+                   NC:fileExtensions="ots">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.oasis.opendocument.spreadsheet-template"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/x-msexcel "
+                   NC:value="application/x-msexcel "
+                   NC:editable="true"
+                   NC:description="Microsoft Excel Dökümanı"
+                   NC:fileExtensions="xls">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-msexcel "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/x-msaccess "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.sun.xml.calc"
+                   NC:value="application/vnd.sun.xml.calc"
+                   NC:editable="true"
+                   NC:description="OpenOffice Hesap Tablosu"
+                   NC:fileExtensions="sxc">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.sun.xml.calc"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.ms-excel"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.ms-excel"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/x-msaccess "
+                   NC:value="application/x-msaccess "
+                   NC:editable="true"
+                   NC:description="Microsoft Access Dökümanı"
+                   NC:fileExtensions="mdb">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-msaccess "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/mdb "
+                   NC:value="application/mdb "
+                   NC:editable="true"
+                   NC:description="Microsoft Access Dökümanı"
+                   NC:fileExtensions="mdb">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/mdb "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.text-template"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/xls "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/xls "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.sun.xml.draw"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.sun.xml.draw"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.sun.xml.impress"
+                   NC:value="application/vnd.sun.xml.impress"
+                   NC:editable="true"
+                   NC:description="OpenOffice Sunumu"
+                   NC:fileExtensions="sxi">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.sun.xml.impress"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/vnd.sun.xml.calc"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.sun.xml.base"
+                   NC:value="application/vnd.sun.xml.base"
+                   NC:editable="true"
+                   NC:description="OpenOffice Veritabanı"
+                   NC:fileExtensions="odb">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.sun.xml.base"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.oasis.opendocument.presentation"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.oasis.opendocument.presentation"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/pdf "
+                   NC:path="/usr/kde/3.5/bin/kpdf"
+                   NC:prettyName="kpdf" />
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:audio/mpegurl"
+                   NC:path="/usr/kde/3.5/bin/kaffeine"
+                   NC:prettyName="kaffeine" />
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.ms-powerpoint "
+                   NC:value="application/vnd.ms-powerpoint "
+                   NC:editable="true"
+                   NC:description="Microsoft Powerpoint Dökümanı"
+                   NC:fileExtensions="ppt">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.ms-powerpoint "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:audio/mpegurl"
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:audio/mpegurl"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/postscript"
+                   NC:value="application/postscript"
+                   NC:editable="true"
+                   NC:description="Postscript Dosyası">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/postscript"/>
+    <NC:fileExtensions>ps</NC:fileExtensions>
+    <NC:fileExtensions>ps.gz</NC:fileExtensions>
+    <NC:fileExtensions>eps</NC:fileExtensions>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/vnd.oasis.opendocument.text-template"
+                   NC:value="application/vnd.oasis.opendocument.text-template"
+                   NC:editable="true"
+                   NC:description="OpenOffice Metin Şablonu"
+                   NC:fileExtensions="ott">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.oasis.opendocument.text-template"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/msexcel "
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-mdb "
+                   NC:alwaysAsk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-mdb "/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:externalApplication:application/x-mspowerpoint"
+                   NC:path="/opt/OpenOffice.org/bin/ooo-wrapper2.0"
+                   NC:prettyName="ooo-wrapper2.0" />
+</RDF:RDF>

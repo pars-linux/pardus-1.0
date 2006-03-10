@@ -1,0 +1,18 @@
+#!/sbin/runscript
+# Copyright © 2005  TUBITAK/UEKAE
+# Licensed under the GNU General Public License, version 2.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+#
+# Original work belongs Gentoo Linux
+
+depend() {
+	need modules
+}
+
+start () {
+	# just verify that people build their kernel with hotplug support.
+	if [ ! -f /proc/sys/kernel/hotplug ] ; then
+		eerror "CONFIG_HOTPLUG not enabled for this kernel!"
+		return 1
+	fi
+}

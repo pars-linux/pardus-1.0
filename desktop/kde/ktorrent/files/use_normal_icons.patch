@@ -1,0 +1,54 @@
+diff -ur ktorrent-1.1.orig/src/ktorrent.cpp ktorrent-1.1/src/ktorrent.cpp
+--- ktorrent-1.1.orig/src/ktorrent.cpp	2005-10-08 12:12:55.000000000 +0300
++++ ktorrent-1.1/src/ktorrent.cpp	2005-10-16 18:41:23.000000000 +0300
+@@ -277,23 +277,23 @@
+ 
+ 
+ 	m_start = new KAction(
+-			i18n("to start", "Start"), "ktstart",0,this, SLOT(startDownload()),
++			i18n("to start", "Start"), "1rightarrow",0,this, SLOT(startDownload()),
+ 			actionCollection(), "Start");
+ 
+ 	m_stop = new KAction(
+-			i18n("to stop", "Stop"), "ktstop",0,this, SLOT(stopDownload()),
++			i18n("to stop", "Stop"), "stop",0,this, SLOT(stopDownload()),
+ 			actionCollection(), "Stop");
+ 
+ 	m_remove = new KAction(
+-			i18n("Remove"), "ktremove",0,this, SLOT(removeDownload()),
++			i18n("Remove"), "edittrash",0,this, SLOT(removeDownload()),
+ 			actionCollection(), "Remove");
+ 	
+ 	m_startall = new KAction(
+-			i18n("to start all", "Start all"), "ktstart_all",0,this, SLOT(startAllDownloads()),
++			i18n("to start all", "Start all"), "2rightarrow",0,this, SLOT(startAllDownloads()),
+ 			actionCollection(), "Start all");
+ 	
+ 	m_stopall = new KAction(
+-			i18n("to stop all", "Stop all"), "ktstop_all",0,this, SLOT(stopAllDownloads()),
++			i18n("to stop all", "Stop all"), "player_stop",0,this, SLOT(stopAllDownloads()),
+ 			actionCollection(), "Stop all");
+ 	
+ 	createGUI();
+diff -ur ktorrent-1.1.orig/src/ktorrentview.cpp ktorrent-1.1/src/ktorrentview.cpp
+--- ktorrent-1.1.orig/src/ktorrentview.cpp	2005-10-08 12:12:55.000000000 +0300
++++ ktorrent-1.1/src/ktorrentview.cpp	2005-10-16 18:40:39.000000000 +0300
+@@ -62,15 +62,15 @@
+ 	menu = new KPopupMenu(this);
+ 	
+ 	stop_id = menu->insertItem(
+-			iload->loadIconSet("ktstop",KIcon::Small),i18n("to stop", "Stop"),
++			iload->loadIconSet("stop",KIcon::Small),i18n("to stop", "Stop"),
+ 			this,SLOT(stopDownload()));
+ 
+ 	start_id = menu->insertItem(
+-			iload->loadIconSet("ktstart",KIcon::Small),i18n("to start", "Start"),
++			iload->loadIconSet("1rightarrow",KIcon::Small),i18n("to start", "Start"),
+ 			this,SLOT(startDownload()));
+ 
+ 	remove_id = menu->insertItem(
+-			iload->loadIconSet("ktremove",KIcon::Small),i18n("Remove"),
++			iload->loadIconSet("edittrash",KIcon::Small),i18n("Remove"),
+ 			this,SLOT(removeDownload()));
+ 	menu->insertSeparator();
+ 

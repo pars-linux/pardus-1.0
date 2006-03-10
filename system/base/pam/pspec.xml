@@ -1,0 +1,112 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pam</Name>
+        <Homepage>http://www.kernel.org/pub/linux/libs/pam/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>PAM</License>
+        <IsA>library</IsA>
+        <Summary>Pluggable Authentication Modules</Summary>
+        <Description>Pluggable Authentication Modules</Description>
+        <Summary xml:lang="tr">PAM - Eklenebilir Yetkilendirme Modülleri</Summary>
+        <Description xml:lang="tr">PAM, çoklu düşük-seviye yetkilendirme şemalarını yüksek-seviye API'lere (Application Programming Interface - Uygulama Programlama Arayüzü) tümleyen mekanizmadır</Description>
+        <Archive sha1sum="58dff29aec3c0b6a9e9b53af6fb643056ce0f304" type="targz">http://www.kernel.org/pub/linux/libs/pam/pre/library/Linux-PAM-0.77.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">pam-0.77-redhat-modules.patch</Patch>
+            <Patch level="1">pam-0.77-modutil-thread.patch</Patch>
+            <Patch level="1">pam-0.77-include_path.patch</Patch>
+            <Patch level="1">pam-0.77-build.patch</Patch>
+            <Patch level="1">pam-0.75-linkage.patch</Patch>
+            <Patch level="1">pam-0.75-prompt.patch</Patch>
+            <Patch level="1">pam-0.75-return.patch</Patch>
+            <Patch level="1">pam-0.75-security.patch</Patch>
+            <Patch level="1">pam-0.77-string.patch</Patch>
+            <Patch level="1">pam-0.77-userdb.patch</Patch>
+            <Patch level="1">pam-0.75-group-reinit.patch</Patch>
+            <Patch level="1">pam-0.77-lastlog-utmp.patch</Patch>
+            <Patch level="1">pam-0.77-securetty-fail.patch</Patch>
+            <Patch level="1">pam-0.75-time.patch</Patch>
+            <Patch level="1">pam-0.77-issue.patch</Patch>
+            <Patch level="1">pam-0.77-doc-rhl.patch</Patch>
+            <Patch level="1">pam-0.77-bigcrypt-main.patch</Patch>
+            <Patch level="1">pam-0.77-cracklib-init.patch</Patch>
+            <Patch level="1">pam-0.77-filter-comments.patch</Patch>
+            <Patch level="1">pam-0.75-unix-loop.patch</Patch>
+            <Patch level="1">pam-0.77-unix-preserve.patch</Patch>
+            <Patch level="1">pam-0.77-unix-brokenshadow.patch</Patch>
+            <Patch level="1">pam-0.77-unix-hpux-aging.patch</Patch>
+            <Patch level="1">pam-0.77-unix-nis.patch</Patch>
+            <Patch level="1">pam-0.77-unix-nullok.patch</Patch>
+            <Patch level="1">pam-0.77-issue-heap.patch</Patch>
+            <Patch level="1">pam-0.75-listfile-tty.patch</Patch>
+            <Patch level="1">pam-0.77-misc-err.patch</Patch>
+            <Patch level="1">pam-0.77-unix-aixhash.patch</Patch>
+            <Patch level="1">pam-0.75-sgml2latex.patch</Patch>
+            <Patch level="1">pam-0.77-multicrack.patch</Patch>
+            <Patch level="1">pam-0.75-isa.patch</Patch>
+            <Patch level="1">pam-0.77-utmp-dev.patch</Patch>
+            <Patch level="1">pam-0.77-pwdb-static.patch</Patch>
+            <Patch level="1">pam-0.77-nss-reentrant.patch</Patch>
+            <Patch level="1">pam-0.77-dbpam.patch</Patch>
+            <Patch level="1">pam-0.77-sigchld.patch</Patch>
+            <Patch level="1">pam-0.77-skip-aconf-install.patch</Patch>
+            <Patch level="1">pam-0.77-console-reset.patch</Patch>
+            <Patch level="1">pam-0.77-devfsd.patch</Patch>
+            <Patch level="1">pam-0.77-pam_console-config.patch</Patch>
+            <Patch level="1">pam-0.77-pam_console-fix-fullpath-in-file-classes.patch</Patch>
+            <Patch level="1">pam-0.77-pam_console-static-glib.patch</Patch>
+            <Patch level="1">pam-0.77-pam_console_apply-use-correct-device.patch</Patch>
+            <Patch level="1">pam-0.77-pam_cracklib-static-cracklib.patch</Patch>
+            <Patch level="1">pam-0.77-pam_group-confile.patch</Patch>
+            <Patch level="1">pam-0.77-pam_pwdb-static-pwdb.patch</Patch>
+            <Patch level="1">pam-0.77-pam_radius-static-pwdb.patch</Patch>
+            <Patch level="1">pam-0.77-pam_xauth-also-set-DISPLAY.patch</Patch>
+            <Patch level="1">pam-0.77-pam_unix-gettext.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>cracklib</Dependency>
+            <Dependency>db4</Dependency>
+            <Dependency>perl</Dependency>
+            <Dependency>glib1</Dependency>
+            <Dependency>pwdb</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>pam</Name>
+        <RuntimeDependencies>
+            <Dependency>cracklib</Dependency>
+            <Dependency>db4</Dependency>
+            <Dependency>pwdb</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="data">/var/run/console</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/security/pam_env.conf">pam_env.conf</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-15</Date>
+            <Version>0.77</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

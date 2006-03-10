@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>sgml-common</Name>
+        <Homepage>http://www.iso.ch/cate/3524030.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>data</IsA>
+        <Summary>Base ISO character entities and utilities for SGML</Summary>
+        <Summary xml:lang="tr">SGML için ISO karakter nesneleri ve yardımcı programları</Summary>
+        <Description>Base ISO character entities and utilities for SGML</Description>
+        <Description xml:lang="tr">SGML için ISO karakter nesneleri ve yardımcı programları</Description>
+        <Archive sha1sum="b7d211c19b83accb92dcb51719de65227fb4c27c" type="targz">http://gd.tuwien.ac.at/hci/kde/devel/docbook/SOURCES/sgml-common-0.6.3.tgz</Archive>
+    </Source>
+
+    <Package>
+        <Name>sgml-common</Name>
+        <Files>
+            <Path fileType="config">/etc/sgml</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/doc/sgml-common-0.6.3</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/sgml</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2005-09-19</Date>
+            <Version>0.6.3</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

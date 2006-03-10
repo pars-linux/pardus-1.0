@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>IO-Socket-SSL</Name>
+        <Homepage>http://search.cpan.org/~behroozi/IO-Socket-SSL</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Summary>Nearly transparent SSL encapsulation for IO::Socket::INET</Summary>
+        <Description>Nearly transparent SSL encapsulation for IO::Socket::INET</Description>
+        <Archive sha1sum="681b0fa2130fe2b4535669b2e2fe145707fbe92a" type="targz">http://www.cpan.org/authors/id/B/BE/BEHROOZI/IO-Socket-SSL-0.96.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>Net-SSLeay</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>IO-Socket-SSL</Name>
+        <RuntimeDependencies>
+            <Dependency>Net-SSLeay</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="2">
+            <Date>2005-11-20</Date>
+            <Version>0.96</Version>
+            <Comment>Don't hardcode perl paths</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-02</Date>
+            <Version>0.96</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

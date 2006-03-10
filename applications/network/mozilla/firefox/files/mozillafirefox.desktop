@@ -1,0 +1,14 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Mozilla Firefox
+GenericName=Web Browser
+GenericName[tr]=İnternet Tarayıcısı
+Comment=Browse the Web
+Exec=/usr/bin/firefox %U
+Icon=mozilla-firebird
+Terminal=false
+Type=Application
+StartupWMClass=Firefox-bin
+MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;
+Categories=Application;Network;
+X-KDE-StartupNotify=false

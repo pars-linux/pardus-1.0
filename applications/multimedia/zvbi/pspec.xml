@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>zvbi</Name>
+        <Homepage>http://zapping.sourceforge.net</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <Summary>VBI Decoding Library for Zapping</Summary>
+        <Summary xml:lang="tr">Zapping uygulaması için VBI çözücü kütüphanesi</Summary>
+        <Description>VBI Decoding Library for Zapping</Description>
+        <Description xml:lang="tr">Zapping uygulaması için VBI çözücü kütüphanesi</Description>
+        <Archive sha1sum="8ebf3c9a2dae0809bbfc08e90e9ce7a285440834" type="tarbz2">http://heanet.dl.sourceforge.net/sourceforge/zapping/zvbi-0.2.17.tar.bz2</Archive>
+        <Patches>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency>libpng</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>zvbi</Name>
+        <RuntimeDependencies>
+            <Dependency>libpng</Dependency>
+        </RuntimeDependencies>        
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+   </Package>
+   <History>
+       <Update release="4">
+          <Date>2005-10-28</Date>
+          <Version>0.2.17</Version>
+          <Comment>Added missing path.</Comment>
+          <Name>Timu EREN</Name>
+          <Email>selamtux@gmail.com</Email>
+        </Update>
+        <Update release="3">
+          <Date>2005-10-28</Date>
+          <Version>0.2.17</Version>
+          <Comment>Added missing path.</Comment>
+          <Name>Timu EREN</Name>
+          <Email>selamtux@gmail.com</Email>
+        </Update>
+        <Update release="2">
+         <Date>2005-10-28</Date>
+         <Version>0.2.17</Version>
+         <Comment>Version update.</Comment>
+         <Name>Timu EREN</Name>
+         <Email>selamtux@gmail.com</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-27</Date>
+            <Version>0.2.4</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

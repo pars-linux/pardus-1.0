@@ -1,0 +1,11 @@
+diff -Nuar tn5250-0.16.5.orig/src/tn5250-config.h.in tn5250-0.16.5/src/tn5250-config.h.in
+--- tn5250-0.16.5.orig/src/tn5250-config.h.in	2005-11-30 17:49:37.000000000 +0200
++++ tn5250-0.16.5/src/tn5250-config.h.in	2005-11-30 17:51:01.000000000 +0200
+@@ -184,3 +184,7 @@
+ 
+ /* Define if the X Window System is missing or not being used. */
+ #undef X_DISPLAY_MISSING
++
++/* Define TRUE and FALSE */
++#define FALSE 0
++#define TRUE !FALSE

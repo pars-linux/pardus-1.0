@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>tv-fonts</Name>
+        <Homepage>http://bytesex.org/xawtv/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>data</IsA>
+        <Summary xml:lang="en">TV Fonts for Xawtv</Summary>
+        <Description xml:lang="en">TV Fonts for Xawtv</Description>
+        <Summary xml:lang="tr">Xawtv için TV yazıtipleri</Summary>
+        <Description xml:lang="tr">Xawtv için TV yazıtipleri</Description>
+        <Archive type="tarbz2" sha1sum="e35d1ddf5cc0b68a5935e5cabd2fbb1c39c6f760">http://dl.bytesex.org/releases/tv-fonts/tv-fonts-1.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>xorg</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>tv-fonts</Name>
+        <Files>
+            <Path fileType="data">/usr/lib/X11/fonts/xawtv</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-20</Date>
+            <Version>1.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>nmap</Name>
+        <Homepage>http://www.insecure.org/nmap/</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Utility for network exploration or security auditing.</Summary>
+        <Summary xml:lang="tr">Ağa gözatmak ya da güvenlik denetlemeleri yapmak için kullanılan bir araç</Summary>
+        <Description>Nmap is a free open source utility for network exploration or security auditing.</Description>
+        <Description xml:lang="tr">Ağa gözatmak ya da güvenlik denetlemeleri yapmak için kullanılan bir araçtır. Konsoldan yapacağınız sorgulamalarla ağınızda hangi makinaların açık/erişilebilir olduğunu, makinalarda hangi portlarda hangi hizmet protokollerinin ve uygulamaların çalıştığını, karşı makinada hangi işletim sisteminin yüklü olduğunu ve bağlantının hangi aygıt ile gerçekleştiğini öğrenebilirsiniz.</Description>
+        <Archive sha1sum="1d8a10ffb29580e3ea0406d52a3886c8de8bf21b" type="tarbz2">http://download.insecure.org/nmap/dist/nmap-3.95.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>libpcre</Dependency>
+            <Dependency>openssl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>nmap</Name>
+        <RuntimeDependencies>
+            <Dependency>libpcre</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/nmap</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-12-08</Date>
+            <Version>3.95</Version>
+            <Comment>Version bump</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-26</Date>
+            <Version>3.93</Version>
+            <Comment>Update to 3.93</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-09</Date>
+            <Version>3.90</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,604 @@
+2004-08-03  Mark Mitchell  <mark@codesourcery.com>
+
+	* class.c (build_vtable): Do not set DECL_VISIBILITY here.
+	(check_field_decls): Or here.
+	(check_methods): Or here.
+	(initialize_array): Don't mess with DECL_CONTEXT.
+	* cp-tree.h (start_decl): Adjust prototype.
+	(determine_visibility): New function.
+	* decl.c (duplicate_decls): Remove checks for hidden "operator
+	new".
+	(build_library_fn_1): Give all library functions default
+	visibility.
+	(start_decl): Add pop_scope_p parameter.  Tidy.
+	(cp_finish_decl): Do not pop scopes here.  Call
+	determine_visibility for variable definitions.
+	(start_preparsed_function): Call determine_visibility.
+	* decl2.c (determine_visibility): New function.
+	* method.c (use_thunk): Fix formatting.
+	* parser.c (cp_parser_condition): Adjust calls to start_decl.
+	(cp_parser_init_declarator): Likewise.
+	* pt.c (instantiate_decl): Always call pop_nested_class.
+	* rtti.c (get_tinfo_decl): Do not set DECL_VISIBILITY.
+	(tinfo_base_init): Likewise.
+
+--- gcc/cp/class.c.jj	2004-08-20 14:48:40.065325667 +0200
++++ gcc/cp/class.c	2004-08-20 15:05:47.255959645 +0200
+@@ -524,10 +524,6 @@ build_vtable (tree class_type, tree name
+   DECL_ALIGN (decl) = MAX (TYPE_ALIGN (double_type_node),
+ 			   DECL_ALIGN (decl));
+ 
+-  /* The vtable's visibility is the class visibility.  There is no way
+-     to override the visibility for just the vtable. */
+-  DECL_VISIBILITY (decl) = CLASSTYPE_VISIBILITY (class_type);
+-  DECL_VISIBILITY_SPECIFIED (decl) = CLASSTYPE_VISIBILITY_SPECIFIED (class_type);
+   import_export_vtable (decl, class_type, 0);
+ 
+   return decl;
+@@ -3018,25 +3014,7 @@ check_field_decls (tree t, tree *access_
+ 	continue;
+ 	  
+       if (TREE_CODE (x) == CONST_DECL || TREE_CODE (x) == VAR_DECL)
+-	{
+-	  /* Apply the class's visibility attribute to static members
+-	     which do not have a visibility attribute. */
+-	  if (! lookup_attribute ("visibility", DECL_ATTRIBUTES (x)))
+-            {
+-              if (visibility_options.inlines_hidden && DECL_INLINE (x))
+-                {
+-                  DECL_VISIBILITY (x) = VISIBILITY_HIDDEN;
+-                  DECL_VISIBILITY_SPECIFIED (x) = 1;
+-                }
+-              else
+-                {
+-                  DECL_VISIBILITY (x) = CLASSTYPE_VISIBILITY (current_class_type);
+-                  DECL_VISIBILITY_SPECIFIED (x) = CLASSTYPE_VISIBILITY_SPECIFIED (current_class_type);
+-                }
+-            }
+-
+-	  continue;
+-	}
++	continue;
+ 
+       /* Now it can only be a FIELD_DECL.  */
+ 
+@@ -3777,22 +3755,6 @@ check_methods (tree t)
+       check_for_override (x, t);
+       if (DECL_PURE_VIRTUAL_P (x) && ! DECL_VINDEX (x))
+ 	cp_error_at ("initializer specified for non-virtual method `%D'", x);
+- 
+-      /* Apply the class's visibility attribute to methods which do
+-	 not have a visibility attribute. */
+-      if (! lookup_attribute ("visibility", DECL_ATTRIBUTES (x)))
+-        {
+-          if (visibility_options.inlines_hidden && DECL_INLINE (x))
+-            {
+-              DECL_VISIBILITY (x) = VISIBILITY_HIDDEN;
+-              DECL_VISIBILITY_SPECIFIED (x) = 1;
+-            }
+-          else
+-            {
+-              DECL_VISIBILITY (x) = CLASSTYPE_VISIBILITY (current_class_type);
+-              DECL_VISIBILITY_SPECIFIED (x) = CLASSTYPE_VISIBILITY_SPECIFIED (current_class_type);
+-            }
+-        }
+ 
+       /* The name of the field is the original field name
+ 	 Save this in auxiliary field for later overloading.  */
+@@ -6813,14 +6775,9 @@ initialize_vtable (tree binfo, tree init
+ static void
+ initialize_array (tree decl, tree inits)
+ {
+-  tree context;
+-
+-  context = DECL_CONTEXT (decl);
+-  DECL_CONTEXT (decl) = NULL_TREE;
+   DECL_INITIAL (decl) = build_constructor (NULL_TREE, inits);
+   TREE_HAS_CONSTRUCTOR (DECL_INITIAL (decl)) = 1;
+   cp_finish_decl (decl, DECL_INITIAL (decl), NULL_TREE, 0);
+-  DECL_CONTEXT (decl) = context;
+ }
+ 
+ /* Build the VTT (virtual table table) for T.
+@@ -7915,4 +7872,3 @@ build_rtti_vtbl_entries (tree binfo, vtb
+   *vid->last_init = build_tree_list (NULL_TREE, init);
+   vid->last_init = &TREE_CHAIN (*vid->last_init);
+ }
+-
+--- gcc/cp/cp-tree.h.jj	2004-08-20 14:48:40.069324952 +0200
++++ gcc/cp/cp-tree.h	2004-08-20 15:41:42.184899125 +0200
+@@ -75,6 +75,7 @@ struct diagnostic_context;
+           or FIELD_DECL).
+       NEED_TEMPORARY_P (in REF_BIND, BASE_CONV)
+       IDENTIFIER_TYPENAME_P (in IDENTIFIER_NODE)
++      DECL_TINFO_P (in VAR_DECL)
+    5: C_IS_RESERVED_WORD (in IDENTIFIER_NODE)
+       DECL_VTABLE_OR_VTT_P (in VAR_DECL)
+    6: For future expansion
+@@ -2069,6 +2070,10 @@ struct lang_decl GTY(())
+   (DECL_CONTEXT (NODE) \
+    && TREE_CODE (DECL_CONTEXT (NODE)) == FUNCTION_DECL)
+ 
++/* 1 iff VAR_DECL node NODE is a type-info decl.  This flag is set for
++   both the primary typeinfo object and the associated NTBS name.  */
++#define DECL_TINFO_P(NODE) TREE_LANG_FLAG_4 (VAR_DECL_CHECK (NODE))
++
+ /* 1 iff VAR_DECL node NODE is virtual table or VTT.  */
+ #define DECL_VTABLE_OR_VTT_P(NODE) TREE_LANG_FLAG_5 (VAR_DECL_CHECK (NODE))
+ 
+@@ -3673,7 +3678,7 @@ extern int init_type_desc			(void);
+ extern tree check_tag_decl			(tree);
+ extern tree shadow_tag				(tree);
+ extern tree groktypename			(tree);
+-extern tree start_decl				(tree, tree, int, tree, tree);
++extern tree start_decl				(tree, tree, int, tree, tree, bool *);
+ extern void start_decl_1			(tree);
+ extern void cp_finish_decl			(tree, tree, tree, int);
+ extern void finish_decl				(tree, tree, tree);
+@@ -3757,6 +3762,7 @@ extern tree finish_table (tree, tree, tr
+ extern tree coerce_new_type (tree);
+ extern tree coerce_delete_type (tree);
+ extern void comdat_linkage (tree);
++extern void determine_visibility (tree);
+ extern void import_export_vtable (tree, tree, int);
+ extern void import_export_decl (tree);
+ extern void import_export_tinfo	(tree, tree, bool);
+--- gcc/cp/decl.c.jj	2004-08-20 14:48:40.075323879 +0200
++++ gcc/cp/decl.c	2004-08-20 15:09:21.014860843 +0200
+@@ -1883,11 +1883,12 @@ duplicate_decls (tree newdecl, tree oldd
+   COPY_DECL_ASSEMBLER_NAME (olddecl, newdecl);
+ 
+   /* Warn about conflicting visibility specifications.  */
+-  if (DECL_VISIBILITY_SPECIFIED (olddecl) && DECL_VISIBILITY_SPECIFIED (newdecl)
++  if (DECL_VISIBILITY_SPECIFIED (olddecl) 
++      && DECL_VISIBILITY_SPECIFIED (newdecl)
+       && DECL_VISIBILITY (newdecl) != DECL_VISIBILITY (olddecl))
+     {
+       warning ("%J'%D': visibility attribute ignored because it",
+-        newdecl, newdecl);
++	       newdecl, newdecl);
+       warning ("%Jconflicts with previous declaration here", olddecl);
+     }
+   /* Choose the declaration which specified visibility.  */
+@@ -1896,21 +1897,6 @@ duplicate_decls (tree newdecl, tree oldd
+       DECL_VISIBILITY (newdecl) = DECL_VISIBILITY (olddecl);
+       DECL_VISIBILITY_SPECIFIED (newdecl) = 1;
+     }
+-  /* If it's a definition of a global operator new or operator
+-     delete, it must be default visibility.  */
+-  if (NEW_DELETE_OPNAME_P (DECL_NAME (newdecl)) && DECL_INITIAL (newdecl) != NULL_TREE)
+-    {
+-      if (!DECL_FUNCTION_MEMBER_P (newdecl) && VISIBILITY_DEFAULT != DECL_VISIBILITY (newdecl))
+-        {
+-          warning ("%J`%D': ignoring non-default symbol",
+-            newdecl, newdecl);
+-          warning ("%Jvisibility on global operator new or delete", newdecl);
+-          DECL_VISIBILITY (olddecl) = VISIBILITY_DEFAULT;
+-          DECL_VISIBILITY_SPECIFIED (olddecl) = 1;
+-          DECL_VISIBILITY (newdecl) = VISIBILITY_DEFAULT;
+-          DECL_VISIBILITY_SPECIFIED (newdecl) = 1;
+-        }
+-    }
+ 
+   if (TREE_CODE (newdecl) == FUNCTION_DECL)
+     {
+@@ -3330,6 +3316,10 @@ build_library_fn_1 (tree name, enum tree
+   TREE_NOTHROW (fn) = 1;
+   SET_OVERLOADED_OPERATOR_CODE (fn, operator_code);
+   SET_DECL_LANGUAGE (fn, lang_c);
++  /* Runtime library routines are, by definition, available in an
++     external shared object.  */
++  DECL_VISIBILITY (fn) = VISIBILITY_DEFAULT;
++  DECL_VISIBILITY_SPECIFIED (fn) = 1;
+   return fn;
+ }
+ 
+@@ -3693,7 +3683,8 @@ start_decl (tree declarator, 
+             tree declspecs, 
+             int initialized, 
+             tree attributes, 
+-            tree prefix_attributes)
++            tree prefix_attributes,
++            bool *pop_scope_p)
+ {
+   tree decl;
+   tree type, tem;
+@@ -3729,14 +3720,11 @@ start_decl (tree declarator, 
+ 
+   context = DECL_CONTEXT (decl);
+ 
+-  if (initialized && context && TREE_CODE (context) == NAMESPACE_DECL
+-      && context != current_namespace && TREE_CODE (decl) == VAR_DECL)
+-    {
+-      /* When parsing the initializer, lookup should use the object's
+-	 namespace.  */
+-      push_decl_namespace (context);
+-    }
+-
++  if (context)
++    *pop_scope_p = push_scope (context);
++  else
++    *pop_scope_p = false;
++  
+   /* We are only interested in class contexts, later.  */
+   if (context && TREE_CODE (context) == NAMESPACE_DECL)
+     context = NULL_TREE;
+@@ -3792,8 +3780,6 @@ start_decl (tree declarator, 
+ 
+   if (context && COMPLETE_TYPE_P (complete_type (context)))
+     {
+-      push_nested_class (context);
+-
+       if (TREE_CODE (decl) == VAR_DECL)
+ 	{
+ 	  tree field = lookup_field (context, DECL_NAME (decl), 0, false);
+@@ -4787,20 +4773,10 @@ cp_finish_decl (tree decl, tree init, tr
+       && (DECL_INITIAL (decl) || init))
+     DECL_INITIALIZED_IN_CLASS_P (decl) = 1;
+ 
+-  if (TREE_CODE (decl) == VAR_DECL
+-      && DECL_CONTEXT (decl)
+-      && TREE_CODE (DECL_CONTEXT (decl)) == NAMESPACE_DECL
+-      && DECL_CONTEXT (decl) != current_namespace
+-      && init)
+-    {
+-      /* Leave the namespace of the object.  */
+-      pop_decl_namespace ();
+-    }
+-
+   type = TREE_TYPE (decl);
+ 
+   if (type == error_mark_node)
+-    goto finish_end0;
++    goto finish_end;
+ 
+   if (TYPE_HAS_MUTABLE_P (type))
+     TREE_READONLY (decl) = 0;
+@@ -4817,7 +4793,7 @@ cp_finish_decl (tree decl, tree init, tr
+ 	  && !DECL_PRETTY_FUNCTION_P (decl)
+ 	  && !dependent_type_p (TREE_TYPE (decl)))
+ 	maybe_deduce_size_from_array_init (decl, init);
+-      goto finish_end0;
++      goto finish_end;
+     }
+ 
+   /* Parameters are handled by store_parm_decls, not cp_finish_decl.  */
+@@ -4953,6 +4929,9 @@
+ 	     the class specifier.  */
+ 	  if (!DECL_EXTERNAL (decl))
+ 	    var_definition_p = true;
++	  /* The variable is being defined, so determine its
++	     visibility.  */
++	  determine_visibility (decl);
+ 	}
+       /* If the variable has an array type, lay out the type, even if
+ 	 there is no initializer.  It is valid to index through the
+@@ -4982,26 +4961,6 @@ cp_finish_decl (tree decl, tree init, tr
+ 	  if (TREE_STATIC (decl))
+ 	    expand_static_init (decl, init);
+ 	}
+-    finish_end0:
+-
+-      /* Undo call to `pushclass' that was done in `start_decl'
+-	 due to initialization of qualified member variable.
+-	 I.e., Foo::x = 10;  */
+-      {
+-	tree context = CP_DECL_CONTEXT (decl);
+-	if (context
+-	    && TYPE_P (context)
+-	    && (TREE_CODE (decl) == VAR_DECL
+-		/* We also have a pushclass done that we need to undo here
+-		   if we're at top level and declare a method.  */
+-		|| TREE_CODE (decl) == FUNCTION_DECL)
+-	    /* If size hasn't been set, we're still defining it,
+-	       and therefore inside the class body; don't pop
+-	       the binding level..  */
+-	    && COMPLETE_TYPE_P (context)
+-	    && context == current_class_type)
+-	  pop_nested_class ();
+-      }
+     }
+ 
+   /* If a CLEANUP_STMT was created to destroy a temporary bound to a
+@@ -10170,6 +10129,9 @@ start_function (tree declspecs, tree dec
+       && lookup_attribute ("noinline", attrs))
+     warning ("%Jinline function '%D' given attribute noinline", decl1, decl1);
+ 
++  /* Determine the ELF visibility attribute for the function.  */
++  determine_visibility (decl1);
++
+   if (DECL_MAYBE_IN_CHARGE_CONSTRUCTOR_P (decl1))
+     /* This is a constructor, we must ensure that any default args
+        introduced by this definition are propagated to the clones
+--- gcc/cp/decl2.c.jj	2004-07-03 14:17:12.000000000 +0200
++++ gcc/cp/decl2.c	2004-08-20 15:11:02.565754132 +0200
+@@ -1652,6 +1652,59 @@ maybe_emit_vtables (tree ctype)
+   return true;
+ }
+ 
++/* Determine the ELF symbol visibility for DECL.  */
++
++void
++determine_visibility (tree decl)
++{
++  tree class_type;
++
++  /* Cloned constructors and destructors get the same visibility as
++     the underlying function.  That should be set up in
++     maybe_clone_body.  */
++  if (DECL_CLONED_FUNCTION_P (decl))
++    return;
++
++  if (DECL_CLASS_SCOPE_P (decl))
++    class_type = DECL_CONTEXT (decl);
++  else if (TREE_CODE (decl) == VAR_DECL
++	   && DECL_TINFO_P (decl)
++	   && CLASS_TYPE_P (TREE_TYPE (DECL_NAME (decl))))
++    class_type = TREE_TYPE (DECL_NAME (decl));
++  else
++    {
++      /* Virtual tables have DECL_CONTEXT set to their associated class,
++	 so they are automatically handled above.  */
++      my_friendly_assert (!(TREE_CODE (decl) == VAR_DECL
++			    && DECL_VTABLE_OR_VTT_P (decl)), 20040803);
++      /* Entities not associated with any class just get the
++	 visibility specified by their attributes.  */
++      return;
++    }
++
++  /* By default, static data members and function members receive
++     the visibility of their containing class.  */
++  if (class_type
++      && (TREE_CODE (decl) == VAR_DECL 
++	  || TREE_CODE (decl) == FUNCTION_DECL)
++      && !lookup_attribute ("visibility", DECL_ATTRIBUTES (decl)))
++    {
++      if (TREE_CODE (decl) == FUNCTION_DECL
++	  && DECL_DECLARED_INLINE_P (decl)
++	  && visibility_options.inlines_hidden)
++	{
++	  DECL_VISIBILITY (decl) = VISIBILITY_HIDDEN;
++	  DECL_VISIBILITY_SPECIFIED (decl) = 1;
++	}
++      else
++	{
++	  DECL_VISIBILITY (decl) = CLASSTYPE_VISIBILITY (class_type);
++	  DECL_VISIBILITY_SPECIFIED (decl)
++	    = CLASSTYPE_VISIBILITY_SPECIFIED (class_type);
++	}
++    }
++}
++
+ /* Determines the proper settings of TREE_PUBLIC and DECL_EXTERNAL for an
+    inline function or template instantiation at end-of-file.  */
+ 
+--- gcc/cp/method.c.jj	2004-08-20 14:48:40.076323700 +0200
++++ gcc/cp/method.c	2004-08-20 15:11:37.400541198 +0200
+@@ -394,7 +394,8 @@ use_thunk (tree thunk_fndecl, bool emit_
+      rewrite.  */
+   TREE_PUBLIC (thunk_fndecl) = TREE_PUBLIC (function);
+   DECL_VISIBILITY (thunk_fndecl) = DECL_VISIBILITY (function);
+-  DECL_VISIBILITY_SPECIFIED (thunk_fndecl) = DECL_VISIBILITY_SPECIFIED (function);
++  DECL_VISIBILITY_SPECIFIED (thunk_fndecl)
++    = DECL_VISIBILITY_SPECIFIED (function);
+ 
+   if (flag_syntax_only)
+     {
+--- gcc/cp/parser.c.jj	2004-08-16 17:29:54.000000000 +0200
++++ gcc/cp/parser.c	2004-08-20 15:18:42.789690358 +0200
+@@ -5828,10 +5828,13 @@ cp_parser_condition (cp_parser* parser)
+ 	 for sure.  */
+       if (cp_parser_parse_definitely (parser))
+ 	{
++	  bool pop_p;
++
+ 	  /* Create the declaration.  */
+ 	  decl = start_decl (declarator, type_specifiers, 
+ 			     /*initialized_p=*/true,
+-			     attributes, /*prefix_attributes=*/NULL_TREE);
++			     attributes, /*prefix_attributes=*/NULL_TREE,
++			     &pop_p);
+ 	  /* Parse the assignment-expression.  */
+ 	  initializer = cp_parser_assignment_expression (parser);
+ 	  
+@@ -5840,7 +5843,9 @@ cp_parser_condition (cp_parser* parser)
+ 			  initializer, 
+ 			  asm_specification, 
+ 			  LOOKUP_ONLYCONVERTING);
+-	  
++	  if (pop_p)
++	    pop_scope (DECL_CONTEXT (decl));
++
+ 	  return convert_from_reference (decl);
+ 	}
+     }
+@@ -10027,12 +10032,12 @@ cp_parser_init_declarator (cp_parser* pa
+ 	  have_extern_spec = false;
+ 	}
+       decl = start_decl (declarator, decl_specifiers,
+-			 is_initialized, attributes, prefix_attributes);
++			 is_initialized, attributes, prefix_attributes,
++			 &pop_p);
+     }
+-
+-  /* Enter the SCOPE.  That way unqualified names appearing in the
+-     initializer will be looked up in SCOPE.  */
+-  if (scope)
++  else if (scope)
++    /* Enter the SCOPE.  That way unqualified names appearing in the
++       initializer will be looked up in SCOPE.  */
+     pop_p = push_scope (scope);
+ 
+   /* Perform deferred access control checks, now that we know in which
+@@ -10079,17 +10084,13 @@ cp_parser_init_declarator (cp_parser* pa
+     if (cp_parser_attributes_opt (parser))
+       warning ("attributes after parenthesized initializer ignored");
+ 
+-  /* Leave the SCOPE, now that we have processed the initializer.  It
+-     is important to do this before calling cp_finish_decl because it
+-     makes decisions about whether to create DECL_STMTs or not based
+-     on the current scope.  */
+-  if (pop_p)
+-    pop_scope (scope);
+-
+   /* For an in-class declaration, use `grokfield' to create the
+      declaration.  */
+   if (member_p)
+     {
++      if (pop_p)
++	pop_scope (scope);
++
+       decl = grokfield (declarator, decl_specifiers,
+ 			initializer, /*asmspec=*/NULL_TREE,
+ 			/*attributes=*/NULL_TREE);
+@@ -10100,15 +10101,19 @@ cp_parser_init_declarator (cp_parser* pa
+   /* Finish processing the declaration.  But, skip friend
+      declarations.  */
+   if (!friend_p && decl)
+-    cp_finish_decl (decl, 
+-		    initializer, 
+-		    asm_specification,
+-		    /* If the initializer is in parentheses, then this is
+-		       a direct-initialization, which means that an
+-		       `explicit' constructor is OK.  Otherwise, an
+-		       `explicit' constructor cannot be used.  */
+-		    ((is_parenthesized_init || !is_initialized)
+-		     ? 0 : LOOKUP_ONLYCONVERTING));
++    {
++      cp_finish_decl (decl, 
++		      initializer, 
++		      asm_specification,
++		      /* If the initializer is in parentheses, then this is
++			 a direct-initialization, which means that an
++			 `explicit' constructor is OK.  Otherwise, an
++			 `explicit' constructor cannot be used.  */
++		      ((is_parenthesized_init || !is_initialized)
++		       ? 0 : LOOKUP_ONLYCONVERTING));
++      if (pop_p)
++	pop_scope (DECL_CONTEXT (decl));
++    }
+ 
+   /* Remember whether or not variables were initialized by
+      constant-expressions.  */
+--- gcc/cp/pt.c.jj	2004-08-16 17:29:55.000000000 +0200
++++ gcc/cp/pt.c	2004-08-20 15:24:22.571125969 +0200
+@@ -11241,20 +11241,13 @@ instantiate_decl (tree d, int defer_ok)
+ 	}
+       else
+ 	{
+-	  /* This is done in analogous to `start_decl'.  It is
+-	     required for correct access checking.  */
++	  /* Enter the scope of D so that access-checking works correctly.  */
+ 	  push_nested_class (DECL_CONTEXT (d));
+ 	  cp_finish_decl (d, 
+ 			  (!DECL_INITIALIZED_IN_CLASS_P (d) 
+ 			   ? DECL_INITIAL (d) : NULL_TREE),
+ 			  NULL_TREE, 0);
+-	  /* Normally, pop_nested_class is called by cp_finish_decl
+-	     above.  But when instantiate_decl is triggered during
+-	     instantiate_class_template processing, its DECL_CONTEXT
+-	     is still not completed yet, and pop_nested_class isn't
+-	     called.  */
+-	  if (!COMPLETE_TYPE_P (DECL_CONTEXT (d)))
+-	    pop_nested_class ();
++	  pop_nested_class ();
+ 	}
+       /* We're not deferring instantiation any more.  */
+       TI_PENDING_TEMPLATE_FLAG (DECL_TEMPLATE_INFO (d)) = 0;
+--- gcc/cp/rtti.c.jj	2004-08-20 14:48:40.079323163 +0200
++++ gcc/cp/rtti.c	2004-08-20 15:33:18.884542643 +0200
+@@ -354,21 +354,16 @@ get_tinfo_decl (tree type)
+       TREE_READONLY (d) = 1;
+       TREE_STATIC (d) = 1;
+       DECL_EXTERNAL (d) = 1;
++      DECL_TINFO_P (d) = 1;
+       DECL_COMDAT (d) = 1;
+       TREE_PUBLIC (d) = 1;
+       SET_DECL_ASSEMBLER_NAME (d, name);
+-
+-      pushdecl_top_level_and_finish (d, NULL_TREE);
+-
+-      if (CLASS_TYPE_P (type))
+-	{
+-	  CLASSTYPE_TYPEINFO_VAR (TYPE_MAIN_VARIANT (type)) = d;
+-	  DECL_VISIBILITY (d) = CLASSTYPE_VISIBILITY (type);
+-	  DECL_VISIBILITY_SPECIFIED (d) = CLASSTYPE_VISIBILITY_SPECIFIED (type);
+-	}
+-
+       /* Remember the type it is for.  */
+       TREE_TYPE (name) = type;
++      if (CLASS_TYPE_P (type))
++	CLASSTYPE_TYPEINFO_VAR (TYPE_MAIN_VARIANT (type)) = d;
++
++      pushdecl_top_level_and_finish (d, NULL_TREE);
+ 
+       /* Add decl to the global array of tinfo decls.  */
+       my_friendly_assert (unemitted_tinfo_decls != 0, 20030312);
+@@ -755,24 +750,20 @@ tinfo_base_init (tree desc, tree target)
+                      NULL_TREE);
+     tree name_string = tinfo_name (target);
+ 
++    /* Determine the name of the variable -- and remember with which
++       type it is associated.  */
+     name_name = mangle_typeinfo_string_for_type (target);
++    TREE_TYPE (name_name) = target;
++
+     name_decl = build_lang_decl (VAR_DECL, name_name, name_type);
+-    
++    SET_DECL_ASSEMBLER_NAME (name_decl, name_name);
+     DECL_ARTIFICIAL (name_decl) = 1;
+     TREE_READONLY (name_decl) = 1;
+     TREE_STATIC (name_decl) = 1;
+     DECL_EXTERNAL (name_decl) = 0;
++    DECL_TINFO_P (name_decl) = 1;
+     TREE_PUBLIC (name_decl) = 1;
+-    if (CLASS_TYPE_P (target))
+-      {
+-        DECL_VISIBILITY (name_decl) = CLASSTYPE_VISIBILITY (target);
+-        DECL_VISIBILITY_SPECIFIED (name_decl) = CLASSTYPE_VISIBILITY_SPECIFIED (target);
+-      }
+     import_export_tinfo (name_decl, target, typeinfo_in_lib_p (target));
+-    /* External name of the string containing the type's name has a
+-       special name.  */
+-    SET_DECL_ASSEMBLER_NAME (name_decl,
+-			     mangle_typeinfo_string_for_type (target));
+     DECL_INITIAL (name_decl) = name_string;
+     mark_used (name_decl);
+     pushdecl_top_level_and_finish (name_decl, name_string);
+--- gcc/testsuite/g++.dg/ext/visibility/new1.C	2004-08-20 13:37:06.849329000 +0000
++++ gcc/testsuite/g++.dg/ext/visibility/new1.C	2004-08-20 13:37:06.849329000 +0000
+@@ -0,0 +1,14 @@
++// { dg-require-visibility }
++// { dg-do compile }
++// { dg-options "-fvisibility=hidden" }
++// { dg-final { scan-assembler-not "\\.hidden\[^\n\]*_Znwj" } }
++
++void f() {
++  new int;
++}
++
++void *g();
++
++void *operator new(__SIZE_TYPE__) {
++  return g();
++}
+--- gcc/testsuite/g++.dg/ext/visibility/assign1.C	2004-08-20 13:37:06.387746000 +0000
++++ gcc/testsuite/g++.dg/ext/visibility/assign1.C	2004-08-20 13:37:06.387746000 +0000
+@@ -0,0 +1,17 @@
++/* { dg-do compile } */
++/* { dg-require-visibility "" } */
++/* { dg-final { scan-assembler "\\.hidden.*_ZN1DaSERKS_" } } */
++
++struct B {
++  B& operator=(const B&);
++};
++
++struct D : public B {
++  // The implicit assignment operator should be hidden.
++} __attribute__((visibility("hidden")));
++
++D d1, d2;
++
++void f() {
++  d1 = d2;
++}

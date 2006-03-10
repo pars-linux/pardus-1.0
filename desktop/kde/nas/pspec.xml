@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>nas</Name>
+        <Homepage>http://nas.codebrilliance.com/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>daemon</IsA>
+        <Summary>Network Audio System</Summary>
+        <Description>Network Audio System</Description>
+        <Summary xml:lang="tr">Ağ Ses Sistemi</Summary>
+        <Description xml:lang="tr">Nas, transparan bir ağ istemci/sunucu ses iletim sistemidir</Description>
+        <Archive sha1sum="a41adef84d0bf4c8e02b14d77bec0d284e7c9317" type="targz">http://nas.codebrilliance.com/nas/nas-1.7.src.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">nas-1.7-header.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>xorg</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>nas</Name>
+        <RuntimeDependencies>
+            <Dependency>xorg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include/audio</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/nas">nas.init.d</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/nas">nas.conf.d</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-05</Date>
+            <Version>1.7</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

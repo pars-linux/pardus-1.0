@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>automake1_5</Name>
+        <Homepage>http://sources.redhat.com/automake/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Used to generate Makefile.in from Makefile.am</Summary>
+        <Summary xml:lang="tr">Makefile.am yapılandırma dosyalarından Makefile.in dosyası üreten program</Summary>
+        <Description>Used to generate Makefile.in from Makefile.am</Description>
+        <Description xml:lang="tr">Makefile.am yapılandırma dosyalarından Makefile.in dosyası üreten program</Description>
+        <Archive sha1sum="9c426ac75e514dc214dea6309b07c5d9cb95002c" type="targz">http://ftp.gnu.org/gnu/automake/automake-1.5.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">automake-1.5-target_hook.patch</Patch>
+            <Patch>automake-1.5-slot.patch</Patch>
+            <Patch level="1">automake-1.5-test-fixes.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>autoconf2_59</Dependency>
+            <Dependency>gnuconfig</Dependency>
+            <Dependency>patch</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>automake1_5</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>autoconf2_59</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/automake-1.5</Path>
+            <Path fileType="data">/usr/share/aclocal-1.5</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-08</Date>
+            <Version>1.5</Version>
+            <Comment>Fix package problem (aclocal renamed as aclocal-1.5)</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-21</Date>
+            <Version>1.5</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

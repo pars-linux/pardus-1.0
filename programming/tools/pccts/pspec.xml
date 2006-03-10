@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pccts</Name>
+        <Homepage>http://www.polhode.com</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>app:console</IsA>
+        <Summary>Purdue Compiler Construction Tool Set is an embedded C/C++ parser generator</Summary>
+        <Description>Purdue Compiler Construction Tool Set is an embedded C/C++ parser generator</Description>
+        <Summary xml:lang="tr">Prudue Derleyici İnşaat Araç Seti (PCCTS) gömülü bir C/C++ ayırıştırıcı üretecidir</Summary>
+        <Description xml:lang="tr">Prudue Derleyici İnşaat Araç Seti (PCCTS) gömülü bir C/C++ ayırıştırıcı üretecidir.</Description>
+        <Archive sha1sum="5b3417efd5f537434b568114bcda853b4975d851" type="zip">http://www.polhode.com/pccts133mr33.zip</Archive>
+        <Patches>
+            <Patch level="1">pccts-1.33.33-gentoo.diff</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>unzip</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>pccts</Name>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+  </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-16</Date>
+            <Version>1.33.33</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,117 @@
+#!/bin/bash
+
+# font_setup
+umask 022
+
+# These cause ttmkfdir to segfault :/
+rm -f /usr/share/fonts/encodings/iso8859-6.8x.enc.gz
+rm -f /usr/share/fonts/encodings/iso8859-6.16.enc.gz
+
+# Create the encodings.dir in /usr/share/fonts/encodings
+LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib" \
+    /usr/bin/mkfontdir -n \
+    -e /usr/share/fonts/encodings \
+    -e /usr/share/fonts/encodings/large \
+    -- /usr/share/fonts/encodings
+
+# Create fonts.scale files
+for x in $(find /usr/share/fonts/* -maxdepth 1 -type d); do
+    [ -z "$(ls ${x}/)" ] && continue
+    [ "$(ls ${x}/)" = "fonts.cache-1" ] && continue
+
+# Only generate .scale files if truetype, opentype or type1
+# fonts are present ...
+# First truetype (ttf,ttc)
+# Also, there is no way to regenerate Speedo/CID fonts.scale
+
+    if [ "${x/encodings}" = "${x}" -a \
+        -n "$(find ${x} -iname '*.tt[cf]' -print)" ]; then
+        if [ -x /usr/bin/ttmkfdir ]; then
+            LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib" \
+            /usr/bin/ttmkfdir -x 2 \
+                -e /usr/share/fonts/encodings/encodings.dir \
+                -o ${x}/fonts.scale -d ${x}
+            # ttmkfdir fails on some stuff, so try mkfontscale if it does
+            ttmkfdir_return=$?
+        else
+            # We didn't use ttmkfdir at all
+            ttmkfdir_return=2
+        fi
+        
+        if [ ${ttmkfdir_return} -ne 0 ]; then
+            LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib" \
+            /usr/bin/mkfontscale \
+                -a /usr/share/fonts/encodings/encodings.dir \
+                -- ${x}
+        fi
+        # Next type1 and opentype (pfa,pfb,otf,otc)
+    elif [ "${x/encodings}" = "${x}" -a \
+        -n "$(find ${x} -iname '*.[po][ft][abcf]' -print)" ]; then
+        LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib" \
+            /usr/bin/mkfontscale \
+            -a /usr/share/fonts/encodings/encodings.dir \
+            -- ${x}
+    fi
+done
+
+# "Generating fonts.dir files"
+for x in $(find /usr/share/fonts/* -maxdepth 1 -type d); do
+    [ -z "$(ls ${x}/)" ] && continue
+    [ "$(ls ${x}/)" = "fonts.cache-1" ] && continue
+
+    if [ "${x/encodings}" = "${x}" ]; then
+        LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib" \
+        /usr/bin/mkfontdir \
+            -e /usr/share/fonts/encodings \
+            -e /usr/share/fonts/encodings/large \
+            -- ${x}
+    fi
+done
+
+# "Generating Xft cache"
+for x in $(find /usr/share/fonts/* -maxdepth 1 -type d); do
+    [ -z "$(ls ${x}/)" ] && continue
+    [ "$(ls ${x}/)" = "fonts.cache-1" ] && continue
+
+    # Only generate XftCache files if there are truetype
+    # fonts present ...
+    if [ "${x/encodings}" = "${x}" -a \
+        -n "$(find ${x} -iname '*.[otps][pft][cfad]' -print)" ]; then
+        LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib" \
+        /usr/bin/xftcache ${x} &> /dev/null
+    fi
+done
+
+# "Fixing permissions"
+find /usr/share/fonts/ -type f -name 'font.*' -exec chmod 0644 {} \;
+
+# danarmak found out that fc-cache should be run AFTER all the above
+# stuff, as otherwise the cache is invalid, and has to be run again
+# as root anyway
+if [ -x /usr/bin/fc-cache ]; then
+    HOME="/root" /usr/bin/fc-cache
+fi
+
+for x in $(find /usr/lib/X11/locale/ -mindepth 1 -type d); do
+    # Remove old compose files we might have created incorrectly
+    # CJK must not have that file (otherwise XIM don't works some times)
+    case $(basename ${x}) in
+        ja*|ko*|zh*)
+            if [ -r "${x}/Compose" ]; then
+                rm -f ${x}/Compose
+            fi
+            ;;
+    esac
+done
+
+# These need to be owned by root and the correct permissions
+x=""
+for x in /tmp/.{ICE,X11}-unix; do
+    if [ ! -d ${x} ]; then
+        mkdir -p ${x}
+    fi
+
+    chown root:wheel ${x}
+    chmod 1777 ${x}
+done
+

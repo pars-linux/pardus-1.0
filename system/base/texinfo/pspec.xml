@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>texinfo</Name>
+        <Homepage>http://www.gnu.org/software/texinfo/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>The GNU info program and utilities</Summary>
+        <Description>The GNU info program and utilities</Description>
+        <Summary xml:lang="tr">GNU info (bilgi) programı ve araçları</Summary>
+        <Description xml:lang="tr">texinfo çevrimiçi bilgilendirme (info, HTML, XML, Docbook) ve basılmış çıktı (DVI, PDF) için tek bir kaynağı kullanan bir belgelendirme sistemidir</Description>
+        <Archive sha1sum="b19e906f7220294c1e8b087d583c50f5c4d7c420" type="tarbz2">ftp://ftp.gnu.org/gnu/texinfo/texinfo-4.8.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>texinfo</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="data">/usr/share/texinfo</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/usr/sbin/mkinfodir">mkinfodir</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-25</Date>
+            <Version>4.8</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>postfix</Name>
+        <Homepage>http://www.postfix.com/</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>IPL-1</License>
+        <IsA>daemon</IsA>
+        <Summary>A fast and secure drop-in replacement for sendmail</Summary>
+        <Summary xml:lang="tr">Hızlı ve güvenli bir e-posta sunucusu</Summary>
+        <Description xml:lang="tr">Hızlı ve güvenli bir e-posta sunucusu</Description>
+        <Description>A fast and secure drop-in replacement for sendmail</Description>
+        <Archive sha1sum="5e86340e6ccff5a9141c259a6b65f72b7396483d" type="targz">ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-2.2.5.tar.gz</Archive>
+        <Patches>
+            <Patch compressionType="gz" level="1">postfix-2.2.5-vda.patch.gz</Patch>
+            <Patch level="1">postfix-2.0.9-get-FQDN.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>db4</Dependency>
+            <Dependency versionFrom="3.4">libpcre</Dependency>
+            <Dependency>pam</Dependency>
+            <Dependency versionFrom="4.1.0">mysql-lib</Dependency>
+            <Dependency versionFrom="0.9.6">openssl</Dependency>
+            <Dependency>cyrus-sasl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>postfix</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="3.4">libpcre</Dependency>
+            <Dependency versionFrom="4.1.0">mysql-lib</Dependency>
+            <Dependency>cyrus-sasl</Dependency>
+        </RuntimeDependencies>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/mail/mailer.conf">mailer.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/sasl2/smtpd.conf">smtpd.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0600" target="/etc/postfix/saslpass">saslpass</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/postfix">postfix.init</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/mail/aliases">aliases</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/mail/mailcap">mailcap</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/smtp">smtp.pam</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/pop">common.pam</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/imap">common.pam</AdditionalFile>
+        </AdditionalFiles>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="data">/var</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-18</Date>
+            <Version>2.2.5</Version>
+            <Comment>Additional dirs. and configuration files.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-16</Date>
+            <Version>2.2.5</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

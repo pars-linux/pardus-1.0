@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>intltool</Name>
+        <Homepage>http://www.gnome.org/</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Scripts for extracting translatable strings from various sourcefiles.</Summary>
+        <Summary xml:lang="tr">Çeşitli kaynak kod dosyalarından satırları ayıklamak için kullanılan betikler</Summary>
+        <Description>Scripts for extracting translatable strings from various sourcefiles.</Description>
+        <Description xml:lang="tr">Çeşitli kaynak kod dosyalarından başka dünya dillerine çevirilebilir satırları ayıklayıp çıkarmak için kullanılan betikler</Description>
+        <Archive sha1sum="1c19e2965af80468bff71610aea1f9d294bfd5e4" type="tarbz2">ftp://ftp.gnome.org/pub/GNOME/sources/intltool/0.31/intltool-0.31.2.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.6.0">perl</Dependency>
+            <Dependency>XML-Parser</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>intltool</Name>
+        <RuntimeDependencies>
+            <Dependency>XML-Parser</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="data">/usr/share/intltool</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+   </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-24</Date>
+            <Version>0.31.2</Version>
+            <Comment>Dep fix</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-09</Date>
+            <Version>0.31.2</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

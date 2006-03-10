@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cdrtools</Name>
+        <Homepage>http://cdrecord.berlios.de/old/private/cdrecord.html</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Description>A set of tools for CD recording, including cdrecord</Description>
+        <Description xml:lang="tr">cdrecord'du da içeren CD yazma araçları topluluğu</Description>
+        <Summary>A set of tools for CD recording, including cdrecord</Summary>
+        <Summary xml:lang="tr">cdrecord'u da içeren CD yazma araçları topluluğu</Summary>
+        <Archive sha1sum="165d4f687841a6cd99c72a50c5ee206c50e69a26" type="tarbz2">http://gd.tuwien.ac.at/utils/schilling/cdrtools/alpha/cdrtools-2.01.01a03.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">cdrtools-2.01-scsi-remote.patch</Patch>
+            <Patch level="1">cdrtools-2.01a27-UTF8.patch</Patch>
+            <Patch level="1">cdrtools-2.01.01a01-scanbus.patch</Patch>
+            <Patch level="1">cdrtools-2.01.01a03-rezero.patch</Patch>
+            <Patch level="1">cdrtools-2.01a27-writemode.patch</Patch>
+            <Patch level="1">cdrtools-2.01.01a03-warnings.patch</Patch>
+        </Patches>
+    </Source>
+    
+    <Package>
+        <Name>cdrtools</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="config">/etc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="3">
+            <Date>2005-11-24</Date>
+            <Version>2.01.01_alpha3</Version>
+            <Comment>Fix UTF-8 problems</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-16</Date>
+            <Version>2.01.01_alpha3</Version>
+            <Comment>Update to 2.01.01a03</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-10</Date>
+            <Version>2.01</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>
+

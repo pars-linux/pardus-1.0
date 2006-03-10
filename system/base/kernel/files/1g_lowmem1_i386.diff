@@ -1,0 +1,59 @@
+ arch/i386/Kconfig       |   14 ++++++++++++++
+ include/asm-i386/page.h |   13 ++++++++++++-
+ 2 files changed, 26 insertions(+), 1 deletion(-)
+
+Index: linux-2.6.14-ck7/arch/i386/Kconfig
+===================================================================
+--- linux-2.6.14-ck7.orig/arch/i386/Kconfig
++++ linux-2.6.14-ck7/arch/i386/Kconfig
+@@ -756,6 +756,20 @@ config X86_PAE
+ 	depends on HIGHMEM64G
+ 	default y
+ 
++config 1GLOWMEM
++	bool "1Gb Low Memory Support"
++	depends on NOHIGHMEM
++	default n
++	help
++	 Linux on i386 architecture normally supports just 896Mb without
++	 enabling HIGHMEM support. This option will enable you to support 1Gb
++	 of ram without needing to enable HIGHMEM support. The advantage of
++	 this is that you don't need the extra overhead of high memory support
++	 to utilise the last 128Mb of ram. However this may break drivers such
++	 as vmware.
++
++	 If unsure say "no"
++
+ # Common NUMA Features
+ config NUMA
+ 	bool "Numa Memory Allocation and Scheduler Support"
+Index: linux-2.6.14-ck7/include/asm-i386/page.h
+===================================================================
+--- linux-2.6.14-ck7.orig/include/asm-i386/page.h
++++ linux-2.6.14-ck7/include/asm-i386/page.h
+@@ -109,13 +109,24 @@ extern int page_is_ram(unsigned long pag
+ 
+ #endif /* __ASSEMBLY__ */
+ 
++#ifdef CONFIG_1GLOWMEM
++#ifdef __ASSEMBLY__
++#define __PAGE_OFFSET		(0xB0000000)
++#define __PHYSICAL_START	CONFIG_PHYSICAL_START
++#else
++#define __PAGE_OFFSET		(0xB0000000UL)
++#define __PHYSICAL_START	((unsigned long)CONFIG_PHYSICAL_START)
++#endif	/* __ASSEMBLY__ */
++#else	/* CONFIG_1GLOWMEM */
+ #ifdef __ASSEMBLY__
+ #define __PAGE_OFFSET		(0xC0000000)
+ #define __PHYSICAL_START	CONFIG_PHYSICAL_START
+ #else
+ #define __PAGE_OFFSET		(0xC0000000UL)
+ #define __PHYSICAL_START	((unsigned long)CONFIG_PHYSICAL_START)
+-#endif
++#endif	/* __ASSEMBLY__ */
++#endif	/* CONFIG_1GLOWMEM */
++
+ #define __KERNEL_START		(__PAGE_OFFSET + __PHYSICAL_START)
+ 
+ 

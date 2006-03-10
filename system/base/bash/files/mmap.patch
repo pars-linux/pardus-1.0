@@ -1,0 +1,50 @@
+diff -Naur ../bash-3.0/lib/readline/histfile.c ./lib/readline/histfile.c
+--- ../bash-3.0/lib/readline/histfile.c	2005-08-28 13:09:25.000000000 -0500
++++ ./lib/readline/histfile.c	2005-08-28 13:35:07.000000000 -0500
+@@ -105,6 +105,37 @@
+    for more extensive tests. */
+ #define HIST_TIMESTAMP_START(s)		(*(s) == history_comment_char)
+ 
++
++/* GHISTORY */
++#ifdef HISTORY_USE_MMAP
++/* This function is a wrapper for the mmap() system call.
++   To accommodate mmap's requirement that the offset parameter 
++   should be a multiple of page size as returned by getpagesize() 
++   (refer man mmap). This function satisfies that requirement by 
++   mapping the last PAGE_SIZE bytes-chunk of history file(fd) but 
++   only returning a pointer to the portion that is to be changed 
++   and not that of the entire chunk. */
++char *
++l_mmap(void *start, size_t length, int prot, int flags, int fd, size_t offset)
++{
++  int buffer_size;
++  size_t cursize;
++  char *buffer;
++  int pgsz = getpagesize();
++  size_t adjust = offset % pgsz;
++
++  cursize = offset - adjust;
++  buffer_size = length + adjust;
++  buffer = (char *)mmap (start, buffer_size, prot, flags, fd, cursize);
++  if ((void *)buffer == MAP_FAILED)
++        return buffer;
++  else
++    return buffer + adjust;
++}
++#endif
++/* GHISTORY */
++
++
+ /* Return the string that should be used in the place of this
+    filename.  This only matters when you don't specify the
+    filename to read_history (), or write_history (). */
+@@ -471,7 +502,7 @@
+ #ifdef HISTORY_USE_MMAP
+     if (ftruncate (file, buffer_size+cursize) == -1)
+       goto mmap_error;
+-    buffer = (char *)mmap (0, buffer_size, PROT_READ|PROT_WRITE, MAP_WFLAGS, file, cursize);
++    buffer = l_mmap (0, buffer_size, PROT_READ|PROT_WRITE, MAP_WFLAGS, file, cursize);
+     if ((void *)buffer == MAP_FAILED)
+       {
+ mmap_error:

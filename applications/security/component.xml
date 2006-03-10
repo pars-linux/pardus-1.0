@@ -1,0 +1,6 @@
+<PISI>
+    <Name>applications.security</Name>
+    <LocalName xml:lang="tr">Güvenlik uygulamaları</LocalName>
+    <Summary xml:lang="tr">Sistem güvenliğine yönelik yazılımlar</Summary>
+    <Description xml:lang="tr">...</Description>
+</PISI>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>hcfpcimodem</Name>
+        <Homepage>http://www.linuxant.com/drivers/hcf/index.php</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>Conexant</License>
+        <IsA>library</IsA>
+        <Summary xml:lang="en">Linuxant's modem driver for Connexant HCF chipset</Summary>
+        <Description xml:lang="en">Linuxant's modem driver for Connexant HCF chipset</Description>
+        <Archive type="targz" sha1sum="976d57c65699bcdec3a0979bfbcd7c25193dd053">http://www.linuxant.com/drivers/hcf/full/archive/hcfpcimodem-1.08full/hcfpcimodem-1.08full.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">hcfpci-1.08-class_device_parent.patch</Patch>
+            <Patch level="1">hcfpci-1.08-refrigerator_modified.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>cpio</Dependency>
+            <Dependency>kernel-source</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>hcfpcimodem</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library" permanent="true">/lib/modules</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-12-19</Date>
+            <Version>1.08</Version>
+            <Comment>Remve addition of init scripts to runlevels</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-12-08</Date>
+            <Version>1.08</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

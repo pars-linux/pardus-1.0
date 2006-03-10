@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>hevea</Name>
+        <Homepage>http://pauillac.inria.fr/~maranget/hevea/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>OPL</License>
+        <IsA>app:console</IsA>
+        <Summary>HeVeA is a quite complete and fast LaTeX to HTML translator</Summary>
+        <Summary xml:lang="tr">Hızlı ve yetkin bir LaTeX'den HTML'ye çevrim programı</Summary>
+        <Description>HeVeA is a quite complete and fast LaTeX to HTML translator</Description>
+        <Description xml:lang="tr">Hızlı ve yetkin bir LaTeX'den HTML'ye çevrim programı</Description>
+        <Archive sha1sum="04cbd526e8458f8535c166e367e1ee5856f1815e" type="targz">ftp://ftp.inria.fr/INRIA/moscova/hevea/hevea-1.07.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="3.07">ocaml</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>hevea</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+            <Path fileType="config">/etc/env.d</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/env.d/99hevea">99hevea</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-07</Date>
+            <Version>1.07</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

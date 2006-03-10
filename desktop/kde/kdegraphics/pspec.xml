@@ -1,0 +1,137 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kdegraphics</Name>
+        <Homepage>http://www.kde.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>KDE graphics-related apps</Summary>
+        <Description>KDE graphics-related apps</Description>
+        <Summary xml:lang="tr">KDE grafiksel uygulamaları</Summary>
+        <Description xml:lang="tr">KDE grafiksel uygulamaları</Description>
+        <Archive sha1sum="ca693ae50a9392f7a8cddcc7d16ff0931d537e9a" type="tarbz2">ftp://ftp.kde.org/pub/kde/stable/3.5/src/kdegraphics-3.5.0.tar.bz2</Archive>
+        <Patches>
+            <Patch>post-3.5.0-kdegraphics-CAN-2005-3193.diff</Patch>
+            <Patch>double-tools-menu.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency version="3.5.0">kdelibs</Dependency>
+            <Dependency version="3.5.0">kdebase</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>libgphoto2</Dependency>
+            <Dependency>sane-backends</Dependency>
+            <Dependency>libart_lgpl</Dependency>
+            <Dependency>lcms</Dependency>
+            <Dependency>fribidi</Dependency>
+            <Dependency>ghostscript</Dependency>
+            <Dependency>tiff</Dependency>
+            <Dependency versionFrom="0.3.1">poppler</Dependency>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kdegraphics</Name>
+        <RuntimeDependencies>
+            <Dependency version="3.5.0">kdelibs</Dependency>
+            <Dependency version="3.5.0">kdebase</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>libgphoto2</Dependency>
+            <Dependency>sane-backends</Dependency>
+            <Dependency>libart_lgpl</Dependency>
+            <Dependency>lcms</Dependency>
+            <Dependency>fribidi</Dependency>
+            <Dependency>ghostscript</Dependency>
+            <Dependency>tiff</Dependency>
+            <Dependency>gwenview</Dependency>
+            <Dependency versionFrom="0.3.1">poppler</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="library">/usr/kde/3.5/lib</Path>
+            <Path fileType="data">/usr/kde/3.5/share</Path>
+            <Path fileType="header">/usr/kde/3.5/include</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="10">
+            <Date>2005-12-12</Date>
+            <Version>3.5.0</Version>
+            <Comment>Fix #1114</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="9">
+            <Date>2005-12-10</Date>
+            <Version>3.5.0</Version>
+            <Comment>Disable KView and Kuickshow</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="8" type="security">
+            <Date>2005-12-07</Date>
+            <Version>3.5.0</Version>
+            <Comment>Fix CAN-2005-3191, CAN-2005-3192 and CAN-2005-3193</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="7">
+            <Date>2005-11-29</Date>
+            <Version>3.5.0</Version>
+            <Comment>Version bump to stable release</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-11-29</Date>
+            <Version>3.5.0_rc2</Version>
+            <Comment>Use SANE</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-11-21</Date>
+            <Version>3.5.0_rc2</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-11-15</Date>
+            <Version>3.5.0_rc1</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-12</Date>
+            <Version>3.5.0_beta2</Version>
+            <Comment>Don't enable DRM in kpdf</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-15</Date>
+            <Version>3.5.0_beta2</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-06</Date>
+            <Version>3.4.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

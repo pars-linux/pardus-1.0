@@ -1,0 +1,126 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>python</Name>
+        <Homepage>http://www.python.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>PSF-2.2</License>
+        <IsA>app:console</IsA>
+        <Summary>Python is an interpreted, interactive, object-orientated programming language.</Summary>
+        <Summary xml:lang="tr">Nesneye yönelik bir programlama dili</Summary>
+        <Description>Python is an interpreted, interactive, object-orientated programming language.</Description>
+        <Description xml:lang="tr">Nesneye yönelik bir programlama dili</Description>
+        <Archive sha1sum="a1f1c466fb4a06f612faac75dbaa8bc81e609c2e" type="tarbz2">http://www.python.org/ftp/python/2.4.2/Python-2.4.2.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="1.1.3">zlib</Dependency>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+            <Dependency versionFrom="4.1">readline</Dependency>
+            <Dependency>db4</Dependency>
+            <Dependency>gdbm</Dependency>
+            <Dependency>openssl</Dependency> 
+            <Dependency>expat</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>python-2.4.2-readline.patch</Patch>
+            <Patch>python-2.4.1-db4.patch</Patch>
+            <Patch level="1">python-2.4.1-st_flags.patch</Patch>
+            <Patch>python-2.4-mimetypes_apache.patch</Patch>
+            <Patch level="1">python-2.4.2-utf.patch</Patch>
+            <Patch level="1">python-2.4-2-searchpath.patch</Patch>
+            <Patch level="1">python-2.4.2-dontcompile.patch</Patch>
+            <Patch>fixbuggytarfiles.patch</Patch>
+            <Patch>fileinput-unicode.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>python</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="1.1.3">zlib</Dependency>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+            <Dependency versionFrom="4.1">readline</Dependency>
+            <Dependency>db4</Dependency>
+            <Dependency>db1</Dependency>
+            <Dependency>gdbm</Dependency>
+            <Dependency>openssl</Dependency> 
+            <Dependency>expat</Dependency>
+            <Dependency>python-fchksum</Dependency>
+            <Dependency>bzip2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/python-config">python-config</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="8">
+            <Date>2005-12-24</Date>
+            <Version>2.4.2</Version>
+            <Comment>Do not convert py's to py/[c-o]</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="7">
+            <Date>2005-10-26</Date>
+            <Version>2.4.2</Version>
+            <Comment>Patch for unicode problem in Lib/fileinput.py added (#579)</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-10-26</Date>
+            <Version>2.4.2</Version>
+            <Comment>Patch added. Fixes #338</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-10-17</Date>
+            <Version>2.4.2</Version>
+            <Comment>Added patch for changing default encoding to utf-8.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-10-14</Date>
+            <Version>2.4.2</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-10-14</Date>
+            <Version>2.3.4</Version>
+            <Comment>Postinstall script added</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-12</Date>
+            <Version>2.3.4</Version>
+            <Comment>dosed in actions.py fixed.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-10</Date>
+            <Version>2.3.4</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

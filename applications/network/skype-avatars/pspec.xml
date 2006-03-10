@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PSPEC SYSTEM 'http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd'>
+
+<PISI>
+    <Source>
+        <Name>skype-avatars</Name>
+        <Homepage>http://www.skype.com</Homepage>
+        <Packager>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Packager>
+        <License>skype-eula</License>
+        <IsA>data</IsA>
+        <IsA>plugin</IsA>
+        <Summary>Skype avatars</Summary>
+        <Description>Skype avatars</Description>
+        <Summary xml:lang="tr">Skype ikon seti</Summary>
+        <Description xml:lang="tr">Skype kullanımını güzelleştiren ikon seti (yüz ifadeleri vb.)</Description>
+        <Archive sha1sum="7cd8ab6935fe91e4c6f59fd571291a7c5fb56a21" type="targz">http://dev.gentoo.org/~humpback/skype-avatars-1.0.tgz</Archive>
+    </Source>
+    
+    <Package>
+        <Name>skype-avatars</Name>
+        <RuntimeDependencies>
+            <Dependency>skype</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/opt/skype</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2005-12-14</Date>
+            <Version>1.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Update>
+    </History>
+</PISI>

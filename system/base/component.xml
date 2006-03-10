@@ -1,0 +1,6 @@
+<PISI>
+    <Name>system.base</Name>
+    <LocalName xml:lang="tr">Taban sistem</LocalName>
+    <Summary xml:lang="tr">Temel işletim sistemi servisleri</Summary>
+    <Description xml:lang="tr">...</Description>
+</PISI>

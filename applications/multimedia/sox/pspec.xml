@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>sox</Name>
+        <Homepage>http://sox.sourceforge.net</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>app:console</IsA>
+        <Summary>The swiss army knife of sound processing programs</Summary>
+        <Summary xml:lang="tr">Bir çok ses formatını birbirine dönüştürebilen, çalabilen ve kaydedebilen bir yazılım</Summary>
+        <Description>The swiss army knife of sound processing programs</Description>
+        <Description xml:lang="tr">Bir çok ses formatını birbirine dönüştürebilen, çalabilen ve kaydedebilen bir yazılım</Description>
+        <Archive sha1sum="674e0328dabc88b7d984c0c3546f8966811d0bf9" type="targz">http://ovh.dl.sourceforge.net/sourceforge/sox/sox-12.17.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>lame</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>madplay</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch level="1">sox-soundcard.patch</Patch>
+            <Patch level="1">sox-install.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>sox</Name>
+        <RuntimeDependencies>
+            <Dependency>lame</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>madplay</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-13</Date>
+            <Version>12.17.5</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,92 @@
+Index: configure
+===================================================================
+RCS file: /cvsroot/emacs/emacs/configure,v
+retrieving revision 1.160
+diff -u -r1.160 configure
+--- configure	4 Oct 2005 09:19:24 -0000	1.160
++++ configure	8 Oct 2005 00:16:59 -0000
+@@ -878,7 +878,7 @@
+   --with-xpm              use -lXpm for displaying XPM images
+   --with-jpeg             use -ljpeg for displaying JPEG images
+   --with-tiff             use -ltiff for displaying TIFF images
+-  --with-gif              use -lungif for displaying GIF images
++  --with-gif              use -lgif for displaying GIF images
+   --with-png              use -lpng for displaying PNG images
+   --with-gtk              use GTK (same as --with-x-toolkit=gtk)
+   --with-pkg-config-prog  Path to pkg-config to use for finding GTK
+@@ -12487,13 +12487,13 @@
+ if test $ac_cv_header_gif_lib_h = yes; then
+   # EGifPutExtensionLast only exists from version libungif-4.1.0b1.
+ # Earlier versions can crash Emacs.
+-      echo "$as_me:$LINENO: checking for EGifPutExtensionLast in -lungif" >&5
+-echo $ECHO_N "checking for EGifPutExtensionLast in -lungif... $ECHO_C" >&6
++      echo "$as_me:$LINENO: checking for EGifPutExtensionLast in -lgif" >&5
++echo $ECHO_N "checking for EGifPutExtensionLast in -lgif... $ECHO_C" >&6
+ if test "${ac_cv_lib_ungif_EGifPutExtensionLast+set}" = set; then
+   echo $ECHO_N "(cached) $ECHO_C" >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-lungif  $LIBS"
++LIBS="-lgif  $LIBS"
+ cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */
+ _ACEOF
+@@ -22612,7 +22612,7 @@
+ echo "  Does Emacs use -lXpm?                                   ${HAVE_XPM}"
+ echo "  Does Emacs use -ljpeg?                                  ${HAVE_JPEG}"
+ echo "  Does Emacs use -ltiff?                                  ${HAVE_TIFF}"
+-echo "  Does Emacs use -lungif?                                 ${HAVE_GIF}"
++echo "  Does Emacs use -lgif?                                 ${HAVE_GIF}"
+ echo "  Does Emacs use -lpng?                                   ${HAVE_PNG}"
+ echo "  Does Emacs use X toolkit scroll bars?                   ${USE_TOOLKIT_SCROLL_BARS}"
+ echo
+Index: configure.in
+===================================================================
+RCS file: /cvsroot/emacs/emacs/configure.in,v
+retrieving revision 1.398
+diff -u -r1.398 configure.in
+--- configure.in	4 Oct 2005 09:19:37 -0000	1.398
++++ configure.in	8 Oct 2005 00:17:14 -0000
+@@ -106,7 +106,7 @@
+ AC_ARG_WITH(tiff,
+ [  --with-tiff             use -ltiff for displaying TIFF images])
+ AC_ARG_WITH(gif,
+-[  --with-gif              use -lungif for displaying GIF images])
++[  --with-gif              use -lgif for displaying GIF images])
+ AC_ARG_WITH(png,
+ [  --with-png              use -lpng for displaying PNG images])
+ AC_ARG_WITH(gtk,
+@@ -2342,7 +2342,7 @@
+   fi
+ 
+   if test "${HAVE_GIF}" = "yes"; then
+-    AC_DEFINE(HAVE_GIF, 1, [Define to 1 if you have the ungif library (-lungif).])
++    AC_DEFINE(HAVE_GIF, 1, [Define to 1 if you have the ungif library (-lgif).])
+   fi
+ fi
+ 
+@@ -3142,7 +3142,7 @@
+ echo "  Does Emacs use -lXpm?                                   ${HAVE_XPM}"
+ echo "  Does Emacs use -ljpeg?                                  ${HAVE_JPEG}"
+ echo "  Does Emacs use -ltiff?                                  ${HAVE_TIFF}"
+-echo "  Does Emacs use -lungif?                                 ${HAVE_GIF}"
++echo "  Does Emacs use -lgif?                                 ${HAVE_GIF}"
+ echo "  Does Emacs use -lpng?                                   ${HAVE_PNG}"
+ echo "  Does Emacs use X toolkit scroll bars?                   ${USE_TOOLKIT_SCROLL_BARS}"
+ echo
+Index: src/Makefile.in
+===================================================================
+RCS file: /cvsroot/emacs/emacs/src/Makefile.in,v
+retrieving revision 1.316
+diff -u -r1.316 Makefile.in
+--- src/Makefile.in	18 Sep 2005 05:41:49 -0000	1.316
++++ src/Makefile.in	8 Oct 2005 00:17:36 -0000
+@@ -435,7 +435,7 @@
+ 
+ #if HAVE_GIF
+ #ifndef LIBGIF
+-#define LIBGIF -lungif
++#define LIBGIF -lgif
+ #endif /* not defined LIBGIF */
+ #else /* not HAVE_GIF */
+ #define LIBGIF

@@ -1,0 +1,11 @@
+--- glibc-2.3.4.orig/include/features.h	2004-10-17 21:17:16.000000000 -0700
++++ glibc-2.3.4/include/features.h	2005-02-05 14:06:58.575066564 -0800
+@@ -262,7 +262,7 @@
+ # define __USE_REENTRANT	1
+ #endif
+ 
+-#if _FORTIFY_SOURCE > 0 && __GNUC_PREREQ (4, 1) && __OPTIMIZE__ > 0
++#if _FORTIFY_SOURCE > 0 && __GNUC_PREREQ (4, 1) && defined(__OPTIMIZE__)
+ # if _FORTIFY_SOURCE == 1
+ #  define __USE_FORTIFY_LEVEL 1
+ # elif _FORTIFY_SOURCE > 1

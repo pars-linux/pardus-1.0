@@ -1,0 +1,195 @@
+diff -Nur p7zip_4.30-old/makefile.beos_x86 p7zip_4.30/makefile.beos_x86
+--- p7zip_4.30-old/makefile.beos_x86	2005-12-15 14:05:57.000000000 +0200
++++ p7zip_4.30/makefile.beos_x86	2005-12-15 14:13:20.000000000 +0200
+@@ -6,8 +6,8 @@
+ 	-DLITTLE_ENDIAN \
+ 	$(LOCAL_FLAGS)
+ 
+-CXX=g++ $(ALLFLAGS)
+-CC=gcc $(ALLFLAGS)
++CXX=HEDE_getCXX $(ALLFLAGS)
++CC=HEDE_getCC $(ALLFLAGS)
+ LINK_SHARED=-nostart
+ 
+ LOCAL_LIBS=-lbe
+diff -Nur p7zip_4.30-old/makefile.cygwin p7zip_4.30/makefile.cygwin
+--- p7zip_4.30-old/makefile.cygwin	2005-12-15 14:05:57.000000000 +0200
++++ p7zip_4.30/makefile.cygwin	2005-12-15 14:13:20.000000000 +0200
+@@ -5,8 +5,8 @@
+ 	-DLITTLE_ENDIAN -DENV_UNIX \
+ 	$(LOCAL_FLAGS)
+ 
+-CXX=g++ $(ALLFLAGS)
+-CC=gcc $(ALLFLAGS)
++CXX=HEDE_getCXX $(ALLFLAGS)
++CC=HEDE_getCC $(ALLFLAGS)
+ LINK_SHARED=-shared
+ 
+ # Cygwin does not need -ldl
+diff -Nur p7zip_4.30-old/makefile.djgpp p7zip_4.30/makefile.djgpp
+--- p7zip_4.30-old/makefile.djgpp	2005-12-15 14:05:57.000000000 +0200
++++ p7zip_4.30/makefile.djgpp	2005-12-15 14:13:20.000000000 +0200
+@@ -8,7 +8,7 @@
+ 	$(LOCAL_FLAGS)
+ 
+ CXX=gpp $(ALLFLAGS)
+-CC=gcc $(ALLFLAGS)
++CC=HEDE_getCC $(ALLFLAGS)
+ LINK_SHARED=-shared
+ 
+ LOCAL_LIBS=
+diff -Nur p7zip_4.30-old/makefile.freebsd p7zip_4.30/makefile.freebsd
+--- p7zip_4.30-old/makefile.freebsd	2005-12-15 14:05:57.000000000 +0200
++++ p7zip_4.30/makefile.freebsd	2005-12-15 14:13:20.000000000 +0200
+@@ -7,8 +7,8 @@
+ 	-DNDEBUG -D_REENTRANT -DENV_UNIX \
+ 	$(LOCAL_FLAGS)
+ 
+-CXX=g++ $(ALLFLAGS)
+-CC=gcc $(ALLFLAGS)
++CXX=HEDE_getCXX $(ALLFLAGS)
++CC=HEDE_getCC $(ALLFLAGS)
+ LINK_SHARED=-shared
+ 
+ LOCAL_LIBS=-lc_r
+diff -Nur p7zip_4.30-old/makefile.gprof p7zip_4.30/makefile.gprof
+--- p7zip_4.30-old/makefile.gprof	2005-12-15 14:05:57.000000000 +0200
++++ p7zip_4.30/makefile.gprof	2005-12-15 14:13:20.000000000 +0200
+@@ -4,8 +4,8 @@
+ 	-DNDEBUG -D_REENTRANT -DENV_UNIX \
+ 	$(LOCAL_FLAGS)
+ 
+-CXX=g++ $(ALLFLAGS)
+-CC=gcc $(ALLFLAGS)
++CXX=HEDE_getCXX $(ALLFLAGS)
++CC=HEDE_getCC $(ALLFLAGS)
+ LINK_SHARED=-shared
+ 
+ LOCAL_LIBS=-lpthread
+diff -Nur p7zip_4.30-old/makefile.linux_amd64 p7zip_4.30/makefile.linux_amd64
+--- p7zip_4.30-old/makefile.linux_amd64	2005-12-15 14:05:57.000000000 +0200
++++ p7zip_4.30/makefile.linux_amd64	2005-12-15 14:13:20.000000000 +0200
+@@ -5,8 +5,8 @@
+ 	-DNDEBUG -D_REENTRANT -DENV_UNIX \
+ 	$(LOCAL_FLAGS)
+ 
+-CXX=g++ $(ALLFLAGS)
+-CC=gcc $(ALLFLAGS)
++CXX=HEDE_getCXX $(ALLFLAGS)
++CC=HEDE_getCC $(ALLFLAGS)
+ LINK_SHARED=-shared
+ 
+ LOCAL_LIBS=-lpthread
+diff -Nur p7zip_4.30-old/makefile.linux_gcc_2.95_no_need_for_libstdc p7zip_4.30/makefile.linux_gcc_2.95_no_need_for_libstdc
+--- p7zip_4.30-old/makefile.linux_gcc_2.95_no_need_for_libstdc	2005-12-15 14:05:57.000000000 +0200
++++ p7zip_4.30/makefile.linux_gcc_2.95_no_need_for_libstdc	2005-12-15 14:13:20.000000000 +0200
+@@ -1,11 +1,11 @@
+ 
+-ALLFLAGS=-O1 -s \
++ALLFLAGS=HEDE_getCXXFLAGS \
+     	-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE \
+ 	-DNDEBUG -D_REENTRANT -DENV_UNIX \
+ 	$(LOCAL_FLAGS)
+ 
+ CXX=gcc $(ALLFLAGS)
+-CC=gcc $(ALLFLAGS)
++CC=HEDE_getCC $(ALLFLAGS)
+ LINK_SHARED=-shared
+ 
+ LOCAL_LIBS=-lpthread
+diff -Nur p7zip_4.30-old/makefile.linux_x86_ppc_alpha p7zip_4.30/makefile.linux_x86_ppc_alpha
+--- p7zip_4.30-old/makefile.linux_x86_ppc_alpha	2005-12-15 14:05:57.000000000 +0200
++++ p7zip_4.30/makefile.linux_x86_ppc_alpha	2005-12-15 14:13:20.000000000 +0200
+@@ -2,13 +2,13 @@
+ # makefile for Linux (x86, PPC, alpha ...)
+ # LITTLE_ENDIAN and BIG_ENDIAN are already defined by the system headers
+ #
+-ALLFLAGS=-O1 -s -fPIC \
++ALLFLAGS=HEDE_getCXXFLAGS -fPIC \
+     	-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE \
+ 	-DNDEBUG -D_REENTRANT -DENV_UNIX \
+ 	$(LOCAL_FLAGS)
+ 
+-CXX=g++ $(ALLFLAGS)
+-CC=gcc $(ALLFLAGS)
++CXX=HEDE_getCXX $(ALLFLAGS)
++CC=HEDE_getCC $(ALLFLAGS)
+ LINK_SHARED=-shared
+ 
+ LOCAL_LIBS=-lpthread
+diff -Nur p7zip_4.30-old/makefile.machine p7zip_4.30/makefile.machine
+--- p7zip_4.30-old/makefile.machine	2005-12-15 14:05:57.000000000 +0200
++++ p7zip_4.30/makefile.machine	2005-12-15 14:13:20.000000000 +0200
+@@ -2,13 +2,13 @@
+ # makefile for Linux (x86, PPC, alpha ...)
+ # LITTLE_ENDIAN and BIG_ENDIAN are already defined by the system headers
+ #
+-ALLFLAGS=-O1 -s -fPIC \
++ALLFLAGS=HEDE_getCXXFLAGS -fPIC \
+     	-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE \
+ 	-DNDEBUG -D_REENTRANT -DENV_UNIX \
+ 	$(LOCAL_FLAGS)
+ 
+-CXX=g++ $(ALLFLAGS)
+-CC=gcc $(ALLFLAGS)
++CXX=HEDE_getCXX $(ALLFLAGS)
++CC=HEDE_getCC $(ALLFLAGS)
+ LINK_SHARED=-shared
+ 
+ LOCAL_LIBS=-lpthread
+diff -Nur p7zip_4.30-old/makefile.netbsd p7zip_4.30/makefile.netbsd
+--- p7zip_4.30-old/makefile.netbsd	2005-12-15 14:05:57.000000000 +0200
++++ p7zip_4.30/makefile.netbsd	2005-12-15 14:13:20.000000000 +0200
+@@ -8,8 +8,8 @@
+ 	-DNDEBUG -D_REENTRANT -DENV_UNIX \
+ 	$(LOCAL_FLAGS)
+ 
+-CXX=g++ $(ALLFLAGS)
+-CC=gcc $(ALLFLAGS)
++CXX=HEDE_getCXX $(ALLFLAGS)
++CC=HEDE_getCC $(ALLFLAGS)
+ LINK_SHARED=-shared
+ 
+ LOCAL_LIBS=-lpthread
+diff -Nur p7zip_4.30-old/makefile.openbsd p7zip_4.30/makefile.openbsd
+--- p7zip_4.30-old/makefile.openbsd	2005-12-15 14:05:57.000000000 +0200
++++ p7zip_4.30/makefile.openbsd	2005-12-15 14:13:20.000000000 +0200
+@@ -7,8 +7,8 @@
+         -DNDEBUG -D_REENTRANT -DENV_UNIX \
+         $(LOCAL_FLAGS)
+                                                                                                       
+-CXX=g++ $(ALLFLAGS)
+-CC=gcc $(ALLFLAGS)
++CXX=HEDE_getCXX $(ALLFLAGS)
++CC=HEDE_getCC $(ALLFLAGS)
+ LINK_SHARED=-shared
+                                                                                                       
+ LOCAL_LIBS=-lpthread
+diff -Nur p7zip_4.30-old/makefile.solaris_sparc_gcc p7zip_4.30/makefile.solaris_sparc_gcc
+--- p7zip_4.30-old/makefile.solaris_sparc_gcc	2005-12-15 14:05:57.000000000 +0200
++++ p7zip_4.30/makefile.solaris_sparc_gcc	2005-12-15 14:13:20.000000000 +0200
+@@ -7,8 +7,8 @@
+ 
+ #CXX=/opt/sfw/bin/g++ $(ALLFLAGS)
+ #CC=/opt/sfw/bin/gcc $(ALLFLAGS)
+-CXX=g++ $(ALLFLAGS)
+-CC=gcc $(ALLFLAGS)
++CXX=HEDE_getCXX $(ALLFLAGS)
++CC=HEDE_getCC $(ALLFLAGS)
+ LINK_SHARED=-shared
+ 
+ LOCAL_LIBS=-lpthread -lrt
+diff -Nur p7zip_4.30-old/makefile.solaris_x86 p7zip_4.30/makefile.solaris_x86
+--- p7zip_4.30-old/makefile.solaris_x86	2005-12-15 14:05:57.000000000 +0200
++++ p7zip_4.30/makefile.solaris_x86	2005-12-15 14:13:20.000000000 +0200
+@@ -5,8 +5,8 @@
+ 	-DNDEBUG -D_REENTRANT \
+ 	$(LOCAL_FLAGS)
+ 
+-CXX=g++ $(ALLFLAGS)
+-CC=gcc $(ALLFLAGS)
++CXX=HEDE_getCXX $(ALLFLAGS)
++CC=HEDE_getCC $(ALLFLAGS)
+ LINK_SHARED=-shared
+ 
+ LOCAL_LIBS=-lpthread -lrt

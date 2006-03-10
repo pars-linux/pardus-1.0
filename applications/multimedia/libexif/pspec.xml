@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libexif</Name>
+        <Homepage>http://libexif.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>library</IsA>
+        <Description>Library for parsing, editing, and saving EXIF data</Description>
+        <Description xml:lang="tr">EXIF verilerini işlemek, değiştirmek ve kaydetmek için bir kütüphane</Description>
+        <Summary>Library for parsing, editing, and saving EXIF data</Summary>
+        <Summary xml:lang="tr">EXIF verilerini işlemek, değiştirmek ve kaydetmek için bir kütüphane</Summary>
+        <Archive sha1sum="71d0aea509acac42337f7243c2cf435774df1769" type="targz">http://ovh.dl.sourceforge.net/sourceforge/libexif/libexif-0.6.12.tar.gz</Archive>
+        <Patches>
+            <Patch level="2">libexif-0.6.12-86740.patch</Patch>
+            <Patch level="1">libexif-0.6.12-recurse.patch</Patch>
+            <Patch>version.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>libexif</Name>
+        <Files>
+        <Path fileType="header">/usr/include</Path>
+        <Path fileType="library">/usr/lib</Path>
+        <Path fileType="doc">/usr/share/doc</Path>
+        <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-10</Date>
+            <Version>0.6.12</Version>
+            <Comment>Version bump.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-14</Date>
+            <Version>0.5.12</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

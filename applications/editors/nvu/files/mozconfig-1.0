@@ -1,0 +1,78 @@
+--- .mozconfig.orig	2005-06-20 12:34:03.000000000 +0300
++++ .mozconfig	2005-12-11 21:47:59.000000000 +0200
+@@ -1,43 +1,38 @@
+-# sh
+-# Build configuration script for WIN32
+-#
+-# See http://www.mozilla.org/build/unix.html for build instructions.
+-#
+-
+-# Mandatory if you use VC7 (see Windows build instructions
+-# in http://mozilla.org/build/win32.html
+-# you may have to edit the lines according to your directory settings
+-GLIB_PREFIX=e:/apps/vc7
+-LIBIDL_PREFIX=e:/apps/vc7
+-
+ export MOZILLA_OFFICIAL=1
+ export BUILD_OFFICIAL=1
+ 
+ export MOZ_STANDALONE_COMPOSER=1
+ mk_add_options MOZ_STANDALONE_COMPOSER=1
+ 
+-# Uncomment the following lines for an optimized build
+-#ac_add_options --disable-debug
+-#ac_add_options --enable-optimize
+-
+-# Uncomment and edit this line if you want to build
+-# outside of the source tree
+-mk_add_options MOZ_OBJDIR=/cygdrive/e/bin/debug/1.0
+-
+-ac_add_options --enable-crypto
+-ac_add_options --disable-ldap
+-ac_add_options --disable-mailnews
+-ac_add_options --disable-mathml
+-ac_add_options --disable-installer
+-ac_add_options --disable-activex
+-ac_add_options --disable-activex-scripting
+-ac_add_options --disable-tests
+-ac_add_options --disable-oji
+-ac_add_options --disable-necko-disk-cache
+-ac_add_options --enable-single-profile
+-ac_add_options --disable-profilesharing
+-ac_add_options --enable-extensions=wallet,xml-rpc,xmlextras,pref,universalchardet,webservices,editor/cascades,spellcheck
+-
+-# Note: Only include icon for mac, windows and os2
+-ac_add_options --enable-image-decoders=default,-xbm
+-
++ac_add_options --disable-debug
++ac_add_options --libdir=/usr/lib
++ac_add_options --with-default-mozilla-five-home=/usr/lib/nvu
++ac_add_options  --disable-svg
++ac_add_options  --without-system-mng
++ac_add_options  --without-system-png
++ac_add_options  --disable-ldap
++ac_add_options  --disable-mailnews
++ac_add_options  --disable-installer
++ac_add_options  --disable-activex
++ac_add_options  --disable-activex-scripting
++ac_add_options  --disable-tests
++ac_add_options  --disable-oji
++ac_add_options  --disable-necko-disk-cache
++ac_add_options  --enable-single-profile
++ac_add_options  --disable-profilesharing
++ac_add_options  --enable-extensions=wallet,xml-rpc,xmlextras,pref,universalchardet,editor/cascades,spellcheck
++ac_add_options  --enable-necko-protocols=http,ftp,file,jar,viewsource,res,data
++ac_add_options  --disable-pedantic
++ac_add_options  --disable-short-wchar
++ac_add_options  --enable-xprint
++ac_add_options  --enable-strip-libs
++ac_add_options  --enable-crypto
++ac_add_options  --disable-mathml
++ac_add_options  --with-system-zlib
++ac_add_options  --enable-toolkit=gtk2
++ac_add_options  --enable-default-toolkit=gtk2
++ac_add_options  --enable-xft
++ac_add_options  --enable-freetype2
++ac_add_options  --disable-short-wchar
++ac_add_options  --prefix=/usr
++ac_add_options --enable-optimize=-O2

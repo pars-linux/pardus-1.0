@@ -1,0 +1,11 @@
+--- xc/config/cf/X11.tmpl.dont-install-Xcms.txt	2003-02-13 03:46:12.000000000 -0500
++++ xc/config/cf/X11.tmpl	2003-02-13 03:47:10.000000000 -0500
+@@ -269,7 +269,7 @@
+ #define BuildLoadableXlibI18n	(HasDlopen && SharedLibX11)
+ #endif
+ #ifndef InstallXcmsTxt
+-#define InstallXcmsTxt		YES
++#define InstallXcmsTxt		NO
+ #endif
+ /*
+  * This disables XLOCALEDIR.  Set it if you're using BuildLoadableXlibI18n,

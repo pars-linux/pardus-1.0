@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>kdetv</Name>
+        <Homepage>http://www.kwintv.org/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary xml:lang="en">A TV application for KDE</Summary>
+        <Description xml:lang="en">A TV application for KDE</Description>
+        <Archive type="tarbz2" sha1sum="b46e5e81d0669bcfcf1328d70fc4984a28adcbf5">http://dziegel.free.fr/releases/kdetv-0.8.8.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="0.2.4">zvbi</Dependency>
+            <Dependency versionFrom="3.2">kdelibs</Dependency>
+            <Dependency versionFrom="3.3">qt</Dependency>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kdetv</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.2.4">zvbi</Dependency>
+            <Dependency versionFrom="3.2">kdelibs</Dependency>
+            <Dependency versionFrom="3.3">qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="library">/usr/kde/3.5/lib</Path>
+            <Path fileType="data">/usr/kde/3.5/share/applnk/Multimedia</Path>
+            <Path fileType="data">/usr/kde/3.5/share/apps/kdetv</Path>
+            <Path fileType="data">/usr/kde/3.5/share/apps/profiles</Path>
+            <Path fileType="doc">/usr/kde/3.5/share/doc/HTML</Path>
+            <Path fileType="data">/usr/kde/3.5/share/icons/hicolor</Path>
+            <Path fileType="localedata">/usr/kde/3.5/share/locale</Path>
+            <Path fileType="data">/usr/kde/3.5/share/services/kdetv</Path>
+            <Path fileType="data">/usr/kde/3.5/share/servicetypes/kdetv</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-21</Date>
+            <Version>0.8.8</Version>
+            <Comment>3.4 to 3.5</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-28</Date>
+            <Version>0.8.8</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

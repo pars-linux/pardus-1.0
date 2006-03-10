@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>Crypt-SmbHash</Name>
+        <Homepage>http://search.cpan.org/dist/Crypt-SmbHash/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Summary>LM/NT hashing, for Samba's smbpasswd entries</Summary>
+        <Description>LM/NT hashing, for Samba's smbpasswd entries</Description>
+        <Summary xml:lang="tr">Samba servisi parola dosyaları için LM/NT özetleme fonksiyonları sunan Perl modülü</Summary>
+        <Description xml:lang="tr">Samba servisi parola dosyaları için LM/NT özetleme fonksiyonları sunan Perl modülü</Description>
+        <Archive sha1sum="7dadc8ceeb40823b5545bf860dd393b79e8b2165" type="targz">http://www.cpan.org/modules/by-category/14_Security_and_Encryption/Crypt/Crypt-SmbHash-0.02.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+            <Dependency>Digest-MD4</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>Crypt-SmbHash</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-10</Date>
+            <Version>0.02</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

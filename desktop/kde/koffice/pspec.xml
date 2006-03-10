@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>koffice</Name>
+        <Homepage>http://www.koffice.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>An integrated office suite for KDE, the K Desktop Environment</Summary>
+        <Summary xml:lang="tr">KDE masaüstü ortamı için ofis programı</Summary>
+        <Description>An integrated office suite for KDE, the K Desktop Environment</Description>
+        <Description xml:lang="tr">KDE masaüstü ortamı için ofis programı</Description>
+        <Archive sha1sum="474ab6d289ff1330c200768b30a3dbe271cd26c5" type="tarbz2">ftp://ftp.kde.org/pub/kde/stable/koffice-1.4.2/src/koffice-1.4.2.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>kdelibs</Dependency>
+            <!--FIXME: latest wv2 needs lots of gnome lib, use older instead...
+            <Dependency>wv2</Dependency>
+            -->
+            <Dependency versionFrom="5.5.2">imagemagick</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>libart_lgpl</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency>readline</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency versionFrom="1.12">lcms</Dependency>
+            <Dependency>doxygen</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>koffice</Name>
+        <RuntimeDependencies>
+            <Dependency>kdelibs</Dependency>
+            <!--FIXME: latest wv2 needs lots of gnome lib, use older instead...
+            <Dependency>wv2</Dependency>
+            -->
+            <Dependency versionFrom="5.5.2">imagemagick</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>libart_lgpl</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency versionFrom="1.12">lcms</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="header">/usr/kde/3.5/include</Path>
+            <Path fileType="library">/usr/kde/3.5/lib</Path>
+            <Path fileType="data">/usr/kde/3.5/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-21</Date>
+            <Version>1.4.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-16</Date>
+            <Version>1.4.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

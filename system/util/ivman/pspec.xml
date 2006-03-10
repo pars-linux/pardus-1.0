@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>ivman</Name>
+        <Homepage>http://ivman.sf.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>QPL</License>
+        <IsA>daemon</IsA>
+        <Summary>Daemon to mount/unmount devices, based on info from HAL</Summary>
+        <Summary xml:lang="tr">Depolama aygıtlarını bağlamak ve ayırmak için kullanılan bir yazılım</Summary>
+        <Description>Daemon to mount/unmount devices, based on info from HAL</Description>
+        <Description xml:lang="tr">Depolama aygıtlarını bağlamak ve ayırmak için kullanılan bir yazılım</Description>
+        <Archive sha1sum="1cfe822a2e4f0ac6c7dd18ca58a0233dec9eff4a" type="tarbz2">http://internap.dl.sourceforge.net/sourceforge/ivman/ivman-0.6.6.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="2.6">glib2</Dependency>
+            <Dependency>libxml2</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ivman</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="2.6">glib2</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>hal</Dependency>
+            <Dependency versionFrom="0.8">pmount</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/init.d</Path>
+            <Path fileType="config">/etc/ivman</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/ivman">ivman</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-12-11</Date>
+            <Version>0.6.6</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-06</Date>
+            <Version>0.6.4</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

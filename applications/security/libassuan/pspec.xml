@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>libassuan</Name>
+        <Homepage>http://www.gnupg.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>Standalone IPC library used by gpg, gpgme and newpg</Summary>
+        <Summary xml:lang="tr">GnuPG, GPGME ve newpg tarafından kullanılan IPC kütüphanesi</Summary>
+        <Description>Standalone IPC library used by gpg, gpgme and newpg</Description>
+        <Description xml:lang="tr">GnuPG, GPGME ve newpg tarafından kullanılan IPC kütüphanesi</Description>
+        <Archive sha1sum="97bdb0c5b66d02bce22e55183c3b550542f19b46" type="targz">ftp://ftp.gnupg.org/GnuPG/alpha/libassuan/libassuan-0.6.9.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>libassuan</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="info">/usr/share/info</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-02</Date>
+            <Version>0.6.9</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,30 @@
+diff -ur kdebase-3.4.92.orig/kcontrol/arts/arts.cpp kdebase-3.4.92/kcontrol/arts/arts.cpp
+--- kdebase-3.4.92.orig/kcontrol/arts/arts.cpp	2005-10-10 18:03:47.000000000 +0300
++++ kdebase-3.4.92/kcontrol/arts/arts.cpp	2005-10-24 01:16:19.000000000 +0300
+@@ -69,7 +69,7 @@
+ 	config->setGroup("Arts");
+ 	bool startServer = config->readBoolEntry("StartServer",true);
+ 	bool startRealtime = config->readBoolEntry("StartRealtime",true);
+-	QString args = config->readEntry("Arguments","-F 10 -S 4096 -s 60 -m artsmessage -c drkonqi -l 3 -f");
++	QString args = config->readEntry("Arguments","-F 10 -S 4096 -s 3 -m artsmessage -c drkonqi -l 3 -f");
+ 
+ 	delete config;
+ 
+@@ -260,7 +260,7 @@
+ 	networkTransparent->setChecked(config->readBoolEntry("NetworkTransparent",false));
+ 	fullDuplex->setChecked(config->readBoolEntry("FullDuplex",false));
+ 	autoSuspend->setChecked(config->readBoolEntry("AutoSuspend",true));
+-	suspendTime->setValue(config->readNumEntry("SuspendTime",60));
++	suspendTime->setValue(config->readNumEntry("SuspendTime",3));
+ 	deviceName->setText(config->readEntry("DeviceName",QString::null));
+ 	customDevice->setChecked(!deviceName->text().isEmpty());
+ 	hardware->addOptions->setText(config->readEntry("AddOptions",QString::null));
+@@ -456,7 +456,7 @@
+ 	networkTransparent->setChecked(false);
+ 	fullDuplex->setChecked(false);
+ 	autoSuspend->setChecked(true);
+-	suspendTime->setValue(60);
++	suspendTime->setValue(3);
+ 	customDevice->setChecked(false);
+ 	deviceName->setText(QString::null);
+ 	customRate->setChecked(false);

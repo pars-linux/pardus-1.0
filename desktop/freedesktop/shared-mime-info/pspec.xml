@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>shared-mime-info</Name>
+        <Homepage>http://www.freedesktop.org/software/shared-mime-info</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>The Shared MIME-info Database specification</Summary>
+        <Summary xml:lang="tr">Paylaşımlı MIME veritabanı tanımlamaları</Summary>
+        <Description>The Shared MIME-info Database specification</Description>
+        <Description xml:lang="tr">Paylaşımlı MIME veritabanı tanımlamaları</Description>
+        <Archive sha1sum="2bbfb34fd40f8437386f65c62170fe46d3c73d89" type="targz">http://www.freedesktop.org/software/shared-mime-info/shared-mime-info-0.14.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency versionFrom="0.29">intltool</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch level="1">shared-mime-info-0.14-text_plain.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>shared-mime-info</Name>
+        <RuntimeDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency>libxml2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="localedata">/usr/share/locale/</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/mime</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-04</Date>
+            <Version>0.14</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

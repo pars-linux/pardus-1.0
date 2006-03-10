@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>sudo</Name>
+        <Homepage>http://www.sudo.ws/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>Sudo</License>
+        <IsA>app:console</IsA>
+        <Summary>Allows certain users/groups to run commands as root</Summary>
+        <Summary xml:lang="tr">Belirli kullanıcıların ya da kullanıcı gruplarının yönetici (root) komutlarını çalıştırmasına izin verir.</Summary>
+        <Description>Allows certain users/groups to run commands as root</Description>
+        <Description xml:lang="tr">Belirli kullanıcıların ya da kullanıcı gruplarının yönetici (root) komutlarını çalıştırmasına izin verir.</Description>
+        <Archive sha1sum="a79631e9e1c0d0d3f2aa88ae685628e5fde61982" type="targz">http://www.sudo.ws/sudo/dist/sudo-1.6.8p12.tar.gz</Archive>
+        <Patches>
+            <Patch>sudo-1.6.8_p8-ldap-tls_cacert.diff</Patch>
+            <Patch level="1">sudo-ldap_timelimit.diff</Patch>
+            <Patch level="1">sudo-skeychallengeargs.diff</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency versionFrom="0.73">pam</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>sudo</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0440" target="/etc/sudoers">sudoers</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="5" type="security">
+            <Date>2005-12-22</Date>
+            <Version>1.6.8_p12</Version>
+            <Comment>Version bump for security fixes</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-12-20</Date>
+            <Version>1.6.8_p9</Version>
+            <Comment>Fix #1346</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-29</Date>
+            <Version>1.6.8_p9</Version>
+            <Comment>needed sudoers file added as additional</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2" type="Security">
+            <Date>2005-10-26</Date>
+            <Version>1.6.8_p9</Version>
+            <Comment>Update to 1.6.8p9 and fix CVE-2005-2959</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-11</Date>
+            <Version>1.6.7_p5</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

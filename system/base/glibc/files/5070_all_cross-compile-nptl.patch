@@ -1,0 +1,48 @@
+A little hack for cross-compiling NPTL w/out linuxthreads.
+
+--- libc/nptl/sysdeps/pthread/configure.in
++++ libc/nptl/sysdeps/pthread/configure.in
+@@ -28,6 +28,9 @@
+ struct _Unwind_Context *context;
+ _Unwind_GetCFA (context)],
+ libc_cv_forced_unwind=yes, libc_cv_forced_unwind=no)])
++if test $libc_cv_forced_unwind = no -a $build_cpu != $host_cpu; then
++  libc_cv_forced_unwind=yes
++fi
+ if test $libc_cv_forced_unwind = yes; then
+   AC_DEFINE(HAVE_FORCED_UNWIND)
+ dnl Check for C cleanup handling.
+@@ -41,6 +44,9 @@
+   puts ("test")],
+ libc_cv_c_cleanup=yes, libc_cv_c_cleanup=no)])
+   CFLAGS="$old_CFLAGS"
++  if test $libc_cv_c_cleanup = no -a $build_cpu != $host_cpu; then
++    libc_cv_c_cleanup=yes
++  fi
+   if test $libc_cv_c_cleanup = no; then
+     AC_MSG_ERROR([the compiler must support C cleanup handling])
+   fi
+--- libc/nptl/sysdeps/pthread/configure
++++ libc/nptl/sysdeps/pthread/configure
+@@ -81,6 +81,10 @@
+ fi
+ echo "$as_me:$LINENO: result: $libc_cv_forced_unwind" >&5
+ echo "${ECHO_T}$libc_cv_forced_unwind" >&6
++if test $libc_cv_forced_unwind = no -a $build_cpu != $host_cpu; then
++  echo "$as_me:$LINENO: forcing libc_cv_forced_unwind = yes for cross-compile"
++  libc_cv_forced_unwind=yes
++fi
+ if test $libc_cv_forced_unwind = yes; then
+   cat >>confdefs.h <<\_ACEOF
+ #define HAVE_FORCED_UNWIND 1
+@@ -147,6 +151,10 @@
+ echo "$as_me:$LINENO: result: $libc_cv_c_cleanup" >&5
+ echo "${ECHO_T}$libc_cv_c_cleanup" >&6
+   CFLAGS="$old_CFLAGS"
++  if test $libc_cv_c_cleanup = no -a $build_cpu != $host_cpu; then
++    echo "$as_me:$LINENO: result: forcing libc_cv_c_cleanup = yes for cross-compile"
++    libc_cv_c_cleanup=yes
++  fi
+   if test $libc_cv_c_cleanup = no; then
+     { { echo "$as_me:$LINENO: error: the compiler must support C cleanup handling" >&5
+ echo "$as_me: error: the compiler must support C cleanup handling" >&2;}

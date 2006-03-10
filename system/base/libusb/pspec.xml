@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libusb</Name>
+        <Homepage>http://libusb.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <IsA>library</IsA>
+        <Summary>Userspace access to USB devices</Summary>
+        <Summary xml:lang="tr">USB aygıtlarınıza erişiminizi sağlayan kütüphane.</Summary>
+        <Description>Userspace access to USB devices</Description>
+        <Description xml:lang="tr">USB aygıtlarınıza erişiminizi sağlayan kütüphane.</Description>
+        <Archive sha1sum="7e03a71f2cec39d96f58e22ea9289088eee617ef" type="targz">http://ovh.dl.sourceforge.net/sourceforge/libusb/libusb-0.1.10a.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libtool</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libusb</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-24</Date>
+            <Version>0.1.10a</Version>
+            <Comment>Version bump for kdebase dep.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-08</Date>
+            <Version>0.1.8</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

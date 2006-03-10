@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libdvdread</Name>
+        <Homepage>http://www.dtek.chalmers.se/groups/dvd/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Description>Provides a simple foundation for reading DVD-Video images.</Description>
+        <Description xml:lang="tr">DVD videolarını okumak için basit bir kütüphane</Description>
+        <Summary>Provides a simple foundation for reading DVD-Video images.</Summary>
+        <Summary xml:lang="tr">DVD videolarını okumak için basit bir kütüphane</Summary>
+        <Archive sha1sum="a4b626e49ba8bd33857693c3abe8b34196bc3360" type="targz">http://www.dtek.chalmers.se/~dvd/dist/libdvdread-0.9.4.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="1.1.1">libdvdcss</Dependency>
+        </BuildDependencies>        
+    </Source>
+
+    <Package>
+        <Name>libdvdread</Name>
+        <Summary>Provides a simple foundation for reading DVD-Video images.</Summary>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include/dvdread</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-30</Date>
+            <Version>0.9.4</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

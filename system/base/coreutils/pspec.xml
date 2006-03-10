@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>coreutils</Name>
+        <Homepage>http://www.gnu.org/software/coreutils/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Standard GNU file, text and shell utilities</Summary>
+        <Description>Standard GNU file utilities (chmod, cp, dd, dir, ls...), text utilities (sort, tr, head, wc..), and shell utilities (whoami, who,...)</Description>
+        <Summary xml:lang="tr">Standart dosya, metin ve kabuk uygulamaları</Summary>
+        <Description xml:lang="tr">GNU dosya uygulamaları (chmod, cp, dd, dir, ls...), sh uygulamaları (whoami, who,...) ve metin uygulamalarının (sort, tr, head, wc..) birlikteliğinden oluşmaktadır.</Description>
+        <Archive sha1sum="56d983bfb20d04ff298677e7e795956f0d44ea6f" type="tarbz2">ftp://ftp.gnu.org/gnu/coreutils/coreutils-5.93.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>acl</Dependency>
+            <Dependency versionFrom="0.14.5">gettext</Dependency>
+            <Dependency versionFrom="5.3">ncurses</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">coreutils-chgrp.patch</Patch>
+            <Patch level="1">fileutils-4.1.10-timestyle.patch</Patch>
+            <Patch level="1">coreutils-acl.patch</Patch>
+            <Patch level="1">sh-utils-2.0.11-dateman.patch</Patch>
+            <Patch level="1">sh-utils-1.16-paths.patch</Patch>
+            <Patch level="1">coreutils-4.5.3-langinfo.patch</Patch>
+            <Patch level="1">coreutils-4.5.3-sysinfo.patch</Patch>
+            <Patch level="1">coreutils-i18n.patch</Patch>
+            <Patch level="1">coreutils-getgrouplist.patch</Patch>
+            <Patch level="1">coreutils-overflow.patch</Patch>
+            <Patch level="1">invalid-ids.diff</Patch>
+            <Patch>coreutils-5.3.0-pie.diff</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>coreutils</Name>
+        <RuntimeDependencies>
+            <Dependency>acl</Dependency>
+            <Dependency>gettext</Dependency>
+            <Dependency versionFrom="5.3">ncurses</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/DIR_COLORS">DIR_COLORS</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+    
+    <History>
+        <Update release="4" type="security">
+            <Date>2005-11-07</Date>
+            <Version>5.93</Version>
+            <Comment>Add some security patches from OpenSuse</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-06</Date>
+            <Version>5.93</Version>
+            <Comment>Update to version 5.93 which upstream says is latest stable</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-03</Date>
+            <Version>5.3.0</Version>
+            <Comment>Update to version 5.3.0 and add ACL support</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-25</Date>
+            <Version>5.2.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

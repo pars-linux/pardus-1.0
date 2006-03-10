@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>doxygen</Name>
+        <Homepage>http://www.doxygen.org/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Documentation and analysis tool for C++, C, Java, IDL, PHP and C#</Summary>
+        <Summary xml:lang="tr">C, C++, Java, IDL, PHP ve C# için döküman ve analiz aracı</Summary>
+        <Description>Documentation and analysis tool for C++, C, Java, IDL, PHP and C#</Description>
+        <Description xml:lang="tr">Doxygen, C, C++, Java, IDL, PHP, C# için bir dökümantasyon sistemidir. Dökümanlardan ve kaynak kodlardan online sınıf tarayıcısı (HTML formatında) ve offline başvuru kitabı (LaTeX formatında) oluşturabilir. man sayfaları ve Postscript, PDF veya sıkıştırılmış HTML çıktısı da verebilir.</Description>
+        <Archive sha1sum="dc7f96e0688370195cc30c144deecb697743363b" type="targz">ftp://ftp.stack.nl/pub/users/dimitri/doxygen-1.4.1.src.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="4">sed</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>ghostscript</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>doxygen</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>ghostscript</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+   </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-21</Date>
+            <Version>1.4.1</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>netpbm</Name>
+        <Homepage>http://netpbm.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Description xml:lang="en">A set of utilities for converting to/from the netpbm (and related) formats</Description>
+        <Description xml:lang="tr">netpbm vb. gibi formatlar arasında dönüşüm yapan araçlar serisi</Description>
+        <Summary xml:lang="en">A set of utilities for converting to/from the netpbm (and related) formats</Summary>
+        <Summary xml:lang="tr">Netpbm vb. gibi formatlar arasında dönüşüm yapan araçlar serisi</Summary>
+        <Archive type="targz" sha1sum="b07ff527f4b2f8adaf7b44abd00f16b10b0ab403">http://puzzle.dl.sourceforge.net/sourceforge/netpbm/netpbm-10.30.tgz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency versionFrom="3.5.5">tiff</Dependency>
+            <Dependency versionFrom="1.2.1">libpng</Dependency>
+            <Dependency>zlib</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">netpbm-10.17-time.patch</Patch>
+            <Patch level="1">netpbm-10.19-message.patch</Patch>
+            <Patch level="1">netpbm-10.22-security2.patch</Patch>
+            <Patch level="1">netpbm-10.22-cmapsize.patch</Patch>
+            <Patch level="1">netpbm-10.24-nodoc.patch</Patch>
+            <Patch level="1">netpbm-10.27-bmptopnm.patch</Patch>
+            <Patch level="1">netpbm-10.28-CAN-2005-2471.patch</Patch>
+            <Patch level="1">netpbm-10.29-pnmtopng.patch</Patch>
+            <Patch level="1">netpbm-10.20-makefile_config.patch</Patch>
+            <Patch>netpbm-10.30-build.patch</Patch>
+            <Patch>netpbm-10.30-anytopnm.patch</Patch>
+            <Patch>netpbm-10.30-pngtopnm.patch</Patch>
+            <Patch>netpbm-10.30-tifftopnm.patch</Patch>
+            <Patch>netpbm-10.30-jpeg-prototypes.patch</Patch>
+            <Patch>uint32_t.diff</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>netpbm</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency versionFrom="3.5.5">tiff</Dependency>
+            <Dependency versionFrom="1.2.1">libpng</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2" type="security">
+            <Date>2005-11-22</Date>
+            <Version>10.30</Version>
+            <Comment>Update to version 10.30 to fix CAN-2005-2978 and CAN-2005-2471</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-20</Date>
+            <Version>10.20</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

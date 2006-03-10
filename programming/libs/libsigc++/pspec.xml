@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE PSPEC
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libsigc++</Name>
+        <Homepage>http://libsigc.sourceforge.net</Homepage>
+        <Packager>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>library</IsA>
+        <Summary>Typesafe callback system for C++</Summary>
+        <Description>Typesafe callback system for C++</Description>
+        <Archive sha1sum="546db4daa5f14842256d0de519b2e329c502e65e" type="tarbz2">http://ftp.gnome.org/pub/GNOME/sources/libsigc++/2.0/libsigc++-2.0.16.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>libsigc++</Name>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-16</Date>
+            <Version>2.0.16</Version>
+            <Comment>First release.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

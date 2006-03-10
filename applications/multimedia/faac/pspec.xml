@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>faac</Name>
+        <Homepage>http://www.audiocoding.com/</Homepage>
+        <Packager>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary xml:lang="en">Free MPEG-4 audio codecs by AudioCoding.com</Summary>
+        <Summary xml:lang="tr">Özgür MPEG-4 ses codecleri</Summary>
+        <Description xml:lang="en">Free MPEG-4 audio codecs by AudioCoding.com</Description>
+        <Description xml:lang="tr">FAAC, MPEG-4 LTP,MAN ve LOW COMPLEXITY obje tiplerini ve MAIN ve LOW MPEG-2 obje tiplerini destekler. Aynı zamanda çok-kanallı çözmeyi de destekler.</Description>
+        <Archive sha1sum="fd79715a800f8b39470d5b312f5d843a2629dd49" type="targz">http://ovh.dl.sourceforge.net/sourceforge/faac/faac-1.24.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="1.0.0">libsndfile</Dependency>
+            <Dependency versionFrom="1.3.5">libtool</Dependency>
+            <Dependency versionFrom="2.0">faad2</Dependency>
+        </BuildDependencies>        
+    </Source>
+    <Package>
+        <Name>faac</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="1.0.0">libsndfile</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-24</Date>
+            <Version>1.24</Version>
+            <Comment>First release.</Comment>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Update>
+    </History>
+</PISI>

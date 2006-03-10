@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>callgrind</Name>
+        <Homepage>http://kcachegrind.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>plugin</IsA>
+        <Summary>A plugin for cachegrind that adds call-graph profiling, needed by kcachegrind</Summary>
+        <Description>A plugin for cachegrind that adds call-graph profiling, needed by kcachegrind</Description>
+        <Summary xml:lang="tr">kcachegrind tarafından ihtiyaç duyulan çağrı-grafik profili eklemesi için bir cachegrind eklentisi</Summary>
+        <Description xml:lang="tr">kcachegrind tarafından ihtiyaç duyulan çağrı-grafik profili eklemesi için bir cachegrind eklentisi</Description>
+        <Archive sha1sum="a5eb41c9f2af0bef2b1f503701b2691f1fe05815" type="tarbz2">http://www.valgrind.org/downloads/callgrind-0.10.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="3.1.0">valgrind</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>callgrind</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="3.1.0">valgrind</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include/valgrind</Path>
+            <Path fileType="library">/usr/lib/valgrind</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="2">
+            <Date>2005-11-29</Date>
+            <Version>0.10.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-13</Date>
+            <Version>0.9.11</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

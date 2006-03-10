@@ -1,0 +1,13 @@
+diff -ur rc-scripts-0.4.1.orig/init.d/checkroot rc-scripts-0.4.1/init.d/checkroot
+--- rc-scripts-0.4.1.orig/init.d/checkroot	2005-12-26 09:15:42.000000000 +0200
++++ rc-scripts-0.4.1/init.d/checkroot	2005-12-26 13:44:32.000000000 +0200
+@@ -97,6 +97,9 @@
+ 			echo "LC_ALL=\"tr_TR.UTF-8\"" >> /etc/env.d/03locale
+ 		fi
+ 	fi
++    
++    # update environ
++    /usr/bin/update-environ.py
+ 
+ 	if [[ ${BOOT} == "yes" ]] ; then
+ 		local x=

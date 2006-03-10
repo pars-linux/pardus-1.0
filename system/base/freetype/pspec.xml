@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>freetype</Name>
+        <Homepage>http://www.freetype.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>FTL</License>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>A high-quality and portable font engine</Summary>
+        <Summary xml:lang="tr">Yüksek kaliteli ve taşınabilir yazıtipi düzeneği</Summary>
+        <Description>A high-quality and portable font engine</Description>
+        <Description xml:lang="tr">Yüksek kaliteli ve taşınabilir yazıtipi düzeneği</Description>
+        <Archive sha1sum="f9e5c52e466c3e41483d5d6d44b4f3135a9c4b16" type="tarbz2">http://easynews.dl.sourceforge.net/sourceforge/freetype/freetype-2.1.10.tar.bz2</Archive>
+        <Patches>
+        <Patch level="1">freetype-2.1.10-enable-ft2-bci.patch</Patch>
+        <Patch level="1">freetype-2.1.10-cvsfixes.patch</Patch>
+        <Patch level="1">freetype-2.1.10-fixautofit.patch</Patch>
+        <Patch level="1">freetype-2.1.10-memleak.patch</Patch>
+        <Patch level="1">freetype-2.1.10-fixkerning.patch</Patch>
+        <Patch level="1">freetype-2.1.10-fixaliasing.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>zlib</Dependency> 
+        </BuildDependencies>        
+    </Source>
+
+    <Package>
+        <Name>freetype</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="2">
+        <Date>2005-11-10</Date>
+        <Version>2.1.10</Version>
+        <Comment>Update to version 2.1.10</Comment>
+        <Name>İsmail Dönmez</Name>
+        <Email>ismail@uludag.org.tr</Email>
+    </Update>
+        <Update release="1">
+            <Date>2005-08-31</Date>
+            <Version>2.1.9</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

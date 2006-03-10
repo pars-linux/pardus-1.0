@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>sip</Name>
+        <Homepage>http://www.riverbankcomputing.co.uk/sip/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>SIP is a tool for generating bindings for C++ classes so that they can be used by Python.</Summary>
+        <Description>SIP is a tool for generating bindings for C++ classes so that they can be used by Python.</Description>
+        <Summary xml:lang="tr">C ve C++ kütüphaneleri için python bağlayıcıları oluşturan bir araç</Summary>
+        <Description xml:lang="tr">C ve C++ kütüphaneleri için python bağlayıcıları oluşturan bir araç</Description>
+        <Archive sha1sum="fd988c9ae4854c3f822194b27b6dbc38c2a9aacc" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/sip-snapshot-20051013.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency versionFrom="2.3">python</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>sip</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+  </Package>
+
+
+    <History>
+        <Update release="3">
+            <Date>2005-10-16</Date>
+            <Version>20051013</Version>
+            <Comment>Update to 20051013 snapshot</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-06</Date>
+            <Version>4.3.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-09</Date>
+            <Version>4.3</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

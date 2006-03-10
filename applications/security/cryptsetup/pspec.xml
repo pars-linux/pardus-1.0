@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>cryptsetup</Name>
+        <Homepage>http://www.saout.de/misc/dm-crypt/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary xml:lang="en">Tool to setup encrypted devices with dm-crypt</Summary>
+        <Description xml:lang="en">Tool to setup encrypted devices with dm-crypt</Description>
+        <Archive type="tarbz2" sha1sum="b371113b266e4cdffe36fd9e3be753e4adc9f766">http://www.saout.de/misc/dm-crypt/cryptsetup-0.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="1.00.07">device-mapper</Dependency>
+            <Dependency versionFrom="1.1.42">libgcrypt</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>cryptsetup</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="1.00.07">device-mapper</Dependency>
+            <Dependency versionFrom="1.1.42">libgcrypt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="config">/etc/conf.d</Path>
+            <Path fileType="data">/lib/rcscripts/addons</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/cryptfs">cryptfs.confd</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/lib/rcscripts/addons/dm-crypt-start.sh">dm-crypt-start.sh</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/lib/rcscripts/addons/dm-crypt-stop.sh">dm-crypt-stop.sh</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-24</Date>
+            <Version>0.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

@@ -1,0 +1,86 @@
+diff -ur linux-2.6.14.2.orig/include/linux/consolemap.h linux-2.6.14.2/include/linux/consolemap.h
+--- linux-2.6.14.2.orig/include/linux/consolemap.h	2005-11-11 07:33:12.000000000 +0200
++++ linux-2.6.14.2/include/linux/consolemap.h	2005-11-16 03:55:00.000000000 +0200
+@@ -13,3 +13,5 @@
+ extern unsigned char inverse_translate(struct vc_data *conp, int glyph);
+ extern unsigned short *set_translate(int m, struct vc_data *vc);
+ extern int conv_uni_to_pc(struct vc_data *conp, long ucs);
++extern u32 conv_8bit_to_uni(unsigned char c);
++
+diff -ur linux-2.6.14.2.orig/drivers/char/consolemap.c linux-2.6.14.2/drivers/char/consolemap.c
+--- linux-2.6.14.2.orig/drivers/char/consolemap.c	2005-11-11 07:33:12.000000000 +0200
++++ linux-2.6.14.2/drivers/char/consolemap.c	2005-11-16 03:57:55.000000000 +0200
+@@ -620,6 +620,19 @@
+ 		p->readonly = rdonly;
+ }
+ 
++/* may be called during an interrupt */
++u32 conv_8bit_to_uni(unsigned char c)
++{
++   /*
++    * Always use USER_MAP. This function is used by the keyboard,
++    * which shouldn't be affected by G0/G1 switching, etc.
++    * If the user map still contains default values, i.e. the
++    * direct-to-font mapping, then assume user is using Latin1.
++    */
++   unsigned short uni = translations[USER_MAP][c];
++   return uni == (0xf000 | c) ? c : uni;
++}
++
+ int
+ conv_uni_to_pc(struct vc_data *conp, long ucs) 
+ {
+diff -ur linux-2.6.14.2.orig/drivers/char/keyboard.c linux-2.6.14.2/drivers/char/keyboard.c
+--- linux-2.6.14.2.orig/drivers/char/keyboard.c	2005-11-11 07:33:12.000000000 +0200
++++ linux-2.6.14.2/drivers/char/keyboard.c	2005-11-16 03:57:19.000000000 +0200
+@@ -34,6 +34,7 @@
+ #include <linux/init.h>
+ #include <linux/slab.h>
+ 
++#include <linux/consolemap.h>
+ #include <linux/kbd_kern.h>
+ #include <linux/kbd_diacr.h>
+ #include <linux/vt_kern.h>
+@@ -349,6 +350,15 @@
+ 	}
+ }
+ 
++static void put_8bit(struct vc_data *vc, u8 c)
++{
++   if (kbd->kbdmode != VC_UNICODE || c < 32 || c == 127)
++       /* Don't translate control chars */
++       put_queue(vc, c);
++   else
++       to_utf8(vc, conv_8bit_to_uni(c));
++}
++
+ /*
+  * Called after returning from RAW mode or when changing consoles - recompute
+  * shift_down[] and shift_state from key_down[] maybe called when keymap is
+@@ -409,7 +419,7 @@
+ 	if (ch == ' ' || ch == d)
+ 		return d;
+ 
+-	put_queue(vc, d);
++	put_8bit(vc, d);
+ 	return ch;
+ }
+ 
+@@ -424,7 +434,7 @@
+ 	}
+ 	put_queue(vc, 13);
+ 	if (vc_kbd_mode(kbd, VC_CRLF))
+-		put_queue(vc, 10);
++		put_8bit(vc, 10);
+ }
+ 
+ static void fn_caps_toggle(struct vc_data *vc, struct pt_regs *regs)
+@@ -628,7 +638,7 @@
+ 		diacr = value;
+ 		return;
+ 	}
+-	put_queue(vc, value);
++	put_8bit(vc, value);
+ }
+ 
+ /*

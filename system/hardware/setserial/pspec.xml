@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>setserial</Name>
+        <Homepage>http://setserial.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary xml:lang="en">Configure your serial ports with it</Summary>
+        <Summary xml:lang="tr">Seri portu yapılandırır</Summary>
+        <Description xml:lang="en">Configure your serial ports with it</Description>
+        <Description xml:lang="tr">Seri portu yapılandırır</Description>
+        <Archive type="targz" sha1sum="68824494a0b5700f7e999564a59358bf34f79eb1">ftp://tsx-11.mit.edu/pub/linux/sources/sbin/setserial-2.17.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">setserial-2.17-spelling.patch</Patch>
+            <Patch level="1">setserial-2.17-manpage-updates.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>setserial</Name>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="doc">/usr/share/doc/setserial-2.17-1</Path>
+            <Path fileType="man">/usr/share/man/man8</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/serial">serial</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-25</Date>
+            <Version>2.17</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

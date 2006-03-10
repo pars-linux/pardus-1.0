@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gv</Name>
+        <Homepage>http://www.gnu.org/software/gv/</Homepage>
+        <Packager>
+            <Name>Fatih Aşıcı</Name>
+            <Email>fasici@linux-sevenler.org</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Description>Standard ghostscript frontend used by programs like LyX</Description>
+        <Description xml:lang="tr">LyX gibi programlar tarafından kullanılan standart bir ghostscript arayüzü</Description>
+        <Summary>Standard ghostscript frontend used by programs like LyX</Summary>
+        <Summary xml:lang="tr">LyX gibi programlar tarafından kullanılan standart bir ghostscript arayüzü</Summary>
+        <Archive sha1sum="a094d019772e11c6003cc8682c945b7b9bc700b7" type="targz">ftp://ftp.gnu.org/gnu/gv/gv-3.6.1.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">gv-3.6.1-landscape.patch</Patch>
+            <Patch>gv-3.6.1-setenv.patch</Patch>
+            <Patch level="1">gv-3.6.1-a0.patch</Patch>
+            <Patch compressionType="gz" level="1">gv_3.6.1-12.diff.gz</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>Xaw3d</Dependency>
+            <Dependency>ghostscript</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gv</Name>
+        <RuntimeDependencies>
+            <Dependency>Xaw3d</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-01</Date>
+            <Version>3.6.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Fatih Aşıcı</Name>
+            <Email>fasici@linux-sevenler.org</Email>
+        </Update>
+    </History>
+</PISI>

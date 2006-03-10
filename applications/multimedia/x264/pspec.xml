@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>x264</Name>
+        <Homepage>http://developers.videolan.org/x264.html</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL</License>
+        <IsA>library</IsA>
+        <Description>x264 is a free library for encoding H264/AVC video streams.</Description>
+        <Description xml:lang="tr">x264 H264/AVC görüntü dosyalarını açmak için kullanılan bir kütüphane</Description>
+        <Summary>Open source H264/AVC encoder</Summary>
+        <Summary xml:lang="tr">Açık kaynak kodlu H264/AVC çözücü</Summary>
+        <Archive sha1sum="0fbdd2543be71874bf237a80736c12900b882fdb" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/x264-20051016.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>gpac</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">noncvs-gpac.diff</Patch>
+        </Patches>
+    </Source>
+    
+    <Package>
+        <Name>x264</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2005-10-16</Date>
+            <Version>20051016</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

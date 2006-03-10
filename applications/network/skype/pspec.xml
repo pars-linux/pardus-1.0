@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PSPEC SYSTEM 'http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd'>
+
+<PISI>
+    <Source>
+        <Name>skype</Name>
+        <Homepage>http://www.skype.com</Homepage>
+        <Packager>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Packager>
+        <License>skype-eula</License>
+        <IsA>app:gui</IsA>
+        <Summary>Skype is a P2P-VoiceIP client.</Summary>
+        <Description>Skype is a P2P-VoiceIP client.</Description>
+        <Summary xml:lang="tr">Skype P2P VoIP istemcisi</Summary>
+        <Description xml:lang="tr">Skype, kullanıcıdan kullanıcıya internet telefonu servisi veren istemci. Ticari bir ürün olmasına karşın skype kullanıcıları arasında ücretsiz olarak internet üzerinden konuşmanıza imkan vermektedir.</Description>
+        <Archive sha1sum="9621f59e07358a4c97a112899c365c05d249d2fb" type="tarbz2">http://download.skype.com/linux/skype-1.2.0.18.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="2.3.2">glibc</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>skype</Name>
+        <Files>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.23.4">dbus</Dependency>
+            <Dependency>skype-avatars</Dependency>
+        </RuntimeDependencies>
+        <Path fileType="executable">/usr/bin</Path>
+        <Path fileType="doc">/usr/share/doc</Path>
+        <Path fileType="data">/opt/skype</Path>
+        <Path fileType="data">/usr/share/icons</Path>
+        <Path fileType="data">/usr/share/applications</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/opt/skype/skype">sDaemonWrapper-r1</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+        
+    <History>
+        <Update release="1">
+            <Date>2005-12-14</Date>
+            <Version>1.2.0.18</Version>
+            <Comment>First release.</Comment>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Update>
+    </History>
+</PISI>

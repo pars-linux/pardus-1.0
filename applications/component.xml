@@ -1,0 +1,6 @@
+<PISI>
+    <Name>applications</Name>
+    <LocalName xml:lang="tr">Uygulamalar</LocalName>
+    <Summary xml:lang="tr">Pardus kullanıcıları için seçilmiş uygulama programları</Summary>
+    <Description xml:lang="tr">Uygulamalar, interneti gezinmek gibi iyi belirlenmiş kullanım alanlarına hitap eden programlardır</Description>
+</PISI>

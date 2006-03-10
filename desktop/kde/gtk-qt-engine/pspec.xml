@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>gtk-qt-engine</Name>
+        <Homepage>http://xserver.freedesktop.org/Software/gtk-qt</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>category</IsA>
+        <Summary>GTK+2 Qt Theme Engine</Summary>
+        <Description>GTK+2 Qt Theme Engine</Description>
+        <Summary xml:lang="tr">GTK+2 Qt Tema Motoru</Summary>
+        <Description xml:lang="tr">GTK+2 Qt Tema Motoru</Description>
+        <Archive sha1sum="9d3e286b359b923ae938389776aa8923b9846739" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/gtk-qt-engine-20051206.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">gtk-qt-engine-colormapless-pixmap.patch</Patch>
+            <Patch>gtk-qt-engine.diff</Patch>
+            <Patch level="1">gtk-qt-engine-small-pixmaps.patch</Patch>
+            <Patch level="1">tr_translation.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>kdelibs</Dependency>
+            <Dependency versionFrom="2.2.0">gtk2</Dependency>
+            <Dependency>arts</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gtk-qt-engine</Name>
+        <RuntimeDependencies>
+            <Dependency>kdelibs</Dependency>
+            <Dependency versionFrom="2.2.0">gtk2</Dependency>
+            <Dependency>arts</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/kde/3.5</Path>
+            <Path fileType="data">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile mode="0644" owner="root" target="/usr/share/applications/kcmgtk-xdg.desktop">kcmgtk-xdg.desktop</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="5">
+            <Date>2005-12-06</Date>
+            <Version>20051206</Version>
+            <Comment>fix "kcmshell kcmgtk" not running bug and add Turkish translation</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-12-06</Date>
+            <Version>20051206</Version>
+            <Comment>Version bump to cvs, fix #1058</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-21</Date>
+            <Version>0.6</Version>
+            <Comment>3.4 to 3.5</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-09</Date>
+            <Version>0.6</Version>
+            <Comment>Wrong Paths fixed in pspec.xml</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-04</Date>
+            <Version>0.6</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

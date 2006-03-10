@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gpac</Name>
+        <Homepage>http://gpac.sourceforge.net</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL</License>
+        <IsA>library</IsA>
+        <Description>GPAC is a multimedia framework based on the MPEG-4 Systems standard (ISO/IEC 14496-1)</Description>
+        <Description xml:lang="tr">GPAC MPEG-4 Sistem standartlarına (ISO7IEC 14496-1) dayanan bir çokluortam çatısıdır</Description>
+        <Summary>GPAC is a multimedia framework based on the MPEG-4 Systems standard (ISO/IEC 14496-1)</Summary>
+        <Summary xml:lang="tr">GPAC MPEG-4 Sistem standartlarına (ISO7IEC 14496-1) dayanan bir çokluortam çatısıdır.</Summary>
+        <Archive sha1sum="d85b6fd056c97e4e2cb56f3eb80e30cec50b2482" type="targz">http://easynews.dl.sourceforge.net/sourceforge/gpac/gpac-0.4.0-rc2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>faad2</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>libmad</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>libogg</Dependency>
+            <Dependency>libtheora</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>libsdl</Dependency>
+            <Dependency>openssl</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency>xvid</Dependency>
+            <Dependency>zlib</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">gpac-destdir.diff</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>gpac</Name>
+        <RuntimeDependencies>
+            <Dependency>faad2</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>libmad</Dependency>
+            <Dependency>libogg</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>libtheora</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>libsdl</Dependency>
+            <Dependency>openssl</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency>xvid</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-16</Date>
+            <Version>0.4.0-rc2</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

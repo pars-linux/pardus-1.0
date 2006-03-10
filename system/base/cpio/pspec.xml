@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cpio</Name>
+        <Homepage>http://www.gnu.org/software/cpio/cpio.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <License>LGPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>A file archival tool which can also read and write tar files</Summary>
+        <Description>A file archival tool which can also read and write tar files</Description>
+        <Summary xml:lang="tr">Tar ve cpio dosyaları içine yazıp okuyabilen bir dosya arşivleme uygulaması</Summary>
+        <Description xml:lang="tr">GNU cpio, tar ve cpio dosyaları içine yazıp okuyabilen bir dosya arşivleme uygulamasıdır. Dosyaların yanısıra dosyalara ait sahip, zaman damgası ve erişim haklarında arşivlenir. Arşiv dosyası başka bir disk ya da manyetik bir teyp üzerinde de olabilir. GNU cpio'nun desteklediği arşiv formatları ise; ikili (binary), eski ASCII, yeni ASCII, crc, HPUX ikili, HPUX eski ASCII, eski tar ve POSIX.1'dir.</Description>
+        <Archive sha1sum="4f65821ec10eb2c330a582fbc8112960c9849ecd" type="tarbz2">http://ftp.gnu.org/gnu/cpio/cpio-2.6.tar.bz2</Archive>
+        <Patches>
+            <Patch>2.6-rili-big-files.patch</Patch>
+            <Patch level="1">2.6-isnumber.patch</Patch>
+            <Patch>2.6-umask.patch</Patch>
+            <Patch level="1">2.6-lstat.patch</Patch>
+            <Patch level="1">cpio-2.6-dirTraversal.patch</Patch>
+            <Patch level="1">cpio-2.6-chmodRaceC.patch</Patch>
+            <Patch>cpio-2.6-gcc4-tests.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>cpio</Name>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="2" type="security">
+            <Date>2005-10-27</Date>
+            <Version>2.6</Version>
+            <Comment>Fix CAN-2005-1229 and CAN-2005-1111</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-04</Date>
+            <Version>2.6</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

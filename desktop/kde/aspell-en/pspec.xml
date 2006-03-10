@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>aspell-en</Name>
+        <Homepage>http://aspell.net</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <License>public-domain</License>
+        <IsA>app:console</IsA>
+        <Summary>English (US, British, Canadian) language dictionary for aspell</Summary>
+        <Summary xml:lang="tr">Aspell için İngilizce sözlük</Summary>
+        <Description>English (US, British, Canadian) language dictionary for aspell</Description>
+        <Description xml:lang="tr">Bu paket GNU Aspell yazım kontrol aracının İngilizce için gerektirdiği dosyaları içerir.</Description>
+        <Archive sha1sum="df7210d341c609dd12df5e9e63a4d94e9cb41cc6" type="tarbz2">ftp://ftp.linux.org.tr/pub/mirrors/gentoo/distfiles/aspell-en-0.51-1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>aspell</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>aspell-en</Name>
+        <Description>English (US, British, Canadian) language dictionary for aspell</Description>
+        <RuntimeDependencies>
+            <Dependency>aspell</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/lib/aspell</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/aspell</Path>
+        </Files>
+  </Package>
+
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-18</Date>
+            <Version>0.51-1</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

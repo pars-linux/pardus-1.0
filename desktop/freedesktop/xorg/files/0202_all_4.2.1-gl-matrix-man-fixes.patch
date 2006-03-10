@@ -1,0 +1,42 @@
+--- XFree86-4.2.1/xc/doc/man/GL/gl/loadidentity.3gl.gl-matrix-man-fixes	2002-01-15 04:43:27.000000000 +0100
++++ XFree86-4.2.1/xc/doc/man/GL/gl/loadidentity.3gl	2002-11-04 14:15:20.000000000 +0100
+@@ -25,12 +25,12 @@ with the identity matrix
+ .ce
+ 
+ .EQ
+-left (  down 20 { ~ matrix {
++down 20 { ~ matrix {
+    ccol { 1 above 0 above 0 above 0~ }
+    ccol { 0 above 1 above 0 above 0~ }
+    ccol { 0 above 0 above 1 above 0~ }
+    ccol { 0 above 0 above 0 above 1 }
+-} } ~~ right )
++} } ~~
+ .EN
+ 
+ 
+--- XFree86-4.2.1/xc/doc/man/GL/gl/translate.3gl.gl-matrix-man-fixes	2002-01-15 04:43:27.000000000 +0100
++++ XFree86-4.2.1/xc/doc/man/GL/gl/translate.3gl	2002-11-04 14:15:26.000000000 +0100
+@@ -40,7 +40,6 @@ Specify the \f2x\fP, \f2y\fP, and \f2z\f
+ $("x","y","z")$.
+ The current matrix
+ (see 
+-.br
+ \%\f3glMatrixMode\fP)
+ is multiplied by this translation matrix,
+ with the product replacing the current matrix, as if
+@@ -49,12 +48,12 @@ for its argument:
+ .sp
+ .ce
+ .EQ
+-left (  ~ down 20 matrix {
++~ down 20 matrix {
+    ccol { 1~~ above 0~~ above 0~~ above 0~~ }
+    ccol { 0~~ above 1~~ above 0~~ above 0~~ }
+    ccol { 0~~ above 0~~ above 1~~ above 0~~ }
+    ccol { "x"~ above "y"~ above "z"~ above 1}
+-} ~~right )
++} ~~
+ .EN
+ .sp
+ .RE

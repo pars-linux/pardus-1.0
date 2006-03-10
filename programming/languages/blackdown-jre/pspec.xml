@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>blackdown-jre</Name>
+        <Homepage>http://www.blackdown.org</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>sun-bcla-java-vm</License>
+        <IsA>category</IsA>
+        <Summary>Blackdown Java Runtime Environment</Summary>
+        <Description>Blackdown Java Runtime Environment</Description>
+        <Summary xml:lang="tr">Blackdown Java sanal makinesi</Summary>
+        <Description xml:lang="tr">Blackdown Java sanal makinesi</Description>
+        <Archive sha1sum="30b37bc8dcb5617971d2ae95e2f7227359d39991" type="binary">http://ftp2.skynet.be/pub/ftp.blackdown.org/JDK-1.4.2/i386/03/j2re-1.4.2-03-linux-i586.bin</Archive>
+    </Source>
+
+    <Package>
+        <Name>blackdown-jre</Name>
+        <Files>
+            <Path fileType="config">/etc/env.d</Path>
+            <Path fileType="executable">/opt/blackdown-jre</Path>
+            <Path fileType="library">/usr/lib/nsbrowser/plugins</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/env.d/20java">20java</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="3" type="security">
+            <Date>2005-12-22</Date>
+            <Version>1.4.2.03</Version>
+            <Comment>Security Update</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-12-21</Date>
+            <Version>1.4.0.02</Version>
+            <Comment>fix #1354</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-28</Date>
+            <Version>1.4.0.02</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

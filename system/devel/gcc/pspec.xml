@@ -1,0 +1,165 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gcc</Name>
+        <Homepage>http://www.gnu.org/software/gcc/gcc.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <License>LGPL-2.1</License>
+        <IsA>app:console</IsA>
+        <Summary>The GNU Compiler Collection. Includes C/C++, java compilers</Summary>
+        <Summary xml:lang="tr">C/C++ ve Java derleyicisi</Summary>
+        <Description>Contains a shared library of support routines used by GCC's runtime, and thus by every program on the system</Description>
+        <Description xml:lang="tr">Çalışma anında kullanılan ve böylelikle sistemdeki her program tarafından kullanılan ortak kitaplıkları ve destek rutinlerini içerir</Description>
+        <Archive sha1sum="389bcc98e391545e501c05557a8651104beac059" type="tarbz2">ftp://ftp.gnu.org/gnu/gcc/gcc-3.4.5/gcc-3.4.5.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">00_all_gcc_unlink_if_ordinary.patch</Patch>
+            <Patch level="1">01_all_gcc-3.4.4-fbsd-linker.patch</Patch>
+            <Patch>02_all_gcc34-ice-hack.patch</Patch>
+            <Patch>04_all_gcc34-java-nomulti.patch</Patch>
+            <Patch>09_all_gcc34-pr18282.patch</Patch>
+            <Patch>20_all_gcc34-visibility1.patch</Patch>
+            <Patch>21_all_gcc34-visibility2.patch</Patch>
+            <Patch>22_all_gcc34-visibility3.patch</Patch>
+            <Patch level="1">23_all_gcc34-visibility4.patch</Patch>
+            <Patch level="1">24_all_gcc34-visibility5.patch</Patch>
+            <Patch level="1">33_all_pr15068-fix.patch</Patch>
+            <Patch level="1">41_all_gcc-3.4.4-fix-sse2-pinsrw.patch</Patch>
+            <Patch level="1">46_all_gcc-3.4.4-pr18300.patch</Patch>
+            <Patch>48_all_gcc-3.4_x-avr-news-devs2.patch</Patch>
+            <Patch>51_all_gcc-3.4-libiberty-pic.patch</Patch>
+            <Patch>52_all_pr16625-fix.patch</Patch>
+            <Patch>53_all_pr15666-fix.patch</Patch>
+            <Patch level="1">54_all_300-libstdc++-pic.patch</Patch>
+            <Patch>71_all_sh-pr16665-fix.patch</Patch>
+            <Patch>72_all_sh-no-reorder-blocks.patch</Patch>
+            <Patch>73_all_sh-pr20617.patch</Patch>
+            <Patch level="1">80_all_canadian-cross-spec-and-syslimits.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency versionFrom="1.1.4">zlib</Dependency>
+            <Dependency versionFrom="2.14.90.0.6">binutils</Dependency>
+            <Dependency versionFrom="1.875">bison</Dependency>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+            <Dependency>gettext</Dependency>
+            <Dependency versionFrom="4.2">texinfo</Dependency>
+            <Dependency>gnuconfig</Dependency>
+            <Dependency versionFrom="4">sed</Dependency>
+            <Dependency>patch</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libgcc</Name>
+        <PartOf>system.base</PartOf>
+        <Summary>Contains a shared library of support routines used by GCC's runtime, and thus by every program on the system</Summary>
+        <Description>Contains a shared library of support routines used by GCC's runtime, and thus by every program on the system</Description>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib/gcc/i686-pc-linux-gnu/3.4.5/libstdc++.so</Path>
+            <Path fileType="library">/usr/lib/gcc/i686-pc-linux-gnu/3.4.5/libstdc++.so.6</Path>
+            <Path fileType="library">/usr/lib/gcc/i686-pc-linux-gnu/3.4.5/libstdc++.so.6.0.3</Path>
+            <Path fileType="library">/usr/lib/gcc/i686-pc-linux-gnu/3.4.5/libgcc_s.so</Path>
+            <Path fileType="library">/usr/lib/gcc/i686-pc-linux-gnu/3.4.5/libgcc_s.so.1</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/env.d/05gcc">05gcc</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <Package>
+        <Name>gcc</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="1.1.4">zlib</Dependency>
+            <Dependency versionFrom="2.14.90.0.6">binutils</Dependency>
+            <Dependency versionFrom="1.875">bison</Dependency>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+            <Dependency>gettext</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/libexec</Path>
+            <Path fileType="library">/usr/i686-pc-linux-gnu</Path>
+            <Path fileType="data">/usr/share/gcc-data</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/libexec/awk/fixlafiles.awk">fixlafiles.awk</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="9">
+            <Date>2005-12-06</Date>
+            <Version>3.4.5</Version>
+            <Comment>Version bump</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="8">
+            <Date>2005-11-21</Date>
+            <Version>3.4.5_20051120</Version>
+            <Comment>Update to GCC 3.4 branch 20051121 snapshot</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="7">
+            <Date>2005-11-20</Date>
+            <Version>3.4.4</Version>
+            <Comment>Fix PCH crashes Gcc bug #14400</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-10-30</Date>
+            <Version>3.4.4</Version>
+            <Comment>05gcc belongs libgcc</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-10-26</Date>
+            <Version>3.4.4</Version>
+            <Comment>Typo fixes, some optimizations by İsmail Dönmez</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-10-14</Date>
+            <Version>3.4.4</Version>
+            <Comment>Postinstall script added to fix libtool files for hardcoded gcc library paths</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-10-12</Date>
+            <Version>3.4.4</Version>
+            <Comment>dosed function in action.py fixed.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-10</Date>
+            <Version>3.4.4</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-11</Date>
+            <Version>3.3.5.20050130</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

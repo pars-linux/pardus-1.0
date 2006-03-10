@@ -1,0 +1,1105 @@
+diff -Nur knights.orig/po/Makefile.am knights/po/Makefile.am
+--- knights.orig/po/Makefile.am	2005-02-06 22:16:45.000000000 +0200
++++ knights/po/Makefile.am	2005-11-18 15:39:16.000000000 +0200
+@@ -2,7 +2,7 @@
+ POFILES = AUTO 
+ 
+ 
+-EXTRA_DIST = cs.gmo de.gmo es.gmo et.gmo fi.gmo fr.gmo it.gmo 
++EXTRA_DIST = cs.gmo de.gmo es.gmo et.gmo fi.gmo fr.gmo it.gmo tr.gmo
+ 
+ ####### kdevelop will overwrite this part!!! (end)############
+-noinst_HEADERS = cs.gmo de.gmo es.gmo et.gmo fi.gmo fr.gmo it.gmo Makefile.in
++noinst_HEADERS = cs.gmo de.gmo es.gmo et.gmo fi.gmo fr.gmo it.gmo tr.gmo Makefile.in
+diff -Nur knights.orig/po/tr.po knights/po/tr.po
+--- knights.orig/po/tr.po	1970-01-01 02:00:00.000000000 +0200
++++ knights/po/tr.po	2005-11-18 15:38:47.000000000 +0200
+@@ -0,0 +1,1088 @@
++msgid ""
++msgstr ""
++"Project-Id-Version: Knights\n"
++"POT-Creation-Date: 2001-12-04 18:24-0600\n"
++"PO-Revision-Date: 2002-12-06 13:42+0200\n"
++"Last-Translator: Onur Otlu <<Onur@linux-sevenler.de>>\n"
++"Language-Team: Türlçe <kde-i18n-tr@mail.kde.org>\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
++"X-Generator: KBabel 0.9.6\n"
++
++msgid " 50 moves rule, draw game"
++msgstr " 50 hareket kuralı, berabere oyun"
++
++msgid " Black has a crushing advantage ( White should resign )"
++msgstr "Siyahın ezici üstünlüğü var (Beyaz taraf çekilmeli)"
++
++msgid " Black has a decisive advantage"
++msgstr "Siyahın belirgin üstünlüğü var"
++
++msgid " Black has a decisive center control advantage"
++msgstr "Siyahın belirleyici merkezi denetleme üstünlüğü var"
++
++msgid " Black has a decisive kingside control advantage"
++msgstr "Beyazın belirleyici şah tarafını denetleme üstünlüğü var"
++
++msgid " Black has a decisive queenside control advantage"
++msgstr "Siyahın belirleyici vezir tarafını denetleme üstünlüğü var"
++
++msgid " Black has a decisive space advantage"
++msgstr "Siyahın belirleyici yer üstünlüğü var"
++
++msgid " Black has a decisive time ( development ) advantage"
++msgstr "Siyahın belirleyici zaman ( gelişim ) üstünlüğü var"
++
++msgid " Black has a lasting initiative"
++msgstr "Siyahın sürekli bir önceliği var"
++
++msgid " Black has a moderate advantage"
++msgstr "Siyahın üstünlüğü var"
++
++msgid " Black has a moderate center control advantage"
++msgstr "Siyahın merkezi denetleme üstünlüğü var"
++
++msgid " Black has a moderate kingside control advantage"
++msgstr "Siyahın şah tarafını denetleme üstünlüğü var"
++
++msgid " Black has a moderate queenside control advantage"
++msgstr "Siyahın vezir tarafını denetleme üstünlüğü var"
++
++msgid " Black has a moderate space advantage"
++msgstr "Siyahın yer üstünlüğü var"
++
++msgid " Black has a moderate time ( development ) advantage"
++msgstr "Siyahın zaman ( gelişim ) üstünlüğü var"
++
++msgid " Black has a moderately strong pawn structure"
++msgstr "Siyah piyon yapısı güçlü"
++
++msgid " Black has a moderately weak pawn structure"
++msgstr "Siyah piyon yapısı zayıf"
++
++msgid " Black has a poorly placed king"
++msgstr "Siyah şah kötü yerleştirilmiş"
++
++msgid " Black has a poorly protected king"
++msgstr "Siyah şah zayıf korunuyor"
++
++msgid " Black has a slight advantage"
++msgstr "Siyahın hafif üstünlüğü var"
++
++msgid " Black has a slight center control advantage"
++msgstr "Siyahın hafif merkezi denetleme üstünlüğü var"
++
++msgid " Black has a slight kingside control advantage"
++msgstr "Siyahın hafif şah tarafını denetleme üstünlüğü var"
++
++msgid " Black has a slight queenside control advantage"
++msgstr "Siyahın hafif vezir tarafını denetleme üstünlüğü var"
++
++msgid " Black has a slight space advantage"
++msgstr "Siyahın hafif yer üstünlüğü var"
++
++msgid " Black has a slight time ( development ) advantage"
++msgstr "Siyahın hafif zaman (gelişim) üstünlüğü var"
++
++msgid " Black has a very strong pawn structure"
++msgstr "Siyah piyon yapısı çok güçlü"
++
++msgid " Black has a very weak pawn structure"
++msgstr "Siyah piyon yapısı çok zayıf"
++
++msgid " Black has a vulnerable first rank"
++msgstr "Siyahın ön sırası korunmasız"
++
++msgid " Black has a well placed king"
++msgstr "Siyah şah iyi yerleştirilmiş"
++
++msgid " Black has a well protected first rank"
++msgstr "Siyahın ön sırası iyi korunuyor"
++
++msgid " Black has a well protected king"
++msgstr "Siyah şah iyi korunuyor"
++
++msgid " Black has good bishop placement"
++msgstr "Siyahın fil yerleşimi iyi"
++
++msgid " Black has good knight placement"
++msgstr "Siyahın at yerleşimi iyi"
++
++msgid " Black has good piece coordination"
++msgstr "Siyahın parça eşgüdümü iyi"
++
++msgid " Black has good queen placement"
++msgstr "Siyahın vezir yerleşimi iyi"
++
++msgid " Black has good rook placement"
++msgstr "Siyahın kale yerleşimi iyi"
++
++msgid " Black has offered a draw"
++msgstr "Siyah berabere önerdi"
++
++msgid " Black has played the ending poorly"
++msgstr "Siyah oyunun sonunu kötü oynadı"
++
++msgid " Black has played the ending very poorly"
++msgstr "Siyah oyunun sonunu çok kötü oynadı"
++
++msgid " Black has played the ending very well"
++msgstr "Siyah oyunun sonunu çok iyi oynadı"
++
++msgid " Black has played the ending well"
++msgstr "Siyah oyunun sonunu iyi oynadı"
++
++msgid " Black has played the middlegame poorly"
++msgstr "Siyah oyunun ortalarını kötü oynadı"
++
++msgid " Black has played the middlegame very poorly"
++msgstr "Siyah oyunun ortalarını çok kötü oynadı"
++
++msgid " Black has played the middlegame very well"
++msgstr "Siyah oyunun ortalarını çok iyi oynadı"
++
++msgid " Black has played the middlegame well"
++msgstr "Siyah oyunun ortalarını iyi oynadı"
++
++msgid " Black has played the opening poorly"
++msgstr "Siyah açılışı kötü oynadı"
++
++msgid " Black has played the opening very poorly"
++msgstr "Siyah açılışı çok kötü oynadı"
++
++msgid " Black has played the opening very well"
++msgstr "Siyah açılışı çok iyi oynadı"
++
++msgid " Black has played the opening well"
++msgstr "Siyah açılışı iyi oynadı"
++
++msgid " Black has poor bishop placement"
++msgstr "Siyahın fil yerleşimi kötü"
++
++msgid " Black has poor knight placement"
++msgstr "Siyahın at yerleşimi kötü"
++
++msgid " Black has poor piece coordination"
++msgstr "Siyahın parça eşgüdümü kötü"
++
++msgid " Black has poor queen placement"
++msgstr "Siyahın vezir yerleşimi kötü"
++
++msgid " Black has poor rook placement"
++msgstr "Siyahın kale yerleşimi kötü"
++
++msgid " Black has slight counterplay"
++msgstr "Siyahın çokaz karşı oyunu var"
++
++msgid " Black has the attack"
++msgstr "Oynama sırası siyahda"
++
++msgid " Black has the initiative"
++msgstr "Siyahın önceliği var"
++
++msgid " Black is in zugzwang"
++msgstr "Oynama sırası Siyahda"
++
++msgid " Black's turn"
++msgstr " Oyun sırası siyahta"
++
++msgid " Can not move a chessman while reviewing the game"
++msgstr "Oyun gözden geçirilirken taşlar oynatılamaz."
++
++msgid " Checkmate, Black wins"
++msgstr " Şah-mat, siyah kazandı"
++
++msgid " Checkmate, White wins"
++msgstr " Şah-mat, beyaz kazandı"
++
++msgid " Draw game"
++msgstr " Berabere oyun"
++
++msgid " Drawish position"
++msgstr "Belirsiz pozisyon"
++
++msgid " Equal chances, active position"
++msgstr "Eşit şanslar, hareketli durum"
++
++msgid " Equal chances, quiet position"
++msgstr "Eşit şanslar, sakin durum"
++
++msgid " Error with black book engine"
++msgstr "Siyah kural motorunda hata"
++
++msgid " Error with black engine"
++msgstr "Siyah oyun motorunda hata oluştu. "
++
++msgid " Error with white book engine"
++msgstr "Beyaz Kural Motorunda Hata"
++
++msgid " Error with white engine"
++msgstr "Beyaz oyun motorunda hata oluştu."
++
++msgid " Forced move"
++msgstr " Zorlanmış hareket"
++
++msgid " Game paused"
++msgstr " Oyun duraklatıldı"
++
++msgid " Good move"
++msgstr " Güzel hareket"
++
++msgid " Illegal Move"
++msgstr " Kuraldışı Hareket"
++
++msgid " Loading complete"
++msgstr "Yükleme tamamlandı."
++
++msgid " Poor move"
++msgstr " Yanlış hareket"
++
++msgid " Questionable move"
++msgstr " Tartışılabilir hareket"
++
++msgid " Reading File"
++msgstr "Dosya Okunuyor"
++
++msgid " Ready"
++msgstr " Hazır"
++
++msgid " Saving complete"
++msgstr "Kaydetme tamamlandı"
++
++msgid " Singular move"
++msgstr "Tekil Hamle"
++
++msgid " Starting computer players, please wait"
++msgstr "Bilgisayar oyuncuları başlatılıyor, lütfen bekleyin"
++
++msgid " The computer opponent assigned to play %1 has crashed"
++msgstr "%1 oynaması için atanan bilgisayar rakip çöktü."
++
++msgid " There was an error while loading the file"
++msgstr "Dosyayı yüklerken bir hata oluştu."
++
++msgid " There was an error while saving the file"
++msgstr "Dosyayı kaydederken bir hata oluştu."
++
++msgid " Unclear position"
++msgstr " Belirsiz pozisyon"
++
++msgid " Very good move"
++msgstr " Çok iyi hareket"
++
++msgid " Very poor move"
++msgstr " Çok yanlış hareket"
++
++msgid " White has a crushing advantage ( Black should resign )"
++msgstr "Beyazın ezici üstünlüğü var (Siyah taraf çekilmeli)"
++
++msgid " White has a decisive advantage"
++msgstr "Beyazın belirgin üstünlüğü var"
++
++msgid " White has a decisive center control advantage"
++msgstr "Beyazın belirleyici merkezi denetleme üstünlüğü var"
++
++msgid " White has a decisive kingside control advantage"
++msgstr "Beyazın belirleyici şah tarafını denetleme üstünlüğü var"
++
++msgid " White has a decisive queenside control advantage"
++msgstr "Beyazın belirleyici vezir tarafını denetleme üstünlüğü var"
++
++msgid " White has a decisive space advantage"
++msgstr "Beyazın belirleyici yer üstünlüğü var"
++
++msgid " White has a decisive time ( development ) advantage"
++msgstr "Beyazın belirleyici zaman ( gelişim ) üstünlüğü var"
++
++msgid " White has a lasting initiative"
++msgstr "Beyazın sürekli bir önceliği var"
++
++msgid " White has a moderate advantage"
++msgstr "Beyazın üstünlüğü var"
++
++msgid " White has a moderate center control advantage"
++msgstr "Beyazın merkezi denetleme üstünlüğü var"
++
++msgid " White has a moderate kingside control advantage"
++msgstr "Beyazın şah tarafını denetleme üstünlüğü var"
++
++msgid " White has a moderate queenside control advantage"
++msgstr "Beyazın vezir tarafını denetleme üstünlüğü var"
++
++msgid " White has a moderate space advantage"
++msgstr "Beyazın yer üstünlüğü var"
++
++msgid " White has a moderate time ( development ) advantage"
++msgstr "Beyazın zaman ( gelişim ) üstünlüğü var"
++
++msgid " White has a moderately strong pawn structure"
++msgstr "Beyaz piyon yapısı güçlü"
++
++msgid " White has a moderately weak pawn structure"
++msgstr "Beyaz piyon yapısı zayıf"
++
++msgid " White has a poorly placed king"
++msgstr "Beyaz şah kötü yerleştirilmiş"
++
++msgid " White has a poorly protected king"
++msgstr "Beyaz şah zayıf korunuyor"
++
++msgid " White has a slight advantage"
++msgstr "Beyazın hafif üstünlüğü var"
++
++msgid " White has a slight center control advantage"
++msgstr "Beyazın hafif merkezi denetleme üstünlüğü var"
++
++msgid " White has a slight kingside control advantage"
++msgstr "Beyazın hafif şah tarafını denetleme üstünlüğü var"
++
++msgid " White has a slight queenside control advantage"
++msgstr "Beyazın hafif vezir tarafını denetleme üstünlüğü var"
++
++msgid " White has a slight space advantage"
++msgstr "Beyazın hafif yer üstünlüğü var"
++
++msgid " White has a slight time ( development ) advantage"
++msgstr "Beyazın hafif zaman ( gelişim ) üstünlüğü var"
++
++msgid " White has a very strong pawn structure"
++msgstr "Beyaz piyon yapısı çok güçlü"
++
++msgid " White has a very weak pawn structure"
++msgstr "Beyaz piyon yapısı çok zayıf"
++
++msgid " White has a vulnerable first rank"
++msgstr "Beyazın ön sırası korunmasız"
++
++msgid " White has a well placed king"
++msgstr "Beyaz şah iyi yerleştirilmiş"
++
++msgid " White has a well protected first rank"
++msgstr "Beyazın ön sırası iyi korunuyor"
++
++msgid " White has a well protected king"
++msgstr "Beyaz şah iyi korunuyor"
++
++msgid " White has good bishop placement"
++msgstr "Beyazın fil yerleşimi iyi"
++
++msgid " White has good knight placement"
++msgstr "Beyazın at yerleşimi iyi"
++
++msgid " White has good piece coordination"
++msgstr "Beyazın parça eşgüdümü iyi"
++
++msgid " White has good queen placement"
++msgstr "Beyazın vezir yerleşimi iyi"
++
++msgid " White has good rook placement"
++msgstr "Beyazın kale yerleşimi iyi"
++
++msgid " White has offered a draw"
++msgstr "Beyaz berabere önerdi"
++
++msgid " White has played the ending poorly"
++msgstr "Beyaz oyunun sonunu kötü oynadı"
++
++msgid " White has played the ending very poorly"
++msgstr "Beyaz oyunun sonunu çok kötü oynadı"
++
++msgid " White has played the ending very well"
++msgstr "Beyaz oyunun sonunu çok iyi oynadı"
++
++msgid " White has played the ending well"
++msgstr "Beyaz oyunun sonunu iyi oynadı"
++
++msgid " White has played the middlegame poorly"
++msgstr "Beyaz oyunun ortalarını kötü oynadı"
++
++msgid " White has played the middlegame very poorly"
++msgstr "Beyaz oyunun ortalarını çok kötü oynadı"
++
++msgid " White has played the middlegame very well"
++msgstr "Beyaz oyunun ortalarını çok iyi oynadı"
++
++msgid " White has played the middlegame well"
++msgstr "Beyaz oyunun ortalarını iyi oynadı"
++
++msgid " White has played the opening poorly"
++msgstr "Beyaz açılışı kötü oynadı"
++
++msgid " White has played the opening very poorly"
++msgstr "Beyaz açılışı çok kötü oynadı"
++
++msgid " White has played the opening very well"
++msgstr "Beyaz açılışı çok iyi oynadı"
++
++msgid " White has played the opening well"
++msgstr "Beyaz açılışı iyi oynadı"
++
++msgid " White has poor bishop placement"
++msgstr "Beyazın fil yerleşimi kötü"
++
++msgid " White has poor knight placement"
++msgstr "Beyazın at yerleşimi kötü"
++
++msgid " White has poor piece coordination"
++msgstr "Beyazın parça eşgüdümü kötü"
++
++msgid " White has poor queen placement"
++msgstr "Beyazın vezir yerleşimi kötü"
++
++msgid " White has poor rook placement"
++msgstr "Beyazın kale yerleşimi kötü"
++
++msgid " White has slight counterplay"
++msgstr "Beyazın çokaz karşı oyunu var"
++
++msgid " White has the attack"
++msgstr "Oynama sırası beyazda"
++
++msgid " White has the initiative"
++msgstr "Beyazın önceliği var"
++
++msgid " White is in zugzwang"
++msgstr "Oynama sırası Beyazda"
++
++msgid " White's turn"
++msgstr " Oyun sırası beyazda"
++
++msgid " Worst move"
++msgstr " En kötü hareket"
++
++msgid " min."
++msgstr " dak."
++
++msgid " sec."
++msgstr " sn."
++
++msgid ""
++"%1 suggests this move:\n"
++"%2"
++msgstr ""
++"%1 bu hareketi öneriyor:\n"
++"%2"
++
++msgid "&Accept Draw"
++msgstr "B&erabere Bitmesini Kabul Et"
++
++msgid "&Add..."
++msgstr "&Ekle..."
++
++msgid "&Close Game"
++msgstr "Oyunu &Kapat"
++
++msgid "&Computer vs. Computer"
++msgstr "&Bilgisayar ve Bilgisayar"
++
++msgid "&Configure Knights..."
++msgstr "&Knights'ı Yapılandır..."
++
++msgid "&Delete..."
++msgstr "&Sil..."
++
++msgid "&Draw"
++msgstr "&Berabere"
++
++msgid "&Hint"
++msgstr "İ&pucu"
++
++msgid "&Ignore Draw"
++msgstr "Berabereyi &Yoksay"
++
++msgid "&Load Game..."
++msgstr "&Oyun Yükle..."
++
++msgid "&Match"
++msgstr "&Oyun"
++
++msgid "&Modify..."
++msgstr "Dü&zenle..."
++
++msgid "&Offer Draw"
++msgstr "&Berabere Öner"
++
++msgid "&Ponder"
++msgstr "&Düşünmeyi engelle"
++
++msgid "&Print Notation..."
++msgstr "&Yazdır..."
++
++msgid "&Reject Draw"
++msgstr "Be&rabere Bitmesini Reddet"
++
++msgid "&Retract Move"
++msgstr "&Hareketi Geri Al"
++
++msgid "&Save Game"
++msgstr "O&yunu Kaydet"
++
++msgid "&Solitaire Chess"
++msgstr "&Solitaire Satranç"
++
++msgid "A .pgn file to be loaded."
++msgstr "Yüklenecek .pgn dosyası."
++
++msgid "Ask"
++msgstr "Sor"
++
++msgid "Australian FICS"
++msgstr "Avustralya FICS"
++
++msgid "Automatic Preview"
++msgstr "Otomatik Önizleme"
++
++msgid "BabyChess"
++msgstr "BabyChess"
++
++msgid "Base Time"
++msgstr "Taban Zaman"
++
++msgid "Beta Testing"
++msgstr "Beta Denemeleri"
++
++msgid "Black Book Engine Problem"
++msgstr "Siyah Kural Motoru Hatası"
++
++msgid "Black Engine Problem"
++msgstr "Siyah Oyun Motoru Sorunu"
++
++msgid "Board Themes"
++msgstr "Tahta Temaları"
++
++msgid "Brazilian FICS"
++msgstr "Brezilya FICS"
++
++msgid "Can not find server."
++msgstr "Sunucu bulunamadı."
++
++msgid "Can not install theme"
++msgstr "Tema kurulamadı"
++
++msgid "Channel Tell"
++msgstr "Kanaldaki Konuşmalar"
++
++msgid "Chess Engines"
++msgstr "Satranç Motorları"
++
++msgid "Chess Servers"
++msgstr "Satranç Sunucuları"
++
++msgid "Chess-Square.Com"
++msgstr "Chess-Square.Com"
++
++msgid "Chess.Net"
++msgstr "Chess.Net"
++
++msgid "Chessman Themes"
++msgstr "Chessman Temaları"
++
++msgid "Chilean FICS"
++msgstr "Şili FICS"
++
++msgid "Close All"
++msgstr "Hepsini Kapat"
++
++msgid "Command Line Arguments"
++msgstr "Komut Satırı Parametreleri"
++
++msgid "Computer Opponents"
++msgstr "Satranç Motoru"
++
++msgid "Configure Engine"
++msgstr "Oyun Motorunu Yapılandır"
++
++msgid "Configure Server"
++msgstr "Sunucuyu Yapılandır"
++
++msgid "Configure your chess engines here."
++msgstr "Satranç motorlarını buradan ayarlayın."
++
++msgid "Configure your internet chess servers here."
++msgstr "İnternet satranç sunucularını buradan yapılandırın."
++
++msgid "Confirm Password"
++msgstr "Parolayı Onayla"
++
++msgid "Connect to Server"
++msgstr "Sunucuya Bağlan"
++
++msgid "Console"
++msgstr "Konsol"
++
++msgid "Console - Knights"
++msgstr "Konsol - Knights"
++
++msgid "Console Orientation"
++msgstr "Konsol Konumu"
++
++msgid "Crafty"
++msgstr "Crafty"
++
++msgid "Croatian FICS"
++msgstr "Hırvatistan FICS"
++
++msgid "Current Server"
++msgstr "Güncel Sunucu"
++
++msgid "Decrease Board Size"
++msgstr "Tahtanın Büyüklüğünü Azalt"
++
++msgid "Disconnect from Server"
++msgstr "Sunucuyla Bağlantıyı Kes"
++
++msgid "Display"
++msgstr "Görünüm"
++
++msgid "Display Startup Logo"
++msgstr "Başlangıç Logosunu Göster"
++
++msgid "Draws"
++msgstr "Berabere"
++
++msgid "Dutch FICS"
++msgstr "Macaristan FICS"
++
++msgid "Engine Filename"
++msgstr "Oyun Motorunun Dosya Adı"
++
++msgid "Engine Name"
++msgstr "Oyun Motorunun Adı"
++
++msgid "Engines to Play Black"
++msgstr "Siyah Oyun Motorları"
++
++msgid "Engines to Play White"
++msgstr "Beyaz Oyun Motorlar"
++
++msgid "Enter Text"
++msgstr "Metni Girin"
++
++msgid "Free Internet Chess Server"
++msgstr "İnternet Satranç Sunucusu"
++
++msgid "French FICS"
++msgstr "Fransız FICS"
++
++msgid "GNUChess"
++msgstr "GNUChess"
++
++msgid "General"
++msgstr "Genel"
++
++msgid "German FICS"
++msgstr "Alman FICS"
++
++msgid "Global Chess Server"
++msgstr "Genel Satranç Sunucusu"
++
++msgid "High Quality"
++msgstr "Yüksek Kalite"
++
++msgid "Hint:"
++msgstr "İpucu:"
++
++msgid ""
++"If checked, this option tells Knights that you will play as the Black army "
++"when you play vs. the computer."
++msgstr ""
++"Bu seçenek, bilgisayara karşı Siyah taraf olarak oynayacağınızı belirtir. "
++
++msgid ""
++"If checked, this option tells Knights that you will play as the White army "
++"when you play vs. the computer."
++msgstr ""
++"Bu seçenek, bilgisayara karşı Beyaz taraf olarak oynayacağınızı belirtir."
++
++msgid ""
++"In order for you to play chess online, Knights will have to connect to a "
++"chess server. Knights has a list of several of these servers. If you like, "
++"this list can be used to automatically configure Knights."
++msgstr ""
++"İnternet üzerinde satranç oynayabilmeniz için Knights'ın bir satranç "
++"sunucusuna bağlanması gerekir. Knights'ta bu sunucuların birkaçının "
++"bulunduğu bir liste vardır. Eğer isterseniz, bu liste Knights'ı otomatik "
++"olarak yapılandırmak için kullanılabilir."
++
++msgid "Increase Board Size"
++msgstr "Tahtanın Büyüklüğünü Artır"
++
++msgid "Increment"
++msgstr "Artım"
++
++msgid "Install New Themes"
++msgstr "Yeni Tema Ekle"
++
++msgid "Installed theme locally"
++msgstr "Tema yerel kuruldu"
++
++msgid "Internet Chess Club"
++msgstr "İnternet Satranç Klübü"
++
++msgid "Kibitz"
++msgstr "Kibitz"
++
++msgid "KnightCap"
++msgstr "KnightCap"
++
++msgid "Knights"
++msgstr "Knights"
++
++msgid "Knights Setup Wizard"
++msgstr "Knights Ayar Sihirbazı"
++
++msgid ""
++"Knights can not find %1. Please make sure the address was entered correctly "
++"and that you are connected to the internet."
++msgstr ""
++"Knights %1 bulamıyor. Lütfen adresi doğru girdiğinizden ve internete bağlı "
++"olduğunuzdan emin olun.  "
++
++msgid ""
++"Knights can not play a game of chess against you without help. Known as "
++"Chess Engines, these helpers can be found on the Internet and are often "
++"included with your distribution. Knights can look for Chess Engines that you "
++"may already have. If found, Knights will configure itself to use them."
++msgstr ""
++"Knights yardım almadan size karşı bir oyun oynayamaz.Satranç motorları denen "
++"bu yardımcılar, İnternet üzerinde bulunabilir ve büyük ihtimalle "
++"dağıtımınıza dahildirler. Knights, bilgisayarınızdaki olası satranç "
++"motorlarını arayıp kendisini buna göre yapılandırabilir."
++
++msgid ""
++"Knights has now configured itself according to your choices. We highly "
++"recommend that you read the documentation to make full use of all that "
++"Knights has to offer. You can access it by pressing F1."
++msgstr ""
++"Knights kendisini tercihleriniz doğrultusunda yapılandırdı. Knights'ın tüm "
++"özelliklerinden faydalanabilmeniz için, belgelemeyi okumanızı öneriyoruz. "
++"Buna F1'e basarak ulaşabilirsiniz."
++
++msgid "Large"
++msgstr "Büyük"
++
++msgid "Last History Item"
++msgstr "Önceki Geçmiş Öğesi"
++
++msgid "Lead Project Manager and Programmer"
++msgstr "Proje Yöneticisi ve Programcı"
++
++msgid "Let Knights configure chess servers?"
++msgstr "Knights, satranç sunucularını yapılandırsın mı?"
++
++msgid "Let Knights handle PGN files?"
++msgstr "Knights sizin .pgn dosyalarınızı kullansın mı?"
++
++msgid "Let Knights search for chess engines?"
++msgstr "Knights, satranç motorlarını arasın mı?"
++
++msgid "Load Game..."
++msgstr "Oyun Yükle..."
++
++msgid "Log File"
++msgstr "Günlük Dosyası"
++
++msgid "Log in to the chess server using this name and password."
++msgstr "Satranç sunucusuna bu isim ve parola ile girin"
++
++msgid "Login"
++msgstr "Bağlan"
++
++msgid "Login Prompt"
++msgstr "Giriş İsteği"
++
++msgid "Losses"
++msgstr "Kaybetme"
++
++msgid "Match Type"
++msgstr "Oyun Türü"
++
++msgid "Move &Now"
++msgstr "Ş&imdi Hareket Et"
++
++msgid "Name"
++msgstr "İsim"
++
++msgid "Next History Item"
++msgstr "Sonraki Geçmiş Öğesi"
++
++msgid "Next Move"
++msgstr "Sonraki Hareket"
++
++msgid "Notification"
++msgstr "Bilgilendirme"
++
++msgid "Other Display Options"
++msgstr "Diğer Görünüm Seçenekeleri"
++
++msgid "Page Down"
++msgstr "Sayfa Aşağı"
++
++msgid "Page Up"
++msgstr "Sayfa Yukarı"
++
++msgid "Password"
++msgstr "Parola"
++
++msgid "Pause"
++msgstr "Duraklat"
++
++msgid "Pause on Minimize"
++msgstr "Küçültüldüğü zaman Duraklat"
++
++msgid "Pawn Promotion"
++msgstr "Piyon Terfisi"
++
++msgid "Play &Black"
++msgstr "&Siyahı Oyna"
++
++msgid "Play &White"
++msgstr "&Beyazı Oyna"
++
++msgid "Previous Move"
++msgstr "Önceki Hareket"
++
++msgid "Private Tell"
++msgstr "Özel Konuşma"
++
++msgid "Promote your pawn to..."
++msgstr "Piyonu şuna terfi et :"
++
++msgid "Protocol"
++msgstr "Protokol"
++
++msgid "Rating"
++msgstr "Sıralama"
++
++msgid "Remember My Password"
++msgstr "Parolamı Hatırla"
++
++msgid "Reply to the Channel"
++msgstr "Kanala Yanıtla"
++
++msgid "Reply to the Last Tell"
++msgstr "Son sorguyu yanıtla"
++
++msgid "Resume"
++msgstr "Devam Et"
++
++msgid "Reverse Board Orientation"
++msgstr "Tahtanın Görünümünü Tersine Çevir"
++
++msgid "Save Game &As..."
++msgstr "Oyunu &Farklı Kaydet..."
++
++msgid "Save Game..."
++msgstr "Oyunu Kaydet..."
++
++msgid "Save Game?"
++msgstr "Oyun Kaydedilsin mi?"
++
++msgid "Save Match on Close?"
++msgstr "Kapatılınca Oyun Kaydedilsin mi?"
++
++msgid "Seconds Between Seek Updates"
++msgstr "Arama Güncellemeleri Arasındaki Saniyeler"
++
++msgid "Seek Matches"
++msgstr "Maçları Ara"
++
++msgid "Server Name"
++msgstr "Sunucu Adı"
++
++msgid "Server Port"
++msgstr "Sunucu Portu"
++
++msgid "Server URL"
++msgstr "Sunucu URL"
++
++msgid "Shout"
++msgstr "Bağırma"
++
++msgid "Show Coordinates"
++msgstr "Koordinatları Göster"
++
++msgid "Show Last Move"
++msgstr "Son Hareketi Göster"
++
++msgid "Sjeng"
++msgstr "Sjeng"
++
++msgid "Small"
++msgstr "Küçük"
++
++msgid "Specify the location of your Knights data directory."
++msgstr "Knights veri dizininin yerini belirtin."
++
++msgid "Standard"
++msgstr "Standart"
++
++msgid "Swedish FICS"
++msgstr "İsveç FICS"
++
++msgid ""
++"Thank you for installing Knights, the graphical chess interface for KDE. To "
++"help you get started quickly, there are a few things Knights can set up on "
++"it's own. You should click 'Next' to see what they are. If you'd rather "
++"configure Knights yourself, just click 'Cancel'."
++msgstr ""
++"KDE için bir grafiksel satranç arayüzü olan Knights'ı kurduğunuz için "
++"teşekkürler. Hızla başlayabilmeniz için Knights'ın kendi başına kurabileceği "
++"bazı şeyler var. Bunlar için 'Sonraki' düğmesine basın.Knights'ı kendiniz "
++"yapılandırmak istiyorsanız 'İptal' düğmesine tıklayın."
++
++msgid ""
++"The Knights Graphical Chess Interface\n"
++"\n"
++"Knights is a KDE2 chess environment."
++msgstr ""
++"Knights Grafiksel Satranç Arayüzü\n"
++"\n"
++"Knights bir KDE2 satranç ortamıdır."
++
++msgid ""
++"The Open command will allow you to select a previously saved game and play "
++"it again."
++msgstr "Bir Knights oyununu açar ve oynar."
++
++msgid ""
++"The Print command will allow you to print this game's notation on your "
++"printer."
++msgstr "Yazdır komutu bu oyunun gösterimini yazıcınızdan çıkartmanızı sağlar."
++
++msgid "The Quit command will stop the current game and exit Knights."
++msgstr "Çık komutu güncel oyunu sonlandırır ve Knights'dan çıkar."
++
++msgid ""
++"The Save command will allow you to store a copy of your current game for "
++"later use."
++msgstr "Güncel oyunu kaydeder."
++
++msgid "The theme could not be installed. It may already be installed."
++msgstr "Tema kurulamadı. Zaten kurulu olabilir."
++
++msgid "Theme Size"
++msgstr "Tema Boyu"
++
++msgid "These settings determine how Knights displays itself to you."
++msgstr "Knights için görünümü ayarlar"
++
++msgid "This allows you to begin a new match."
++msgstr "Bu işlem yeni bir oyuna başlamanızı sağlayacak."
++
++msgid "This command removes the current match."
++msgstr "Güncel oyunu sonlandırır."
++
++msgid "This command will remove all matches that are currently loaded."
++msgstr "Yüklenmiş tüm oyunları kapatır"
++
++msgid ""
++"This opens a new window which allows you to customize Knights to your "
++"particular tastes."
++msgstr "Bu pencere Knights'ı yapılandırmanıza olanak tanır."
++
++msgid "URL"
++msgstr "URL"
++
++msgid "Username"
++msgstr "Kullanıcı Adı"
++
++msgid "Various aspects of Knights get configured here."
++msgstr "Çeşitli Knights ayarlarını buradan yapılandırabilirsiniz."
++
++msgid ""
++"When Knights saves a game to disk, it uses Portable Game Notation (PGN) to "
++"store the game. Several other computer chess games use PGN too. If you like, "
++"Knights can be the default PGN viewer on this system."
++msgstr ""
++"Knights programı bir oyunu diske kaydederken Portable Game Notation (PGN) "
++"adı verilen bir dosya biçimi kullanır. İnternet üzerindeki diğer satranç "
++"oyunları da bu biçimi kullanırlar. İsterseniz, Knights'ın bu tür dosyaları "
++"açmasını sağlayabilirsiniz."
++
++msgid "Whisper"
++msgstr "Fısılda"
++
++msgid "White Book Engine Problem"
++msgstr "Beyaz Kural Motoru Sorunu"
++
++msgid "White Engine Problem"
++msgstr "Beyaz Oyun Motoru Sorunu"
++
++msgid "Wins"
++msgstr "Kazanma"
++
++msgid "Would you like to save this game?"
++msgstr "Bu oyunu kaydetmek istiyor musunuz?"
++
++msgid "XBoard protocol"
++msgstr "XBoard protokolü"
++
++msgid ""
++"You do not have permission to install this theme systemwide, so Knights "
++"installed it locally."
++msgstr ""
++"Bu temayı tüm sisteme kurmak için yeterli erişim hakkınız yok, bu yüzden "
++"Knights bunu yerel olarak kurdu. "
++
++msgid ""
++"You selected %1 to play black's book,\n"
++"but it can only be used as a regular engine.\n"
++"Please select another engine to play black's book."
++msgstr ""
++"Siyah kurallarını belirlemesi için %1 seçtiniz,\n"
++"ama bu sadece normal bir motor olarak kullanılabilir.\n"
++"Lütfen farklı bir motor seçiniz."
++
++msgid ""
++"You selected %1 to play black,\n"
++"but it can only be used as a book engine.\n"
++"Please select another engine to play black."
++msgstr ""
++"Siyah tarafı oynamak için %1 seçtiniz;\n"
++"ama bu sadece kural motoru olarak kullanılabilir.\n"
++"Lütfen Siyah taraf için başka bir motor seçiniz."
++
++msgid ""
++"You selected %1 to play white's book,\n"
++"but it can only be used as a regular engine.\n"
++"Please select another engine to play white's book."
++msgstr ""
++"Beyaz kurallarını belirlemesi için %1 seçtiniz,\n"
++"ama bu sadece normal bir motor olarak kullanılabilir.\n"
++"Lütfen farklı bir motor seçiniz."
++
++msgid ""
++"You selected %1 to play white,\n"
++"but it can only be used as a book engine.\n"
++"Please select another engine to play white."
++msgstr ""
++"Beyaz tarafı oynamak için %1 seçtiniz;\n"
++"ama bu sadece kural motoru olarak kullanılabilir.\n"
++"Lütfen Beyaz taraf için başka bir motor seçiniz."
++
++msgid "Your Name:"
++msgstr "Adınız:"
++
++msgid ""
++"_: EMAIL OF TRANSLATORS\n"
++"Your emails"
++msgstr "gorkem@kde.org"
++
++msgid ""
++"_: NAME OF TRANSLATORS\n"
++"Your names"
++msgstr "Görkem Çetin"
++
++msgid "enable Book Engine"
++msgstr "Kural Motorunu Etkinleştir"
++
++msgid "pgn"
++msgstr "pgn"
++
++msgid "vs. &Email"
++msgstr "ve &E-posta"
++
++msgid "vs. Com&puter"
++msgstr "ve &Bilgisayar"

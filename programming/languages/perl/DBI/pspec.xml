@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>DBI</Name>
+        <Homepage>http://search.cpan.org/~timb/DBI-1.48/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Summary>The Perl Database Interface</Summary>
+        <Description>The Perl Database Interface</Description>
+        <Summary xml:lang="tr">Perl veritabanı arayüzü</Summary>
+        <Description xml:lang="tr">Perl veritabanı arayüzü</Description>
+        <Archive sha1sum="76e7b96c9c135919be696ac7dc18f126e9ec041f" type="targz">http://www.cpan.org/modules/by-category/07_Database_Interfaces/DBI/DBI-1.48.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>DBI</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+            <Dependency>Net-Daemon</Dependency>
+            <Dependency>PlRPC</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-16</Date>
+            <Version>1.48</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

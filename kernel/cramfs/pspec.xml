@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cramfs</Name>
+        <Homepage>http://cramfs.sourceforge.net</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Linux filesystem designed to be simple, small, and to compress things well</Summary>
+        <Summary xml:lang="tr">Basit ve küçük bir Linux dosya sistemi</Summary>
+        <Description>Linux filesystem designed to be simple, small, and to compress things well</Description>
+        <Description xml:lang="tr">Basit ve küçük bir Linux dosya sistemi</Description>
+        <Archive sha1sum="08133f2a2a0f02c6dd07c8dc565a4eac6bc967cd" type="targz">http://heanet.dl.sourceforge.net/sourceforge/cramfs/cramfs-1.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>zlib</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>cramfs</Name>
+        <Files>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-07</Date>
+            <Version>1.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

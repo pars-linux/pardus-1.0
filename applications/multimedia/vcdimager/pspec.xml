@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>vcdimager</Name>
+        <Homepage>http://www.vcdimager.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>GNU VCDimager</Summary>
+        <Summary xml:lang="tr">GNU VCDimager, VCD ve SVDC dosyalarını oluşturabilen, analiz edebilen ve makine diline dönüştürebilen bir yazılımdır.</Summary>
+        <Description>GNU VCDimager</Description>
+        <Description xml:lang="tr">GNU VCDimager, VCD ve SVDC dosyalarını oluşturabilen, analiz edebilen ve makine diline dönüştürebilen bir yazılımdır. GNU VCDimager komut pernceresinden (konsole) çalıştırılabilmektedir.</Description>
+        <Archive sha1sum="6d1a3125fa8b7fa88a993e0c028cadcc03ac6304" type="targz">http://www.vcdimager.org/pub/vcdimager/vcdimager-0.7/vcdimager-0.7.23.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="0.76">libcdio</Dependency>
+            <Dependency>popt</Dependency>
+            <Dependency versionFrom="2.5.11">libxml2</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>vcdimager</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.76">libcdio</Dependency>
+            <Dependency versionFrom="2.5.11">libxml2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-25</Date>
+            <Version>0.7.23</Version>
+            <Comment>New release</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-15</Date>
+            <Version>0.7.20</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

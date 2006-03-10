@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>boost</Name>
+        <Homepage>http://boost.org</Homepage>
+        <Packager>
+            <Name>Eray Özkural</Name>
+            <Email>eray@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary xml:lang="en">Boost provides free peer-reviewed portable C++ source libraries.</Summary>
+        <Description xml:lang="en">In their own words:
+        We emphasize libraries that work well with the C++ Standard Library. Boost libraries are intended to be widely useful, and usable across a broad spectrum of applications.         The Boost license encourages both commercial and non-commercial use.
+We aim to establish "existing practice" and provide reference implementations so that Boost libraries are suitable for eventual standardization. Ten Boost libraries are already included in the C++ Standards Committee's Library Technical Report (  TR1) as a step toward becoming part of a future C++ Standard. More Boost libraries are proposed for the upcoming  TR2.
+        </Description>
+        <Archive type="tarbz2" sha1sum="bb9a593677f4485c615145258abe5bce1fcf46ea">http://voxel.dl.sourceforge.net/sourceforge/boost/boost_1_33_1_beta.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>boost</Name>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-16</Date>
+            <Version>1.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Eray Özkural</Name>
+            <Email>eray@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

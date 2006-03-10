@@ -1,0 +1,11 @@
+diff -ur 4Suite-1.0b2.orig/Ft/Lib/DistExt/Install.py 4Suite-1.0b2/Ft/Lib/DistExt/Install.py
+--- 4Suite-1.0b2.orig/Ft/Lib/DistExt/Install.py	2005-11-12 20:18:01.000000000 +0200
++++ 4Suite-1.0b2/Ft/Lib/DistExt/Install.py	2005-11-12 20:19:36.000000000 +0200
+@@ -14,6 +14,7 @@
+         # these are duplicated from there (but only install_lib does
+         # anything with them).
+         ('compile', 'c', "compile .py to .pyc [default]"),
++        ('root=', None, 'install everything relative to this alternate root directory'),
+         ('no-compile', None, "don't compile .py files"),
+         ('optimize=', 'O',
+          "also compile with optimization: -O1 for \"python -O\", "

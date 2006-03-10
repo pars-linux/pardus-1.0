@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>binutils</Name>
+        <Homepage>http://sources.redhat.com/binutils/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Tools necessary to build programs</Summary>
+        <Summary xml:lang="tr">Programların inşaası için gerekli araçlar</Summary>
+        <Description>Tools necessary to build programs</Description>
+        <Description xml:lang="tr">Programların inşaası için gerekli araçlar</Description>
+        <Archive sha1sum="5c80fd5657da47efc16a63fdd93ef7395319fbbf" type="tarbz2">http://ftp.gnu.org/gnu/binutils/binutils-2.16.1.tar.bz2</Archive>
+        <Patches>
+            <Patch>04_all_binutils-2.15.92.0.2-place-orphan.patch</Patch>
+            <Patch>10_all_generate-pie-scripts.patch</Patch>
+            <Patch>11_all_sh-flags-off-by-one.patch</Patch>
+            <Patch level="1">12_all_sh-targets.patch</Patch>
+            <Patch level="1">41_all_006_better_file_error.patch</Patch>
+            <Patch level="1">42_all_012_check_ldrunpath_length.patch</Patch>
+            <Patch level="1">53_all_binutils-avr-dollar-sign-in-symbol.patch</Patch>
+            <Patch level="1">61_all_binutils-001_libiberty-nolimits.patch</Patch>
+            <Patch level="1">63_all_binutils-2.15.97-pt-pax-flags-200504200000.patch</Patch>
+            <Patch>66_all_binutils-2.16-warn-textrel.patch</Patch>
+            <Patch level="1">72_all_skip-comments.patch</Patch>
+            <Patch level="1">76_all_use-new-ld-dtags.patch</Patch>
+            <Patch>81_all_binutils-2.16-readelf-ptr.patch</Patch>
+            <Patch>91_all_libiberty-pic.patch</Patch>
+        </Patches>
+        
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>binutils-doc</Name>
+        <Files>
+            <Path fileType="config">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>binutils</Name>
+        <Files>
+            <Path fileType="config">/etc/env.d</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/i686-pc-linux-gnu</Path>
+            <Path fileType="library">/usr/lib/binutils/i686-pc-linux-gnu/2.16.1</Path>
+            <Path fileType="info">/usr/share/binutils-data/i686-pc-linux-gnu/2.16.1/info</Path>
+            <Path fileType="man">/usr/share/binutils-data/i686-pc-linux-gnu/2.16.1/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/env.d/05binutils">05binutils</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-27</Date>
+            <Version>2.16.1</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

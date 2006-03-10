@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ocaml</Name>
+        <Homepage>http://www.ocaml.org/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>OPL-1.0</License>
+        <IsA>category</IsA>
+        <Summary>fast modern type-inferring functional programming language descended from the ML (Meta Language) family</Summary>
+        <Description>fast modern type-inferring functional programming language descended from the ML (Meta Language) family</Description>
+        <Archive sha1sum="936d131fd2e32a6bc9eb29fca0c2e9f339a2545f" type="tarbz2">http://caml.inria.fr/distrib/ocaml-3.08/ocaml-3.08.1.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>ocaml</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+            <Path fileType="man">/usr/share/man/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-12</Date>
+            <Version>3.08.1</Version>
+            <Comment>dosed function in action.py fixed.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-07</Date>
+            <Version>3.08.1</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

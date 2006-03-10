@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>zemberek-server</Name>
+        <Homepage>http://zemberek.dev.java.net/</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>daemon</IsA>
+        <Summary>Zemberek Turkish spell checker</Summary>
+        <Summary xml:lang="tr">Zemberek Türkçe imla denetleyicisi</Summary>
+        <Description>Zemberek Turkish spell checker</Description>
+        <Description xml:lang="tr">Zemberek Türkçe imla denetleyicisi</Description>
+        <Archive sha1sum="afd91471350519b689779bfd97043b8615705bea" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/zemberek_server-0.3.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>blackdown-jdk</Dependency>
+            <Dependency>ant</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>zemberek-server</Name>
+        <RuntimeDependencies>
+            <Dependency>blackdown-jre</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/init.d</Path>
+            <Path fileType="executable">/opt/zemberek-server/</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/zemberek-server">zemberek-server</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-12-05</Date>
+            <Version>0.3</Version>
+            <Comment>Init script correction for solving startup problems</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-29</Date>
+            <Version>0.3</Version>
+            <Comment>Use newly tagged zemberek_server</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-28</Date>
+            <Version>0.3</Version>
+            <Comment>First release</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

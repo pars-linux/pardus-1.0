@@ -1,0 +1,48 @@
+--- xc/programs/Xserver/hw/xfree86/drivers/ati/r128_chipset.h.orig	2004-08-12 10:19:15.000000000 -0700
++++ xc/programs/Xserver/hw/xfree86/drivers/ati/r128_chipset.h	2004-08-12 10:22:29.000000000 -0700
+@@ -1,5 +1,5 @@
+ static SymTabRec R128Chipsets[] = {
+-    /* FIXME: The chipsets with (PCI/AGP) are not known wether they are AGP or
++    /* FIXME: The chipsets with (AGP?) are not known wether they are AGP or
+      *        PCI, so I've labeled them as such in hopes users will submit
+      *        data if we're unable to gather it from official documentation
+      */
+@@ -25,25 +25,25 @@
+     { PCI_CHIP_RAGE128PP, "ATI Rage 128 Pro VR PP (PCI)" },
+     { PCI_CHIP_RAGE128PQ, "ATI Rage 128 Pro VR PQ (AGP?)" },
+     { PCI_CHIP_RAGE128PR, "ATI Rage 128 Pro VR PR (PCI)" },
+-    { PCI_CHIP_RAGE128PS, "ATI Rage 128 Pro VR PS (PCI/AGP)" },
+-    { PCI_CHIP_RAGE128PT, "ATI Rage 128 Pro VR PT (PCI/AGP)" },
+-    { PCI_CHIP_RAGE128PU, "ATI Rage 128 Pro VR PU (PCI/AGP)" },
+-    { PCI_CHIP_RAGE128PV, "ATI Rage 128 Pro VR PV (PCI/AGP)" },
+-    { PCI_CHIP_RAGE128PW, "ATI Rage 128 Pro VR PW (PCI/AGP)" },
+-    { PCI_CHIP_RAGE128PX, "ATI Rage 128 Pro VR PX (PCI/AGP)" },
++    { PCI_CHIP_RAGE128PS, "ATI Rage 128 Pro VR PS (AGP?)" },
++    { PCI_CHIP_RAGE128PT, "ATI Rage 128 Pro VR PT (AGP?)" },
++    { PCI_CHIP_RAGE128PU, "ATI Rage 128 Pro VR PU (AGP?)" },
++    { PCI_CHIP_RAGE128PV, "ATI Rage 128 Pro VR PV (AGP?)" },
++    { PCI_CHIP_RAGE128PW, "ATI Rage 128 Pro VR PW (AGP?)" },
++    { PCI_CHIP_RAGE128PX, "ATI Rage 128 Pro VR PX (AGP?)" },
+     { PCI_CHIP_RAGE128RE, "ATI Rage 128 GL RE (PCI)" },
+     { PCI_CHIP_RAGE128RF, "ATI Rage 128 GL RF (AGP)" },
+     { PCI_CHIP_RAGE128RG, "ATI Rage 128 RG (AGP)" },
+     { PCI_CHIP_RAGE128RK, "ATI Rage 128 VR RK (PCI)" },
+     { PCI_CHIP_RAGE128RL, "ATI Rage 128 VR RL (AGP)" },
+-    { PCI_CHIP_RAGE128SE, "ATI Rage 128 4X SE (PCI/AGP)" },
+-    { PCI_CHIP_RAGE128SF, "ATI Rage 128 4X SF (PCI/AGP)" },
+-    { PCI_CHIP_RAGE128SG, "ATI Rage 128 4X SG (PCI/AGP)" },
+-    { PCI_CHIP_RAGE128SH, "ATI Rage 128 4X SH (PCI/AGP)" },
+-    { PCI_CHIP_RAGE128SK, "ATI Rage 128 4X SK (PCI/AGP)" },
+-    { PCI_CHIP_RAGE128SL, "ATI Rage 128 4X SL (PCI/AGP)" },
++    { PCI_CHIP_RAGE128SE, "ATI Rage 128 4X SE (AGP?)" },
++    { PCI_CHIP_RAGE128SF, "ATI Rage 128 4X SF (AGP?)" },
++    { PCI_CHIP_RAGE128SG, "ATI Rage 128 4X SG (AGP?)" },
++    { PCI_CHIP_RAGE128SH, "ATI Rage 128 4X SH (AGP?)" },
++    { PCI_CHIP_RAGE128SK, "ATI Rage 128 4X SK (AGP?)" },
++    { PCI_CHIP_RAGE128SL, "ATI Rage 128 4X SL (AGP?)" },
+     { PCI_CHIP_RAGE128SM, "ATI Rage 128 4X SM (AGP)" },
+-    { PCI_CHIP_RAGE128SN, "ATI Rage 128 4X SN (PCI/AGP)" },
++    { PCI_CHIP_RAGE128SN, "ATI Rage 128 4X SN (AGP?)" },
+     { PCI_CHIP_RAGE128TF, "ATI Rage 128 Pro ULTRA TF (AGP)" },
+     { PCI_CHIP_RAGE128TL, "ATI Rage 128 Pro ULTRA TL (AGP)" },
+     { PCI_CHIP_RAGE128TR, "ATI Rage 128 Pro ULTRA TR (AGP)" },

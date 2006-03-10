@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pango</Name>
+        <Homepage>http://www.pango.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <License>FTL</License>
+        <IsA>library</IsA>
+        <Summary>Text rendering and layout library</Summary>
+        <Summary xml:lang="tr">Metin görüntüleme kütüphanesi</Summary>
+        <Description>Text rendering and layout library</Description>
+        <Description xml:lang="tr">Metin görüntüleme kütüphanesi</Description>
+        <Archive sha1sum="09a00c228725afc281b4332d3a22f8c098f4ed80" type="tarbz2">ftp://ftp.gtk.org/pub/gtk/v2.8/pango-1.10.0.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>cairo</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency versionFrom="2.8.3">glib2</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">pango-1.0.99.020606-xfonts.patch</Patch>
+            <Patch level="1">pango-1.2.2-slighthint.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>pango</Name>
+        <RuntimeDependencies>
+            <Dependency>cairo</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency versionFrom="2.8.3">glib2</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>freetype</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/pango</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+    
+    <History>
+        <Update release="2">
+            <Date>2005-10-30</Date>
+            <Version>1.10.0</Version>
+            <Comment>Update to version 1.10.0</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-13</Date>
+            <Version>1.8.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

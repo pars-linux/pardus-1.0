@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libtool</Name>
+        <Homepage>http://www.gnu.org/software/libtool/libtool.html</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>A shared library tool for developers</Summary>
+        <Summary xml:lang="tr">Program geliştiriciler için ortak kütüphane aracı</Summary>
+        <Description>A shared library tool for developers</Description>
+        <Description xml:lang="tr">Program geliştiriciler için ortak kütüphane aracı</Description>
+        <Archive sha1sum="0c8935aa80cd5532aa8e5462157cc07ae26a3862" type="targz">ftp://ftp.gnu.org/gnu/libtool/libtool-1.5.14.tar.gz</Archive>
+        <Patches>
+            <Patch target="configure">nocxx.patch</Patch>
+            <Patch target="libltdl/configure">nocxx.patch</Patch>
+            <Patch level="1">01-libtool-1.4.2-multilib.patch</Patch>
+            <Patch level="1">02-libtool-1.4.2-demo.patch</Patch>
+            <Patch level="1">03-libtool-1.5-testfailure.patch</Patch>
+            <Patch level="1">04-libtool-1.4.3-lib64.patch</Patch>
+            <Patch level="1">05-libtool-1.4.2-archive-shared.patch</Patch>
+            <Patch level="1">06-libtool-1.5.6-ltmain-SED.patch</Patch>
+            <Patch level="1">07-libtool-1.4.2-expsym-linux.patch</Patch>
+            <Patch level="1">08-libtool-1.4.3-libtoolize--config-only.patch</Patch>
+            <Patch level="1">09-libtool-1.4.3-pass-thread-flags.patch</Patch>
+            <Patch>10-libtool-1.5.10-portage.patch</Patch>
+            <Patch level="1">11-libtool-1.5.10-version-checking.patch</Patch>
+            <Patch level="1">12-libtool-1.5.14-ltmain_sh-max_cmd_len.patch</Patch>
+            <Patch level="1">13-libtool-1.5-filter-host-tags.patch</Patch>
+            <Patch level="1">14-libtool-1.5.10-locking.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>gnuconfig</Dependency>
+            <Dependency>autoconf2_59</Dependency>
+            <Dependency>automake1_9</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libtool</Name>
+        <Summary>A shared library tool for developers</Summary>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share/libtool</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-04</Date>
+            <Version>1.5.14</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

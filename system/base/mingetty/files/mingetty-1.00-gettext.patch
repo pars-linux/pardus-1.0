@@ -1,0 +1,177 @@
+diff -ur mingetty-1.00.orig/Makefile mingetty-1.00/Makefile
+--- mingetty-1.00.orig/Makefile	2004-11-05 11:59:31.950884504 +0200
++++ mingetty-1.00/Makefile	2004-11-05 12:02:36.288860872 +0200
+@@ -1,17 +1,25 @@
+ DESTDIR=
+ CC=gcc
+-CFLAGS=$(RPM_OPTS) -Wall -D_GNU_SOURCE
++
++LOCALEDIR=/usr/share/locale
++CFLAGS=$(RPM_OPTS) -Wall -D_GNU_SOURCE -DLOCALEDIR=\"$(LOCALEDIR)\"
++LDFLAGS = -lgettextpo
++
+ MANDIR=/usr/man/man8
+ SBINDIR=/sbin
+ 
+-all:		mingetty
++all:		mingetty po
+ 
+ install:	all
+ 		install -m 0755 mingetty $(DESTDIR)$(SBINDIR)
+ 		install -m 0644 mingetty.8 $(DESTDIR)$(MANDIR)
++		install -m 0644 tr.mo /usr/share/locale/tr/LC_MESSAGES/mingetty.mo
++
++po:	tr.po
++		msgfmt tr.po -o tr.mo
+ 
+ mingetty:	mingetty.o
+ 
+ clean:
+-		rm -f *.o mingetty
++		rm -f *.o mingetty *.mo
+ 
+diff -ur mingetty-1.00.orig/mingetty.c mingetty-1.00/mingetty.c
+--- mingetty-1.00.orig/mingetty.c	2004-11-05 11:59:32.065867024 +0200
++++ mingetty-1.00/mingetty.c	2004-11-05 12:03:19.796246744 +0200
+@@ -36,6 +36,11 @@
+ #include <ctype.h>
+ #include <utmp.h>
+ #include <getopt.h>
++#include <libintl.h>
++#include <gettext-po.h>
++#include <locale.h>
++
++#define _(string) gettext(string)
+ 
+ #ifndef _PATH_LOGIN
+ #define _PATH_LOGIN "/bin/login"
+@@ -70,7 +75,7 @@
+ #include <sys/utsname.h>
+ #include <time.h>
+ 
+-#define LOGIN " login: "	/* login prompt */
++#define LOGIN _(" login: ")	/* login prompt */
+ 
+ /* name of this program (argv[0]) */
+ static char *progname;
+@@ -358,7 +363,7 @@
+ 	}
+ #endif
+ 	write (1, hn, strlen (hn));
+-	write (1, LOGIN, sizeof (LOGIN) - 1);
++	write (1, LOGIN, strlen (LOGIN));
+ }
+ 
+ /* get_logname - get user name, establish speed, erase, kill, eol */
+@@ -383,10 +388,10 @@
+ 				*bp = 0;
+ 				break;
+ 			} else if (!isprint (c))
+-				error ("%s: invalid character %c in login name",
++				error (_("%s: invalid character %c in login name"),
+ 								tty, c);
+ 			else if (bp - logname >= sizeof (logname) - 1)
+-				error ("%s: too long login name", tty);
++				error (_("%s: too long login name"), tty);
+ 			else
+ 				*bp++ = c;
+ 		}
+@@ -452,7 +457,7 @@
+ 
+ static void usage (void)
+ {
+-	error ("usage: '%s tty' with e.g. tty=tty1", progname);
++	error (_("usage: '%s tty' with e.g. tty=tty1"), progname);
+ }
+ 
+ static struct option const long_options[] = {
+@@ -470,6 +475,10 @@
+ 	char *logname, *s;
+ 	int c;
+ 
++	setlocale (LC_ALL, "");
++	bindtextdomain ("mingetty", LOCALEDIR);
++	textdomain ("mingetty");
++
+ 	progname = argv[0];
+ 	uname (&uts);
+ 	gethostname (hn, MAXHOSTNAMELEN);
+diff -ur mingetty-1.00.orig/mingetty.pot mingetty-1.00/mingetty.pot
+--- mingetty-1.00.orig/mingetty.pot	2004-11-05 12:03:43.263679152 +0200
++++ mingetty-1.00/mingetty.pot	2004-11-05 12:02:36.289860720 +0200
+@@ -0,0 +1,36 @@
++# SOME DESCRIPTIVE TITLE.
++# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
++# This file is distributed under the same license as the PACKAGE package.
++# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
++#
++#, fuzzy
++msgid ""
++msgstr ""
++"Project-Id-Version: PACKAGE VERSION\n"
++"Report-Msgid-Bugs-To: \n"
++"POT-Creation-Date: 2004-11-05 11:29+0200\n"
++"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
++"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
++"Language-Team: LANGUAGE <LL@li.org>\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=CHARSET\n"
++"Content-Transfer-Encoding: 8bit\n"
++
++#: mingetty.c:78
++msgid " login: "
++msgstr ""
++
++#: mingetty.c:391
++#, c-format
++msgid "%s: invalid character %c in login name"
++msgstr ""
++
++#: mingetty.c:394
++#, c-format
++msgid "%s: too long login name"
++msgstr ""
++
++#: mingetty.c:460
++#, c-format
++msgid "usage: '%s tty' with e.g. tty=tty1"
++msgstr ""
+diff -ur mingetty-1.00.orig/tr.po mingetty-1.00/tr.po
+--- mingetty-1.00.orig/tr.po	2004-11-05 12:03:45.934273160 +0200
++++ mingetty-1.00/tr.po	2004-11-05 12:02:36.289860720 +0200
+@@ -0,0 +1,35 @@
++# SOME DESCRIPTIVE TITLE.
++# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
++# This file is distributed under the same license as the PACKAGE package.
++# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
++#
++msgid ""
++msgstr ""
++"Project-Id-Version: mingetty 1.0\n"
++"Report-Msgid-Bugs-To: \n"
++"POT-Creation-Date: 2004-11-05 11:29+0200\n"
++"PO-Revision-Date: 2004-11-05 11:29+0200\n"
++"Last-Translator: Baris Metin <baris@uludag.org.tr>\n"
++"Language-Team: Uludag\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=utf-8\n"
++"Content-Transfer-Encoding: 8bit\n"
++
++#: mingetty.c:78
++msgid " login: "
++msgstr " kullanıcı adı: "
++
++#: mingetty.c:391
++#, c-format
++msgid "%s: invalid character %c in login name"
++msgstr "%s: kullanıcı adında geçersiz karakter %c"
++
++#: mingetty.c:394
++#, c-format
++msgid "%s: too long login name"
++msgstr "%s: fazla uzun kullanıcı adı"
++
++#: mingetty.c:460
++#, c-format
++msgid "usage: '%s tty' with e.g. tty=tty1"
++msgstr "kullanım: '%s sanal_konsol'. Örn. sanal konsol tty1 olabilir."

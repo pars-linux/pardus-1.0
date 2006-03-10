@@ -1,0 +1,23 @@
+--- xc/programs/xkbcomp/symbols/pc/pc.old	2004-04-19 14:49:33.935285846 +0200
++++ xc/programs/xkbcomp/symbols/pc/pc	2004-04-19 15:13:04.523298499 +0200
+@@ -200,6 +200,7 @@
+     include "pc/pc(basic)"
+     key <LALT> {	[ 	Alt_L,	Meta_L 		]	};
+     key <RALT> {	[	Alt_R,	Meta_R		]	};
++    key <RCTL> {	[   Control_R,	Multi_key       ]       }; 
+ 
+ };
+ 
+@@ -216,8 +217,10 @@
+     key <LALT> {	[ 	Alt_L,	Meta_L		]	};
+     key <RALT> {	[	Alt_R,	Meta_R		]	};
+     key <LWIN> {	[	Super_L			]	};
+-    key <RWIN> {	[	Super_R			]	};
++    key <RWIN> {	[	Super_R,  Multi_key     ]       }; 
+     key <MENU> {	[	Menu			]	};
++    key <RCTL> {	[     Control_R,  Multi_key     ]       }; 
++    modifier_map Mod4 { Super_L, Super_R }; 
+ 
+ };
+ 
+

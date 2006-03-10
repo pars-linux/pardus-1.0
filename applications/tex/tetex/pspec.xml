@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>tetex</Name>
+        <Homepage>http://tug.org/teTeX/</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>A complete TeX distribution</Summary>
+        <Summary xml:lang="tr">Yetkin bir TeX sürümü</Summary>
+        <Description>A complete TeX distribution</Description>
+        <Description xml:lang="tr">Yekpare bir TeX dağıtımı olan tetex, LaTeX gereksinimleriniz için eksiksiz destek sağlayacaktır.</Description>
+        <Archive sha1sum="7637789f7f4929694aed1b89820f5bad4753e8fc" type="targz">ftp://tug.ctan.org/tex-archive/systems/unix/teTeX/current/distrib/tetex-src-3.0.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">tetex-3.0-CVE-2005-3193.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>tetex-texmf</Dependency>
+            <Dependency>ed</Dependency>
+            <Dependency>sed</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>tetex</Name>
+        <RuntimeDependencies>
+            <Dependency>tetex-texmf</Dependency>
+            <Dependency>ed</Dependency>
+            <Dependency>xorg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include/kpathsea</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/texi2html</Path>
+            <Path fileType="data">/usr/share/texmf</Path>
+            <Path fileType="data">/usr/share/texmf-var</Path>
+            <Path fileType="data">/usr/share/texinfo</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="4" type="security">
+            <Date>2005-12-22</Date>
+            <Version>3.0</Version>
+            <Comment>Fix xpdf vulnerabilities</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-04</Date>
+            <Version>3.0</Version>
+            <Comment>Build data files.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-10</Date>
+            <Version>3.0</Version>
+            <Comment>Build correctly.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-08</Date>
+            <Version>3.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gtk1</Name>
+        <Homepage>http://www.gtk.org/</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <IsA>library</IsA>
+        <Summary>The GIMP Toolkit</Summary>
+        <Summary xml:lang="tr">GIMP araçları</Summary>
+        <Description>The GIMP Toolkit</Description>
+        <Description xml:lang="tr">GIMP araçları</Description>
+        <Archive sha1sum="a5adcb909257da01ae4d4761e1d41081d06e4d7c" type="targz">ftp://ftp.gtk.org/pub/gtk/v1.2/gtk+-1.2.10.tar.gz</Archive>
+        <Patches>
+            <Patch compressionType="bz2" level="1">gtk+-1.2.10-r8-gentoo.diff.bz2</Patch>
+            <Patch level="0">gtk+-1.2-locale_fix.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+            <Dependency>intltool</Dependency>
+            <Dependency versionFrom="1.2">glib1</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gtk1</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="1.2">glib1</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="data">/usr/share/themes</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="config">/etc</Path>
+        </Files>
+   </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-09</Date>
+            <Version>1.2.10</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

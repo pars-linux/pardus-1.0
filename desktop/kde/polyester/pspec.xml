@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>polyester</Name>
+        <Homepage>http://www.kde-look.org/content/show.php?content=27968</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>plugin</IsA>
+        <Summary>Widget style + kwin decoration both aimed to be a good balance between eyecandy and simplicity</Summary>
+        <Description>Widget style + kwin decoration both aimed to be a good balance between eyecandy and simplicity</Description>
+        <Summary xml:lang="tr">Grafik arayüz stili ve + kwin dekorasyonu</Summary>
+        <Description xml:lang="tr">Masaüstünde uyum ve sadelik için grafik arayüz stili ve + kwin dekorasyonu</Description>
+        <Archive sha1sum="97b0bfef3442a65077e9ab8c29e347047c06b126" type="targz">http://www.notmart.org/files/polyester-0.6.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>polyester</Name>
+        <RuntimeDependencies>
+            <Dependency>kdelibs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/kde/3.5/lib/</Path>
+            <Path fileType="data">/usr/kde/3.5/share/apps/</Path>
+        </Files>
+    </Package>
+
+    <History>
+         <Update release="3">
+            <Date>2005-12-09</Date>
+            <Version>0.6.5</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+         <Update release="2">
+            <Date>2005-11-21</Date>
+            <Version>0.5.5</Version>
+            <Comment>3.4 to 3.5</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-15</Date>
+            <Version>0.5.5</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

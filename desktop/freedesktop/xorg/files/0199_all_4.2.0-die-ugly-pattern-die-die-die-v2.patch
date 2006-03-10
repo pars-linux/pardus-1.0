@@ -1,0 +1,11 @@
+--- xc/programs/xinit/startx.cpp	2004-02-21 12:04:51.000000000 +0000
++++ xc/programs/xinit/startx.cpp	2004-02-21 12:10:57.000000000 +0000
+@@ -53,7 +53,7 @@
+ sysclientrc=XINITDIR/xinitrc
+ sysserverrc=XINITDIR/xserverrc
+ defaultclientargs=""
+-defaultserverargs="-nolisten tcp"
++defaultserverargs="-nolisten tcp -br"
+ clientargs=""
+ serverargs=""
+ 

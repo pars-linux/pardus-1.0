@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>imlib2</Name>
+        <Homepage>http://www.enlightenment.org/pages/imlib2.html</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>library</IsA>
+        <Description>General image loading and rendering library</Description>
+        <Description xml:lang="tr">Genel bir resim yükleme ve tarama kütüphanesi</Description>
+        <Summary>General image loading and rendering library</Summary>
+        <Summary xml:lang="tr">Genel bir resim yükleme ve tarama kütüphanesi</Summary>
+        <Archive sha1sum="54f8ef83b0eac3f8e7f2218705e02a425fa73118" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/imlib2-1.2.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>freetype</Dependency>
+            <Dependency versionFrom="4.1.0">giflib</Dependency>
+            <Dependency versionFrom="1.2.1">libpng</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency versionFrom="3.5.5">tiff</Dependency>
+            <Dependency>xorg</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch level="1">imlib2-1.2.0-loaders.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>imlib2</Name>
+        <RuntimeDependencies>
+            <Dependency>freetype</Dependency>
+            <Dependency versionFrom="4.1.0">giflib</Dependency>
+            <Dependency versionFrom="1.2.1">libpng</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency versionFrom="3.5.5">tiff</Dependency>
+            <Dependency>xorg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/imlib2</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-12</Date>
+            <Version>1.2.0</Version>
+            <Comment>dosed functions in action.py fixed.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-03</Date>
+            <Version>1.2.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

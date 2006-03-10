@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>ltmodem</Name>
+        <Homepage>http://www.physcip.uni-stuttgart.de/heby/ltmodem/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary xml:lang="en">Winmodems with Lucent Apollo (ISA) and Mars (PCI) chipsets</Summary>
+        <Description xml:lang="en">Winmodems with Lucent Apollo (ISA) and Mars (PCI) chipsets</Description>
+        <Archive type="targz" sha1sum="1ccf4c853ec968a948eef562365e09e891d188ce">ftp://ftp.uludag.org.tr/pub/pisi/source/ltmodem-8.31_alpha10-alk8.tar.gz</Archive>
+        <Patches>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>util-linux</Dependency>
+            <Dependency>kernel-source</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ltmodem</Name>
+        <RuntimeDependencies>
+            <Dependency>util-linux</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library" permanent="true">/lib/modules</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/modules.d/ltmodem">ltmodem.modules.d</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/modules.d/ltserial">ltserial.modules.d</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-12-14</Date>
+            <Version>8.31_alpha10-alk8</Version>
+            <Comment>Version bump</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-12-12</Date>
+            <Version>8.31_alpha10-alk7</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

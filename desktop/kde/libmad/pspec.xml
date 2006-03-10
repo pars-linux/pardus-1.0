@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>libmad</Name>
+        <Homepage>http://mad.sourceforge.net</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>"M"peg "A"udio "D"ecoder library</Summary>
+        <Description>"M"peg "A"udio "D"ecoder library</Description>
+        <Summary xml:lang="tr">Yüksek kaliteli MPEG ses çözücü kütüphanesi</Summary>
+        <Description xml:lang="tr">MPEG-1,MPEG-2 ve MPEG-2.5 gibi düşük örnekleme frekanslarını destekleyen, tüm üç ses katmanlarını Layer-I, Layer-II ve Layer-III (mp3) tamamen uygulayan bir ses çözücü kütüphanedir.</Description>
+        <Archive type="targz" sha1sum="cac19cd00e1a907f3150cc040ccc077783496d76">http://mesh.dl.sourceforge.net/sourceforge/mad/libmad-0.15.1b.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>libmad</Name>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" target="/usr/lib/pkgconfig/mad.pc" permission="0644">mad.pc</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-08</Date>
+            <Version>0.15.1b</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

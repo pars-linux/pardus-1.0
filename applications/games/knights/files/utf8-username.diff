@@ -1,0 +1,21 @@
+--- knights/knights/resource.cpp	2005-01-22 23:26:24.000000000 +0200
++++ knights-fixed/knights/resource.cpp	2005-12-26 02:35:40.000000000 +0200
+@@ -131,14 +131,14 @@
+ 
+     /* Get user name from environment in case it's needed */
+     passwd = getpwuid( getuid() );
+-    sysName = passwd->pw_gecos;
+-    if( sysName.contains(",") )
++    sysName = QString::fromLocal8Bit(passwd->pw_gecos);
++     if( sysName.contains(",") )
+     {
+-        sysName = QStringList::split( ",", sysName ).first();
++       sysName = QStringList::split( ",", sysName ).first();
+     }
+     else if( sysName.isEmpty() )
+     {
+-        sysName = passwd->pw_name;
++       sysName = QString::fromLocal8Bit(passwd->pw_name);
+     }
+ 
+     /* Cursors */

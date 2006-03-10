@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>acl</Name>
+        <Homepage>http://acl.bestbits.at/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>app:console</IsA>
+        <Summary>Access control list utilities, libraries and headers</Summary>
+        <Summary xml:lang="tr">Erişim denetim listesi için çeşitli araçlar</Summary>
+        <Description>Access control list utilities, libraries and headers</Description>
+        <Description xml:lang="tr">Erişim denetim listesi için çeşitli araçlar</Description>
+        <Archive sha1sum="8fd0ee7ba253141b0354acf6bdb8846522601f67" type="targz">http://mirrors.dotsrc.org/xfs/cmd_tars/acl-2.2.32.src.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+            <Dependency>attr</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>acl</Name>
+        <RuntimeDependencies>
+            <Dependency>attr</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/libexec</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/man</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2005-11-03</Date>
+            <Version>2.2.32</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

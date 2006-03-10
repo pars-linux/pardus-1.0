@@ -1,0 +1,133 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>k3b</Name>
+        <Homepage>http://www.k3b.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <Icon>cdwriter_unmount</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>K3b, KDE CD Writing Software</Summary>
+        <Description>K3b, KDE CD Writing Software</Description>
+        <Summary xml:lang="tr">KDE CD yazdırma sistemi</Summary>
+        <Description xml:lang="tr">KDE CD yazdırma sistemi</Description>
+        <Archive sha1sum="4b3550436644e9ec4f96374f1e09df1b50b3434f" type="tarbz2">http://osdn.dl.sourceforge.net/sourceforge/k3b/k3b-0.12.10.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="3.1">kdebase</Dependency>
+            <Dependency versionFrom="3.9.8">cdparanoia</Dependency>
+            <Dependency>ffmpeg</Dependency>
+            <Dependency>dbus</Dependency>
+            <Dependency>hal</Dependency>
+            <Dependency>id3lib</Dependency>
+            <Dependency>flac</Dependency>
+            <Dependency>libmad</Dependency>
+            <Dependency>libmpcdec</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>libsamplerate</Dependency>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">remove_useless_warning.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>k3b</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.12.10">k3b-i18n-tr</Dependency>
+            <Dependency versionFrom="3.1">kdebase</Dependency>
+            <Dependency versionFrom="3.9.8">cdparanoia</Dependency>
+            <Dependency>ffmpeg</Dependency>
+            <Dependency>dbus</Dependency>
+            <Dependency>hal</Dependency>
+            <Dependency>id3lib</Dependency>
+            <Dependency>flac</Dependency>
+            <Dependency>libmad</Dependency>
+            <Dependency>libmpcdec</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>libsamplerate</Dependency>
+            <Dependency>cdrtools</Dependency>
+            <Dependency versionFrom="1.1.7">cdrdao</Dependency>
+            <Dependency>normalize</Dependency>
+            <Dependency>dvd+rw-tools</Dependency>
+            <Dependency>lame</Dependency>
+            <Dependency>sox</Dependency>
+            <Dependency>transcode</Dependency>
+            <Dependency>vcdimager</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="header">/usr/kde/3.5/include</Path>
+            <Path fileType="library">/usr/kde/3.5/lib</Path>
+            <Path fileType="data">/usr/kde/3.5/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/kde/3.5/share/config/k3brc">k3b-defaultcfg-0.11.18</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="8">
+            <Date>2005-12-22</Date>
+            <Version>0.12.10</Version>
+            <Comment>fix #1338</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="7">
+            <Date>2005-12-16</Date>
+            <Version>0.12.10</Version>
+            <Comment>Version bump</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-12-12</Date>
+            <Version>0.12.9</Version>
+            <Comment>New stable release</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-11-26</Date>
+            <Version>0.12.8</Version>
+            <Comment>New stable release</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-11-21</Date>
+            <Version>0.12.7</Version>
+            <Comment>3.4 to 3.5</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-20</Date>
+            <Version>0.12.7</Version>
+            <Comment>Update to version 0.12.7 and enabled mpc/ffmpeg support</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-10</Date>
+            <Version>0.12.4a</Version>
+            <Comment>Version bump, dependencie cleanup, lots of feature enabled default</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-19</Date>
+            <Version>0.11.18</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

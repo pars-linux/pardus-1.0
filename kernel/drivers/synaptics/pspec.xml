@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>synaptics</Name>
+        <Homepage>http://w1.894.telia.com/~u89404340/touchpad/</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>Driver for Synaptics touchpads</Summary>
+        <Summary xml:lang="tr">Synaptics dokunma alanı sürücüleri</Summary>
+        <Description>This is a driver for the Synaptics TouchPad for XOrg/XFree86 4.x. A Synaptics touchpad by default operates in compatibility mode by emulating a standard mouse. However, by using a dedicated driver, more advanced features of the touchpad becomes available.</Description>
+        <Description xml:lang="tr">XOrg/XFree86 4.x için Synaptics TouchPad sürücüleri sayesinde, öntanımlı olarak geleneksel fareler ile uyumluluk kipinde çalışan dokunma alanınızı daha gelişkin özellikler ile donatmanız mümkün olacaktır.</Description>
+        <Archive sha1sum="f6f7c39b4028efd0344d927de643efdd1d2ee649" type="tarbz2">http://web.telia.com/~u89404340/touchpad/files/synaptics-0.14.4.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>sed</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>synaptics-0.14.4-makefile.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>synaptics</Name>
+        <RuntimeDependencies>
+            <Dependency>xorg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/modules/input</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/syndaemon">rc.init</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/syndaemon">rc.conf</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-12-22</Date>
+            <Version>0.14.4</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-27</Date>
+            <Version>0.14.3</Version>
+            <Comment>The sentinels have attacked, morpheus</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-19</Date>
+            <Version>0.14.3</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

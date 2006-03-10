@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>irda-utils</Name>
+        <Homepage>http://irda.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <IsA>daemon</IsA>
+        <Summary xml:lang="en">IrDA utilities for infrared communication</Summary>
+        <Summary xml:lang="tr">Kızılötesi aktarım için IrDA yardımcı programları</Summary>
+        <Description xml:lang="en">IrDA utilities for infrared communication</Description>
+        <Description xml:lang="tr">Kızılötesi aktarım için IrDA yardımcı programları</Description>
+        <Archive type="targz" sha1sum="36b10be40a4c0949c6541ce5c1f2782c906eb231">http://easynews.dl.sourceforge.net/sourceforge/irda/irda-utils-0.9.16.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency version="1.2">glib1</Dependency>
+            <Dependency version="1.2">gtk1</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">irda-utils-rh1.patch</Patch>
+            <Patch level="1">irda-utils-gcc3.4-fix.patch</Patch>
+            <Patch level="1">irda-utils-0.9.16-irkbd.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>irda-utils</Name>
+        <RuntimeDependencies>
+            <Dependency version="1.2">glib1</Dependency>
+            <Dependency version="1.2">gtk1</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/conf.d</Path>
+            <Path fileType="executable">/etc/init.d</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/irda">irda.rc</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/irda">irda.conf</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-25</Date>
+            <Version>0.9.16</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

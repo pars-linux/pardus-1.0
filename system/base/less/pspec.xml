@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>less</Name>
+        <Homepage>http://www.greenwoodsoftware.com/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Excellent text file viewer</Summary>
+        <Description>Excellent text file viewer</Description>
+        <Summary xml:lang="tr">Mükemmel bir metin görüntüleyici</Summary>
+        <Description xml:lang="tr">Less uygulaması çok özellikli  bir metin tarayıcısıdır. Metin dosyasını açmadan 
+        önce okuması gerekmediğinden diğer metin editörlerinden daha hızlı açılmaktadır.</Description>
+        <Archive sha1sum="3c3f1ae0bf18039b047524ff0f573ef514bcc944" type="targz">http://www.greenwoodsoftware.com/less/less-382.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>less</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/env.d</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/lesspipe.sh">lesspipe.sh</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/env.d/70less">70less</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2005-07-22</Date>
+            <Version>382</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

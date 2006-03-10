@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>mkinitrd</Name>
+        <Homepage>http://www.busybox.net</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>A tool to create the initrd image</Summary>
+        <Summary xml:lang="tr">initrd image dosyası yaratmak için araç</Summary>
+        <Description>A tool to create the initrd imag</Description>
+        <Description xml:lang="tr">initrd image dosyası yaratmak için araç</Description>
+        <Archive sha1sum="12b6e04e7e9e91c9aa0729c0748bb68789d71c26" type="tarbz2">http://www.busybox.net/downloads/busybox-1.01.tar.bz2</Archive>
+        <Patches>
+            <Patch>config.patch</Patch>
+        </Patches>
+    </Source>
+    
+    <Package>
+        <Name>mkinitrd</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.73">udev</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/sbin</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/sbin/mkinitrd">mkinitrd</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="5">
+            <Date>2005-12-23</Date>
+            <Version>0.2</Version>
+            <Comment>use ext2</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-12-17</Date>
+            <Version>0.2</Version>
+            <Comment>fix #1227 and #1229, silly me</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-12-06</Date>
+            <Version>0.2</Version>
+            <Comment>fix #1040, and Oscar goes to Onur</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-30</Date>
+            <Version>0.1</Version>
+            <Comment>be smart</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-30</Date>
+            <Version>0.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

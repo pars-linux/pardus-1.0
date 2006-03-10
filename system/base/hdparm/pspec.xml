@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>hdparm</Name>
+        <Homepage>http://www.ibiblio.org/pub/Linux/system/hardware/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>category</IsA>
+        <Summary>Utility to change hard drive performance parameters</Summary>
+        <Description>Utility to change hard drive performance parameters</Description>
+        <Summary xml:lang="tr">Sabit disk parametrelerini değiştirmekte kullanılan araç</Summary>
+        <Description xml:lang="tr">Hdparm (E)IDE sabit disklerin parametrelerini ayarlamak için kullanılan bir uygulamadır. Sabit
+        disklerin performasını arttırmak ve enerji tasarrufu için diskleri durdurmakta kullanılabilir.</Description>
+        <Archive sha1sum="013ebdf957bbbd53889e910012f552343eeff4b6" type="targz">http://easynews.dl.sourceforge.net/sourceforge/hdparm/hdparm-6.3.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>hdparm</Name>
+        <Summary>Utility to change hard drive performance parameters</Summary>
+        <Files>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="config">/etc/conf.d</Path>
+            <Path fileType="config">/etc/init.d</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/hdparm">hdparm-init-7</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/hdparm">hdparm-conf.d.3</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <History>
+        <Update release="2">
+            <Date>2005-10-29</Date>
+            <Version>6.3</Version>
+            <Comment>Update to version 6.3 and enable 32bit I/O by default</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-27</Date>
+            <Version>5.7</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

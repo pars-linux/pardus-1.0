@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>mDNSResponder</Name>
+        <Homepage>http://developer.apple.com/macosx/rendezvous/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>APSL-2</License>
+        <IsA>daemon</IsA>
+        <Summary>The mDNSResponder project is a component of Rendezvous, Apple's ease-of-use IP networking initiative.</Summary>
+        <Summary xml:lang="tr">Apple bilgisayarların ağ ile iletişimini sağlayan Rendezvous projesinin bir bileşeni</Summary>
+        <Description>The mDNSResponder project is a component of Rendezvous, Apple's ease-of-use IP networking initiative.</Description>
+        <Description xml:lang="tr">Apple bilgisayarların ağ ile iletişimini sağlayan Rendezvous projesinin bir bileşenidir. Linux sisteminiz ile Apple-MacOs bir sistem arasında ağ kurabilmeniz için bu paket gereklidir.</Description>
+        <Archive sha1sum="272c97dce83cea643a75ddd46a6e7d4c4e05d1ef" type="targz">http://helios.et.put.poznan.pl/~jstachow/pub/mDNSResponder-107.1.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">mDNSResponder-107.1-Makefiles.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>mDNSResponder</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/mdnsd">mdnsd.init.d</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/mDNSResponderPosix">mDNSResponderPosix.init.d</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/dnsextd">dnsextd.init.d</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/mDNSResponderPosix">mDNSResponderPosix.conf.d</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/dnsextd">dnsextd.conf.d</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/mDNSResponderPosix.conf">mDNSResponderPosix.conf</AdditionalFile>
+        </AdditionalFiles>
+       <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-12-22</Date>
+            <Version>107.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-12-18</Date>
+            <Version>98</Version>
+            <Comment>Fix #1240</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-07</Date>
+            <Version>98</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

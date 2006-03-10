@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>dgs</Name>
+        <Homepage>http://www.gyve.org/dgs/</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>daemon</IsA>
+        <Description>A Ghostscript based Display Postscript (DPS) server</Description>
+        <Description xml:lang="tr">Ghostscript tabanlı Postscript Gösterme (DPS) sunucusu</Description>
+        <Summary>A Ghostscript based Display Postscript (DPS) server</Summary>
+        <Summary xml:lang="tr">Ghostscript tabanlı Postscript Gösterme (DPS) sunucusu</Summary>
+        <Archive sha1sum="94c35dbbf596dd35d47205cdde628457d95df084" type="targz">ftp://ftp.gnustep.org/pub/gnustep/old/dgs/dgs-0.5.10.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>texinfo</Dependency>
+             <Dependency versionFrom="1.7">tcp-wrappers</Dependency>
+             <Dependency>xorg</Dependency>
+             <Dependency versionFrom="1.2">glib1</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>dgs-0.5.10-gs-time_.h-gentoo.diff</Patch>
+            <Patch level="1">dgs-0.5.10-tcpd-gentoo.diff</Patch>
+            <Patch>dgs-0.5.10-gcc-3.4.diff</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>dgs</Name>
+        <RuntimeDependencies>
+             <Dependency>xorg</Dependency>
+             <Dependency versionFrom="1.2">glib1</Dependency>   
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share/ghostscript/</Path>
+            <Path fileType="data">/usr/share/aclocal/</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+   </Package>
+
+    <History>
+       <Update release="2">
+           <Date>2005-10-11</Date>
+           <Version>0.5.10</Version>
+           <Comment>Added gcc 3.4.4 patch</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-27</Date>
+            <Version>0.5.10</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

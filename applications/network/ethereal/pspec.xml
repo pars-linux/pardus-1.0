@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ethereal</Name>
+        <Homepage>http://www.ethereal.com/</Homepage>
+        <Packager>
+            <Name>Furkan Duman</Name>
+            <Email>coderlord@gmail.com</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>A commercial-quality network protocol analyzer</Summary>
+        <Summary xml:lang="tr">Görsel ağ protokol izleyici</Summary>
+        <Description>A commercial-quality network protocol analyzer</Description>
+        <Description xml:lang="tr">Görsel ağ protokol izleyici</Description>
+        <Archive sha1sum="4ed2014a1ede6bdb05fbe99b0469a030c7794a13" type="tarbz2">http://www.ethereal.com/distribution/ethereal-0.10.13.tar.bz2</Archive>
+        <Patch>
+            <Patch level="1">ethereal-0.10.13-fix-irc-loop-DoS-CVE-2005-3313.diff</Patch>
+            <Patch level="1">ethereal-0.10.13-packet-ospf.diff</Patch>
+            <Patch level="1">ethereal-0.10.13-pie.patch</Patch>
+        </Patch>
+        <BuildDependencies>
+            <Dependency>sed</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>libpcap</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ethereal</Name>
+        <Summary>A commercial-quality network protocol analyzer</Summary>
+        <RuntimeDependencies>
+            <Dependency>gtk2</Dependency>
+            <Dependency>libpcap</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2" type="security">
+            <Date>2005-12-12</Date>
+            <Version>0.10.13</Version>
+            <Comment>Fix CVE-2005-3651</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-15</Date>
+            <Version>0.10.13</Version>
+            <Comment>First release</Comment>
+            <Name>Furkan Duman</Name>
+            <Email>coderlord@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

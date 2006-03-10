@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>db1</Name>
+        <Homepage>http://www.sleepycat.com/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>DB</License>
+        <IsA>app:console</IsA>
+        <Summary>Berkeley database version 1</Summary>
+        <Summary xml:lang="tr">Berkeley veritabanı 1. sürümü</Summary>
+        <Description>Berkeley database version 1</Description>
+        <Description xml:lang="tr">Berkeley veritabanı 1. sürümü</Description>
+        <Archive sha1sum="6b7cb09e8ebd2b057c17f3b3b424c69c20b6351d" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/db.1.85.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">db-1.85.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>db1</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-14</Date>
+            <Version>1.85</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

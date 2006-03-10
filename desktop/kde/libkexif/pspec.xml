@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libkexif</Name>
+        <Homepage>http://www.digikam.org</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>A KDE library for loss-less EXIF operations</Summary>
+        <Description>A KDE library for loss-less EXIF operations</Description>
+        <Summary xml:lang="tr">EXIF loss-less işlemleri için kullanılan bir KDE kütüphanesi</Summary>
+        <Description xml:lang="tr">Görüntülerin içinde gömülü olan EXIF bilgilerini yönetmek için kulanılan bir KDE kütüphanesi</Description>
+        <Archive sha1sum="9962ca1f52436f649950600b643f01ee935a4858" type="tarbz2">http://ovh.dl.sourceforge.net/sourceforge/digikam/libkexif-0.2.2.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>kdebase</Dependency>
+            <Dependency versionFrom="0.6.9">libexif</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libkexif</Name>
+        <RuntimeDependencies>
+            <Dependency>kdebase</Dependency>
+            <Dependency versionFrom="0.6.9">libexif</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/kde/3.5/include</Path>
+            <Path fileType="library">/usr/kde/3.5/lib</Path>
+            <Path fileType="localedata">/usr/kde/3.5/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-21</Date>
+            <Version>0.2.2</Version>
+            <Comment>3.4 to 3.5</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-10</Date>
+            <Version>0.2.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
