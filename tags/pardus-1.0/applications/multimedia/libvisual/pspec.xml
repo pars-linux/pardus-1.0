@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libvisual</Name>
+        <Homepage>http://libvisual.sourceforge.net</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <IsA>library</IsA>
+        <Description>Libvisual is an abstraction library that comes between applications and audio visualisation plugins.</Description>
+        <Description xml:lang="tr">Libvisiual programlar ve canlandırma eklentileri arasındaki soyutlama kütüphanesidir</Description>
+        <Summary>An abstraction library that comes between applications and audio visualisation plugins.</Summary>
+        <Summary xml:lang="tr">Libvisual programlar ve canlandırma eklentileri arasındaki soyutlama kütüphanesidir</Summary>
+        <Archive sha1sum="8867f743c7407890c8cc571acab2fbcab869f3a1" type="targz">http://internap.dl.sourceforge.net/sourceforge/libvisual/libvisual-0.2.0.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">libvisual-0.2.0-movd.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>libvisual</Name>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-08</Date>
+            <Version>0.2.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

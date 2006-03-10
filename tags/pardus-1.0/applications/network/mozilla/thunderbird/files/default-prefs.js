@@ -1,0 +1,10 @@
+pref("network.protocol-handler.app.http","firefox");
+pref("network.protocol-handler.app.https","firefox");
+pref("mail.content_disposition_type", 1);
+pref("mailnews.reply_header_type", 3);
+pref("mailnews.reply_header_authorwrote", "%s şöyle yazmıştı:");
+pref("mailnews.reply_header_ondate", "on %s");
+pref("mailnews.reply_header_separator", " ");
+pref("mailnews.reply_header_colon", ":");
+pref("mail.compose.max_recycled_windows", 1);
+pref("browser.display.show_image_placeholders", false);

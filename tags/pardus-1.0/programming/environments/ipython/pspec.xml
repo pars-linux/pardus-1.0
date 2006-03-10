@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ipython</Name>
+        <Homepage>http://ipython.scipy.org/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>PYTHON</License>
+        <IsA>app:console</IsA>
+        <Summary>An advanced interactive shell for Python.</Summary>
+        <Summary xml:lang="tr">Python programlama dili için gelişmiş kabuk.</Summary>
+        <Description>An advanced interactive shell for Python.</Description>
+        <Description xml:lang="tr">Standart Python kabuğundan daha yetenekli bir etkileşimli Python kabuğudur. Aynı zamanda standart Python kabuğu ile tümü ile uyumludur.</Description>
+        <Archive sha1sum="c15cfdf957d46f17d23af6cf53d5b08dca15d93d" type="targz">http://ipython.scipy.org/dist/ipython-0.6.15.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>python</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ipython</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-07</Date>
+            <Version>0.6.15</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

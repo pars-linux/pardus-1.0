@@ -1,0 +1,13 @@
+--- gcc/config/sh/sh.h~	2004-05-29 11:35:52.000000000 +0900
++++ gcc/config/sh/sh.h	2004-05-29 11:38:48.000000000 +0900
+@@ -422,6 +422,10 @@
+ do {									\
+   if (LEVEL)								\
+     flag_omit_frame_pointer = -1;					\
++  if (LEVEL <= 2)							\
++    {									\
++      flag_reorder_blocks = 0;						\
++    }									\
+   if (SIZE)								\
+     target_flags |= SPACE_BIT;						\
+   if (TARGET_SHMEDIA && LEVEL > 1)					\

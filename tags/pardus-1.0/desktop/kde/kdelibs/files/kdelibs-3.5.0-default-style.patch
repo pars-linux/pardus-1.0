@@ -1,0 +1,12 @@
+diff -ur kdelibs-3.4.92.orig/kdefx/kstyle.cpp kdelibs-3.4.92/kdefx/kstyle.cpp
+--- kdelibs-3.4.92.orig/kdefx/kstyle.cpp	2005-10-10 18:05:27.000000000 +0300
++++ kdelibs-3.4.92/kdefx/kstyle.cpp	2005-10-20 03:54:58.000000000 +0300
+@@ -238,7 +238,7 @@
+ QString KStyle::defaultStyle()
+ {
+ 	if (QPixmap::defaultDepth() > 8)
+-	   return QString("plastik");
++	   return QString("lipstik");
+ 	else
+ 	   return QString("light, 3rd revision");
+ }

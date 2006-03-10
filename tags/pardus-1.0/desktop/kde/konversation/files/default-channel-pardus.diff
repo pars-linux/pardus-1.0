@@ -1,0 +1,12 @@
+diff -ur konversation-0.18/konversation/src/preferences.cpp konversation-fixed/konversation/src/preferences.cpp
+--- konversation-0.18/konversation/src/preferences.cpp	2005-06-07 09:34:47.000000000 +0300
++++ konversation-fixed/konversation/src/preferences.cpp	2005-12-25 01:23:26.000000000 +0200
+@@ -68,7 +68,7 @@
+   serverGroup->addServer(server);
+   serverGroup->setIdentityId(identity->id());
+   Konversation::ChannelSettings channel;
+-  channel.setName("#kde");
++  channel.setName("#pardus");
+   serverGroup->addChannel(channel);
+   m_serverGroupList.append(serverGroup);
+ 

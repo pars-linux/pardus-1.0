@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib/MozillaFirefox
+includedir=/usr/lib/MozillaFirefox/include
+
+Name: Mozilla Gtk Embedding Widget
+Description: Mozilla Embedding Widget for Gtk+
+Version: 1.4.1
+Requires: firefox-xpcom = 1.4.1
+Libs: -L${libdir} -lgtkembedmoz  -Wl,-R${libdir}
+Cflags: -I${includedir}/gtkembedmoz

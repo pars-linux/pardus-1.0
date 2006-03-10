@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ttf-bitstream-vera</Name>
+        <Homepage>http://www.gnome.org/fonts/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>BitstreamVera</License>
+        <IsA>data</IsA>
+        <Summary>Bitstream Vera font family</Summary>
+        <Summary xml:lang="tr">Bitstream Vera yazıtipi ailesi</Summary>
+        <Description>Bitstream Vera font family</Description>
+        <Description xml:lang="tr">Bitstream Vera yazıtipi ailesi</Description>
+        <Archive sha1sum="c3e8505a58d52e198a02960a2bd295e4c7a14242" type="tarbz2">http://ftp.gnome.org/pub/GNOME/sources/ttf-bitstream-vera/1.10/ttf-bitstream-vera-1.10.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>xorg</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ttf-bitstream-vera</Name>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/fonts</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-07</Date>
+            <Version>1.10</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

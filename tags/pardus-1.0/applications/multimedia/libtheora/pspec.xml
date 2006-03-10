@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libtheora</Name>
+        <Homepage>http://www.theora.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>xiph</License>
+        <IsA>library</IsA>
+        <Summary>The Theora Video Compression Codec</Summary>
+        <Summary xml:lang="tr">Theora formatında sıkıştırılmış videolarınız için kodlayıcı/açıcı kütüphane.</Summary>
+        <Description>The Theora Video Compression Codec</Description>
+        <Description xml:lang="tr">Theora formatında sıkıştırılmış videolarınız için kodlayıcı/açıcı kütüphane.</Description>
+        <Archive sha1sum="8e740ccd7219861de83ac17ecceb13c02ed7e24a" type="tarbz2">http://downloads.xiph.org/releases/theora/libtheora-1.0alpha5.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="1.1.0">libogg</Dependency>
+            <Dependency versionFrom="1.0.1">libvorbis</Dependency>
+        </BuildDependencies>        
+    </Source>
+
+    <Package>
+        <Name>libtheora</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="1.1.0">libogg</Dependency>
+            <Dependency versionFrom="1.0.1">libvorbis</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="2">
+            <Date>2005-10-16</Date>
+            <Version>1.0_alpha5</Version>
+            <Comment>Update to 1.0_alpha5</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-07</Date>
+            <Version>1.0_alpha3</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

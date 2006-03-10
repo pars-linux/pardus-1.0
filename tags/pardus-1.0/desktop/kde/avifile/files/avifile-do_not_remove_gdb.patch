@@ -1,0 +1,42 @@
+diff -Nur avifile-0.7-0.7.43-old/configure avifile-0.7-0.7.43/configure
+--- avifile-0.7-0.7.43-old/configure	2005-02-24 16:25:46.000000000 +0200
++++ avifile-0.7-0.7.43/configure	2005-12-21 21:00:16.000000000 +0200
+@@ -31746,10 +31746,6 @@
+ echo "${ECHO_T}profiling enabled - DO NOT USE FOR NORMAL OPERATIONS" >&6
+             	PROFFLAG="-finstrument-functions "
+     fi
+-            else
+-    CFLAGS=`echo $CFLAGS | sed s/-g//`
+-    CXXFLAGS=`echo $CXXFLAGS | sed s/-g//`
+-    FFMPEG_CFLAGS=`echo $FFMPEG_CFLAGS | sed s/-g//`
+ fi
+ 
+ WIN32_CFLAGS=`echo $CFLAGS | sed s/-fomit-frame-pointer//g`
+diff -Nur avifile-0.7-0.7.43-old/configure.ac avifile-0.7-0.7.43/configure.ac
+--- avifile-0.7-0.7.43-old/configure.ac	2005-02-24 13:31:38.000000000 +0200
++++ avifile-0.7-0.7.43/configure.ac	2005-12-21 21:00:25.000000000 +0200
+@@ -904,10 +904,6 @@
+     dnl CFLAGS="-g $PROFFLAG"
+     dnl CXXFLAGS="-g $PROFFLAG"
+     dnl FFMPEG_CFLAGS="-g $PROFFLAG"
+-else
+-    CFLAGS=`echo $CFLAGS | sed s/-g//`
+-    CXXFLAGS=`echo $CXXFLAGS | sed s/-g//`
+-    FFMPEG_CFLAGS=`echo $FFMPEG_CFLAGS | sed s/-g//`
+ fi
+ 
+ WIN32_CFLAGS=`echo $CFLAGS | sed s/-fomit-frame-pointer//g`
+diff -Nur avifile-0.7-0.7.43-old/configure.in avifile-0.7-0.7.43/configure.in
+--- avifile-0.7-0.7.43-old/configure.in	2005-02-24 13:31:38.000000000 +0200
++++ avifile-0.7-0.7.43/configure.in	2005-12-21 21:00:25.000000000 +0200
+@@ -904,10 +904,6 @@
+     dnl CFLAGS="-g $PROFFLAG"
+     dnl CXXFLAGS="-g $PROFFLAG"
+     dnl FFMPEG_CFLAGS="-g $PROFFLAG"
+-else
+-    CFLAGS=`echo $CFLAGS | sed s/-g//`
+-    CXXFLAGS=`echo $CXXFLAGS | sed s/-g//`
+-    FFMPEG_CFLAGS=`echo $FFMPEG_CFLAGS | sed s/-g//`
+ fi
+ 
+ WIN32_CFLAGS=`echo $CFLAGS | sed s/-fomit-frame-pointer//g`

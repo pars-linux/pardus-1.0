@@ -1,0 +1,19 @@
+--- examples/pdb/mysql/mysql.dump.ORIG	2005-10-14 14:33:12.000000000 +0200
++++ examples/pdb/mysql/mysql.dump	2005-10-14 14:33:38.000000000 +0200
+@@ -20,7 +20,7 @@
+ 	workstations varchar(255),
+ 	unknown_str varchar(255),
+ 	munged_dial varchar(255),
+-	uid int(9) NOT NULL DEFAULT "0" PRIMARY KEY auto_increment,
++	uid int(9) NOT NULL auto_increment,
+ 	gid int(9),
+ 	user_sid varchar(255),
+ 	group_sid varchar(255),
+@@ -33,5 +33,6 @@
+ 	unknown_5 int(9),
+ 	unknown_6 int(9) default "1260",
+ 	bad_password_count int(9),
+-	logon_count int(9)
++	logon_count int(9),
++	logon_hours varchar(42) default NULL
+ );

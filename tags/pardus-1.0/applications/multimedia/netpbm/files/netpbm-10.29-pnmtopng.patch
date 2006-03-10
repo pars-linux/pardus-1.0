@@ -1,0 +1,20 @@
+--- netpbm-10.29/converter/other/pnmtopng.c.segfault	2005-08-06 19:26:55.000000000 +0200
++++ netpbm-10.29/converter/other/pnmtopng.c	2005-10-05 14:33:03.000000000 +0200
+@@ -1618,7 +1618,7 @@ makePngLine(png_byte *           const l
+             *pp++ = PNM_GET1(p_png) & 0xff;
+         } else if (info_ptr->color_type == PNG_COLOR_TYPE_PALETTE) {
+             unsigned int paletteIndex;
+-            if (alpha)
++            if (alpha && alpha_mask)
+                 paletteIndex = lookupColorAlpha(caht, &p, &alpha_mask[col]);
+             else
+                 paletteIndex = ppm_lookupcolor(cht, &p);
+@@ -1637,7 +1637,7 @@ makePngLine(png_byte *           const l
+         } else
+             pm_error("INTERNAL ERROR: undefined color_type");
+                 
+-        if (info_ptr->color_type & PNG_COLOR_MASK_ALPHA) {
++        if (info_ptr->color_type & PNG_COLOR_MASK_ALPHA && alpha_mask) {
+             int const png_alphaval = (int)
+                 alpha_mask[col] * (float) png_maxval / maxval + 0.5;
+             if (depth == 16)

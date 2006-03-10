@@ -1,0 +1,664 @@
+#!/bin/bash
+# $Header: /var/cvsroot/gentoo-src/mozilla-launcher/mozilla-launcher,v 1.42 2005/07/23 19:29:30 agriffis Exp $
+#
+# Portions of this file are extracted from the mozilla.org distributed scripts.
+# Those portions are Copyright (C) 1998 Netscape Communmications Corporation and
+# released under the NPL as detailed in /usr/lib/mozilla/mozilla,
+# /usr/lib/MozillaFirefox/firefox and /usr/lib/MozillaThunderbird/thunderbird.
+#
+# The remainder of this file is Copyright 1999-2005 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+: ${MOZILLA_LAUNCHER_DEBUG:=false}
+
+# Make sure necessary progs are in the PATH
+PATH=/usr/bin:/bin:/usr/X11R6/bin:$PATH
+
+main() {
+  declare args mozargs urls u i mozpid debugger debugging=false
+  declare candidates retval=0 remote_supports_dash_a progname
+  declare zero=${0##*/}
+
+  # We'd like to believe that we were called via one of the symlinks in
+  # /usr/bin.  However OOo sports some questionable behavior: it follows the
+  # symlinks instead of relying on UNIX filesystem semantics, so $zero is
+  # "/usr/libexec/mozilla-launcher" in that case.  We workaround this
+  # misbehavior by using a stub in /usr/bin instead of a symlink.  The stub sets
+  # MOZILLA_LAUNCHER and execs /usr/libexec/mozilla-launcher
+  [[ -n $MOZILLA_LAUNCHER ]] && zero=$MOZILLA_LAUNCHER
+  unset MOZILLA_LAUNCHER
+
+  # Determine if we're called as firefox or mozilla and set up
+  # variables appropriately
+  which_browser || exit 1       # note: modifies $zero
+
+  # Parse the command-line and set args, mozargs and urls
+  parse_cmdline "$@" || exit 1
+
+  # Make sure we'll get at least an empty window/tab
+  # when nothing else is specified on the cmdline.
+  if [[ $# -eq 0 && ${#mozargs[@]} == 0 ]]; then
+    if [[ $zero == thunderbird* ]]; then
+      mozargs=-mail
+    else
+      urls=('')
+    fi
+  fi
+
+  # Set the candidates array with find_running
+  find_running
+
+  # Handle some special args.  We want to handle these ourselves so
+  # that we can find the right window on the screen to target.
+  set -- "${mozargs[@]}"
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      -mail)    try_running 'xfeDoCommand(openInbox)' ;;
+      -compose)
+        if [[ -n $2 ]]; then
+          try_running "xfeDoCommand(composeMessage,$2)" && shift
+        else
+          try_running "xfeDoCommand(composeMessage)"
+        fi ;;
+      -remote)  try_running "$2" && shift ;;
+    esac
+    [[ $? -eq 0 ]] && { shift; continue; }
+    # Error path: try_running failed, so prepend remaining mozargs to
+    # args and drop through to call the browser binary
+    args=("$@" "${args[@]}")
+    break
+  done
+
+  # If there's no running browser, or we've got args, start an
+  # instance.
+  if [[ ${#args[@]} -gt 0 ]] || ! try_running 'ping()'; then
+    # Assume the first url should just be tacked on the end.
+    try_start "${args[@]}" ${urls:+"${urls[0]}"} || exit
+    mozpid=$!
+    set -- "${urls[@]}"; shift; urls=("$@")   # shift off the first url
+    candidates=$DISPLAY
+    args=()
+
+    # Handle case of multiple URLs by waiting for browser to map to
+    # the screen so that it can be found by $remote below
+    if [[ ${#urls[@]} -gt 0 ]]; then
+      if [[ -x /usr/bin/xtoolwait ]]; then
+        xtoolwait sleep 10      # hope it hasn't mapped yet
+      else
+        sleep 1
+        for ((i = 0; i < 40; i = i + 1)); do
+          try_running 'ping()' && break || sleep 0.25
+        done
+      fi
+    fi
+  fi
+
+  # Handle multiple URLs by looping over the xremote call
+  for u in "${urls[@]}"; do
+    if [[ $u == mailto:* ]]; then
+      try_running "mailto(${u#mailto:})" || retval=$?
+    else
+      if [[ -n $MOZILLA_NEWTYPE ]]; then
+        try_running "openURL($u,new-$MOZILLA_NEWTYPE)" || retval=$?
+      elif [[ $zero == firefox* && -n $u ]]; then
+        # Don't override preferences set in the browser #82653
+        try_running "openURL($u)" || retval=$?
+      elif [[ -n $u ]]; then
+        try_running "openURL($u,new-window)" || retval=$?
+      else
+        try_running "xfeDoCommand(openBrowser)" || retval=$?
+      fi
+    fi
+  done
+
+  # Will only wait here if browser was started by this script
+  if [[ -n ${mozpid} ]]; then
+    wait ${mozpid}
+    retval=$?
+    [[ ${retval} == 0 ]] \
+      || echo "${mozbin##*/} exited with non-zero status (${retval})" >&2
+    moz_pis_startstop_scripts stop
+  fi
+
+  exit $retval
+}
+
+which_browser() {
+  # Newer launcher stubs will set MOZILLA_LIBDIR so that the installation
+  # location is controlled by the ebuild rather than mozilla-launcher, finally!
+  if [[ ! -d $MOZILLA_LIBDIR ]]; then
+    unset MOZILLA_LIBDIR
+  fi
+
+  # Support mozilla, mozilla-bin, firefox, firefox-bin, thunderbird,
+  # thunderbird-bin!
+  # This case statement does the setup for source-based browsers and
+  # just drops through for binary-based browsers.
+  case $zero in
+    *fox)
+      export MOZILLA_FIVE_HOME=${MOZILLA_LIBDIR:-"/usr/lib/MozillaFirefox"}
+      remote=$MOZILLA_FIVE_HOME/mozilla-xremote-client
+      mozbin=$MOZILLA_FIVE_HOME/firefox-bin
+      grepfor=Firefox-bin
+      ;;
+
+    *mozilla)
+      export MOZILLA_FIVE_HOME=${MOZILLA_LIBDIR:-"/usr/lib/mozilla"}
+      remote=$MOZILLA_FIVE_HOME/mozilla-xremote-client
+      mozbin=$MOZILLA_FIVE_HOME/mozilla-bin
+      grepfor=Mozilla-bin
+      ;;
+
+    *sunbird)
+      export MOZILLA_FIVE_HOME=${MOZILLA_LIBDIR:-"/usr/lib/MozillaSunbird"}
+      remote=$MOZILLA_FIVE_HOME/mozilla-xremote-client
+      mozbin=$MOZILLA_FIVE_HOME/sunbird-bin
+      grepfor=Sunbird-bin
+      ;;
+
+    *thunderbird)
+      export MOZILLA_FIVE_HOME=${MOZILLA_LIBDIR:-"/usr/lib/MozillaThunderbird"}
+      remote=$MOZILLA_FIVE_HOME/mozilla-xremote-client
+      mozbin=$MOZILLA_FIVE_HOME/thunderbird-bin
+      grepfor=Thunderbird-bin
+      ;;
+
+    *-bin)
+      unset mozbin  # just in case...
+      ;;            # but don't do anything yet
+
+    *)
+      echo "$0: unknown browser" >&2
+      return 1
+      ;;
+  esac
+
+  # Attempt to use -bin version if source version isn't available
+  if [[ -n $mozbin && ! -f $mozbin ]]; then
+    unset mozbin        # it's bogus anyway
+    zero=${zero}-bin
+  fi
+
+  case $zero in
+    *fox-bin)
+      export MOZILLA_FIVE_HOME=${MOZILLA_LIBDIR:-"/opt/firefox"}
+      remote=$MOZILLA_FIVE_HOME/mozilla-xremote-client
+      mozbin=$MOZILLA_FIVE_HOME/firefox-bin
+      grepfor=Firefox-bin
+      ;;
+
+    *mozilla-bin)
+      export MOZILLA_FIVE_HOME=${MOZILLA_LIBDIR:-"/opt/mozilla"}
+      remote=$MOZILLA_FIVE_HOME/mozilla-xremote-client
+      mozbin=$MOZILLA_FIVE_HOME/mozilla-bin
+      grepfor=Mozilla-bin
+      ;;
+
+    *sunbird-bin)
+      export MOZILLA_FIVE_HOME=${MOZILLA_LIBDIR:-"/opt/sunbird"}
+      remote=$MOZILLA_FIVE_HOME/mozilla-xremote-client
+      mozbin=$MOZILLA_FIVE_HOME/sunbird-bin
+      grepfor=Sunbird-bin
+      ;;
+
+    *thunderbird-bin)
+      export MOZILLA_FIVE_HOME=${MOZILLA_LIBDIR:-"/opt/thunderbird"}
+      remote=$MOZILLA_FIVE_HOME/mozilla-xremote-client
+      mozbin=$MOZILLA_FIVE_HOME/thunderbird-bin
+      grepfor=Thunderbird-bin
+      ;;
+  esac
+
+  # Make sure we got something
+  if [[ -z $mozbin || ! -f $mozbin ]]; then
+    echo "$0: can't find the browser :-(" >&2
+    return 1
+  fi
+
+  # Newer xremote has the ability to specify a target program.  Base
+  # this on ${zero} but workaround bug 247754 for thunderbird
+  progname=${zero%-bin}
+  if [[ $progname == thunderbird ]]; then
+    grep -q '"0\.[78]"' ${MOZILLA_FIVE_HOME}/defaults/pref/*.js \
+      && progname=Thunderbird
+  fi
+
+  # Set LD_LIBRARY_PATH (also set in /etc/env.d/10*)
+  export LD_LIBRARY_PATH=$MOZILLA_FIVE_HOME:$MOZILLA_FIVE_HOME/plugins${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+
+  # Make sure netscape-compatible plugins are picked up
+  [[ -z $MOZ_PLUGIN_PATH ]] && export MOZ_PLUGIN_PATH=/usr/lib/nsbrowser/plugins
+
+  return 0
+}
+
+# parse_cmdline: set args, mozargs and urls, which are dynamically
+# scoped in main()
+parse_cmdline() {
+  # Validate the args and extract the urls
+  args=()         # general arguments
+  mozargs=()      # arguments that we handle specifically
+  urls=()         # urls to open
+  while [[ $# -ne 0 ]] ; do
+    if [[ $1 == -* ]] ; then
+      case "${1#-}" in
+        # options we handle specially
+        g|-debug)
+          debugging=true
+          shift 1 ;;
+        d|-debugger)
+          debugging=true
+          debugger=$2
+          shift 2 ;;
+        a)
+          # ignore -a which xfhelp4 passes for no reason
+          shift 2 ;;
+        register)
+          # just do this immediately
+          update_chrome
+          exit $? ;;
+        unregister)
+          # just do this immediately
+          remove_chrome
+          exit $? ;;
+        # mozargs with 0 arguments
+        mail)
+          mozargs=("${mozargs[@]}" "$1")
+          shift 1 ;;
+        # mozargs with 0 or 1 arguments
+        compose|remote)
+          if [[ -n $2 ]]; then
+            mozargs=("${mozargs[@]}" "$1" "$2")
+            shift 2
+          else
+            mozargs=("${mozargs[@]}" "$1")
+            shift 1
+          fi ;;
+        # options we pass through 1 argument
+        height|width|CreateProfile|P|UILocale|contentLocale|edit|chrome)
+          args=("${args[@]}" "$1" "$2")
+          shift 2 ;;
+        # unrecognized options are simply passed through
+        *)
+          args=("${args[@]}" "$1")
+          shift 1 ;;
+      esac
+    else
+      if [[ $1 == *://*/* ]]; then
+        urls=("${urls[@]}" "$1")
+      elif [[ $1 == *://* ]]; then
+        # as of mozilla_1.7_rc1 the url checking changed for xremote
+        # calls... now three slashes are required for urls, otherwise we
+        # get the following error from xremote:
+        #  Error: Failed to send command: 509 internal error
+        urls=("${urls[@]}" "$1/")
+      elif [[ $1 != /* && -e $1 ]]; then
+        # relative path to a file, transform to URL syntax
+        urls=("${urls[@]}" "file://$PWD/$1")
+      elif [[ $1 == /* && -e $1 ]]; then
+        # absolute path to a file, transform to URL syntax
+        urls=("${urls[@]}" "file://$1")
+      elif [[ $1 != *:* && $1 == *@* ]]; then
+        # looks like an email address, prefix with mailto: so we can
+        # recognize it later.
+        urls=("${urls[@]}" "mailto:$1")
+      else
+        # no idea what this is!  just add it to urls and hope it works
+        urls=("${urls[@]}" "$1")
+      fi
+      shift
+    fi
+  done
+
+  return 0
+}
+
+# set_logname: make sure LOGNAME is set
+set_logname() {
+  : ${LOGNAME:=$USER}
+  : ${LOGNAME:=$(whoami)}
+  export LOGNAME
+}
+
+# fake_user: fake user string on browser windows that should be found
+# by $remote.  This is a hack, but on the other hand, anything other
+# than patching the xremote source would be a hack.  This prevents
+# xremote from mixing up mozilla and firefox windows.
+fake_user() {
+  declare id retval=1
+  set_logname
+
+  # Find browser windows with a _MOZILLA_USER property and fake it
+  for id in $(xwininfo -root -tree | awk -v gf="$grepfor" '$0~gf{print $1}'); do
+    if xprop -notype -id $id | grep -Fqx "_MOZILLA_USER = \"$LOGNAME\""; then
+      xprop -id $id -f _MOZILLA_USER 8s -set _MOZILLA_USER "${zero}-$LOGNAME"
+      retval=0
+    fi
+  done
+
+  return $retval
+}
+
+# unfake_user: remove the hackery done by fake_user
+unfake_user() {
+  declare id
+  set_logname
+
+  # Find browser windows with a fake _MOZILLA_USER and fix it
+  for id in $(xwininfo -root -tree | awk -v gf="$grepfor" '$0~gf{print $1}'); do
+    xprop -notype -id $id | grep -Fqx "_MOZILLA_USER = \"${zero}-$LOGNAME\"" \
+    && xprop -id $id -f _MOZILLA_USER 8s -set _MOZILLA_USER "$LOGNAME"
+  done
+}
+
+# find_running: sets the candidates array
+find_running() {
+  declare screens s
+
+  # Try to start in an existing session; check all screens
+  # with priority on the current screen
+  screens=("$DISPLAY"
+    $(xdpyinfo | awk '
+      /^name of display:/ {
+        disp = substr($NF, 0, match($NF, /\.[^.]*$/)-1)
+      }
+      /^number of screens:/ {
+        for (i = 0; i < $NF; i++) {
+          this = sprintf("%s.%d", disp, i)
+          if (this != ENVIRON["DISPLAY"])
+            print this
+        }
+      }')
+    )
+
+  # We used to check displays with xwininfo here but that isn't
+  # necessary with the advent of fake_user and/or -a programname.
+  # Instead just test for a running program if we're on a local
+  # display.
+  if [[ $DISPLAY != :* ]] || killall -0 ${mozbin##*/} &>/dev/null; then
+    candidates=("${screens[@]}")
+  else
+    candidates=()
+  fi
+}
+
+# try_running: try to use an existing browser to run a command
+try_running() {
+  declare s retval=2  # default == can't find an instance
+
+  # Check for newer xremote which supports -a programname
+  # which thankfully obviates fake_user
+  if [[ -z $remote_supports_dash_a ]]; then
+    if $remote 2>&1 | grep -Fq '[-a '; then
+      remote_supports_dash_a=true
+    else
+      remote_supports_dash_a=false
+    fi
+  fi
+
+  # Try mozilla-xremote-client on each candidate screen.
+  # Only use mozilla-xremote-client if we have no other args (which
+  # must be passed to the browser binary).
+  if [[ ${#candidates[@]} > 0 ]]; then
+    if $remote_supports_dash_a || [[ -n $MOZ_FORCE_FAKE_USER || \
+      ( $candidates == :* && -z $MOZ_NO_FAKE_USER ) ]]
+    then
+      # Attempt to find a target browser using either -a or fake_user
+      for s in "${candidates[@]}"; do
+        if $remote_supports_dash_a; then
+          DISPLAY=$s $remote -a ${progname} "$@"
+          retval=$?
+        elif DISPLAY=$s fake_user; then
+          LOGNAME="${zero}-$LOGNAME" DISPLAY=$s $remote "$@"
+          retval=$?
+          DISPLAY=$s unfake_user
+        fi
+        if [[ $retval -eq 0 ]]; then
+          candidates=("$s")       # for future calls
+          return 0
+        fi
+      done
+    else
+      # fake_user stuff takes prohibitively long on a remote
+      # display, so I guess this has the potential to exhibit the
+      # mozilla/firefox mixups for the 1% of users that are running
+      # both simultaneously from a remote machine.
+      for s in "${candidates[@]}"; do
+        DISPLAY=$s $remote "$@"
+        retval=$?
+        if [[ $retval -eq 0 ]]; then
+          candidates=("$s")       # for future calls
+          return 0
+        fi
+      done
+    fi
+  fi
+
+  # Might as well do this error interpretation here
+  case $retval in
+    1) echo "Unable to connect to X server" >&2 ;;
+    2) echo "No running windows found" >&2 ;;
+    3) echo "Browser doesn't understand command" >&2 ;;
+    *) echo "Unknown error $retval from mozilla-xremote-client" >&2 ;;
+  esac
+
+  return $retval
+}
+
+# set_debugger: set $debugger
+set_debugger() {
+  declare d
+  : ${debugger:=ddd gdb}
+
+  # Try to find a workable debugger
+  for d in ${debugger}; do
+    type -fp $d &>/dev/null || continue
+    debugger=$d
+    return 0
+  done
+
+  echo "Can't find debugger (${debugger})" >&2
+  exit 1
+}
+
+# try_start: attempt to start a browser
+try_start() {
+  declare f
+
+  # shouldn't have files in profile that are owned by a user other
+  # than the current one.  http://bugs.gentoo.org/show_bug.cgi?id=59849
+  f=$(find ~/{.,.mozilla/}${zero%-bin} ! -uid ${EUID} 2>/dev/null | head -n10)
+  if [[ -n ${f} ]]; then
+    cat <<EOF
+Error launching ${zero}:
+
+There are files in your profile that are owned by a user other than
+$(id -un).  ${zero} can't execute in this condition.  Here are some of
+the files that I found:
+EOF
+    echo "${f}" | sed 's/^/    /'
+    (( $(echo "${f}" | wc -l) == 10 )) && echo "    ..."
+    echo
+    echo "You can fix this problem by running the following:"
+    echo "    su -c 'chown -R $(id -un):$(id -gn) $HOME/.mozilla'"
+    echo
+    return 101
+  fi >&2
+
+  # compreg.dat and/or chrome.rdf will screw things up if it's from an
+  # older version.  http://bugs.gentoo.org/show_bug.cgi?id=63999
+  for f in ~/{.,.mozilla/}${zero%-bin}/*/{compreg.dat,chrome.rdf,XUL.mfasl}; do
+    if [[ -f ${f} && ${f} -ot ${mozbin} ]]; then
+      echo "Removing ${f} leftover from older ${zero%-bin}"
+      rm -f "${f}"
+    fi
+  done
+
+  moz_pis_startstop_scripts start
+
+  if $debugging && set_debugger; then
+    for v in MOZILLA_FIVE_HOME LD_LIBRARY_PATH LD_LIBRARYN32_PATH \
+        LD_LIBRARYN64_PATH LD_LIBRARY_PATH_64 DISPLAY XPSERVERLIST \
+        MOZILLA_POSTSCRIPT_PRINTER_LIST DYLD_LIBRARY_PATH LIBRARY_PATH \
+        SHLIB_PATH LIBPATH ADDON_PATH MOZ_PROGRAM MOZ_TOOLKIT debugger; do
+      [[ -n ${!v} ]] && printf "%31s=%s\n" "$v" "${!v}"
+    done
+    echo
+
+    # Note that --args works for gdb and ddd.  Other debuggers will need another
+    # method if added to this script.
+    "$debugger" --args "$mozbin" "$@"
+
+    # Don't try to load additional URLs if debugging
+    unset urls
+  else
+    "$mozbin" "$@" &
+  fi
+}
+
+moz_pis_startstop_scripts() {
+  eval $(grep -m1 MOZ_USER_DIR= $MOZILLA_FIVE_HOME/${zero%-bin})
+  if [[ -z $MOZ_USER_DIR ]]; then
+    echo "Warning: Couldn't extract MOZ_USER_DIR from $MOZILLA_FIVE_HOME/$zero"
+    return
+  fi
+  # MOZ_PIS_ is the name space for "Mozilla Plugable Init Scripts"
+  # These variables and there meaning are specified in
+  # mozilla/xpfe/bootstrap/init.d/README
+  MOZ_PIS_API=2
+  MOZ_PIS_MOZBINDIR="${dist_bin}"
+  MOZ_PIS_SESSION_PID="$$"
+  MOZ_PIS_USER_DIR="${MOZ_USER_DIR}"
+  export MOZ_PIS_API MOZ_PIS_MOZBINDIR MOZ_PIS_SESSION_PID MOZ_PIS_USER_DIR
+
+  case "${1}" in
+    "start")
+      for curr_pis in "${dist_bin}/init.d"/S* "${HOME}/${MOZ_USER_DIR}/init.d"/S* ; do
+        if [ -x "${curr_pis}" ] ; then
+          case "${curr_pis}" in
+            *.sh) .  "${curr_pis}"         ;;
+            *)       "${curr_pis}" "start" ;;
+          esac
+        fi
+      done
+      ;;
+    "stop")
+      for curr_pis in "${HOME}/${MOZ_USER_DIR}/init.d"/K* "${dist_bin}/init.d"/K* ; do
+        if [ -x "${curr_pis}" ] ; then
+          case "${curr_pis}" in
+            *.sh) . "${curr_pis}"        ;;
+            *)      "${curr_pis}" "stop" ;;
+          esac
+        fi
+      done
+      ;;
+    *)
+      echo 1>&2 "$0: Internal error in moz_pis_startstop_scripts."
+      exit 1
+      ;;
+  esac
+}
+
+remove_chrome() {
+  if [[ $UID != 0 ]]; then
+    echo "$0: You need to be root to update the registry" >&2
+    return 1
+  fi
+
+  rm -rf ${MOZILLA_FIVE_HOME}/chrome/overlayinfo
+  rm -f  ${MOZILLA_FIVE_HOME}/chrome/chrome.rdf
+  rm -f  ${MOZILLA_FIVE_HOME}/extensions/installed-extensions-processed.txt 
+  rm -f  ${MOZILLA_FIVE_HOME}/extensions/Extensions.rdf
+  rm -f  ${MOZILLA_FIVE_HOME}/extensions/installed-extensions.txt
+  rm -f  ${MOZILLA_FIVE_HOME}/chrome/installed-chrome.txt
+
+  return 0
+}
+
+update_chrome() {
+  if [[ $UID != 0 ]]; then
+    echo "$0: You need to be root to update the registry" >&2
+    return 1
+  fi
+
+  # The -bin packages don't support updating the registry, at least not yet.
+  # regxpcom and regchrome are missing from firefox-bin and thunderbird-bin, and
+  # there should be no need to run mozilla-rebuild-databases.pl with mozilla-bin
+  if [[ ${zero} == *-bin ]]; then
+    echo "$0: update_chrome doesn't support ${zero}"
+    return 1
+  fi
+
+  # mozilla (seamonkey) doesn't support -register yet.  Until it does, use the
+  # mozilla-rebuild-databases.pl script instead
+  if [[ ${zero} == mozilla ]]; then
+    echo "Running mozilla-rebuild-databases.pl"
+    umask 022
+    ${MOZILLA_FIVE_HOME}/mozilla-rebuild-databases.pl
+    return $?
+  fi
+
+  echo "Updating ${zero} chrome registry..."
+  umask 022
+  export PATH=${MOZILLA_FIVE_HOME}:${PATH}
+  export HOME=$(mktemp -d /tmp/${zero}-register.XXXXXX)
+  declare libdir=${MOZILLA_FIVE_HOME}
+  declare extdir=${libdir}/extensions.d
+  declare chrdir=${libdir}/chrome.d
+
+  # set up libdir
+  remove_chrome || return 1
+  mkdir -p ${libdir}/chrome/overlayinfo
+  mkdir -p ${libdir}/extensions
+
+  # generate installed-extensions.txt
+  :> ${libdir}/extensions/installed-extensions.txt
+  chmod 0644 ${libdir}/extensions/installed-extensions.txt
+  for f in $(ls -d ${extdir}/* 2>/dev/null); do
+    while read line; do
+      extuid=$(echo ${line} | cut -f 2 -d ,)
+      extuiddir=${libdir}/extensions/${extuid}
+      if [[ ! -e ${extuiddir} ]]; then
+        echo "W: ${f}: ${extuiddir} doesn't exist." >&2
+      elif [[ ! -e ${extuiddir}/install.rdf ]]; then
+        echo "W: ${f}: ${extuiddir}/install.rdf doesn't exist." >&2
+      elif grep -Fq ${extuid} ${extuiddir}/install.rdf; then
+        echo $line >> ${libdir}/extensions/installed-extensions.txt
+      else
+        echo "W: ${f}: ${extuiddir}/install.rdf doesn't contain the UID." >&2
+      fi
+    done < $f
+  done
+
+  # do some double-checking
+  if $MOZILLA_LAUNCHER_DEBUG; then
+    for f in $(find ${libdir}/extensions/ -maxdepth 1 -name '{*}'); do
+      if ! grep -Fq ${f##*/} ${libdir}/extensions/installed-extensions.txt; then
+        echo "W: ${f##*/} not in ${libdir}/extensions/installed-extensions.txt" >&2
+      fi
+    done
+  fi
+
+  # generate installed-chrome.txt
+  cat /dev/null $(ls -d ${chrdir}/* 2>/dev/null) > ${libdir}/chrome/installed-chrome.txt
+  chmod 0644 ${libdir}/chrome/installed-chrome.txt
+
+  # let the mozilla binary do its thing...
+  $mozbin -register || echo "E: Registration process exited with status: $?" >&2
+  regchrome || echo "E: regchrome exited with status: $?" >&2
+  regxpcom || echo "E: regxpcom exited with status: $?" >&2
+
+  if [[ -e ${libdir}/extensions/installed-extensions.txt ]]; then
+    echo "E: ${libdir}/extensions/installed-extensions.txt still present" >&2
+    echo "E: Registration might have gone wrong" >&2
+  fi
+
+  rm -fr ${HOME}
+
+  return 0
+}
+
+# Call the main sub, which is defined at the top of this script
+main "$@"
+
+# vim:expandtab sw=2:

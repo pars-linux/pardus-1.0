@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gd</Name>
+        <Homepage>http://www.boutell.com/gd/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <License>BSD</License>
+        <IsA>library</IsA>
+        <Description>FLTK (pronounced "fulltick") is a cross-platform C++ GUI toolkit</Description>
+        <Description xml:lang="tr">Hızlı bir şekilde resim oluşturmak için bir kütüphane</Description>
+        <Summary>FLTK (pronounced "fulltick") is a cross-platform C++ GUI toolkit</Summary>
+        <Summary xml:lang="tr">Hızlı bir şekilde resim oluşturmak için bir kütüphane</Summary>           
+        <Archive sha1sum="5d67504ad0e54231ea63f7143288eafc62da9b2d" type="targz">http://www.boutell.com/gd/http/gd-2.0.32.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency versionFrom="1.2.5">libpng</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency versionFrom="2.1.5">freetype</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gd</Name>
+        <RuntimeDependencies>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency versionFrom="1.2.5">libpng</Dependency>
+            <Dependency versionFrom="2.1.5">freetype</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-08</Date>
+            <Version>2.0.32</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

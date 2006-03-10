@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>elfutils</Name>
+        <Homepage>http://www.redhat.com/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>OpenSoftware</License>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <Summary>Libraries/utilities to handle ELF objects (drop in replacement for libelf)</Summary>
+        <Description>Libraries/utilities to handle ELF objects (drop in replacement for libelf)</Description>
+        <Summary xml:lang="tr">Derlenmiş objeleri işlemek için gereken aletler kollesiyonu</Summary>
+        <Description xml:lang="tr">İçinde ld, nm, size, strip, readline ve elfint gibi uygulamaları barındıran derlenmiş objeleri işlemek için kullanılan uygulama ve kütüphaneler bütünüdür.</Description>
+        <Archive sha1sum="21535ebb1570e063a5142f70a1a1dd6767ee78c5" type="targz">http://www.dmatech.org/~dma/distfiles/elfutils-0.94.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>elfutils</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+            <Path fileType="header">/usr/include/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-07</Date>
+            <Version>0.94</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

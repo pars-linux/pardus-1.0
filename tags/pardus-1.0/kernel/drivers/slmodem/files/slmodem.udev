@@ -1,0 +1,2 @@
+KERNEL="slamr", NAME="slamr0" GROUP="dialout"
+KERNEL="slusb", NAME="slusb0" GROUP="dialout"

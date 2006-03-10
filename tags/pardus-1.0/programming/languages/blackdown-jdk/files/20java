@@ -1,0 +1,7 @@
+JDK_HOME=/opt/blackdown-jdk
+JAVAC=/opt/blackdown-jdk/bin/javac
+PATH="/opt/blackdown-jdk/bin:/opt/blackdown-jdk/jre/bin"
+ROOTPATH="/opt/blackdown-jdk/bin:/blackdown-jdk/jre/bin"
+LDPATH="/opt/blackdown-jdk/jre/lib"
+MANPATH=${MANPATH}:/opt/blackdown-jdk/man
+JAVA_HOME=/opt/blackdown-jdk

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>spca5xx</Name>
+        <Homepage>http://mxhaard.free.fr/spca5xx.html</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary xml:lang="en">Driver for webcams using SPCA5xx chips</Summary>
+        <Summary xml:lang="tr">SPCA5xx yongalı kameralar için sürücü</Summary>
+        <Description xml:lang="en">Driver for webcams using SPCA5xx chips</Description>
+        <Description xml:lang="tr">SPCA5xx yongalı kameralar için sürücü</Description>
+        <Archive type="targz" sha1sum="b466ddf5d99bcbd723b6e3f67c4dbff7824a4d1a">http://mxhaard.free.fr/spca50x/Download/spca5xx-20051212.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>kernel-source</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>spca5xx</Name>
+        <Files>
+            <Path fileType="library" permanent="true">/lib/modules</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-23</Date>
+            <Version>20051212</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

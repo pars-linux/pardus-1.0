@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>portmap</Name>
+        <Homepage>ftp://ftp.porcupine.org/pub/security/index.html</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>daemon</IsA>
+        <IsA>app:console</IsA>
+        <Summary>Netkit - portmapper</Summary>
+        <Summary xml:lang="tr">Portmap, RPC (remote procedure call) uygulama numaralarını TCP/IP protokolüne göre port numaralarına çevirir</Summary>
+        <Description>Netkit - portmapper</Description>
+        <Description xml:lang="tr">Portmap, RPC (remote procedure call) uygulama numaralarını tcp/ip protokolüne göre port numaralarına çevirir.</Description>
+        <Archive sha1sum="7f3c61b73eddcf4991571bd0d0a712d411d85833" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/portmap_5b.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="7.6">tcp-wrappers</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>00-portmap_5beta.dif</Patch>
+            <Patch level="1">01-portmap-4.0-malloc.patch</Patch>
+            <Patch level="1">02-portmap-4.0-cleanup.patch</Patch>
+            <Patch level="1">03-portmap-4.0-rpc_user.patch</Patch>
+            <Patch level="1">04-portmap-4.0-sigpipe.patch</Patch>
+            <Patch level="1">05-portmap-5b-include-errno_h.patch</Patch>
+            <Patch level="1">06-portmap-5b-loopback-only.patch</Patch>
+            <Patch>07-portmap-5b-optional-tcpd.patch</Patch>
+            <Patch level="1">08-portmap-5b-no-SYS.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>portmap</Name>
+        <Files>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/portmap">portmap.rc6</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/portmap">portmap.confd</AdditionalFile>
+        </AdditionalFiles>  
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-12</Date>
+            <Version>5b</Version>
+            <Comment>forgotten additional file added to pspec.xml..</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-30</Date>
+            <Version>5b</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

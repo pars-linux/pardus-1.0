@@ -1,0 +1,7 @@
+Id=Pardus-1.0-krandr-save-settings
+File=kcmrandrrc
+Group=Display
+Options=overwrite
+RemoveKey=ApplyOnStartup
+RemoveKey=SyncTrayApp
+Script=pardus-1.0-randr-save-settings.sh,sh

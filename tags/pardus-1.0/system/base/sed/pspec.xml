@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>sed</Name>
+        <Homepage>http://sed.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>GNU Stream Editor</Summary>
+        <Description>GNU Stream Editor</Description>
+        <Summary xml:lang="tr">GNU stream düzenleyici</Summary>
+        <Description xml:lang="tr">Bir dosya ve ya akış içerisindeki metinler üzerinde değiştirme işlemleri yapmaya olanak sağlayan bir uygulamadır.</Description>
+        <Archive sha1sum="b11241648a58662d2976fd8384f74be1821fea65" type="targz">http://ftp.gnu.org/gnu/sed/sed-4.0.9.tar.gz</Archive>
+        <Patches>
+        <Patch level="1">sed-4.0.9-document.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>sed</Name>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-12</Date>
+            <Version>4.0.9</Version>
+            <Comment>Archive url fixed in pspec.xml + dodoc funcs fixed in actions.py</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-26</Date>
+            <Version>4.0.9</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

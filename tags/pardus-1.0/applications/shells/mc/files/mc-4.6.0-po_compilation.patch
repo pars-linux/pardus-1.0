@@ -1,0 +1,24 @@
+diff -Nur mc-4.6.0-old/configure mc-4.6.0/configure
+--- mc-4.6.0-old/configure	2005-02-01 12:04:42.441309000 +0200
++++ mc-4.6.0/configure	2005-02-01 12:08:12.410389512 +0200
+@@ -5282,7 +5282,7 @@
+ 
+ 
+ ALL_LINGUAS="az be bg ca cs da de el es eu fi fr hu it ja ko lv \
+-nl no pl pt pt_BR ro ru sk sl sv uk ta tr wa zh_CN zh_TW"
++nl no pl pt pt_BR ro ru sk sl sv uk ta tr wa zh_CN"
+ 
+ 
+         MKINSTALLDIRS=
+diff -Nur mc-4.6.0-old/configure.in mc-4.6.0/configure.in
+--- mc-4.6.0-old/configure.in	2005-02-01 12:04:42.443309000 +0200
++++ mc-4.6.0/configure.in	2005-02-01 12:08:18.387480856 +0200
+@@ -71,7 +71,7 @@
+ AC_FUNC_MMAP
+ 
+ ALL_LINGUAS="az be bg ca cs da de el es eu fi fr hu it ja ko lv \
+-nl no pl pt pt_BR ro ru sk sl sv uk ta tr wa zh_CN zh_TW"
++nl no pl pt pt_BR ro ru sk sl sv uk ta tr wa zh_CN"
+ 
+ dnl
+ dnl Internationalization

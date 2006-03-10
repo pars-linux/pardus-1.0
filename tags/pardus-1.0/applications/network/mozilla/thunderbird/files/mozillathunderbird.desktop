@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Mozilla Thunderbird
+GenericName=Mail Application
+GenericName[tr]=E-Posta İstemcisi
+Exec=/usr/bin/thunderbird %U
+Icon=mozilla-thunderbird
+Terminal=false
+Type=Application
+StartupWMClass=Thunderbird-bin
+Categories=Application;Network;

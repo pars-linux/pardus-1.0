@@ -1,0 +1,12 @@
+diff -Nuar Lib.orig/fileinput.py Lib/fileinput.py
+--- Lib.orig/fileinput.py	2005-10-26 16:26:30.840806152 +0300
++++ Lib/fileinput.py	2005-10-26 16:26:48.658097512 +0300
+@@ -184,7 +184,7 @@
+     """
+ 
+     def __init__(self, files=None, inplace=0, backup="", bufsize=0):
+-        if type(files) == type(''):
++        if isinstance(files, basestring):
+             files = (files,)
+         else:
+             if files is None:

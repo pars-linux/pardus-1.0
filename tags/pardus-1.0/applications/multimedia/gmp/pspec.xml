@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gmp</Name>
+        <Homepage>http://www.swox.com/gmp/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <IsA>library</IsA>
+        <Description xml:lang="en">GMP is a free library for arbitrary precision arithmetic, operating on signed integers, rational numbers, and floating point numbers. There is no practical limit to the precision except the ones implied by the available memory in the machine GMP runs on. GMP has a rich set of functions, and the functions have a regular interface.</Description>
+        <Description xml:lang="tr">GMP işaretli tamsayılar, rasyonel ve ondalık sayılar üzerinde istenilen kadar duyarlı aritmetik işlemler yapan bir kütüphane. GMP'nin yüklü olduğu makinenin hafıza sınırı dışında herhangi bir duyarlılık limiti yoktur. GMP düzenli arayüzlere sahip zengin kütüphanelere sahiptir.</Description>
+        <Summary xml:lang="en">Library for arithmetic on arbitrary precision integers, rational numbers, and floating-point numbers</Summary> 
+        <Summary xml:lang="tr">GMP işaretli tamsayılar, rasyonel ve ondalık sayılar üzerinde istenilen kadar duyarlı aritmetik işlemler yapan bir kütüphane</Summary>
+        <Archive sha1sum="21bf0e934fb31784487827f358e00077602145e7" type="tarbz2">ftp://ftp.gnu.org/gnu/gmp/gmp-4.1.4.tar.bz2</Archive>
+        <Patches>
+            <Patch>gmp-impl.h.MPF_SIGNIFICANT_DIGITS.diff</Patch>
+            <Patch>gmp-impl.h.MPN_SIZEINBASE.diff</Patch>
+            <Patch>mpn_rootrem.c.diff</Patch>
+            <Patch>gmp-impl.h.x86.ULONG_PARITY.diff</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>gmp</Name>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="2">
+            <Date>2005-11-24</Date>
+            <Version>4.1.4</Version>
+            <Comment>Add some patches from Gentoo</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-12</Date>
+            <Version>4.1.4</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

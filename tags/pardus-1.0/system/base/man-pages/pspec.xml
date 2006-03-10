@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>man-pages</Name>
+        <Homepage>http://www.win.tue.nl/~aeb/linux/man/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>doc</IsA>
+        <Summary>A somewhat comprehensive collection of Linux man pages</Summary>
+        <Description>A somewhat comprehensive collection of Linux man pages</Description>
+        <Summary xml:lang="tr">Kapsamlı Linux kılavuz dökümanları</Summary>
+        <Description xml:lang="tr">Linux ile ilgili komut ve programlar hakkında hayli ayrıntılı bilgiler sağlayan, Linux'un         geleneksel kılavuz dökümanları</Description>
+        <Archive sha1sum="df00926f4644549b7d136777458f93aad1648d4d" type="tarbz2">ftp://ftp.kernel.org/pub/linux/docs/manpages/man-pages-2.07.tar.bz2</Archive>
+        <Patches>
+            <Patch>man-pages-2.07-updates.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>man-pages</Name>
+        <RuntimeDependencies>
+            <Dependency>man</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-03</Date>
+            <Version>2.07</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

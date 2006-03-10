@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kmplayer</Name>
+        <Homepage>http://kmplayer.kde.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Video player plugin for Konqueror and basic MPlayer/Xine/ffmpeg/ffserver/VDR frontend for KDE</Summary>
+        <Summary xml:lang="tr">KDE'nin Konqueror ve temel MPlayer/Xine/ffmpeg/ffserver/VDR önyüzü için video oynatıcısı</Summary>
+        <Description>Video player plugin for Konqueror and basic MPlayer/Xine/ffmpeg/ffserver/VDR frontend for KDE</Description>
+        <Description xml:lang="tr">KDE'nin Konqueror ve temel MPlayer/Xine/ffmpeg/ffserver/VDR önyüzü için video oynatıcısı</Description>
+        <Archive sha1sum="8b10e5a3054c8993eb3060dfe4837dda078790d0" type="tarbz2">http://kmplayer.kde.org/pkgs/kmplayer-0.9.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>kdebase</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kmplayer</Name>
+        <RuntimeDependencies>
+            <Dependency>kdebase</Dependency>
+            <Dependency>gst-plugins</Dependency>
+            <Dependency>xine-lib</Dependency>
+            <Dependency>mplayer</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="library">/usr/kde/3.5/lib</Path>
+            <Path fileType="data">/usr/kde/3.5/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-23</Date>
+            <Version>0.9.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

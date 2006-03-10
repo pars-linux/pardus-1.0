@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>valgrind</Name>
+        <Homepage>http://valgrind.kde.org</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>An open-source memory debugger for x86-GNU/Linux and ppc-GNU/Linux</Summary>
+        <Summary xml:lang="tr">Valgrind, x86-GNU/Linux ve ppc-GNU/Linux için geliştirilmiş, bellek hatalarını ayıklayıcı, açık kaynaklı bir yazılımdır.</Summary>
+        <Description>An open-source memory debugger for x86-GNU/Linux and ppc-GNU/Linux</Description>
+        <Description xml:lang="tr">Valgrind, x86-GNU/Linux ve ppc-GNU/Linux için geliştirilmiş, bellek hatalarını ayıklayıcı, açık kaynaklı bir yazılımdır.</Description>
+        <Archive sha1sum="557235c42e202c3619f9834842c3c71f8242e884" type="tarbz2">http://www.valgrind.org/downloads/valgrind-3.1.0.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>xorg</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>valgrind</Name>
+        <RuntimeDependencies>
+            <Dependency>xorg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include/valgrind</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+  </Package>
+
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-27</Date>
+            <Version>3.1.0</Version>
+            <Comment>Version bump</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-13</Date>
+            <Version>2.4.0</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

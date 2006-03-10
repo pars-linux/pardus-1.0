@@ -1,0 +1,47 @@
+While uid_t and gid_t are both unsigned, the values (uid_t) -1 and
+(gid_t) -1 are reserved.  A uid or gid argument of -1 to the chown(2)
+system call means to leave the uid/gid unchanged.  Catch this case
+so that trying to set a uid or gid to -1 will result in an error.
+
+Test cases:
+
+  chown 4294967295 file
+  chown :4294967295 file
+  chgrp 4294967295 file
+
+Andreas Gruenbacher <agruen@suse.de>
+
+Index: coreutils-5.2.1/lib/userspec.c
+================================================================================
+--- coreutils-5.3.0/lib/userspec.c
++++ coreutils-5.3.0/lib/userspec.c
+@@ -184,7 +184,7 @@
+ 	    {
+ 	      unsigned long int tmp;
+ 	      if (xstrtoul (u, NULL, 10, &tmp, "") == LONGINT_OK
+-		  && tmp <= MAXUID)
++		  && tmp <= MAXUID && tmp != (uid_t) -1)
+ 		unum = tmp;
+ 	      else
+ 		error_msg = E_invalid_user;
+@@ -214,7 +214,8 @@
+       if (grp == NULL)
+ 	{
+ 	  unsigned long int tmp;
+-	  if (xstrtoul (g, NULL, 10, &tmp, "") == LONGINT_OK && tmp <= MAXGID)
++	  if (xstrtoul (g, NULL, 10, &tmp, "") == LONGINT_OK && tmp <= MAXGID
++	      && tmp != (gid_t) -1)
+ 	    gnum = tmp;
+ 	  else
+ 	    error_msg = E_invalid_group;
+--- coreutils-5.3.0/src/chgrp.c
++++ coreutils-5.3.0/src/chgrp.c
+@@ -91,7 +91,7 @@
+ 	{
+ 	  unsigned long int tmp;
+ 	  if (! (xstrtoul (name, NULL, 10, &tmp, "") == LONGINT_OK
+-		 && tmp <= GID_T_MAX))
++		 && tmp <= GID_T_MAX && tmp != (gid_t) -1))
+ 	    error (EXIT_FAILURE, 0, _("invalid group %s"), quote (name));
+ 	  gid = tmp;
+ 	}

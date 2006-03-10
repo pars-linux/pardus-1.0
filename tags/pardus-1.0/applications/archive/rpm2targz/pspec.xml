@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>rpm2targz</Name>
+        <Homepage>http://www.slackware.com/config/packages.php</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:console</IsA>
+        <Summary>Convert an RPM file to a .tar.gz archive</Summary>
+        <Summary xml:lang="tr">Red Hat, SUSE gibi dağıtımların kullandığı RPM paketlerini .tar.gz paketlerine dönüştürür</Summary>
+        <Description>Convert an RPM file to a .tar.gz archive</Description>
+        <Description xml:lang="tr">Red Hat, SUSE gibi dağıtımların kullandığı RPM paketlerini .tar.gz paketlerine dönüştürür</Description>
+        <Archive sha1sum="b62685f5330e4a15998a99a9f560689a67bfdfb9" type="targz">ftp://ftp.linux.org.tr/pub/gentoo/distfiles/rpm2targz-9.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>cpio</Dependency>
+            <Dependency>file</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>rpm2targz-9.0-gentoo.patch</Patch>
+            <Patch>rpm2targz-9.0-bzip2.patch</Patch>
+            <Patch>rpm2targz-9.0-bzip2_rpm2targz.patch</Patch>
+            <Patch>rpm2targz-9.0-secure_temp_handling.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>rpm2targz</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="2" type="security">
+            <Date>2005-11-19</Date>
+            <Version>9.0</Version>
+            <Comment>Add rpm2targz-9.0-secure_temp_handling.patch</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-15</Date>
+            <Version>9.0</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

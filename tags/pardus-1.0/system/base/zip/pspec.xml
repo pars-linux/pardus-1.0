@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>zip</Name>
+        <Homepage>ftp://ftp.freesoftware.com/pub/infozip/Zip.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>Info-ZIP</License>
+        <IsA>app:console</IsA>
+        <Summary>Info ZIP (encryption support)</Summary>
+        <Description>Info ZIP (encryption support)</Description>
+        <Summary xml:lang="tr">ZIP programı (şifreleme desteği ile birlikte)</Summary>
+        <Description xml:lang="tr">ZIP programı (şifreleme desteği ile birlikte)</Description>
+        <Archive sha1sum="0600c93218e6acf1be75dd79da4244eabc8e16cf" type="targz">ftp://ftp.linux.org.tr/pub/mirrors/gentoo/distfiles/zip23.tar.gz</Archive>
+        <Patches>
+            <Patch>zip-2.3-unix_configure-pic.patch</Patch>
+            <Patch level="1">zip-CAN-2004-1010.patch</Patch>
+            <Patch level="1">zcrypt.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>zip</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-15</Date>
+            <Version>2.3</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

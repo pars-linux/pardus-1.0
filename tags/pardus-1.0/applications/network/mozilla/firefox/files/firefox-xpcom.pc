@@ -1,0 +1,12 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib/MozillaFirefox
+includedir=/usr/lib/MozillaFirefox/include
+idldir=/usr/lib/MozillaFirefox/idl
+
+Name: XPCOM
+Description: The Mozilla Cross Platform Component Library
+Version: 1.4.1
+Requires: firefox-nspr >= 4.6.1
+Libs: -L${libdir} -lxpcom -Wl,-R${libdir}
+Cflags: -I${includedir} -I${includedir}/xpcom -I${includedir}/string

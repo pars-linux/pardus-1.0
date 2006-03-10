@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>libmpcdec</Name>
+        <Homepage>http://www.musepack.net/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>library</IsA>
+        <Description>Portable Musepack decoder library</Description>
+        <Description xml:lang="tr">Taşınabilir Musepack çözücü kütüphanesi</Description>
+        <Summary>Portable Musepack decoder library</Summary>
+        <Summary xml:lang="tr">Taşınabilir Musepack çözücü kütüphanesi</Summary>
+        <Archive sha1sum="aab2a7329486e712ea5fd6e3b0819f918c428e8a" type="tarbz2">http://files2.musepack.net/source/libmpcdec-1.2.2.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>libmpcdec</Name>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package> 
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-23</Date>
+            <Version>1.2.2</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

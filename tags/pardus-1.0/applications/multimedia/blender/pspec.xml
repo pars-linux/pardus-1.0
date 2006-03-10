@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>blender</Name>
+        <Homepage>http://www.blender.org/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>3D Creation/Animation/Publishing System</Summary>
+        <Summary xml:lang="tr">3D animasyon sistemi</Summary>
+        <Description>3D Creation/Animation/Publishing System</Description>
+        <Description xml:lang="tr">Blender, profesyonel amaçlarla kullanılabilen bir üç boyutlu animasyon yazılımıdır.</Description>
+        <Archive type="targz" sha1sum="8070654abdca449658f8fb7c9ecfc4fb7e445465">http://download.blender.org/source/blender-2.37a.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>xorg</Dependency>
+            <Dependency>libsdl</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency versionFrom="2.0">freetype</Dependency>
+            <Dependency versionFrom="20020127">openal</Dependency>
+            <Dependency versionFrom="1.2">libsdl</Dependency>
+            <Dependency versionFrom="1.0">libvorbis</Dependency>
+            <Dependency versionFrom="0.9.6">openssl</Dependency>
+            <Dependency versionFrom="0.0.7">yafray</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">blender-2.37a-dirs.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>blender</Name>
+        <RuntimeDependencies>
+            <Dependency>xorg</Dependency>
+            <Dependency>libsdl</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency versionFrom="2.0">freetype</Dependency>
+            <Dependency versionFrom="20020127">openal</Dependency>
+            <Dependency versionFrom="1.2">libsdl</Dependency>
+            <Dependency versionFrom="1.0">libvorbis</Dependency>
+            <Dependency versionFrom="0.0.7">yafray</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/blender.png">blender.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/blender.desktop">blender.desktop</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-29</Date>
+            <Version>2.37a</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

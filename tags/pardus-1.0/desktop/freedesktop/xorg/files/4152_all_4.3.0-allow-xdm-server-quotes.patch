@@ -1,0 +1,73 @@
+--- xc/programs/xdm/file.c.old	2004-02-17 22:55:03.000000000 +1100
++++ xc/programs/xdm/file.c	2004-03-02 23:23:42.243627680 +1100
+@@ -39,6 +39,7 @@
+ # include	"dm_error.h"
+ 
+ # include	<ctype.h>
++# include	<stdbool.h>
+ 
+ static int
+ DisplayTypeMatch (DisplayType d1, DisplayType d2)
+@@ -62,11 +63,14 @@
+ splitIntoWords (char *s)
+ {
+     char    **args, **newargs;
+-    char    *wordStart;
++    char    *wordStart, *thisToken;
+     int	    nargs;
+-
++    bool    spaceBreakable, hadQuotes;
++    static char DOUBLE_QUOTE=34, SINGLE_QUOTE=39;
++    
+     args = 0;
+     nargs = 0;
++    spaceBreakable = true;
+     while (*s)
+     {
+ 	while (*s && isspace (*s))
+@@ -74,8 +78,17 @@
+ 	if (!*s || *s == '#')
+ 	    break;
+ 	wordStart = s;
+-	while (*s && *s != '#' && !isspace (*s))
++	hadQuotes = false;
++	while (*s && *s != '#')
++	{
++	    if (spaceBreakable && isspace (*s))
++	        break;
++	    if (*s == DOUBLE_QUOTE || *s == SINGLE_QUOTE){
++	        spaceBreakable = !spaceBreakable;
++		hadQuotes = true;
++	    }
+ 	    ++s;
++	}
+ 	if (!args)
+ 	{
+     	    args = (char **) malloc (2 * sizeof (char *));
+@@ -93,14 +106,25 @@
+ 	    }
+ 	    args = newargs;
+ 	}
+-	args[nargs] = malloc (s - wordStart + 1);
++
++	args[nargs] = malloc (s - wordStart);
++
+ 	if (!args[nargs])
+ 	{
+ 	    freeFileArgs (args);
+ 	    return NULL;
+ 	}
++	 
+ 	strncpy (args[nargs], wordStart, s - wordStart);
++	  
+ 	args[nargs][s-wordStart] = '\0';
++
++	/* Tidy up problems with quotes in file */
++	if (hadQuotes){
++	  args[nargs][0] = ' ';
++	  args[nargs][s-wordStart-1] = ' ';
++	}
++	
+ 	++nargs;
+ 	args[nargs] = NULL;
+     }

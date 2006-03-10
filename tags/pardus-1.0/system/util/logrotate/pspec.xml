@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PSPEC
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>logrotate</Name>
+        <Homepage>http://packages.debian.org/unstable/admin/logrotate.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Rotates, compresses, and mails system logs</Summary>
+        <Summary xml:lang="tr">Sistem günlük (log) dosyalarını yönetmeyi kolaylaştıran bir araç</Summary>
+        <Description>Rotates, compresses, and mails system logs</Description>
+        <Description xml:lang="tr">Sistem günlük (log) dosyalarınızı yönetmenizi kolaylaştıran bir araçtır. Bu araç belirli zaman aralıklarında veya belirli boyuta ulaştıklarında sistem günlük dosyalarınızı otomatik olarak sıkıştırabilir, silebilir ya da elektronik posta olarak gönderebilir.</Description>
+        <Archive sha1sum="84ce324a78ee071536c39e95d3086e53d7fe7ccb" type="targz">http://web.verbum.org/debian/experimental/logrotate_3.6.5.orig.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>popt</Dependency>
+            <Dependency>sed</Dependency>
+            <Dependency>shadow</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>logrotate</Name>
+        <Files>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/cron.daily/logrotate.cron">logrotate.cron</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/logrotate.conf">logrotate.conf</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-12</Date>
+            <Version>3.6.5</Version>
+            <Comment>Additional files (logrotate.cron, logrotate.conf) added.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-06-28</Date>
+            <Version>3.6.5</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

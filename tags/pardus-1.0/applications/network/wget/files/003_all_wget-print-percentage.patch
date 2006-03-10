@@ -1,0 +1,101 @@
+--- ./wget-1.10/src/progress.c	2005-05-03 17:24:29.000000000 +0200
++++ ./wget-1.10-/src/progress.c	2005-06-27 20:13:45.000000000 +0200
+@@ -262,10 +262,58 @@
+ }
+ 
+ static void
+-print_percentage (wgint bytes, wgint expected)
+-{
+-  int percentage = (int)(100.0 * bytes / expected);
+-  logprintf (LOG_VERBOSE, "%3d%%", percentage);
++print_percentage (long bytes, long expected,
++                  long row_size,
++                  long dltime, struct dot_progress *dp )
++{
++  int percentage = -1;
++  long d_time = 0; /* time elapsed since last call */
++  long speed = 0; /* download speed in bytes/sec */
++  long estimate = 0; /* estimated remaining time in seconds */
++  char buf[100];
++  char* pc;
++  
++  pc = buf;
++  *pc = 0;
++
++  if( dltime > dp->last_timer_value ) 
++    {
++    d_time = dltime - dp->last_timer_value;
++    speed = (long)( row_size / ( d_time / 1000.0 ) );
++    if ( speed > 0 )
++      estimate = ( expected - bytes ) / speed;
++    dp->last_timer_value = dltime;
++    }
++
++  if ( expected )
++    percentage = (int)(100.0 * bytes / expected);
++  pc += sprintf( pc, percentage >= 0 ? "%3d%% " : " ??%% ", percentage );
++
++  if ( d_time == 0 ) { /* we are too fast :) -- print percentage only */
++    logprintf( LOG_VERBOSE, "%s", buf );
++    return;
++    }
++
++  /* print download rate */
++  if ( speed < 1024 )
++    pc += sprintf( pc, "%4ldB", speed );
++  else if ( speed < 1024*10 )
++    pc += sprintf( pc, "%4.2fK", speed / 1024.0 );
++  else if ( speed < 1024*100 )
++    pc += sprintf( pc, "%4.1fK", speed / 1024.0 );
++  else if ( speed < 1024*1000 )
++    pc += sprintf( pc, "%4.0fK", speed / 1024.0 );
++  else if ( speed < 1024*1024*10 )
++    pc += sprintf( pc, "%4.2fM", speed / (1024.0*1024.0) );
++  else if ( speed < 1024*1024*100 )
++    pc += sprintf( pc, "%4.1fM", speed / (1024.0*1024.0) );
++  else
++    pc += sprintf( pc, "%4.0fM", speed / (1024.0*1024.0) );
++
++  /* print ETA in minutes:seconds */
++  pc += sprintf( pc, estimate > 0 ? "%4ld:%02ld" : "       ", estimate / 60, estimate % 60 );
++
++  logprintf( LOG_VERBOSE, "%s", buf );
+ }
+ 
+ static void
+@@ -307,9 +355,8 @@
+ 	  ++dp->rows;
+ 	  dp->dots = 0;
+ 
+-	  if (dp->total_length)
+-	    print_percentage (dp->rows * row_bytes, dp->total_length);
+-	  print_download_speed (dp, row_qty, dltime);
++    print_percentage (dp->rows * row_bytes, dp->total_length,
++                      row_qty, dltime, dp );
+ 	}
+     }
+ 
+@@ -336,19 +383,14 @@
+ 	logputs (LOG_VERBOSE, " ");
+       logputs (LOG_VERBOSE, " ");
+     }
+-  if (dp->total_length)
+-    {
+-      print_percentage (dp->rows * row_bytes
+-			+ dp->dots * dot_bytes
+-			+ dp->accumulated,
+-			dp->total_length);
+-    }
+-
+   {
+     wgint row_qty = dp->dots * dot_bytes + dp->accumulated;
+     if (dp->rows == dp->initial_length / row_bytes)
+       row_qty -= dp->initial_length % row_bytes;
+-    print_download_speed (dp, row_qty, dltime);
++    print_percentage (dp->rows * row_bytes
++			+ dp->dots * dot_bytes
++			+ dp->accumulated,
++			dp->total_length, row_qty, dltime, dp );
+   }
+ 
+   logputs (LOG_VERBOSE, "\n\n");

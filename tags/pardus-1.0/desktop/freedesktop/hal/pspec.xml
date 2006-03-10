@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>hal</Name>
+        <Homepage>http://www.freedesktop.org/Software/hal</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <License>AFL-2.0</License>
+        <IsA>daemon</IsA>
+        <Summary>Hardware Abstraction Layer</Summary>
+        <Summary xml:lang="tr">Donanım soyutlama katmanı</Summary>
+        <Description>Hardware Abstraction Layer</Description>
+        <Description xml:lang="tr">Donanım soyutlama katmanı</Description>
+        <Archive sha1sum="f4daef79c54a7047484a48bb2727fa627de06c93" type="targz">http://freedesktop.org/~david/dist/hal-0.5.5.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="2.6">glib2</Dependency>
+            <Dependency versionFrom="0.5">dbus</Dependency>
+            <Dependency>expat</Dependency>
+            <Dependency versionFrom="0.71">udev</Dependency>
+            <Dependency>hotplug</Dependency>
+            <Dependency versionFrom="2.12i">util-linux</Dependency>
+            <Dependency>libusb</Dependency>
+            <Dependency versionFrom="0.29">intltool</Dependency>
+            <Dependency>doxygen</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch>hal-0.5.1-old_storage_policy.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>hal</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="2.6">glib2</Dependency>
+            <Dependency versionFrom="0.5">dbus</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/libexec</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/hal</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/hald">hald</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/dev.d/default/hal-unmount.dev">hal-unmount.dev</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>   
+    </Package>
+
+    <History>
+        <Update release="6">
+            <Date>2005-12-21</Date>
+            <Version>0.5.5.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-11-29</Date>
+            <Version>0.5.4</Version>
+            <Comment>fix #924</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-11-26</Date>
+            <Version>0.5.4</Version>
+            <Comment>Add itself into default runlevel</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-15</Date>
+            <Version>0.5.4</Version>
+            <Comment>typo fix in postinstall script</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-31</Date>
+            <Version>0.5.4</Version>
+            <Comment>Init script now retains priveleges for solving a uig/guid problem. FIXME: this is not a solution but a workaround</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-19</Date>
+            <Version>0.5.4</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

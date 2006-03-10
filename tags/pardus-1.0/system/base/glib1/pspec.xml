@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>glib1</Name>
+        <Homepage>http://www.gtk.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>library</IsA>
+        <Summary>The GLib library of C routines</Summary>
+        <Summary xml:lang="tr">C programlama dili için GLib kütüphanesi</Summary>
+        <Description>The GLib library of C routines</Description>
+        <Description xml:lang="tr">C programlama dili için GLib kütüphanesi</Description>
+        <Archive sha1sum="e5a9361c594608d152d5d9650154c2e3260b87fa" type="targz">ftp://ftp.gtk.org/pub/gtk/v1.2/glib-1.2.10.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">glib-1.2.10-gcc34-fix.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>glib1</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-23</Date>
+            <Version>1.2.10</Version>
+            <Comment>gcc 3.4 fix</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-15</Date>
+            <Version>1.2.10</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

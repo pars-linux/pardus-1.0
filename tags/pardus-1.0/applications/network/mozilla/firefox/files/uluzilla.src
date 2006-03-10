@@ -1,0 +1,63 @@
+# Search file for Mozilla/Netscape 6+
+#
+# Created by ?? on ??
+
+# Last updated: 1 October 2002 by Julius Ross <juliusross@mac.com>
+
+# Known issues:
+# - This plugin is affected by mozilla bug 87784 (Bugzilla is unfriendly to Sherlock)
+
+# Uluzilla
+
+<SEARCH
+    version = "1.0"
+	name = "Uluzilla"
+	description = "Uluzilla'da Arama Yap"
+	action = "http://bugs.uludag.org.tr/buglist.cgi"
+	searchForm = "http://bugs.uludag.org.tr"
+	method = "get"
+>
+
+<INPUT NAME="bug_status" VALUE="UNCONFIRMED">
+<INPUT NAME="bug_status" VALUE="NEW">
+<INPUT NAME="bug_status" VALUE="ASSIGNED">
+<INPUT NAME="bug_status" VALUE="REOPENED">
+<INPUT NAME="bug_status" VALUE="RESOLVED">
+<INPUT NAME="bug_status" VALUE="VERIFIED">
+<INPUT NAME="bug_status" VALUE="CLOSED">
+<INPUT NAME="email1" VALUE="">
+<INPUT NAME="emailtype1" VALUE="substring">
+<INPUT NAME="emailassigned_to1" VALUE="1">
+<INPUT NAME="email2" VALUE="">
+<INPUT NAME="emailtype2" VALUE="substring">
+<INPUT NAME="emailreporter2" VALUE="1">
+<INPUT NAME="bugidtype" VALUE="include">
+<INPUT NAME="bug_id" VALUE="">
+<INPUT NAME="changedin" VALUE="">
+<INPUT NAME="votes" VALUE="">
+<INPUT NAME="chfieldfrom" VALUE="">
+<INPUT NAME="chfieldto" VALUE="Now">
+<INPUT NAME="chfieldvalue" VALUE="">
+<INPUT NAME="short_desc" user>
+<INPUT NAME="short_desc_type" VALUE="substring">
+<INPUT NAME="long_desc" VALUE="">
+<INPUT NAME="long_desc_type" VALUE="substring">
+<INPUT NAME="bug_file_loc" VALUE="">
+<INPUT NAME="bug_file_loc_type" VALUE="substring">
+<INPUT NAME="status_whiteboard" VALUE="">
+<INPUT NAME="status_whiteboard_type" VALUE="substring">
+<INPUT NAME="keywords" VALUE="">
+<INPUT NAME="keywords_type" VALUE="anywords">
+<INPUT NAME="field0-0-0" VALUE="noop">
+<INPUT NAME="type0-0-0" VALUE="noop">
+<INPUT NAME="value0-0-0" VALUE="">
+<INPUT NAME="cmdtype" VALUE="doit">
+<INPUT NAME="order" VALUE="Reuse+same+sort+as+last+time">
+<input  name="sourceid" value="Mozilla-search">
+
+<INTERPRET
+  resultItemStart = '<tr class="bz_'
+  resultItemEnd = "</tr>"
+>
+
+</search>

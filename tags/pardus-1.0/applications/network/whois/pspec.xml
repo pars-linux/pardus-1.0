@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>whois</Name>
+        <Homepage>http://www.linux.it/~md/software/</Homepage>
+        <Packager>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>improved Whois Client</Summary>
+        <Summary xml:lang="tr">Geliştirilmiş Whois istemcisi</Summary>
+        <Description>improved Whois Client</Description>
+        <Description xml:lang="tr">Geliştirilmiş Whois istemcisi</Description>
+        <Archive sha1sum="5094cdc4e8b35041ba12eca404abd2f18d6bb55b" type="targz">http://gentoo.kems.net/distfiles/whois_4.7.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libidn</Dependency>
+            <Dependency versionFrom="5">perl</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch level="1">whois-4.7.2-gentoo-security.patch</Patch>
+            <Patch level="0">whois-4.7.2-config-file.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>whois</Name>
+        <RuntimeDependencies>
+            <Dependency>libidn</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-16</Date>
+            <Version>4.7.2</Version>
+            <Comment>First release.</Comment>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Update>
+    </History>
+</PISI>

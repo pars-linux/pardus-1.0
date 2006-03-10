@@ -1,0 +1,58 @@
+--- ethereal-0.10.12-SVN-15355/Makefile.in.pie	2005-08-15 01:41:15.000000000 +0200
++++ ethereal-0.10.12-SVN-15355/Makefile.in	2005-08-16 09:43:51.000000000 +0200
+@@ -937,7 +937,7 @@
+ 	$(ethereal_additional_libs)	\
+ 	$(plugin_libs)
+ 
+-@ENABLE_STATIC_FALSE@ethereal_LDFLAGS = -export-dynamic
++@ENABLE_STATIC_FALSE@ethereal_LDFLAGS = -export-dynamic -pie
+ 
+ # This automake variable adds to the link-line for the executable.
+ #
+@@ -980,7 +980,7 @@
+ 	@GLIB_LIBS@ -lm			\
+ 	@PCAP_LIBS@ @SOCKET_LIBS@ @NSL_LIBS@ @ADNS_LIBS@ @KRB5_LIBS@
+ 
+-@ENABLE_STATIC_FALSE@tethereal_LDFLAGS = -export-dynamic
++@ENABLE_STATIC_FALSE@tethereal_LDFLAGS = -export-dynamic -pie
+ @ENABLE_STATIC_TRUE@tethereal_LDFLAGS = -Wl,-static -all-static
+ 
+ # Optional objects that I know how to build, and that are needed by
+@@ -1530,7 +1530,7 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/version_info.Po@am__quote@
+ 
+ .c.o:
+-@am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
++@am__fastdepCC_TRUE@	if $(COMPILE) $(PIECFLAGS) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
+ @am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
+@@ -1538,7 +1538,7 @@
+ @am__fastdepCC_FALSE@	$(COMPILE) -c $<
+ 
+ .c.obj:
+-@am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ `$(CYGPATH_W) '$<'`; \
++@am__fastdepCC_TRUE@	if $(COMPILE) $(PIECFLAGS) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ `$(CYGPATH_W) '$<'`; \
+ @am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
+--- ethereal-0.10.12-SVN-15355/gtk/Makefile.in.pie	2005-08-15 01:41:25.000000000 +0200
++++ ethereal-0.10.12-SVN-15355/gtk/Makefile.in	2005-08-16 09:42:19.000000000 +0200
+@@ -943,7 +943,7 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wsp_stat.Po@am__quote@
+ 
+ .c.o:
+-@am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
++@am__fastdepCC_TRUE@	if $(COMPILE) $(PIECFLAGS) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
+ @am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
+@@ -951,7 +951,7 @@
+ @am__fastdepCC_FALSE@	$(COMPILE) -c $<
+ 
+ .c.obj:
+-@am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ `$(CYGPATH_W) '$<'`; \
++@am__fastdepCC_TRUE@	if $(COMPILE) $(PIECFLAGS) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ `$(CYGPATH_W) '$<'`; \
+ @am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@

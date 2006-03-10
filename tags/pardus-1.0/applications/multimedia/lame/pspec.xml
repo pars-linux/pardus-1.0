@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>lame</Name>
+        <Homepage>http://lame.sourceforge.net</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <Description>A free MP3 audio compression codec</Description>
+        <Description xml:lang="tr">MP3 ses çözümleme kütüphanesi</Description>
+        <Summary>A free MP3 audio compression codec</Summary>
+        <Summary xml:lang="tr">MP3 ses çözümleme kütüphanesi</Summary>
+        <Archive sha1sum="3a8e6d17c8b1d3558e817a5bf9b70ed68f93988f" type="targz">http://easynews.dl.sourceforge.net/sourceforge/lame/lame-3.96.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency version="5.2">ncurses</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">lame-3.96.1-shared-frontend.patch</Patch>
+            <Patch level="1">lame-3.96-ccc.patch</Patch>
+            <Patch level="1">lame-3.96.1-largefile.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>lame</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-11-24</Date>
+            <Version>3.96.1</Version>
+            <Comment>Add largefile support</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-09-07</Date>
+            <Version>3.96.1</Version>
+            <Comment>Useless gtk1 interface and dep removed</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-07</Date>
+            <Version>3.96.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

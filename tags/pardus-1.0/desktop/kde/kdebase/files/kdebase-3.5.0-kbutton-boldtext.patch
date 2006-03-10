@@ -1,0 +1,14 @@
+diff -ur kdebase-3.5.0.orig/kicker/kicker/buttons/kbutton.cpp kdebase-3.5.0/kicker/kicker/buttons/kbutton.cpp
+--- kdebase-3.5.0.orig/kicker/kicker/buttons/kbutton.cpp	2005-11-17 00:01:29.000000000 +0200
++++ kdebase-3.5.0/kicker/kicker/buttons/kbutton.cpp	2005-11-16 23:59:22.000000000 +0200
+@@ -50,7 +50,9 @@
+     if (KickerSettings::showKMenuText())
+     {
+         setButtonText(KickerSettings::kMenuText());
+-        setFont(KickerSettings::buttonFont());
++	QFont f = KickerSettings::buttonFont();
++	f.setBold(true);
++        setFont(f);
+         setTextColor(KickerSettings::buttonTextColor());
+     }
+ }

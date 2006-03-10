@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xcolor</Name>
+        <Homepage>http://www.ukern.de/tex/xcolor.html</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>plugin</IsA>
+        <Summary>LaTeX package that provides easy driver-independent access to several kinds of colors and so</Summary>
+        <Summary xml:lang="tr">LaTeX paketi renk ve benzeri özelliklere sürücüden bağımsız bir şekilde erişimi sağlar</Summary>
+        <Description>xcolor is a LaTeX package that provides easy driver-independent access to several kinds of colors, tints, shades, tone
+s, and mixes of arbitrary colors by means of color expressions</Description>
+        <Description xml:lang="tr">xcolor; renk, tonlama, gölge, zemin, özgün karışımlar gibi görsel özelliklere sürücüden bağımsız bir şek
+ilde erişimi sağlayan bir LaTeX paketidir</Description>
+        <Archive sha1sum="e3b3266a668e25cdf69dad659e9fa597d90f10f7" type="zip">http://www.olos.de/~ukern/tex/xcolor/ctan/xcolor206.zip</Archive>
+        <BuildDependencies>
+            <Dependency>tetex</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>xcolor</Name>
+        <RuntimeDependencies>
+            <Dependency>tetex</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share/texmf-dist</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-30</Date>
+            <Version>2.06</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

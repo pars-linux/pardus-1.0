@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>taglib</Name>
+        <Homepage>http://developer.kde.org/~wheeler/taglib.html</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>A library for reading and editing audio meta data</Summary>
+        <Summary xml:lang="tr">Ses dosyalarının etiket bilgilerini okuma ve düzenleme kütüphanesi.</Summary>
+        <Description>A library for reading and editing audio meta data</Description>
+        <Description xml:lang="tr">Ses dosyalarının etiket bilgilerini okuma ve düzenleme kütüphanesi.</Description>
+        <Archive sha1sum="9830aed2e8d4e0d5da399e2e6b0c5d5db3a0c270" type="targz">http://developer.kde.org/~wheeler/files/src/taglib-1.4.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">wma.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>taglib</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="executable">/usr/bin</Path>
+        </Files>
+   </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-12-23</Date>
+            <Version>1.4</Version>
+            <Comment>Support WMA</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-07</Date>
+            <Version>1.4</Version>
+            <Comment>New upstream version</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-06</Date>
+            <Version>1.3.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>sysvinit</Name>
+        <Homepage>http://freshmeat.net/projects/sysvinit/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>/sbin/init - parent of all processes</Summary>
+        <Description>/sbin/init - parent of all processes</Description>
+        <Summary xml:lang="tr">/sbin/init - tüm süreçlerin ebeveyni</Summary>
+        <Description xml:lang="tr">Temel görevi mevcut betik dosyasını kullanarak süreçleri ilklendirmektir.</Description>
+        <Archive sha1sum="3e78df609a2ff0fea6304cb662a7f10298d03667" type="targz">ftp://ftp.cistron.nl/pub/people/miquels/software/sysvinit-2.86.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>linux-headers</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>2.86-pardus.patch</Patch>
+            <Patch>sysvinit-2.86-docs.patch</Patch>
+            <Patch level="1">sysvinit-2.86-kexec.patch</Patch>
+            <Patch>sysvinit-2.86-off-by-one.patch</Patch>
+            <Patch> sysvinit-2.86-shutdown-usage.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>sysvinit</Name>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/inittab">inittab</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-06</Date>
+            <Version>2.86</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-21</Date>
+            <Version>2.85</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

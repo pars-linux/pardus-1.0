@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>digikam</Name>
+        <Homepage>http://www.digikam.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>A digital photo management application for KDE</Summary>
+        <Description>A digital photo management application for KDE</Description>
+        <Summary xml:lang="tr">KDE için dijital bir fotoğraf yönetim uygulaması</Summary>
+        <Description xml:lang="tr">Dijital fotoğraf makinenizi bağlayıp ön izleme, resim indirme, silme gibi bir çok işlemi kolayca yapabileceğiniz basit bir arayüze sahip fotoğraf yönetim uygulamasıdır</Description>
+        <Archive sha1sum="889297651c6c4f596f810c61826df64637b2261a" type="tarbz2">http://puzzle.dl.sourceforge.net/sourceforge/digikam/digikam-0.8.0.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">digikam-i18n.diff</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>kdebase</Dependency>
+            <Dependency versionFrom="2.1.6">libgphoto2</Dependency>
+            <Dependency versionFrom="0.2.1">libkexif</Dependency>
+            <Dependency versionFrom="3">sqlite</Dependency>
+            <Dependency versionFrom="0.1.1">libkipi</Dependency>
+            <Dependency>imlib2</Dependency>
+            <Dependency>tiff</Dependency>
+            <Dependency>gdbm</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>digikam</Name>
+        <RuntimeDependencies>
+            <Dependency>kdebase</Dependency>
+            <Dependency versionFrom="2.1.6">libgphoto2</Dependency>
+            <Dependency versionFrom="0.2.1">libkexif</Dependency>
+            <Dependency versionFrom="3">sqlite</Dependency>
+            <Dependency versionFrom="0.1.1">libkipi</Dependency>
+            <Dependency>imlib2</Dependency>
+            <Dependency>tiff</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="header">/usr/kde/3.5/include</Path>
+            <Path fileType="library">/usr/kde/3.5/lib</Path>
+            <Path fileType="data">/usr/kde/3.5/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="5">
+            <Date>2005-12-23</Date>
+            <Version>0.8.0</Version>
+            <Comment>Fix i18n problem</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-11-26</Date>
+            <Version>0.8.0</Version>
+            <Comment>New version</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-26</Date>
+            <Version>0.8.0_beta2</Version>
+            <Comment>Dep fix</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-21</Date>
+            <Version>0.8.0_beta2</Version>
+            <Comment>3.4 to 3.5</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-10</Date>
+            <Version>0.8.0_beta2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

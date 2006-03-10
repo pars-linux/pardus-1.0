@@ -1,0 +1,1915 @@
+diff -urp binutils-2.15.97.orig/bfd/elf-bfd.h binutils-2.15.97/bfd/elf-bfd.h
+--- binutils-2.15.97.orig/bfd/elf-bfd.h	2005-04-20 20:04:25.000000000 -0400
++++ binutils-2.15.97/bfd/elf-bfd.h	2005-04-20 21:19:53.000000000 -0400
+@@ -1281,6 +1281,9 @@ struct elf_obj_tdata
+   /* Should the PT_GNU_RELRO segment be emitted?  */
+   bfd_boolean relro;
+ 
++  /* Segment flags for the PT_PAX_FLAGS segment.  */
++  unsigned int pax_flags;
++
+   /* Symbol version definitions in external objects.  */
+   Elf_Internal_Verdef *verdef;
+ 
+diff -urp binutils-2.15.97.orig/bfd/elf.c binutils-2.15.97/bfd/elf.c
+--- binutils-2.15.97.orig/bfd/elf.c	2005-04-20 20:04:25.000000000 -0400
++++ binutils-2.15.97/bfd/elf.c	2005-04-20 21:19:53.000000000 -0400
+@@ -1028,6 +1028,7 @@ _bfd_elf_print_private_bfd_data (bfd *ab
+ 	    case PT_GNU_EH_FRAME: pt = "EH_FRAME"; break;
+ 	    case PT_GNU_STACK: pt = "STACK"; break;
+ 	    case PT_GNU_RELRO: pt = "RELRO"; break;
++	    case PT_PAX_FLAGS: pt = "PAX_FLAGS"; break;
+ 	    default: sprintf (buf, "0x%lx", p->p_type); pt = buf; break;
+ 	    }
+ 	  fprintf (f, "%8s off    0x", pt);
+@@ -2376,6 +2377,9 @@ bfd_section_from_phdr (bfd *abfd, Elf_In
+     case PT_GNU_RELRO:
+       return _bfd_elf_make_section_from_phdr (abfd, hdr, index, "relro");
+ 
++    case PT_PAX_FLAGS:
++      return _bfd_elf_make_section_from_phdr (abfd, hdr, index, "pax_flags");
++
+     default:
+       /* Check for any processor-specific program segment types.  */
+       bed = get_elf_backend_data (abfd);
+@@ -3720,6 +3724,20 @@ map_sections_to_segments (bfd *abfd)
+       pm = &m->next;
+     }
+ 
++    {
++      amt = sizeof (struct elf_segment_map);
++      m = bfd_zalloc (abfd, amt);
++      if (m == NULL)
++	goto error_return;
++      m->next = NULL;
++      m->p_type = PT_PAX_FLAGS;
++      m->p_flags = elf_tdata (abfd)->pax_flags;
++      m->p_flags_valid = 1;
++
++      *pm = m;
++      pm = &m->next;
++    }
++
+   free (sections);
+   sections = NULL;
+ 
+@@ -4424,6 +4442,11 @@ get_program_header_size (bfd *abfd)
+       ++segs;
+     }
+ 
++    {
++      /* We need a PT_PAX_FLAGS segment.  */
++      ++segs;
++    }
++
+   for (s = abfd->sections; s != NULL; s = s->next)
+     {
+       if ((s->flags & SEC_LOAD) != 0
+@@ -4959,7 +4982,8 @@ copy_private_bfd_data (bfd *ibfd, bfd *o
+        6. PT_TLS segment includes only SHF_TLS sections.
+        7. SHF_TLS sections are only in PT_TLS or PT_LOAD segments.
+        8. PT_DYNAMIC should not contain empty sections at the beginning
+-          (with the possible exception of .dynamic).  */
++          (with the possible exception of .dynamic).
++       9. PT_PAX_FLAGS segments do not include any sections.  */
+ #define INCLUDE_SECTION_IN_SEGMENT(section, segment, bed)		\
+   ((((segment->p_paddr							\
+       ? IS_CONTAINED_BY_LMA (section, segment, segment->p_paddr)	\
+@@ -4968,6 +4992,7 @@ copy_private_bfd_data (bfd *ibfd, bfd *o
+     || IS_COREFILE_NOTE (segment, section))				\
+    && section->output_section != NULL					\
+    && segment->p_type != PT_GNU_STACK					\
++   && segment->p_type != PT_PAX_FLAGS					\
+    && (segment->p_type != PT_TLS					\
+        || (section->flags & SEC_THREAD_LOCAL))				\
+    && (segment->p_type == PT_LOAD					\
+diff -urp binutils-2.15.97.orig/bfd/elflink.c binutils-2.15.97/bfd/elflink.c
+--- binutils-2.15.97.orig/bfd/elflink.c	2005-04-20 20:04:25.000000000 -0400
++++ binutils-2.15.97/bfd/elflink.c	2005-04-20 21:19:53.000000000 -0400
+@@ -4941,17 +4941,31 @@ bfd_elf_size_dynamic_sections (bfd *outp
+   if (!is_elf_hash_table (info->hash))
+     return TRUE;
+ 
++  elf_tdata (output_bfd)->pax_flags = PF_NORANDEXEC;
++
++  if (info->execheap)
++    elf_tdata (output_bfd)->pax_flags |= PF_NOMPROTECT;
++  else if (info->noexecheap)
++    elf_tdata (output_bfd)->pax_flags |= PF_MPROTECT;
++
+   elf_tdata (output_bfd)->relro = info->relro;
+   if (info->execstack)
+-    elf_tdata (output_bfd)->stack_flags = PF_R | PF_W | PF_X;
++    {
++      elf_tdata (output_bfd)->stack_flags = PF_R | PF_W | PF_X;
++      elf_tdata (output_bfd)->pax_flags |= PF_EMUTRAMP;
++    }
+   else if (info->noexecstack)
+-    elf_tdata (output_bfd)->stack_flags = PF_R | PF_W;
++    {
++      elf_tdata (output_bfd)->stack_flags = PF_R | PF_W;
++      elf_tdata (output_bfd)->pax_flags |= PF_NOEMUTRAMP;
++    }
+   else
+     {
+       bfd *inputobj;
+       asection *notesec = NULL;
+       int exec = 0;
+ 
++      elf_tdata (output_bfd)->pax_flags |= PF_NOEMUTRAMP;
+       for (inputobj = info->input_bfds;
+ 	   inputobj;
+ 	   inputobj = inputobj->link_next)
+@@ -4964,7 +4978,11 @@ bfd_elf_size_dynamic_sections (bfd *outp
+ 	  if (s)
+ 	    {
+ 	      if (s->flags & SEC_CODE)
+-		exec = PF_X;
++		{
++		  elf_tdata (output_bfd)->pax_flags &= ~PF_NOEMUTRAMP;
++		  elf_tdata (output_bfd)->pax_flags |= PF_EMUTRAMP;
++		  exec = PF_X;
++		}
+ 	      notesec = s;
+ 	    }
+ 	  else
+diff -urp binutils-2.15.97.orig/binutils/readelf.c binutils-2.15.97/binutils/readelf.c
+--- binutils-2.15.97.orig/binutils/readelf.c	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/binutils/readelf.c	2005-04-20 21:19:53.000000000 -0400
+@@ -2330,6 +2330,7 @@ get_segment_type (unsigned long p_type)
+ 			return "GNU_EH_FRAME";
+     case PT_GNU_STACK:	return "GNU_STACK";
+     case PT_GNU_RELRO:  return "GNU_RELRO";
++    case PT_PAX_FLAGS: return "PAX_FLAGS";
+ 
+     default:
+       if ((p_type >= PT_LOPROC) && (p_type <= PT_HIPROC))
+diff -urp binutils-2.15.97.orig/include/bfdlink.h binutils-2.15.97/include/bfdlink.h
+--- binutils-2.15.97.orig/include/bfdlink.h	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/include/bfdlink.h	2005-04-20 21:19:53.000000000 -0400
+@@ -318,6 +318,14 @@ struct bfd_link_info
+      flags.  */
+   unsigned int noexecstack: 1;
+ 
++  /* TRUE if PT_PAX_FLAGS segment should be created with PF_NOMPROTECT
++     flags.  */
++  unsigned int execheap: 1;
++
++  /* TRUE if PT_PAX_FLAGS segment should be created with PF_MPROTECT
++     flags.  */
++  unsigned int noexecheap: 1;
++
+   /* TRUE if PT_GNU_RELRO segment should be created.  */
+   unsigned int relro: 1;
+ 
+diff -urp binutils-2.15.97.orig/include/elf/common.h binutils-2.15.97/include/elf/common.h
+--- binutils-2.15.97.orig/include/elf/common.h	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/include/elf/common.h	2005-04-20 21:19:53.000000000 -0400
+@@ -293,12 +293,29 @@
+ #define PT_SUNW_EH_FRAME PT_GNU_EH_FRAME      /* Solaris uses the same value */
+ #define PT_GNU_STACK	(PT_LOOS + 0x474e551) /* Stack flags */
+ #define PT_GNU_RELRO	(PT_LOOS + 0x474e552) /* Read-only after relocation */
++#define PT_PAX_FLAGS	(PT_LOOS + 0x5041580) /* PaX flags */
+ 
+ /* Program segment permissions, in program header p_flags field.  */
+ 
+ #define PF_X		(1 << 0)	/* Segment is executable */
+ #define PF_W		(1 << 1)	/* Segment is writable */
+ #define PF_R		(1 << 2)	/* Segment is readable */
++
++/* Flags to control PaX behavior. */
++
++#define PF_PAGEEXEC    (1 << 4)    /* Enable  PAGEEXEC */
++#define PF_NOPAGEEXEC  (1 << 5)    /* Disable PAGEEXEC */
++#define PF_SEGMEXEC    (1 << 6)    /* Enable  SEGMEXEC */
++#define PF_NOSEGMEXEC  (1 << 7)    /* Disable SEGMEXEC */
++#define PF_MPROTECT    (1 << 8)    /* Enable  MPROTECT */
++#define PF_NOMPROTECT  (1 << 9)    /* Disable MPROTECT */
++#define PF_RANDEXEC    (1 << 10)   /* Enable  RANDEXEC */
++#define PF_NORANDEXEC  (1 << 11)   /* Disable RANDEXEC */
++#define PF_EMUTRAMP    (1 << 12)   /* Enable  EMUTRAMP */
++#define PF_NOEMUTRAMP  (1 << 13)   /* Disable EMUTRAMP */
++#define PF_RANDMMAP    (1 << 14)   /* Enable  RANDMMAP */
++#define PF_NORANDMMAP  (1 << 15)   /* Disable RANDMMAP */
++
+ /* #define PF_MASKOS	0x0F000000    *//* OS-specific reserved bits */
+ #define PF_MASKOS	0x0FF00000	/* New value, Oct 4, 1999 Draft */
+ #define PF_MASKPROC	0xF0000000	/* Processor-specific reserved bits */
+diff -urp binutils-2.15.97.orig/ld/emultempl/elf32.em binutils-2.15.97/ld/emultempl/elf32.em
+--- binutils-2.15.97.orig/ld/emultempl/elf32.em	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/emultempl/elf32.em	2005-04-20 21:19:53.000000000 -0400
+@@ -1725,6 +1725,16 @@ cat >>e${EMULATION_NAME}.c <<EOF
+ 	  link_info.noexecstack = TRUE;
+ 	  link_info.execstack = FALSE;
+ 	}
++      else if (strcmp (optarg, "execheap") == 0)
++	{
++	  link_info.execheap = TRUE;
++	  link_info.noexecheap = FALSE;
++	}
++      else if (strcmp (optarg, "noexecheap") == 0)
++	{
++	  link_info.noexecheap = TRUE;
++	  link_info.execheap = FALSE;
++	}
+       else if (strcmp (optarg, "relro") == 0)
+ 	link_info.relro = TRUE;
+       else if (strcmp (optarg, "norelro") == 0)
+@@ -1765,6 +1775,7 @@ cat >>e${EMULATION_NAME}.c <<EOF
+   fprintf (file, _("  -z combreloc\t\tMerge dynamic relocs into one section and sort\n"));
+   fprintf (file, _("  -z defs\t\tReport unresolved symbols in object files.\n"));
+   fprintf (file, _("  -z execstack\t\tMark executable as requiring executable stack\n"));
++  fprintf (file, _("  -z execheap\t\tMark executable as requiring executable heap\n"));
+   fprintf (file, _("  -z initfirst\t\tMark DSO to be initialized first at runtime\n"));
+   fprintf (file, _("  -z interpose\t\tMark object to interpose all DSOs but executable\n"));
+   fprintf (file, _("  -z loadfltr\t\tMark object requiring immediate process\n"));
+@@ -1776,6 +1787,7 @@ cat >>e${EMULATION_NAME}.c <<EOF
+   fprintf (file, _("  -z nodlopen\t\tMark DSO not available to dlopen\n"));
+   fprintf (file, _("  -z nodump\t\tMark DSO not available to dldump\n"));
+   fprintf (file, _("  -z noexecstack\tMark executable as not requiring executable stack\n"));
++  fprintf (file, _("  -z noexecheap\tMark executable as not requiring executable heap\n"));
+   fprintf (file, _("  -z norelro\t\tDon't create RELRO program header\n"));
+   fprintf (file, _("  -z now\t\tMark object non-lazy runtime binding\n"));
+   fprintf (file, _("  -z origin\t\tMark object requiring immediate \$ORIGIN processing\n\t\t\t  at runtime\n"));
+diff -urp binutils-2.15.97.orig/ld/ldgram.y binutils-2.15.97/ld/ldgram.y
+--- binutils-2.15.97.orig/ld/ldgram.y	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/ldgram.y	2005-04-20 21:19:53.000000000 -0400
+@@ -1085,6 +1085,8 @@ phdr_type:
+ 			    $$ = exp_intop (0x6474e550);
+ 			  else if (strcmp (s, "PT_GNU_STACK") == 0)
+ 			    $$ = exp_intop (0x6474e551);
++			  else if (strcmp (s, "PT_PAX_FLAGS") == 0)
++			    $$ = exp_intop (0x65041580);
+ 			  else
+ 			    {
+ 			      einfo (_("\
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-alpha/tlsbin.rd binutils-2.15.97/ld/testsuite/ld-alpha/tlsbin.rd
+--- binutils-2.15.97.orig/ld/testsuite/ld-alpha/tlsbin.rd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-alpha/tlsbin.rd	2005-04-20 21:19:53.000000000 -0400
+@@ -34,17 +34,18 @@ Section Headers:
+ 
+ Elf file type is EXEC \(Executable file\)
+ Entry point 0x[0-9a-f]+
+-There are 6 program headers, starting at offset [0-9]+
++There are 7 program headers, starting at offset [0-9]+
+ 
+ Program Headers:
+   Type +Offset +VirtAddr +PhysAddr +FileSiz +MemSiz +Flg Align
+-  PHDR +0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x0+150 R E 0x8
++  PHDR +0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x0+188 R E 0x8
+   INTERP +0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ R +0x1
+ .*Requesting program interpreter.*
+   LOAD +0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ R E 0x10000
+   LOAD +0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ RWE 0x10000
+   DYNAMIC +0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ RW +0x8
+   TLS +0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ R +0x4
++  PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x8
+ #...
+ 
+ Relocation section '.rela.dyn' at offset 0x[0-9a-f]+ contains 3 entries:
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-alpha/tlsbinr.rd binutils-2.15.97/ld/testsuite/ld-alpha/tlsbinr.rd
+--- binutils-2.15.97.orig/ld/testsuite/ld-alpha/tlsbinr.rd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-alpha/tlsbinr.rd	2005-04-20 21:19:53.000000000 -0400
+@@ -34,7 +34,7 @@ Section Headers:
+ 
+ Elf file type is EXEC \(Executable file\)
+ Entry point 0x[0-9a-f]+
+-There are 6 program headers, starting at offset [0-9]+
++There are 7 program headers, starting at offset [0-9]+
+ 
+ Program Headers:
+  +Type +Offset +VirtAddr +PhysAddr +FileSiz +MemSiz +Flg Align
+@@ -45,6 +45,7 @@ Program Headers:
+  +LOAD +0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ RWE 0x10000
+  +DYNAMIC +0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ RW +0x8
+  +TLS +0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ R +0x4
++ +PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x8
+ #...
+ 
+ Relocation section '.rela.dyn' at offset 0x[0-9a-f]+ contains 2 entries:
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-alpha/tlspic.rd binutils-2.15.97/ld/testsuite/ld-alpha/tlspic.rd
+--- binutils-2.15.97.orig/ld/testsuite/ld-alpha/tlspic.rd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-alpha/tlspic.rd	2005-04-20 21:19:53.000000000 -0400
+@@ -33,7 +33,7 @@ Section Headers:
+ 
+ Elf file type is DYN \(Shared object file\)
+ Entry point 0x1000
+-There are 4 program headers, starting at offset [0-9a-f]+
++There are 5 program headers, starting at offset [0-9a-f]+
+ 
+ Program Headers:
+  +Type +Offset +VirtAddr +PhysAddr +FileSiz +MemSiz +Flg Align
+@@ -41,6 +41,7 @@ Program Headers:
+  +LOAD +0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ RWE 0x10000
+  +DYNAMIC +0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ RW +0x8
+  +TLS +0x0+2000 0x0+12000 0x0+12000 0x0+60 0x0+80 R +0x4
++ +PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x8
+ #...
+ 
+ Relocation section '.rela.dyn' at offset 0x[0-9a-f]+ contains 7 entries:
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-i386/tlsbin.rd binutils-2.15.97/ld/testsuite/ld-i386/tlsbin.rd
+--- binutils-2.15.97.orig/ld/testsuite/ld-i386/tlsbin.rd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-i386/tlsbin.rd	2005-04-20 21:19:53.000000000 -0400
+@@ -35,7 +35,7 @@ Key to Flags:
+ 
+ Elf file type is EXEC \(Executable file\)
+ Entry point 0x8049178
+-There are 6 program headers, starting at offset [0-9]+
++There are 7 program headers, starting at offset [0-9]+
+ 
+ Program Headers:
+   Type +Offset +VirtAddr +PhysAddr +FileSiz +MemSiz +Flg Align
+@@ -46,6 +46,7 @@ Program Headers:
+   LOAD.*
+   DYNAMIC.*
+   TLS +0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x0+60 0x0+a0 R +0x1000
++  PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x4
+ 
+  Section to Segment mapping:
+   Segment Sections...
+@@ -55,6 +56,7 @@ Program Headers:
+    03 +.tdata .dynamic .got .got.plt *
+    04 +.dynamic *
+    05 +.tdata .tbss *
++   06 +
+ 
+ Relocation section '.rel.dyn' at offset 0x[0-9a-f]+ contains 9 entries:
+  Offset +Info +Type +Sym.Value +Sym. Name
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-i386/tlsnopic.rd binutils-2.15.97/ld/testsuite/ld-i386/tlsnopic.rd
+--- binutils-2.15.97.orig/ld/testsuite/ld-i386/tlsnopic.rd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-i386/tlsnopic.rd	2005-04-20 21:19:53.000000000 -0400
+@@ -32,7 +32,7 @@ Key to Flags:
+ 
+ Elf file type is DYN \(Shared object file\)
+ Entry point 0x1000
+-There are 4 program headers, starting at offset [0-9]+
++There are 5 program headers, starting at offset [0-9]+
+ 
+ Program Headers:
+   Type +Offset +VirtAddr +PhysAddr +FileSiz +MemSiz +Flg Align
+@@ -40,6 +40,7 @@ Program Headers:
+   LOAD.*
+   DYNAMIC.*
+   TLS +0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x0+ 0x0+24 R +0x1
++  PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x4
+ 
+  Section to Segment mapping:
+   Segment Sections...
+@@ -47,6 +48,7 @@ Program Headers:
+    01 +.dynamic .got .got.plt *
+    02 +.dynamic *
+    03 +.tbss *
++   04 +
+ 
+ Relocation section '.rel.dyn' at offset 0x[0-9a-f]+ contains 20 entries:
+  Offset +Info +Type +Sym.Value +Sym. Name
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-i386/tlspic.rd binutils-2.15.97/ld/testsuite/ld-i386/tlspic.rd
+--- binutils-2.15.97.orig/ld/testsuite/ld-i386/tlspic.rd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-i386/tlspic.rd	2005-04-20 21:19:53.000000000 -0400
+@@ -42,6 +42,7 @@ Program Headers:
+   LOAD.*
+   DYNAMIC.*
+   TLS +0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x0+60 0x0+80 R +0x1
++  PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x4
+ 
+  Section to Segment mapping:
+   Segment Sections...
+@@ -49,6 +50,7 @@ Program Headers:
+    01 +.tdata .dynamic .got .got.plt *
+    02 +.dynamic *
+    03 +.tdata .tbss *
++   04 +
+ 
+ Relocation section '.rel.dyn' at offset 0x[0-9a-f]+ contains 26 entries:
+  Offset +Info +Type +Sym.Value +Sym. Name
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-ia64/tlsbin.dd binutils-2.15.97/ld/testsuite/ld-ia64/tlsbin.dd
+--- binutils-2.15.97.orig/ld/testsuite/ld-ia64/tlsbin.dd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-ia64/tlsbin.dd	2005-04-20 21:19:53.000000000 -0400
+@@ -18,25 +18,25 @@ Disassembly of section .text:
+ 40+101c:	81 0a 00 90[ 	]+addl r15=40,r1;;
+ 40+1020:	19 18 01 1c 18 10[ 	]+\[MMB\][ 	]+ld8 r35=\[r14\]
+ 40+1026:	40 02 3c 30 20 00[ 	]+ld8 r36=\[r15\]
+-40+102c:	c8 f3 ff 58[ 	]+br.call.sptk.many b0=[0-9a-f]+ <.*>;;
++40+102c:	e8 f3 ff 58[ 	]+br.call.sptk.many b0=[0-9a-f]+ <.*>;;
+ 40+1030:	0d 70 c0 02 00 24[ 	]+\[MFI\][ 	]+addl r14=48,r1
+ 40+1036:	00 00 00 02 00 e0[ 	]+nop.f 0x0
+ 40+103c:	01 0c 00 90[ 	]+addl r15=64,r1;;
+ 40+1040:	19 18 01 1c 18 10[ 	]+\[MMB\][ 	]+ld8 r35=\[r14\]
+ 40+1046:	40 02 3c 30 20 00[ 	]+ld8 r36=\[r15\]
+-40+104c:	a8 f3 ff 58[ 	]+br.call.sptk.many b0=[0-9a-f]+ <.*>;;
++40+104c:	c8 f3 ff 58[ 	]+br.call.sptk.many b0=[0-9a-f]+ <.*>;;
+ 40+1050:	0d 70 c0 02 00 24[ 	]+\[MFI\][ 	]+addl r14=48,r1
+ 40+1056:	00 00 00 02 00 80[ 	]+nop.f 0x0
+ 40+105c:	14 02 00 90[ 	]+mov r36=33;;
+ 40+1060:	1d 18 01 1c 18 10[ 	]+\[MFB\][ 	]+ld8 r35=\[r14\]
+ 40+1066:	00 00 00 02 00 00[ 	]+nop.f 0x0
+-40+106c:	88 f3 ff 58[ 	]+br.call.sptk.many b0=[0-9a-f]+ <.*>;;
++40+106c:	a8 f3 ff 58[ 	]+br.call.sptk.many b0=[0-9a-f]+ <.*>;;
+ 40+1070:	0d 70 c0 02 00 24[ 	]+\[MFI\][ 	]+addl r14=48,r1
+ 40+1076:	00 00 00 02 00 80[ 	]+nop.f 0x0
+ 40+107c:	04 00 00 84[ 	]+mov r36=r0;;
+ 40+1080:	1d 18 01 1c 18 10[ 	]+\[MFB\][ 	]+ld8 r35=\[r14\]
+ 40+1086:	00 00 00 02 00 00[ 	]+nop.f 0x0
+-40+108c:	68 f3 ff 58[ 	]+br.call.sptk.many b0=[0-9a-f]+ <.*>;;
++40+108c:	88 f3 ff 58[ 	]+br.call.sptk.many b0=[0-9a-f]+ <.*>;;
+ 40+1090:	0b 10 00 10 00 21[ 	]+\[MMI\][ 	]+mov r2=r8;;
+ 40+1096:	e0 00 0a 00 48 e0[ 	]+addl r14=64,r2
+ 40+109c:	61 14 00 90[ 	]+addl r15=70,r2;;
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-ia64/tlsbin.rd binutils-2.15.97/ld/testsuite/ld-ia64/tlsbin.rd
+--- binutils-2.15.97.orig/ld/testsuite/ld-ia64/tlsbin.rd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-ia64/tlsbin.rd	2005-04-20 21:19:53.000000000 -0400
+@@ -35,17 +35,18 @@ Section Headers:
+ 
+ Elf file type is EXEC \(Executable file\)
+ Entry point 0x40+10d0
+-There are 7 program headers, starting at offset [0-9]+
++There are 8 program headers, starting at offset [0-9]+
+ 
+ Program Headers:
+   Type +Offset +VirtAddr +PhysAddr +FileSiz +MemSiz +Flg Align
+-  PHDR +0x0+40 0x40+40 0x40+40 0x0+188 0x0+188 R E 0x8
+-  INTERP +0x0+1c8 0x40+1c8 0x40+1c8 0x[0-9a-f]+ 0x[0-9a-f]+ R +0x1
++  PHDR +0x0+40 0x40+40 0x40+40 0x0+1c0 0x0+1c0 R E 0x8
++  INTERP +0x0+200 0x40+200 0x40+200 0x[0-9a-f]+ 0x[0-9a-f]+ R +0x1
+ .*Requesting program interpreter.*
+   LOAD +0x0+ 0x40+ 0x40+ 0x0+1[0-9a-f]+ 0x0+1[0-9a-f]+ R E 0x10000
+   LOAD +0x0+1[0-9a-f]+ 0x60+1[0-9a-f]+ 0x60+1[0-9a-f]+ 0x0+0[0-9a-f]+ 0x0+0[0-9a-f]+ RW +0x10000
+   DYNAMIC +0x0+1[0-9a-f]+ 0x60+1[0-9a-f]+ 0x60+1[0-9a-f]+ 0x0+150 0x0+150 RW +0x8
+   TLS +0x0+1[0-9a-f]+ 0x60+1[0-9a-f]+ 0x60+1[0-9a-f]+ 0x0+60 0x0+a0 R +0x4
++  PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x8
+   IA_64_UNWIND .* R +0x8
+ #...
+ 
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-ia64/tlspic.dd binutils-2.15.97/ld/testsuite/ld-ia64/tlspic.dd
+--- binutils-2.15.97.orig/ld/testsuite/ld-ia64/tlspic.dd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-ia64/tlspic.dd	2005-04-20 21:19:53.000000000 -0400
+@@ -18,25 +18,25 @@ Disassembly of section .text:
+  +101c:	01 0a 00 90[ 	]+addl r15=32,r1;;
+  +1020:	19 18 01 1c 18 10[ 	]+\[MMB\] +ld8 r35=\[r14\]
+  +1026:	40 02 3c 30 20 00[ 	]+ld8 r36=\[r15\]
+- +102c:	68 f5 ff 58[ 	]+br.call.sptk.many b0=[0-9a-f]+ <.*>;;
++ +102c:	88 f5 ff 58[ 	]+br.call.sptk.many b0=[0-9a-f]+ <.*>;;
+  +1030:	0d 70 c0 02 00 24[ 	]+\[MFI\] +addl r14=48,r1
+  +1036:	00 00 00 02 00 e0[ 	]+nop.f 0x0
+  +103c:	01 0c 00 90[ 	]+addl r15=64,r1;;
+  +1040:	19 18 01 1c 18 10[ 	]+\[MMB\] +ld8 r35=\[r14\]
+  +1046:	40 02 3c 30 20 00[ 	]+ld8 r36=\[r15\]
+- +104c:	48 f5 ff 58[ 	]+br.call.sptk.many b0=[0-9a-f]+ <.*>;;
++ +104c:	68 f5 ff 58[ 	]+br.call.sptk.many b0=[0-9a-f]+ <.*>;;
+  +1050:	0d 70 c0 02 00 24[ 	]+\[MFI\] +addl r14=48,r1
+  +1056:	00 00 00 02 00 80[ 	]+nop.f 0x0
+  +105c:	14 02 00 90[ 	]+mov r36=33;;
+  +1060:	1d 18 01 1c 18 10[ 	]+\[MFB\] +ld8 r35=\[r14\]
+  +1066:	00 00 00 02 00 00[ 	]+nop.f 0x0
+- +106c:	28 f5 ff 58[ 	]+br.call.sptk.many b0=[0-9a-f]+ <.*>;;
++ +106c:	48 f5 ff 58[ 	]+br.call.sptk.many b0=[0-9a-f]+ <.*>;;
+  +1070:	0d 70 c0 02 00 24[ 	]+\[MFI\] +addl r14=48,r1
+  +1076:	00 00 00 02 00 80[ 	]+nop.f 0x0
+  +107c:	04 00 00 84[ 	]+mov r36=r0;;
+  +1080:	1d 18 01 1c 18 10[ 	]+\[MFB\] +ld8 r35=\[r14\]
+  +1086:	00 00 00 02 00 00[ 	]+nop.f 0x0
+- +108c:	08 f5 ff 58[ 	]+br.call.sptk.many b0=[0-9a-f]+ <.*>;;
++ +108c:	28 f5 ff 58[ 	]+br.call.sptk.many b0=[0-9a-f]+ <.*>;;
+  +1090:	0b 10 00 10 00 21[ 	]+\[MMI\] +mov r2=r8;;
+  +1096:	e0 00 0a 00 48 e0[ 	]+addl r14=64,r2
+  +109c:	21 16 00 90[ 	]+addl r15=98,r2;;
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-ia64/tlspic.rd binutils-2.15.97/ld/testsuite/ld-ia64/tlspic.rd
+--- binutils-2.15.97.orig/ld/testsuite/ld-ia64/tlspic.rd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-ia64/tlspic.rd	2005-04-20 21:19:53.000000000 -0400
+@@ -35,7 +35,7 @@ Key to Flags:
+ 
+ Elf file type is DYN \(Shared object file\)
+ Entry point 0x1000
+-There are 5 program headers, starting at offset [0-9]+
++There are 6 program headers, starting at offset [0-9]+
+ 
+ Program Headers:
+   Type +Offset +VirtAddr +PhysAddr +FileSiz +MemSiz +Flg Align
+@@ -43,6 +43,7 @@ Program Headers:
+   LOAD +0x0+1[0-9a-f]+ 0x0+11[0-9a-f]+ 0x0+11[0-9a-f]+ 0x0+0[0-9a-f]+ 0x0+0[0-9a-f]+ RW +0x10000
+   DYNAMIC +0x0+1[0-9a-f]+ 0x0+11[0-9a-f]+ 0x0+11[0-9a-f]+ 0x0+140 0x0+140 RW +0x8
+   TLS +0x0+1[0-9a-f]+ 0x0+11[0-9a-f]+ 0x0+11[0-9a-f]+ 0x0+60 0x0+80 R +0x4
++  PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x8
+   IA_64_UNWIND +0x0+1[0-9a-f]+ 0x0+1[0-9a-f]+ 0x0+1[0-9a-f]+ 0x0+18 0x0+18 R +0x8
+ #...
+ 
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tls.d binutils-2.15.97/ld/testsuite/ld-powerpc/tls.d
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tls.d	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tls.d	2005-04-20 21:19:53.000000000 -0400
+@@ -9,45 +9,45 @@
+ 
+ Disassembly of section \.text:
+ 
+-0+100000e8 <_start>:
+-    100000e8:	3c 6d 00 00 	addis   r3,r13,0
+-    100000ec:	60 00 00 00 	nop
+-    100000f0:	38 63 90 78 	addi    r3,r3,-28552
+-    100000f4:	3c 6d 00 00 	addis   r3,r13,0
+-    100000f8:	60 00 00 00 	nop
+-    100000fc:	38 63 10 00 	addi    r3,r3,4096
+-    10000100:	3c 6d 00 00 	addis   r3,r13,0
+-    10000104:	60 00 00 00 	nop
+-    10000108:	38 63 90 40 	addi    r3,r3,-28608
+-    1000010c:	3c 6d 00 00 	addis   r3,r13,0
+-    10000110:	60 00 00 00 	nop
+-    10000114:	38 63 10 00 	addi    r3,r3,4096
+-    10000118:	39 23 80 48 	addi    r9,r3,-32696
+-    1000011c:	3d 23 00 00 	addis   r9,r3,0
+-    10000120:	81 49 80 50 	lwz     r10,-32688\(r9\)
+-    10000124:	e9 22 80 10 	ld      r9,-32752\(r2\)
+-    10000128:	7d 49 18 2a 	ldx     r10,r9,r3
+-    1000012c:	3d 2d 00 00 	addis   r9,r13,0
+-    10000130:	a1 49 90 60 	lhz     r10,-28576\(r9\)
+-    10000134:	89 4d 90 68 	lbz     r10,-28568\(r13\)
+-    10000138:	3d 2d 00 00 	addis   r9,r13,0
+-    1000013c:	99 49 90 70 	stb     r10,-28560\(r9\)
+-    10000140:	3c 6d 00 00 	addis   r3,r13,0
+-    10000144:	60 00 00 00 	nop
+-    10000148:	38 63 90 00 	addi    r3,r3,-28672
+-    1000014c:	3c 6d 00 00 	addis   r3,r13,0
+-    10000150:	60 00 00 00 	nop
+-    10000154:	38 63 10 00 	addi    r3,r3,4096
+-    10000158:	f9 43 80 08 	std     r10,-32760\(r3\)
+-    1000015c:	3d 23 00 00 	addis   r9,r3,0
+-    10000160:	91 49 80 10 	stw     r10,-32752\(r9\)
+-    10000164:	e9 22 80 08 	ld      r9,-32760\(r2\)
+-    10000168:	7d 49 19 2a 	stdx    r10,r9,r3
+-    1000016c:	3d 2d 00 00 	addis   r9,r13,0
+-    10000170:	b1 49 90 60 	sth     r10,-28576\(r9\)
+-    10000174:	e9 4d 90 2a 	lwa     r10,-28632\(r13\)
+-    10000178:	3d 2d 00 00 	addis   r9,r13,0
+-    1000017c:	a9 49 90 30 	lha     r10,-28624\(r9\)
++0+10000120 <_start>:
++    10000120:	3c 6d 00 00 	addis   r3,r13,0
++    10000124:	60 00 00 00 	nop
++    10000128:	38 63 90 78 	addi    r3,r3,-28552
++    1000012c:	3c 6d 00 00 	addis   r3,r13,0
++    10000130:	60 00 00 00 	nop
++    10000134:	38 63 10 00 	addi    r3,r3,4096
++    10000138:	3c 6d 00 00 	addis   r3,r13,0
++    1000013c:	60 00 00 00 	nop
++    10000140:	38 63 90 40 	addi    r3,r3,-28608
++    10000144:	3c 6d 00 00 	addis   r3,r13,0
++    10000148:	60 00 00 00 	nop
++    1000014c:	38 63 10 00 	addi    r3,r3,4096
++    10000150:	39 23 80 48 	addi    r9,r3,-32696
++    10000154:	3d 23 00 00 	addis   r9,r3,0
++    10000158:	81 49 80 50 	lwz     r10,-32688\(r9\)
++    1000015c:	e9 22 80 10 	ld      r9,-32752\(r2\)
++    10000160:	7d 49 18 2a 	ldx     r10,r9,r3
++    10000164:	3d 2d 00 00 	addis   r9,r13,0
++    10000168:	a1 49 90 60 	lhz     r10,-28576\(r9\)
++    1000016c:	89 4d 90 68 	lbz     r10,-28568\(r13\)
++    10000170:	3d 2d 00 00 	addis   r9,r13,0
++    10000174:	99 49 90 70 	stb     r10,-28560\(r9\)
++    10000178:	3c 6d 00 00 	addis   r3,r13,0
++    1000017c:	60 00 00 00 	nop
++    10000180:	38 63 90 00 	addi    r3,r3,-28672
++    10000184:	3c 6d 00 00 	addis   r3,r13,0
++    10000188:	60 00 00 00 	nop
++    1000018c:	38 63 10 00 	addi    r3,r3,4096
++    10000190:	f9 43 80 08 	std     r10,-32760\(r3\)
++    10000194:	3d 23 00 00 	addis   r9,r3,0
++    10000198:	91 49 80 10 	stw     r10,-32752\(r9\)
++    1000019c:	e9 22 80 08 	ld      r9,-32760\(r2\)
++    100001a0:	7d 49 19 2a 	stdx    r10,r9,r3
++    100001a4:	3d 2d 00 00 	addis   r9,r13,0
++    100001a8:	b1 49 90 60 	sth     r10,-28576\(r9\)
++    100001ac:	e9 4d 90 2a 	lwa     r10,-28632\(r13\)
++    100001b0:	3d 2d 00 00 	addis   r9,r13,0
++    100001b4:	a9 49 90 30 	lha     r10,-28624\(r9\)
+ 
+-0+10000180 <\.__tls_get_addr>:
+-    10000180:	4e 80 00 20 	blr
++0+100001b8 <\.__tls_get_addr>:
++    100001b8:	4e 80 00 20 	blr
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tls.g binutils-2.15.97/ld/testsuite/ld-powerpc/tls.g
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tls.g	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tls.g	2005-04-20 21:19:53.000000000 -0400
+@@ -8,5 +8,5 @@
+ .*: +file format elf64-powerpc
+ 
+ Contents of section \.got:
+- 100101e0 00000000 100181e0 ffffffff ffff8018  .*
+- 100101f0 ffffffff ffff8058                    .*
++ 10010218 00000000 10018218 ffffffff ffff8018  .*
++ 10010228 ffffffff ffff8058                    .*
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tls32.d binutils-2.15.97/ld/testsuite/ld-powerpc/tls32.d
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tls32.d	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tls32.d	2005-04-20 21:19:53.000000000 -0400
+@@ -9,42 +9,42 @@
+ 
+ Disassembly of section \.text:
+ 
+-0+1800094 <_start>:
+- 1800094:	3c 62 00 00 	addis   r3,r2,0
+- 1800098:	38 63 90 3c 	addi    r3,r3,-28612
+- 180009c:	3c 62 00 00 	addis   r3,r2,0
+- 18000a0:	38 63 10 00 	addi    r3,r3,4096
+- 18000a4:	3c 62 00 00 	addis   r3,r2,0
+- 18000a8:	38 63 90 20 	addi    r3,r3,-28640
+- 18000ac:	3c 62 00 00 	addis   r3,r2,0
+- 18000b0:	38 63 10 00 	addi    r3,r3,4096
+- 18000b4:	39 23 80 24 	addi    r9,r3,-32732
+- 18000b8:	3d 23 00 00 	addis   r9,r3,0
+- 18000bc:	81 49 80 28 	lwz     r10,-32728\(r9\)
+- 18000c0:	3d 22 00 00 	addis   r9,r2,0
+- 18000c4:	a1 49 90 30 	lhz     r10,-28624\(r9\)
+- 18000c8:	89 42 90 34 	lbz     r10,-28620\(r2\)
+- 18000cc:	3d 22 00 00 	addis   r9,r2,0
+- 18000d0:	99 49 90 38 	stb     r10,-28616\(r9\)
+- 18000d4:	3c 62 00 00 	addis   r3,r2,0
+- 18000d8:	38 63 90 00 	addi    r3,r3,-28672
+- 18000dc:	3c 62 00 00 	addis   r3,r2,0
+- 18000e0:	38 63 10 00 	addi    r3,r3,4096
+- 18000e4:	91 43 80 04 	stw     r10,-32764\(r3\)
+- 18000e8:	3d 23 00 00 	addis   r9,r3,0
+- 18000ec:	91 49 80 08 	stw     r10,-32760\(r9\)
+- 18000f0:	3d 22 00 00 	addis   r9,r2,0
+- 18000f4:	b1 49 90 30 	sth     r10,-28624\(r9\)
+- 18000f8:	a1 42 90 14 	lhz     r10,-28652\(r2\)
+- 18000fc:	3d 22 00 00 	addis   r9,r2,0
+- 1800100:	a9 49 90 18 	lha     r10,-28648\(r9\)
++0+18000b4 <_start>:
++ 18000b4:	3c 62 00 00 	addis   r3,r2,0
++ 18000b8:	38 63 90 3c 	addi    r3,r3,-28612
++ 18000bc:	3c 62 00 00 	addis   r3,r2,0
++ 18000c0:	38 63 10 00 	addi    r3,r3,4096
++ 18000c4:	3c 62 00 00 	addis   r3,r2,0
++ 18000c8:	38 63 90 20 	addi    r3,r3,-28640
++ 18000cc:	3c 62 00 00 	addis   r3,r2,0
++ 18000d0:	38 63 10 00 	addi    r3,r3,4096
++ 18000d4:	39 23 80 24 	addi    r9,r3,-32732
++ 18000d8:	3d 23 00 00 	addis   r9,r3,0
++ 18000dc:	81 49 80 28 	lwz     r10,-32728\(r9\)
++ 18000e0:	3d 22 00 00 	addis   r9,r2,0
++ 18000e4:	a1 49 90 30 	lhz     r10,-28624\(r9\)
++ 18000e8:	89 42 90 34 	lbz     r10,-28620\(r2\)
++ 18000ec:	3d 22 00 00 	addis   r9,r2,0
++ 18000f0:	99 49 90 38 	stb     r10,-28616\(r9\)
++ 18000f4:	3c 62 00 00 	addis   r3,r2,0
++ 18000f8:	38 63 90 00 	addi    r3,r3,-28672
++ 18000fc:	3c 62 00 00 	addis   r3,r2,0
++ 1800100:	38 63 10 00 	addi    r3,r3,4096
++ 1800104:	91 43 80 04 	stw     r10,-32764\(r3\)
++ 1800108:	3d 23 00 00 	addis   r9,r3,0
++ 180010c:	91 49 80 08 	stw     r10,-32760\(r9\)
++ 1800110:	3d 22 00 00 	addis   r9,r2,0
++ 1800114:	b1 49 90 30 	sth     r10,-28624\(r9\)
++ 1800118:	a1 42 90 14 	lhz     r10,-28652\(r2\)
++ 180011c:	3d 22 00 00 	addis   r9,r2,0
++ 1800120:	a9 49 90 18 	lha     r10,-28648\(r9\)
+ 
+-0+1800104 <__tls_get_addr>:
+- 1800104:	4e 80 00 20 	blr
++0+1800124 <__tls_get_addr>:
++ 1800124:	4e 80 00 20 	blr
+ Disassembly of section \.got:
+ 
+-0+1810128 <_GLOBAL_OFFSET_TABLE_-0x4>:
+- 1810128:	4e 80 00 21 	blrl
++0+1810148 <_GLOBAL_OFFSET_TABLE_-0x4>:
++ 1810148:	4e 80 00 21 	blrl
+ 
+-0+181012c <_GLOBAL_OFFSET_TABLE_>:
++0+181014c <_GLOBAL_OFFSET_TABLE_>:
+ 	\.\.\.
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tls32.g binutils-2.15.97/ld/testsuite/ld-powerpc/tls32.g
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tls32.g	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tls32.g	2005-04-20 21:19:53.000000000 -0400
+@@ -8,4 +8,4 @@
+ .*: +file format elf32-powerpc
+ 
+ Contents of section \.got:
+- 1810128 4e800021 00000000 00000000 00000000  .*
++ 1810148 4e800021 00000000 00000000 00000000  .*
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tls32.t binutils-2.15.97/ld/testsuite/ld-powerpc/tls32.t
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tls32.t	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tls32.t	2005-04-20 21:19:53.000000000 -0400
+@@ -8,5 +8,5 @@
+ .*: +file format elf32-powerpc
+ 
+ Contents of section \.tdata:
+- 1810108 12345678 23456789 3456789a 456789ab  .*
+- 1810118 56789abc 6789abcd 789abcde 00c0ffee  .*
++ 1810128 12345678 23456789 3456789a 456789ab  .*
++ 1810138 56789abc 6789abcd 789abcde 00c0ffee  .*
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsexe.g binutils-2.15.97/ld/testsuite/ld-powerpc/tlsexe.g
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsexe.g	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tlsexe.g	2005-04-20 21:19:53.000000000 -0400
+@@ -7,6 +7,6 @@
+ .*: +file format elf64-powerpc
+ 
+ Contents of section \.got:
+- 100105f0 00000000 100185f0 ffffffff ffff8018  .*
+- 10010600 00000000 00000000 00000000 00000000  .*
+- 10010610 00000000 00000000 00000000 00000000  .*
++ 10010628 00000000 10018628 ffffffff ffff8018  .*
++ 10010638 00000000 00000000 00000000 00000000  .*
++ 10010648 00000000 00000000 00000000 00000000  .*
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsexe.r binutils-2.15.97/ld/testsuite/ld-powerpc/tlsexe.r
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsexe.r	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tlsexe.r	2005-04-20 21:19:53.000000000 -0400
+@@ -33,17 +33,18 @@ Section Headers:
+ 
+ Elf file type is EXEC \(Executable file\)
+ Entry point .*
+-There are 6 program headers.*
++There are 7 program headers.*
+ 
+ Program Headers:
+  +Type +Offset +VirtAddr +PhysAddr +FileSiz +MemSiz +Flg Align
+- +PHDR +0x0+40 0x0+10000040 0x0+10000040 0x0+150 0x0+150 R E 0x8
+- +INTERP +0x0+190 0x0+10000190 0x0+10000190 0x0+11 0x0+11 R +0x1
++ +PHDR +0x0+40 0x0+10000040 0x0+10000040 0x0+188 0x0+188 R E 0x8
++ +INTERP +0x0+1c8 0x0+100001c8 0x0+100001c8 0x0+11 0x0+11 R +0x1
+  +\[Requesting program interpreter: .*\]
+- +LOAD +0x0+ 0x0+10000000 0x0+10000000 0x0+464 0x0+464 R E 0x10000
+- +LOAD +0x0+468 0x0+10010468 0x0+10010468 0x0+1b8 0x0+1e8 RW +0x10000
+- +DYNAMIC +0x0+4a0 0x0+100104a0 0x0+100104a0 0x0+150 0x0+150 RW +0x8
+- +TLS +0x0+468 0x0+10010468 0x0+10010468 0x0+38 0x0+70 R +0x8
++ +LOAD +0x0+ 0x0+10000000 0x0+10000000 0x0+49c 0x0+49c R E 0x10000
++ +LOAD +0x0+4a0 0x0+100104a0 0x0+100104a0 0x0+1b8 0x0+1e8 RW +0x10000
++ +DYNAMIC +0x0+4d8 0x0+100104d8 0x0+100104d8 0x0+150 0x0+150 RW +0x8
++ +TLS +0x0+4a0 0x0+100104a0 0x0+100104a0 0x0+38 0x0+70 R +0x8
++ +PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x8
+ 
+  Section to Segment mapping:
+  +Segment Sections\.\.\.
+@@ -53,28 +54,29 @@ Program Headers:
+  +03 +\.tdata \.dynamic \.got \.plt 
+  +04 +\.dynamic 
+  +05 +\.tdata \.tbss 
++ +06 +
+ 
+ Relocation section '\.rela\.dyn' at offset .* contains 3 entries:
+  +Offset +Info +Type +Symbol's Value +Symbol's Name \+ Addend
+-0+10010600 +0+200000049 R_PPC64_TPREL64 +0+ gd \+ 0
+-0+10010608 +0+400000044 R_PPC64_DTPMOD64 +0+ ld \+ 0
+-0+10010618 +0+50000004e R_PPC64_DTPREL64 +0+50 ld2 \+ 0
++0+10010638 +0+200000049 R_PPC64_TPREL64 +0+ gd \+ 0
++0+10010640 +0+400000044 R_PPC64_DTPMOD64 +0+ ld \+ 0
++0+10010650 +0+50000004e R_PPC64_DTPREL64 +0+50 ld2 \+ 0
+ 
+ Relocation section '\.rela\.plt' at offset .* contains 1 entries:
+  +Offset +Info +Type +Symbol's Value +Symbol's Name \+ Addend
+-0+10010638 +0+300000015 R_PPC64_JMP_SLOT +0+ __tls_get_addr \+ 0
++0+10010670 +0+300000015 R_PPC64_JMP_SLOT +0+ __tls_get_addr \+ 0
+ 
+ Symbol table '\.dynsym' contains 9 entries:
+  +Num: +Value +Size Type +Bind +Vis +Ndx Name
+ .* 0+ +0 NOTYPE +LOCAL +DEFAULT +UND 
+-.* 0+100104a0 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
++.* 0+100104d8 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
+ .* 0+ +0 TLS +GLOBAL DEFAULT +UND gd
+ .* 0+ +0 FUNC +GLOBAL DEFAULT +UND __tls_get_addr
+ .* 0+ +0 TLS +GLOBAL DEFAULT +UND ld
+ .* 0+50 +0 TLS +GLOBAL DEFAULT +9 ld2
+-.* 0+10010620 +0 NOTYPE +GLOBAL DEFAULT +ABS __bss_start
+-.* 0+10010620 +0 NOTYPE +GLOBAL DEFAULT +ABS _edata
+-.* 0+10010650 +0 NOTYPE +GLOBAL DEFAULT +ABS _end
++.* 0+10010658 +0 NOTYPE +GLOBAL DEFAULT +ABS __bss_start
++.* 0+10010658 +0 NOTYPE +GLOBAL DEFAULT +ABS _edata
++.* 0+10010688 +0 NOTYPE +GLOBAL DEFAULT +ABS _end
+ 
+ Symbol table '\.symtab' contains 43 entries:
+  +Num: +Value +Size Type +Bind +Vis +Ndx Name
+@@ -85,11 +87,11 @@ Symbol table '\.symtab' contains 43 entr
+ .* [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +4 
+ .* [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +5 
+ .* [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +6 
+-.* 0+10000368 +0 SECTION LOCAL +DEFAULT +7 
+-.* 0+10010468 +0 SECTION LOCAL +DEFAULT +8 
+-.* 0+100104a0 +0 SECTION LOCAL +DEFAULT +9 
+-.* 0+100104a0 +0 SECTION LOCAL +DEFAULT +10 
+-.* 0+100105f0 +0 SECTION LOCAL +DEFAULT +11 
++.* 0+100003a0 +0 SECTION LOCAL +DEFAULT +7 
++.* 0+100104a0 +0 SECTION LOCAL +DEFAULT +8 
++.* 0+100104d8 +0 SECTION LOCAL +DEFAULT +9 
++.* 0+100104d8 +0 SECTION LOCAL +DEFAULT +10 
++.* 0+10010628 +0 SECTION LOCAL +DEFAULT +11 
+ .* [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +12 
+ .* 0+100105f0 +0 SECTION LOCAL +DEFAULT +13 
+ .* [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +14 
+@@ -106,7 +108,7 @@ Symbol table '\.symtab' contains 43 entr
+ .* 0+28 +0 TLS +LOCAL +DEFAULT +8 le4
+ .* 0+30 +0 TLS +LOCAL +DEFAULT +8 le5
+ .* 0+ +0 FUNC +LOCAL +DEFAULT +UND \.__tls_get_addr
+-.* 0+100104a0 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
++.* 0+100104d8 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
+ .* 0+ +0 TLS +GLOBAL DEFAULT +UND gd
+ .* 0+60 +0 TLS +GLOBAL DEFAULT +9 le0
+ .* 0+ +0 FUNC +GLOBAL DEFAULT +UND __tls_get_addr
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsexe32.d binutils-2.15.97/ld/testsuite/ld-powerpc/tlsexe32.d
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsexe32.d	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tlsexe32.d	2005-04-20 21:19:53.000000000 -0400
+@@ -42,5 +42,5 @@ Disassembly of section \.got:
+ .* <_GLOBAL_OFFSET_TABLE_-0x4>:
+ .*:	4e 80 00 21 	blrl
+ .* <_GLOBAL_OFFSET_TABLE_>:
+-.*:	01 81 02 d0 00 00 00 00 00 00 00 00 00 00 00 00     .*
++.*:	01 81 02 f0 00 00 00 00 00 00 00 00 00 00 00 00     .*
+ 	\.\.\.
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsexe32.g binutils-2.15.97/ld/testsuite/ld-powerpc/tlsexe32.g
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsexe32.g	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tlsexe32.g	2005-04-20 21:19:53.000000000 -0400
+@@ -7,5 +7,5 @@
+ .*: +file format elf32-powerpc
+ 
+ Contents of section \.got:
+-.* 4e800021 018102d0 00000000 00000000  .*
++.* 4e800021 018102f0 00000000 00000000  .*
+ .* 00000000 00000000 00000000           .*
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsexe32.r binutils-2.15.97/ld/testsuite/ld-powerpc/tlsexe32.r
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsexe32.r	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tlsexe32.r	2005-04-20 21:19:53.000000000 -0400
+@@ -16,15 +16,15 @@ Section Headers:
+  +\[ 4\] \.dynstr +.*
+  +\[ 5\] \.rela\.dyn +.*
+  +\[ 6\] \.rela\.plt +.*
+- +\[ 7\] \.text +PROGBITS +01800244 000244 000070 00 +AX +0 +0 +1
++ +\[ 7\] \.text +PROGBITS +01800264 000264 000070 00 +AX +0 +0 +1
+  +\[ 8\] \.sdata2 +PROGBITS +.*
+- +\[ 9\] \.tdata +PROGBITS +018102b4 0002b4 00001c 00 WAT +0 +0 +4
+- +\[10\] \.tbss +NOBITS +018102d0 0002d0 00001c 00 WAT +0 +0 +4
+- +\[11\] \.dynamic +DYNAMIC +018102d0 0002d0 0000a0 08 +WA +4 +0 +4
+- +\[12\] \.data +PROGBITS +01810370 000370 000000 00 +WA +0 +0 +1
+- +\[13\] \.got +PROGBITS +01810370 000370 00001c 04 WAX +0 +0 +4
+- +\[14\] \.sdata +PROGBITS +0181038c 00038c 000000 00 +WA +0 +0 +4
+- +\[15\] \.sbss +NOBITS +0181038c 00038c 000000 00 +WA +0 +0 +1
++ +\[ 9\] \.tdata +PROGBITS +018102d4 0002d4 00001c 00 WAT +0 +0 +4
++ +\[10\] \.tbss +NOBITS +018102f0 0002f0 00001c 00 WAT +0 +0 +4
++ +\[11\] \.dynamic +DYNAMIC +018102f0 0002f0 0000a0 08 +WA +4 +0 +4
++ +\[12\] \.data +PROGBITS +01810390 000390 00001c 00 +WA +0 +0 +1
++ +\[13\] \.got +PROGBITS +01810390 000390 00001c 04 WAX +0 +0 +4
++ +\[14\] \.sdata +PROGBITS +018103a0 0003a0 000000 00 +WA +0 +0 +4
++ +\[15\] \.sbss +NOBITS +018103a0 0003a0 000000 00 +WA +0 +0 +1
+  +\[16\] \.plt +NOBITS +.*
+  +\[17\] \.bss +NOBITS +.*
+  +\[18\] \.shstrtab +STRTAB +.*
+@@ -33,18 +33,19 @@ Section Headers:
+ #...
+ 
+ Elf file type is EXEC \(Executable file\)
+-Entry point 0x1800244
+-There are 6 program headers, starting at offset 52
++Entry point 0x1800264
++There are 7 program headers, starting at offset 52
+ 
+ Program Headers:
+  +Type +Offset +VirtAddr +PhysAddr +FileSiz MemSiz +Flg Align
+- +PHDR +0x000034 0x01800034 0x01800034 0x000c0 0x000c0 R E 0x4
+- +INTERP +0x0000f4 0x018000f4 0x018000f4 0x00011 0x00011 R +0x1
++ +PHDR +0x000034 0x01800034 0x01800034 0x000e0 0x000e0 R E 0x4
++ +INTERP +0x000114 0x01800114 0x01800114 0x00011 0x00011 R +0x1
+  +\[Requesting program interpreter: .*\]
+- +LOAD +0x000000 0x01800000 0x01800000 0x002b4 0x002b4 R E 0x10000
+- +LOAD +0x0002b4 0x018102b4 0x018102b4 0x000d8 0x0012c RWE 0x10000
+- +DYNAMIC +0x0002d0 0x018102d0 0x018102d0 0x000a0 0x000a0 RW +0x4
+- +TLS +0x0002b4 0x018102b4 0x018102b4 0x0001c 0x00038 R +0x4
++ +LOAD +0x000000 0x01800000 0x01800000 0x002d4 0x002d4 R E 0x10000
++ +LOAD +0x0002d4 0x018102d4 0x018102d4 0x000d8 0x0012c RWE 0x10000
++ +DYNAMIC +0x0002f0 0x018102f0 0x018102f0 0x000a0 0x000a0 RW +0x4
++ +TLS +0x0002d4 0x018102d4 0x018102d4 0x0001c 0x00038 R +0x4
++ +PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x4
+ 
+  Section to Segment mapping:
+  +Segment Sections\.\.\.
+@@ -54,27 +55,28 @@ Program Headers:
+  +03 +\.tdata \.dynamic \.got \.plt 
+  +04 +\.dynamic 
+  +05 +\.tdata \.tbss 
++ +06 +
+ 
+-Relocation section '\.rela\.dyn' at offset 0x220 contains 2 entries:
++Relocation section '\.rela\.dyn' at offset 0x240 contains 2 entries:
+  Offset +Info +Type +Sym\. Value +Symbol's Name \+ Addend
+-01810380 +00000249 R_PPC_TPREL32 +00000000 +gd \+ 0
+-01810384 +00000444 R_PPC_DTPMOD32 +00000000 +ld \+ 0
++018103a0 +00000249 R_PPC_TPREL32 +00000000 +gd \+ 0
++018103a4 +00000444 R_PPC_DTPMOD32 +00000000 +ld \+ 0
+ 
+-Relocation section '\.rela\.plt' at offset 0x238 contains 1 entries:
++Relocation section '\.rela\.plt' at offset 0x258 contains 1 entries:
+  Offset +Info +Type +Sym\. Value +Symbol's Name \+ Addend
+-018103d4 +00000315 R_PPC_JMP_SLOT +018103d4 +__tls_get_addr \+ 0
++018103f4 +00000315 R_PPC_JMP_SLOT +018103f4 +__tls_get_addr \+ 0
+ 
+ Symbol table '\.dynsym' contains 9 entries:
+  +Num: +Value +Size Type +Bind +Vis +Ndx Name
+  +0: 00000000 +0 NOTYPE +LOCAL +DEFAULT +UND 
+- +1: 018102d0 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
++ +1: 018102f0 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
+  +2: 00000000 +0 TLS +GLOBAL DEFAULT +UND gd
+- +3: 018103d4 +0 FUNC +GLOBAL DEFAULT +UND __tls_get_addr
++ +3: 018103f4 +0 FUNC +GLOBAL DEFAULT +UND __tls_get_addr
+  +4: 00000000 +0 TLS +GLOBAL DEFAULT +UND ld
+- +5: 018103e0 +0 NOTYPE +GLOBAL DEFAULT +ABS __end
+- +6: 0181038c +0 NOTYPE +GLOBAL DEFAULT +ABS __bss_start
+- +7: 0181038c +0 NOTYPE +GLOBAL DEFAULT +ABS _edata
+- +8: 018103e0 +0 NOTYPE +GLOBAL DEFAULT +ABS _end
++ +5: 01810400 +0 NOTYPE +GLOBAL DEFAULT +ABS __end
++ +6: 018103ac +0 NOTYPE +GLOBAL DEFAULT +ABS __bss_start
++ +7: 018103ac +0 NOTYPE +GLOBAL DEFAULT +ABS _edata
++ +8: 01810400 +0 NOTYPE +GLOBAL DEFAULT +ABS _end
+ 
+ Symbol table '\.symtab' contains 47 entries:
+  +Num: +Value +Size Type +Bind +Vis +Ndx Name
+@@ -85,15 +87,15 @@ Symbol table '\.symtab' contains 47 entr
+  +4: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +4 
+  +5: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +5 
+  +6: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +6 
+- +7: 01800244 +0 SECTION LOCAL +DEFAULT +7 
++ +7: 01800264 +0 SECTION LOCAL +DEFAULT +7 
+  +8: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +8 
+- +9: 018102b4 +0 SECTION LOCAL +DEFAULT +9 
+- +10: 018102d0 +0 SECTION LOCAL +DEFAULT +10 
+- +11: 018102d0 +0 SECTION LOCAL +DEFAULT +11 
+- +12: 01810370 +0 SECTION LOCAL +DEFAULT +12 
+- +13: 01810370 +0 SECTION LOCAL +DEFAULT +13 
+- +14: 0181038c +0 SECTION LOCAL +DEFAULT +14 
+- +15: 0181038c +0 SECTION LOCAL +DEFAULT +15 
++ +9: 018102d4 +0 SECTION LOCAL +DEFAULT +9 
++ +10: 018102f0 +0 SECTION LOCAL +DEFAULT +10 
++ +11: 018102f0 +0 SECTION LOCAL +DEFAULT +11 
++ +12: 01810390 +0 SECTION LOCAL +DEFAULT +12 
++ +13: 01810390 +0 SECTION LOCAL +DEFAULT +13 
++ +14: 018103ac +0 SECTION LOCAL +DEFAULT +14 
++ +15: 018103ac +0 SECTION LOCAL +DEFAULT +15 
+  +16: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +16 
+  +17: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +17 
+  +18: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +18 
+@@ -106,7 +108,7 @@ Symbol table '\.symtab' contains 47 entr
+  +25: 00000010 +0 TLS +LOCAL +DEFAULT +9 ie4
+  +26: 00000014 +0 TLS +LOCAL +DEFAULT +9 le4
+  +27: 00000018 +0 TLS +LOCAL +DEFAULT +9 le5
+- +28: 018102d0 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
++ +28: 018102f0 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
+  +29: 00000000 +0 TLS +GLOBAL DEFAULT +UND gd
+  +30: 00000030 +0 TLS +GLOBAL DEFAULT +10 le0
+  +31: [0-9a-f]+ +0 FUNC +GLOBAL DEFAULT +UND __tls_get_addr
+@@ -120,7 +122,7 @@ Symbol table '\.symtab' contains 47 entr
+  +39: 00000024 +0 TLS +GLOBAL DEFAULT +10 ld1
+  +40: [0-9a-f]+ +0 NOTYPE +GLOBAL DEFAULT +ABS __bss_start
+  +41: [0-9a-f]+ +0 NOTYPE +GLOBAL DEFAULT +ABS _edata
+- +42: 01810374 +0 OBJECT +GLOBAL +HIDDEN +13 _GLOBAL_OFFSET_TABLE_
++ +42: 01810394 +0 OBJECT +GLOBAL +HIDDEN +13 _GLOBAL_OFFSET_TABLE_
+  +43: [0-9a-f]+ +0 NOTYPE +GLOBAL DEFAULT +ABS _end
+  +44: 0000001c +0 TLS +GLOBAL DEFAULT +10 gd0
+  +45: 0000002c +0 TLS +GLOBAL DEFAULT +10 ie0
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsexetoc.g binutils-2.15.97/ld/testsuite/ld-powerpc/tlsexetoc.g
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsexetoc.g	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tlsexetoc.g	2005-04-20 21:19:53.000000000 -0400
+@@ -7,9 +7,9 @@
+ .*: +file format elf64-powerpc
+ 
+ Contents of section \.got:
+- 10010580 00000000 10018580 00000000 00000000  .*
+- 10010590 00000000 00000000 00000000 00000000  .*
+- 100105a0 00000000 00000000 00000000 00000001  .*
+- 100105b0 00000000 00000000 00000000 00000001  .*
+- 100105c0 00000000 00000000 ffffffff ffff8050  .*
+- 100105d0 00000000 00000000                    .*
++ 100105b8 00000000 100185b8 00000000 00000000  .*
++ 100105c8 00000000 00000000 00000000 00000000  .*
++ 100105d8 00000000 00000000 00000000 00000001  .*
++ 100105e8 00000000 00000000 00000000 00000001  .*
++ 100105f8 00000000 00000000 ffffffff ffff8050  .*
++ 10010608 00000000 00000000                    .*
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsexetoc.r binutils-2.15.97/ld/testsuite/ld-powerpc/tlsexetoc.r
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsexetoc.r	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tlsexetoc.r	2005-04-20 21:19:53.000000000 -0400
+@@ -33,17 +33,18 @@ Section Headers:
+ 
+ Elf file type is EXEC \(Executable file\)
+ Entry point .*
+-There are 6 program headers.*
++There are 7 program headers.*
+ 
+ Program Headers:
+  +Type +Offset +VirtAddr +PhysAddr +FileSiz +MemSiz +Flg Align
+- +PHDR +0x0+40 0x0+10000040 0x0+10000040 0x0+150 0x0+150 R E 0x8
+- +INTERP +0x0+190 0x0+10000190 0x0+10000190 0x0+11 0x0+11 R +0x1
++ +PHDR +0x0+40 0x0+10000040 0x0+10000040 0x0+188 0x0+188 R E 0x8
++ +INTERP +0x0+1c8 0x0+100001c8 0x0+100001c8 0x0+11 0x0+11 R +0x1
+  +\[Requesting program interpreter: .*\]
+- +LOAD +0x0+ 0x0+10000000 0x0+10000000 0x0+3f4 0x0+3f4 R E 0x10000
+- +LOAD +0x0+3f8 0x0+100103f8 0x0+100103f8 0x0+1e0 0x0+210 RW +0x10000
+- +DYNAMIC +0x0+430 0x0+10010430 0x0+10010430 0x0+150 0x0+150 RW +0x8
+- +TLS +0x0+3f8 0x0+100103f8 0x0+100103f8 0x0+38 0x0+70 R +0x8
++ +LOAD +0x0+ 0x0+10000000 0x0+10000000 0x0+42c 0x0+42c R E 0x10000
++ +LOAD +0x0+430 0x0+10010430 0x0+10010430 0x0+1e0 0x0+210 RW +0x10000
++ +DYNAMIC +0x0+468 0x0+10010468 0x0+10010468 0x0+150 0x0+150 RW +0x8
++ +TLS +0x0+430 0x0+10010430 0x0+10010430 0x0+38 0x0+70 R +0x8
++ +PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x8
+ 
+  Section to Segment mapping:
+  +Segment Sections\.\.\.
+@@ -53,20 +54,21 @@ Program Headers:
+  +03 +\.tdata \.dynamic \.got \.plt 
+  +04 +\.dynamic 
+  +05 +\.tdata \.tbss 
++ +06 +
+ 
+ Relocation section '\.rela\.dyn' at offset .* contains 2 entries:
+  +Offset +Info +Type +Symbol's Value +Symbol's Name \+ Addend
+-0+10010588 +0+200000049 R_PPC64_TPREL64 +0+ gd \+ 0
+-0+10010598 +0+400000044 R_PPC64_DTPMOD64 +0+ ld \+ 0
++0+100105c0 +0+200000049 R_PPC64_TPREL64 +0+ gd \+ 0
++0+100105d0 +0+400000044 R_PPC64_DTPMOD64 +0+ ld \+ 0
+ 
+ Relocation section '\.rela\.plt' at offset .* contains 1 entries:
+  +Offset +Info +Type +Symbol's Value +Symbol's Name \+ Addend
+-0+100105f0 +0+300000015 R_PPC64_JMP_SLOT +0+ __tls_get_addr \+ 0
++0+10010628 +0+300000015 R_PPC64_JMP_SLOT +0+ __tls_get_addr \+ 0
+ 
+ Symbol table '\.dynsym' contains 8 entries:
+  +Num: +Value +Size Type +Bind +Vis +Ndx Name
+ .* 0+ +0 NOTYPE +LOCAL +DEFAULT +UND 
+-.* 0+10010430 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
++.* 0+10010468 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
+ .* 0+ +0 TLS +GLOBAL DEFAULT +UND gd
+ .* 0+ +0 FUNC +GLOBAL DEFAULT +UND __tls_get_addr
+ .* 0+ +0 TLS +GLOBAL DEFAULT +UND ld
+@@ -83,11 +85,11 @@ Symbol table '\.symtab' contains 44 entr
+ .* [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +4 
+ .* [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +5 
+ .* [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +6 
+-.* 0+10000338 +0 SECTION LOCAL +DEFAULT +7 
+-.* 0+100103f8 +0 SECTION LOCAL +DEFAULT +8 
+-.* 0+10010430 +0 SECTION LOCAL +DEFAULT +9 
+-.* 0+10010430 +0 SECTION LOCAL +DEFAULT +10 
+-.* 0+10010580 +0 SECTION LOCAL +DEFAULT +11 
++.* 0+10000370 +0 SECTION LOCAL +DEFAULT +7 
++.* 0+10010430 +0 SECTION LOCAL +DEFAULT +8 
++.* 0+10010468 +0 SECTION LOCAL +DEFAULT +9 
++.* 0+10010468 +0 SECTION LOCAL +DEFAULT +10 
++.* 0+100105b8 +0 SECTION LOCAL +DEFAULT +11 
+ .* [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +12 
+ .* 0+10010580 +0 SECTION LOCAL +DEFAULT +13 
+ .* [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +14 
+@@ -103,20 +105,20 @@ Symbol table '\.symtab' contains 44 entr
+ .* 0+20 +0 TLS +LOCAL +DEFAULT +8 ie4
+ .* 0+28 +0 TLS +LOCAL +DEFAULT +8 le4
+ .* 0+30 +0 TLS +LOCAL +DEFAULT +8 le5
+-.* 0+100105d0 +0 NOTYPE +LOCAL +DEFAULT +13 \.Lie0
++.* 0+10010608 +0 NOTYPE +LOCAL +DEFAULT +13 \.Lie0
+ .* 0+ +0 FUNC +LOCAL +DEFAULT +UND \.__tls_get_addr
+-.* 0+10010430 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
++.* 0+10010468 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
+ .* 0+ +0 TLS +GLOBAL DEFAULT +UND gd
+ .* 0+60 +0 TLS +GLOBAL DEFAULT +9 le0
+ .* 0+ +0 FUNC +GLOBAL DEFAULT +UND __tls_get_addr
+ .* 0+40 +0 TLS +GLOBAL DEFAULT +9 ld0
+ .* 0+68 +0 TLS +GLOBAL DEFAULT +9 le1
+ .* 0+ +0 TLS +GLOBAL DEFAULT +UND ld
+-.* 0+10000354 +0 NOTYPE +GLOBAL DEFAULT +7 _start
++.* 0+1000038c +0 NOTYPE +GLOBAL DEFAULT +7 _start
+ .* 0+50 +0 TLS +GLOBAL DEFAULT +9 ld2
+ .* 0+48 +0 TLS +GLOBAL DEFAULT +9 ld1
+-.* 0+100105d8 +0 NOTYPE +GLOBAL DEFAULT +ABS __bss_start
+-.* 0+100105d8 +0 NOTYPE +GLOBAL DEFAULT +ABS _edata
+-.* 0+10010608 +0 NOTYPE +GLOBAL DEFAULT +ABS _end
++.* 0+10010610 +0 NOTYPE +GLOBAL DEFAULT +ABS __bss_start
++.* 0+10010610 +0 NOTYPE +GLOBAL DEFAULT +ABS _edata
++.* 0+10010640 +0 NOTYPE +GLOBAL DEFAULT +ABS _end
+ .* 0+38 +0 TLS +GLOBAL DEFAULT +9 gd0
+ .* 0+58 +0 TLS +GLOBAL DEFAULT +9 ie0
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsso.g binutils-2.15.97/ld/testsuite/ld-powerpc/tlsso.g
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsso.g	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tlsso.g	2005-04-20 21:19:53.000000000 -0400
+@@ -7,9 +7,9 @@
+ .*: +file format elf64-powerpc
+ 
+ Contents of section \.got:
+- 10850 00000000 00018850 00000000 00000000  .*
+- 10860 00000000 00000000 00000000 00000000  .*
+- 10870 00000000 00000000 00000000 00000000  .*
+- 10880 00000000 00000000 00000000 00000000  .*
+- 10890 00000000 00000000 00000000 00000000  .*
+- 108a0 00000000 00000000 00000000 00000000  .*
++ 10888 00000000 00018888 00000000 00000000  .*
++ 10898 00000000 00000000 00000000 00000000  .*
++ 108a8 00000000 00000000 00000000 00000000  .*
++ 108b8 00000000 00000000 00000000 00000000  .*
++ 108c8 00000000 00000000 00000000 00000000  .*
++ 108d8 00000000 00000000 00000000 00000000  .*
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsso.r binutils-2.15.97/ld/testsuite/ld-powerpc/tlsso.r
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsso.r	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tlsso.r	2005-04-20 21:19:53.000000000 -0400
+@@ -14,13 +14,13 @@ Section Headers:
+  +\[ 3\] \.dynstr +.*
+  +\[ 4\] \.rela\.dyn +.*
+  +\[ 5\] \.rela\.plt +.*
+- +\[ 6\] \.text +PROGBITS +0+5c8 0+5c8 0+fc 0+ +AX +0 +0 +4
+- +\[ 7\] \.tdata +PROGBITS +0+106c8 0+6c8 0+38 0+ WAT +0 +0 +8
+- +\[ 8\] \.tbss +NOBITS +0+10700 0+700 0+38 0+ WAT +0 +0 +8
+- +\[ 9\] \.dynamic +DYNAMIC +0+10700 0+700 0+150 10 +WA +3 +0 +8
+- +\[10\] \.data +PROGBITS +0+10850 0+850 0+ 0+ +WA +0 +0 +1
++ +\[ 6\] \.text +PROGBITS +0+600 0+600 0+fc 0+ +AX +0 +0 +4
++ +\[ 7\] \.tdata +PROGBITS +0+10700 0+700 0+38 0+ WAT +0 +0 +8
++ +\[ 8\] \.tbss +NOBITS +0+10738 0+738 0+38 0+ WAT +0 +0 +8
++ +\[ 9\] \.dynamic +DYNAMIC +0+10738 0+738 0+150 10 +WA +3 +0 +8
++ +\[10\] \.data +PROGBITS +0+10888 0+888 0+ 0+ +WA +0 +0 +1
+  +\[11\] \.branch_lt +.*
+- +\[12\] \.got +PROGBITS +0+10850 0+850 0+60 08 +WA +0 +0 +8
++ +\[12\] \.got +PROGBITS +0+10888 0+888 0+60 08 +WA +0 +0 +8
+  +\[13\] \.sbss +.*
+  +\[14\] \.plt +.*
+  +\[15\] \.bss +.*
+@@ -31,14 +31,15 @@ Section Headers:
+ 
+ Elf file type is DYN \(Shared object file\)
+ Entry point 0x[0-9a-f]+
+-There are 4 program headers.*
++There are 5 program headers.*
+ 
+ Program Headers:
+  +Type +Offset +VirtAddr +PhysAddr +FileSiz +MemSiz +Flg Align
+- +LOAD +0x0+ 0x0+ 0x0+ 0x0+6c4 0x0+6c4 R E 0x10000
+- +LOAD +0x0+6c8 0x0+106c8 0x0+106c8 0x0+1e8 0x0+218 RW +0x10000
+- +DYNAMIC +0x0+700 0x0+10700 0x0+10700 0x0+150 0x0+150 RW +0x8
+- +TLS +0x0+6c8 0x0+106c8 0x0+106c8 0x0+38 0x0+70 R +0x8
++ +LOAD +0x0+ 0x0+ 0x0+ 0x0+6fc 0x0+6fc R E 0x10000
++ +LOAD +0x0+700 0x0+10700 0x0+10700 0x0+1e8 0x0+218 RW +0x10000
++ +DYNAMIC +0x0+738 0x0+10738 0x0+10738 0x0+150 0x0+150 RW +0x8
++ +TLS +0x0+700 0x0+10700 0x0+10700 0x0+38 0x0+70 R +0x8
++ +PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x8
+ 
+  Section to Segment mapping:
+  +Segment Sections\.\.\.
+@@ -46,40 +47,41 @@ Program Headers:
+  +01 +\.tdata \.dynamic \.got \.plt 
+  +02 +\.dynamic 
+  +03 +\.tdata \.tbss 
++ +04 +
+ 
+ Relocation section '\.rela\.dyn' at offset .* contains 16 entries:
+  +Offset +Info +Type +Symbol's Value +Symbol's Name \+ Addend
+-0+632 +0+90+45 R_PPC64_TPREL16 +0+60 le0 \+ 0
+-0+636 +0+c0+48 R_PPC64_TPREL16_HA +0+68 le1 \+ 0
+-0+63a +0+c0+46 R_PPC64_TPREL16_LO +0+68 le1 \+ 0
+-0+672 +0+20+5f R_PPC64_TPREL16_DS +0+106c8 \.tdata \+ 28
+-0+676 +0+20+48 R_PPC64_TPREL16_HA +0+106c8 \.tdata \+ 30
+-0+67a +0+20+46 R_PPC64_TPREL16_LO +0+106c8 \.tdata \+ 30
+-0+10858 +0+44 R_PPC64_DTPMOD64 +0+
+-0+10868 +0+44 R_PPC64_DTPMOD64 +0+
+-0+10870 +0+4e R_PPC64_DTPREL64 +0+
+-0+10878 +0+4e R_PPC64_DTPREL64 +0+18
+-0+10880 +0+80+44 R_PPC64_DTPMOD64 +0+ gd \+ 0
+-0+10888 +0+80+4e R_PPC64_DTPREL64 +0+ gd \+ 0
+-0+10890 +0+f0+4e R_PPC64_DTPREL64 +0+50 ld2 \+ 0
+-0+10898 +0+140+44 R_PPC64_DTPMOD64 +0+38 gd0 \+ 0
+-0+108a0 +0+140+4e R_PPC64_DTPREL64 +0+38 gd0 \+ 0
+-0+108a8 +0+150+49 R_PPC64_TPREL64 +0+58 ie0 \+ 0
++0+66a +0+90+45 R_PPC64_TPREL16 +0+60 le0 \+ 0
++0+66e +0+c0+48 R_PPC64_TPREL16_HA +0+68 le1 \+ 0
++0+672 +0+c0+46 R_PPC64_TPREL16_LO +0+68 le1 \+ 0
++0+6aa +0+20+5f R_PPC64_TPREL16_DS +0+10700 \.tdata \+ 28
++0+6ae +0+20+48 R_PPC64_TPREL16_HA +0+10700 \.tdata \+ 30
++0+6b2 +0+20+46 R_PPC64_TPREL16_LO +0+10700 \.tdata \+ 30
++0+10890 +0+44 R_PPC64_DTPMOD64 +0+
++0+108a0 +0+44 R_PPC64_DTPMOD64 +0+
++0+108a8 +0+4e R_PPC64_DTPREL64 +0+
++0+108b0 +0+4e R_PPC64_DTPREL64 +0+18
++0+108b8 +0+80+44 R_PPC64_DTPMOD64 +0+ gd \+ 0
++0+108c0 +0+80+4e R_PPC64_DTPREL64 +0+ gd \+ 0
++0+108c8 +0+f0+4e R_PPC64_DTPREL64 +0+50 ld2 \+ 0
++0+108d0 +0+140+44 R_PPC64_DTPMOD64 +0+38 gd0 \+ 0
++0+108d8 +0+140+4e R_PPC64_DTPREL64 +0+38 gd0 \+ 0
++0+108e0 +0+150+49 R_PPC64_TPREL64 +0+58 ie0 \+ 0
+ 
+ Relocation section '\.rela\.plt' at offset .* contains 1 entries:
+  +Offset +Info +Type +Symbol's Value +Symbol's Name \+ Addend
+-0+108c8 +0+a0+15 R_PPC64_JMP_SLOT +0+ __tls_get_addr \+ 0
++0+10900 +0+a0+15 R_PPC64_JMP_SLOT +0+ __tls_get_addr \+ 0
+ 
+ Symbol table '\.dynsym' contains 22 entries:
+  +Num: +Value +Size Type +Bind +Vis +Ndx Name
+  +[0-9]+: 0+ +0 NOTYPE +LOCAL +DEFAULT +UND 
+- +[0-9]+: 0+5c8 +0 SECTION LOCAL +DEFAULT +6 
+- +[0-9]+: 0+106c8 +0 SECTION LOCAL +DEFAULT +7 
+- +[0-9]+: 0+10700 +0 SECTION LOCAL +DEFAULT +8 
+- +[0-9]+: 0+10850 +0 SECTION LOCAL +DEFAULT +10 
++ +[0-9]+: 0+600 +0 SECTION LOCAL +DEFAULT +6 
++ +[0-9]+: 0+10700 +0 SECTION LOCAL +DEFAULT +7 
++ +[0-9]+: 0+10738 +0 SECTION LOCAL +DEFAULT +8 
++ +[0-9]+: 0+10880 +0 SECTION LOCAL +DEFAULT +10 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +11 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +15 
+- +[0-9]+: 0+10700 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
++ +[0-9]+: 0+10738 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
+  +[0-9]+: 0+ +0 TLS +GLOBAL DEFAULT +UND gd
+  +[0-9]+: 0+60 +0 TLS +GLOBAL DEFAULT +8 le0
+  +[0-9]+: 0+ +0 NOTYPE +GLOBAL DEFAULT +UND __tls_get_addr
+@@ -103,11 +105,11 @@ Symbol table '\.symtab' contains 42 entr
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +3 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +4 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +5 
+- +[0-9]+: 0+5c8 +0 SECTION LOCAL +DEFAULT +6 
+- +[0-9]+: 0+106c8 +0 SECTION LOCAL +DEFAULT +7 
+- +[0-9]+: 0+10700 +0 SECTION LOCAL +DEFAULT +8 
+- +[0-9]+: 0+10700 +0 SECTION LOCAL +DEFAULT +9 
+- +[0-9]+: 0+10850 +0 SECTION LOCAL +DEFAULT +10 
++ +[0-9]+: 0+600 +0 SECTION LOCAL +DEFAULT +6 
++ +[0-9]+: 0+10700 +0 SECTION LOCAL +DEFAULT +7 
++ +[0-9]+: 0+10738 +0 SECTION LOCAL +DEFAULT +8 
++ +[0-9]+: 0+10738 +0 SECTION LOCAL +DEFAULT +9 
++ +[0-9]+: 0+10888 +0 SECTION LOCAL +DEFAULT +10 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +11 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +12 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +13 
+@@ -124,7 +126,7 @@ Symbol table '\.symtab' contains 42 entr
+  +[0-9]+: 0+28 +0 TLS +LOCAL +DEFAULT +7 le4
+  +[0-9]+: 0+30 +0 TLS +LOCAL +DEFAULT +7 le5
+  +[0-9]+: [0-9a-f]+ +0 NOTYPE +LOCAL +DEFAULT +6 \.__tls_get_addr
+- +[0-9]+: 0+10700 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
++ +[0-9]+: 0+10738 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
+  +[0-9]+: 0+ +0 TLS +GLOBAL DEFAULT +UND gd
+  +[0-9]+: 0+60 +0 TLS +GLOBAL DEFAULT +8 le0
+  +[0-9]+: 0+ +0 NOTYPE +GLOBAL DEFAULT +UND __tls_get_addr
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsso32.d binutils-2.15.97/ld/testsuite/ld-powerpc/tlsso32.d
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsso32.d	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tlsso32.d	2005-04-20 21:19:53.000000000 -0400
+@@ -41,5 +41,5 @@ Disassembly of section \.got:
+ 
+ .* <\.got>:
+ .*:	4e 80 00 21 	blrl
+-.*:	00 01 04 e4 	.*
++.*:	00 01 05 04 	.*
+ 	\.\.\.
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsso32.g binutils-2.15.97/ld/testsuite/ld-powerpc/tlsso32.g
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsso32.g	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tlsso32.g	2005-04-20 21:19:53.000000000 -0400
+@@ -7,7 +7,7 @@
+ .*: +file format elf32-powerpc
+ 
+ Contents of section \.got:
+-.* 4e800021 000104e4 00000000 00000000  .*
++.* 4e800021 00010504 00000000 00000000  .*
+ .* 00000000 00000000 00000000 00000000  .*
+ .* 00000000 00000000 00000000 00000000  .*
+ .* 00000000                             .*
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsso32.r binutils-2.15.97/ld/testsuite/ld-powerpc/tlsso32.r
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlsso32.r	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tlsso32.r	2005-04-20 21:19:53.000000000 -0400
+@@ -14,12 +14,12 @@ Section Headers:
+  +\[ 3\] \.dynstr +.*
+  +\[ 4\] \.rela\.dyn +.*
+  +\[ 5\] \.rela\.plt +.*
+- +\[ 6\] \.text +PROGBITS +0+458 0+458 0+70 0+ +AX +0 +0 +1
+- +\[ 7\] \.tdata +PROGBITS +0+104c8 0+4c8 0+1c 0+ WAT +0 +0 +4
+- +\[ 8\] \.tbss +NOBITS +0+104e4 0+4e4 0+1c 0+ WAT +0 +0 +4
+- +\[ 9\] \.dynamic +DYNAMIC +0+104e4 0+4e4 0+a0 08 +WA +3 +0 +4
+- +\[10\] \.data +PROGBITS +0+10584 0+584 0+ 0+ +WA +0 +0 +1
+- +\[11\] \.got +PROGBITS +0+10584 0+584 0+34 04 WAX +0 +0 +4
++ +\[ 6\] \.text +PROGBITS +0+478 0+478 0+70 0+ +AX +0 +0 +1
++ +\[ 7\] \.tdata +PROGBITS +0+104e8 0+4e8 0+1c 0+ WAT +0 +0 +4
++ +\[ 8\] \.tbss +NOBITS +0+10504 0+504 0+1c 0+ WAT +0 +0 +4
++ +\[ 9\] \.dynamic +DYNAMIC +0+10504 0+504 0+a0 08 +WA +3 +0 +4
++ +\[10\] \.data +PROGBITS +0+105a4 0+5a4 0+ 0+ +WA +0 +0 +1
++ +\[11\] \.got +PROGBITS +0+105a4 0+5a4 0+34 04 WAX +0 +0 +4
+  +\[12\] \.sdata +.*
+  +\[13\] \.sbss +.*
+  +\[14\] \.plt +.*
+@@ -31,14 +31,15 @@ Section Headers:
+ 
+ Elf file type is DYN \(Shared object file\)
+ Entry point 0x[0-9a-f]+
+-There are 4 program headers.*
++There are 5 program headers.*
+ 
+ Program Headers:
+  +Type +Offset +VirtAddr +PhysAddr +FileSiz MemSiz +Flg Align
+- +LOAD +0x0+ 0x0+ 0x0+ 0x0+4c8 0x0+4c8 R E 0x10000
+- +LOAD +0x0+4c8 0x0+104c8 0x0+104c8 0x0+f0 0x0+144 RWE 0x10000
+- +DYNAMIC +0x0+4e4 0x0+104e4 0x0+104e4 0x0+a0 0x0+a0 RW +0x4
+- +TLS +0x0+4c8 0x0+104c8 0x0+104c8 0x0+1c 0x0+38 R +0x4
++ +LOAD +0x0+ 0x0+ 0x0+ 0x0+4e8 0x0+4e8 R E 0x10000
++ +LOAD +0x0+4e8 0x0+104e8 0x0+104e8 0x0+f0 0x0+144 RWE 0x10000
++ +DYNAMIC +0x0+504 0x0+10504 0x0+10504 0x0+a0 0x0+a0 RW +0x4
++ +TLS +0x0+4e8 0x0+104e8 0x0+104e8 0x0+1c 0x0+38 R +0x4
++ +PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x4
+ 
+  Section to Segment mapping:
+  +Segment Sections\.\.\.
+@@ -46,43 +47,44 @@ Program Headers:
+  +01 +\.tdata \.dynamic \.got \.plt 
+  +02 +\.dynamic 
+  +03 +\.tdata \.tbss 
++ +04 +
+ 
+ Relocation section '\.rela\.dyn' at offset 0x[0-9a-f]+ contains 18 entries:
+  Offset +Info +Type +Sym\. Value +Symbol's Name \+ Addend
+-0+45c +0+b0a R_PPC_REL24 +0+ +__tls_get_addr \+ 0
+-0+464 +0+b0a R_PPC_REL24 +0+ +__tls_get_addr \+ 0
+-0+49c +0+b0a R_PPC_REL24 +0+ +__tls_get_addr \+ 0
+-0+4a4 +0+b0a R_PPC_REL24 +0+ +__tls_get_addr \+ 0
+-0+48e +0+a45 R_PPC_TPREL16 +0+30 +le0 \+ 0
+-0+492 +0+d48 R_PPC_TPREL16_HA +0+34 +le1 \+ 0
+-0+496 +0+d46 R_PPC_TPREL16_LO +0+34 +le1 \+ 0
+-0+4be +0+245 R_PPC_TPREL16 +0+104c8 +\.tdata \+ 104dc
+-0+4c2 +0+248 R_PPC_TPREL16_HA +0+104c8 +\.tdata \+ 104e0
+-0+4c6 +0+246 R_PPC_TPREL16_LO +0+104c8 +\.tdata \+ 104e0
+-0+10594 +0+44 R_PPC_DTPMOD32 +0+
+-0+1059c +0+44 R_PPC_DTPMOD32 +0+
+-0+105a0 +0+4e R_PPC_DTPREL32 +0+
+-0+105a4 +0+944 R_PPC_DTPMOD32 +0+ +gd \+ 0
+-0+105a8 +0+94e R_PPC_DTPREL32 +0+ +gd \+ 0
+-0+105ac +0+1744 R_PPC_DTPMOD32 +0+1c +gd0 \+ 0
+-0+105b0 +0+174e R_PPC_DTPREL32 +0+1c +gd0 \+ 0
+-0+105b4 +0+1849 R_PPC_TPREL32 +0+2c +ie0 \+ 0
++0+47c +0+b0a R_PPC_REL24 +0+ +__tls_get_addr \+ 0
++0+484 +0+b0a R_PPC_REL24 +0+ +__tls_get_addr \+ 0
++0+4ac +0+b0a R_PPC_REL24 +0+ +__tls_get_addr \+ 0
++0+4c4 +0+b0a R_PPC_REL24 +0+ +__tls_get_addr \+ 0
++0+4ae +0+a45 R_PPC_TPREL16 +0+30 +le0 \+ 0
++0+4b2 +0+d48 R_PPC_TPREL16_HA +0+34 +le1 \+ 0
++0+4b6 +0+d46 R_PPC_TPREL16_LO +0+34 +le1 \+ 0
++0+4de +0+245 R_PPC_TPREL16 +0+104e8 +\.tdata \+ 104dc
++0+4e2 +0+248 R_PPC_TPREL16_HA +0+104e8 +\.tdata \+ 10500
++0+4e6 +0+246 R_PPC_TPREL16_LO +0+104e8 +\.tdata \+ 10500
++0+105b4 +0+44 R_PPC_DTPMOD32 +0+
++0+105bc +0+44 R_PPC_DTPMOD32 +0+
++0+105c0 +0+4e R_PPC_DTPREL32 +0+
++0+105c4 +0+944 R_PPC_DTPMOD32 +0+ +gd \+ 0
++0+105c8 +0+94e R_PPC_DTPREL32 +0+ +gd \+ 0
++0+105cc +0+1744 R_PPC_DTPMOD32 +0+1c +gd0 \+ 0
++0+105d0 +0+174e R_PPC_DTPREL32 +0+1c +gd0 \+ 0
++0+105d4 +0+1849 R_PPC_TPREL32 +0+2c +ie0 \+ 0
+ 
+ Relocation section '\.rela\.plt' at offset 0x[0-9a-f]+ contains 1 entries:
+  Offset +Info +Type +Sym\. Value +Symbol's Name \+ Addend
+-0+10600 +0+b15 R_PPC_JMP_SLOT +0+ +__tls_get_addr \+ 0
++0+10620 +0+b15 R_PPC_JMP_SLOT +0+ +__tls_get_addr \+ 0
+ 
+ Symbol table '\.dynsym' contains 26 entries:
+  +Num: +Value +Size Type +Bind +Vis +Ndx Name
+  +[0-9]+: 0+ +0 NOTYPE +LOCAL +DEFAULT +UND 
+- +[0-9]+: 0+458 +0 SECTION LOCAL +DEFAULT +6 
+- +[0-9]+: 0+104c8 +0 SECTION LOCAL +DEFAULT +7 
+- +[0-9]+: 0+104e4 +0 SECTION LOCAL +DEFAULT +8 
+- +[0-9]+: 0+10584 +0 SECTION LOCAL +DEFAULT +10 
+- +[0-9]+: 0+105b8 +0 SECTION LOCAL +DEFAULT +12 
+- +[0-9]+: 0+105b8 +0 SECTION LOCAL +DEFAULT +13 
+- +[0-9]+: 0+1060c +0 SECTION LOCAL +DEFAULT +15 
+- +[0-9]+: 0+104e4 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
++ +[0-9]+: 0+478 +0 SECTION LOCAL +DEFAULT +6 
++ +[0-9]+: 0+104e8 +0 SECTION LOCAL +DEFAULT +7 
++ +[0-9]+: 0+10504 +0 SECTION LOCAL +DEFAULT +8 
++ +[0-9]+: 0+105a4 +0 SECTION LOCAL +DEFAULT +10 
++ +[0-9]+: 0+105d8 +0 SECTION LOCAL +DEFAULT +12 
++ +[0-9]+: 0+105d8 +0 SECTION LOCAL +DEFAULT +13 
++ +[0-9]+: 0+1062c +0 SECTION LOCAL +DEFAULT +15 
++ +[0-9]+: 0+10504 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
+  +[0-9]+: 0+ +0 TLS +GLOBAL DEFAULT +UND gd
+  +[0-9]+: 0+30 +0 TLS +GLOBAL DEFAULT +8 le0
+  +[0-9]+: 0+ +0 NOTYPE +GLOBAL DEFAULT +UND __tls_get_addr
+@@ -109,16 +111,16 @@ Symbol table '\.symtab' contains 45 entr
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +3 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +4 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +5 
+- +[0-9]+: 0+458 +0 SECTION LOCAL +DEFAULT +6 
+- +[0-9]+: 0+104c8 +0 SECTION LOCAL +DEFAULT +7 
+- +[0-9]+: 0+104e4 +0 SECTION LOCAL +DEFAULT +8 
++ +[0-9]+: 0+474 +0 SECTION LOCAL +DEFAULT +6 
++ +[0-9]+: 0+104e8 +0 SECTION LOCAL +DEFAULT +7 
++ +[0-9]+: 0+10504 +0 SECTION LOCAL +DEFAULT +8 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +9 
+- +[0-9]+: 0+10584 +0 SECTION LOCAL +DEFAULT +10 
++ +[0-9]+: 0+105a4 +0 SECTION LOCAL +DEFAULT +10 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +11 
+- +[0-9]+: 0+105b8 +0 SECTION LOCAL +DEFAULT +12 
+- +[0-9]+: 0+105b8 +0 SECTION LOCAL +DEFAULT +13 
+- +[0-9]+: 0+105b8 +0 SECTION LOCAL +DEFAULT +14 
+- +[0-9]+: 0+1060c +0 SECTION LOCAL +DEFAULT +15 
++ +[0-9]+: 0+105d8 +0 SECTION LOCAL +DEFAULT +12 
++ +[0-9]+: 0+105d8 +0 SECTION LOCAL +DEFAULT +13 
++ +[0-9]+: 0+105d8 +0 SECTION LOCAL +DEFAULT +14 
++ +[0-9]+: 0+1062c +0 SECTION LOCAL +DEFAULT +15 
+  +[0-9]+: 0+ +0 SECTION LOCAL +DEFAULT +16 
+  +[0-9]+: 0+ +0 SECTION LOCAL +DEFAULT +17 
+  +[0-9]+: 0+ +0 SECTION LOCAL +DEFAULT +18 
+@@ -129,8 +131,8 @@ Symbol table '\.symtab' contains 45 entr
+  +[0-9]+: 0+10 +0 TLS +LOCAL +DEFAULT +7 ie4
+  +[0-9]+: 0+14 +0 TLS +LOCAL +DEFAULT +7 le4
+  +[0-9]+: 0+18 +0 TLS +LOCAL +DEFAULT +7 le5
+- +[0-9]+: 0+10588 +0 OBJECT +LOCAL +HIDDEN +ABS _GLOBAL_OFFSET_TABLE_
+- +[0-9]+: 0+104e4 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
++ +[0-9]+: 0+105a8 +0 OBJECT +LOCAL +HIDDEN +ABS _GLOBAL_OFFSET_TABLE_
++ +[0-9]+: 0+10504 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
+  +[0-9]+: 0+ +0 TLS +GLOBAL DEFAULT +UND gd
+  +[0-9]+: 0+30 +0 TLS +GLOBAL DEFAULT +8 le0
+  +[0-9]+: 0+ +0 NOTYPE +GLOBAL DEFAULT +UND __tls_get_addr
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlstoc.g binutils-2.15.97/ld/testsuite/ld-powerpc/tlstoc.g
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlstoc.g	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tlstoc.g	2005-04-20 21:19:53.000000000 -0400
+@@ -8,8 +8,8 @@
+ .*: +file format elf64-powerpc
+ 
+ Contents of section \.got:
+- 100101a0 00000000 00000001 00000000 00000000  .*
+- 100101b0 00000000 00000001 00000000 00000000  .*
+- 100101c0 00000000 00000001 00000000 00000000  .*
+- 100101d0 00000000 00000001 00000000 00000000  .*
+- 100101e0 ffffffff ffff8060 00000000 00000000  .*
++ 100101d8 00000000 00000001 00000000 00000000  .*
++ 100101e8 00000000 00000001 00000000 00000000  .*
++ 100101f8 00000000 00000001 00000000 00000000  .*
++ 10010208 00000000 00000001 00000000 00000000  .*
++ 10010218 ffffffff ffff8060 00000000 00000000  .*
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlstoc.t binutils-2.15.97/ld/testsuite/ld-powerpc/tlstoc.t
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlstoc.t	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tlstoc.t	2005-04-20 21:19:53.000000000 -0400
+@@ -8,7 +8,7 @@
+ .*: +file format elf64-powerpc
+ 
+ Contents of section \.tdata:
+- 10010148 00c0ffee 00000000 12345678 9abcdef0  .*
+- 10010158 23456789 abcdef01 3456789a bcdef012  .*
+- 10010168 456789ab cdef0123 56789abc def01234  .*
+- 10010178 6789abcd ef012345 789abcde f0123456  .*
++ 10010180 00c0ffee 00000000 12345678 9abcdef0  .*
++ 10010190 23456789 abcdef01 3456789a bcdef012  .*
++ 100101a0 456789ab cdef0123 56789abc def01234  .*
++ 100101b0 6789abcd ef012345 789abcde f0123456  .*
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlstocso.g binutils-2.15.97/ld/testsuite/ld-powerpc/tlstocso.g
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlstocso.g	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tlstocso.g	2005-04-20 21:19:53.000000000 -0400
+@@ -7,9 +7,9 @@
+ .*: +file format elf64-powerpc
+ 
+ Contents of section \.got:
+- 10798 00000000 00018798 00000000 00000000  .*
+- 107a8 00000000 00000000 00000000 00000000  .*
+- 107b8 00000000 00000000 00000000 00000000  .*
+- 107c8 00000000 00000000 00000000 00000000  .*
+- 107d8 00000000 00000000 00000000 00000000  .*
+- 107e8 00000000 00000000                    .*
++ 107d0 00000000 000187d0 00000000 00000000  .*
++ 107e0 00000000 00000000 00000000 00000000  .*
++ 107f0 00000000 00000000 00000000 00000000  .*
++ 10800 00000000 00000000 00000000 00000000  .*
++ 10810 00000000 00000000 00000000 00000000  .*
++ 10820 00000000 00000000                    .*
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlstocso.r binutils-2.15.97/ld/testsuite/ld-powerpc/tlstocso.r
+--- binutils-2.15.97.orig/ld/testsuite/ld-powerpc/tlstocso.r	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-powerpc/tlstocso.r	2005-04-20 21:19:53.000000000 -0400
+@@ -14,13 +14,13 @@ Section Headers:
+  +\[ 3\] \.dynstr +.*
+  +\[ 4\] \.rela\.dyn +.*
+  +\[ 5\] \.rela\.plt +.*
+- +\[ 6\] \.text +PROGBITS +0+550 0+550 0+bc 0+ +AX +0 +0 +4
+- +\[ 7\] \.tdata +PROGBITS +0+10610 0+610 0+38 0+ WAT +0 +0 +8
+- +\[ 8\] \.tbss +NOBITS +0+10648 0+648 0+38 0+ WAT +0 +0 +8
+- +\[ 9\] \.dynamic +DYNAMIC +0+10648 0+648 0+150 10 +WA +3 +0 +8
+- +\[10\] \.data +PROGBITS +0+10798 0+798 0+ 0+ +WA +0 +0 +1
++ +\[ 6\] \.text +PROGBITS +0+588 0+588 0+bc 0+ +AX +0 +0 +4
++ +\[ 7\] \.tdata +PROGBITS +0+10648 0+648 0+38 0+ WAT +0 +0 +8
++ +\[ 8\] \.tbss +NOBITS +0+10680 0+680 0+38 0+ WAT +0 +0 +8
++ +\[ 9\] \.dynamic +DYNAMIC +0+10680 0+680 0+150 10 +WA +3 +0 +8
++ +\[10\] \.data +PROGBITS +0+107d0 0+7d0 0+ 0+ +WA +0 +0 +1
+  +\[11\] \.branch_lt +.*
+- +\[12\] \.got +PROGBITS +0+10798 0+798 0+58 08 +WA +0 +0 +8
++ +\[12\] \.got +PROGBITS +0+107d0 0+7d0 0+58 08 +WA +0 +0 +8
+  +\[13\] \.sbss +.*
+  +\[14\] \.plt +.*
+  +\[15\] \.bss +.*
+@@ -31,14 +31,15 @@ Section Headers:
+ 
+ Elf file type is DYN \(Shared object file\)
+ Entry point 0x[0-9a-f]+
+-There are 4 program headers.*
++There are 5 program headers.*
+ 
+ Program Headers:
+  +Type +Offset +VirtAddr +PhysAddr +FileSiz +MemSiz +Flg Align
+- +LOAD +0x0+ 0x0+ 0x0+ 0x0+60c 0x0+60c R E 0x10000
+- +LOAD +0x0+610 0x0+10610 0x0+10610 0x0+1e0 0x0+210 RW +0x10000
+- +DYNAMIC +0x0+648 0x0+10648 0x0+10648 0x0+150 0x0+150 RW +0x8
+- +TLS +0x0+610 0x0+10610 0x0+10610 0x0+38 0x0+70 R +0x8
++ +LOAD +0x0+ 0x0+ 0x0+ 0x0+644 0x0+644 R E 0x10000
++ +LOAD +0x0+648 0x0+10648 0x0+10648 0x0+1e0 0x0+210 RW +0x10000
++ +DYNAMIC +0x0+680 0x0+10680 0x0+10680 0x0+150 0x0+150 RW +0x8
++ +TLS +0x0+648 0x0+10648 0x0+10648 0x0+38 0x0+70 R +0x8
++ +PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x8
+ 
+  Section to Segment mapping:
+  +Segment Sections\.\.\.
+@@ -46,35 +47,36 @@ Program Headers:
+  +01 +\.tdata \.dynamic \.got \.plt 
+  +02 +\.dynamic 
+  +03 +\.tdata \.tbss 
++ +04 +
+ 
+ Relocation section '\.rela\.dyn' at offset .* contains 11 entries:
+  +Offset +Info +Type +Symbol's Value +Symbol's Name \+ Addend
+-0+5ba +0+90+45 R_PPC64_TPREL16 +0+60 le0 \+ 0
+-0+5be +0+c0+48 R_PPC64_TPREL16_HA +0+68 le1 \+ 0
+-0+5c2 +0+c0+46 R_PPC64_TPREL16_LO +0+68 le1 \+ 0
+-0+107a0 +0+80+44 R_PPC64_DTPMOD64 +0+ gd \+ 0
+-0+107a8 +0+80+4e R_PPC64_DTPREL64 +0+ gd \+ 0
+-0+107b0 +0+d0+44 R_PPC64_DTPMOD64 +0+ ld \+ 0
+-0+107c0 +0+140+44 R_PPC64_DTPMOD64 +0+38 gd0 \+ 0
+-0+107c8 +0+140+4e R_PPC64_DTPREL64 +0+38 gd0 \+ 0
+-0+107d0 +0+b0+44 R_PPC64_DTPMOD64 +0+40 ld0 \+ 0
+-0+107e0 +0+f0+4e R_PPC64_DTPREL64 +0+50 ld2 \+ 0
+-0+107e8 +0+150+49 R_PPC64_TPREL64 +0+58 ie0 \+ 0
++0+5f2 +0+90+45 R_PPC64_TPREL16 +0+60 le0 \+ 0
++0+5f6 +0+c0+48 R_PPC64_TPREL16_HA +0+68 le1 \+ 0
++0+5fa +0+c0+46 R_PPC64_TPREL16_LO +0+68 le1 \+ 0
++0+107d8 +0+80+44 R_PPC64_DTPMOD64 +0+ gd \+ 0
++0+107e0 +0+80+4e R_PPC64_DTPREL64 +0+ gd \+ 0
++0+107e8 +0+d0+44 R_PPC64_DTPMOD64 +0+ ld \+ 0
++0+107f8 +0+140+44 R_PPC64_DTPMOD64 +0+38 gd0 \+ 0
++0+10800 +0+140+4e R_PPC64_DTPREL64 +0+38 gd0 \+ 0
++0+10808 +0+b0+44 R_PPC64_DTPMOD64 +0+40 ld0 \+ 0
++0+10818 +0+f0+4e R_PPC64_DTPREL64 +0+50 ld2 \+ 0
++0+10820 +0+150+49 R_PPC64_TPREL64 +0+58 ie0 \+ 0
+ 
+ Relocation section '\.rela\.plt' at offset .* contains 1 entries:
+  +Offset +Info +Type +Symbol's Value +Symbol's Name \+ Addend
+-0+10808 +0+a0+15 R_PPC64_JMP_SLOT +0+ __tls_get_addr \+ 0
++0+10840 +0+a0+15 R_PPC64_JMP_SLOT +0+ __tls_get_addr \+ 0
+ 
+ Symbol table '\.dynsym' contains 22 entries:
+  +Num: +Value +Size Type +Bind +Vis +Ndx Name
+  +[0-9]+: 0+ +0 NOTYPE +LOCAL +DEFAULT +UND 
+- +[0-9]+: 0+550 +0 SECTION LOCAL +DEFAULT +6 
+- +[0-9]+: 0+10610 +0 SECTION LOCAL +DEFAULT +7 
+- +[0-9]+: 0+10648 +0 SECTION LOCAL +DEFAULT +8 
+- +[0-9]+: 0+10798 +0 SECTION LOCAL +DEFAULT +10 
++ +[0-9]+: 0+588 +0 SECTION LOCAL +DEFAULT +6 
++ +[0-9]+: 0+10648 +0 SECTION LOCAL +DEFAULT +7 
++ +[0-9]+: 0+10680 +0 SECTION LOCAL +DEFAULT +8 
++ +[0-9]+: 0+107d0 +0 SECTION LOCAL +DEFAULT +10 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +11 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +15 
+- +[0-9]+: 0+10648 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
++ +[0-9]+: 0+10680 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
+  +[0-9]+: 0+ +0 TLS +GLOBAL DEFAULT +UND gd
+  +[0-9]+: 0+60 +0 TLS +GLOBAL DEFAULT +8 le0
+  +[0-9]+: 0+ +0 NOTYPE +GLOBAL DEFAULT +UND __tls_get_addr
+@@ -93,16 +95,16 @@ Symbol table '\.dynsym' contains 22 entr
+ Symbol table '\.symtab' contains 43 entries:
+  +Num: +Value +Size Type +Bind +Vis +Ndx Name
+  +[0-9]+: 0+ +0 NOTYPE +LOCAL +DEFAULT +UND 
+- +[0-9]+: 0+120 +0 SECTION LOCAL +DEFAULT +1 
++ +[0-9]+: 0+158 +0 SECTION LOCAL +DEFAULT +1 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +2 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +3 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +4 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +5 
+- +[0-9]+: 0+550 +0 SECTION LOCAL +DEFAULT +6 
+- +[0-9]+: 0+10610 +0 SECTION LOCAL +DEFAULT +7 
+- +[0-9]+: 0+10648 +0 SECTION LOCAL +DEFAULT +8 
++ +[0-9]+: 0+588 +0 SECTION LOCAL +DEFAULT +6 
++ +[0-9]+: 0+10648 +0 SECTION LOCAL +DEFAULT +7 
++ +[0-9]+: 0+10680 +0 SECTION LOCAL +DEFAULT +8 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +9 
+- +[0-9]+: 0+10798 +0 SECTION LOCAL +DEFAULT +10 
++ +[0-9]+: 0+107d0 +0 SECTION LOCAL +DEFAULT +10 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +11 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +12 
+  +[0-9]+: [0-9a-f]+ +0 SECTION LOCAL +DEFAULT +13 
+@@ -120,7 +122,7 @@ Symbol table '\.symtab' contains 43 entr
+  +[0-9]+: 0+30 +0 TLS +LOCAL +DEFAULT +7 le5
+  +[0-9]+: [0-9a-f]+ +0 NOTYPE +LOCAL +DEFAULT +12 \.Lie0
+  +[0-9]+: [0-9a-f]+ +0 NOTYPE +LOCAL +DEFAULT +6 \.__tls_get_addr
+- +[0-9]+: 0+10648 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
++ +[0-9]+: 0+10680 +0 OBJECT +GLOBAL DEFAULT +ABS _DYNAMIC
+  +[0-9]+: 0+ +0 TLS +GLOBAL DEFAULT +UND gd
+  +[0-9]+: 0+60 +0 TLS +GLOBAL DEFAULT +8 le0
+  +[0-9]+: 0+ +0 NOTYPE +GLOBAL DEFAULT +UND __tls_get_addr
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-s390/tlsbin.dd binutils-2.15.97/ld/testsuite/ld-s390/tlsbin.dd
+--- binutils-2.15.97.orig/ld/testsuite/ld-s390/tlsbin.dd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-s390/tlsbin.dd	2005-04-20 21:19:53.000000000 -0400
+@@ -151,7 +151,7 @@ Disassembly of section .text:
+   +[0-9a-f]+:	90 6e f0 18       	stm	%r6,%r14,24\(%r15\)
+   +[0-9a-f]+:	a7 d5 00 0c       	bras	%r13,[0-9a-f]+ <_start\+0x1c>
+ # sG6@indntpoff
+-  +[0-9a-f]+:	00 40 15 a4       	.long	0x004015a4
++  +[0-9a-f]+:	00 40 15 e4       	.long	0x004015e4
+ # bg6@indntpoff
+   +[0-9a-f]+:	ff ff ff d4       	.long	0xffffffd4
+ # bl6@indntpoff
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-s390/tlsbin.rd binutils-2.15.97/ld/testsuite/ld-s390/tlsbin.rd
+--- binutils-2.15.97.orig/ld/testsuite/ld-s390/tlsbin.rd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-s390/tlsbin.rd	2005-04-20 21:19:53.000000000 -0400
+@@ -18,10 +18,10 @@ Section Headers:
+   \[ 6\] .rela.plt +.*
+   \[ 7\] .plt +.*
+   \[ 8\] .text +PROGBITS +.*
+-  \[ 9\] .tdata +PROGBITS +0+401480 0+480 0+60 00 WAT +0 +0 +32
+-  \[10\] .tbss +NOBITS +0+4014e0 0+4e0 0+40 00 WAT +0 +0 +1
+-  \[11\] .dynamic +DYNAMIC +0+4014e0 0+4e0 0+a0 08 +WA +4 +0 +4
+-  \[12\] .got +PROGBITS +0+401580 0+580 0+2c 04 +WA +0 +0 +4
++  \[ 9\] .tdata +PROGBITS +0+4014c0 0+4c0 0+60 00 WAT +0 +0 +32
++  \[10\] .tbss +NOBITS +0+401520 0+520 0+40 00 WAT +0 +0 +1
++  \[11\] .dynamic +DYNAMIC +0+401520 0+520 0+a0 08 +WA +4 +0 +4
++  \[12\] .got +PROGBITS +0+4015c0 0+5c0 0+2c 04 +WA +0 +0 +4
+   \[13\] .data +.*
+   \[14\] .bss +.*
+   \[15\] .shstrtab +.*
+@@ -34,17 +34,18 @@ Key to Flags:
+ 
+ Elf file type is EXEC \(Executable file\)
+ Entry point 0x[0-9a-f]+
+-There are 6 program headers, starting at offset [0-9]+
++There are 7 program headers, starting at offset [0-9]+
+ 
+ Program Headers:
+   Type +Offset +VirtAddr +PhysAddr +FileSiz +MemSiz +Flg Align
+-  PHDR +0x0+34 0x0+400034 0x0+400034 0x0+c0 0x0+c0 R E 0x4
+-  INTERP +0x0+f4 0x0+4000f4 0x0+4000f4 0x0+11 0x0+11 R +0x1
++  PHDR +0x0+34 0x0+400034 0x0+400034 0x0+e0 0x0+e0 R E 0x4
++  INTERP +0x0+114 0x0+400114 0x0+400114 0x0+11 0x0+11 R +0x1
+ .*Requesting program interpreter.*
+   LOAD +0x0+ 0x0+400000 0x0+400000 0x[0-9a-f]+ 0x[0-9a-f]+ R E 0x1000
+-  LOAD +0x0+480 0x0+401480 0x0+401480 0x0+12c 0x0+12c RW  0x1000
+-  DYNAMIC +0x0+4e0 0x0+4014e0 0x0+4014e0 0x0+a0 0x0+a0 RW  0x4
+-  TLS +0x0+480 0x0+401480 0x0+401480 0x0+60 0x0+a0 R +0x20
++  LOAD +0x0+4c0 0x0+4014c0 0x0+4014c0 0x0+12c 0x0+12c RW  0x1000
++  DYNAMIC +0x0+520 0x0+401520 0x0+401520 0x0+a0 0x0+a0 RW  0x4
++  TLS +0x0+4c0 0x0+4014c0 0x0+4014c0 0x0+60 0x0+a0 R +0x20
++  PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x4
+ 
+  Section to Segment mapping:
+   Segment Sections...
+@@ -54,8 +55,9 @@ Program Headers:
+    03 +.tdata .dynamic .got *
+    04 +.dynamic *
+    05 +.tdata .tbss *
++   06 +
+ 
+-Relocation section '.rela.dyn' at offset 0x23c contains 4 entries:
++Relocation section '.rela.dyn' at offset 0x25c contains 4 entries:
+  Offset +Info +Type +Sym.Value  Sym. Name \+ Addend
+ [0-9a-f]+  0+138 R_390_TLS_TPOFF +0+ +sG3 \+ 0
+ [0-9a-f]+  0+338 R_390_TLS_TPOFF +0+ +sG2 \+ 0
+@@ -64,7 +66,7 @@ Relocation section '.rela.dyn' at offset
+ 
+ Relocation section '.rela.plt' at offset 0x[0-9a-f]+ contains 1 entries:
+  Offset +Info +Type +Sym.Value  Sym. Name \+ Addend
+-[0-9a-f]+  0+40b R_390_JMP_SLOT +0+40+298 +__tls_get_offset \+ 0
++[0-9a-f]+  0+40b R_390_JMP_SLOT +0+40+2b8 +__tls_get_offset \+ 0
+ 
+ Symbol table '.dynsym' contains 10 entries:
+  +Num: +Value  Size Type +Bind +Vis +Ndx Name
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-s390/tlsbin_64.rd binutils-2.15.97/ld/testsuite/ld-s390/tlsbin_64.rd
+--- binutils-2.15.97.orig/ld/testsuite/ld-s390/tlsbin_64.rd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-s390/tlsbin_64.rd	2005-04-20 21:19:53.000000000 -0400
+@@ -18,10 +18,10 @@ Section Headers:
+   \[ 6\] .rela.plt +.*
+   \[ 7\] .plt +.*
+   \[ 8\] .text +PROGBITS +.*
+-  \[ 9\] .tdata +PROGBITS +0+80001720 0+720 0+60 00 WAT +0 +0 +32
+-  \[10\] .tbss +NOBITS +0+80001780 0+780 0+40 00 WAT +0 +0 +1
+-  \[11\] .dynamic +DYNAMIC +0+80001780 0+780 0+140 10 +WA +4 +0 +8
+-  \[12\] .got +PROGBITS +0+800018c0 0+8c0 0+78 08 +WA +0 +0 +8
++  \[ 9\] .tdata +PROGBITS +0+80001760 0+760 0+60 00 WAT +0 +0 +32
++  \[10\] .tbss +NOBITS +0+800017c0 0+7c0 0+40 00 WAT +0 +0 +1
++  \[11\] .dynamic +DYNAMIC +0+800017c0 0+7c0 0+140 10 +WA +4 +0 +8
++  \[12\] .got +PROGBITS +0+80001900 0+900 0+78 08 +WA +0 +0 +8
+   \[13\] .data +.*
+   \[14\] .bss +.*
+   \[15\] .shstrtab +.*
+@@ -34,17 +34,18 @@ Key to Flags:
+ 
+ Elf file type is EXEC \(Executable file\)
+ Entry point 0x[0-9a-f]+
+-There are 6 program headers, starting at offset [0-9]+
++There are 7 program headers, starting at offset [0-9]+
+ 
+ Program Headers:
+   Type +Offset +VirtAddr +PhysAddr +FileSiz +MemSiz +Flg Align
+-  PHDR +0x0+40 0x0+80000040 0x0+80000040 0x0+150 0x0+150 R E 0x8
+-  INTERP +0x0+190 0x0+80000190 0x0+80000190 0x0+11 0x0+11 R +0x1
++  PHDR +0x0+40 0x0+80000040 0x0+80000040 0x0+188 0x0+188 R E 0x8
++  INTERP +0x0+1c8 0x0+800001c8 0x0+800001c8 0x0+11 0x0+11 R +0x1
+ .*Requesting program interpreter.*
+-  LOAD +0x0+ 0x0+80000000 0x0+80000000 0x0+720 0x0+720 R E 0x1000
+-  LOAD +0x0+720 0x0+80001720 0x0+80001720 0x0+218 0x0+218 RW  0x1000
+-  DYNAMIC +0x0+780 0x0+80001780 0x0+80001780 0x0+140 0x0+140 RW  0x8
+-  TLS +0x0+720 0x0+80001720 0x0+80001720 0x0+60 0x0+a0 R +0x20
++  LOAD +0x0+ 0x0+80000000 0x0+80000000 0x0+760 0x0+760 R E 0x1000
++  LOAD +0x0+760 0x0+80001760 0x0+80001760 0x0+218 0x0+218 RW  0x1000
++  DYNAMIC +0x0+7c0 0x0+800017c0 0x0+800017c0 0x0+140 0x0+140 RW  0x8
++  TLS +0x0+760 0x0+80001760 0x0+80001760 0x0+60 0x0+a0 R +0x20
++  PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x8
+ 
+  Section to Segment mapping:
+   Segment Sections...
+@@ -54,6 +55,7 @@ Program Headers:
+    03 +.tdata .dynamic .got *
+    04 +.dynamic *
+    05 +.tdata .tbss *
++   06 +
+ 
+ Relocation section '.rela.dyn' at offset 0x[0-9a-f]+ contains 4 entries:
+  +Offset +Info +Type +Symbol's Value +Symbol's Name \+ Addend
+@@ -64,7 +66,7 @@ Relocation section '.rela.dyn' at offset
+ 
+ Relocation section '.rela.plt' at offset 0x40+ contains 1 entries:
+  +Offset +Info +Type +Symbol's Value +Symbol's Name \+ Addend
+-[0-9a-f]+ +0+40+b R_390_JMP_SLOT +0+80+438 __tls_get_offset \+ 0
++[0-9a-f]+ +0+40+b R_390_JMP_SLOT +0+80+470 __tls_get_offset \+ 0
+ 
+ Symbol table '.dynsym' contains 11 entries:
+  +Num: +Value +Size Type +Bind +Vis +Ndx Name
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-s390/tlspic.rd binutils-2.15.97/ld/testsuite/ld-s390/tlspic.rd
+--- binutils-2.15.97.orig/ld/testsuite/ld-s390/tlspic.rd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-s390/tlspic.rd	2005-04-20 21:19:53.000000000 -0400
+@@ -33,7 +33,7 @@ Key to Flags:
+ 
+ Elf file type is DYN \(Shared object file\)
+ Entry point 0x[0-9a-f]+
+-There are 4 program headers, starting at offset [0-9]+
++There are 5 program headers, starting at offset [0-9]+
+ 
+ Program Headers:
+   Type +Offset +VirtAddr +PhysAddr +FileSiz MemSiz  Flg Align
+@@ -41,6 +41,7 @@ Program Headers:
+   LOAD +0x0+5c0 0x0+15c0 0x0+15c0 0x00150 0x00150 RW  0x1000
+   DYNAMIC +0x0+620 0x0+1620 0x0+1620 0x0+98 0x0+98 RW  0x4
+   TLS +0x0+5c0 0x0+15c0 0x0+15c0 0x0+60 0x0+80 R +0x20
++  PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x4
+ 
+  Section to Segment mapping:
+   Segment Sections...
+@@ -48,6 +49,7 @@ Program Headers:
+  +01 +.tdata .dynamic .got 
+  +02 +.dynamic 
+  +03 +.tdata .tbss 
++ +04 +
+ 
+ Relocation section '.rela.dyn' at offset 0x[0-9a-f]+ contains 14 entries:
+  Offset +Info +Type +Sym.Value  Sym. Name \+ Addend
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-s390/tlspic_64.rd binutils-2.15.97/ld/testsuite/ld-s390/tlspic_64.rd
+--- binutils-2.15.97.orig/ld/testsuite/ld-s390/tlspic_64.rd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-s390/tlspic_64.rd	2005-04-20 21:19:53.000000000 -0400
+@@ -17,10 +17,10 @@ Section Headers:
+   \[ 5\] .rela.plt +.*
+   \[ 6\] .plt +.*
+   \[ 7\] .text +PROGBITS +.*
+-  \[ 8\] .tdata +PROGBITS +0+1900 0+900 0+60 00 WAT +0 +0 +32
+-  \[ 9\] .tbss +NOBITS +0+1960 0+960 0+20 00 WAT +0 +0 +1
+-  \[10\] .dynamic +DYNAMIC +0+1960 0+960 0+130 10 +WA +3 +0 +8
+-  \[11\] .got +PROGBITS +0+1a90 0+a90 0+b0 08 +WA +0 +0 +8
++  \[ 8\] .tdata +PROGBITS +0+1940 0+940 0+60 00 WAT +0 +0 +32
++  \[ 9\] .tbss +NOBITS +0+19a0 0+9a0 0+20 00 WAT +0 +0 +1
++  \[10\] .dynamic +DYNAMIC +0+19a0 0+9a0 0+130 10 +WA +3 +0 +8
++  \[11\] .got +PROGBITS +0+1ac0 0+ac0 0+b0 08 +WA +0 +0 +8
+   \[12\] .data +.*
+   \[13\] .bss +.*
+   \[14\] .shstrtab +.*
+@@ -33,14 +33,15 @@ Key to Flags:
+ 
+ Elf file type is DYN \(Shared object file\)
+ Entry point 0x[0-9a-f]+
+-There are 4 program headers, starting at offset [0-9]+
++There are 5 program headers, starting at offset [0-9]+
+ 
+ Program Headers:
+   Type +Offset +VirtAddr +PhysAddr +FileSiz +MemSiz +Flg Align
+   LOAD +0x0+ 0x0+ 0x0+ 0x[0-9a-f]+ 0x[0-9a-f]+ R E 0x1000
+-  LOAD +0x0+900 0x0+1900 0x0+1900 0x0+240 0x0+240 RW +0x1000
+-  DYNAMIC +0x0+960 0x0+1960 0x0+1960 0x0+130 0x0+130 RW +0x8
+-  TLS +0x0+900 0x0+1900 0x0+1900 0x0+60 0x0+80 R +0x20
++  LOAD +0x0+940 0x0+1940 0x0+1940 0x0+240 0x0+240 RW +0x1000
++  DYNAMIC +0x0+9a0 0x0+19a0 0x0+19a0 0x0+130 0x0+130 RW +0x8
++  TLS +0x0+940 0x0+1940 0x0+1940 0x0+60 0x0+80 R +0x20
++  PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x8
+ 
+  Section to Segment mapping:
+   Segment Sections...
+@@ -48,6 +49,7 @@ Program Headers:
+    01 +.tdata .dynamic .got *
+    02 +.dynamic *
+    03 +.tdata .tbss *
++   04 +
+ 
+ Relocation section '.rela.dyn' at offset 0x[0-9a-f]+ contains 14 entries:
+  +Offset +Info +Type +Symbol's Value  Symbol's Name \+ Addend
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-x86-64/tlsbin.rd binutils-2.15.97/ld/testsuite/ld-x86-64/tlsbin.rd
+--- binutils-2.15.97.orig/ld/testsuite/ld-x86-64/tlsbin.rd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-x86-64/tlsbin.rd	2005-04-20 21:19:53.000000000 -0400
+@@ -35,7 +35,7 @@ Key to Flags:
+ 
+ Elf file type is EXEC \(Executable file\)
+ Entry point 0x40113c
+-There are 6 program headers, starting at offset [0-9]+
++There are 7 program headers, starting at offset [0-9]+
+ 
+ Program Headers:
+   Type +Offset +VirtAddr +PhysAddr +FileSiz +MemSiz +Flg Align
+@@ -46,6 +46,7 @@ Program Headers:
+   LOAD +0x0+122a 0x0+50122a 0x0+50122a 0x0+dd6 0x0+dd6 RW  0x100000
+   DYNAMIC +0x0+1290 0x0+501290 0x0+501290 0x0+140 0x0+140 RW  0x8
+   TLS +0x0+122a 0x0+50122a 0x0+50122a 0x0+60 0x0+a0 R +0x1
++  PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x8
+ 
+  Section to Segment mapping:
+   Segment Sections...
+@@ -55,6 +56,7 @@ Program Headers:
+    03 +.tdata .dynamic .got .got.plt *
+    04 +.dynamic *
+    05 +.tdata .tbss *
++   06 +
+ 
+ Relocation section '.rela.dyn' at offset 0x328 contains 4 entries:
+  +Offset +Info +Type +Symbol's Value  Symbol's Name \+ Addend
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-x86-64/tlspic.dd binutils-2.15.97/ld/testsuite/ld-x86-64/tlspic.dd
+--- binutils-2.15.97.orig/ld/testsuite/ld-x86-64/tlspic.dd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-x86-64/tlspic.dd	2005-04-20 21:19:53.000000000 -0400
+@@ -22,7 +22,7 @@ Disassembly of section .text:
+ #				-> R_X86_64_DTPMOD64	sg1
+  +1010:	66[ 	]+data16
+  +1011:	66[ 	]+data16
+- +1012:	48 e8 58 f5 ff ff[ 	]+rex64 callq  [0-9a-f]+ <.*>
++ +1012:	48 e8 90 f5 ff ff[ 	]+rex64 callq  [0-9a-f]+ <.*>
+ #				-> R_X86_64_JUMP_SLOT	__tls_get_addr
+  +1018:	90[ 	]+nop *
+  +1019:	90[ 	]+nop *
+@@ -43,7 +43,7 @@ Disassembly of section .text:
+ #				-> R_X86_64_DTPMOD64	[0 0x2000000000000000]
+  +1038:	66[ 	]+data16
+  +1039:	66[ 	]+data16
+- +103a:	48 e8 30 f5 ff ff[ 	]+rex64 callq  [0-9a-f]+ <.*>
++ +103a:	48 e8 68 f5 ff ff[ 	]+rex64 callq  [0-9a-f]+ <.*>
+ #				-> R_X86_64_JUMP_SLOT	__tls_get_addr
+  +1040:	90[ 	]+nop *
+  +1041:	90[ 	]+nop *
+@@ -64,7 +64,7 @@ Disassembly of section .text:
+ #				-> R_X86_64_DTPMOD64	[0 0x4000000000000000]
+  +1060:	66[ 	]+data16
+  +1061:	66[ 	]+data16
+- +1062:	48 e8 08 f5 ff ff[ 	]+rex64 callq  [0-9a-f]+ <.*>
++ +1062:	48 e8 40 f5 ff ff[ 	]+rex64 callq  [0-9a-f]+ <.*>
+ #				-> R_X86_64_JUMP_SLOT	__tls_get_addr
+  +1068:	90[ 	]+nop *
+  +1069:	90[ 	]+nop *
+@@ -85,7 +85,7 @@ Disassembly of section .text:
+ #				-> R_X86_64_DTPMOD64	[0 0x6000000000000000]
+  +1088:	66[ 	]+data16
+  +1089:	66[ 	]+data16
+- +108a:	48 e8 e0 f4 ff ff[ 	]+rex64 callq  [0-9a-f]+ <.*>
++ +108a:	48 e8 18 f5 ff ff[ 	]+rex64 callq  [0-9a-f]+ <.*>
+ #				-> R_X86_64_JUMP_SLOT	__tls_get_addr
+  +1090:	90[ 	]+nop *
+  +1091:	90[ 	]+nop *
+@@ -103,7 +103,7 @@ Disassembly of section .text:
+ #  LD
+  +10a8:	48 8d 3d b1 02 10 00[ 	]+lea    1049265\(%rip\),%rdi +# 101360 <.*>
+ #				-> R_X86_64_DTPMOD64	[0 0x000000000000000]
+- +10af:	e8 bc f4 ff ff[ 	]+callq  [0-9a-f]+ <.*>
++ +10af:	e8 f4 f4 ff ff[ 	]+callq  [0-9a-f]+ <.*>
+ #				-> R_X86_64_JUMP_SLOT	__tls_get_addr
+  +10b4:	90[ 	]+nop *
+  +10b5:	90[ 	]+nop *
+@@ -118,7 +118,7 @@ Disassembly of section .text:
+ #  LD against hidden and local variables
+  +10ca:	48 8d 3d 8f 02 10 00[ 	]+lea    1049231\(%rip\),%rdi +# 101360 <.*>
+ #				-> R_X86_64_DTPMOD64	[0 0x000000000000000]
+- +10d1:	e8 9a f4 ff ff[ 	]+callq  [0-9a-f]+ <.*>
++ +10d1:	e8 d2 f4 ff ff[ 	]+callq  [0-9a-f]+ <.*>
+ #				-> R_X86_64_JUMP_SLOT	__tls_get_addr
+  +10d6:	90[ 	]+nop *
+  +10d7:	90[ 	]+nop *
+@@ -133,7 +133,7 @@ Disassembly of section .text:
+ #  LD against hidden but not local variables
+  +10ec:	48 8d 3d 6d 02 10 00[ 	]+lea    1049197\(%rip\),%rdi +# 101360 <.*>
+ #				-> R_X86_64_DTPMOD64	[0 0x000000000000000]
+- +10f3:	e8 78 f4 ff ff[ 	]+callq  [0-9a-f]+ <.*>
++ +10f3:	e8 b0 f4 ff ff[ 	]+callq  [0-9a-f]+ <.*>
+ #				-> R_X86_64_JUMP_SLOT	__tls_get_addr
+  +10f8:	90[ 	]+nop *
+  +10f9:	90[ 	]+nop *
+diff -urp binutils-2.15.97.orig/ld/testsuite/ld-x86-64/tlspic.rd binutils-2.15.97/ld/testsuite/ld-x86-64/tlspic.rd
+--- binutils-2.15.97.orig/ld/testsuite/ld-x86-64/tlspic.rd	2005-04-20 20:04:24.000000000 -0400
++++ binutils-2.15.97/ld/testsuite/ld-x86-64/tlspic.rd	2005-04-20 21:19:53.000000000 -0400
+@@ -34,7 +34,7 @@ Key to Flags:
+ 
+ Elf file type is DYN \(Shared object file\)
+ Entry point 0x1000
+-There are 4 program headers, starting at offset [0-9]+
++There are 5 program headers, starting at offset [0-9]+
+ 
+ Program Headers:
+   Type +Offset +VirtAddr +PhysAddr +FileSiz +MemSiz +Flg Align
+@@ -42,6 +42,7 @@ Program Headers:
+   LOAD +0x0+11ac 0x0+1011ac 0x0+1011ac 0x0+e54 0x0+e54 RW +0x100000
+   DYNAMIC +0x0+1210 0x0+101210 0x0+101210 0x0+130 0x0+130 RW +0x8
+   TLS +0x0+11ac 0x0+1011ac 0x0+1011ac 0x0+60 0x0+80 R +0x1
++  PAX_FLAGS +0x0+ 0x0+ 0x0+ 0x0+ 0x0+ +0x8
+ 
+  Section to Segment mapping:
+   Segment Sections...
+@@ -49,6 +50,7 @@ Program Headers:
+    01 +.tdata .dynamic .got .got.plt *
+    02 +.dynamic *
+    03 +.tdata .tbss *
++   04 +
+ 
+ Relocation section '.rela.dyn' at offset 0x[0-9a-f]+ contains 14 entries:
+  +Offset +Info +Type +Symbol's Value +Symbol's Name \+ Addend

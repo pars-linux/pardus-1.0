@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>acx100-firmware</Name>
+        <Homepage>http://acx100.sourceforge.net</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>Unknown</License>
+        <IsA>data</IsA>
+        <Summary>Firmware for Texas Instruments' ACX100/ACX111 wireless network chips</Summary>
+        <Summary xml:lang="tr">Texas Instruments ACX100/ACX111 kablosuz ağ çip sürücüleri</Summary>
+        <Description>Firmware for Texas Instruments' ACX100/ACX111 wireless network chips</Description>
+        <Description xml:lang="tr">Texas Instruments ACX100/ACX111 kablosuz ağ çip sürücüleri</Description>
+        <Archive sha1sum="ef28e9fb1cd7b39f506e809572763c7596aebc02" type="tarbz2">http://www.cmartin.tk/acx/fw.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>acx100-firmware</Name>
+        <Files>
+            <Path fileType="library">/lib/firmware</Path>
+        </Files>
+   </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-08</Date>
+            <Version>20050927</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

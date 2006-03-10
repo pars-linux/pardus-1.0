@@ -1,0 +1,3 @@
+PATH=/usr/kde/3.5/bin
+ROOTPATH=/usr/kde/3.5/sbin:/usr/kde/3.5/bin
+LDPATH=/usr/kde/3.5/lib

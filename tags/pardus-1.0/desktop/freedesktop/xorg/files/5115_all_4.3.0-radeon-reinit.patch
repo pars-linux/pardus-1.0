@@ -1,0 +1,298 @@
+Index: xc/programs/Xserver/hw/xfree86/drivers/ati/radeon.h
+===================================================================
+RCS file: /cvsroot/dri/xc/xc/programs/Xserver/hw/xfree86/drivers/ati/radeon.h,v
+retrieving revision 1.34
+diff -p -u -r1.34 radeon.h
+--- xc/programs/Xserver/hw/xfree86/drivers/ati/radeon.h	5 Dec 2002 18:00:41 -0000	1.34
++++ xc/programs/Xserver/hw/xfree86/drivers/ati/radeon.h	2 Feb 2003 18:34:42 -0000
+@@ -38,6 +38,8 @@
+ #ifndef _RADEON_H_
+ #define _RADEON_H_
+ 
++#define RADEON_DRI_REINIT
++
+ #include "xf86str.h"
+ 
+ 				/* PCI support */
+@@ -397,6 +399,10 @@ typedef struct {
+ #ifdef XF86DRI
+     Bool              noBackBuffer;
+     Bool              directRenderingEnabled;
++#ifdef RADEON_DRI_REINIT
++    Bool              directRenderingInitialized;
++    Bool              DRIReinit;
++#endif
+     DRIInfoPtr        pDRIInfo;
+     int               drmFD;
+     int               numVisualConfigs;
+Index: xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_accel.c
+===================================================================
+RCS file: /cvsroot/dri/xc/xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_accel.c,v
+retrieving revision 1.22
+diff -p -u -r1.22 radeon_accel.c
+--- xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_accel.c	25 Nov 2002 19:58:46 -0000	1.22
++++ xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_accel.c	2 Feb 2003 18:34:44 -0000
+@@ -391,12 +391,36 @@ void RADEONEngineInit(ScrnInfoPtr pScrn)
+ #ifdef XF86DRI
+ 
+ #define ACCEL_CP
++
++#ifdef RADEON_DRI_REINIT
++
++#define ACCEL_PREAMBLE()						\
++    unsigned char *RADEONMMIO = info->MMIO;				\
++    RING_LOCALS;							\
++    if (info->directRenderingEnabled)					\
++	RADEONCP_REFRESH(pScrn, info)
++#define BEGIN_ACCEL(n)          do { if (info->directRenderingEnabled)	\
++					BEGIN_RING(2*(n));		\
++				else					\
++					RADEONWaitForFifo(pScrn, (n));	\
++				} while(0)
++#define OUT_ACCEL_REG(reg, val) do { if (info->directRenderingEnabled)	\
++					OUT_RING_REG(reg, val);		\
++				else					\
++					OUTREG(reg, val); } while(0)
++#define FINISH_ACCEL()          do { if (info->directRenderingEnabled)	\
++					ADVANCE_RING(); } while(0)
++
++#else
++
+ #define ACCEL_PREAMBLE()						\
+     RING_LOCALS;							\
+     RADEONCP_REFRESH(pScrn, info)
+ #define BEGIN_ACCEL(n)          BEGIN_RING(2*(n))
+ #define OUT_ACCEL_REG(reg, val) OUT_RING_REG(reg, val)
+ #define FINISH_ACCEL()          ADVANCE_RING()
++
++#endif
+ 
+ #include "radeon_accelfuncs.c"
+ 
+Index: xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_accelfuncs.c
+===================================================================
+RCS file: /cvsroot/dri/xc/xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_accelfuncs.c,v
+retrieving revision 1.6
+diff -p -u -r1.6 radeon_accelfuncs.c
+--- xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_accelfuncs.c	21 Jan 2003 18:11:44 -0000	1.6
++++ xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_accelfuncs.c	2 Feb 2003 18:34:48 -0000
+@@ -76,16 +76,18 @@
+ #endif
+ 
+ #if !defined(UNIXCPP) || defined(ANSICPP)
+-#define FUNC_NAME_CAT(prefix,suffix) prefix##suffix
++#define FUNC_NAME_MMIO(prefix)	prefix##MMIO
++#define FUNC_NAME_CP(prefix)	prefix##CP
+ #else
+-#define FUNC_NAME_CAT(prefix,suffix) prefix/**/suffix
++#define FUNC_NAME_MMIO(prefix)	prefix/**/MMIO
++#define FUNC_NAME_CP(prefix)	prefix/**/CP
+ #endif
+ 
+ #ifdef ACCEL_MMIO
+-#define FUNC_NAME(prefix) FUNC_NAME_CAT(prefix,MMIO)
++#define FUNC_NAME(prefix) FUNC_NAME_MMIO(prefix)
+ #else
+ #ifdef ACCEL_CP
+-#define FUNC_NAME(prefix) FUNC_NAME_CAT(prefix,CP)
++#define FUNC_NAME(prefix) FUNC_NAME_CP(prefix)
+ #else
+ #error No accel type defined!
+ #endif
+@@ -701,7 +703,9 @@ RADEONCPScanlinePacket(ScrnInfoPtr pScrn
+ {
+     RADEONInfoPtr info = RADEONPTR(pScrn);
+     int           chunk_words = info->scanline_hpass * info->scanline_words;
+-    ACCEL_PREAMBLE();
++    RING_LOCALS;
++
++    RADEONCP_REFRESH(pScrn, info);
+ 
+     if (RADEON_VERBOSE) {
+ 	xf86DrvMsg(pScrn->scrnIndex, X_INFO,
+@@ -783,6 +787,14 @@ FUNC_NAME(RADEONSetupForScanlineCPUToScr
+ 
+ #else /* ACCEL_CP */
+ 
++#ifdef RADEON_DRI_REINIT
++    if (!info->directRenderingEnabled) {
++	FUNC_NAME_MMIO(RADEONSetupForScanlineCPUToScreenColorExpandFill)
++			(pScrn, fg, bg, rop, planemask);
++	return;
++    }
++#endif
++					
+     info->scanline_fg = fg;
+     info->scanline_bg = bg;
+ 
+@@ -849,6 +861,14 @@ FUNC_NAME(RADEONSubsequentScanlineCPUToS
+ 
+ #else /* ACCEL_CP */
+ 
++#ifdef RADEON_DRI_REINIT
++    if (!info->directRenderingEnabled) {
++	FUNC_NAME_MMIO(RADEONSubsequentScanlineCPUToScreenColorExpandFill)
++			(pScrn, x, y, w, h, skipleft);
++	return;
++    }
++#endif
++					
+     info->scanline_x      = x;
+     info->scanline_y      = y;
+     /* Have to pad the width here and use clipping engine */
+@@ -914,6 +934,13 @@ FUNC_NAME(RADEONSubsequentScanline)(Scrn
+ 
+ #else /* ACCEL_CP */
+ 
++#ifdef RADEON_DRI_REINIT
++    if (!info->directRenderingEnabled) {
++	FUNC_NAME_MMIO(RADEONSubsequentScanline)(pScrn, bufno);
++	return;
++    }
++#endif
++					
+     if (--info->scanline_hpass) {
+ 	info->scratch_buffer[bufno] += 4 * info->scanline_words;
+     } else if (info->scanline_h) {
+@@ -966,6 +993,14 @@ FUNC_NAME(RADEONSetupForScanlineImageWri
+ 
+ #else /* ACCEL_CP */
+ 
++#ifdef RADEON_DRI_REINIT
++    if (!info->directRenderingEnabled) {
++	FUNC_NAME_MMIO(RADEONSetupForScanlineImageWrite)
++			(pScrn, rop, planemask, trans_color, bpp, depth);
++	return;
++    }
++#endif
++					
+ #if X_BYTE_ORDER == X_LITTLE_ENDIAN
+     BEGIN_ACCEL(1);
+ #else
+@@ -1042,6 +1077,14 @@ FUNC_NAME(RADEONSubsequentScanlineImageW
+ 
+     int  pad = 0; /* 32bpp */
+ 
++#ifdef RADEON_DRI_REINIT
++    if (!info->directRenderingEnabled) {
++	FUNC_NAME_MMIO(RADEONSubsequentScanlineImageWriteRect)
++			(pScrn, x, y, w, h, skipleft);
++	return;
++    }
++#endif
++					
+     if (pScrn->bitsPerPixel == 8)       pad = 3;
+     else if (pScrn->bitsPerPixel == 16) pad = 1;
+ 
+Index: xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_dri.c
+===================================================================
+RCS file: /cvsroot/dri/xc/xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_dri.c,v
+retrieving revision 1.43
+diff -p -u -r1.43 radeon_dri.c
+--- xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_dri.c	25 Jan 2003 22:25:43 -0000	1.43
++++ xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_dri.c	2 Feb 2003 18:36:00 -0000
+@@ -1705,7 +1710,8 @@ static void RADEONDRIRefreshArea(ScrnInf
+     /* Don't want to do this when no 3d is active and pages are
+      * right-way-round
+      */
+-    if (!pSAREAPriv->pfAllowPageFlip && pSAREAPriv->pfCurrentPage == 0)
++    if (!info->directRenderingEnabled
++	|| (!pSAREAPriv->pfAllowPageFlip && pSAREAPriv->pfCurrentPage == 0))
+ 	return;
+ 
+     (*info->accel->SetupForScreenToScreenCopy)(pScrn,
+Index: xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_driver.c
+===================================================================
+RCS file: /cvsroot/dri/xc/xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_driver.c,v
+retrieving revision 1.56
+diff -p -u -r1.56 radeon_driver.c
+--- xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_driver.c	25 Jan 2003 22:25:44 -0000	1.56
++++ xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_driver.c	2 Feb 2003 18:36:02 -0000
+@@ -132,6 +132,9 @@ typedef enum {
+     OPTION_BUFFER_SIZE,
+     OPTION_DEPTH_MOVE,
+     OPTION_PAGE_FLIP,
++#ifdef RADEON_DRI_REINIT
++    OPTION_DRI_REINIT,
++#endif
+     OPTION_NO_BACKBUFFER,
+ #endif
+     OPTION_PANEL_OFF,
+@@ -161,6 +164,9 @@ const OptionInfoRec RADEONOptions[] = {
+     { OPTION_DEPTH_MOVE,     "EnableDepthMoves", OPTV_BOOLEAN, {0}, FALSE },
+     { OPTION_PAGE_FLIP,      "EnablePageFlip",   OPTV_BOOLEAN, {0}, FALSE },
+     { OPTION_NO_BACKBUFFER,  "NoBackBuffer",     OPTV_BOOLEAN, {0}, FALSE },
++#ifdef RADEON_DRI_REINIT
++    { OPTION_DRI_REINIT,     "DRIReinit",        OPTV_BOOLEAN, {0}, FALSE },
++#endif
+ #endif
+     { OPTION_PANEL_OFF,      "PanelOff",         OPTV_BOOLEAN, {0}, FALSE },
+     { OPTION_DDC_MODE,       "DDCMode",          OPTV_BOOLEAN, {0}, FALSE },
+@@ -3891,6 +3897,16 @@ Bool RADEONScreenInit(int scrnIndex, Scr
+     } else {
+ 	xf86DrvMsg(pScrn->scrnIndex, X_INFO, "Direct rendering disabled\n");
+     }
++
++#ifdef RADEON_DRI_REINIT
++    if ((info->directRenderingInitialized = info->directRenderingEnabled)) {
++	if ((info->DRIReinit = xf86ReturnOptValBool(info->Options,
++						   OPTION_DRI_REINIT, FALSE)))
++	    xf86DrvMsg(scrnIndex, X_CONFIG, "Will re-initialize the DRI on VT "
++					    "switches\n");
++    }
++#endif
++
+ #endif
+ 
+     info->BlockHandler = pScreen->BlockHandler;
+@@ -5577,6 +5593,22 @@ Bool RADEONEnterVT(int scrnIndex, int fl
+ 	RADEONEngineRestore(pScrn);
+ 
+ #ifdef XF86DRI
++#ifdef RADEON_DRI_REINIT
++    if (info->DRIReinit && !info->directRenderingEnabled
++	&& info->directRenderingInitialized)
++    {
++	if (RADEONDRIScreenInit(pScrn->pScreen)
++	    && RADEONDRIFinishScreenInit(pScrn->pScreen))
++	{
++	    info->directRenderingEnabled = TRUE;
++	    DRILock(pScrn->pScreen, 0);
++	} else {
++	    xf86DrvMsg(pScrn->scrnIndex, X_WARNING, 
++		       "Direct rendering disabled after VT switch.\n");
++	}
++    }
++#endif
++
+     if (info->directRenderingEnabled) {
+ 	RADEONCP_START(pScrn, info);
+ 	DRIUnlock(pScrn->pScreen);
+@@ -5601,10 +5633,25 @@ void RADEONLeaveVT(int scrnIndex, int fl
+     RADEONSavePtr  save  = &info->ModeReg;
+ 
+     RADEONTRACE(("RADEONLeaveVT\n"));
++
+ #ifdef XF86DRI
+-    if (RADEONPTR(pScrn)->directRenderingEnabled) {
++    if (info->directRenderingEnabled) {
+ 	DRILock(pScrn->pScreen, 0);
+-	RADEONCP_STOP(pScrn, info);
++
++#ifdef RADEON_DRI_REINIT
++	if (info->DRIReinit) {
++	    int auth, pid, uid;
++	    unsigned long magic, ioctls;
++	    /* We can only disable the DRI if no client has the DRM open */
++	    if (drmGetClient(info->drmFD, 1, &auth, &pid, &uid, &magic, &ioctls)) {
++		RADEONDRICloseScreen(pScrn->pScreen);
++		info->directRenderingEnabled = FALSE;
++	    }
++	}
++
++	if (info->directRenderingEnabled)
++#endif
++	    RADEONCP_STOP(pScrn, info);
+     }
+ #endif
+ 

@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>imposter</Name>
+        <Homepage>http://imposter.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Gökçen Eraslan</Name>
+            <Email>gokcene@anadolu.edu.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Description>Imposter is a standalone viewer for the presentations created by OpenOffice.org Impress software</Description>
+        <Description xml:lang="tr">Tek başına Openoffice.org Impress sunumlarını açabilen bir görüntüleyici</Description>
+        <Summary>Imposter is a standalone viewer for the presentations created by OpenOffice.org Impress software</Summary>
+        <Summary xml:lang="tr">Tek başına Openoffice.org Impress sunumlarını açabilen bir görüntüleyici</Summary>
+        <Archive sha1sum="70ebda94cd62dcc65c9c53a4c7cb420f4b8b694b" type="targz">http://easynews.dl.sourceforge.net/sourceforge/imposter/imposter-0.3.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>xorg</Dependency> 
+            <Dependency>atk</Dependency> 
+            <Dependency>pango</Dependency> 
+            <Dependency>glib2</Dependency> 
+            <Dependency versionFrom="2.4.0">gtk2</Dependency> 
+            <Dependency versionFrom="1.2">iksemel</Dependency> 
+        </BuildDependencies>
+         <Patches>
+            <Patch level="1">imposter-0.3-ignore-modifiers.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>imposter</Name>
+        <RuntimeDependencies>
+            <Dependency>xorg</Dependency> 
+            <Dependency>atk</Dependency> 
+            <Dependency>pango</Dependency> 
+            <Dependency>glib2</Dependency> 
+            <Dependency versionFrom="2.4.0">gtk2</Dependency> 
+            <Dependency versionFrom="1.2">iksemel</Dependency> 
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-11</Date>
+            <Version>0.3</Version>
+            <Comment>First release.</Comment>
+            <Name>Gökçen Eraslan</Name>
+            <Email>gokcene@anadolu.edu.tr</Email>
+        </Update>
+    </History>
+</PISI>

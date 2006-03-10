@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xvid</Name>
+        <Homepage>http://www.xvid.org/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>XviD, a high performance/quality MPEG-4 video de-/encoding solution.</Summary>
+        <Summary xml:lang="tr">XviD, yüksek performanslı/kaliteli bir MPEG-4 video kodlayıcı/çözücü yazılımdır.</Summary>
+        <Description>XviD, a high performance/quality MPEG-4 video de-/encoding solution.</Description>
+        <Description xml:lang="tr">XviD dijital videoları sıkıştırmak ve geri açmak için geliştirilen, açık kaynak kodlu bir video kodlayıcıdır.</Description>
+        <Archive sha1sum="843c6d9d20a6525331726d5357f5032fcd62b4de" type="tarbz2">http://files.xvid.org/downloads/xvidcore-1.0.2.tar.bz2</Archive>
+         <Patches>
+            <Patch>1.0.2-DESTDIR.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>xvid</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.98.36">nasm</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-06</Date>
+            <Version>1.0.2</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

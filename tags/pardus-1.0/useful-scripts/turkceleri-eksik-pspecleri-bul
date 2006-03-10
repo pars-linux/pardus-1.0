@@ -1,0 +1,4 @@
+#!/bin/bash
+cd ..
+for p in `find -name pspec.xml`; do grep 'xml:lang' $p > /dev/null; \
+if [ $? == "1" ]; then echo $p; fi; done > useful-scripts/turkceleri-eksik-pspecler

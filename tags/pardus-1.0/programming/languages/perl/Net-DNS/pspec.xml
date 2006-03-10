@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>Net-DNS</Name>
+        <Homepage>http://search.cpan.org/~olaf/Net-DNS-0.54/lib/Net/DNS.pm</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>category</IsA>
+        <Summary>Perl interface to the DNS resolver</Summary>
+        <Description>Perl interface to the DNS resolver</Description>
+        <Archive sha1sum="22d932f0181689b7a933812edecee011879691fd" type="targz">http://search.cpan.org/CPAN/authors/id/O/OL/OLAF/Net-DNS-0.54.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+            <Dependency>IO-Socket-INET6</Dependency>
+            <Dependency>Socket6</Dependency>
+            <Dependency>Net-IP</Dependency>
+            <Dependency>Digest-HMAC</Dependency>
+        </BuildDependencies>
+        
+    </Source>
+
+    <Package>
+        <Name>Net-DNS</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+            <Dependency>IO-Socket-INET6</Dependency>
+            <Dependency>Socket6</Dependency>
+            <Dependency>Net-IP</Dependency>
+            <Dependency>Digest-HMAC</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-10</Date>
+            <Version>0.54</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

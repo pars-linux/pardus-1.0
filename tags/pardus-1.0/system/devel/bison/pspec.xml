@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>bison</Name>
+        <Homepage>http://www.gnu.org/software/bison/bison.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>A yacc-compatible parser generator</Summary>
+        <Summary xml:lang="tr">Yacc uyumlu yazım ayrıştırma üreteci</Summary>
+        <Description>A yacc-compatible parser generator</Description>
+        <Description xml:lang="tr">Yacc uyumlu yazım ayrıştırma üreteci</Description>
+        <Archive sha1sum="cf17c4f2df1344ee93bcc5c336f691db831d1ab5" type="tarbz2">ftp://alpha.gnu.org/pub/gnu/bison/bison-1.875d.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">bison-1.32-extfix.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+        <Dependency>m4</Dependency>
+            <Dependency>gettext</Dependency>
+            <Dependency>patch</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>bison</Name>
+        <RuntimeDependencies>
+            <Dependency>m4</Dependency>
+            <Dependency>gettext</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="data">/usr/share/bison</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-21</Date>
+            <Version>1.875d</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

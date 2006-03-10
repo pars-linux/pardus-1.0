@@ -1,0 +1,23 @@
+--- Linux-PAM-0.77/modules/pam_pwdb/Makefile.orig	2003-11-09 20:32:03.156609664 +0200
++++ Linux-PAM-0.77/modules/pam_pwdb/Makefile	2003-11-09 20:34:25.658946016 +0200
+@@ -11,7 +11,8 @@
+ 
+ ifeq ($(HAVE_LIBPWDB),yes)
+ 
+-EXTRALS += -lpwdb 
++# Link to static pwdb
++EXTRALS += $(ROOT)/usr/lib/libpwdb.a 
+ EXTRAS += -DCHKPWD_HELPER=\"$(SUPLEMENTED)/$(CHKPWD)\"
+ 
+ ifeq ($(HAVE_LIBCRYPT),yes)
+--- Linux-PAM-0.77/modules/pam_pwdb/Makefile.orig	2003-11-09 20:40:29.791589440 +0200
++++ Linux-PAM-0.77/modules/pam_pwdb/Makefile	2003-11-09 20:41:51.065233968 +0200
+@@ -57,7 +57,7 @@
+ 
+ $(CHKPWD): pwdb_chkpwd.o md5_good.o md5_broken.o \
+            md5_crypt_good.o md5_crypt_broken.o
+-	$(CC) $(CFLAGS) -o $(CHKPWD) $^ $(LDFLAGS) -lpwdb $(EXTRALS)
++	$(CC) $(CFLAGS) -o $(CHKPWD) $^ $(LDFLAGS) $(EXTRALS)
+ 
+ pwdb_chkpwd.o: pwdb_chkpwd.c pam_unix_md.-c bigcrypt.-c
+ 

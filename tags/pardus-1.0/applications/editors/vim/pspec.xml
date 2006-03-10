@@ -1,0 +1,140 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>vim</Name>
+        <Homepage>http://www.vim.org/</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>King of all text editors.</Summary>
+        <Summary xml:lang="tr">Vim gelişmiş bir metin düzenleyicidir.</Summary>
+        <Description>King of all text editors.</Description>
+        <Description xml:lang="tr">Vim gelişmiş yapılandırılabilme yeteneği ile başarılı bir metin düzenleyicidir. Bir çok işletim sistemiyle beraber dağıtılan Vi metin düzenleyisinin geliştirilmiş sürümüdür.</Description>
+        <Archive sha1sum="4ecc16d704b303db25c52c6bc33ab65e661ace93" type="tarbz2">ftp://ftp.vim.org/pub/vim/unix/vim-6.4.tar.bz2</Archive>
+        <Patches>
+            <Patch compressionType="gz" level="1">001_all_vim-4.2-speed_t.patch.gz</Patch>
+            <Patch compressionType="gz" level="1">002_all_vim-5.1-vimnotvi.patch.gz</Patch>
+            <Patch compressionType="gz" level="1">003_all_vim-5.6a-paths.patch.gz</Patch>
+            <Patch compressionType="gz" level="1">004_all_vim-6.0-fixkeys.patch.gz</Patch>
+            <Patch compressionType="gz" level="1">006_all_vim-6.0r-crv.patch.gz</Patch>
+            <Patch compressionType="gz" level="1">007_all_vim-6.0-gcc31.patch.gz</Patch>
+            <Patch compressionType="gz" level="1">009_all_vim-6.2-selinux.patch.gz</Patch>
+            <Patch compressionType="gz" level="1">011_all_vim-6.3-xorg-75816.patch.gz</Patch>
+            <Patch compressionType="gz" level="0">012_all_vim-7.0-apache-76713.patch.gz</Patch>
+            <Patch compressionType="gz" level="1">013_all_vim-7.0-cron-vars-79981.patch.gz</Patch>
+            <Patch compressionType="gz" level="1">014_all_vim-6.3-dns-syntax.patch.gz</Patch>
+            <Patch compressionType="gz" level="0">015_all_vim-6.3-screen.linux-is-dark-83416.patch.gz</Patch>
+            <Patch compressionType="gz" level="1">016_all_vim-7.0-fstab-cifs-85758.patch.gz</Patch>
+            <Patch compressionType="gz" level="1">017_all_vim-7.0-fstab-openpromfs.patch.gz</Patch>
+            <Patch compressionType="gz" level="1">018_all_vim-7.0-fstab-bind-81289.patch.gz</Patch>
+            <Patch compressionType="gz" level="1">019_all_vim-7.0-fstab-loop.patch.gz</Patch>
+            <Patch compressionType="gz" level="1">020_all_vim-7.0-fstab-tmpfs-size.patch.gz</Patch>
+            <Patch compressionType="gz" level="1">021_all_vim-7.0-fstab-bogus-errors.patch.gz</Patch>
+            <Patch compressionType="gz" level="0">023_all_vim-6.3-apache-83565.patch.gz</Patch>
+            <Patch compressionType="gz" level="0">024_all_vim-6.3-bash-83565.patch.gz</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>gawk</Dependency>
+            <Dependency versionFrom="1.19.3">gpm</Dependency>
+            <Dependency>perl</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency versionFrom="4">sed</Dependency>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+            <Dependency>ctags</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>vim</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="1.19.3">gpm</Dependency>
+            <Dependency>ctags</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/vim</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="config">/etc/vim</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/vim/vimrc">vimrc</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/vim/vim64/plugin/actions.vim">actions.vim</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/vim/vim64/plugin/taglist.vim">taglist.vim</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="8">
+            <Date>2005-11-18</Date>
+            <Version>6.4</Version>
+            <Comment>Version bump</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="7">
+            <Date>2005-10-30</Date>
+            <Version>6.3</Version>
+            <Comment>Taglist added. vimrc updated.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-10-18</Date>
+            <Version>6.3</Version>
+            <Comment>Cool vimrc enhancements by A. Murat Eren</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-10-09</Date>
+            <Version>6.3</Version>
+            <Comment>
+                Replaced sed operation with an echo. I love you ActionsAPI.
+                Removed my name from actions.vim :)
+            </Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-10-08</Date>
+            <Version>6.3</Version>
+            <Comment>
+                Fixed wrong AdditionalFile path.
+                Added missing m4 dependency.  
+            </Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-10-08</Date>
+            <Version>6.3</Version>
+            <Comment>Added missing directory</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-08</Date>
+            <Version>6.3</Version>
+            <Comment>
+                Syntax highlight, nowrap, autoindent. These are now set by default.
+                A. Murat Eren's actions.vim added to plugin list.
+                Fixed broken vi link
+             </Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-17</Date>
+            <Version>6.3</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

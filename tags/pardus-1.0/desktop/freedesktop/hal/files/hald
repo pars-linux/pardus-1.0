@@ -1,0 +1,26 @@
+#!/sbin/runscript
+# Copyright © 2005  TUBITAK/UEKAE
+# Licensed under the GNU General Public License, version 2.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+#
+# Original work belongs Gentoo Linux
+
+depend() {
+	need dbus hotplug
+}
+
+start() {
+	ebegin "Starting Hardware Abstraction Layer daemon"
+
+	start-stop-daemon --start -q --exec /usr/sbin/hald -- --retain-privileges
+	
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping Hardware Abstraction Layer daemon"
+
+	start-stop-daemon --stop -q --pidfile /var/run/hald.pid 
+
+	eend $?
+}

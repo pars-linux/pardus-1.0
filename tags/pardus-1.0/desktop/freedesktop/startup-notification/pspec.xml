@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PSPEC SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>startup-notification</Name>
+        <Homepage>http://www.freedesktop.org/software/startup-notification/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <License>BSD</License>
+        <IsA>library</IsA>
+        <Summary>Application startup notification and feedback library</Summary>
+        <Summary xml:lang="tr">Uygulama başlangıç duyurusu ve geribildirim sistemi</Summary>
+        <Description>Application startup notification and feedback library</Description>
+        <Description xml:lang="tr">Uygulama başlangıç duyurusu ve geribildirim sistemi</Description>
+        <Archive sha1sum="d2b5698b6209b5172d17222a3117db6447d7cdf1" type="tarbz2">ftp://ftp.linux.org.tr/pub/mirrors/gentoo/distfiles/startup-notification-0.8.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>startup-notification</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>startup-notification-devel</Name>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-06-24</Date>
+            <Version>0.8</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-06-10</Date>
+            <Version>0.7</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,13 @@
+--- Linux-PAM-0.77/modules/pam_console/Makefile.orig	2003-11-09 19:46:34.627409152 +0200
++++ Linux-PAM-0.77/modules/pam_console/Makefile	2003-11-09 19:47:39.727512432 +0200
+@@ -10,7 +10,9 @@
+ 
+ LOCKDIR = /var/run/console
+ LOCKMODE = 755
+-LIBS +=  $(shell glib-config --libs) -L../pammodutil -lpammodutil
++# Use static version of glib
++GLIB = $(shell glib-config --libs | sed -e 's|^.*-L\([^[:space:]]*\)[[:space:]]*.*|\1/libglib.a|')
++LIBS +=  $(ROOT)$(GLIB) -L../pammodutil -lpammodutil
+ LDFLAGS = $(LIBS)
+ 
+ BINARY = pam_console_apply

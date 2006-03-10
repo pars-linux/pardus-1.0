@@ -1,0 +1,223 @@
+2004-08-05  Mark Mitchell  <mark@codesourcery.com>
+
+	* g++.dg/ext/visibility/assign1.C: Use scan-hidden and
+	dg-require-visiblity.
+	* g++.dg/ext/visibility/fvisibility-inlines-hidden.C: Likewise.
+	* g++.dg/ext/visibility/fvisibility.C: Likewise.
+	* g++.dg/ext/visibility/memfuncts.C: Likewise.
+	* g++.dg/ext/visibility/new1.C: Likewise.
+	* g++.dg/ext/visibility/pragma.C: Likewise.
+	* g++.dg/ext/visibility/staticmemfuncts.C: Likewise.
+	* g++.dg/ext/visibility/virtual.C: Likewise.
+	* g++/dg/ext/visibility/visibility-1.C: Likewise.
+	* g++/dg/ext/visibility/visibility-2.C: Likewise.
+	* g++/dg/ext/visibility/visibility-3.C: Likewise.
+	* g++/dg/ext/visibility/visibility-4.C: Likewise.
+	* g++/dg/ext/visibility/visibility-5.C: Likewise.
+	* g++/dg/ext/visibility/visibility-6.C: Likewise.
+	* g++/dg/ext/visibility/visibility-7.C: Likewise.
+	* lib/scanasm.exp (scan_hidden): New function.
+	(scan_not_hidden): Likewise.
+
+--- gcc/testsuite/g++.dg/ext/visibility/assign1.C	4 Aug 2004 05:27:52 -0000	1.1
++++ gcc/testsuite/g++.dg/ext/visibility/assign1.C	6 Aug 2004 02:03:28 -0000	1.2
+@@ -1,6 +1,6 @@
+ /* { dg-do compile } */
+ /* { dg-require-visibility "" } */
+-/* { dg-final { scan-assembler "\\.hidden.*_ZN1DaSERKS_" } } */
++/* { dg-final { scan-hidden "_ZN1DaSERKS_" } } */
+ 
+ struct B {
+   B& operator=(const B&);
+--- gcc/testsuite/g++.dg/ext/visibility/fvisibility-inlines-hidden.C	25 Jul 2004 22:52:21 -0000	1.1
++++ gcc/testsuite/g++.dg/ext/visibility/fvisibility-inlines-hidden.C	6 Aug 2004 02:03:28 -0000	1.2
+@@ -2,7 +2,7 @@
+ /* { dg-do compile } */
+ /* { dg-require-visibility "" } */
+ /* { dg-options "-fvisibility-inlines-hidden" } */
+-/* { dg-final { scan-assembler "\\.hidden.*Foo.methodEv" } } */
++/* { dg-final { scan-hidden "_ZN3Foo6methodEv" } } */
+ 
+ class Foo
+ {
+--- gcc/testsuite/g++.dg/ext/visibility/fvisibility.C	25 Jul 2004 22:52:21 -0000	1.1
++++ gcc/testsuite/g++.dg/ext/visibility/fvisibility.C	6 Aug 2004 02:03:28 -0000	1.2
+@@ -2,7 +2,7 @@
+ /* { dg-do compile } */
+ /* { dg-require-visibility "" } */
+ /* { dg-options "-fvisibility=hidden" } */
+-/* { dg-final { scan-assembler "\\.hidden.*Foo.methodEv" } } */
++/* { dg-final { scan-hidden "_ZN3Foo6methodEv" } } */
+ 
+ class Foo
+ {
+--- gcc/testsuite/g++.dg/ext/visibility/memfuncts.C	25 Jul 2004 22:52:21 -0000	1.1
++++ gcc/testsuite/g++.dg/ext/visibility/memfuncts.C	6 Aug 2004 02:03:28 -0000	1.2
+@@ -1,7 +1,7 @@
+ /* Test that setting visibility for class member functions works. */
+ /* { dg-do compile } */
+ /* { dg-require-visibility "" } */
+-/* { dg-final { scan-assembler "\\.hidden.*Foo.methodEv" } } */
++/* { dg-final { scan-hidden "_ZN3Foo6methodEv" } } */
+ 
+ class __attribute__ ((visibility ("hidden"))) Foo
+ {
+--- gcc/testsuite/g++.dg/ext/visibility/new1.C	4 Aug 2004 05:27:52 -0000	1.1
++++ gcc/testsuite/g++.dg/ext/visibility/new1.C	6 Aug 2004 02:03:28 -0000	1.2
+@@ -1,7 +1,6 @@
+-// { dg-require-visibility }
+-// { dg-do compile }
++// { dg-require-visibility "" }
+ // { dg-options "-fvisibility=hidden" }
+-// { dg-final { scan-assembler-not "\\.hidden\[^\n\]*_Znwj" } }
++// { dg-final { scan-not-hidden "_Znwj" } }
+ 
+ void f() {
+   new int;
+--- gcc/testsuite/g++.dg/ext/visibility/pragma.C	25 Jul 2004 22:52:21 -0000	1.1
++++ gcc/testsuite/g++.dg/ext/visibility/pragma.C	6 Aug 2004 02:03:28 -0000	1.2
+@@ -1,7 +1,7 @@
+ /* Test that #pragma GCC visibility affects class members. */
+ /* { dg-do compile } */
+ /* { dg-require-visibility "" } */
+-/* { dg-final { scan-assembler "\\.hidden.*Foo.methodEv" } } */
++/* { dg-final { scan-hidden "_ZN3Foo6methodEv" } } */
+ 
+ #pragma GCC visibility push(hidden)
+ class Foo
+--- gcc/testsuite/g++.dg/ext/visibility/staticmemfuncts.C	25 Jul 2004 22:52:21 -0000	1.1
++++ gcc/testsuite/g++.dg/ext/visibility/staticmemfuncts.C	6 Aug 2004 02:03:28 -0000	1.2
+@@ -1,7 +1,7 @@
+ /* Test that setting visibility for static class member functions works. */
+ /* { dg-do compile } */
+ /* { dg-require-visibility "" } */
+-/* { dg-final { scan-assembler "\\.hidden.*Foo.methodEv" } } */
++/* { dg-final { scan-hidden "_ZN3Foo6methodEv" } } */
+ 
+ class __attribute__ ((visibility ("hidden"))) Foo
+ {
+--- gcc/testsuite/g++.dg/ext/visibility/virtual.C	25 Jul 2004 22:52:21 -0000	1.1
++++ gcc/testsuite/g++.dg/ext/visibility/virtual.C	6 Aug 2004 02:03:28 -0000	1.2
+@@ -1,7 +1,7 @@
+ /* Test that setting visibility for class affects virtual table. */
+ /* { dg-do compile } */
+ /* { dg-require-visibility "" } */
+-/* { dg-final { scan-assembler "\\.hidden.*ZTV3Foo" } } */
++/* { dg-final { scan-hidden "ZTV3Foo" } } */
+ 
+ class __attribute__ ((visibility ("hidden"))) Foo
+ {
+--- gcc/testsuite/g++.dg/ext/visibility/visibility-1.C	25 Jul 2004 22:52:21 -0000	1.1
++++ gcc/testsuite/g++.dg/ext/visibility/visibility-1.C	6 Aug 2004 02:03:28 -0000	1.2
+@@ -1,6 +1,6 @@
+ /* Test visibility attribute on function definition. */
+-/* { dg-do compile { target *86-*-linux* } } */
+-/* { dg-final { scan-assembler "\\.hidden.*_Z3foov" } } */
++/* { dg-require-visibility "" }
++/* { dg-final { scan-hidden "_Z3foov" } } */
+ 
+ void
+ __attribute__((visibility ("hidden")))
+--- gcc/testsuite/g++.dg/ext/visibility/visibility-2.C	25 Jul 2004 22:52:21 -0000	1.1
++++ gcc/testsuite/g++.dg/ext/visibility/visibility-2.C	6 Aug 2004 02:03:28 -0000	1.2
+@@ -1,6 +1,6 @@
+ /* Test that visibility attribute on declaration extends to definition. */
+-/* { dg-do compile { target *86-*-linux* } } */
+-/* { dg-final { scan-assembler "\\.hidden.*_Z3foov" } } */
++/* { dg-require-visibility "" }
++/* { dg-final { scan-hidden "_Z3foov" } } */
+ 
+ void __attribute__((visibility ("hidden"))) foo();
+ 
+--- gcc/testsuite/g++.dg/ext/visibility/visibility-3.C	25 Jul 2004 22:52:21 -0000	1.1
++++ gcc/testsuite/g++.dg/ext/visibility/visibility-3.C	6 Aug 2004 02:03:28 -0000	1.2
+@@ -1,6 +1,6 @@
+ /* Test visibility attribute on forward declaration of global variable */
+-/* { dg-do compile { target *86-*-linux* } } */
+-/* { dg-final { scan-assembler "\\.hidden.*xyzzy" } } */
++/* { dg-require-visibility "" }
++/* { dg-final { scan-hidden "xyzzy" } } */
+ 
+ int
+ __attribute__((visibility ("hidden")))
+--- gcc/testsuite/g++.dg/ext/visibility/visibility-4.C	25 Jul 2004 22:52:21 -0000	1.1
++++ gcc/testsuite/g++.dg/ext/visibility/visibility-4.C	6 Aug 2004 02:03:28 -0000	1.2
+@@ -1,6 +1,6 @@
+ /* Test visibility attribute on forward declaration of global variable */
+-/* { dg-do compile { target *86-*-linux* } } */
+-/* { dg-final { scan-assembler "\\.hidden.*xyzzy" } } */
++/* { dg-require-visibility "" }
++/* { dg-final { scan-hidden "xyzzy" } } */
+ 
+ extern int __attribute__ ((visibility ("hidden")))
+ xyzzy;
+--- gcc/testsuite/g++.dg/ext/visibility/visibility-5.C	25 Jul 2004 22:52:21 -0000	1.1
++++ gcc/testsuite/g++.dg/ext/visibility/visibility-5.C	6 Aug 2004 02:03:28 -0000	1.2
+@@ -1,7 +1,7 @@
+ /* Test visibility attribute on definition of a function that has
+    already had a forward declaration. */
+-/* { dg-do compile { target *86-*-linux* } } */
+-/* { dg-final { scan-assembler "\\.hidden.*_Z3foov" } } */
++/* { dg-require-visibility "" }
++/* { dg-final { scan-hidden "_Z3foov" } } */
+ 
+ void foo();
+ 
+--- gcc/testsuite/g++.dg/ext/visibility/visibility-6.C	25 Jul 2004 22:52:21 -0000	1.1
++++ gcc/testsuite/g++.dg/ext/visibility/visibility-6.C	6 Aug 2004 02:03:28 -0000	1.2
+@@ -1,7 +1,7 @@
+ /* Test visibility attribute on definition of global variable that has
+    already had a forward declaration. */
+-/* { dg-do compile { target *86-*-linux* } } */
+-/* { dg-final { scan-assembler "\\.hidden.*xyzzy" } } */
++/* { dg-require-visibility "" }
++/* { dg-final { scan-hidden "xyzzy" } } */
+ 
+ extern int xyzzy;
+ 
+--- gcc/testsuite/g++.dg/ext/visibility/visibility-7.C	25 Jul 2004 22:52:21 -0000	1.1
++++ gcc/testsuite/g++.dg/ext/visibility/visibility-7.C	6 Aug 2004 02:03:28 -0000	1.2
+@@ -1,6 +1,6 @@
+ /* Test warning from conflicting visibility specifications. */
+-/* { dg-do compile { target *86-*-linux* } } */
+-/* { dg-final { scan-assembler "\\.hidden.*xyzzy" } } */
++/* { dg-require-visibility "" } */
++/* { dg-final { scan-hidden "xyzzy" } } */
+ 
+ extern int 
+ __attribute__((visibility ("hidden")))
+--- gcc/testsuite/lib/scanasm.exp	12 Feb 2004 17:47:47 -0000	1.12
++++ gcc/testsuite/lib/scanasm.exp	6 Aug 2004 02:03:29 -0000	1.13
+@@ -79,6 +79,32 @@ proc scan-assembler-not { args } {
+     dg-scan "scan-assembler-not" 0 $testcase $output_file $args
+ }
+ 
++# Check that a symbol is defined as a hidden symbol in the .s file
++# produced by the compiler.
++
++proc scan-hidden { args } {
++    upvar 2 name testcase
++    set output_file "[file rootname [file tail $testcase]].s"
++
++    set symbol [lindex $args 0]
++    set args [lreplace $args 0 0 "hidden\[ \t_\]*$symbol"]
++
++    dg-scan "scan-hidden" 1 $testcase $output_file $args
++}
++
++# Check that a symbol is not defined as a hidden symbol in the .s file
++# produced by the compiler.
++
++proc scan-not-hidden { args } {
++    upvar 2 name testcase
++    set output_file "[file rootname [file tail $testcase]].s"
++
++    set symbol [lindex $args 0]
++    set args [lreplace $args 0 0 "hidden\[ \t_\]*$symbol"]
++
++    dg-scan "scan-not-hidden" 0 $testcase $output_file $args
++}
++
+ # Look for a pattern in OUTPUT_FILE.  See dg-scan for details.
+ 
+ proc scan-file { output_file args } {

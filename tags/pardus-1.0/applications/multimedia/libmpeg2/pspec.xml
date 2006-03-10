@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>libmpeg2</Name>
+        <Homepage>http://libmpeg2.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL</License>
+        <IsA>library</IsA>
+        <Description>libmpeg2 is a free library for decoding mpeg-2 and mpeg-1 video streams</Description>
+        <Description xml:lang="tr">mpeg-2 ve mpeg-1 vidyo görüntülerini çözmek için ücretsiz bir kütüphane</Description>
+        <Summary>libmpeg2 is a free library for decoding mpeg-2 and mpeg-1 video streams</Summary>
+        <Summary xml:lang="tr">mpeg-2 ve mpeg-1 video görüntülerini çözmek için ücretsiz bir kütüphane</Summary>
+        <Archive sha1sum="7ad99a810802f216893022fa14fa078ac49d67d7" type="targz">http://libmpeg2.sourceforge.net/files/mpeg2dec-0.4.0b.tar.gz</Archive>
+    </Source>
+    
+    <Package>
+        <Name>libmpeg2</Name>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2005-10-26</Date>
+            <Version>0.4.0</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

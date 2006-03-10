@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>chktex</Name>
+        <Homepage>http://http://baruch.ev-en.org/proj/chktex/</Homepage>
+        <Packager>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Error checker for LaTeX documents</Summary>
+        <Summary xml:lang="tr">LaTeX belgeleri için hata denetleyicisi</Summary>
+        <Description>Error checker for LaTeX documents</Description>
+        <Description xml:lang="tr">LaTeX belgeleri için hata denetleyicisi</Description>
+        <Archive sha1sum="9ae85c99f11fc99a088c3055eca40c9de04e686c" type="targz">http://baruch.ev-en.org/proj/chktex/chktex-1.6.3.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>chktex</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-01</Date>
+            <Version>1.6.3</Version>
+            <Comment>First release.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

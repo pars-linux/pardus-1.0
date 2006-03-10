@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>ksystemlog</Name>
+        <Homepage>http://www.kde-look.org/content/show.php?content=23761</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>KSystemLog is a system log viewer tool for KDE</Summary>
+        <Summary xml:lang="tr">KDE için bir sistem günlüğü izleyici aracı</Summary>
+        <Description>KSystemLog is a system log viewer tool for KDE</Description>
+        <Description xml:lang="tr">KDE için bir sistem günlüğü izleyici aracı</Description>
+        <Archive sha1sum="623123b67ea411daf88214307bc8e76866fb7645" type="tarbz2">http://annivernet.free.fr/ksystemlog/archives/src/ksystemlog-0.3.2.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>kdebase</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ksystemlog</Name>
+        <RuntimeDependencies>
+            <Dependency>kdebase</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5</Path>
+            <Path fileType="data">/usr/kde/3.5/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-21</Date>
+            <Version>0.3.2</Version>
+            <Comment>3.4 to 3.5</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-16</Date>
+            <Version>0.3.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

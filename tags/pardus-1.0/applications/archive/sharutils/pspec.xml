@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>sharutils</Name>
+        <Homepage>http://www.gnu.org/software/sharutils/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Tools to deal with shar archives</Summary>
+        <Summary xml:lang="tr">shar arşivlerini işlemeye yarayan araçlar</Summary>
+        <Description>Tools to deal with shar archives</Description>
+        <Description xml:lang="tr">shar arşivlerini işlemeye yarayan araçlar</Description>
+        <Archive sha1sum="3f0c0af31bd429cee1e088eb74867f20f8d399ef" type="targz">ftp://ftp.linux.org.tr/pub/mirrors/gentoo/distfiles/sharutils-4.2.1.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">sharutils-4.2.1-gentoo.patch</Patch>
+            <Patch>sharutils-4.2.1-buffer-check.patch</Patch>
+            <Patch level="2">sharutils-4.2.1-buffer-limits.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>texinfo</Dependency>
+            <Dependency>gettext</Dependency>
+            <Dependency>sed</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>sharutils</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-15</Date>
+            <Version>4.2.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

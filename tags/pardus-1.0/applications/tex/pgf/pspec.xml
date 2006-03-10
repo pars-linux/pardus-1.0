@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pgf</Name>
+        <Homepage>http://latex-beamer.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>plugin</IsA>
+        <Summary>pgf -- The TeX Portable Graphic Format</Summary>
+        <Summary xml:lang="tr">pgf --TeX Portable Graphic Format</Summary>
+        <Description>pgf -- The TeX Portable Graphic Format</Description>
+        <Description xml:lang="tr">pgf --TeX Portable Graphic Format</Description>
+        <Archive sha1sum="1b943cb7357ed2b26fb61ad5a003c9a45e270152" type="targz">http://nchc.dl.sourceforge.net/sourceforge/latex-beamer/pgf-1.00.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>tetex</Dependency>
+            <Dependency versionFrom="2.00">xcolor</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>pgf</Name>
+        <RuntimeDependencies>
+            <Dependency>tetex</Dependency>
+            <Dependency versionFrom="2.00">xcolor</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-30</Date>
+            <Version>1.00</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

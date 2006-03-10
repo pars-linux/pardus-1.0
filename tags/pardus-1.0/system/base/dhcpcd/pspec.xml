@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>dhcpcd</Name>
+        <Homepage>http://www.phystech.com/download/</Homepage>
+        <Packager>
+            <Name>Gökçen Eraslan</Name>
+            <Email>gokcene@anadolu.edu.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>A dhcp client only</Summary>
+        <Description>A dhcp client only</Description>
+        <Summary xml:lang="tr">DHCP protokolü için istemci</Summary>
+        <Description xml:lang="tr">Ağ kartlarının, ağ içerisinde bir DHCP sunucusu varsa otomatik olarak yapılandırılmasını sağlayan uygulama</Description>
+        <Archive sha1sum="bf5cbe68fbadd5597a1ccbf78848af5beff4b6e6" type="targz">ftp://ftp.phystech.com/pub/dhcpcd-1.3.22-pl4.tar.gz</Archive>
+        <Patches>
+            <Patch compressionType="bz2" level="1">dhcpcd-1.3.22_p4.diff.bz2</Patch>
+            <Patch compressionType="bz2" level="1">dhcpcd-1.3.22_p4-keepCacheAndResolv.diff.bz2</Patch>
+            <Patch level="1">dhcpcd-1.3.22_p4-no-iface-down.diff</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>dhcpcd</Name>
+        <RuntimeDependencies>
+            <Dependency>glibc</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/dhcpc</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-17</Date>
+            <Version>1.3.22_p4</Version>
+            <Comment>First release.</Comment>
+            <Name>Gökçen Eraslan</Name>
+            <Email>gokcene@anadolu.edu.tr</Email>
+        </Update>
+    </History>
+</PISI>

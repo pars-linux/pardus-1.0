@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libpng</Name>
+        <Homepage>http://www.libpng.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>library</IsA>
+        <Summary>Portable Network Graphics library</Summary>
+        <Summary xml:lang="tr">PNG kütüphanesi</Summary>
+        <Description>Portable Network Graphics library</Description>
+        <Description xml:lang="tr">PNG kütüphanesi</Description>
+        <Archive sha1sum="b6d73493eea4095166118b298efecb54a8e3d2f5" type="tarbz2">http://ovh.dl.sourceforge.net/libpng/libpng-1.2.8.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>zlib</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">libpng-rhconf.patch</Patch>
+            <Patch level="1">libpng-1.2.8-strnlen.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>libpng</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="2">
+            <Date>2005-11-21</Date>
+            <Version>1.2.8</Version>
+            <Comment>Link to -lz -lm</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-25</Date>
+            <Version>1.2.8</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

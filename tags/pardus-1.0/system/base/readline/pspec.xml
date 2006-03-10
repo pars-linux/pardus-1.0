@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>readline</Name>
+        <Homepage>http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Another cute console display library</Summary>
+        <Description>Another cute console display library</Description>
+        <Summary xml:lang="tr">Diğer bir şirin konsol gösterim kütüphanesi</Summary>
+        <Description xml:lang="tr">Bu kütüphane kullanıcıların komut satırını tuşladıkları gibi düzenlemelerini sağlayan uygulamalara (vi, emacs, nano vb.) fonksiyonlar sağlar.</Description>
+        <Archive sha1sum="9b9959c3f62e3e82d3edd604c0bf6124d5256c9e" type="targz">ftp://ftp.gnu.org/gnu/readline/readline-5.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="2.05b">bash</Dependency>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>readline50-001</Patch>
+            <Patch>readline50-002</Patch>
+            <Patch>readline50-003</Patch>
+            <Patch>readline50-004</Patch>
+            <Patch>readline50-005</Patch>
+            <Patch level="3">bash-3.0-etc-inputrc.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>readline</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="2.05b">bash</Dependency>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="header">/usr/include/readline</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-12-14</Date>
+            <Version>5.0</Version>
+            <Comment>Workaround #1074</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-08</Date>
+            <Version>5.0</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

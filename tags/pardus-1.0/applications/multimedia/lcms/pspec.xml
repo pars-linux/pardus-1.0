@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>lcms</Name>
+        <Homepage>http://www.littlecms.com/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>app:console</IsA>
+        <Description>A lightweight, speed optimized color management engine</Description>
+        <Description xml:lang="tr">Hız geliştirmesi yapılmış, hafif bir renk yönetim motoru</Description>
+        <Summary>A lightweight, speed optimized color management engine</Summary>
+        <Summary xml:lang="tr">Hız geliştirmesi yapılmış, hafif bir renk yönetim motoru</Summary>
+        <Archive sha1sum="01224619128262c3ed444af90761261ae7d37374" type="targz">http://www.littlecms.com/lcms-1.13.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>tiff</Dependency> 
+            <Dependency>jpeg</Dependency> 
+            <Dependency>zlib</Dependency> 
+            <Dependency>python</Dependency> 
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>lcms</Name>
+        <RuntimeDependencies>
+            <Dependency>jpeg</Dependency> 
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share/lcms/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-31</Date>
+            <Version>1.13</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

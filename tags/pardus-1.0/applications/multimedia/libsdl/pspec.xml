@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libsdl</Name>
+        <Homepage>http://www.libsdl.org/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <IsA>app:console</IsA>
+        <Description>Simple Direct Media Layer</Description>
+        <Description xml:lang="tr">Basit bir direk ortam erişim katmanı</Description>
+        <Summary>Simple Direct Media Layer</Summary>
+        <Summary xml:lang="tr">Basit bir direk ortam erişim katmanı</Summary>
+        <Archive sha1sum="1a840c50668f230df9e9163ef1a282d9f3355383" type="targz">http://www.libsdl.org/release/SDL-1.2.7.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="0.1.9">audiofile</Dependency>
+            <Dependency versionFrom="4">sed</Dependency>
+            <Dependency versionFrom="0.9.19">DirectFB</Dependency>
+            <Dependency versionFrom="0.9">libcaca</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>arts</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency>aalib</Dependency>
+            <Dependency>nas</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch level="1">01-1.2.7-nobuggy-X.patch</Patch>
+            <Patch level="1">02-1.2.7-libcaca.patch</Patch>
+            <Patch>03-1.2.7-gcc34.patch</Patch>
+            <Patch>04-1.2.7-joystick2.patch</Patch>
+            <Patch level="1">05-1.2.7-26headers.patch</Patch>
+            <Patch>06-1.2.8-keyrepeat.patch</Patch>
+            <Patch>07-fix-head.patch</Patch>
+            <Patch target="configure">08-nocxx.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>libsdl</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.1.9">audiofile</Dependency>
+            <Dependency versionFrom="0.9.19">DirectFB</Dependency>
+            <Dependency versionFrom="0.9">libcaca</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>arts</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency>aalib</Dependency>
+            <Dependency>nas</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include/SDL</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-12-05</Date>
+            <Version>1.4.7</Version>
+            <Comment>nas support</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-09-21</Date>
+            <Version>1.4.7</Version>
+            <Comment>dosed function in action.py fixed.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-21</Date>
+            <Version>1.4.7</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

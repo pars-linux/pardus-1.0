@@ -1,0 +1,45 @@
+Sniped from:
+http://rpm.sh-linux.org/rpm-2004/target/SRPMS/glibc-2.3.3-27.12.src.rpm
+
+http://bugs.gentoo.org/show_bug.cgi?id=100696
+
+--- sysdeps/unix/sysv/linux/sh/bits/fcntl.h
++++ sysdeps/unix/sysv/linux/sh/bits/fcntl.h
+@@ -88,6 +88,12 @@
+ # define F_GETSIG	11	/* Get number of signal to be sent.  */
+ #endif
+ 
++#ifdef __USE_GNU
++# define F_SETLEASE	1024	/* Set a lease.	 */
++# define F_GETLEASE	1025	/* Enquire what lease is active.  */
++# define F_NOTIFY	1026	/* Request notfications on a directory.	 */
++#endif
++
+ /* For F_[GET|SET]FL.  */
+ #define FD_CLOEXEC	1	/* actually anything with low bit set goes */
+ 
+@@ -109,6 +115,24 @@
+ # define LOCK_UN	8	/* remove lock */
+ #endif
+ 
++#ifdef __USE_GNU
++# define LOCK_MAND	32	/* This is a mandatory flock:	*/
++# define LOCK_READ	64	/* ... which allows concurrent read operations.	 */
++# define LOCK_WRITE	128	/* ... which allows concurrent write operations.  */
++# define LOCK_RW	192	/* ... Which allows concurrent read & write operations.	 */
++#endif
++
++#ifdef __USE_GNU
++/* Types of directory notifications that may be requested with F_NOTIFY.  */
++# define DN_ACCESS	0x00000001	/* File accessed.  */
++# define DN_MODIFY	0x00000002	/* File modified.  */
++# define DN_CREATE	0x00000004	/* File created.  */
++# define DN_DELETE	0x00000008	/* File removed.  */
++# define DN_RENAME	0x00000010	/* File renamed.  */
++# define DN_ATTRIB	0x00000020	/* File changed attibutes.  */
++# define DN_MULTISHOT	0x80000000	/* Don't remove notifier.  */
++#endif
++
+ struct flock
+   {
+     short int l_type;	/* Type of lock: F_RDLCK, F_WRLCK, or F_UNLCK.  */

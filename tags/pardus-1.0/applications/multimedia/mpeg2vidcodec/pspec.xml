@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>mpeg2vidcodec</Name>
+        <Homepage>http://www.mpeg.org</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>library</IsA>
+        <Summary>MPEG Library</Summary>
+        <Summary xml:lang="tr">Mpeg formatında sıkıştırılmış görüntü ve ses dosyaları için gereken kütüphane</Summary>
+        <Description>MPEG Library</Description>
+        <Description xml:lang="tr">Mpeg formatında sıkıştırılmış görüntü ve ses dosyaları için gereken kütüphane</Description>
+        <Archive sha1sum="2ba56c46f3a70213e4f09417ad5340ef2b1e312e" type="targz">ftp://ftp.mpeg.org/pub/mpeg/mssg/mpeg2vidcodec_v12.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>mpeg2vidcodec</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-18</Date>
+            <Version>12</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

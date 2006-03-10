@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cairo</Name>
+        <Homepage>http://cairographics.org/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL</License>
+        <IsA>library</IsA>
+        <Summary>Cairo is a 2D graphics library with support for multiple output devices.</Summary>
+        <Summary xml:lang="tr">Birden çok çıktı cihazına destek veren bir 2 boyutlu grafik kütüphanesi</Summary>
+        <Description>Cairo is a 2D graphics library with support for multiple output devices.</Description>
+        <Description xml:lang="tr">Birden çok çıktı cihazına destek veren bir 2 boyutlu grafik kütüphanesi</Description>
+        <Archive sha1sum="3a425049499b0b067ed4dc60d94b4d0819c0841b" type="targz">http://cairographics.org/releases/cairo-1.0.2.tar.gz</Archive>
+        <Patches>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency>zlib</Dependency>
+        </BuildDependencies> 
+    </Source>
+    
+    <Package>
+        <Name>cairo</Name>
+        <RuntimeDependencies>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>xorg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2005-10-30</Date>
+            <Version>1.0.2</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

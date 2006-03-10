@@ -1,0 +1,32 @@
+diff -Nur new/modules/Makefile new-2/modules/Makefile
+--- new/modules/Makefile	2005-12-09 12:03:44.000000000 +0200
++++ new-2/modules/Makefile	2005-12-09 12:05:20.000000000 +0200
+@@ -81,8 +81,9 @@
+ FOUND_UART_REGISTER_PORT := $(shell grep -q 'uart_register_port' ${REAL_KERNELSRC}/include/linux/serial_core.h 2>/dev/null && echo -DFOUND_UART_REGISTER_PORT)
+ FOUND_TTY_START_STOP := $(shell grep -q 'stop_tx.*tty_stop' ${REAL_KERNELSRC}/include/linux/serial_core.h 2>/dev/null && echo -DFOUND_TTY_START_STOP)
+ FOUND_CLASS_DEVICE_PARENT := $(shell grep -q 'struct[ \t]*class_device[ \t]*\*[ \t]*parent' ${REAL_KERNELSRC}/include/linux/device.h 2>/dev/null && echo -DFOUND_CLASS_DEVICE_PARENT)
++FOUND_REFRIGERATOR := $(shell grep -q 'refrigerator' ${REAL_KERNELSRC}/include/linux/suspend.h 2>/dev/null && echo -DFOUND_REFRIGERATOR)
+ 
+-CFLAGS+= $(FOUND_CLASS_SIMPLE) $(FOUND_UART_REGISTER_PORT) $(FOUND_TTY_START_STOP) $(FOUND_CLASS_DEVICE_PARENT)
++CFLAGS+= $(FOUND_CLASS_SIMPLE) $(FOUND_UART_REGISTER_PORT) $(FOUND_TTY_START_STOP) $(FOUND_CLASS_DEVICE_PARENT) $(FOUND_REFRIGERATOR)
+ 
+ else
+ KO= o
+diff -Nur new/modules/osservices.c new-2/modules/osservices.c
+--- new/modules/osservices.c	2005-12-09 12:03:39.000000000 +0200
++++ new-2/modules/osservices.c	2005-12-09 12:06:30.000000000 +0200
+@@ -519,8 +519,13 @@
+ 
+ 			if(signal_pending(current)) {
+ 				handle_sigs();
+-			} else
++			} else {
++#ifdef FOUND_REFRIGERATOR
++				if (current->flags & PF_FREEZE)
++				refrigerator(PF_FREEZE);
++#endif
+ 				schedule();
++			}
+ 		}
+ 		current->state = TASK_RUNNING;
+ 		remove_wait_queue(&osthrd->wq, &wait);

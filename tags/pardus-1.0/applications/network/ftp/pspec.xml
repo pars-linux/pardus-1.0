@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>ftp</Name>
+        <Homepage>http://www.hcs.harvard.edu/~dholland/computers/netkit.html</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:console</IsA>
+        <Summary xml:lang="en">Standard Linux FTP client</Summary>
+        <Summary xml:lang="tr">Standard Linux FTP istemcisi</Summary>
+        <Description xml:lang="en">Standard Linux FTP client</Description>
+        <Description xml:lang="tr">Standard Linux FTP istemcisi</Description>
+        <Archive type="targz" sha1sum="815541a33bf02a43b5b41194389b8435e7890935">ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/netkit-ftp-0.17.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+            <Dependency>openssl</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">netkit-ftp-0.17-ssl-0.2.patch</Patch>
+            <Patch level="1">netkit-ftp-0.17-ipv6.patch</Patch>
+            <Patch>netkit-ftp-0.17-dont-strcpy-overlapping.patch</Patch>
+            <Patch level="1">netkit-ftp-0.17-acct.patch</Patch>
+            <Patch level="1">netkit-ftp-0.17-locale.patch</Patch>
+            <Patch level="1">netkit-ftp-0.17-runique_mget.patch</Patch>
+            <Patch level="1">netkit-ftp-0.17-security.patch</Patch>
+            <Patch level="1">netkit-ftp-0.17-segv.patch</Patch>
+            <Patch level="1">netkit-ftp-0.17-custom-cflags.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>ftp</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-27</Date>
+            <Version>0.17</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

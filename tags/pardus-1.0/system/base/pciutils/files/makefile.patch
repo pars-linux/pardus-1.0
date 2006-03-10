@@ -1,0 +1,15 @@
+--- Makefile.orig	2005-10-19 22:49:04.997843112 +0300
++++ Makefile	2005-10-19 22:49:35.190253168 +0300
+@@ -7,10 +7,10 @@
+ VERSION=2.2.0
+ DATE=2005-09-21
+ 
+-PREFIX=/usr/local
++PREFIX=/usr
+ SBINDIR=$(PREFIX)/sbin
+ SHAREDIR=$(PREFIX)/share
+-IDSDIR=$(SHAREDIR)
++IDSDIR=$(SHAREDIR)/misc
+ MANDIR:=$(shell if [ -d $(PREFIX)/share/man ] ; then echo $(PREFIX)/share/man ; else echo $(PREFIX)/man ; fi)
+ INSTALL=install
+ DIRINSTALL=install -d

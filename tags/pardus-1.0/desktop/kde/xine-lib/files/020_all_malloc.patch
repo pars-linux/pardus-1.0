@@ -1,0 +1,13 @@
+diff -ur -x '*~' xine-lib-1.1.0/src/post/deinterlace/plugins/tomsmocomp/tomsmocompmacros.h xine-lib-1.1.0-fbsd/src/post/deinterlace/plugins/tomsmocomp/tomsmocompmacros.h
+--- src/post/deinterlace/plugins/tomsmocomp/tomsmocompmacros.h	2005-06-05 18:00:06.000000000 +0200
++++ src/post/deinterlace/plugins/tomsmocomp/tomsmocompmacros.h	2005-07-29 00:54:35.242588576 +0200
+@@ -1,7 +1,8 @@
+-#include <malloc.h>
+ #include <string.h>
+ #include <math.h>
++#ifdef HAVE_MALLOC_H
+ #include <malloc.h>
++#endif
+ 
+ #define USE_FOR_DSCALER
+ 

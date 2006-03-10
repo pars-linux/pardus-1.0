@@ -1,0 +1,33 @@
+#!/sbin/runscript
+# Copyright © 2005  TUBITAK/UEKAE
+# Licensed under the GNU General Public License, version 2.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+#
+# Original work belongs Gentoo Linux
+
+start() {
+
+	ebegin "Starting D-BUS system messagebus"
+
+	start-stop-daemon --start --pidfile /var/run/dbus.pid --exec /usr/bin/dbus-daemon-1 -- --system
+
+	eend $?
+
+}
+
+stop() {
+
+	local retval
+
+	ebegin "Stopping D-BUS system messagebus"
+
+	start-stop-daemon --stop --pidfile /var/run/dbus.pid
+	retval=$?
+
+	eend ${retval}
+
+	rm -f /var/run/dbus.pid
+
+	return ${retval}
+
+}

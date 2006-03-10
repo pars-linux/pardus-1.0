@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>Digest-Base</Name>
+        <Homepage>http://search.cpan.org/~gaas/Digest-1.12/Digest.pm</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Summary>Modules that calculate message digests</Summary>
+        <Description>Modules that calculate message digests</Description>
+        <Archive sha1sum="cac99f3e9ca6d97dc5eac1013544f9366f713a12" type="targz">http://www.cpan.org/authors/id/GAAS/Digest-1.05.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>Digest-Base</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-09</Date>
+            <Version>1.05</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

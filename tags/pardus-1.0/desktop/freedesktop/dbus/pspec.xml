@@ -1,0 +1,104 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>dbus</Name>
+        <Homepage>http://dbus.freedesktop.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <License>AFL-2.1</License>
+        <IsA>daemon</IsA>
+        <Summary>A message bus system, a simple way for applications to talk to each other</Summary>
+        <Summary xml:lang="tr">Uygulamaların birbirleriyle haberleşmesinin basit bir yöntemi</Summary>
+        <Description>A message bus system, a simple way for applications to talk to each other</Description>
+        <Description xml:lang="tr">Uygulamaların birbirleriyle haberleşmesinin basit bir yöntemi</Description>
+        <Archive sha1sum="cca89dc471ca7ca830cd6378638c3a2ec78dc16a" type="targz">http://dbus.freedesktop.org/releases/dbus-0.50.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="2.6">glib2</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency versionFrom="2.4">python</Dependency>
+            <Dependency versionFrom="0.9.3">pyrex</Dependency>
+            <Dependency versionFrom="3">qt</Dependency>
+            <Dependency>doxygen</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>dbus-0.23-fd_set.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>dbus</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="2.6">glib2</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency versionFrom="0.9.3">pyrex</Dependency>
+            <Dependency versionFrom="3">qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/etc/X11/xinit/xinitrc.d</Path>
+            <Path fileType="config">/etc/dbus-1</Path>
+            <Path fileType="executable">/etc/init.d</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/var/lib/dbus</Path>
+            <Path fileType="data">/var/lib/run/dbus</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/dbus">dbus</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/X11/xinit/xinitrc.d/30-dbus">30-dbus</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="5">
+            <Date>2005-12-21</Date>
+            <Version>0.50</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-12-17</Date>
+            <Version>0.36.2</Version>
+            <Comment>fix depscaning warnings while booting</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-26</Date>
+            <Version>0.36.2</Version>
+            <Comment>postinstall script added</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-16</Date>
+            <Version>0.36.2</Version>
+            <Comment>Generate python bindings</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-19</Date>
+            <Version>0.36.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

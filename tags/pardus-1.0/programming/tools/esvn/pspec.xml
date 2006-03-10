@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>esvn</Name>
+        <Homepage>http://esvn.umputun.com/</Homepage>
+        <Packager>
+            <Name>Fatih Aşıcı</Name>
+            <Email>fasici@linux-sevenler.org</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>GUI frontend to the Subversion revision system.</Summary>
+        <Description>GUI frontend to the Subversion revision system.</Description>
+        <Summary xml:lang="tr">Subversion sisteminin grafik arayüz ön ucu</Summary>
+        <Description xml:lang="tr">Subversion sisteminin grafik arayüz ön ucu</Description>
+        <Archive sha1sum="855d2f3a415ce53ae8c6ce73416f1ca5a4f7fd92" type="targz">http://esvn.umputun.com/esvn-0.6.11-1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>qt</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>esvn</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>subversion</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-29</Date>
+            <Version>0.6.11</Version>
+            <Comment>First release.</Comment>
+            <Name>Fatih Aşıcı</Name>
+            <Email>fasici@linux-sevenler.org</Email>
+        </Update>
+    </History>
+</PISI>

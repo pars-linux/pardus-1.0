@@ -1,0 +1,12 @@
+diff -Nur rt2500-1.1.0-b3-old/Module/oid.h rt2500-1.1.0-b3/Module/oid.h
+--- rt2500-1.1.0-b3-old/Module/oid.h	2005-07-30 19:28:20.000000000 +0300
++++ rt2500-1.1.0-b3/Module/oid.h	2005-11-03 21:12:10.000000000 +0200
+@@ -105,7 +105,7 @@
+ #define RT_OID_802_11_LINK_STATUS                   0x0202
+ #define RT_OID_802_11_RESET_COUNTERS                0x0203
+ #define RT_OID_802_11_AC_CAM                        0x0204
+-#if RT2500_DBG
++#ifdef RT2500_DBG
+ #define RT_OID_802_11_HARDWARE_REGISTER             0x0205
+ #endif
+ #define RT_OID_802_11_RACONFIG                      0x0206

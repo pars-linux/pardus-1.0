@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>k3b-i18n</Name>
+        <Homepage>http://uludag.org.tr</Homepage>
+        <Packager>
+            <Name>Fatih Aşıcı</Name>
+            <Email>fasici@linux-sevenler.org</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>doc</IsA>
+        <Summary>Internationalization files for K3b</Summary>
+        <Summary xml:lang="tr">K3b için uluslararasılaştırma dosyaları</Summary>
+        <Description>Internationalization files for K3b</Description>
+        <Description xml:lang="tr">K3b için uluslararasılaştırma dosyaları</Description>
+        <Archive sha1sum="7dbdefeb2a35ff3fed4ea811edbf73341814f3fd" type="tarbz2">http://heanet.dl.sourceforge.net/sourceforge/k3b/k3b-i18n-0.12.10.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>k3b-i18n-tr</Name>
+        <Summary>Translation files for K3b</Summary>
+        <Summary xml:lang="tr">K3b için çeviri dosyaları</Summary>
+        <Description>Translation files for K3b</Description>
+        <Description xml:lang="tr">K3b için çeviri dosyaları</Description>
+        <Files>
+            <Path fileType="localedata">/usr/kde/3.5/share/locale/tr</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>k3b-i18n-others</Name>
+        <Summary>Translation files for K3b</Summary>
+        <Summary xml:lang="tr">K3b için çeviri dosyaları</Summary>
+        <Description>Translation files for K3b</Description>
+        <Description xml:lang="tr">K3b için çeviri dosyaları</Description>
+        <Files>
+            <Path fileType="localedata">/usr/kde/3.5/share/locale/</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+   </Package>
+
+   <History>
+        <Update release="5">
+            <Date>2005-12-16</Date>
+            <Version>0.12.10</Version>
+            <Comment>Update for new stable release</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-11-26</Date>
+            <Version>0.12.9</Version>
+            <Comment>Update for new stable release</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-26</Date>
+            <Version>0.12.8</Version>
+            <Comment>Update for new stable release</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-21</Date>
+            <Version>0.12.7</Version>
+            <Comment>3.4 to 3.5</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-06</Date>
+            <Version>0.12.7</Version>
+            <Comment>First release.</Comment>
+            <Name>Fatih Aşıcı</Name>
+            <Email>fasici@linux-sevenler.org</Email>
+        </Update>
+    </History>
+</PISI>

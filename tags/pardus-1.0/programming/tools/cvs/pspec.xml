@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cvs</Name>
+        <Homepage>http://www.cvshome.org/</Homepage>
+        <Packager>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <License>LGPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Concurrent Versions System - source code revision control tools</Summary>
+        <Summary xml:lang="tr">Concurrent Versions System - kaynak kod revizyon kontrol sistemi</Summary>
+        <Description>Concurrent Versions System - source code revision control tools</Description>
+        <Description xml:lang="tr">CVS, eski dosyaları ve versiyonları saklayabilen, kim, ne zaman, neden değişiklik yaptı gibi kayıtları tutabilen bir versiyon kontrol sistemidir. Benzerlerinin tersine CVS yalnızca bir dosya veya dizin üzerinde değil, hiyerarşik bir düzen içinde dizin grupları üzerinde çalışmanızı sağlar.</Description>
+        <Archive sha1sum="d114ed2943a4027f1277b04f57867a2e09a1f432" type="tarbz2">http://ftp.gnu.org/non-gnu/cvs/source/stable/1.11.21/cvs-1.11.21.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="1.1.4">zlib</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>cvs</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+            <Path fileType="man">/usr/share/man/</Path>
+            <Path fileType="executable">/usr/share/cvs/contrib</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile permission="0644" target="/etc/xinetd.d">cvspserver</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-12-15</Date>
+            <Version>1.11.21</Version>
+            <Comment>New version</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-12</Date>
+            <Version>1.11.20</Version>
+            <Comment>First release.</Comment>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Update>
+    </History>
+</PISI>

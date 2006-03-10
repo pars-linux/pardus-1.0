@@ -1,0 +1,133 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gimp</Name>
+        <Homepage>http://www.gimp.org/</Homepage>
+        <Packager>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>GNU Image Manipulation Program</Summary>
+        <Summary xml:lang="tr">Bir resim işleme programı</Summary>
+        <Description>GNU Image Manipulation Program</Description>
+        <Description xml:lang="tr">Bir resim işleme programı</Description>
+        <Archive sha1sum="ca37e24e6edf8c92bb65a838be2cdc8c3547ec32" type="tarbz2">ftp://ftp.gimp.org/pub/gimp/v2.3/gimp-2.3.4.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="2.8.0">glib2</Dependency>
+            <Dependency versionFrom="2.6.0">gtk2</Dependency>
+            <Dependency versionFrom="2.8.0">librsvg</Dependency>
+            <Dependency>lcms</Dependency>
+            <Dependency versionFrom="1.4">pango</Dependency>
+            <Dependency versionFrom="2.1.7">freetype</Dependency>
+            <Dependency versionFrom="2.2">fontconfig</Dependency>
+            <Dependency versionFrom="1.2.1">libpng</Dependency>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency>libexif</Dependency>
+            <Dependency versionFrom="3.5.7">tiff</Dependency>
+            <Dependency>aalib</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>gimp2.3.4-tr-locale.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>gimp-devel</Name>
+        <IsA>devel</IsA>
+        <Summary>Development header and documents for GIMP</Summary>
+        <Summary xml:lang="tr">GIMP için geliştirme belgeleri ve başlık dosyaları</Summary>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="doc">/usr/share/gtk-doc</Path>
+            <Path fileType="config">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+        </Files>
+    </Package>
+
+   <Package>
+        <Name>gimp</Name>
+        <RuntimeDependencies>
+            <Dependency>xorg</Dependency>
+            <Dependency versionFrom="2.8.0">glib2</Dependency>
+            <Dependency versionFrom="2.6.0">gtk2</Dependency>
+            <Dependency versionFrom="2.8.0">librsvg</Dependency>
+            <Dependency>lcms</Dependency>
+            <Dependency versionFrom="1.4">pango</Dependency>
+            <Dependency versionFrom="2.1.7">freetype</Dependency>
+            <Dependency versionFrom="2.2">fontconfig</Dependency>
+            <Dependency versionFrom="1.2.1">libpng</Dependency>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency>libexif</Dependency>
+            <Dependency versionFrom="3.5.7">tiff</Dependency>
+            <Dependency>aalib</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/application-registry</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/gimp</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="localedata">/usr/share/locale/tr</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/mime-info</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/gimp/2.0/images/gimp-splash.png">gimp-splash.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <Package>
+        <Name>gimp-i18n</Name>
+        <IsA>data</IsA>
+        <Summary>GIMP translations for languages other than English and Turkish</Summary>
+        <Summary xml:lang="tr">Türkçe ve İngilizce dışındaki GIMP çevirileri</Summary>
+        <Files>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="5">
+            <Date>2005-12-20</Date>
+            <Version>2.3.4</Version>
+            <Comment>Splitted into separate packages for devel and i18n files.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-10-20</Date>
+            <Version>2.3.4</Version>
+            <Comment>Turkish translation improved.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-10-18</Date>
+            <Version>2.3.4</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-07</Date>
+            <Version>2.2.6</Version>
+            <Comment>Changed splash.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-07</Date>
+            <Version>2.2.6</Version>
+            <Comment>First release.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

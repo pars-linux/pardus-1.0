@@ -1,0 +1,14 @@
+--- freetype-2.1.10/src/sfnt/sfobjs.c.kerning	2005-09-13 14:33:28.000000000 +0200
++++ freetype-2.1.10/src/sfnt/sfobjs.c	2005-09-13 14:33:47.000000000 +0200
+@@ -555,11 +555,9 @@
+       if ( face->vertical_info )
+         flags |= FT_FACE_FLAG_VERTICAL;
+ 
+-#if 0
+       /* kerning available ? */
+       if ( TT_FACE_HAS_KERNING( face ) )
+         flags |= FT_FACE_FLAG_KERNING;
+-#endif
+ 
+ #ifdef TT_CONFIG_OPTION_GX_VAR_SUPPORT
+       /* Don't bother to load the tables unless somebody asks for them. */

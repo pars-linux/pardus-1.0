@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>firefox</Name>
+        <Homepage>http://www.mozilla.org/projects/firefox/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>MPL-1.1</License>
+        <License>NPL-1.1</License>
+        <IsA>app:gui</IsA>
+        <Summary xml:lang="en">Firefox Web Browser</Summary>
+        <Description xml:lang="en">Firefox Web Browser</Description>
+        <Archive type="tarbz2" sha1sum="7437c6a351787ec8762e598ae1852e22bcca3220">http://releases.mozilla.org/pub/mozilla.org/firefox/releases/1.5/source/firefox-1.5-source.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>xorg</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency versionFrom="1.1.4">zlib</Dependency>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency versionFrom="1.0.0">libmng</Dependency>
+            <Dependency versionFrom="1.2.1">libpng</Dependency>
+            <Dependency>expat</Dependency> 
+            <Dependency>zip</Dependency> 
+            <Dependency>unzip</Dependency>
+            <Dependency versionFrom="2.8.7">gtk2</Dependency>
+            <Dependency versionFrom="2.8.3">glib2</Dependency>
+            <Dependency versionFrom="1.10.0">pango</Dependency>
+            <Dependency versionFrom="0.8.0">libIDL</Dependency>
+            <Dependency>cairo</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch compressionType="bz2">tr-cvs-trans-11112005-0215.patch.bz2</Patch>
+            <Patch level="1">embed-typeaheadfind.patch</Patch>
+            <Patch level="1">mozconfig.patch</Patch>
+            <Patch level="1">firefox-nopangoxft.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>firefox</Name>
+        <RuntimeDependencies>
+            <Dependency>xorg</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency versionFrom="1.0.0">libmng</Dependency>
+            <Dependency versionFrom="1.2.1">libpng</Dependency>
+            <Dependency versionFrom="2.8.7">gtk2</Dependency>
+            <Dependency versionFrom="2.8.3">glib2</Dependency>
+            <Dependency versionFrom="1.10.0">pango</Dependency>
+            <Dependency versionFrom="0.8.0">libIDL</Dependency>
+            <Dependency>pkgconfig</Dependency>
+            <Dependency>cairo</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/lib/MozillaFirefox</Path>
+            <Path fileType="executable">/usr/libexec</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <!-- wrappers -->
+            <AdditionalFile target="/usr/bin/firefox" permission="0755" owner="root">firefox</AdditionalFile>
+            <AdditionalFile target="/usr/libexec/mozilla-launcher" permission="0755" owner="root">mozilla-launcher</AdditionalFile>
+            <!-- env.d -->
+            <AdditionalFile target="/etc/env.d/10MozillaFirefox" permission="0644" owner="root">10MozillaFirefox</AdditionalFile>
+            <!-- Desktop file --> 
+            <AdditionalFile target="/usr/share/applications/mozillafirefox.desktop" permission="0644" owner="root">mozillafirefox.desktop</AdditionalFile>
+            <!-- Default options -->
+            <AdditionalFile target="/usr/lib/MozillaFirefox/greprefs/all-pardus.js" permission="0644" owner="root">default-prefs.js</AdditionalFile>
+            <AdditionalFile target="/usr/lib/MozillaFirefox/defaults/pref/all-pardus.js" permission="0644" owner="root">default-prefs.js</AdditionalFile>
+            <!-- Corrected *.pc files and config -->
+            <AdditionalFile target="/usr/lib/MozillaFirefox/firefox-config" permission="0755" owner="root">firefox-config</AdditionalFile>
+            <AdditionalFile target="/usr/lib/pkgconfig/firefox-gtkmozembed.pc" permission="0644" owner="root">firefox-gtkmozembed.pc</AdditionalFile>
+            <AdditionalFile target="/usr/lib/pkgconfig/firefox-js.pc" permission="0644" owner="root">firefox-js.pc</AdditionalFile>
+            <AdditionalFile target="/usr/lib/pkgconfig/firefox-nspr.pc" permission="0644" owner="root">firefox-nspr.pc</AdditionalFile>
+            <AdditionalFile target="/usr/lib/pkgconfig/firefox-nss.pc" permission="0644" owner="root">firefox-nss.pc</AdditionalFile>
+            <AdditionalFile target="/usr/lib/pkgconfig/firefox-plugin.pc" permission="0644" owner="root">firefox-plugin.pc</AdditionalFile>
+            <AdditionalFile target="/usr/lib/pkgconfig/firefox-xpcom.pc" permission="0644" owner="root">firefox-xpcom.pc</AdditionalFile>
+            <!-- Uluzilla search plugin -->
+            <AdditionalFile target="/usr/lib/MozillaFirefox/searchplugins/uluzilla.src" permission="0644" owner="root">uluzilla.src</AdditionalFile>
+            <AdditionalFile target="/usr/lib/MozillaFirefox/searchplugins/uluzilla.png" permission="0644" owner="root">uluzilla.png</AdditionalFile>
+            <!-- Wikipedia-TR search plugin.. -->
+            <AdditionalFile target="/usr/lib/MozillaFirefox/searchplugins/wikipedia-tr.src" permission="0644" owner="root">wikipedia-tr.src</AdditionalFile>
+            <AdditionalFile target="/usr/lib/MozillaFirefox/searchplugins/wikipedia-tr.png" permission="0644" owner="root">wikipedia-tr.png</AdditionalFile>
+            <AdditionalFile target="/etc/preload.d/Firefox.preload_phase2" permission="0644" owner="root">Firefox.preload_phase2</AdditionalFile>
+            <!-- Default Mimetypes -->
+            <AdditionalFile target="/usr/lib/MozillaFirefox/defaults/profile/mimeTypes.rdf" permission="0644" owner="root">mimeTypes.rdf</AdditionalFile>
+            <!-- Bookmarks -->
+            <AdditionalFile target="/usr/lib/MozillaFirefox/defaults/profile/bookmarks.html" permission="0644" owner="root">pardus_bookmark.html</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script='package.py'>System.Package</COMAR>
+        </Provides>
+    </Package>
+    
+    <Package>
+        <Name>firefox-devel</Name>
+        <RuntimeDependencies>
+            <Dependency>firefox</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/lib/MozillaFirefox/include</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="11">
+            <Date>2005-11-30</Date>
+            <Version>1.5.0</Version>
+            <Comment>Final stable version for 1.5</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="10">
+            <Date>2005-11-28</Date>
+            <Version>1.5_rc3</Version>
+            <Comment>Fix #265</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="9">
+            <Date>2005-11-25</Date>
+            <Version>1.5_rc3</Version>
+            <Comment>Add default mimetypes</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="8">
+            <Date>2005-11-18</Date>
+            <Version>1.5_rc3</Version>
+            <Comment>Update to version 1.5rc3, fix GTK+ 2.8 support and enable SVG</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="7" type="security">
+            <Date>2005-11-11</Date>
+            <Version>1.5_rc2</Version>
+            <Comment>Update to version 1.5rc2</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-11-05</Date>
+            <Version>1.5_rc1</Version>
+            <Comment>Update translations</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-11-02</Date>
+            <Version>1.5_rc1</Version>
+            <Comment>Update to version 1.5rc1</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-11-01</Date>
+            <Version>1.5_beta2</Version>
+            <Comment>Add preload support for rootfs 0.2</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3" type="Enhancement">
+            <Date>2005-10-14</Date>
+            <Version>1.5_beta2</Version>
+            <Comment>Uluzilla search plugin added.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-08-10</Date>
+            <Version>1.5_beta2</Version>
+            <Comment>firefox-devel depens firefox</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-10</Date>
+            <Version>1.5_beta2</Version>
+            <Comment>Initial import</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,17 @@
+--- pam_login-3.14.orig/src/login.c	2004-11-04 12:01:33.249950112 +0200
++++ pam_login-3.14/src/login.c	2004-11-04 12:01:08.816664536 +0200
+@@ -480,12 +480,12 @@
+ 
+   *cp++ = '\n';
+   cp = stpcpy (cp, thishost);
+-  cp = stpcpy (cp, " login: ");
++  cp = stpcpy (cp, _(" login: "));
+ 
+   ret = strdup (buffer);
+ 
+   if (ret == NULL)
+-    return "login:";
++    return _("login:");
+   else
+     return ret;
+ }

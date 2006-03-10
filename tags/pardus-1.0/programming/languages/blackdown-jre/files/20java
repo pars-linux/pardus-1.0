@@ -1,0 +1,6 @@
+PATH="/opt/blackdown-jre/bin"
+ROOTPATH="/opt/blackdown-jre/bin"
+LDPATH="/opt/blackdown-jre/lib/i386/:/opt/blackdown-jre/lib/i386/server/"
+MANPATH=${MANPATH}:/opt/blackdown-jre/man
+JRE_HOME=/opt/blackdown-jre
+JAVA_HOME=/opt/blackdown-jre

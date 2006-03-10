@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cyrus-sasl</Name>
+        <Homepage>http://asg.web.cmu.edu/sasl/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>daemon</IsA>
+        <Summary>The Cyrus SASL (Simple Authentication and Security Layer)</Summary>
+        <Summary xml:lang="tr">Cyrus basit kimlik tanımlama ve güvenlik katmanı</Summary>
+        <Description>The Cyrus SASL (Simple Authentication and Security Layer)</Description>
+        <Description xml:lang="tr">Cyrus basit kimlik tanımlama ve güvenlik katmanı)</Description>
+        <Archive sha1sum="d1eec5644c4e87edb95fa5ab8bf124cfdf277eb6" type="targz">ftp://ftp.andrew.cmu.edu/pub/cyrus-mail/cyrus-sasl-2.1.20.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">01-cyrus-sasl-2.1.20-configdir.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency versionFrom="4">sed</Dependency>
+            <Dependency versionFrom="1.8.0">gdbm</Dependency>
+            <Dependency versionFrom="0.75">pam</Dependency>
+            <Dependency versionFrom="0.9.6d">openssl</Dependency>
+        </BuildDependencies>    
+    </Source>
+
+    <Package>
+        <Name>cyrus-sasl</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="header">/usr/include/sasl</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/var/lib</Path>
+            <Path fileType="data">/usr/share/cyrus-sasl-2</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <!--
+        <AdditionalFiles>
+            <AdditionalFile target="/etc/init.d/pwcheck" permission="0755" owner="root">pwcheck.rc6</AdditionalFile>
+            <AdditionalFile target="/etc/init.d/saslauthd" permission="0755" owner="root">saslauthd2.rc6</AdditionalFile>
+            <AdditionalFile target="/etc/conf.d/saslauthd" permission="0644" owner="root">saslauthd-2.1.20.conf</AdditionalFile>
+            <AdditionalFile target="/etc/pam.d/saslauthd" permission="0644" owner="root">saslauthd.pam</AdditionalFile>
+        </AdditionalFiles>            
+        -->
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-23</Date>
+            <Version>2.1.20</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PSPEC SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>apollon</Name>
+        <Homepage>http://apollon.sourceforge.net</Homepage>
+        <Packager>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>A KDE-based giFT GUI to search for and monitor downloads.</Summary>
+        <Description>A KDE-based giFT GUI to search for and monitor downloads.</Description>
+        <Summary xml:lang="tr">KDE tabanlı giFT grafik arayüzü</Summary>
+        <Description xml:lang="tr">OpenFT, Gnutella, FastTrack (Kazaa) gibi p2p ağlarına erişim sağlayan giFT programının başarılı KDE uygulaması</Description>
+        <Archive sha1sum="5b11f176d5f4b7cfa5443800938ceaf765096949" type="tarbz2">http://switch.dl.sourceforge.net/sourceforge/apollon/apollon-1.0.2.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>kdebase</Dependency>
+            <Dependency versionFrom="0.11.4">gift</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>apollon-pardus-utf8.patch</Patch>
+            <Patch>apollon-desktop.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>apollon</Name>
+        <RuntimeDependencies>
+            <Dependency>kdebase</Dependency>
+            <Dependency versionFrom="0.11.4">gift</Dependency>
+            <Dependency>gift-ares</Dependency>
+            <Dependency>gift-gnutella</Dependency>
+            <Dependency>gift-openft</Dependency>
+            <Dependency>gift-fasttrack</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="data">/usr/kde/3.5/share</Path>
+            <Path fileType="library">/usr/kde/3.5/lib</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="4">
+            <Date>2005-12-20</Date>
+            <Version>1.0.2.1</Version>
+            <Comment>fix dependency</Comment>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-12-07</Date>
+            <Version>1.0.2.1</Version>
+            <Comment>fix #1054</Comment>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-12-01</Date>
+            <Version>1.0.2.1</Version>
+            <Comment>fix dependency.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-12-01</Date>
+            <Version>1.0.2.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Update>
+    </History>
+</PISI>

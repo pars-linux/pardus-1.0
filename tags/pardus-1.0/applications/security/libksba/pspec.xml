@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>libksba</Name>
+        <Homepage>http://www.gnupg.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>makes X.509 certificates and CMS easily accessible to applications</Summary>
+        <Summary xml:lang="tr">Çeşitli uygulamaların X.509 sertifikaları ve CMS verilerine kolay erişebilmesini sağlar</Summary>
+        <Description>makes X.509 certificates and CMS easily accessible to applications</Description>
+        <Description xml:lang="tr">X.509 yetki belgeleri ve İçerik Yönetim Sistemlerinin verilerine, uygulama programları tarafından ulaşıl
+masını kolaylaştıran bir kütüphanedir.</Description>
+        <Archive sha1sum="a0dc9385b113f0051beae187d9f88b7a92013f7f" type="targz">ftp://ftp.gnupg.org/GnuPG/alpha/libksba/libksba-0.9.9.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>qt</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libksba</Name>
+        <RuntimeDependencies>
+            <Dependency>libgcrypt</Dependency>
+            <Dependency>libgpg-error</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="info">/usr/share/info</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-02</Date>
+            <Version>0.9.9</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

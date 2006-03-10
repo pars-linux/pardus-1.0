@@ -1,0 +1,11 @@
+--- XFree86-4.1.0/xc/config/cf/Imake.tmpl.orig	Wed Oct 24 14:07:19 2001
++++ XFree86-4.1.0/xc/config/cf/Imake.tmpl	Wed Oct 24 14:08:01 2001
+@@ -1001,7 +1001,7 @@
+ #define CppCmd /lib/cpp
+ #endif
+ #ifndef RawCppCmd
+-#define RawCppCmd CppCmd -undef
++#define RawCppCmd CppCmd
+ #endif
+ #ifndef CppNoLineInfoOption
+ #define CppNoLineInfoOption /**/

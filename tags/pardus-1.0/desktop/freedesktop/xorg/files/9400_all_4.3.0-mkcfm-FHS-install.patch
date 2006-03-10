@@ -1,0 +1,13 @@
+diff -urN xc.orig/programs/mkcfm/mkcfm.c xc/programs/mkcfm/mkcfm.c
+--- xc.orig/programs/mkcfm/mkcfm.c	2002-12-09 12:30:12.000000000 -0500
++++ xc/programs/mkcfm/mkcfm.c	2004-01-27 17:11:57.000000000 -0500
+@@ -38,7 +38,7 @@
+ static Bool DoDirectory(char *dirName);
+
+ #ifndef DEFAULTCID
+-#define DEFAULTCID "/usr/X11R6/lib/X11/fonts/CID"
++#define DEFAULTCID "/usr/share/fonts/CID"
+ #endif
+ #define DECIPOINTSPERINCH 722.7
+ #define DEFAULTRES 75
+

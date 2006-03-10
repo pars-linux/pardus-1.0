@@ -1,0 +1,184 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kernel</Name>
+        <Homepage>http://www.uludag.org.tr/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>category</IsA>
+        <Summary>Uniprocessor Linux kernel for Pardus Linux</Summary>
+        <Summary xml:lang="tr">Pardus için Linux çekirdeği</Summary>
+        <Description>Uniproccessor Linux kernel for Pardus Linux</Description>
+        <Description xml:lang="tr">Pardus Linux için Linux çekirdeği</Description>
+        <Archive sha1sum="43e8b66e0ac487d9d59406573293b1caa84377d6" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/linux-2.6.14.4.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>cpio</Dependency>
+            <Dependency>mkinitrd</Dependency>
+            <Dependency>diffutils</Dependency>
+            <Dependency>splashutils</Dependency>
+            <Dependency>splashutils-misc</Dependency>
+            <Dependency>splash-theme</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <!-- Disabled until SMP one comes
+            <Patch level="1">2705_ht-slowdown.patch</Patch>
+            <Patch level="1">2715_ht-slowdown-3.patch</Patch>
+            <Patch level="1">2710_ht-dlowdown-2.patch</Patch>
+            -->
+            <Patch level="1">acpi-dsdt-initrd-v0.7e-2.6.14.patch</Patch>
+            <Patch level="1">4101_deprecate-sk98lin.patch</Patch>
+            <Patch level="1">4300_via-vt6410.patch</Patch>
+            <Patch level="1">4320_promise-pdc2037x.patch</Patch>
+            <Patch level="1">4351_megaraid-compatibility.patch</Patch>
+            <Patch level="1">4500_fbsplash-0.9.2-r5.patch</Patch>
+            <Patch level="1">4505_vesafb-tng-1.0-rc1-r2.patch</Patch>
+            <Patch level="1">4705_squashfs-2.2.patch</Patch>
+            <Patch level="1">pardus-logo.patch</Patch>
+            <Patch level="1">pardus-utf8.patch</Patch>
+            <!-- Subset of Con Kolivas's patches -->
+            <Patch level="1">1g_lowmem1_i386.diff</Patch>
+            <Patch level="1">pdflush-tweaks.patch</Patch>
+            <Patch level="1">vm-mapped.diff</Patch>
+            <Patch level="1">vm-lots_watermark.diff</Patch>
+            <Patch level="1">vm-background_scan-1.diff</Patch>
+            <Patch>pardus-kernel-config.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>kernel</Name>
+        <RuntimeDependencies>
+            <Dependency>splashutils</Dependency>
+            <Dependency>splashutils-misc</Dependency>
+            <Dependency>splash-theme</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable" permanent="true">/boot</Path>
+            <Path fileType="library" permanent="true">/lib/modules/</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <Package>
+        <Name>kernel-source</Name>
+        <Summary>Pardus Linux kernel source</Summary>
+        <Description>Pardus Linux kernel source</Description>
+        <Files>
+            <Path fileType="header">/usr/src/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="15">
+            <Date>2005-12-24</Date>
+            <Version>2.6.14.4</Version>
+            <Comment>fix #777 (scsi vmware support)</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="14">
+            <Date>2005-12-22</Date>
+            <Version>2.6.14.4</Version>
+            <Comment>Update latest greatest and lots of config/bug fix, add -htslowdown patches for future smp kernel [disabled], and subset of -ck patch set</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="13">
+            <Date>2005-12-21</Date>
+            <Version>2.6.14.3</Version>
+            <Comment>Remove 8139cp, causing lots of problem</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="12">
+            <Date>2005-12-21</Date>
+            <Version>2.6.14.3</Version>
+            <Comment>Remove *-2.6.15 patches as they didnt provide needed sysfs entries</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="11">
+            <Date>2005-12-10</Date>
+            <Version>2.6.14.3</Version>
+            <Comment>Enable DVB support</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="10">
+            <Date>2005-11-29</Date>
+            <Version>2.6.14.3</Version>
+            <Comment>Embed splash-theme into kernel</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="9">
+            <Date>2005-11-29</Date>
+            <Version>2.6.14.3</Version>
+            <Comment>naming changes, serial mouse support</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="8">
+            <Date>2005-11-28</Date>
+            <Version>2.6.14.3</Version>
+            <Comment>Update to 2.6.14.3 and use utf-8 patch</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="7">
+            <Date>2005-11-25</Date>
+            <Version>2.6.14.2</Version>
+            <Comment>Fix hp notebooks acpi pci problem</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-11-24</Date>
+            <Version>2.6.14.2</Version>
+            <Comment>/usr/src/linux symlink</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-11-17</Date>
+            <Version>2.6.14.2</Version>
+            <Comment>Backport wireless drivers from 2.6.15-rc1-mm1</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-11-16</Date>
+            <Version>2.6.14.2</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-10-27</Date>
+            <Version>2.6.12</Version>
+            <Comment>Postinstall script added</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-26</Date>
+            <Version>2.6.12</Version>
+            <Comment>Config changes for various driver support</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-03</Date>
+            <Version>2.6.12</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

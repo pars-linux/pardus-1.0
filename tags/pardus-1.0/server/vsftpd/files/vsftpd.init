@@ -1,0 +1,63 @@
+#!/sbin/runscript
+# Copyright © 2005  TUBITAK/UEKAE
+# Licensed under the GNU General Public License, version 2.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+#
+
+VSFTPD_CONF="${VSFTPD_CONF:-/etc/vsftpd/vsftpd.conf}"
+VSFTPD_NAME="${myservice##*.}"
+if [[ -n ${VSFTPD_NAME} && ${myservice} != "vsftpd" ]]; then
+    VSFTPD_PID="/var/run/vsftpd.${VSFTPD_NAME}.pid"
+else
+    VSFTPD_PID="/var/run/vsftpd.pid"
+fi
+
+depend() {
+	need net
+	use dns logger
+}
+
+checkconfig() {
+	if [[ ! -e ${VSFTPD_CONF} ]] ; then
+		eerror "Please setup ${VSFTPD_CONF} before starting vsftpd"
+		eerror "There are sample configurations in /usr/share/doc/vsftpd"
+		return 1
+	fi
+
+	if egrep -iq "^ *background *= *yes" "${VSFTPD_CONF}" ; then
+		eerror "${VSFTPD_CONF} must not set background=YES"
+		return 1
+	fi
+
+	local has_ip=false has_ipv6=false ip_error=true
+	egrep -iq "^ *listen *= *yes" "${VSFTPD_CONF}" && has_ip=true
+	egrep -iq "^ *listen_ipv6 *= *yes" "${VSFTPD_CONF}" && has_ipv6=true
+	if ${has_ip} && ! ${has_ipv6} ; then
+		ip_error=false
+	elif ! ${has_ip} && ${has_ipv6} ; then
+		ip_error=false
+	fi
+	if ${ip_error} ; then
+		eerror "${VSFTPD_CONF} must contain listen=YES or listen_ipv6=YES"
+		eerror "but not both"
+		return 1
+	fi
+}
+
+start() {
+	checkconfig || return 1
+	ebegin "Starting vsftpd"
+	start-stop-daemon --start --exec /usr/sbin/vsftpd \
+		--background --make-pidfile --pidfile "${VSFTPD_PID}" \
+		-- "${VSFTPD_CONF}"
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping vsftpd"
+	start-stop-daemon --stop --exec /usr/sbin/vsftpd \
+		--pidfile "${VSFTPD_PID}"
+	eend $?
+}
+
+# vim: ts=4

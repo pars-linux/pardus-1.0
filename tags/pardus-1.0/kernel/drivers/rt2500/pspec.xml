@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>rt2500</Name>
+        <Homepage>http://rt2x00.serialmonkey.com</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary xml:lang="en">Driver for the RaLink RT2500 wireless chipset</Summary>
+        <Description xml:lang="en">Driver for the RaLink RT2500 wireless chipset</Description>
+        <Archive type="targz" sha1sum="bee68bb1e8ed27f98a0cde30e21829bc919481ef">http://rt2x00.serialmonkey.com/rt2500-1.1.0-b3.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">rt2500-1.1.0-b3-ifdef_fix.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>wireless-tools</Dependency>
+            <Dependency versionFrom="2.6.8.1">linux-headers</Dependency>
+            <Dependency>kernel-source</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>rt2500</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library" permanent="true">/lib/modules</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-12-05</Date>
+            <Version>1.1.0_beta3</Version>
+            <Comment>Remove unnecessary action</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-26</Date>
+            <Version>1.1.0_beta3</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

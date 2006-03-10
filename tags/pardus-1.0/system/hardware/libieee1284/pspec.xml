@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>libieee1284</Name>
+        <Homepage>http://cyberelk.net/tim/libieee1284/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>Library to query devices using IEEE1284</Summary>
+        <Summary xml:lang="tr">IEEE1284 kullanarak donanımların sorgulanması için bir kütüphane</Summary>
+        <Description>Library to query devices using IEEE1284</Description>
+        <Description xml:lang="tr">IEEE1284 kullanarak donanımların sorgulanması için bir kütüphane</Description>
+        <Archive type="tarbz2" sha1sum="70bd7a5afd9b1b2e6bfbc716229ba87dc7f106c8">http://heanet.dl.sourceforge.net/sourceforge/libieee1284/libieee1284-0.2.8.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>XML-RegExp</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1" compressionType="bz2">libieee1284-0.2.8-dbjh-v4.diff.bz2</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>libieee1284</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="header">/usr/include/</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+            <Path fileType="man">/usr/share/man/</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2005-11-29</Date>
+            <Version>0.2.8</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

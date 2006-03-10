@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gettext</Name>
+        <Homepage>http://www.gnu.org/software/gettext/gettext.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>GNU locale utilities</Summary>
+        <Description>GNU locale utilities</Description>
+        <Summary xml:lang="tr">GNU yerelleştirme araçları</Summary>
+        <Description xml:lang="tr">Gettext, mesajların mesaj kataloğundan bakılarak kullanıcının kendi ana diline çevirilmesini sağlayan araçlar bütünüdür.</Description>
+        <Archive sha1sum="68737eee1a6427044eef901dc88e4144d371fb6b" type="targz">ftp://ftp.gnu.org/gnu/gettext/gettext-0.14.5.tar.gz</Archive>
+        <Patches>
+            <Patch>gettext-0.14.1-lib-path-tests.patch</Patch>
+            <Patch level="1">gettext-0.14.1-without_java.patch</Patch>
+            <Patch level="1">gettext-0.14.2-no-java-tests.patch</Patch>
+            <Patch level="1">gettext-0.14.2-fix-race.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>gettext</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="data">/usr/share/gettext</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="2">
+            <Date>2005-11-06</Date>
+            <Version>0.14.5</Version>
+            <Comment>Update to version 0.14.5</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-22</Date>
+            <Version>0.14.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>XML-Parser</Name>
+        <Homepage>http://cpan.valueclick.com/modules/by-category/11_String_Lang_Text_Proc/XML/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Summary>A Perl extension interface to James Clark's XML parser, expat</Summary>
+        <Description>A Perl extension interface to James Clark's XML parser, expat</Description>
+        <Summary xml:lang="tr">James Clark'ın XML ayırıştırıcısına bir Perl uzantısı arayüzü</Summary>
+        <Description xml:lang="tr">James Clark'ın XML ayırıştırıcısına bir Perl uzantısı arayüzü</Description>
+        <Archive sha1sum="253cb641057d929616622408de5a572ab37a8df9" type="targz">http://search.cpan.org/CPAN/authors/id/M/MS/MSERGEANT/XML-Parser-2.34.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="1.95.1">expat</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>XML-Parser</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="1.95.1">expat</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="2">
+            <Date>2005-11-20</Date>
+            <Version>2.34</Version>
+            <Comment>Don't hardcode perl paths</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-02</Date>
+            <Version>2.34</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>bash-completion</Name>
+        <Homepage>http://www.caliban.org/bash/index.shtml#completion</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>IsA</IsA>
+        <Summary>Programmable Completion for bash</Summary>
+        <Summary xml:lang="tr">Bash kabuğu için otomatik tamamlama</Summary>
+        <Description>Programmable Completion for bash</Description>
+        <Description xml:lang="tr">Bash kabuğu için otomatik tamamlama özelliği veren yazılım</Description>
+        <Archive sha1sum="bd77fd6c2d7bd5a7af308023c93d8ac1b5358578" type="tarbz2">http://www.caliban.org/files/bash/bash-completion-20050721.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">01_all_gkrellm.diff</Patch>
+            <Patch level="1">02_all_cvs.diff</Patch>
+            <Patch level="1">03_all_find.diff</Patch>
+            <Patch level="1">04_all_command.diff</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>bash-completion</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share/bash-completion/</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/var</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/profile.d/bash-completion">bash-completion</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/bash-completion/pisi">pisi.bash</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+             <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="7">
+            <Date>2005-11-20</Date>
+            <Version>20040711</Version>
+            <Comment>PISI completion works better now!</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-11-12</Date>
+            <Version>20040711</Version>
+            <Comment>Fixed typo in pisi bashcomp. script.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-11-07</Date>
+            <Version>20040711</Version>
+            <Comment>Removed mount completion.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-11-06</Date>
+            <Version>20040711</Version>
+            <Comment>Fixed pisi completion bug.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-10-13</Date>
+            <Version>20040711</Version>
+            <Comment>Fixed post-install script.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-13</Date>
+            <Version>20040711</Version>
+            <Comment>Added post-install script for /etc/profile update.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-13</Date>
+            <Version>20040711</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,18 @@
+--- imlib-1.9.13/imlib-config.in.orig	2005-09-13 13:34:47.000000000 +0300
++++ imlib-1.9.13/imlib-config.in	2005-09-13 13:35:12.000000000 +0300
+@@ -46,15 +46,9 @@
+       echo @VERSION@
+       ;;
+     --cflags)
+-      if test @includedir@ != /usr/include ; then
+-        includes=-I@includedir@
+-      fi
+       echo $includes @X_CFLAGS@ 
+       ;;
+     --cflags-gdk)
+-      if test @includedir@ != /usr/include ; then
+-        includes=-I@includedir@
+-      fi
+       echo `@GTK_CONFIG@ --cflags` $includes @X_CFLAGS@
+       ;;
+     --libs)

@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>grub</Name>
+        <Homepage>http://www.gnu.org/software/grub/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>GNU GRUB boot loader</Summary>
+        <Summary xml:lang="tr">GRUB işletim sistemi önyükleyicisi</Summary>
+        <Description>GNU GRUB boot loader</Description>
+        <Description xml:lang="tr">GRUB, Linux, FreeBSD, NetBSD, GNU Mach gibi çeşitli açık işletim sistemleri yanında diğer ticari işletim sistemlerini de başlatabilen bir önyükleyicidir. Sisteminizi hem Windows, hem de Pardus'tan başlatabilmek için GRUB'a gereksinmeniz vardır.</Description>
+        <Archive sha1sum="2520b03c8990ffe900cfc4fabd800d1056014f48" type="targz">ftp://alpha.gnu.org/gnu/grub/grub-0.96.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">grub-0.95.20040823-splash.patch</Patch>
+            <Patch level="1">grub-0.96-PIC.patch</Patch>
+            <Patch level="1">grub-0.96-bounced-checks.patch</Patch>
+            <Patch level="1">grub-0.96-i2o-raid.patch</Patch>
+            <Patch level="1">grub-0.96-nxstack.patch</Patch>
+            <Patch level="1">grub-0.95.20040823-warnings.patch</Patch>
+            <Patch level="1">grub-0.96-pardus.patch</Patch>
+            <Patch level="1">xfs.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>grub</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="library">/lib/grub</Path>
+            <Path fileType="executable">/sbin/</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+            <Path fileType="info">/usr/share/info/</Path>
+            <Path fileType="man">/usr/share/man/</Path>
+            <Path fileType="data">/boot</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/boot/grub/splash.xpm.gz">splash.xpm.gz</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="4" type="Bug">
+            <Date>2005-12-26</Date>
+            <Version>0.96</Version>
+            <Comment>Don't give segfault on xfs</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3" type="Bug">
+            <Date>2005-12-01</Date>
+            <Version>0.96</Version>
+            <Comment>Newer splash + comar script fix</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-24</Date>
+            <Version>0.96</Version>
+            <Comment>New splash</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-04</Date>
+            <Version>0.96</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>jfsutils</Name>
+        <Homepage>http://jfs.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Fatih Aşıcı</Name>
+            <Email>fasici@linux-sevenler.org</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>IBM's Journaling Filesystem (JFS) Utilities</Summary>
+        <Description>IBM's Journaling Filesystem (JFS) Utilities</Description>
+        <Summary xml:lang="tr">IBM'in Journaling Dosya sistemi (JFS) araçları</Summary>
+        <Description xml:lang="tr">Journaling dosya sistemi (JFS) IBM tarafından oluşturulmuş bir dosya sistemidir. Paket içinde fsck.jfs, logdump, logredo, mkfs.jfs, xchkdmp ve xpeek gibi Journaling dosya sistemi oluşturmak ve yönetmek için gerekli olan programlar bulunmaktadır.</Description>
+        <Archive type="targz" sha1sum="5ec30a4ed2dd184f4c4a722ca70c71a6668de5fc">http://jfs.sourceforge.net/project/pub/jfsutils-1.1.10.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>jfsutils</Name>
+        <Files>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-20</Date>
+            <Version>1.1.10</Version>
+            <Comment>First release.</Comment>
+            <Name>Fatih Aşıcı</Name>
+            <Email>fasici@linux-sevenler.org</Email>
+        </Update>
+    </History>
+</PISI>

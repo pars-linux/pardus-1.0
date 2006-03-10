@@ -1,0 +1,356 @@
+diff -ru ./ncftp/cmdlist.c ../ncftp-3.1.8_editpatch/ncftp/cmdlist.c
+--- ./ncftp/cmdlist.c	2004-01-06 22:39:11.000000000 +0100
++++ ../ncftp-3.1.8_editpatch/ncftp/cmdlist.c	2004-07-14 11:05:13.000000000 +0200
+@@ -163,6 +163,13 @@
+ 		kCmdHidden,
+ 		kNoMin, kNoMax,
+ 	},
++	{ "edit",
++		EditCmd,
++		"file1 [file2...]",
++		"edit remote files",
++		kCmdMustBeConnected | kCompleteRemoteFile,
++		1, kNoMax,
++	},
+ 	{ "exit",
+ 		(CmdProc) QuitCmd,
+ 		"",
+diff -ru ./ncftp/cmds.c ../ncftp-3.1.8_editpatch/ncftp/cmds.c
+--- ./ncftp/cmds.c	2004-03-14 03:19:50.000000000 +0100
++++ ../ncftp-3.1.8_editpatch/ncftp/cmds.c	2004-07-14 11:05:13.000000000 +0200
+@@ -87,7 +87,7 @@
+ extern char gFirewallUser[32];
+ extern char gFirewallPass[32];
+ extern char gFirewallExceptionList[];
+-extern char gPager[], gHome[], gShell[];
++extern char gPager[], gEditor[], gHome[], gShell[];
+ extern char gOS[];
+ extern int gAutoResume;
+ extern int gAutoSaveChangesToExistingBookmarks;
+@@ -775,6 +775,243 @@
+ 
+ 
+ 
++#if (defined(WIN32) || defined(_WINDOWS)) && !defined(__CYGWIN__)
++#else
++void
++InitFilePair(FilePair* filePair)
++{
++	filePair->size = 0;
++	filePair->first = NULL;
++	filePair->last  = NULL;
++}
++
++FilePairElement*
++AddFilePair(FilePair* filePair, char* remoteFile)
++{
++	char* name;
++	static char mask[] = ".XXXXXX";  /* for mkstemp template */
++	static char temp[] = "/tmp/";
++
++	FilePairElement* newElement;
++
++	/* allocate memory */
++	newElement = malloc(sizeof(FilePairElement));
++	if (newElement == NULL) {
++		free(newElement);
++		return NULL;
++	}
++
++	/* remoteFile */
++	newElement->remoteFile = malloc(strlen(remoteFile) + 1);
++	if (newElement->remoteFile == NULL) {
++		free(newElement->remoteFile);
++		free(newElement);
++		return NULL;
++	}
++	strcpy(newElement->remoteFile, remoteFile);
++
++	/* localTmpFile */
++	name = remoteFile;
++	if (name && strrchr(name, '/'))
++		name = strrchr(name, '/') + 1;
++
++	newElement->localTmpFile = malloc(strlen(temp) + strlen(name) + strlen(mask) + 1);
++	if (newElement->localTmpFile == NULL) {
++		free(newElement->localTmpFile);
++		free(newElement->remoteFile);
++		free(newElement);
++		return NULL;
++	}
++	strcpy(newElement->localTmpFile, temp);
++	strcat(newElement->localTmpFile, name);
++	strcat(newElement->localTmpFile, mask);
++
++	/* FTPGetOneFile3 does not take a file descriptor as dstfile! */
++	close(mkstemp(newElement->localTmpFile));
++
++	/* insert last in list */
++	newElement->next = NULL;
++	if (filePair->first == NULL) {
++		filePair->first = filePair->last = newElement;
++	} else {
++		filePair->last->next = newElement;
++		filePair->last = newElement;
++	}
++	filePair->size++;
++
++	return newElement;
++}
++
++void
++FreeFilePair(FilePair* filePair)
++{
++	FilePairElement *fpe, *fpe_next;
++
++	for (fpe_next = filePair->first; fpe_next != NULL; ) {
++		fpe = fpe_next;
++		fpe_next = fpe_next->next;
++		if (fpe->remoteFile) {
++			free(fpe->remoteFile);
++			fpe->remoteFile = NULL;
++		}
++		if (fpe->localTmpFile) {
++			unlink(fpe->localTmpFile);
++			free(fpe->localTmpFile);
++			fpe->localTmpFile = NULL;
++		}
++		free(fpe);
++	}
++	InitFilePair(filePair);
++}
++
++void
++EditCmd(const int argc, char **const argv, const CommandPtr cmdp, const ArgvInfoPtr aip)
++{
++	int i, result;
++
++	char ans[32];
++	char cmdbuf[2048];
++
++	FTPLineList globlist;
++	FTPLinePtr  lp = NULL;
++	FilePair filePair;
++	FilePairElement* fpe;
++
++	InitFilePair(&filePair);
++
++	ARGSUSED(gUnusedArg);
++	for (i = 1; i < argc; i++) {
++		InitLineList(&globlist);
++		result = FTPRemoteGlob(&gConn, &globlist, argv[i], kGlobYes);
++		if (result == 0) {
++			for (lp = globlist.first; lp != NULL; lp = lp->next) {
++				result = FTPIsRegularFile(&gConn, lp->line);
++				switch (result) {
++					case 1:
++						if (AddFilePair(&filePair, lp->line) == NULL) {
++							(void) fprintf(stderr, "failed to AddFilePair %s\n", lp->line);
++							DisposeLineListContents(&globlist);
++							FreeFilePair(&filePair);
++							return;
++						}
++						break;
++					case 0:
++						(void) fprintf(stderr, "Can not edit directory - ignoring '%s'\n", lp->line);
++						break;
++					default:
++						for (;;) {
++							(void) printf("'%s' does not exist! Do you wish to create it? [Y]es  [N]o > ", lp->line);
++							fflush(stdin);
++							(void) memset(ans, 0, sizeof(ans));
++							(void) fgets(ans, sizeof(ans) - 1, stdin);
++							switch ((int) ans[0]) {
++								case 'y':
++								case 'Y':
++									if (AddFilePair(&filePair, argv[i]) == NULL) {
++										(void) fprintf(stderr, "failed to AddFilePair %s\n", lp->line);
++										DisposeLineListContents(&globlist);
++										FreeFilePair(&filePair);
++										return;
++									}
++									break;
++								case 'n':
++								case 'N':
++									ans[0] = 'N';
++									ans[1] = '\0';
++									break;
++								default:
++									ans[0] = '\0';
++							
++							}
++							if (ans[0] != '\0')
++								break;
++						}
++				}
++			}
++		} else {
++			FTPPerror(&gConn, result, kErrCouldNotStartDataTransfer, "glob", argv[i]);
++		}
++		DisposeLineListContents(&globlist);
++	}
++
++	if (filePair.first == NULL) {
++		(void) printf("nothing to edit!\n");
++		FreeFilePair(&filePair);
++		return;
++	}
++
++	for (fpe = filePair.first; fpe != NULL; fpe = fpe->next) {
++		/* get the files */
++		if (FTPFileExists(&gConn, fpe->remoteFile) == kNoErr) {
++			result = FTPGetOneFile3(&gConn, fpe->remoteFile, fpe->localTmpFile, kTypeBinary, -1, kResumeNo,
++					kAppendNo, kDeleteNo, kNoFTPConfirmResumeDownloadProc, 0);
++			if (result < 0) {
++				FTPPerror(&gConn, result, kErrCouldNotStartDataTransfer, "get", fpe->remoteFile);
++				FreeFilePair(&filePair);
++				return;
++			}
++		}
++	}
++
++	/* edit the files */
++	/* use exec to avoid having a shell hanging around */
++	(void) STRNCPY(cmdbuf, "exec ");
++	(void) STRNCAT(cmdbuf, gEditor);
++	for (fpe = filePair.first; fpe != NULL; fpe = fpe->next) {
++		(void) STRNCAT(cmdbuf, " ");
++		(void) STRNCAT(cmdbuf, fpe->localTmpFile);
++	}
++	result = system(cmdbuf);
++	if (result < 0) {
++		FreeFilePair(&filePair);
++		return;
++	}
++
++	/* upload the changed files */
++	for (fpe = filePair.first; fpe != NULL; fpe = fpe->next) {
++
++		for (;;) {
++			(void) printf("Put edited file '%s'? [Y]es  [N]o > ", fpe->remoteFile);
++			fflush(stdin);
++			(void) memset(ans, 0, sizeof(ans));
++			(void) fgets(ans, sizeof(ans) - 1, stdin);
++			switch ((int) ans[0]) {
++				case 'y':
++				case 'Y':
++					result = FTPPutOneFile3(&gConn, fpe->localTmpFile, fpe->remoteFile, kTypeBinary, -1, kAppendNo,
++							NULL, NULL, kResumeNo, kDeleteNo, kNoFTPConfirmResumeUploadProc, 0);
++					if (result < 0) {
++						FTPPerror(&gConn, result, kErrCouldNotStartDataTransfer, "put", fpe->remoteFile);
++						(void) fprintf(stderr, "Local changes to '%s' can be recovered from '%s'\n",
++							       fpe->remoteFile, fpe->localTmpFile);
++						fpe->localTmpFile = NULL;
++					}
++					break;
++				case 'n':
++				case 'N':
++					ans[0] = 'N';
++					ans[1] = '\0';
++					break;
++				default:
++					ans[0] = '\0';
++			
++			}
++			if (ans[0] != '\0')
++				break;
++		}
++	}
++	FreeFilePair(&filePair);
++	FlushLsCache();
++
++	return;
++
++}	/* EditCmd */
++#endif
++
++
++
++
++
+ static int
+ NcFTPConfirmResumeDownloadProc(
+ 	const FTPCIPtr cipUNUSED,
+@@ -4218,3 +4455,5 @@
+ 	if (gOS[0] != '\0')
+ 		(void) printf("Platform:         %s\n", gOS);
+ }	/* VersionCmd */
++
++/* vim: set noet sw=8: */
+Only in ../ncftp-3.1.8_editpatch/ncftp: cmds.c.orig
+diff -ru ./ncftp/cmds.h ../ncftp-3.1.8_editpatch/ncftp/cmds.h
+--- ./ncftp/cmds.h	2004-01-06 22:39:30.000000000 +0100
++++ ../ncftp-3.1.8_editpatch/ncftp/cmds.h	2004-07-14 11:05:13.000000000 +0200
+@@ -5,6 +5,21 @@
+  * 
+  */
+ 
++typedef struct FilePairElement {
++	struct FilePairElement* next;
++	char* remoteFile;
++	char* localTmpFile;
++} FilePairElement;
++
++typedef struct FilePair {
++	struct FilePairElement *first, *last;
++	unsigned int size;
++} FilePair;
++
++extern void InitFilePair(FilePair*);
++extern void FreeFilePair(FilePair*);
++extern FilePairElement* AddFilePair(FilePair*, char*);
++
+ /* cmds.c */
+ int PromptForBookmarkName(BookmarkPtr);
+ void CurrentURL(char *, size_t, int);
+@@ -23,6 +38,7 @@
+ void DebugCmd(const int, char **const, const CommandPtr, const ArgvInfoPtr);
+ void DeleteCmd(const int, char **const, const CommandPtr, const ArgvInfoPtr);
+ void EchoCmd(const int, char **const, const CommandPtr, const ArgvInfoPtr);
++void EditCmd(const int, char **const, const CommandPtr, const ArgvInfoPtr);
+ void InitTransferType(void);
+ void GetCmd(const int, char **const, const CommandPtr, const ArgvInfoPtr);
+ void HelpCmd(const int, char **const, const CommandPtr, const ArgvInfoPtr);
+@@ -62,3 +78,5 @@
+ void TypeCmd(const int, char **const, const CommandPtr, const ArgvInfoPtr);
+ void UmaskCmd(const int, char **const, const CommandPtr, const ArgvInfoPtr);
+ void VersionCmd(const int, char **const, const CommandPtr, const ArgvInfoPtr);
++
++/* vim: set noet sw=8: */
+diff -ru ./ncftp/pref.c ../ncftp-3.1.8_editpatch/ncftp/pref.c
+--- ./ncftp/pref.c	2004-01-06 22:40:08.000000000 +0100
++++ ../ncftp-3.1.8_editpatch/ncftp/pref.c	2004-07-14 11:05:13.000000000 +0200
+@@ -23,6 +23,9 @@
+ /* Their $PAGER. */
+ char gPager[128];
+ 
++/* Their $EDITOR. */
++char gEditor[128];
++
+ /* These correspond to the various timeouts from LibNcFTP. */
+ int gConnTimeout, gXferTimeout, gCtrlTimeout;
+ 
+@@ -600,6 +603,7 @@
+ InitPrefs(void)
+ {
+ 	char *tok1;
++	char *tok2;
+ 
+ 	/* Set default values. */
+ 	gPager[0] = '\0';
+@@ -655,6 +659,15 @@
+ 	} else {
+ 		(void) STRNCPY(gPager, "more");
+ 	}
++
++#if (defined(WIN32) || defined(_WINDOWS)) && !defined(__CYGWIN__)
++#else
++	tok2 = getenv("EDITOR");
++	if ((tok2 != NULL) && (tok2[0] != '\0')) 
++		(void) STRNCPY(gEditor, tok2);
++	else
++		(void) STRNCPY(gEditor, "vi");
++#endif
+ }	/* InitPrefs */
+ 
+ 

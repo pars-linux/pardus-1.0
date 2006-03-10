@@ -1,0 +1,13 @@
+Index: konqueror/konq_mainwindow.cc
+===================================================================
+--- konqueror/konq_mainwindow.cc	(revision 483953)
++++ konqueror/konq_mainwindow.cc	(revision 483954)
+@@ -3648,7 +3648,7 @@
+ 
+ void KonqMainWindow::focusLocationBar()
+ {
+-  if ( m_combo->isVisible() )
++  if ( m_combo->isVisible() || !isVisible() )
+     m_combo->setFocus();
+ }
+ 

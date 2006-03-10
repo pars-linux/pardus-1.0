@@ -1,0 +1,19 @@
+--- Linux-PAM-0.77/modules/pam_radius/Makefile.orig	2003-11-09 22:44:56.586464080 +0200
++++ Linux-PAM-0.77/modules/pam_radius/Makefile	2003-11-09 22:46:01.854541824 +0200
+@@ -62,14 +62,14 @@
+ $(LIBOBJD): $(LIBSRC)
+ 
+ $(LIBSHARED):	$(LIBOBJD)
+-	$(LD_D) -o $@ $(LIBOBJD) -lpwdb
++	$(LD_D) -o $@ $(LIBOBJD) $(ROOT)/usr/lib/libpwdb.a
+ endif
+ 
+ #ifdef STATIC
+ #$(LIBOBJS): $(LIBSRC)
+ #
+ #$(LIBSTATIC): $(LIBOBJS)
+-#	$(LD) -r -o $@ $(LIBOBJS) -lpwdb
++#	$(LD) -r -o $@ $(LIBOBJS) $(ROOT)/usr/lib/libpwdb.a
+ #endif
+ 
+ install: all

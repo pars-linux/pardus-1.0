@@ -1,0 +1,43 @@
+--- Linux-PAM-0.75/modules/pam_console/config.y.orig	2002-10-13 09:49:07.000000000 +0200
++++ Linux-PAM-0.75/modules/pam_console/config.y	2002-10-13 10:08:52.000000000 +0200
+@@ -190,13 +190,37 @@
+ 		if (check_one_console_name(consolename, this_list->data)) {
+ 		    g_hash_table_insert(consoleHash, c, c);
+ 		    found = 1;
++		} else {
++			/* consolename may contain the full path to the tty --
++			 * notebly pam-login sets PAM_TTY to a fully qualified filename.
++			 */
++			strcpy(full_path, "/dev/");
++			strncat(full_path, this_list->data,
++				sizeof(full_path) - 1 - strlen(full_path));
++			full_path[sizeof(full_path) - 1] = '\0';
++			if (check_one_console_name(consolename, full_path)) {
++				g_hash_table_insert(consoleHash, c, c);
++				found = 1;
++			}
+ 		}
+ 	    }
+ 	} else {
+ 	    if (check_one_console_name(consolename, c->name)) {
+-		g_hash_table_insert(consoleHash, c, c);
+-		found = 1;
+-	    }
++		    g_hash_table_insert(consoleHash, c, c);
++		    found = 1;
++	    } else {
++			/* consolename may contain the full path to the tty --
++			 * notebly pam-login sets PAM_TTY to a fully qualified filename.
++			 */
++			strcpy(full_path, "/dev/");
++			strncat(full_path, c->name,
++				sizeof(full_path) - 1 - strlen(full_path));
++			full_path[sizeof(full_path) - 1] = '\0';
++			if (check_one_console_name(consolename, full_path)) {
++				g_hash_table_insert(consoleHash, c, c);
++				found = 1;
++			}
++		}
+ 	}
+     }
+ 

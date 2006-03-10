@@ -1,0 +1,17 @@
+#!/sbin/runscript
+
+start() {
+        ebegin "Starting Zemberek Server"
+        export JAVA_HOME=`cat /etc/env.d/*java | grep '^JAVA_HOME' | cut -d"=" -f2`
+        
+        cd /opt/zemberek-server
+        LC_ALL=tr_TR.UTF-8 start-stop-daemon -b --start --quiet --pidfile /var/run/zemberek.pid --make-pidfile \
+                --exec ${JAVA_HOME}/bin/java -- -jar zemberek_server-0.3.jar > /dev/null &
+        eend $?
+}
+
+stop() {
+        ebegin "Stopping Zemberek Server"
+        start-stop-daemon --stop --quiet --pidfile /var/run/zemberek.pid
+        eend $?
+}

@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>man</Name>
+        <Homepage>http://freshmeat.net/projects/man/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <IsA>doc</IsA>
+        <Summary>A somewhat comprehensive collection of Linux man pages</Summary>
+        <Summary xml:lang="tr">Kapsamlı Linux kılavuzları</Summary>
+        <Description>A somewhat comprehensive collection of Linux man pages</Description>
+        <Description xml:lang="tr">Linux ile ilgili komut ve programlar hakkında hayli ayrıntılı bilgiler sağlayan, Linux'un geleneksel kılavuz dosyaları</Description>
+        <Archive sha1sum="0dcdcf7d4aa8b81da1bbac3229e64fbe3abaf24c" type="targz">ftp://ftp.kernel.org/pub/linux/utils/man/man-1.5p.tar.gz</Archive>
+        <Patches>
+            <Patch>man-1.5p-parallel-make.patch</Patch>
+            <Patch level="1">man-1.5p-search-order.patch</Patch>
+            <Patch level="1">man-1.5m-groff-1.18.patch</Patch>
+            <Patch level="1">man-1.5p-defmanpath-symlinks.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>man</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="1.18">groff</Dependency>
+            <Dependency>gettext</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/var/cache</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/cron.weekly/makewhatis">makewhatis</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-03</Date>
+            <Version>1.5p</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

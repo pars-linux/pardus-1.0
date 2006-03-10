@@ -1,0 +1,145 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kdepim</Name>
+        <Homepage>http://www.kde.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>KDE PIM (Personal Information Management) apps: korganizer, kmail, knode...</Summary>
+        <Description>KDE PIM (Personal Information Management) apps: korganizer, kmail, knode...</Description>
+        <Summary xml:lang="tr">KDE KBY (Kişisel Bilgi Yönetimi) uygulamaları: korganizer, kmail, knode...</Summary>
+        <Description xml:lang="tr">KDE KBY (Kişisel Bilgi Yönetimi) uygulamaları: korganizer, kmail, knode...</Description>
+        <Archive sha1sum="fb98ea719990bf1169289ca5012ad75ac261f488" type="tarbz2">ftp://ftp.kde.org/pub/kde/stable/3.5/src/kdepim-3.5.0.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency version="3.5.0">kdebase</Dependency>
+            <Dependency>cyrus-sasl</Dependency>
+            <Dependency>pilot-link </Dependency>
+            <Dependency>libmal</Dependency>
+            <Dependency versionFrom="0.9.0">gpgme</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>kdepim-3.5-kmail_remove_charsets.diff</Patch>
+            <Patch level="1">kdepim-3.5.0-kmail-imapfetchmaxsize.patch</Patch>
+            <Patch level="1">kdepim-3.5-kmail-enablehtml.patch</Patch>
+            <Patch>kmail-3.5-filtering.patch</Patch>
+            <Patch>kmail-3.5-faster-imap.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>kdepim</Name>
+        <RuntimeDependencies>
+            <Dependency version="3.5.0">kdebase</Dependency>
+            <Dependency>cyrus-sasl</Dependency>
+            <Dependency>pilot-link </Dependency>
+            <Dependency>libmal</Dependency>
+            <Dependency versionFrom="0.9.0">gpgme</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="library">/usr/kde/3.5/lib</Path>
+            <Path fileType="data">/usr/kde/3.5/share</Path>
+            <Path fileType="header">/usr/kde/3.5/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="13">
+            <Date>2005-12-12</Date>
+            <Version>3.5.0</Version>
+            <Comment>Backport David Faure's IMAP slowness fixes</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="12">
+            <Date>2005-12-10</Date>
+            <Version>3.5.0</Version>
+            <Comment>Disable Kandy and Korn</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="11">
+            <Date>2005-12-09</Date>
+            <Version>3.5.0</Version>
+            <Comment>Update KMail to 1.9.1</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="10">
+            <Date>2005-12-06</Date>
+            <Version>3.5.0</Version>
+            <Comment>fix #892</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="9">
+            <Date>2005-11-29</Date>
+            <Version>3.5.0</Version>
+            <Comment>Version bump to stable release</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="8">
+            <Date>2005-11-26</Date>
+            <Version>3.5.0_rc2</Version>
+            <Comment>--enable-indexlib disabled, see #904</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="7">
+            <Date>2005-11-24</Date>
+            <Version>3.5.0_rc2</Version>
+            <Comment>imapfetchmaxsize patch added</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-11-24</Date>
+            <Version>3.5.0_rc2</Version>
+            <Comment>compiles with --enable-indexlib</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-11-21</Date>
+            <Version>3.5.0_rc2</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-11-18</Date>
+            <Version>3.5.0_rc1</Version>
+            <Comment>remove korganizer from autostart</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-15</Date>
+            <Version>3.5.0_rc1</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-15</Date>
+            <Version>3.5.0_beta2</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-05</Date>
+            <Version>3.4.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

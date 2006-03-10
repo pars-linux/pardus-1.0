@@ -1,0 +1,77 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>fontconfig</Name>
+        <Homepage>http://freedesktop.org/Software/fontconfig</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>fontconfig</License>
+        <IsA>library</IsA>
+        <Summary>A library for configuring and customizing font access</Summary>
+        <Summary xml:lang="tr">Yazıtiplerinin yapılandırılması ve özelleştirilmesi için bir kitaplık</Summary>
+        <Description>A library for configuring and customizing font access</Description>
+        <Description xml:lang="tr">Yazıtiplerinin yapılandırılması ve özelleştirilmesi için bir kitaplık</Description>
+        <Archive sha1sum="447e312cb861d0e3494436e1a1a4e5ad09dd8598" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/fontconfig-2.3.93.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">fontconfig-fontdir.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency versionFrom="2.1.4">freetype</Dependency>
+            <Dependency versionFrom="1.95.3">expat</Dependency>
+            <Dependency>sed</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>fontconfig</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="2.1.4">freetype</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/fonts</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="4">
+            <Date>2005-12-23</Date>
+            <Version>2.3.93</Version>
+            <Comment>Final release for Pardus 1.0</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-10-30</Date>
+            <Version>2.3.91</Version>
+            <Comment>#639 solved</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-09</Date>
+            <Version>2.3.91</Version>
+            <Comment>Version bump for fontconfig optimization (more info: http://www.kdedevelopers.org/node/1495)</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-31</Date>
+            <Version>2.2.3</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

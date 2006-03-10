@@ -1,0 +1,24 @@
+diff -ur DirectFB-0.9.22.orig/configure DirectFB-0.9.22/configure
+--- DirectFB-0.9.22.orig/configure	2005-02-20 23:01:33.000000000 +0200
++++ DirectFB-0.9.22/configure	2005-10-03 17:11:03.000000000 +0300
+@@ -23622,9 +23622,9 @@
+ /* end confdefs.h.  */
+ 
+ #include <linux/fb.h>
+-//#ifdef FB_ACCEL_I830
++#ifdef FB_ACCEL_I830
+   yes
+-//#endif
++#endif
+ 
+ _ACEOF
+ if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
+@@ -24879,7 +24879,7 @@
+ 
+ fi
+ if test $ac_cv_header_linux_wm97xx_h = yes; then
+-  enable_wm97xx_ts=yes
++  enable_wm97xx_ts=no
+ else
+   enable_wm97xx_ts=no
+     { echo "$as_me:$LINENO: WARNING: *** WM97XX Touchscreen driver will not be built." >&5

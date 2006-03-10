@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>udev</Name>
+        <Homepage>http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Linux dynamic and persistent device naming support (aka userspace devfs)</Summary>
+        <Description>Linux dynamic and persistent device naming support (aka userspace devfs)</Description>
+        <Summary xml:lang="tr">Linux dinamik ve sürekli aygıt isimlendirme desteği (kernel dışındaki devfs)</Summary>
+        <Description xml:lang="tr">udev paketinin görevi mevcut kural dosyalarını kullanarak aygıtları eklemek ve/veya kaldırmaktır. Sürüm 2.6.13 itibari ile devfs kernelden çıkarıldığı için standart haline gelmiştir.</Description>
+        <Archive sha1sum="12e7fe30a5e11e31322da9a8a5c83e5ab12329f5" type="tarbz2">http://ftp.belnet.be/mirror/rsync.gentoo.org/gentoo/distfiles/udev-072.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>hotplug</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>udev</Name>
+        <RuntimeDependencies>
+            <Dependency>hotplug</Dependency>
+            <Dependency>baselayout</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="man">/lib</Path>
+            <Path fileType="config">/etc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/udev/udev.conf">udev.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/lib/rcscripts/addons/udev-start.sh">udev-start.sh</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/lib/rcscripts/addons/udev-stop.sh">udev-stop.sh</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="5">
+            <Date>2005-17-06</Date>
+            <Version>072</Version>
+            <Comment>Solve #1277 and KIO/Slave problems</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-12-06</Date>
+            <Version>073</Version>
+            <Comment>Generate static udev</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-12-01</Date>
+            <Version>073</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2" type="Bug">
+            <Date>2005-10-27</Date>
+            <Version>068</Version>
+            <Comment>Add tty1 device node and fix COMAR postInstall script to make mknod actually work when udev is running</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-02</Date>
+            <Version>068</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

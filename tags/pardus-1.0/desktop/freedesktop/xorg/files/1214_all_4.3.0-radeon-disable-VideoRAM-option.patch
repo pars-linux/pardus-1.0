@@ -1,0 +1,29 @@
+--- xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_driver.c.radeon-disable-VideoRAM-option	2003-09-05 16:26:31.000000000 -0400
++++ xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_driver.c	2003-09-05 16:33:40.000000000 -0400
+@@ -2144,12 +2144,25 @@
+     info->ram = &RADEONRAM[offset];
+ 
+     if (dev->videoRam) {
++	/* The radeon driver is known to properly autodetect the amount of
++         * video memory on all known Radeon and FireGL video adaptors at this
++         * time.  All of the bug reports that come into Red Hat in which the
++         * user has overridden the autodetected video RAM amount by using the
++         * VideoRAM option in their config file, turn out to be that the user
++         * thought their video card had more RAM than it does in reality.  As
++         * such, this option is not useful for the Radeon driver, and is only
++         * a burden on tech support load and increases end user problems, so
++         * I am disabling it permanently in Red Hat radeon driver builds from
++         * now on.  - Mike A. Harris <mharris@redhat.com>
++         */
+ 	xf86DrvMsg(pScrn->scrnIndex, X_INFO,
+-		   "Video RAM override, using %d kB instead of %d kB\n",
++		   "VideoRAM override ignored, this driver autodetects RAM\n",
+ 		   dev->videoRam,
+ 		   pScrn->videoRam);
++#if 0
+ 	from             = X_CONFIG;
+ 	pScrn->videoRam  = dev->videoRam;
++#endif
+     }
+     pScrn->videoRam  &= ~1023;
+     info->FbMapSize  = pScrn->videoRam * 1024;

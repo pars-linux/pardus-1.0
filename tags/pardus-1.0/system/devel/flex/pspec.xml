@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>flex</Name>
+        <Homepage>http://lex.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>FLEX</License>
+        <IsA>app:console</IsA>
+        <Summary>GNU lexical analyser generator</Summary>
+        <Summary xml:lang="tr">GNU sözcüksel analiz üreteci</Summary>
+        <Description>GNU lexical analyser generator</Description>
+        <Description xml:lang="tr">GNU sözcüksel analiz üreteci</Description>
+        <Archive sha1sum="38a5e15c348d2ca7dce94d71de2b51484d23e2ef" type="targz">ftp://ftp.linux.org.tr/pub/gentoo/distfiles/flex-2.5.4a.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">flex-2.5.4-glibc22.patch</Patch>
+            <Patch level="1">flex-2.5.4a-gcc3.patch</Patch>
+            <Patch level="1">flex-2.5.4a-gcc31.patch</Patch>
+            <Patch level="1">flex-2.5.4a-skel.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>patch</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>flex</Name>
+        <RuntimeDependencies>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-26</Date>
+            <Version>2.5.4a</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# bison installs a /usr/bin/yacc symlink ...
+# we need to remove it to avoid triggering
+# collision-protect errors
+
+if [[ -L /usr/bin/yacc ]] ; then
+    rm -f /usr/bin/yacc
+fi

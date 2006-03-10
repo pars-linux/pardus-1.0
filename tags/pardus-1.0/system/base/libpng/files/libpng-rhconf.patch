@@ -1,0 +1,125 @@
+--- libpng-1.2.6/scripts/makefile.linux.rhconf	2004-08-15 08:15:22.000000000 -0400
++++ libpng-1.2.6/scripts/makefile.linux	2004-08-17 10:45:31.918335000 -0400
+@@ -13,13 +13,11 @@
+ # where "make install" puts libpng12.a, libpng12.so*,
+ # libpng12/png.h and libpng12/pngconf.h
+ # Prefix must be a full pathname.
+-prefix=/usr/local
++prefix=/usr
+ 
+ # Where the zlib library and include files are located.
+-#ZLIBLIB=/usr/local/lib
+-#ZLIBINC=/usr/local/include
+-ZLIBLIB=../zlib
+-ZLIBINC=../zlib
++ZLIBLIB=/usr/lib
++ZLIBINC=/usr/include
+ 
+ ALIGN=
+ # for i386:
+@@ -42,7 +40,7 @@
+ 
+ INCPATH=$(prefix)/include
+ LIBPATH=$(prefix)/lib
+-MANPATH=$(prefix)/man
++MANPATH=$(prefix)/share/man
+ BINPATH=$(prefix)/bin
+ 
+ # override DESTDIR= on the make install command line to easily support
+@@ -78,15 +76,14 @@
+ 	$(RANLIB) $@
+ 
+ libpng.pc:
+-	cat scripts/libpng.pc.in | sed -e s\!@PREFIX@!$(prefix)! > libpng.pc
++	cat scripts/libpng.pc.in | sed -e s\!@PREFIX@!$(prefix)! -e s\!@LIBPATH@!$(LIBPATH)! > libpng.pc
+ 
+ libpng-config:
+ 	( cat scripts/libpng-config-head.in; \
+ 	echo prefix=\"$(prefix)\"; \
+ 	echo I_opts=\"-I$(INCPATH)/$(LIBNAME)\"; \
+ 	echo L_opts=\"-L$(LIBPATH)\"; \
+-	echo R_opts=\"-Wl,-rpath,$(LIBPATH)\"; \
+-	echo libs=\"-lpng12 -lz -lm\"; \
++	echo libs=\"-lpng12\"; \
+ 	cat scripts/libpng-config-body.in ) > libpng-config
+ 	chmod +x libpng-config
+ 
+@@ -97,12 +94,12 @@
+ 	ln -sf $(LIBNAME).so.$(PNGVER) $(LIBNAME).so.$(PNGMAJ)
+ 
+ $(LIBNAME).so.$(PNGVER): $(OBJSDLL)
+-	$(CC) -shared -Wl,-soname,$(LIBNAME).so.$(PNGMAJ) \
++	$(CC) -shared -Wl,-soname,$(LIBNAME).so.$(PNGMAJ) -lz -lm \
+ 	-o $(LIBNAME).so.$(PNGVER) \
+ 	$(OBJSDLL)
+ 
+ libpng.so.3.$(PNGMIN): $(OBJSDLL)
+-	$(CC) -shared -Wl,-soname,libpng.so.3 \
++	$(CC) -shared -Wl,-soname,libpng.so.3 -lz -lm \
+ 	-o libpng.so.3.$(PNGMIN) \
+ 	$(OBJSDLL)
+ 
+@@ -123,8 +120,8 @@
+ 	./pngtest-static
+ 
+ install-headers: png.h pngconf.h
+-	-@if [ ! -d $(DI) ]; then mkdir $(DI); fi
+-	-@if [ ! -d $(DI)/$(LIBNAME) ]; then mkdir $(DI)/$(LIBNAME); fi
++	-@if [ ! -d $(DI) ]; then mkdir -p $(DI); fi
++	-@if [ ! -d $(DI)/$(LIBNAME) ]; then mkdir -p $(DI)/$(LIBNAME); fi
+ 	cp png.h pngconf.h $(DI)/$(LIBNAME)
+ 	chmod 644 $(DI)/$(LIBNAME)/png.h $(DI)/$(LIBNAME)/pngconf.h
+ 	-@/bin/rm -f $(DI)/png.h $(DI)/pngconf.h
+@@ -132,7 +129,7 @@
+ 	(cd $(DI); ln -sf $(LIBNAME) libpng; ln -sf $(LIBNAME)/* .)
+ 
+ install-static: install-headers libpng.a
+-	-@if [ ! -d $(DL) ]; then mkdir $(DL); fi
++	-@if [ ! -d $(DL) ]; then mkdir -p $(DL); fi
+ 	cp libpng.a $(DL)/$(LIBNAME).a
+ 	chmod 644 $(DL)/$(LIBNAME).a
+ 	-@/bin/rm -f $(DL)/libpng.a
+@@ -147,14 +144,13 @@
+ 	-@/bin/rm -f $(DL)/libpng.so.3
+ 	-@/bin/rm -f $(DL)/libpng.so.3.$(PNGMIN)*
+ 	cp $(LIBNAME).so.$(PNGVER) $(DL)
+-	cp libpng.so.3.$(PNGMIN) $(DL)
+ 	chmod 755 $(DL)/$(LIBNAME).so.$(PNGVER)
+-	chmod 755 $(DL)/libpng.so.3.$(PNGMIN)
+ 	(cd $(DL); \
+ 	ln -sf libpng.so.3.$(PNGMIN) libpng.so.3; \
+ 	ln -sf libpng.so.3 libpng.so; \
+ 	ln -sf $(LIBNAME).so.$(PNGVER) $(LIBNAME).so.$(PNGMAJ); \
+-	ln -sf $(LIBNAME).so.$(PNGMAJ) $(LIBNAME).so)
++	ln -sf $(LIBNAME).so.$(PNGMAJ) $(LIBNAME).so; \
++	ln -sf $(LIBNAME).so.$(PNGVER) libpng.so.3.$(PNGMIN))
+ 	-@if [ ! -d $(DL)/pkgconfig ]; then mkdir $(DL)/pkgconfig; fi
+ 	-@/bin/rm -f $(DL)/pkgconfig/$(LIBNAME).pc
+ 	-@/bin/rm -f $(DL)/pkgconfig/libpng.pc
+@@ -163,8 +159,8 @@
+ 	(cd $(DL)/pkgconfig; ln -sf $(LIBNAME).pc libpng.pc)
+ 
+ install-man: libpng.3 libpngpf.3 png.5
+-	-@if [ ! -d $(DM) ]; then mkdir $(DM); fi
+-	-@if [ ! -d $(DM)/man3 ]; then mkdir $(DM)/man3; fi
++	-@if [ ! -d $(DM) ]; then mkdir -p $(DM); fi
++	-@if [ ! -d $(DM)/man3 ]; then mkdir -p $(DM)/man3; fi
+ 	-@/bin/rm -f $(DM)/man3/libpng.3
+ 	-@/bin/rm -f $(DM)/man3/libpngpf.3
+ 	cp libpng.3 $(DM)/man3
+--- libpng-1.2.6/scripts/libpng.pc.in.libdirfix	2004-08-15 08:15:22.000000000 -0400
++++ libpng-1.2.6/scripts/libpng.pc.in	2004-08-17 10:48:15.731359000 -0400
+@@ -1,11 +1,11 @@
+ 
+ prefix=@PREFIX@
+ exec_prefix=${prefix}
+-libdir=${exec_prefix}/lib
++libdir=@LIBPATH@
+ includedir=${exec_prefix}/include
+ 
+ Name: libpng12
+ Description: Loads and saves PNG files
+ Version: 1.2.8
+-Libs: -L${libdir} -lpng12 -lz -lm
++Libs: -L${libdir} -lpng12 
+ Cflags: -I${includedir}/libpng12

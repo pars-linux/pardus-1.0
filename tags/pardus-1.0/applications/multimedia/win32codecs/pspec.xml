@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>win32codecs</Name>
+        <Homepage>http://www.mplayerhq.hu/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>plugin</IsA>
+        <Summary>Win32 binary codecs for video and audio playback support</Summary>
+        <Summary xml:lang="tr">Ses çalma ve görüntü oynatabilme desteği için Win32(Windows) derlenmiş kodlayıcıları.</Summary>
+        <Description>Win32 binary codecs for video and audio playback support</Description>
+        <Description xml:lang="tr">Ses çalma ve görüntü oynatabilme desteği için Win32(Windows) derlenmiş kodlayıcıları.</Description>
+        <Archive sha1sum="39b949dacc015d8e3aa308c24c74a97598fe92c9" type="tarbz2">http://ftp3.mplayerhq.hu/MPlayer/releases/codecs/all-20050412.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>win32codecs</Name>
+        <RuntimeDependencies>
+            <Dependency>libstdc++</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-04</Date>
+            <Version>20050412</Version>
+            <Comment>Dep fix.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-06</Date>
+            <Version>20050412</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

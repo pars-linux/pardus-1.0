@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>shadow</Name>
+        <Homepage>http://shadow.pld.org.pl/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>app:console</IsA>
+        <Summary>Utilities to deal with user accounts</Summary>
+        <Summary xml:lang="tr">Kullanıcı hesaplarını düzenlemek için araçlar</Summary>
+        <Description>Utilities to deal with user accounts</Description>
+        <Description xml:lang="tr">Kullanıcı hesaplarını düzenlemek için araçlar</Description>
+        <Archive sha1sum="1ae84f2fcdb8e931c8d31f7bfae059b2f0407bcc" type="targz">ftp://ftp.pld.org.pl/software/shadow/old/shadow-4.0.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>diffutils</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch target="ltmain.sh">max_cmd_len-1.5.0.patch</Patch>
+            <Patch target="ltmain.sh">sed-1.5.6.patch</Patch>
+            <Patch target="configure">nocxx.patch</Patch>
+            <Patch>01-shadow-4.0.4.1-nonis.patch</Patch>
+            <Patch>02-shadow-4.0.5-nls-manpages.patch</Patch>
+            <Patch>03-shadow-4.0.5-login.defs.patch</Patch>
+            <Patch>04-shadow-4.0.4.1-passwd-typo.patch</Patch>
+            <Patch level="1">05-shadow-4.0.5-skey.patch</Patch>
+            <Patch level="1">06-shadow-4.0.5-remove-else.patch</Patch>
+            <Patch level="1">07-shadow-4.0.5-fix-mail-configure.patch</Patch>
+            <Patch level="1">08-shadow-4.0.5-fix-adding-of-pam_env-set-env-vars.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency versionFrom="2.7">cracklib</Dependency>
+            <Dependency versionFrom="0.75">pam</Dependency>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>shadow</Name>
+        <Summary>Utilities to deal with user accounts</Summary>
+        <RuntimeDependencies>
+            <Dependency versionFrom="2.7">cracklib</Dependency>
+            <Dependency versionFrom="0.75">pam</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0600" target="/etc/securetty">securetty</AdditionalFile>
+            <AdditionalFile owner="root" permission="0600" target="/etc/default/useradd">default/useradd</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/login">pam.d/login</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/other">pam.d/other</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/passwd">pam.d/passwd</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/shadow">pam.d/shadow</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/chage">pam.d/shadow</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/chsh">pam.d/shadow</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/chfn">pam.d/shadow</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/chpasswd">pam.d/shadow</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/newusers">pam.d/shadow</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/useradd">pam.d/shadow</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/userdel">pam.d/shadow</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/usermod">pam.d/shadow</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/groupadd">pam.d/shadow</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/groupdel">pam.d/shadow</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/groupmod">pam.d/shadow</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/su">pam.d/su</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/system-auth-1.1">pam.d/system-auth-1.1</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/system-auth">pam.d/system-auth-1.1</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/system-auth.new">pam.d/system-auth-1.1</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-05</Date>
+            <Version>4.0.5</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

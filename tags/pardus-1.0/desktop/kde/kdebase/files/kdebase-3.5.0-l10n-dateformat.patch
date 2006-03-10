@@ -1,0 +1,12 @@
+diff -ur kdebase-3.4.92.orig/l10n/tr/entry.desktop kdebase-3.4.92/l10n/tr/entry.desktop
+--- kdebase-3.4.92.orig/l10n/tr/entry.desktop	2005-10-10 18:04:26.000000000 +0300
++++ kdebase-3.4.92/l10n/tr/entry.desktop	2005-10-24 02:13:33.000000000 +0300
+@@ -86,7 +86,7 @@
+ NegativePrefixCurrencySymbol=true
+ PositiveMonetarySignPosition=1
+ NegativeMonetarySignPosition=1
+-DateFormat[tr]=%a %d %b %Y
++DateFormat[tr]=%A %e %B %Y
+ DateFormat[eo]=%A, la %ea de %B %Y
+ DateFormatShort=%Y-%m-%d
+ TimeFormat=%H:%M:%S

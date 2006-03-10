@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>grep</Name>
+        <Homepage>http://www.gnu.org/software/grep/grep.html</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>GNU regular expression matcher</Summary>
+        <Summary xml:lang="tr">Grep düzenli ifade eşleme aracı</Summary>
+        <Description>GNU regular expression matcher</Description>
+        <Description xml:lang="tr">Grep, belirtilmiş bir maskeye (düzenli ifadeye) uyan metinleri bulmaya yarar. Eşleşen satırlar gösterilir. GNU grep araçları grep, egrep ve fgrep'tir.</Description>
+        <Archive sha1sum="834c7f39b35dbaf7c9074c14a8765d6a3a58bf30" type="targz">http://ftp.belnet.be/mirror/rsync.gentoo.org/gentoo/distfiles/grep-2.5.1.tar.gz</Archive>
+        <Patches>
+            <Patch>2.5.1-manpage.patch</Patch>
+            <Patch>2.5.1-manpage-line-buffering.diff</Patch>
+            <Patch compressionType="bz2" level="1">grep-2.5.1-fgrep.patch.bz2</Patch>
+            <Patch compressionType="bz2" level="1">grep-2.5.1-i18n.patch.bz2</Patch>
+            <Patch compressionType="bz2" level="1">grep-2.5.1-oi.patch.bz2</Patch>
+            <Patch>grep-2.5.1-restrict_arr.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>grep</Name>
+        <RuntimeDependencies>
+            <Dependency>libpcre</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-25</Date>
+            <Version>2.5.1</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

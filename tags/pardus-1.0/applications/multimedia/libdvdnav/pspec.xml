@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libdvdnav</Name>
+        <Homepage>http://dvd.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL</License>
+        <IsA>library</IsA>
+        <Description>libdvdnav is a library for developers of multimedia applications. It allows easy use of sophisticated DVD navigation features such as DVD menus, multiangle playback and even interactive DVD games.</Description>
+        <Description xml:lang="tr">libdvdnav çokluortam uyguamaları geliştiricileri için bir kütüphane. libdvdnav ile karmaşık DVD dolaşmalarını Örn: DVD menüleri, değişik açılı gösterimleri ve hatta etkileşimli DVD oyunlarını kullanabilirsiniz</Description>
+        <Summary>libdvdnav is a library for developers of multimedia applications.</Summary>
+        <Summary xml:lang="tr">libdvdnav çokluortam uyguamaları geliştiricileri için bir kütüphane</Summary>
+        <Archive sha1sum="22289cb8f297664ce36551b818c0083e936632a7" type="targz">http://easynews.dl.sourceforge.net/sourceforge/dvd/libdvdnav-0.1.10.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>libdvdnav</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-26</Date>
+            <Version>0.1.10</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,11 @@
+--- gcc-3.4.4/gcc/config/freebsd-spec.h
++++ gcc-3.4.4/gcc/config/freebsd-spec.h
+@@ -148,8 +148,4 @@
+ #endif
+ #endif
+
+-#if FBSD_MAJOR < 6
+-#define FBSD_DYNAMIC_LINKER "/usr/libexec/ld-elf.so.1"
+-#else
+ #define FBSD_DYNAMIC_LINKER "/libexec/ld-elf.so.1"
+-#endif

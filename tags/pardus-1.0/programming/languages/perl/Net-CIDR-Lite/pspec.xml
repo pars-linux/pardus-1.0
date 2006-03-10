@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>Net-CIDR-Lite</Name>
+        <Homepage>http://search.cpan.org/~mrsam/Net-CIDR-0.11/CIDR.pm</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Summary>Perl extension for merging IPv4 or IPv6 CIDR addresses</Summary>
+        <Description>Perl extension for merging IPv4 or IPv6 CIDR addresses</Description>
+        <Archive sha1sum="b0c550b36a3ccb67c89b10ee74d812769113c0d9" type="targz">http://search.cpan.org/CPAN/authors/id/D/DO/DOUGW/Net-CIDR-Lite-0.18.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </BuildDependencies>        
+    </Source>
+
+    <Package>
+        <Name>Net-CIDR-Lite</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-10</Date>
+            <Version>0.18</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

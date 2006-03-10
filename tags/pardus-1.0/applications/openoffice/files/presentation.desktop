@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=OpenOffice.org Sunu
+Exec=ooimpress %U
+Icon=ooo-impress2.0.png
+Terminal=false
+Type=Application
+InitialPreference=15
+Categories=Qt;KDE;Office;
+MimeType=application/vnd.sun.xml.impress;application/vnd.sun.xml.impress.template;application/vnd.ms-powerpoint;application/mspowerpoint;application/vnd.stardivision.impress;application/vnd.oasis.opendocument.presentation;application/vnd.oasis.opendocument.presentation-template;

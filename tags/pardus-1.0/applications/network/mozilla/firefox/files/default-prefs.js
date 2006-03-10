@@ -1,0 +1,26 @@
+pref("app.update.autoInstallEnabled", false);
+pref("app.update.enabled", false);
+pref("browser.display.use_document_fonts", 1);
+pref("browser.display.use_system_colors", true);
+pref("browser.link.open_external", 3);
+pref("browser.startup.homepage", "http://www.uludag.org.tr/");
+pref("browser.urlbar.clickSelectsAll", true);
+pref("general.autoScroll", true);
+pref("general.smoothScroll", true);
+pref("intl.locale.matchOS", true);
+pref("middlemouse.contentLoadURL", false);
+pref("general.useragent.vendor", "Pardus");
+pref("browser.display.show_image_placeholders", false);
+pref("network.protocol-handler.app.mailto","kmail");
+pref("print.print_command","kprinter");
+pref("print.postscript.print_command", "kprinter");
+
+pref("font.default.tr", "sans-serif");
+pref("font.language.group", "tr");
+pref("font.name.monospace.tr", "Bitstream Vera Sans Mono");
+pref("font.name.sans-serif.tr", "Bitstream Vera Sans");
+pref("font.name.serif.tr", "Bitstream Vera Serif");
+pref("font.minimum-size.tr", 12);
+pref("font.size.variable.tr", 14);
+pref("intl.charset.default", "UTF-8");
+pref("intl.charsetmenu.browser.cache", "UTF-8");

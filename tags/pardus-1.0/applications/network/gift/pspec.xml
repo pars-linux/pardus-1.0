@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PSPEC SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gift</Name>
+        <Homepage>http://gift.sourceforge.net</Homepage>
+        <Packager>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>daemon</IsA>
+        <Summary>A OpenFT, Gnutella and FastTrack p2p network daemon</Summary>
+        <Summary xml:lang="tr">OpenFT, Gnutella ve FastTrack p2p ağ servisi</Summary>
+        <Description>A OpenFT, Gnutella and FastTrack p2p network daemon</Description>
+        <Description xml:lang="tr">OpenFT, Gnutella ve FastTrack p2p ağ servisi</Description>
+        <Archive sha1sum="eda16a9abead7552859679696605f7e7350b0bb2" type="tarbz2">http://mesh.dl.sourceforge.net/sourceforge/gift/gift-0.11.8.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="1.1.4">zlib</Dependency>
+            <Dependency>file</Dependency>
+            <Dependency versionFrom="5.5.7.15">imagemagick</Dependency>
+            <Dependency>libvorbis</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+           <Name>gift</Name>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="header">/usr/include/libgift</Path>
+                <Path fileType="data">/usr/share</Path>
+                <Path fileType="config">/etc/conf.d</Path>
+                <Path fileType="config">/etc/init.d</Path>
+            </Files>
+            <AdditionalFiles>
+                <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/gift">gift.confd</AdditionalFile>
+                <AdditionalFile owner="root" permission="0755" target="/etc/init.d/gift">gift.initd</AdditionalFile>
+            </AdditionalFiles>                                                               
+    </Package> 
+    <History>
+        <Update release="1">
+            <Date>2005-11-29</Date>
+            <Version>0.11.8.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Update>
+</History>
+</PISI>

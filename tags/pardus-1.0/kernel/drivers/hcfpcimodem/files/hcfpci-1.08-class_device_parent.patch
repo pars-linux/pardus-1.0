@@ -1,0 +1,29 @@
+diff -urN hcfpcimodem-1.08full/modules/GPL/oscompat.h hcfpcimodem-1.08full-class_device_parent/modules/GPL/oscompat.h
+--- hcfpcimodem-1.08full/modules/GPL/oscompat.h	2005-09-17 17:42:03.000000000 -0400
++++ hcfpcimodem-1.08full-class_device_parent/modules/GPL/oscompat.h	2005-11-17 14:46:50.000000000 -0500
+@@ -550,7 +550,11 @@
+ #define CLASS_DEVICE_DESTROY(class, dev) class_simple_device_remove(dev)
+ #define CLASS_CREATE(owner, name) class_simple_create(owner, name)
+ #else
++#ifdef FOUND_CLASS_DEVICE_PARENT
++#define CLASS_DEVICE_CREATE(class, dev, device, fmt, rest) class_device_create(class, NULL, dev, device, fmt, rest)
++#else
+ #define CLASS_DEVICE_CREATE(class, dev, device, fmt, rest) class_device_create(class, dev, device, fmt, rest)
++#endif
+ #define CLASS_DESTROY(class) class_destroy(class)
+ #define CLASS_DEVICE_DESTROY(class, dev) class_device_destroy(class, dev)
+ #define CLASS_CREATE(owner, name) class_create(owner, name)
+diff -urN hcfpcimodem-1.08full/modules/Makefile hcfpcimodem-1.08full-class_device_parent/modules/Makefile
+--- hcfpcimodem-1.08full/modules/Makefile	2005-10-21 12:15:04.000000000 -0400
++++ hcfpcimodem-1.08full-class_device_parent/modules/Makefile	2005-11-17 14:46:50.000000000 -0500
+@@ -80,8 +80,9 @@
+ FOUND_CLASS_SIMPLE := $(shell grep -q 'class_simple_device_add' ${REAL_KERNELSRC}/include/linux/device.h 2>/dev/null && echo -DFOUND_CLASS_SIMPLE)
+ FOUND_UART_REGISTER_PORT := $(shell grep -q 'uart_register_port' ${REAL_KERNELSRC}/include/linux/serial_core.h 2>/dev/null && echo -DFOUND_UART_REGISTER_PORT)
+ FOUND_TTY_START_STOP := $(shell grep -q 'stop_tx.*tty_stop' ${REAL_KERNELSRC}/include/linux/serial_core.h 2>/dev/null && echo -DFOUND_TTY_START_STOP)
++FOUND_CLASS_DEVICE_PARENT := $(shell grep -q 'struct[ \t]*class_device[ \t]*\*[ \t]*parent' ${REAL_KERNELSRC}/include/linux/device.h 2>/dev/null && echo -DFOUND_CLASS_DEVICE_PARENT)
+ 
+-CFLAGS+= $(FOUND_CLASS_SIMPLE) $(FOUND_UART_REGISTER_PORT) $(FOUND_TTY_START_STOP)
++CFLAGS+= $(FOUND_CLASS_SIMPLE) $(FOUND_UART_REGISTER_PORT) $(FOUND_TTY_START_STOP) $(FOUND_CLASS_DEVICE_PARENT)
+ 
+ else
+ KO= o

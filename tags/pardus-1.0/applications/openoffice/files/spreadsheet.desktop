@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=OpenOffice.org Hesap Tablosu
+Exec=oocalc %U
+Icon=ooo-calc2.0.png
+Terminal=false
+Type=Application
+InitialPreference=15
+Categories=Qt;KDE;Office;
+MimeType=application/vnd.sun.xml.calc;application/vnd.sun.xml.calc.template;application/vnd.sun.xml.math;application/vnd.ms-excel;application/vnd.stardivision.calc;application/vnd.stardivision.chart;application/vnd.stardivision.math;application/vnd.lotus-1-2-3;text/x-comma-separated-values;application/vnd.oasis.opendocument.spreadsheet;application/vnd.oasis.opendocument.spreadsheet-template;
+

@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kdevelop</Name>
+        <Homepage>http://www.kdevelop.org</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>An Integrated Development Enviroment from KDE.</Summary>
+        <Description>Integrated Development Enviroment for Unix, supporting KDE/Qt, C/C++ and a many other languages.</Description>
+        <Summary xml:lang="tr">KDE tarafından üretilen bir uygulama geliştirme ortamı</Summary>
+        <Description xml:lang="tr">C/C++ ve diğer bir çok programlama dili ile uygulama geliştirmeye olanak veren bir grafik geliştirme ortamıdır</Description>
+        <Archive sha1sum="ca3b8c2985ea6c45c48dfc3e7e21d68fcd5f95b9" type="tarbz2">ftp://ftp.kde.org/pub/kde/stable/3.5/src/kdevelop-3.3.0.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>kdesdk</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kdevelop</Name>
+        <RuntimeDependencies>
+            <Dependency>kdesdk</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="header">/usr/kde/3.5/include</Path>
+            <Path fileType="library">/usr/kde/3.5/lib</Path>
+            <Path fileType="config">/usr/kde/3.5/share/config</Path>
+            <Path fileType="data">/usr/kde/3.5/share/applications</Path>
+            <Path fileType="data">/usr/kde/3.5/share/apps</Path>
+            <Path fileType="data">/usr/kde/3.5/share/desktop-directories</Path>
+            <Path fileType="data">/usr/kde/3.5/share/icons</Path>
+            <Path fileType="data">/usr/kde/3.5/share/mimelnk</Path>
+            <Path fileType="data">/usr/kde/3.5/share/services</Path>
+            <Path fileType="data">/usr/kde/3.5/share/servicetypes</Path>
+            <Path fileType="doc">/usr/kde/3.5/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-29</Date>
+            <Version>3.3.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

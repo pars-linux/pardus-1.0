@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>sysklogd</Name>
+        <Homepage>http://www.infodrom.org/projects/sysklogd/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>daemon</IsA>
+        <Summary>Standard log daemons</Summary>
+        <Summary xml:lang="tr">Günlük tutulmasını sağlayan servis</Summary>
+        <Description>Standard log daemons</Description>
+        <Description xml:lang="tr">Tüm Linux sistemlerinde bulunan, sistemin, sunucuların ve programların çalışma raporlarını, arızalarını izleyen ve günlük dosyalarına kaydedilmesini sağlayan hizmetçiler.</Description>
+        <Archive sha1sum="093775da0e429d0768cf195ceb20fdd6d96aeeea" type="targz">ftp://metalab.unc.edu/pub/Linux/system/daemons/sysklogd-1.4.1.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">sysklogd-1.4.1-SO_BSDCOMPAT.patch</Patch>
+            <Patch level="1">sysklogd-1.4.1-2.6.headers.patch</Patch>
+            <Patch>sysklogd-1.4.1-utf8.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>sysklogd</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>debianutils</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/usr/sbin/syslogd-listfiles">syslogd-listfiles</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/cron.daily/syslog.cron">syslog.cron</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/syslog.conf">syslog.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/sysklogd">sysklogd.initd</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/sysklogd">sysklogd.confd</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-30</Date>
+            <Version>1.4.1</Version>
+            <Comment>AdditionalFile permissions fixed</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-03</Date>
+            <Version>1.4.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

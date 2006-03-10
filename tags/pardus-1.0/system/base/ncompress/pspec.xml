@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ncompress</Name>
+        <Homepage>ftp://ftp.leo.org/pub/comp/os/unix/linux/sunsite/utils/compress/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>public-domain</License>
+        <IsA>app:console</IsA>
+        <Summary>Another uncompressor for compatibility</Summary>
+        <Summary xml:lang="tr">Bir başka sıkışmış dosya açma programı</Summary>
+        <Description>Another uncompressor for compatibility</Description>
+        <Description xml:lang="tr">Bir başka sıkışmış dosya açma programı</Description>
+        <Archive sha1sum="d053db1f05a8120214157dfb8666c95d78ad6efc" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/ncompress-4.2.4.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">ncompress_4.2.4-15.diff</Patch>
+            <Patch level="1">ncompress-gcc34.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>ncompress</Name>
+        <Files>
+          <Path fileType="executable">/usr/bin</Path>
+          <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-21</Date>
+            <Version>4.2.4</Version>
+            <Comment>Gcc 3.4 compile fix.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-04</Date>
+            <Version>4.2.4</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

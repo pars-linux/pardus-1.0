@@ -1,0 +1,131 @@
+--- transcode/export/export_ffmpeg.c.orig	2005-10-13 12:40:21.000000000 +0000
++++ transcode/export/export_ffmpeg.c	2005-10-13 12:46:32.000000000 +0000
+@@ -674,48 +674,48 @@
+ 
+     switch (vob->ex_frc) {
+ 	case 1: // 23.976
+-	    lavc_venc_context->frame_rate      = 24000;
+-	    lavc_venc_context->frame_rate_base = 1001;
++	    lavc_venc_context->time_base.den      = 24000;
++	    lavc_venc_context->time_base.num = 1001;
+ 	    break;
+ 	case 2: // 24.000
+-	    lavc_venc_context->frame_rate      = 24000;
+-	    lavc_venc_context->frame_rate_base = 1000;
++	    lavc_venc_context->time_base.den      = 24000;
++	    lavc_venc_context->time_base.num = 1000;
+ 	    break;
+ 	case 3: // 25.000
+-	    lavc_venc_context->frame_rate      = 25000;
+-	    lavc_venc_context->frame_rate_base = 1000;
++	    lavc_venc_context->time_base.den      = 25000;
++	    lavc_venc_context->time_base.num = 1000;
+ 	    break;
+ 	case 4: // 29.970
+-	    lavc_venc_context->frame_rate      = 30000;
+-	    lavc_venc_context->frame_rate_base = 1001;
++	    lavc_venc_context->time_base.den      = 30000;
++	    lavc_venc_context->time_base.num = 1001;
+ 	    break;
+ 	case 5: // 30.000
+-	    lavc_venc_context->frame_rate      = 30000;
+-	    lavc_venc_context->frame_rate_base = 1000;
++	    lavc_venc_context->time_base.den      = 30000;
++	    lavc_venc_context->time_base.num = 1000;
+ 	    break;
+ 	case 6: // 50.000
+-	    lavc_venc_context->frame_rate      = 50000;
+-	    lavc_venc_context->frame_rate_base = 1000;
++	    lavc_venc_context->time_base.den      = 50000;
++	    lavc_venc_context->time_base.num = 1000;
+ 	    break;
+ 	case 7: // 59.940
+-	    lavc_venc_context->frame_rate      = 60000;
+-	    lavc_venc_context->frame_rate_base = 1001;
++	    lavc_venc_context->time_base.den      = 60000;
++	    lavc_venc_context->time_base.num = 1001;
+ 	    break;
+ 	case 8: // 60.000
+-	    lavc_venc_context->frame_rate      = 60000;
+-	    lavc_venc_context->frame_rate_base = 1000;
++	    lavc_venc_context->time_base.den      = 60000;
++	    lavc_venc_context->time_base.num = 1000;
+ 	    break;
+ 	case 0: // not set
+ 	default:
+ 		if((vob->ex_fps > 29) && (vob->ex_fps < 30))
+ 		{
+-	    	lavc_venc_context->frame_rate      = 30000;
+-	    	lavc_venc_context->frame_rate_base = 1001;
++	    	lavc_venc_context->time_base.den      = 30000;
++	    	lavc_venc_context->time_base.num = 1001;
+ 		}
+ 		else
+ 		{
+-	    	lavc_venc_context->frame_rate      = (int)(vob->ex_fps*1000.0);
+-	    	lavc_venc_context->frame_rate_base = 1000;
++	    	lavc_venc_context->time_base.den      = (int)(vob->ex_fps*1000.0);
++	    	lavc_venc_context->time_base.num = 1000;
+ 		}
+ 	    break;
+     }
+@@ -732,41 +732,41 @@
+     {
+         switch (lavc_param_fps_code) {
+ 	    case 1: // 23.976
+-	        lavc_venc_context->frame_rate      = 24000;
+-	        lavc_venc_context->frame_rate_base = 1001;
++	        lavc_venc_context->time_base.den      = 24000;
++	        lavc_venc_context->time_base.num = 1001;
+ 	        break;
+ 	    case 2: // 24.000
+-	        lavc_venc_context->frame_rate      = 24000;
+-	        lavc_venc_context->frame_rate_base = 1000;
++	        lavc_venc_context->time_base.den      = 24000;
++	        lavc_venc_context->time_base.num = 1000;
+ 	        break;
+ 	    case 3: // 25.000
+-	        lavc_venc_context->frame_rate      = 25000;
+-	        lavc_venc_context->frame_rate_base = 1000;
++	        lavc_venc_context->time_base.den      = 25000;
++	        lavc_venc_context->time_base.num = 1000;
+ 	        break;
+ 	    case 4: // 29.970
+-	        lavc_venc_context->frame_rate      = 30000;
+-	        lavc_venc_context->frame_rate_base = 1001;
++	        lavc_venc_context->time_base.den      = 30000;
++	        lavc_venc_context->time_base.num = 1001;
+ 	        break;
+ 	    case 5: // 30.000
+-    	    lavc_venc_context->frame_rate      = 30000;
+-	        lavc_venc_context->frame_rate_base = 1000;
++    	    lavc_venc_context->time_base.den      = 30000;
++	        lavc_venc_context->time_base.num = 1000;
+ 	        break;
+ 	    case 6: // 50.000
+-	        lavc_venc_context->frame_rate      = 50000;
+-	        lavc_venc_context->frame_rate_base = 1000;
++	        lavc_venc_context->time_base.den      = 50000;
++	        lavc_venc_context->time_base.num = 1000;
+ 	        break;
+ 	    case 7: // 59.940
+-	        lavc_venc_context->frame_rate      = 60000;
+-	        lavc_venc_context->frame_rate_base = 1001;
++	        lavc_venc_context->time_base.den      = 60000;
++	        lavc_venc_context->time_base.num = 1001;
+ 	        break;
+ 	    case 8: // 60.000
+-	        lavc_venc_context->frame_rate      = 60000;
+-	        lavc_venc_context->frame_rate_base = 1000;
++	        lavc_venc_context->time_base.den      = 60000;
++	        lavc_venc_context->time_base.num = 1000;
+ 	        break;
+ 	    case 0: // not set
+ 	    default:
+-	        //lavc_venc_context->frame_rate      = (int)(vob->ex_fps*1000.0);
+-	        //lavc_venc_context->frame_rate_base = 1000;
++	        //lavc_venc_context->time_base.den      = (int)(vob->ex_fps*1000.0);
++	        //lavc_venc_context->time_base.num = 1000;
+ 	    break;
+         }
+     }

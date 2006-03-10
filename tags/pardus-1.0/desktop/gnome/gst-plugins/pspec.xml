@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gst-plugins</Name>
+        <Homepage>http://gstreamer.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>plugin</IsA>
+        <Summary>Basepack of plugins for gstreamer</Summary>
+        <Summary xml:lang="tr">Gstreamer için temel eklentiler paketi</Summary>
+        <Description>Basepack of plugins for gstreamer</Description>
+        <Description xml:lang="tr">Gstreamer için temel eklentiler paketi</Description>
+        <Archive sha1sum="fbfb1a23ef805e58f5617649590d065440470628" type="tarbz2">http://gstreamer.freedesktop.org/src/gst-plugins/gst-plugins-0.8.7.tar.bz2</Archive>
+        <Patches>
+            <Patch level="2">gst-plugins-alsa-0.8.7-alsa_deadlock.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency versionFrom="0.8.8">gstreamer</Dependency>
+            <Dependency versionFrom="0.11.5">gettext</Dependency> 
+            <Dependency>sed</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gst-plugins</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.8.8">gstreamer</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-10</Date>
+            <Version>0.8.7</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

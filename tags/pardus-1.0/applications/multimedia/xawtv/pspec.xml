@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>xawtv</Name>
+        <Homepage>http://bytesex.org/xawtv/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Description xml:lang="en">TV application for the bttv driver</Description>
+        <Description xml:lang="tr">bttv kartlar için bir TV uygulaması</Description>
+        <Summary xml:lang="en">TV application for the bttv driver</Summary>
+        <Summary xml:lang="tr">bttv kartlar için bir TV uygulaması</Summary>
+        <Archive type="targz" sha1sum="d0f2f3c64b92a21a9a01673d1b32aaa040428b40">http://dl.bytesex.org/releases/xawtv/xawtv-3.94.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.1">ncurses</Dependency>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>aalib</Dependency>
+            <Dependency>libquicktime</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">xawtv-3.94-allow-xlibs-in-normal-search-path.patch</Patch>
+            <Patch level="1">dirty-xawtv-unicode.patch</Patch>
+            <Patch level="1">xawtv-3.94-gcc4.patch</Patch>
+            <Patch level="1">xawtv-3.94-no-x11.patch</Patch>
+            <Patch level="1">xawtv-3.94-with_x_in_usr.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>xawtv</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.1">ncurses</Dependency>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency versionFrom="1.1">tv-fonts</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>aalib</Dependency>
+            <Dependency>libquicktime</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/xawtv</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/xawtv</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-12-20</Date>
+            <Version>3.94</Version>
+            <Comment>Fix compilation with gcc4 and Xorg 6.9, add lirc support</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-20</Date>
+            <Version>3.94</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

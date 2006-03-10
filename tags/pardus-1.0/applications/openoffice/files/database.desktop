@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=OpenOffice.org Veritabanı
+Exec=oobase %U
+Icon=ooo-base2.0.png
+Terminal=false
+Type=Application
+InitialPreference=15
+Categories=Qt;KDE;Office;X-KDE-More;
+MimeType=application/vnd.oasis.opendocument.database
+

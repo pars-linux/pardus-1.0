@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xmms</Name>
+        <Homepage>http://www.xmms.org</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>XMMS multimedia player</Summary>
+        <Summary xml:lang="tr">Winamp benzeri çokluortam oynatıcı/çalıcı </Summary>
+        <Description xml:lang="tr">XMMS (X MultiMedia System), Linux sistemlerde çalışan ve Winamp'a benzeyen bir çokluortam oynatıcısıdır. Genellikle MP3 dosyalarını çalmak için kullanılır.</Description>
+        <Description>XMMS is a multimedia player for unix systems. XMMS stands for X MultiMedia System and can play media files such as MP3, MOD's, WAV and others with the use of input plugins.</Description>
+        <Archive sha1sum="a3c3d3756d5263183c27b3c50a7f5404cba8bfaf" type="tarbz2">http://www.xmms.org/files/1.2.x/xmms-1.2.10.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>gtk1</Dependency>
+        </BuildDependencies>        
+    </Source>
+
+    <Package>
+        <Name>xmms</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk1</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include/xmms</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man/man1</Path>
+            <Path fileType="data">/usr/share/xmms</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/xmms.desktop">xmms.desktop</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="2" type="bug">
+            <Date>2005-12-09</Date>
+            <Version>1.2.10</Version>
+            <Comment>Fix bug #1116</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-10</Date>
+            <Version>1.2.10</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

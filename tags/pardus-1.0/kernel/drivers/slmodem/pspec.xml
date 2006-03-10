@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>slmodem</Name>
+        <Homepage>http://linmodems.technion.ac.il/packages/smartlink/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>Smart-Link</License>
+        <IsA>library</IsA>
+        <Summary xml:lang="en">Driver for Smart Link modem</Summary>
+        <Description xml:lang="en">Driver for Smart Link modem</Description>
+        <Archive type="targz" sha1sum="bacd94800a83c86cc872c6afa75dfb3c90828815">http://linmodems.technion.ac.il/packages/smartlink/slmodem-2.9.11-20051101.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>kernel-source</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>slmodem</Name>
+        <RuntimeDependencies>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>ungrab-winmodem</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library" permanent="true">/lib/modules</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="library">/var/lib/slmodem</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/udev/rules.d/55-slmodem.rules">slmodem.udev</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/hotplug/blacklist.d/slmodem">slmodem.hotplug</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/slmodem">slmodem.conf.d</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/slmodem">slmodem.init.d</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/hotplug/usb/slusb">slusb.hotplug</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/modules.d/slmodem">slmodem.modules.d</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/modules.d/slamr">slamr.modules.d</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/modules.d/slusb">slusb.modules.d</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="5">
+            <Date>2005-12-21</Date>
+            <Version>2.9.11-20051101</Version>
+            <Comment>Remove intel8x0m from hotplug blacklist</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-12-21</Date>
+            <Version>2.9.11-20051101</Version>
+            <Comment>Change default config, set alsa as default</Comment>
+            <Name>Ekin Meroğlu</Name>
+            <Email>ekin@fisek.com.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-12-20</Date>
+            <Version>2.9.11-20051101</Version>
+            <Comment>Change default config, removing alsa</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-12-14</Date>
+            <Version>2.9.11-20051101</Version>
+            <Comment>Change kernel module target</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-12-12</Date>
+            <Version>2.9.11-20051101</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

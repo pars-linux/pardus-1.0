@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>opensp</Name>
+        <Homepage>http://openjade.sourceforge.net</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:console</IsA>
+        <Summary>A free, object-oriented toolkit for SGML parsing and entity management</Summary>
+        <Summary xml:lang="tr">SGML/XML için bir grup araç</Summary>
+        <Description>A free, object-oriented toolkit for SGML parsing and entity management</Description>
+        <Description xml:lang="tr">SGML/XML için bir grup araç. Bu araçlar SGML/XML dosyalarının sözdizimsel analizini yapmak ve geçerliliğini saptamak için kullanılmaktadır</Description>
+        <Archive sha1sum="93bd4f99972c9a50e07c68e3161ed3c25f9a3b22" type="targz">http://heanet.dl.sourceforge.net/sourceforge/openjade/OpenSP-1.5.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch>opensp-1.5-gcc34.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>opensp</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path> 
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/sgml/opensp</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-12</Date>
+            <Version>1.5.1</Version>
+            <Comment>Added gcc 3.4 patch</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-26</Date>
+            <Version>1.5.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

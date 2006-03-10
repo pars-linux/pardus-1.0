@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>discover</Name>
+        <Homepage>http://componentizedlinux.org/index.php/Discover</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:gui</IsA>
+        <IsA>library</IsA>
+        <Summary>Library and front-end for retrieving information about a system's hardware</Summary>
+        <Description>Library and front-end for retrieving information about a system's hardware</Description>
+        <Summary xml:lang="tr">Discover, sisteme ait donanım bilgileri toplamak ve raporlamak için kullanılan kütüphane ve uygulamalar setidir.</Summary>
+        <Description xml:lang="tr">İşletim sistemine özgü modüller kullanarak mevcut sistem üzerindeki donanımı tanır ve sistem bağımsızı arayüzü ile XML veri kaynaklarından donanıma ait sorgu yapılabilmektedir.</Description>
+        <Archive sha1sum="bd18ac1b93408b670e97fd163f25fb3c21b92952" type="targz">http://archive.progeny.com/progeny/discover/discover-2.0.7.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>curl</Dependency>
+            <Dependency>expat</Dependency>
+            <Dependency>libidn</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>discover</Name>
+        <RuntimeDependencies>
+            <Dependency>discover-data</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include/discover</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="data">/usr/share/discover/dtd</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-29</Date>
+            <Version>2.0.7</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

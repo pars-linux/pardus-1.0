@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libvisual-plugins</Name>
+        <Homepage>http://libvisual.sourceforge.net</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>plugin</IsA>
+        <Description>Visualization plugins for use with the libvisual framework.</Description>
+        <Description xml:lang="tr">libvisiual frameworkü için canlandırma(Visualization) eklentileri</Description>
+        <Summary>Visualization plugins for use with the libvisual framework.</Summary>
+        <Summary xml:lang="tr">libvisual çatısı için canlandırma (visualization) eklentileri</Summary>
+        <Archive sha1sum="bc001f66b1c81b747bc06e3e09aaf71882c47370" type="targz">http://puzzle.dl.sourceforge.net/sourceforge/libvisual/libvisual-plugins-0.2.0.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">libvisual-plugins-0.2.0-configure.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>libvisual</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libvisual-plugins</Name>
+        <RuntimeDependencies>
+            <Dependency>libvisual</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency>gtk2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/libvisual</Path>
+            <Path fileType="data">/usr/share/libvisual-plugins</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-08</Date>
+            <Version>0.2.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

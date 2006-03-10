@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>iproute2</Name>
+        <Homepage>http://developer.osdl.org/dev/iproute2/</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Kernel routing and traffic control utilities</Summary>
+        <Description>Kernel routing and traffic control utilities</Description>
+        <Summary xml:lang="tr">Çekirdek içinde yer alan ağ trafiği yönlendirme ve trafik kontrol araçları.</Summary>
+        <Description xml:lang="tr">Çekirdek içinde yer alan ağ trafiği yönlendirme ve trafik kontrol araçları.</Description>
+        <Archive sha1sum="844d32f38e8ef51fd9e87111c65e37b93cb766fd" type="targz">http://developer.osdl.org/dev/iproute2/download/iproute2-051007.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">2.6.9.20041106-esfq.patch</Patch>
+            <Patch level="1">2.6.9.20041019-wrr.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>iproute2</Name>
+        <Files>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-16</Date>
+            <Version>20051007</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

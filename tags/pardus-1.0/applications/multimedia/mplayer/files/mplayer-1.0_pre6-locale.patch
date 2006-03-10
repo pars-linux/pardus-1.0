@@ -1,0 +1,63 @@
+diff -ur MPlayer-1.0pre4.orig/libmpcodecs/dec_audio.c MPlayer-1.0pre4/libmpcodecs/dec_audio.c
+--- MPlayer-1.0pre4.orig/libmpcodecs/dec_audio.c	2004-01-27 08:30:16.000000000 +0200
++++ MPlayer-1.0pre4/libmpcodecs/dec_audio.c	2004-11-24 10:32:50.250553864 +0200
+@@ -134,6 +134,10 @@
+ int init_audio(sh_audio_t *sh_audio,char* codecname,char* afm,int status){
+     unsigned int orig_fourcc=sh_audio->wf?sh_audio->wf->wFormatTag:0;
+     sh_audio->codec=NULL;
++
++    char * locale_data = setlocale(LC_CTYPE,"");
++	setlocale(LC_CTYPE,"C");
++
+     while(1){
+ 	int i;
+ 	// restore original fourcc:
+@@ -197,8 +201,12 @@
+ 	    continue; // try next...
+ 	}
+ 	// Yeah! We got it!
++
++    setlocale(LC_CTYPE,locale_data);
+ 	return 1;
+     }
++
++    setlocale(LC_CTYPE,locale_data);
+     return 0;
+ }
+ 
+diff -ur MPlayer-1.0pre4.orig/libmpcodecs/dec_video.c MPlayer-1.0pre4/libmpcodecs/dec_video.c
+--- MPlayer-1.0pre4.orig/libmpcodecs/dec_video.c	2004-02-18 17:23:41.000000000 +0200
++++ MPlayer-1.0pre4/libmpcodecs/dec_video.c	2004-11-24 10:31:48.138996256 +0200
+@@ -8,6 +8,8 @@
+ #include <stdlib.h>
+ #include <unistd.h>
+ 
++#include <locale.h>
++
+ #include "mp_msg.h"
+ #include "help_mp.h"
+ 
+@@ -165,6 +167,9 @@
+     sh_video->codec=NULL;
+     sh_video->vf_inited=0;
+ 
++	char * locale_data = setlocale(LC_ALL,"");
++	setlocale(LC_CTYPE,"C");
++
+     while(1){
+ 	int i;
+ 	// restore original fourcc:
+@@ -240,8 +245,13 @@
+ 	}
+ 	// Yeah! We got it!
+ 	sh_video->inited=1;
++
++    setlocale(LC_CTYPE,locale_data);
++
+ 	return 1;
+     }
++
++    setlocale(LC_CTYPE,locale_data);
+     return 0;
+ }
+ 

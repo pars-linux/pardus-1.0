@@ -1,0 +1,169 @@
+diff -urN xc-orig/programs/xman/man.c xc/programs/xman/man.c
+--- xc-orig/programs/xman/man.c	2004-08-11 13:46:30.000000000 -0400
++++ xc/programs/xman/man.c	2004-08-11 15:12:29.000000000 -0400
+@@ -447,6 +447,10 @@
+     else if (streq(ptr + 1, GZIP_EXTENSION))
+       *ptr = '\0';
+ #endif
++#ifdef BZIP2_EXTENSION
++    else if (streq(ptr + 1, BZIP2_EXTENSION))
++      *ptr = '\0';
++#endif
+   }
+   
+   nentries = local_manual->nentries;
+@@ -485,6 +489,10 @@
+       else if (streq(ptr + 1, GZIP_EXTENSION))
+ 	*ptr = '\0';
+ #endif
++#ifdef BZIP2_EXTENSION
++      else if (streq(ptr + 1, BZIP2_EXTENSION))
++	*ptr = '\0';
++#endif
+ #ifdef IGNORE_EXTENSION
+       /* skip files with specified extension - they're not real man pages */
+       else if (streq(ptr + 1, IGNORE_EXTENSION)) {
+diff -urN xc-orig/programs/xman/man.h xc/programs/xman/man.h
+--- xc-orig/programs/xman/man.h	2004-08-11 13:46:30.000000000 -0400
++++ xc/programs/xman/man.h	2004-08-11 15:14:23.000000000 -0400
+@@ -165,6 +165,7 @@
+ 				   page from. */
+   Boolean compress;		/* Compress file on save? */
+   Boolean gzip;			/* Gzip file on save? */
++  Boolean bzip2;       /* Bzip2 file on save? */
+   Boolean deletetempfile;	/* Need to delete tempfile when done? */
+   char ** section_name;		/* The name of each of the sections */
+ 
+diff -urN xc-orig/programs/xman/misc.c xc/programs/xman/misc.c
+--- xc-orig/programs/xman/misc.c	2004-08-11 13:46:30.000000000 -0400
++++ xc/programs/xman/misc.c	2004-08-11 15:16:24.000000000 -0400
+@@ -251,6 +251,22 @@
+       return(file);
+   }
+ #endif
++#ifdef BZIP2_EXTENSION
++  {
++    sprintf(filename, "%s/%s%s/%s.%s", path, CAT,
++	    section + len_cat, page, BZIP2_EXTENSION);
++    if ( (file = Uncompress(man_globals, filename)) != NULL)
++      return(file);
++  }
++#endif
++#ifdef BZIP2_EXTENSION
++  {
++    sprintf(filename, "%s/%s%s/%s.%s", path, CAT,
++	    section + len_cat, page, BZIP2_EXTENSION);
++    if ( (file = Uncompress(man_globals, filename)) != NULL)
++      return(file);
++  }
++#endif
+ #else
+   for(i = 0; i < strlen(COMPRESSION_EXTENSIONS); i++) {
+       snprintf(filename, sizeof(filename), "%s/%s%s/%s.%c", path, CAT,
+@@ -377,6 +393,18 @@
+     snprintf(cmdbuf, sizeof(cmdbuf), GUNZIP_FORMAT, filename, output);
+   else
+ #endif
++#ifdef BZIP2_EXTENSION
++  if (streq(filename + strlen(filename) - strlen(BZIP2_EXTENSION),
++	    BZIP2_EXTENSION))
++    sprintf(cmdbuf, BUNZIP2_FORMAT, filename, output);
++  else
++#endif
++#ifdef BZIP2_EXTENSION
++  if (streq(filename + strlen(filename) - strlen(BZIP2_EXTENSION),
++	    BZIP2_EXTENSION))
++    sprintf(cmdbuf, BUNZIP2_FORMAT, filename, output);
++  else
++#endif
+   snprintf(cmdbuf, sizeof(cmdbuf), UNCOMPRESS_FORMAT, filename, output);
+   if(system(cmdbuf) == 0) 	/* execute search. */
+     return(TRUE);
+@@ -803,6 +831,10 @@
+ 
+   ParseEntry(entry, path, section, page);
+ 
++  man_globals->bzip2 = FALSE;
++
++  man_globals->bzip2 = FALSE;
++
+ #if defined(__OpenBSD__) || defined(__NetBSD__)
+   /*
+    * look for uncompressed file in machine subdir first
+@@ -852,6 +884,25 @@
+   }
+ #endif /* GZIP_EXTENSION */
+ #endif /* __OpenBSD__ || __NetBSD__ */
++
++#ifdef BZIP2_EXTENSION
++ {
++    sprintf(input, "%s.%s", filename, BZIP2_EXTENSION);
++#ifndef HAS_MKSTEMP
++    if ( UncompressNamed(man_globals, input, filename) ) {
++#else
++    if ( UncompressNamed(man_globals, input, filename, file) ) {
++#endif
++      man_globals->compress = TRUE;
++      man_globals->gzip = FALSE;
++      man_globals->bzip2 = TRUE;
++      sprintf(man_globals->save_file, "%s/%s%s/%s.%s", path,
++	      CAT, section + len_cat, page, BZIP2_EXTENSION);
++      return(TRUE);
++    }
++  }
++#endif /* BZIP2_EXTENSION */
++
+ /*
+  * Look for uncompressed file first.
+  */
+@@ -921,6 +972,24 @@
+     }
+   }
+ #endif
++
++#ifdef BZIP2_EXTENSION
++  {
++    sprintf(input, "%s.%s", filename, BZIP2_EXTENSION);
++#ifndef HAS_MKSTEMP
++    if ( UncompressNamed(man_globals, input, filename) ) {
++#else
++    if ( UncompressNamed(man_globals, input, filename, file) ) {
++#endif	
++      man_globals->compress = TRUE;
++      man_globals->gzip = TRUE;
++      sprintf(man_globals->save_file, "%s/%s%s/%s.%s", path,
++	      CAT, section + len_cat, page, BZIP2_EXTENSION);
++      return(TRUE);
++    }
++  }
++#endif
++
+ /*
+  * And lastly files in a compressed directory.
+  */
+diff -urN xc-orig/programs/xman/vendor.h xc/programs/xman/vendor.h
+--- xc-orig/programs/xman/vendor.h	2004-08-11 13:46:30.000000000 -0400
++++ xc/programs/xman/vendor.h	2004-08-11 15:10:52.000000000 -0400
+@@ -132,6 +132,13 @@
+ #    define GUNZIP_FORMAT "gzip -c -d < %s >> %s"
+ #  endif
+ #  define GZIP_COMPRESS "gzip"
++#  define BZIP2_EXTENSION "bz2"
++#  ifndef HAS_MKSTEMP
++#    define BUNZIP2_FORMAT "bunzip2 -c -d < %s > %s"
++#  else
++#    define BUNZIP2_FORMAT "bunzip2 -c -d < %s >> %s"
++#  endif
++#  define BZIP2_COMPRESS "bzip2"
+ #endif
+ 
+ 
+@@ -175,7 +182,7 @@
+ # define TBL "tbl"
+ #else /* HANDLE_ROFFSEQ */
+ # if defined(linux)
+-#  define ZSOELIM	"zsoelim"
++#  define ZSOELIM	"soelim"
+ # else
+ #  define ZSOELIM	"soelim"
+ #endif

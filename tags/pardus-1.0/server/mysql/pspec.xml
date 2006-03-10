@@ -1,0 +1,136 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>mysql</Name>
+        <Homepage>http://www.mysql.com/</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>daemon</IsA>
+        <Summary>A fast, multi-threaded, multi-user SQL database server</Summary>
+        <Summary xml:lang="tr">Hızlı, çok kullanıcılı ve çok görevli SQL veritabanı sunucusu</Summary>
+        <Description xml:lang="tr">Hızlı, çok kullanıcılı ve çok görevli SQL veritabanı sunucusu</Description>
+        <Description>A fast, multi-threaded, multi-user SQL database server</Description>
+        <Archive sha1sum="275e5a304d0f9175734c7ff00eba49f0f856436d" type="targz">http://mir2.ovh.net/ftp.mysql.com/Downloads/MySQL-4.1/mysql-4.1.14.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">010_all_my-print-defaults-r0.patch</Patch>
+            <Patch level="1">030_all_thrssl-r1.patch</Patch>
+            <Patch level="1">040_all_tcpd-vars-fix.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency versionFrom="4.1">readline</Dependency>
+            <Dependency>ed</Dependency>
+            <Dependency>procps</Dependency>
+            <Dependency>openssl</Dependency>
+            <Dependency versionFrom="4">sed</Dependency>
+            <Dependency versionFrom="1.2.3">zlib</Dependency>
+            <Dependency versionFrom="4.7">texinfo</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>mysql-lib</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin/mysql_config</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>mysql-client</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="4.1.14">mysql-lib</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/comp_err</Path>
+            <Path fileType="executable">/usr/bin/msql2mysql</Path>
+            <Path fileType="executable">/usr/bin/replace</Path>
+            <Path fileType="executable">/usr/bin/mysqldump</Path>
+            <Path fileType="executable">/usr/bin/mysql</Path>
+            <Path fileType="executable">/usr/bin/mysqloptimize</Path>
+            <Path fileType="executable">/usr/bin/mysqlimport</Path>
+            <Path fileType="executable">/usr/bin/mysqlcheck</Path>
+            <Path fileType="executable">/usr/bin/mysql_create_system_tables</Path>
+            <Path fileType="executable">/usr/bin/mysqladmin</Path>
+            <Path fileType="executable">/usr/bin/mysqlanalyze</Path>
+            <Path fileType="executable">/usr/bin/mysqlshow</Path>
+            <Path fileType="executable">/usr/bin/mysqlbug</Path>
+            <Path fileType="executable">/usr/bin/mysqlrepair</Path>
+            <Path fileType="executable">/usr/bin/my_print_defaults</Path>
+            <Path fileType="executable">/usr/bin/mysql_tzinfo_to_sql</Path>
+            <Path fileType="executable">/usr/bin/perror</Path>
+            <Path fileType="executable">/usr/bin/resolve_stack_dump</Path>
+            <Path fileType="executable">/usr/bin/resolveip</Path>
+            <Path fileType="executable">/usr/bin/mysql_client_test</Path>
+            <Path fileType="man">/usr/share/man/man1/mysql.1</Path>
+            <Path fileType="man">/usr/share/man/man1/mysqladmin.1</Path>
+            <Path fileType="man">/usr/share/man/man1/mysqldump.1</Path>
+            <Path fileType="man">/usr/share/man/man1/mysqlshow.1</Path>
+            <Path fileType="man">/usr/share/man/man1/mysql_zap.1</Path>
+            <Path fileType="man">/usr/share/man/man1/replace.1</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>mysql-server</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="4.1.14">mysql-lib</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/var/log</Path>
+            <Path fileType="data">/var/run</Path>
+            <Path fileType="data">/var/lib</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="executable">/usr/bin/mysql_install_db</Path>
+            <Path fileType="executable">/usr/bin/mysqlmanagerc</Path>
+            <Path fileType="executable">/usr/bin/mysqlmanager-pwgen</Path>
+            <Path fileType="executable">/usr/bin/mysqlmanager</Path>
+            <Path fileType="executable">/usr/bin/mysql_secure_installation</Path>
+            <Path fileType="executable">/usr/bin/mysql_fix_privilege_tables</Path>
+            <Path fileType="executable">/usr/bin/mysqld_safe</Path>
+            <Path fileType="executable">/usr/bin/myisamchk</Path>
+            <Path fileType="executable">/usr/bin/myisamlog</Path>
+            <Path fileType="executable">/usr/bin/myisampack</Path>
+            <Path fileType="executable">/usr/bin/myisam_ftdump</Path>
+            <Path fileType="executable">/usr/bin/isamchk</Path>
+            <Path fileType="executable">/usr/bin/isamlog</Path>
+            <Path fileType="executable">/usr/bin/mysql_waitpid</Path>
+            <Path fileType="executable">/usr/bin/mysqlbinlog</Path>
+            <Path fileType="executable">/usr/bin/pack_isam</Path>
+            <Path fileType="data">/usr/share/mysql</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="man">/usr/share/man/man1/isamchk.1</Path>
+            <Path fileType="man">/usr/share/man/man1/isamlog.1</Path>
+            <Path fileType="man">/usr/share/man/man1/mysqlaccess.1</Path>
+            <Path fileType="man">/usr/share/man/man1/mysqld.1</Path>
+            <Path fileType="man">/usr/share/man/man1/mysqld_multi.1</Path>
+            <Path fileType="man">/usr/share/man/man1/mysqld_safe.1</Path>
+            <Path fileType="man">/usr/share/man/man1/mysql_fix_privilege_tables.1</Path>
+            <Path fileType="man">/usr/share/man/man1/perror.1</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/mysql/my.cnf">my.cnf-4.1</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/mysql">mysql.init</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+             <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-15</Date>
+            <Version>4.1.14</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

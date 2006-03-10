@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cabextract</Name>
+        <Homepage>http://www.kyz.uklinux.net/cabextract.php</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL</License>
+        <IsA>app:console</IsA>
+        <Summary>A program to extract Microsoft Cabinet files</Summary>
+        <Summary xml:lang="tr">Microsoft Cabinet dosyalarını açan bir program</Summary>
+        <Description>cabextract is a program to extract Microsoft Cabinet files</Description>
+        <Description xml:lang="tr">Microsoft Cabinet dosyalarını açan bir program</Description>
+        <Archive sha1sum="359c8f4ec9c62d9dac5d572269b607b2cae4fbf7" type="targz">http://www.kyz.uklinux.net/downloads/cabextract-1.1.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>cabextract</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-27</Date>
+            <Version>1.1</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

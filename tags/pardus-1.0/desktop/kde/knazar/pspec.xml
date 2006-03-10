@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>knazar</Name>
+        <Homepage>http://cekirdek.uludag.org.tr/~caglar/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>An application to protect your computer from harmfull looks.</Summary>
+        <Summary xml:lang="tr">Elem tere fiş, kem gözlere şiş!</Summary>
+        <Description>An application to protect your computer from harmfull looks.</Description>
+        <Description xml:lang="tr">Elem tere fiş, kem gözlere şiş!</Description>
+        <Archive sha1sum="f54c0f218234a711079c5dff8036fea8ba24e846" type="tarbz2">http://cekirdek.uludag.org.tr/~meren/knazar-0.1.tar.bz2</Archive>
+        <Patches>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>knazar</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+   </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-28</Date>
+            <Version>0.1</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

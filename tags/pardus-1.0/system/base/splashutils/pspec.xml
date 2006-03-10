@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>splashutils</Name>
+        <Homepage>http://dev.gentoo.org/~spock/projects/gensplash/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary xml:lang="en">Framebuffer splash utilities.</Summary>
+        <Description xml:lang="en">Framebuffer splash utilities.</Description>
+        <Archive type="tarbz2" sha1sum="7c5b5980c36992d12a86caaa60d00334c7242d2a">ftp://ftp.uludag.org.tr/pub/pisi/source/splashutils-1.1.9.10.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="2">freetype</Dependency>
+            <Dependency versionFrom="1.2.7">libpng</Dependency>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency versionFrom="1.0.14">klibc</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>splashutils</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.1.3">splashutils-misc</Dependency>
+            <Dependency versionFrom="2">freetype</Dependency>
+            <Dependency versionFrom="1.2.7">libpng</Dependency>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency>fbgrab</Dependency>
+            <Dependency>splash-theme</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/lib/splash</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc/splashutils-1.1.9.10-1</Path>
+            <Path fileType="data">/usr/share/splashutils</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/sbin/splash" permission="0755" owner="root">splash</AdditionalFile>
+            <AdditionalFile target="/etc/init.d/splash" permission="0755" owner="root">init-splash</AdditionalFile>
+            <AdditionalFile target="/usr/share/splashutils/initrd.splash" permission="0644" owner="root">initrd.splash</AdditionalFile>
+            <AdditionalFile target="/sbin/splash-functions.sh" permission="0644" owner="root">splash-functions.sh</AdditionalFile>
+            <AdditionalFile target="/etc/conf.d/splash" permission="0644" owner="root">splash.conf</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-30</Date>
+            <Version>1.1.9.10</Version>
+            <Comment>Use Pardus theme</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-25</Date>
+            <Version>1.1.9.10</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

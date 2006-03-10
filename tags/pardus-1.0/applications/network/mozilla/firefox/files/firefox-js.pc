@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib/MozillaFirefox
+includedir=/usr/lib/MozillaFirefox/include
+
+Name: JavaScript
+Description: The Mozilla JavaScript Library
+Version: 1.4.1
+Requires: firefox-nspr >= 4.6.1
+Libs: -L${libdir} -lmozjs -Wl,-R${libdir}
+Cflags: -I${includedir}/js -DXP_UNIX

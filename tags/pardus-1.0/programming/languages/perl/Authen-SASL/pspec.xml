@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>Authen-SASL</Name>
+        <Homepage>http://search.cpan.org/~gbarr/Authen-SASL/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Summary>A Perl SASL interface</Summary>
+        <Description>A Perl SASL interface</Description>
+        <Summary xml:lang="tr">Perl için SASL modülü</Summary>
+        <Description xml:lang="tr">SASL kimlik doğrulama altyapısına erişim için Perl modülü</Description>
+        <Archive sha1sum="b5811774c970f2c4f7ee4016098a0c75e94c81b1" type="targz">http://www.cpan.org/modules/by-module/Authen/Authen-SASL-2.04.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>Authen-SASL</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-10</Date>
+            <Version>2.04</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

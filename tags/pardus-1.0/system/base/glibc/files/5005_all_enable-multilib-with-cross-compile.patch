@@ -1,0 +1,54 @@
+We want to enable support for installing into multilib dirs for
+cross-compilers too.
+
+--- sysdeps/unix/sysv/linux/configure
++++ sysdeps/unix/sysv/linux/configure
+@@ -223,12 +223,17 @@
+ # shared library objects and the configuration files on the root partition
+ # in /lib and /etc.
+ case "$prefix" in
+-/usr | /usr/)
++/usr | /usr/ | /usr/$host | /usr/$host/)
++  case "$prefix" in
++  /usr/$host | /usr/$host/) sysroot="/usr/$host";;
++  *) sysroot="";;
++  esac
++
+   # 64-bit libraries on bi-arch platforms go in /lib64 instead of /lib
+   case $machine in
+   sparc/sparc64 | x86_64 | powerpc/powerpc64 | s390/s390-64 | \
+   mips/mips64/n64/* )
+-    libc_cv_slibdir="/lib64"
++    libc_cv_slibdir="${sysroot}/lib64"
+     if test "$libdir" = '${exec_prefix}/lib'; then
+       libdir='${exec_prefix}/lib64';
+       # Locale data can be shared between 32bit and 64bit libraries
+@@ -236,7 +241,7 @@
+     fi
+     ;;
+   mips/mips64/n32/* )
+-    libc_cv_slibdir="/lib32"
++    libc_cv_slibdir="${sysroot}/lib32"
+     if test "$libdir" = '${exec_prefix}/lib'; then
+       libdir='${exec_prefix}/lib32';
+       # Locale data can be shared between 32bit and 64bit libraries
+@@ -244,16 +249,16 @@
+     fi
+     ;;
+   *)
+-    libc_cv_slibdir="/lib"
++    libc_cv_slibdir="${sysroot}/lib"
+     ;;
+   esac
+   # Allow the user to override the path with --sysconfdir
+   if test $sysconfdir = '${prefix}/etc'; then
+-    libc_cv_sysconfdir=/etc
++    libc_cv_sysconfdir="${sysroot}/etc"
+   else
+     libc_cv_sysconfdir=$sysconfdir
+    fi
+-  libc_cv_rootsbindir="/sbin"
++  libc_cv_rootsbindir="${sysroot}/sbin"
+   ;;
+ esac
+ 

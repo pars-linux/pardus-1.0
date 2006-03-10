@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libfame</Name>
+        <Homepage>http://fame.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Description>MPEG-1 and MPEG-4 video encoding library</Description>
+        <Description xml:lang="tr">MPEG-1 ve MPEG-4 görüntü çözme kütüphanesi</Description>
+        <Summary>MPEG-1 and MPEG-4 video encoding library</Summary>
+        <Summary xml:lang="tr">MPEG-1 ve MPEG-4 görüntü çözme kütüphanesi</Summary>
+        <Archive sha1sum="2b3c04f8be5ab715cda2bb6aef847e7d2d4709ee" type="targz">http://ovh.dl.sourceforge.net/sourceforge/fame/libfame-0.9.1.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">01_all_m4.patch</Patch>
+            <Patch level="1">02_all_mmx-configure.patch</Patch>
+            <Patch level="1">03_all_gcc34.patch</Patch>
+            <Patch level="1">04_all_pic.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>libfame</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-24</Date>
+            <Version>0.9.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-14</Date>
+            <Version>0.9.0</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

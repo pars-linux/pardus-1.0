@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pciutils</Name>
+        <Homepage>http://atrey.karlin.mff.cuni.cz/~mj/pciutils.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Various utilities dealing with the PCI bus</Summary>
+        <Summary xml:lang="tr">PCI veriyolu işlevleri ile ilgili çeşitli programlar</Summary>
+        <Description>Various utilities dealing with the PCI bus</Description>
+        <Description xml:lang="tr">PCI veriyolu işlevleri ile ilgili çeşitli programlar</Description>
+        <Archive sha1sum="db71fd2adc52795718ba32b8bf5448635eb38306" type="targz">ftp://atrey.karlin.mff.cuni.cz/pub/linux/pci/pciutils-2.2.0.tar.gz</Archive>
+        <Patches>
+            <Patch>makefile.patch</Patch>
+            <Patch level="1">pcimodules-pciutils-2.2.0.patch</Patch>
+            <Patch level="1">pciutils-2.2.0-shared-lib.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>pciutils</Name>
+        <Files>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/misc</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-08-19</Date>
+            <Version>2.2.0</Version>
+            <Comment>Version bump..</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-15</Date>
+            <Version>2.1.11</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

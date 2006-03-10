@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gle</Name>
+        <Homepage>http://www.linas.org/gle</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Description>GL extrusion library</Description>
+        <Description xml:lang="tr">GL extrusion kütüphanesi</Description>
+        <Summary>GL extrusion library</Summary>
+        <Summary xml:lang="tr">GL extrusion kütüphanesi</Summary>
+        <Archive sha1sum="ed6d7332df85357430b249854d4f2753f1228074" type="targz">http://www.linas.org/gle/pub/gle-3.1.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>xorg</Dependency>
+            <Dependency>glut</Dependency> 
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gle</Name>
+        <Summary>GL extrusion library</Summary>
+        <RuntimeDependencies>
+            <Dependency>xorg</Dependency>
+            <Dependency>glut</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include/GL</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-12-15</Date>
+            <Version>3.1.0</Version>
+            <Comment>Update to version 3.1.0</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-01</Date>
+            <Version>3.0.1</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

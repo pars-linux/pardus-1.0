@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>nvu</Name>
+        <Homepage>http://www.nvu.com/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>A WYSIWYG web editor for linux similiar to Dreamweaver</Summary>
+        <Description>A WYSIWYG web editor for linux similiar to Dreamweaver</Description>
+        <Summary xml:lang="tr">Linux için dreamweaver'e benzeyen bir web editörü</Summary>
+        <Description xml:lang="tr">Mozilla Application Suite Composer bileşeni tabanlı bir HTML editörü</Description>
+        <Archive sha1sum="438b1633cb820bbede503ef2da90f46d4e96bee8" type="tarbz2">http://cvs.nvu.com/download/nvu-1.0-sources.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>gawk</Dependency>
+            <Dependency>perl</Dependency>
+            <Dependency verdionFrom="2.1.10">freetype</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>mozconfig-1.0</Patch>
+            <Patch>nvu-0.50-dir.patch</Patch>
+            <Patch>nvu-0.50-freetype-compile.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>nvu</Name>
+        <RuntimeDependencies>
+            <Dependency>gawk</Dependency>
+            <Dependency>perl</Dependency>
+            <Dependency verdionFrom="2.1.10">freetype</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/nvu.desktop">nvu.desktop</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-09</Date>
+            <Version>1.0</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

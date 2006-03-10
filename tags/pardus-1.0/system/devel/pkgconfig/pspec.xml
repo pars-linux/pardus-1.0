@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pkgconfig</Name>
+        <Homepage>http://www.freedesktop.org/software/pkgconfig/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Package Config system that manages compile/link flags for libraries</Summary>
+        <Summary xml:lang="tr">Kütüphaneler için derleme bayraklarını yöneten bir paket yapılandırma sistemi</Summary>
+        <Description>Package Config system that manages compile/link flags for libraries</Description>
+        <Description xml:lang="tr">Kütüphaneler için derleme bayraklarını yöneten bir paket yapılandırma sistemi</Description>
+        <Archive sha1sum="1019c8027c0cf94bca680886f4e2ae4e629a2a97" type="targz">http://www.freedesktop.org/software/pkgconfig/releases/pkgconfig-0.15.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gnuconfig</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>pkgconfig</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-15</Date>
+            <Version>0.15.0</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

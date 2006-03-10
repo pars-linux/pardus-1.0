@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>scons</Name>
+        <Homepage>http://www.scons.org</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:console</IsA>
+        <Summary>Extensible python-based build utility</Summary>
+        <Summary xml:lang="tr">Python-temelli, esnek, geliştirilebilir inşa aracı</Summary>
+        <Description>Extensible python-based build utility</Description>
+        <Description xml:lang="tr">Python-temelli, esnek, geliştirilebilir inşa aracı</Description>
+        <Archive sha1sum="9ba5c47ffc1fa947b9984700d9a4f4c2368d74aa" type="targz">http://mesh.dl.sourceforge.net/sourceforge/scons/scons-0.96.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>python</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>scons</Name>
+        <RuntimeDependencies>
+            <Dependency>python</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/scons/</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-28</Date>
+            <Version>0.96.1</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

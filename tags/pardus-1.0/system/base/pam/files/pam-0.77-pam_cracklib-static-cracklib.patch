@@ -1,0 +1,12 @@
+--- Linux-PAM-0.77/modules/pam_cracklib/Makefile.orig	2003-11-09 22:53:04.665264824 +0200
++++ Linux-PAM-0.77/modules/pam_cracklib/Makefile	2003-11-09 23:23:13.538274328 +0200
+@@ -14,7 +14,8 @@
+ 
+ ifeq ($(HAVE_LIBCRACK),yes)
+ BUILD_THIS_MODULE=yes
+-MODULE_SIMPLE_EXTRALIBS=-lcrack
++# We want the static version
++MODULE_SIMPLE_EXTRALIBS=$(ROOT)/usr/lib/libcrack.a
+ 
+ # These two should really be provided by ../../pam_aconf.h
+ CFLAGS+=-DCRACKLIB_DICTPATH=\"$(CRACKLIB_DICTPATH)\"

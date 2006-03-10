@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>samba</Name>
+        <Homepage>http://www.samba.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>daemon</IsA>
+        <Summary>SAMBA is a suite of SMB and CIFS client/server programs for UNIX</Summary>
+        <Summary xml:lang="tr">SAMBA, Linux için Windows ağ paylaşım yazılımıdır</Summary>
+        <Description>SAMBA is a suite of SMB and CIFS client/server programs for UNIX</Description>
+        <Description xml:lang="tr">SAMBA, Linux için Windows ağ paylaşım yazılımıdır</Description>
+        <Archive sha1sum="e46fa8465dd70c670d84d697e408e70cbc18bb56" type="targz">http://us5.samba.org/samba/ftp/stable/samba-3.0.20b.tar.gz</Archive> 
+        <Patches>
+            <Patch>001_all_samba-3.0.x-python-setup.patch</Patch>
+            <Patch>004_all_samba-2.2.8-statfs.patch</Patch>
+            <Patch>011_all_samba-3.0.x-subins-configure.patch</Patch>
+            <Patch>025_all_samba-3.0.x-pdb-mysql.patch</Patch>
+            <Patch>002_all_samba-3.0.x-smbumount-uid32.patch</Patch>
+            <Patch>010_all_samba-3.0.x-extrabins.patch</Patch>
+            <Patch>012_all_samba-3.0.x-subins-makefile.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>popt</Dependency>
+            <Dependency>acl</Dependency>
+            <Dependency>cups</Dependency>
+            <Dependency>pam</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency>readline</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>zlib</Dependency>
+            <!-- kerberos, openldap, mysql -->
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>samba-python</Name>
+        <RuntimeDependencies>
+            <Dependency>acl</Dependency>
+            <Dependency>cups</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>samba</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/python2.4/site-packages/samba</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>samba</Name>
+        <RuntimeDependencies>
+            <Dependency>acl</Dependency>
+            <Dependency>cups</Dependency>
+            <Dependency>libxml2</Dependency>
+            <!-- kerberos, openldap, mysql -->
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/lib/security</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/var/cache/samba</Path>
+            <Path fileType="data">/var/lib</Path>
+            <Path fileType="data">/var/log</Path>
+            <Path fileType="data">/var/run</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/samba/smbusers">smbusers</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/samba/smb.conf">smb.conf.pardus-0.1</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/samba/lmhosts">lmhosts</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/samba/system-auth-winbind">system-auth-winbind</AdditionalFile>
+
+
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/samba">samba.pam</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/samba">samba.confd</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/samba">samba.initd</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+   </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-12-15</Date>
+            <Version>3.0.20b</Version>
+            <Comment>Default smb.conf powered by Doruk Fişek (#1166)</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-28</Date>
+            <Version>3.0.20b</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ed</Name>
+        <Homepage>http://www.gnu.org/software/ed/</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Basic line editor</Summary>
+        <Summary xml:lang="tr">Basit bir satır düzenleyicisi</Summary>
+        <Description>Basic line editor</Description>
+        <Description xml:lang="tr">Basit bir satır düzenleyicisi</Description>
+        <Archive sha1sum="abb61231a3baeb988b145ffe97cdbaea8f651d93" type="targz">ftp://ftp.gnu.org/pub/gnu/ed/ed-0.2.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">0.2-info-dir.patch</Patch>
+            <Patch level="1">0.2-mkstemp.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>ed</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-09</Date>
+            <Version>0.2</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

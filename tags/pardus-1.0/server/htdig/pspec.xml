@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>htdig</Name>
+        <Homepage>http://www.htdig.org/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>WWW Search Engine Software</Summary>
+        <Summary xml:lang="tr">Web arama motoru</Summary>
+        <Description>The ht://Dig system is a complete indexing and searching system for a domain or intranet.</Description>
+        <Description xml:lang="tr">ht://Dig, bir alan veya intranet için indeksleme ve arama hizmeti sağlar</Description>
+        <Archive sha1sum="603fc244ba59ee1efcbe8f2ba087567cb14468d0" type="targz">http://gnu.kookel.org/htdig/maindocs/files/htdig-3.1.6.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">htdig-3.1.6-unescaped-output.diff</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>zlib</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>htdig</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="library">/usr/libexec</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/var/lib</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-01</Date>
+            <Version>3.1.6</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ati-drivers</Name>
+        <Homepage>http://www.ati.com</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>ATI</License>
+        <IsA>library</IsA>
+        <Summary>Ati precompiled drivers for Xorg</Summary>
+        <Summary xml:lang="tr">ATI ekran kartı sürücüleri</Summary>
+        <Description>Ati drivers...</Description>
+        <Description xml:lang="tr">ATI ekran kartı sürücüleri</Description>
+        <Archive sha1sum="e8b280cadf7cd023711e65f03bea901889717dea" type="binary">ftp://ftp.ankara.edu.tr/gentoo/distfiles/ati-driver-installer-8.20.8-i386.run</Archive>
+        <BuildDependencies>
+            <Dependency>kernel-source</Dependency>
+            <Dependency>xorg</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ati-drivers</Name>
+        <RuntimeDependencies>
+            <Dependency>xorg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-12-12</Date>
+            <Version>8.20.8</Version>
+            <Comment>New version.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-25</Date>
+            <Version>8.19.10</Version>
+            <Comment>New version.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-21</Date>
+            <Version>8.18.6</Version>
+            <Comment>First release.</Comment>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

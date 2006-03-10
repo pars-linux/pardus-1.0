@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>flac</Name>
+        <Homepage>http://flac.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <License>LGPL-2</License>
+        <IsA>app:console</IsA>
+        <Description>C subroutine library for computing the Discrete Fourier Transform (DFT)</Description>   
+        <Description xml:lang="tr">Kayıpsız ses sıkıştırma algoritması</Description>
+        <Summary>C subroutine library for computing the Discrete Fourier Transform (DFT)</Summary>
+        <Summary xml:lang="tr">Ayrık Fourier Dönüşümü (DFT) hesaplaması için alt c rutin kütüphanesi</Summary>          
+        <Archive sha1sum="65501f3547df99b153951edb2ee7bfc13dd56946" type="targz">http://ovh.dl.sourceforge.net/sourceforge/flac/flac-1.1.2.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">flac-1.1.1-libtool.patch</Patch>
+            <Patch level="1">flac-1.1.1-m4.patch</Patch>
+            <Patch level="1">010_all_xmms-configure.patch</Patch>
+            <Patch level="1">030_all_gas.patch</Patch>
+            <Patch level="1">040_all_makefile.patch</Patch>
+            <Patch level="1">060_all_largefile.patch</Patch>
+            <Patch level="1">080_all_noextraflags.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>libogg</Dependency> 
+            <Dependency>gawk</Dependency> 
+        </BuildDependencies>        
+    </Source>
+
+    <Package>
+        <Name>flac</Name>
+        <RuntimeDependencies>
+            <Dependency>libogg</Dependency> 
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="3">
+            <Date>2005-11-24</Date>
+            <Version>1.1.2</Version>
+            <Comment>Update some patches</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-29</Date>
+            <Version>1.1.2</Version>
+            <Comment>Update to version 1.1.2</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-07</Date>
+            <Version>1.1.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

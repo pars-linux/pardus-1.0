@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libcap</Name>
+        <Homepage>http://www.kernel.org/pub/linux/libs/security/linux-privs/</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <License>BSD</License>
+        <IsA>library</IsA>
+        <Summary>POSIX 1003.1e capabilities</Summary>
+        <Summary xml:lang="tr">POSIX 1003.1e desteği</Summary>
+        <Description>POSIX 1003.1e capabilities</Description>
+        <Description xml:lang="tr">POSIX 1003.1e desteği</Description>
+        <Archive sha1sum="95e86a451df60db26152f753ed5f880d42a41884" type="targz">http://www.kernel.org/pub/linux/libs/security/linux-privs/kernel-2.4/libcap-1.10.tar.gz</Archive>
+        <Patches>
+            <Patch level="1" compressionType="gz">libcap_1.10-14.diff.gz</Patch>
+            <Patch level="1">1.10-python.patch</Patch>
+            <Patch level="1">libcap-1.10-r4-staticfix.diff</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>libcap</Name>
+        <Files>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+   </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-15</Date>
+            <Version>1.10</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

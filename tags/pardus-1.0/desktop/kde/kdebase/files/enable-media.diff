@@ -1,0 +1,13 @@
+Index: kdesktop/kdesktop.kcfg
+===================================================================
+--- kdesktop/kdesktop.kcfg	(revision 479742)
++++ kdesktop/kdesktop.kcfg	(working copy)
+@@ -191,7 +191,7 @@
+   </group>
+   <group name="Media"> 
+     <entry name="MediaEnabled" key="enabled" type="Bool">
+-      <default>false</default>
++      <default>true</default>
+       <label></label>
+       <whatsthis></whatsthis>
+       <!-- kdiconview.cc:258 -->

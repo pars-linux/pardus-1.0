@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>parted</Name>
+        <Homepage>http://www.gnu.org/software/parted</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Create, destroy, resize, check, copy partitions and file systems</Summary>
+        <Summary xml:lang="tr">GNU Parted disk bölümlerini oluşturmaya, silmeye, boyutlandırmaya, taşımaya ve kopyalamaya yarayan bir yazılımdır.</Summary>
+        <Description>Create, destroy, resize, check, copy partitions and file systems</Description>
+        <Description xml:lang="tr">GNU Parted disk bölümlerini oluşturmaya, silmeye, boyutlandırmaya, taşımaya ve kopyalamaya yarayan bir yazılımdır. Yeni bir işletim sistemi kurulumu sırasında disk üzerinde bu işletim sistemine boş yer açmak ve disk kullanımını yenide organize etmek ve  yeni diske veri kopyalamak için kullanışlıdır. Desteklediği dosya sistemleri; ext2,ext3,fat(fat16/fat32),reiserfs(yüklenmiş ise) ve linux-swap. Parted HFS,JFS,NTFS,UFS,XFS ve ASFS/AFFS/APFS gibi dosya sistemlerini tanıyabilir ve silebilir ancak bu dosya sistemlerini oluşturamaz.</Description>
+        <Archive sha1sum="46684502e1aa58ebdb20037957f6c6dcb84a7eb2" type="targz">ftp://ftp.gnu.org/gnu/parted/parted-1.6.20.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="1.27">e2fsprogs</Dependency>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+            <Dependency versionFrom="0.12.1">gettext</Dependency>
+            <Dependency versionFrom="4.1">readline</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">002_all_parted-1.6.19-hfs-16.patch</Patch>
+            <Patch level="1">005_all_parted-1.6.3-pyparted.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>parted</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="1.27">e2fsprogs</Dependency>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+            <Dependency versionFrom="0.12.1">gettext</Dependency>
+            <Dependency versionFrom="4.1">readline</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="data">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-19</Date>
+            <Version>1.6.20</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

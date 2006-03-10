@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>a52dec</Name>
+        <Homepage>http://liba52.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>library for decoding ATSC A/52 streams used in DVD</Summary>
+        <Summary xml:lang="tr">DVD'de kullanılan ATSC A/52 akımını çözen kütüphane</Summary>
+        <Description>library for decoding ATSC A/52 streams used in DVD</Description>
+        <Description xml:lang="tr">a52dec ATSC A/52 akımlarını çözmek için kullanılan özgür bir kütüphanedir. A-52 standardı çeşitli uygulamalarda, özellikle de dijital televizyon ve DVD uygulamalarında kullanılır. AC-3 olarak da bilinir.</Description>
+        <Archive sha1sum="79b33bd8d89dad7436f85b9154ad35667aa37321" type="targz">http://liba52.sourceforge.net/files/a52dec-0.7.4.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">a52dec-0.7.4-build.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>a52dec</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+  </Package>
+
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-15</Date>
+            <Version>0.7.4</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

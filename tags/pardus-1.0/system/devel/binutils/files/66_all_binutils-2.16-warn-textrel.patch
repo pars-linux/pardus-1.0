@@ -1,0 +1,31 @@
+2005-03-20 Ned Ludd <solar@gentoo.org>
+	* textrels are bad for forcing copy-on-write (this affects everyone),
+	and for security/runtime code generation, this affects security ppl.
+	But in either case, it doesn't matter who needs textrels, it's
+	the very fact that they're needed at all.
+
+--- bfd/elflink.c
++++ bfd/elflink.c
+@@ -2770,9 +2770,9 @@ _bfd_elf_add_dynamic_entry (struct bfd_l
+   if (! is_elf_hash_table (hash_table))
+     return FALSE;
+ 
+-  if (info->warn_shared_textrel && info->shared && tag == DT_TEXTREL)
++  if (info->warn_shared_textrel && tag == DT_TEXTREL)
+     _bfd_error_handler
+-      (_("warning: creating a DT_TEXTREL in a shared object."));
++      (_("warning: creating a DT_TEXTREL in object."));
+ 
+   bed = get_elf_backend_data (hash_table->dynobj);
+   s = bfd_get_section_by_name (hash_table->dynobj, ".dynamic");
+--- ld/ldmain.c
++++ ld/ldmain.c
+@@ -311,7 +311,7 @@ main (int argc, char **argv)
+   link_info.flags = 0;
+   link_info.flags_1 = 0;
+   link_info.need_relax_finalize = FALSE;
+-  link_info.warn_shared_textrel = FALSE;
++  link_info.warn_shared_textrel = TRUE;
+ 
+   ldfile_add_arch ("");
+ 

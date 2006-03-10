@@ -1,0 +1,34 @@
+https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=154504
+http://bugs.gentoo.org/show_bug.cgi?id=92067
+
+2005-03-15  Gwenole Beauchesne  <gbeauchesne@mandrakesoft.com>
+
+	[BZ #710]
+	* stdlib/random_r.c (__initstate_r): Only save old state if any.
+	* stdlib/Makefile (tests): Add tst-random3.
+	* stdlib/tst-random3.c: New test.
+
+--- glibc-2.3.4/stdlib/random_r.c.fix-initstate_r	2005-03-07 18:44:51.000000000 -0500
++++ glibc-2.3.4/stdlib/random_r.c	2005-03-15 11:27:40.581159408 -0500
+@@ -246,12 +246,15 @@ __initstate_r (seed, arg_state, n, buf)
+   if (buf == NULL)
+     goto fail;
+ 
+-  old_type = buf->rand_type;
+-  old_state = buf->state;
+-  if (old_type == TYPE_0)
+-    old_state[-1] = TYPE_0;
+-  else
+-    old_state[-1] = (MAX_TYPES * (buf->rptr - old_state)) + old_type;
++  if (buf->state)
++    {
++      old_type = buf->rand_type;
++      old_state = buf->state;
++      if (old_type == TYPE_0)
++	old_state[-1] = TYPE_0;
++      else
++	old_state[-1] = (MAX_TYPES * (buf->rptr - old_state)) + old_type;
++    }
+ 
+   if (n >= BREAK_3)
+     type = n < BREAK_4 ? TYPE_3 : TYPE_4;

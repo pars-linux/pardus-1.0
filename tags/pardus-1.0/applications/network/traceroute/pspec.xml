@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>traceroute</Name>
+        <Homepage>http://ee.lbl.gov/</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>app:console</IsA>
+        <Summary>Utility to trace the route of IP packets</Summary>
+        <Summary xml:lang="tr">IP paketlerinin izlediği yolları takip etme aracı</Summary>
+        <Description>Utility to trace the route of IP packets</Description>
+        <Description xml:lang="tr">IP paketlerinin izlediği yolları takip etme aracı</Description>
+        <Archive sha1sum="4b40644db8f659ebd3511988d43050eadc8e0fbc" type="targz">ftp://ee.lbl.gov/traceroute-1.4a12.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>sed</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch level="0">traceroute-1.4-target-resolv.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>traceroute</Name>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+   </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-27</Date>
+            <Version>1.4a12</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

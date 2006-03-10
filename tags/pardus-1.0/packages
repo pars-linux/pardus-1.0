@@ -1,0 +1,19 @@
+# format
+# package-name : comment
+
+#Acil & Önemliler;
+#-----------------
+openldap:
+    
+#Diğer;
+#----------------
+links: nihat.ciddi
+perl-ldap:
+php:
+mod_php:
+pwlib:
+
+#Sürücüler:
+#----------
+ati-drivers-extra:
+realplayer: erdinc

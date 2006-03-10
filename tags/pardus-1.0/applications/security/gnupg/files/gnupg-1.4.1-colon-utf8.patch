@@ -1,0 +1,12 @@
+diff -ur gnupg-1.4.1.orig/g10/keylist.c gnupg-1.4.1/g10/keylist.c
+--- gnupg-1.4.1.orig/g10/keylist.c	2005-01-20 19:21:40.000000000 +0200
++++ gnupg-1.4.1/g10/keylist.c	2005-04-22 18:33:55.000000000 +0300
+@@ -1145,7 +1145,7 @@
+ 	    if(uid->attrib_data)
+ 	      printf("%u %lu",uid->numattribs,uid->attrib_len);
+             else
+-	      print_string(stdout,uid->name,uid->len, ':' );
++	      print_utf8_string2(stdout,uid->name,uid->len, ':' );
+             putchar(':');
+ 	    if (any)
+                 putchar('\n');

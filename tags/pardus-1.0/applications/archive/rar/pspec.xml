@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>rar</Name>
+        <Homepage>http://www.rarsoft.com/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>RAR</License>
+        <IsA>app:console</IsA>
+        <Summary>RAR compressor/uncompressor</Summary>
+        <Summary xml:lang="tr">RAR, .rar uzantılı dosyaları açar ve dosyaları .rar formatında sıkıştırır</Summary>
+        <Description>RAR compressor/uncompressor</Description>
+        <Description xml:lang="tr">RAR, .rar uzantılı dosyaları açar ve dosyaları .rar formatında sıkıştırır</Description>
+        <Archive sha1sum="f6082178e510697c9052a0696863f66716f1b347" type="targz">http://www.rarlab.com/rar/rarlinux-3.5.1.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>rar</Name>
+        <RuntimeDependencies>
+            <Dependency>libstdc++</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/opt/bin</Path>
+            <Path fileType="executable">/opt/rar</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2" type="security">
+            <Date>2005-11-24</Date>
+            <Version>3.5.1</Version>
+            <Comment>Update to version 3.5.1 to fix multiple vulnerabilities</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-15</Date>
+            <Version>3.4.0</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>plastique</Name>
+        <Homepage>http://static.int.pl/~mig21/dev/releases/polymer</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>plugin</IsA>
+        <Summary>Polymer (formerly known as Plastique) is a port of KDE style Plastik</Summary>
+        <Description>Polymer (formerly known as Plastique) is a port of KDE style Plastik</Description>
+        <Summary xml:lang="tr">Polymer (daha çok Plastique olarak bilinir) KDE Plastik stilinin bir uyarlamasıdır.</Summary>
+        <Description xml:lang="tr">Polymer (daha çok Plastique olarak bilinir) KDE kütüphanelerine bağlı olmayan KDE Plastik stilinin bir uyarlamasıdır.</Description>
+        <Archive sha1sum="82c6225aecd4378e3f1039f5df9455f615495e1a" type="tarbz2">http://static.int.pl/~mig21/dev/releases/polymer/polymer-0.3.2.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>qt</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>plastique</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/qt/3/plugins/styles</Path>
+            <Path fileType="executable">/usr/bin</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-15</Date>
+            <Version>0.3.2</Version>
+            <Comment>First release</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

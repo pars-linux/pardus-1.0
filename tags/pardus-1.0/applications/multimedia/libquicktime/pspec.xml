@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libquicktime</Name>
+        <Homepage>http://libquicktime.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>library</IsA>
+        <Description>A library based on quicktime4linux with extensions</Description>
+        <Description xml:lang="tr">quicktime4linux ve eklentileri tabanlı bir kütüphane</Description>
+        <Summary>A library based on quicktime4linux with extensions</Summary>
+        <Summary xml:lang="tr">quicktime4linux ve eklentileri tabanlı bir kütüphane</Summary>
+        <Archive sha1sum="8835cd89434f4d7da540ca50e629d18cc7d5c24b" type="targz">http://ovh.dl.sourceforge.net/sourceforge/libquicktime/libquicktime-0.9.4.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libdv</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>libavc1394</Dependency>
+            <Dependency>libraw1394</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch>libquicktime-0.9.4-cflags.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>libquicktime</Name>
+        <RuntimeDependencies>
+            <Dependency>libdv</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>libavc1394</Dependency>
+            <Dependency>libraw1394</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-25</Date>
+            <Version>0.9.4</Version>
+            <Comment>Remove GTK dep</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-18</Date>
+            <Version>0.9.4</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

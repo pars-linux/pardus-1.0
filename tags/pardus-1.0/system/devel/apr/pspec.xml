@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>apr</Name>
+        <Homepage>http://apr.apache.org/</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>Apache-2.0</License>
+        <IsA>library</IsA>
+        <Summary>Apache Portable Runtime Library</Summary>
+        <Description>Apache Portable Runtime Library</Description>
+        <Summary xml:lang="tr">Apache portatif çalışma zamanı kütüphanesi</Summary>
+        <Description xml:lang="tr">Apache portatig çalışma zamanı kütüphanesi</Description>
+        <Archive sha1sum="237cb3f2a3616f8c40e4d811b1da047dc79a39c4" type="tarbz2">http://archive.apache.org/dist/apr/apr-0.9.7.tar.bz2</Archive>
+        <Patches>
+            <Patch level="0" target="build/ltmain.sh">fix-relink-1.5.0.patch</Patch>
+            <Patch level="0" target="build/ltmain.sh">max_cmd_len-1.5.0.patch</Patch>
+            <Patch level="0" target="build/ltmain.sh">sed-1.5.6.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>apr</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/build</Path>
+            <Path fileType="data">/usr/share/apr-0</Path>
+            <Path fileType="man">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-12</Date>
+            <Version>0.9.7</Version>
+            <Comment>Version bump. Required for apache-2.0.55.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-15</Date>
+            <Version>0.9.6</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

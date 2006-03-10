@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cdk</Name>
+        <Homepage>http://dickey.his.com/cdk/cdk.html</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>library</IsA>
+        <Description>A library of curses widgets</Description>
+        <Description xml:lang="tr">Curses parçacıkları için bir kütüphane</Description>
+        <Summary>A library of curses widgets</Summary>
+        <Summary xml:lang="tr">Curses parçacıkları için bir kütüphane</Summary>
+        <Archive sha1sum="6e80868fa825b8d1d27bc3448d3f3c1313a9dbf8" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/cdk-4.9.10-20020809.tgz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>cdk</Name>
+        <Files>
+            <Path fileType="header">/usr/include/</Path>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="man">/usr/share/man</Path> 
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-26</Date>
+            <Version>4.9.10</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

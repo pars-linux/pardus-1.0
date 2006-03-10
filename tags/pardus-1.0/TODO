@@ -1,0 +1,50 @@
+İş bu döküman görünümlü yerde PİSİ paketlerinin sürüme hazır hale gelmesi için
+neler yapılması gerektiğini yazmayı amaçlamakta ve geliştiricilerimize yol
+göstermek niyetindeyimdir. 
+
+Döküman dili olarak PİSİ TODO'sunu örnek alıyoruz, yani;
+
+- Todo
+? Yapılacak mı yapılmayacak mı karar verilmeli, yani muallakta 
+/ Üzerinde çalışılıyor
++ Bitirilmiş
+
+işaretleri bizim için yeterli.
+
+Tarih sınırlamaları için [] arasını kullanacağız.
+
+Kalıbımız şu
+
+(işin_durumu) işin tanımı - işi kim/kimler yapıyor [varsa deadline]
+
+(/) packages dosyasından gerekli paketler ayıklanmalı ve pisize edilmeli - tüm
+ekip [max. 10 gün]
+
+(/) paketler birbiri ile uyumlu şekilde gerekiyorlarsa güncellenmeli - tüm ekip
+
+(/) paketlerimizin güvenlik güncellemeleri yapılmalı - ismail
+
+(/) paketlere yapılacak iyileştirmeler belirlenmeli - görkem [max. 10 gün]
+
+(/) paketlere yapılacak iyileştirmeler bir yerlere (mesela bugzilla) girilmeli
+- görkem [max 10.gün]
+
+() iyileştirmeler paketlere uygulanmalı - tüm ekip [iyileştirmeler bildirildikten sonra max 15 gün]
+
+() paketlerin kalitesi arttırılmalı, sorunları giderilmeli - tüm ekip 
+
+() PSPEC'ler içinde Description ve Summary'ler tamamlanmalı - i18n takımı [beta'ya kadar]
+
+(/) category ve componentlar belirlenmeli [max. 15 gün]
+
+(/) PSPEC'ler içinde category ve componentlar düzeltilmeli [belirlendikten sonra max. 1 hafta]
+
+(/) depo belirlenen category ve componentlar'a göre düzenlenmeli [liste belirlenir belirlenmez]
+
+(?) _kullanılacak_ yeni paketler hazırlanmalı 
+
+(?) çok çalışılmalı, az uyunmalı
+
+Bu plana göre bugünden 20 gün sonra elimizde kararlı, sağlam, tutarlı, güncel, nefis kullanılabilir pisi paketleri olmalı.
+
+Haydi panterler, kükreyin (bu satır büyük bir gazla okunmalı)...

@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>wget</Name>
+        <Homepage>http://wget.sunsite.dk/</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>GPL</License>
+        <IsA>app:console</IsA>
+        <Summary>Network utility to retrieve files from the WWW or FTP protocols</Summary>
+        <Summary xml:lang="tr">Http ve ftp gibi internet protokollerini kullanarak dosya indirebilen bir yazılım</Summary>
+        <Description>Network utility to retrieve files from the WWW or FTP protocols</Description>
+        <Description xml:lang="tr">GNU Wget, http, https, ftp gibi internet protokollerini kullanarak dosya indirebilen ve komut penceresinden (konsole) çalıştırılabilen bir yazılımdır.</Description>
+        <Archive type="targz" sha1sum="a258357297959964fd42fed6afa1a4cce9069980">http://ftp.gnu.org/pub/gnu/wget/wget-1.10.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+            <Dependency versionFrom="0.9.6b">openssl</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch level="2">001_all_wget-1.9.1-locale.patch</Patch>
+            <Patch level="2">002_all_wget-etc-not-usr-local-etc.patch</Patch>
+            <Patch level="2">003_all_wget-print-percentage.patch</Patch>
+            <Patch level="2">004_all_wget-url-password.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>wget</Name>
+        <RuntimeDependencies>
+            <Dependency>gettext</Dependency>
+        </RuntimeDependencies>        
+        <Files>
+          <Path fileType="config">/etc/wget</Path>
+          <Path fileType="executable">/usr/bin</Path>
+          <Path fileType="doc">/usr/share/doc</Path>
+          <Path fileType="info">/usr/share/info</Path>
+          <Path fileType="man">/usr/share/man</Path>
+          <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+  </Package>
+
+    <History>
+        <Update release="3" type="Security">
+            <Date>2005-10-13</Date>
+            <Version>1.10.2</Version>
+            <Comment>Update to 1.10.2 release fixing a buffer overrun in NTLM code</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-06</Date>
+            <Version>1.10</Version>
+            <Comment>Update to 1.10 release</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-04</Date>
+            <Version>1.9.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

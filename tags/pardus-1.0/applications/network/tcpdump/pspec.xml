@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+    <Name>tcpdump</Name>
+        <Homepage>http://www.tcpdump.org/</Homepage>
+        <Packager>
+            <Name>Furkan Duman</Name>
+            <Email>coderlord@gmail.com</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>app:console</IsA>
+        <Summary>A Tool for network monitoring and data acquisition</Summary>
+        <Summary xml:lang="tr">Ağı izlemek için kullanılan bir araç</Summary>
+        <Description>A Tool for network monitoring and data acquisition</Description>
+        <Description xml:lang="tr">Ağ izlemek için kullanılan bir araç</Description>
+        <Archive sha1sum="fbfdb0e08713c6bf95d2658e294ac3f8bf2c7a16" type="targz">http://www.tcpdump.org/release/tcpdump-3.9.4.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>openssl</Dependency>
+            <Dependency>libpcap</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>tcpdump</Name>
+        <Summary>A Tool for network monitoring and data acquisition</Summary>
+        <RuntimeDependencies>
+            <Dependency>libpcap</Dependency>
+        </RuntimeDependencies>
+        <Files>
+        <Path fileType="executable">/usr/sbin</Path>
+        <Path fileType="man">/usr/share/man</Path>
+        <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-19</Date>
+            <Version>3.9.4</Version>
+            <Comment>First release</Comment>
+            <Name>Furkan Duman</Name>
+            <Email>coderlord@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

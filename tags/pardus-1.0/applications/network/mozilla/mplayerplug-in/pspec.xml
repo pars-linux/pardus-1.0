@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>mplayerplug-in</Name>
+        <Homepage>http://mplayerplug-in.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>plugin</IsA>
+        <Summary xml:lang="en">mplayer plug-in for Gecko based browsers</Summary>
+        <Description xml:lang="en">mplayer plug-in for Gecko based browsers</Description>
+        <Archive sha1sum="49a4cad53c45e78aaad9c76617214ac38127e59a" type="targz">http://easynews.dl.sourceforge.net/sourceforge/mplayerplug-in/mplayerplug-in-3.15.tar.gz</Archive>
+        <BuildDependency>
+            <Dependency>mplayer</Dependency>
+            <Dependency>mozilla-firefox</Dependency>
+            <Dependency versionFrom="2.2.0">gtk2</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency versionFrom="2.2.0">glib2</Dependency>
+            <Dependency versionFrom="1.2.1">pango</Dependency>
+        </BuildDependency>
+    </Source>
+    
+    <Package>
+        <Name>mplayerplug-in</Name>
+        <RuntimeDependencies>
+            <Dependency>firefox</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-11</Date>
+            <Version>3.15</Version>
+            <Comment>First release</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

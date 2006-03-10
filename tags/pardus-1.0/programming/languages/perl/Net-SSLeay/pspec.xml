@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>Net-SSLeay</Name>
+        <Homepage>http://www.cpan.org/authors/id/SAMPO/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>Net::SSLeay module for perl</Summary>
+        <Description>Net::SSLeay module for perl</Description>
+        <Summary xml:lang="tr">OpenSSL erişimi için Perl modülü</Summary>
+        <Description xml:lang="tr">OpenSSL erişimi için Perl modülü</Description>
+        <Archive sha1sum="e45a11cbe35c4f8202937609adcfbf132d7003a0" type="targz">http://www.cpan.org/authors/id/SAMPO/Net_SSLeay.pm-1.23.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>openssl</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>Net-SSLeay</Name>
+        <RuntimeDependencies>
+            <Dependency>openssl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="3">
+            <Date>2005-11-20</Date>
+            <Version>1.23</Version>
+            <Comment>Don't hardcode perl paths</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-12</Date>
+            <Version>1.23</Version>
+            <Comment>A dependency typo in pspec.xml fixed.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-02</Date>
+            <Version>1.23</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

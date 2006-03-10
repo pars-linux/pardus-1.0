@@ -1,0 +1,14 @@
+diff -ur pykdeextensions-0.4.0/src/kdedistutils.py py-custom/src/kdedistutils.py
+--- pykdeextensions-0.4.0/src/kdedistutils.py	2005-09-19 22:15:13.000000000 +0300
++++ py-custom/src/kdedistutils.py	2005-09-30 18:30:25.000000000 +0300
+@@ -513,8 +513,8 @@
+         self.build_dir = None
+         self.python_inc_dir = None
+         self.python_dir = None
+-        self.kde_inc_dir = None
+-        self.kde_lib_dir = None
++        self.kde_inc_dir = '/usr/kde/3.5/include'
++        self.kde_lib_dir = '/usr/kde/3.5/lib'
+         self.kde_kcm_lib_dir = None
+         self.qt_inc_dir = None
+         self.qt_lib_dir = None

@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>sash</Name>
+        <Homepage>http://www.pcug.org.au/~dbell/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>freeware</License>
+        <IsA>app:console</IsA>
+        <Summary xml:lang="en">A stand-alone shell with many built-in commands</Summary>
+        <Description xml:lang="en">A stand-alone shell with many built-in commands.</Description>
+        <Archive sha1sum="3dd22cb5387966184dbd5404319a9cac1d39192e" type="targz">http://www.pcug.org.au/~dbell/programs/sash-3.7.tar.gz</Archive> 
+    </Source>
+
+    <Package>
+        <Name>sash</Name>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-20</Date>
+            <Version>3.7</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

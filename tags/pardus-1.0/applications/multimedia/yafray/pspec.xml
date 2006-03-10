@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>yafray</Name>
+        <Homepage>http://www.yafray.org/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>app:console</IsA>
+        <Description>Yet Another Free Raytracer</Description>
+        <Description xml:lang="tr">Bir ışın tarama programı</Description>
+        <Summary>Yet Another Free Raytracer</Summary>
+        <Summary xml:lang="tr">Bir ışın tarama programı</Summary>
+        <Archive type="targz" sha1sum="d055e3071e78c0f64f1f6ea8c64e306b497e41f7">http://www.yafray.org/sec/2/downloads/yafray-0.0.8.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="4">sed</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>zlib</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>yafray-0.0.8-64bit.patch</Patch>
+            <Patch>yafray-0.0.8-libdir.patch</Patch>
+            <Patch>yafray-0.0.8-scons.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>yafray</Name>
+        <RuntimeDependencies>
+            <Dependency>jpeg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="doc">/usr/share/</Path>
+            <Path fileType="config">/etc/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-19</Date>
+            <Version>0.0.8</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

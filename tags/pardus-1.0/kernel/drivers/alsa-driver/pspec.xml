@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>alsa-driver</Name>
+        <Homepage>http://www.alsa-project.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <License>LGPL-2.1</License>
+        <IsA>library</IsA>
+        <Summary>Advanced Linux Sound Architecture kernel modules</Summary>
+        <Description>Advanced Linux Sound Architecture kernel modules</Description>
+        <Summary xml:lang="tr">ALSA çekirdek modülleri</Summary>
+        <Description xml:lang="tr">ALSA çekirdek modülleri</Description>
+        <Archive sha1sum="a672c29a156097a3122e2ad1dd2f45f2fcba69e4" type="tarbz2">ftp://ftp.alsa-project.org/pub/driver/alsa-driver-1.0.10.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">00_platform_device_compat.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>kernel-source</Dependency>
+            <Dependency version="1.0.10">alsa-headers</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>alsa-driver</Name>
+        <Files>
+            <Path fileType="library" permanent="true">/lib/modules</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="2">
+            <Date>2005-12-07</Date>
+            <Version>1.0.10</Version>
+            <Comment>Fix kernel oops when modprobing snd_mpu401 module</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-11-18</Date>
+            <Version>1.0.10</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

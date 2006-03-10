@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cdrdao</Name>
+        <Homepage>http://cdrdao.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Burn CDs in disk-at-once mode -- with optional GUI frontend</Summary>
+        <Summary xml:lang="tr">CDlerinizi DAO modunda yazar</Summary>
+        <Description>Burn CDs in disk-at-once mode -- with optional GUI frontend</Description>
+        <Description xml:lang="tr">cdrdao ses veya veri CDlerinizi DAO (disc-at-once) modunda yazar. DAO modunda yazılan diskler tek bir adımda yazılır. Daha çok kullanılan TAO (track-at-once) modunda her track aralarında köprü kurularak ayrı olarak yazılır. cdrdao genellikle VCDler tarafından kullanılan bin/cue formatını kullanabilir.</Description>
+        <Archive sha1sum="c98f21b0f8d8d9d3c3aa63b75166c555cfe22633" type="tarbz2">http://puzzle.dl.sourceforge.net/sourceforge/cdrdao/cdrdao-1.2.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="1.33.24">pccts</Dependency>
+            <Dependency>cdrtools</Dependency>
+            <Dependency versionFrom="3.90">lame</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>cdrdao</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="3.90">lame</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/usr/share/cdrdao</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="2" type="security">
+            <Date>2005-11-24</Date>
+            <Version>1.2.1</Version>
+            <Comment>Update to version 1.2.1 to fix CAN-2002-0137</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-16</Date>
+            <Version>1.1.9</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

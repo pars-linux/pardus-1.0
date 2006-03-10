@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>PyWireless</Name>
+        <Homepage>http://svn.uludag.org.tr/viewcvs/PyWireless/?root=%22Harici+Projeler+Deposu%22</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>PyWireless is a basic wireless connection monitor</Summary>
+        <Description>PyWireless is a basic wireless connection monitor</Description>
+        <Summary xml:lang="tr">Kablosuz ağ bağlantı durumunu gösteren bir uygulama</Summary>
+        <Description xml:lang="tr">Kablosuz ağ bağlantı durumunu gösteren bir uygulama</Description>
+        <Archive sha1sum="4e69ae63750c72a758be0e46030e252600cd24aa" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/PyWireless-3.0.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>PyWireless</Name>
+        <RuntimeDependencies>
+            <Dependency>PyKDE</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/PyWireless</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-16</Date>
+            <Version>3.0</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-06</Date>
+            <Version>2.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

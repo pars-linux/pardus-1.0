@@ -1,0 +1,57 @@
+diff -Nur mplayer-20051121-old/etc/example.conf mplayer-20051121/etc/example.conf
+--- mplayer-20051121-old/etc/example.conf	2005-08-23 20:03:30.000000000 +0300
++++ mplayer-20051121/etc/example.conf	2005-11-21 16:15:36.000000000 +0200
+@@ -15,12 +15,17 @@
+ 
+ # Specify default video driver (see -vo help for a list).
+ # vo=xv
++vo=xv
+ 
+ # Specify default audio driver (see -ao help for a list).
+ # ao=oss
+ 
++# Try arts, if fails try alsa, else stat with no sound
++ao = arts:noblock,alsa
++
+ # fullscreen mode
+ # fs=yes
++fs = no
+ 
+ # Change to a different videomode when going fullscreen
+ # (dga, x11, sdl video output drivers only).
+@@ -34,9 +39,11 @@
+ # Enable software scaling (powerful CPU needed).
+ # Some video output drivers (svga, x11, vesa) do not support hardware scaling.
+ # zoom=no
++zoom = yes
+ 
+ # Doublebuffering can help remove flicker from subtitles/OSD.
+ # double=yes
++double = yes
+ 
+ # standard monitor size, with square pixels
+ # monitoraspect=4:3
+@@ -81,6 +88,13 @@
+ ##
+ # ffactor = 0.75
+ 
++# Some font enhancements
++fontconfig = 1
++subcp = cp1254
++spuaa = 4
++subfont-text-scale = 3
++
++
+ ##
+ ## FBdev driver:
+ ##
+@@ -152,6 +166,9 @@
+ # DVD: Play English audio tracks if available.
+ # alang		= en
+ 
++# Default to Turkish for subtitles
++slang = tr,en
++alang = tr,en
+ 
+ ## This is the correct way to use "subconfig" type options in the
+ ## configuration file. In the command line you use:

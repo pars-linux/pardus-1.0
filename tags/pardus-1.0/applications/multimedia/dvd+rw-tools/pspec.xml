@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>dvd+rw-tools</Name>
+        <Homepage>http://fy.chalmers.se/~appro/linux/DVD+RW/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>A set of tools for DVD+RW/-RW drives</Summary>
+        <Summary xml:lang="tr">DVD+RW/-RW sürücüler için birtakım araçlar</Summary>
+        <Description>A set of tools for DVD+RW/-RW drives</Description>
+        <Description xml:lang="tr">Bu paket bir DVD+-RW medyayı formatlamak için bir araç, DVD+-RW/R diski yazan mkisofs için bir arayüz, ve ilişkili birkaç araç içerir.</Description>
+        <Archive sha1sum="319a4529db3748f595aa9dc8f2e54564bb32a0e3" type="targz">http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-5.21.4.10.8.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">01_all_samsung-media-fix.patch</Patch>
+            <Patch level="1">02_growisofs_mmc.cpp.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>cdrtools</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>dvd+rw-tools</Name>
+        <RuntimeDependencies>
+            <Dependency>cdrtools</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-09</Date>
+            <Version>5.21.4.10.8</Version>
+            <Comment>02_growisofs_mmc.cpp.patch: Fix Pioneer DVD-R's firmware bug...</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-19</Date>
+            <Version>5.21.4.10.8</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

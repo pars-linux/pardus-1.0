@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>acpi</Name>
+        <Homepage>http://grahame.angrygoats.net/acpi.shtml</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Attempts to replicate the functionality of the 'old' apm command on ACPI systems, including battery and thermal information.</Summary>
+        <Summary xml:lang="tr">ACPI sistemlerde pil ve sıcaklık bilgilerini tutar</Summary>
+        <Description>Attempts to replicate the functionality of the 'old' apm command on ACPI systems, including battery and thermal information.</Description>
+        <Description xml:lang="tr">ACPI sistemlerde pil ve sıcaklık bilgilerini tutar</Description>
+        <Archive sha1sum="2dcf9415680d19b780ad607ce4326d7bfbe3f6a9" type="targz">http://grahame.angrygoats.net/source/acpi/acpi-0.09.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>acpi</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-26</Date>
+            <Version>0.09</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

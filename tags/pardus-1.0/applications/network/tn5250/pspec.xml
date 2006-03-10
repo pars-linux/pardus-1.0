@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>tn5250</Name>
+        <Homepage>http://tn5250.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Telnet client for the IBM AS/400 that emulates 5250 terminals and printers</Summary>
+        <Summary xml:lang="tr">5250 terminallerine öykünen IBM AS/400 makineleri için telnet istemcisi</Summary>
+        <Description>Telnet client for the IBM AS/400 that emulates 5250 terminals and printers</Description>
+        <Description xml:lang="tr">5250 terminallerine öykünen IBM AS/400 makineleri için telnet istemcisi</Description>
+        <Archive type="targz" sha1sum="93de53de31b4dd1d13bcbda3199cd4c050d94065">http://heanet.dl.sourceforge.net/sourceforge/tn5250/tn5250-0.16.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>ncurses</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency>openssl</Dependency>
+            <Dependency>slang</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>gcc3.patch</Patch>
+            <Patch level="1">linux-Makefile.in.patch</Patch>
+            <Patch level="1">tn5250-config.h.in.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>tn5250</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="header">/usr/include/</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+            <Path fileType="man">/usr/share/man/</Path>
+            <Path fileType="data">/usr/share/</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2005-11-30</Date>
+            <Version>0.16.5</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

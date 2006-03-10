@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>debianutils</Name>
+        <Homepage>http://packages.debian.org/unstable/base/debianutils.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <License>BSD</License>
+        <IsA>app:console</IsA>
+        <Summary>A selection of tools from Debian</Summary>
+        <Description>A selection of tools from Debian</Description>
+        <Summary xml:lang="tr">Debian'a özel muhtelif uygulamalar</Summary>
+        <Description xml:lang="tr">Genellikle Debian paketlerinin kurulum betikleri tarafından kullanılan çeşitli uygulamalar.</Description>
+        <Archive sha1sum="f7ffb999a5a1f6ba8750c013f812b046d4d62114" type="targz">ftp://ftp.linux.org.tr/pub/mirrors/gentoo/distfiles/debianutils_1.16.7.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">debianutils-1.16.7-gentoo.patch</Patch>
+            <Patch>debianutils-compress.patch</Patch>
+            <Patch level="1">debianutils-1.16.7-gcc33.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>debianutils</Name>
+        <RuntimeDependencies>
+            <Dependency>bzip2</Dependency>
+            <Dependency>coreutils</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-03</Date>
+            <Version>1.16.7</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

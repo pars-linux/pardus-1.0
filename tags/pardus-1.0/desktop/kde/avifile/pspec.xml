@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>avifile</Name>
+        <Homepage>http://avifile.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary xml:lang="en">Library for AVI-Files</Summary>
+        <Description xml:lang="en">Library for AVI-Files</Description>
+        <Archive type="tarbz2" sha1sum="a76976b1c842f2ca34f982e40eb5f1ac9e81d5a8">http://kent.dl.sourceforge.net/sourceforge/avifile/avifile-0.7-0.7.43.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency versionFrom="20030428">divx4linux</Dependency>
+            <Dependency versionFrom="0.90">win32codecs</Dependency>
+            <Dependency versionFrom="1.0">xvid</Dependency>
+            <Dependency versionFrom="3.90">lame</Dependency>
+            <Dependency versionFrom="0.2.3">audiofile</Dependency>
+            <Dependency versionFrom="0.14.2b">madplay</Dependency>
+            <Dependency versionFrom="2.1">freetype</Dependency>
+            <Dependency versionFrom="1.2.2">libsdl</Dependency>
+            <Dependency versionFrom="0.7">a52dec</Dependency>
+            <Dependency versionFrom="1.1.3">zlib</Dependency>
+            <Dependency versionFrom="1.0">libvorbis</Dependency>
+            <Dependency versionFrom="3.0.3">qt</Dependency>
+            <Dependency versionFrom="0.9.0_rc2">alsa-lib</Dependency>
+            <Dependency>xorg</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">avifile-0.7.43.20050224-1.0.0.1.gcc4.patch</Patch>
+            <Patch level="1">avifile-0.7.43.20050224-sdllibs.patch</Patch>
+            <Patch level="1">avifile-0.7.43.20050224-fixlabels.patch</Patch>
+            <Patch level="1">avifile-0.7.43.20050224-pic.patch</Patch>
+            <Patch level="1">avifile-do_not_remove_gdb.patch</Patch>
+            <Patch level="1">avifile-mad.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>avifile</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency versionFrom="20030428">divx4linux</Dependency>
+            <Dependency versionFrom="0.90">win32codecs</Dependency>
+            <Dependency versionFrom="1.0">xvid</Dependency>
+            <Dependency versionFrom="3.90">lame</Dependency>
+            <Dependency versionFrom="0.2.3">audiofile</Dependency>
+            <Dependency versionFrom="0.14.2b">madplay</Dependency>
+            <Dependency versionFrom="2.1">freetype</Dependency>
+            <Dependency versionFrom="1.2.2">libsdl</Dependency>
+            <Dependency versionFrom="0.7">a52dec</Dependency>
+            <Dependency versionFrom="1.0">libvorbis</Dependency>
+            <Dependency versionFrom="3.0.3">qt</Dependency>
+            <Dependency versionFrom="0.9.0_rc2">alsa-lib</Dependency>
+            <Dependency>xorg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="library">/usr/lib/win32</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="data">/usr/share/avifile-0.7</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="4">
+            <Date>2005-12-22</Date>
+            <Version>0.7.43</Version>
+            <Comment>Fix bug #1193</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-12-20</Date>
+            <Version>0.7.43</Version>
+            <Comment>Fix bug #1192</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-12-08</Date>
+            <Version>0.7.43</Version>
+            <Comment>Version bump</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-19</Date>
+            <Version>0.7.41.20041001</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

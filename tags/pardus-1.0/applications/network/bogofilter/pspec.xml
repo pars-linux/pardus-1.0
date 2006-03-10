@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>bogofilter</Name>
+        <Homepage>http://www.linux.it/~md/software/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Bayesian spam filter designed with fast algorithms, and tuned for speed</Summary>
+        <Summary xml:lang="tr">Süratli algoritmalar kullanılarak tasarlanan SPAM süzme aracı</Summary>
+        <Description>Bayesian spam filter designed with fast algorithms, and tuned for speed</Description>
+        <Description xml:lang="tr">SPAM süzme aracıdır ve Thomas Bayes'in Bayesian teoremine dayanır</Description>
+        <Archive sha1sum="ffaf181f71dfee7d4475d5c20fed4a8f50a3e7c4" type="tarbz2">http://ovh.dl.sourceforge.net/sourceforge/bogofilter/bogofilter-0.92.8.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>db4</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>bogofilter</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+  </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-09</Date>
+            <Version>0.92.8</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

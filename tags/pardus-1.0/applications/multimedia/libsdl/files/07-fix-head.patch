@@ -1,0 +1,20 @@
+--- configure.in.orig	2005-09-21 15:48:58.302115392 +0300
++++ configure.in	2005-09-21 15:51:07.965403576 +0300
+@@ -342,7 +342,7 @@
+ [  --enable-esd-shared     dynamically load ESD audio support [default=yes]],
+                           , enable_esd_shared=yes)
+             esd_lib_spec=`echo $ESD_LIBS | sed 's/.*-L\([[^ ]]*\).*/\1\/libesd.so.*/'`
+-            esd_lib=`ls $esd_lib_spec | head -1 | sed 's/.*\/\(.*\)/\1/'`
++            esd_lib=`ls $esd_lib_spec | head -n 1 | sed 's/.*\/\(.*\)/\1/'`
+             echo "-- $esd_lib_spec -> $esd_lib"
+             if test x$use_dlopen != xyes && \
+                test x$enable_esd_shared = xyes; then
+@@ -392,7 +392,7 @@
+ [  --enable-arts-shared    dynamically load aRts audio support [default=yes]],
+                               , enable_arts_shared=yes)
+                 arts_lib_spec=`echo $ARTSC_LIBS | sed 's/.*-L\([[^ ]]*\).*/\1\/libartsc.so.*/'`
+-                arts_lib=`ls $arts_lib_spec | head -1 | sed 's/.*\/\(.*\)/\1/'`
++                arts_lib=`ls $arts_lib_spec | head -n 1 | sed 's/.*\/\(.*\)/\1/'`
+                 echo "-- $arts_lib_spec -> $arts_lib"
+                 if test x$use_dlopen != xyes && \
+                    test x$enable_arts_shared = xyes; then

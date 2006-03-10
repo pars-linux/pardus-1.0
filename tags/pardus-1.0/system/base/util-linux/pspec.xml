@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>util-linux</Name>
+        <Homepage>http://www.kernel.org/pub/linux/utils/util-linux/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Various useful Linux utilities</Summary>
+        <Summary xml:lang="tr">Çeşitli kullanışlı Linux araçları</Summary>
+        <Description>Various useful Linux utilities</Description>
+        <Description xml:lang="tr">Linux sistemi için temel uygulamaları içerir.</Description>
+        <Archive sha1sum="740b7eb5ae1148b2200b2cd34a0a6c4b0db577e4" type="tarbz2">http://www.kernel.org/pub/linux/utils/util-linux/util-linux-2.12r.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+            <Dependency versionFrom="1.34">e2fsprogs</Dependency>
+            <Dependency>pam-login</Dependency>
+            <Dependency>hashalot</Dependency>
+            <Dependency>zlib</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">util-linux-2.11z-parallel-make.patch</Patch>
+            <Patch level="0">util-linux-2.12q-more-fake-checks-v2.patch</Patch>
+            <Patch level="1">util-linux-2.12q-update-mtab-when-moving.patch</Patch>
+            <Patch level="0">util-linux-2.12q-umount-dont-write-mtab-with-remount.patch</Patch>
+            <Patch level="1">util-linux-2.12q-update_mtab-fixes.patch</Patch>
+            <Patch level="1">util-linux-2.12q-use-update_mtab-for-fake.patch</Patch>
+            <Patch level="1">util-linux-2.11z-agetty-domainname-option.patch</Patch>
+            <Patch level="1">util-linux-2.12i-nfsv4.patch</Patch>
+            <Patch level="1">util-linux-2.12i-ignore-managed.patch</Patch>
+            <Patch level="1">util-linux-2.12i-pic.patch</Patch>
+            <Patch level="1">util-linux-2.12p-swapon-check-symlinks.patch</Patch>
+            <Patch level="1">util-linux-2.12q-debian-10cfdisk.patch</Patch>
+            <Patch level="0">util-linux-2.12q-dont-umask.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>util-linux</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+            <Dependency versionFrom="1.34">e2fsprogs</Dependency>
+            <Dependency>pam-login</Dependency>
+            <Dependency>hashalot</Dependency>
+            <Dependency>perl</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>gettext</Dependency>
+        </RuntimeDependencies>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+            <COMAR script="clock.py">Time.Clock</COMAR>
+        </Provides>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="data">/usr/share/misc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3" type="security">
+            <Date>2005-12-22</Date>
+            <Version>2.12r</Version>
+            <Comment>Fix CAN-2005-2876</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-19</Date>
+            <Version>2.12q</Version>
+            <Comment>Comar script for default timezone.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-02</Date>
+            <Version>2.12q</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

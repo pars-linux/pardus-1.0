@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>konversation</Name>
+        <Homepage>http://konversation.kde.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>A user friendly IRC Client for KDE</Summary>
+        <Summary xml:lang="tr">KDE için kolay kullanımlı bir IRC istemcisi</Summary>
+        <Description>A user friendly IRC Client for KDE</Description>
+        <Description xml:lang="tr">KDE için kolay kullanımlı bir IRC istemcisi</Description>
+        <Archive sha1sum="bf97232eb74db4901a629417cb3fcf1f9ac6efaa" type="tarbz2">http://download.berlios.de/konversation/konversation-0.18.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>kdelibs</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">pardus-custom.diff</Patch>
+            <Patch level="1">default-channel-pardus.diff</Patch>
+            <Patch level="1">away-message-squeeze.diff</Patch>
+        </Patches>
+    </Source>
+    
+    <Package>
+        <Name>konversation</Name>
+        <RuntimeDependencies>
+            <Dependency>kdelibs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="data">/usr/kde/3.5/share</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="4">
+            <Date>2005-12-25</Date>
+            <Version>0.18</Version>
+            <Comment>Make default channel #pardus</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-21</Date>
+            <Version>0.18</Version>
+            <Comment>3.4 to 3.5</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-15</Date>
+            <Version>0.18</Version>
+            <Comment>Add custom pardus patch</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-06</Date>
+            <Version>0.18</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

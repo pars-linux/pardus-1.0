@@ -1,0 +1,10 @@
+--- xc/lib/X11/Imakefile.orig	2002-10-29 20:50:25.000000000 +0200
++++ xc/lib/X11/Imakefile	2002-10-29 20:50:52.000000000 +0200
+@@ -1037,6 +1037,7 @@
+ DependTarget3($(SRCS1),$(SRCS2),$(SRCS3))
+ 
+ #if BuildLoadableXlibI18n
++BuildIncludes($(HEADERS),IncSubdir,..)
+ MakeSubdirs($(SUBDIRS))
+ DependSubdirs($(SUBDIRS))
+ MakeLintLibSubdirs($(LINTSUBDIRS))

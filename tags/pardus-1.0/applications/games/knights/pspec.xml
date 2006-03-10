@@ -1,0 +1,81 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>knights</Name>
+        <Homepage>http://knights.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>KDE Chess Interface</Summary>
+        <Summary xml:lang="tr">Satranç programı</Summary>
+        <Description>KDE Chess Interface</Description>
+        <Description xml:lang="tr">Satranç programı</Description>
+        <Archive sha1sum="af8f5d59b7d96b643a7738911f3d04642e2fbec0" type="targz">http://ufpr.dl.sourceforge.net/sourceforge/knights/knights-0.6.4-beta.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>arts</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>gcc-3.4-fix.diff</Patch>
+            <Patch level="1">translations.diff</Patch>
+            <Patch level="1">utf8-username.diff</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>knights</Name>
+        <RuntimeDependencies>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>arts</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="library">/usr/kde/3.5/lib</Path>
+            <Path fileType="man">/usr/kde/3.5/man</Path>
+            <Path fileType="data">/usr/kde/3.5/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="5">
+            <Date>2005-12-26</Date>
+            <Version>0.6.4_beta1</Version>
+            <Comment>Fix #1521</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-11-21</Date>
+            <Version>0.6.4_beta1</Version>
+            <Comment>3.4 to 3.5</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-18</Date>
+            <Version>0.6.4_beta1</Version>
+            <Comment>fix #558</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-09</Date>
+            <Version>0.6.4_beta1</Version>
+            <Comment>Gcc 3.4 fix</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-07</Date>
+            <Version>0.6.4_beta1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

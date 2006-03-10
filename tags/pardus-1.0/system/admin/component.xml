@@ -1,0 +1,6 @@
+<PISI>
+    <Name>system.admin</Name>
+    <LocalName xml:lang="tr">Sistem yönetim uygulamaları</LocalName>
+    <Summary xml:lang="tr">Sistem yönetimi ile ilgili programlar</Summary>
+    <Description xml:lang="tr">Bu bileşendeki programlar özellikle sistem yöneticisinin kullanması için düşünülmüş araçlardır</Description>
+</PISI>

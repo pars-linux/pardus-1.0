@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kshutdown</Name>
+        <Homepage>http://kshutdown.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Summary>A shutdown manager for KDE</Summary>
+        <Description>An advanced shut down utility for KDE</Description>
+        <Summary xml:lang="tr">KDE için bir kapatma yöneticisi</Summary>
+        <Description xml:lang="tr">KDE için gelişmiş bir kapatma uygulaması</Description>
+        <Archive sha1sum="fef0684e35bd20a3e55cf36087de8600b73bc195" type="tarbz2">http://mesh.dl.sourceforge.net/sourceforge/kshutdown/kshutdown-0.6.0.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">kshutdown-0.6.0-makefile-fix.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>kdelibs</Dependency>
+        </BuildDependencies>
+        
+        </Source>
+        <Package>
+            <Name>kshutdown</Name>
+            <RuntimeDependencies>
+                <Dependency>kdelibs</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/usr/kde/3.5/bin/</Path>
+                <Path fileType="data">/usr/kde/3.5/share/apps</Path>
+                <Path fileType="data">/usr/kde/3.5/share/applnk/Utilities/</Path>
+                <Path fileType="doc">/usr/kde/3.5/share/doc/</Path>
+                <Path fileType="data">/usr/kde/3.5/share/icons/</Path>
+                <Path fileType="config">/usr/kde/3.5/share/apps/kconf_update/</Path>
+                <Path fileType="localedata">/usr/kde/3.5/share/locale/</Path>
+            </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-21</Date>
+            <Version>0.6.0</Version>
+            <Comment>3.4 to 3.5</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-06</Date>
+            <Version>0.6.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Update>
+    </History>
+</PISI>

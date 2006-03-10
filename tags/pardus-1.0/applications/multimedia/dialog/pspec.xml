@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>dialog</Name>
+        <Homepage>http://hightek.org/dialog</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Description>Tool to display dialog boxes from a shell</Description>
+        <Description xml:lang="tr">Kabuktan dialog gösteren bir araç</Description>
+        <Summary>Tool to display dialog boxes from a shell</Summary>
+        <Summary xml:lang="tr">Kabuktan dialog gösteren bir araç</Summary>
+        <Archive sha1sum="d5d80f43c08dcdc44224da8fedd83d77e6943b3f" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/dialog_1.0-20051107.orig.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="2.04">bash</Dependency>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+            <Dependency>patch</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">dialog-1.0-20050206-enable_nls.patch</Patch>
+        </Patches>
+    </Source>
+    
+    <Package>
+        <Name>dialog</Name>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency>ncurses</Dependency>
+        </RuntimeDependencies>
+    </Package>
+   
+    <History>
+        <Update release="3">
+            <Date>2005-11-25</Date>
+            <Version>1.0-20051030</Version>
+            <Comment>Version Upgrade</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-05</Date>
+            <Version>1.0-20051030</Version>
+            <Comment>Version Upgrade</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-27</Date>
+            <Version>1.0-20050206</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

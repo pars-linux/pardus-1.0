@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PSPEC
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gift-gnutella</Name>
+        <Homepage>http://gift.sf.net/</Homepage>
+        <Packager>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <IsA>plugin</IsA>
+        <Summary>The giFT Gnutella plugin</Summary>
+        <Description>The giFT Gnutella plugin</Description>
+        <Summary xml:lang="tr">giFT Gnutella eklentisi</Summary>
+        <Description xml:lang="tr">giFT Gnutella eklentisi</Description>
+        <Archive sha1sum="390e675a8993c8b2633cf8314649cd051e3a9ee3" type="tarbz2">http://switch.dl.sourceforge.net/sourceforge/gift/gift-gnutella-0.0.10.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>zlib</Dependency>
+            <Dependency>bzip2</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gift-gnutella</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.11.6">gift</Dependency>
+        </RuntimeDependencies>                       
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/giFT</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-29</Date>
+            <Version>0.0.10.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Update>
+    </History>
+</PISI>

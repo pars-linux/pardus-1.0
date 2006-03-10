@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>groff</Name>
+        <Homepage>http://www.gnu.org/software/groff/groff.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Text formatter used for man pages</Summary>
+        <Description>Text formatter used for man pages</Description>
+        <Summary xml:lang="tr">Man sayfaları için kullanılan döküman biçimlendirme sistemi.</Summary>
+        <Description xml:lang="tr">Groff programı ve mikro suit'i roff sisteminin GNU (http://www.gnu.org) özgür yazılım'a 
+        uyarlanmış halidir. Klasik roff'un sisteminin sahip olduğu tüm
+        özelliklere sahip groff'ta ayrıca yeni bir çok özellikte
+        bulunmaktadır.</Description>
+        <Archive sha1sum="82ba1b29b01c36bf41149ce8813cea712e3e6cbf" type="targz">http://ftp.gnu.org/gnu/groff/groff-1.19.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="4.7">texinfo</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">groff-1.18-infoext.patch</Patch>
+            <Patch level="1">groff-1.18-no-netpbm-depend.patch</Patch>
+            <Patch level="1">groff-man-UTF-8.diff</Patch>
+            <Patch level="1">groff-1.19.1-stack.patch</Patch>
+            <Patch level="1">groff-1.19.1-tmpfile.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>groff</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="4.7">texinfo</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/X11</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="data">/usr/share/groff</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-27</Date>
+            <Version>1.19.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

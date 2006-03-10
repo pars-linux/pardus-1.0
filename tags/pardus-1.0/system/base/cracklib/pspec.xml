@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cracklib</Name>
+        <Homepage>http://www.crypticide.org/users/alecm/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>CRACKLIB</License>
+        <IsA>library</IsA>
+        <Summary>Password Checking Library</Summary>
+        <Description>Password Checking Library</Description>
+        <Summary xml:lang="tr">Parola Kontrol Kütüphanesi</Summary>
+        <Description xml:lang="tr">Cracklib, paralo kontrolü yapmak için kullanılan C fonksiyonlarını içeren bir kütüphanedir. Cracklib, passwd programı yerine kullanılmamaktadır aksine mevcut passwd programı ile eşgüdüm çalışmaktadır.</Description>
+        <Archive sha1sum="903bb7e2400c7e486f432aab026dd6584815d2c1" type="targz">http://www.crypticide.org/users/alecm/security/cracklib,2.7.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>miscfiles</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">cracklib-2.7-redhat.patch</Patch>
+            <Patch level="1">cracklib-2.7-gentoo-new.diff</Patch>
+            <Patch level="1">cracklib-2.7-static-lib.patch</Patch>
+            <Patch level="1">cracklib-2.7-libdir.patch</Patch>
+            <Patch>cracklib-2.7-parallel-make.patch</Patch>
+            <Patch level="1">cracklib-2.7-cross-compile.patch</Patch>
+            <Patch level="1">cracklib-2.7-buffer-packer.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>cracklib</Name>
+        <RuntimeDependencies>
+            <Dependency>miscfiles</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/lib</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/dict</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-25</Date>
+            <Version>2.7</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

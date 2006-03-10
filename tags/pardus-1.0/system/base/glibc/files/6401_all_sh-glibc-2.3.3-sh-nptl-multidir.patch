@@ -1,0 +1,16 @@
+Sniped from:
+http://rpm.sh-linux.org/rpm-2004/target/SRPMS/glibc-2.3.3-27.12.src.rpm
+
+http://bugs.gentoo.org/show_bug.cgi?id=100696
+
+--- nptl/Makefile
++++ nptl/Makefile
+@@ -320,7 +320,7 @@
+ crtn-objs += $(multidir)/crtn.o
+ omit-deps += $(multidir)/crti $(multidir)/crtn
+ $(objpfx)$(multidir):
+-	mkdir $@
++	mkdir -p $@
+ endif
+ extra-objs += $(crti-objs) $(crtn-objs)
+ omit-deps += crti crtn

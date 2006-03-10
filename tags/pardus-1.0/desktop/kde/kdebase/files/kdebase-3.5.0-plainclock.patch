@@ -1,0 +1,30 @@
+diff -ur kdebase-3.5.0.orig/kicker/applets/clock/clockapplet.kcfg kdebase-3.5.0/kicker/applets/clock/clockapplet.kcfg
+--- kdebase-3.5.0.orig/kicker/applets/clock/clockapplet.kcfg	2005-09-10 11:25:35.000000000 +0300
++++ kdebase-3.5.0/kicker/applets/clock/clockapplet.kcfg	2005-11-22 11:48:10.000000000 +0200
+@@ -14,7 +14,7 @@
+         <choice name="Analog"/>
+         <choice name="Fuzzy"/>
+       </choices>
+-      <default>Digital</default>
++      <default>Plain</default>
+     </entry>
+   </group>
+   <group name="Date">
+@@ -42,7 +42,7 @@
+     </entry>
+     <entry name="PlainShowDate" type="Bool" key="Show_Date">
+       <label>Show date.</label>
+-      <default>true</default>
++      <default>false</default>
+     </entry>
+     <entry name="PlainShowDayOfWeek" type="Bool" key="Show_DayOfWeek">
+       <label>Show day of week.</label>
+@@ -56,7 +56,7 @@
+       <label>Font for the clock.</label>
+       <code>
+ defFont=KGlobalSettings::generalFont();
+-defFont.setPointSize(8);
++defFont.setPointSize(14);
+ defFont.setBold(true);
+       </code>
+       <default code="true">defFont</default>

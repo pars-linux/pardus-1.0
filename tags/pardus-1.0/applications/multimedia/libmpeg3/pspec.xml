@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>libmpeg3</Name>
+        <Homepage>http://heroinewarrior.com/libmpeg3.php3</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Description>An mpeg library for linux</Description>
+        <Description xml:lang="tr">Linux için bir mpeg kütüphanesi</Description>
+        <Summary>An mpeg library for linux</Summary>
+        <Summary xml:lang="tr">Linux için bir mpeg kütüphanesi</Summary>
+        <Archive sha1sum="bb7efb0ac5548302c02923e05ad5ce16da83aac6" type="tarbz2">http://ovh.dl.sourceforge.net/sourceforge/heroines/libmpeg3-1.5.2-src.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>zlib</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>a52dec</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch level="1">1.5.2-p1.patch</Patch>
+            <Patch>1.5.2-mpeg3split.patch</Patch>
+            <Patch>1.5.2-pthread.patch</Patch>
+            <Patch>1.5.2-largefile.patch</Patch>
+            <Patch>1.5.2-proper-c.patch</Patch>
+            <Patch>1.5.2-no-nasm.patch</Patch>
+            <Patch level="1">1.5.2-gcc3.4.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>libmpeg3</Name>
+        <RuntimeDependencies>
+            <Dependency>jpeg</Dependency>
+            <Dependency>a52dec</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-24</Date>
+            <Version>1.5.2</Version>
+            <Comment>Gcc 3.4 fix</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-15</Date>
+            <Version>1.5.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

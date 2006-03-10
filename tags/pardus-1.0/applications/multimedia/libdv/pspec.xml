@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libdv</Name>
+        <Homepage>http://libdv.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Software codec for dv-format video (camcorders etc).</Summary>
+        <Summary xml:lang="tr">Dijital video (kaydedici cihazlar vs) için çözümleme yazılımı</Summary>
+        <Description>Software codec for dv-format video (camcorders etc).</Description>
+        <Description xml:lang="tr">Dijital video (kaydedici cihazlar vs) için çözümleme yazılımı</Description>
+        <Archive sha1sum="66d2609bd639c8223f388dc1d1de653f9e61fd2d" type="targz">http://voxel.dl.sourceforge.net/sourceforge/libdv/libdv-0.102.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">libdv-0.99-2.6.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>libdv</Name>
+        <Summary>Software codec for dv-format video (camcorders etc).</Summary>
+        <RuntimeDependencies>
+            <Dependency versionFrom="1.2.4.20020601">libsdl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include/libdv</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-25</Date>
+            <Version>0.102</Version>
+            <Comment>Remove GTK dep.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-01</Date>
+            <Version>0.102</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

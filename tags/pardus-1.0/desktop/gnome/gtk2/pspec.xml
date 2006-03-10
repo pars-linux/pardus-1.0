@@ -1,0 +1,96 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gtk2</Name>
+        <Homepage>http://www.gtk.org/</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <IsA>library</IsA>
+        <Summary>The GIMP Toolkit</Summary>
+        <Summary xml:lang="tr">GNOME grafik arayüz kütüphanesi</Summary>
+        <Description>The GIMP Toolkit</Description>
+        <Description xml:lang="tr">GNOME grafik arayüz kütüphanesi</Description>
+        <Archive sha1sum="9edd59987e20d9da16c8d2b2fa3199211d6b831d" type="tarbz2">ftp://ftp.gtk.org/pub/gtk/v2.8/gtk+-2.8.7.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">gtk+-2.2.1-disable_icons_smooth_alpha.patch</Patch>
+            <Patch compressionType="bz2" level="1">gtk+-2-smoothscroll-r6.patch.bz2</Patch>
+            <Patch level="1">gtk+-2.8.0-multilib.patch</Patch>
+            <Patch target="configure">nocxx.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>cairo</Dependency>
+            <Dependency>perl</Dependency>
+            <Dependency>tiff</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency versionFrom="2.8">glib2</Dependency>
+            <Dependency versionFrom="1.0.1">atk</Dependency>
+            <Dependency versionFrom="1.10.0">pango</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gtk2</Name>
+        <RuntimeDependencies>
+            <Dependency>cairo</Dependency>
+            <Dependency>tiff</Dependency>
+            <Dependency>jpeg</Dependency>  
+            <Dependency>libpng</Dependency>
+            <Dependency versionFrom="2.8">glib2</Dependency>
+            <Dependency versionFrom="1.0.1">atk</Dependency>
+            <Dependency versionFrom="1.10">pango</Dependency>
+            <Dependency>shared-mime-info</Dependency>
+            <Dependency versionFrom="1.2.1">libpng</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency versionFrom="3.5.7">tiff</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="data">/usr/share/themes</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="doc">/usr/share/gtk-2.0</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="config">/etc</Path>
+        <Path fileType="executable">/var/lib/pisi/scripts</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/env.d/50gtk2">50gtk2</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>        
+   </Package>
+    <History>
+        <Update release="3" type="security">
+            <Date>2005-11-16</Date>
+            <Version>2.8.7</Version>
+            <Comment>Update to version 2.8.7 to fix CVE-2005-3186,CVE-2005-2975</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-30</Date>
+            <Version>2.8.6</Version>
+            <Comment>Update to version 2.8.6</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-09</Date>
+            <Version>2.6.4</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

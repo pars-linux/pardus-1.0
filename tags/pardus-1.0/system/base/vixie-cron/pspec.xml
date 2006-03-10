@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>vixie-cron</Name>
+        <Homepage>http://www.gentoo.org/</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>daemon</IsA>
+        <Summary>Paul Vixie's cron daemon, a fully featured crond implementation.</Summary>
+        <Summary xml:lang="tr">Tam teşekküllü bir crond uyarlaması</Summary>
+        <Description>Paul Vixie's cron daemon, a fully featured crond implementation.</Description>
+        <Description xml:lang="tr">Paul Vixie'nin cron hizmetçisi, tam teşekküllü bir crond uyarlamasıdır.</Description>
+        <Archive sha1sum="e353e13ef889fd27a8e52616a552fad64049aa6e" type="tarbz2">http://k-de.lunar-linux.org/lunar/mirrors/vixie-cron-4.1.tar.bz2</Archive>
+        <Patches>
+            <Patch compressionType="bz2" level="1">vixie-cron-4.1-gentoo-r4.patch.bz2</Patch>
+            <Patch level="0">crontab.5.diff</Patch>
+            <Patch level="0">vixie-cron-4.1-commandline.patch</Patch>
+            <Patch level="1">vixie-cron-4.1-pam.patch</Patch>
+            <Patch level="1">vixie-cron-4.1-CAN-2005-1038.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency versionFrom="4.0.5">sed</Dependency>
+            <Dependency>pam</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>vixie-cron</Name>
+        <RuntimeDependencies>
+            <Dependency>pam</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/var/spool</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/usr/sbin/run-crons">run-crons-0.3.1</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/vixie-cron">vixie-cron.rc6</AdditionalFile>
+            <AdditionalFile owner="root" permission="0600" target="/etc/crontab">crontab</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/cron.deny">vixie-cron-4.1-cron.deny</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/cron">cron.pam.d</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="4" type="security">
+            <Date>2005-10-27</Date>
+            <Version>4.1</Version>
+            <Comment>Fix CAN-2005-1038</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-10-16</Date>
+            <Version>4.1</Version>
+            <Comment>Added COMAR script to set file mods.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="2" type="bug">
+            <Date>2005-10-13</Date>
+            <Version>4.1</Version>
+            <Comment>Fixed wrong file mod.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-13</Date>
+            <Version>4.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

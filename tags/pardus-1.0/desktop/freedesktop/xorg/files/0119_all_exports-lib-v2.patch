@@ -1,0 +1,11 @@
+--- xc/Imakefile.orig	2003-02-26 04:21:31.000000000 -0500
++++ xc/Imakefile	2003-07-30 17:54:31.000000000 -0500
+@@ -89,6 +89,7 @@
+ 
+ includes::
+ 	MakeDir($(BUILDINCDIR))
++	MakeDir($(BUILDLIBDIR))
+ 	MakeDir($(BUILDBINDIR))
+ 
+ XCOMM
+

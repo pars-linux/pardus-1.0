@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>recode</Name>
+        <Homepage>http://www.gnu.org/software/recode/</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Convert files between various character sets</Summary>
+        <Summary xml:lang="tr">Karakter kümesi dönüşümü yapan bir araç</Summary>
+        <Description>Convert files between various character sets</Description>
+        <Description xml:lang="tr">Herhangi bir karakter kümesini kullanan dosyanın karakter kümesini diğer karakter kümelerine dönüştürür. Örneğin, iso8859-9 karakter kümesi ile yazılmış bir metin dosyasını utf8'e dönüştürebilir. Recode yaklaşık 300 karakter kümesini tanımaktadır.</Description>
+        <Archive sha1sum="2de90cd2ba553bc07d75a29913ea4424dd9e616b" type="targz">ftp://ftp.gnu.org/pub/gnu/recode/recode-3.6.tar.gz</Archive> 
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch>recode-3.6-debian.diff</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>recode</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-07</Date>
+            <Version>3.6</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

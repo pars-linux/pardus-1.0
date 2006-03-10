@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>modutils</Name>
+        <Homepage>http://www.kernel.org/pub/linux/kernel/people/rusty/modules</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Old version of kernel module tools for 2.6.* series kernels</Summary>
+        <Summary xml:lang="tr">2.6 serisi çekirdekler için modül araçlarının eski sürümü</Summary>
+        <Description>Old version of kernel module tools for 2.6.* series kernels</Description>
+        <Description xml:lang="tr">2.6 serisi çekirdekler için modül araçlarının eski sürümü</Description>
+        <Archive sha1sum="fa268b48d98e0efab349d45fa7fb2372d58320c1" type="tarbz2">http://www.kernel.org/pub/linux/utils/kernel/modutils/v2.4/modutils-2.4.27.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>zlib</Dependency>
+            <Dependency>diffutils</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>modutils</Name>
+        <Files>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-28</Date>
+            <Version>2.4.27</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

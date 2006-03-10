@@ -1,0 +1,27 @@
+diff -ur bsddb3-4.3.3.orig/setup.py bsddb3-4.3.3/setup.py
+--- bsddb3-4.3.3.orig/setup.py	2005-06-03 10:27:21.000000000 +0300
++++ bsddb3-4.3.3/setup.py	2005-12-07 13:01:39.000000000 +0200
+@@ -194,11 +194,11 @@
+ 
+     # figure out from the base setting where the lib and .h are
+     if not incdir:
+-        incdir = os.path.join(BERKELEYDB_DIR, 'include')
++        incdir = os.path.join(BERKELEYDB_DIR, 'include/db4.2')
+     if not libdir:
+         libdir = os.path.join(BERKELEYDB_DIR, 'lib')
+-    if not '-ldb' in LIBS:
+-        libname = [dblib]
++    if not '-ldb-4.2' in LIBS:
++        libname = ['db-4.2']
+     else:
+         if debug: print "LIBS already contains '-ldb' not adding our own", "'-l"+dblib+"'"
+         libname = []
+@@ -218,7 +218,7 @@
+     fp = os.popen('ldd %s 2>&1' % sys.executable)
+     results = fp.read()
+     status = fp.close()
+-    if not status and results.find('libdb.') >= 0:
++    if not status and results.find('libdb-4.2.') >= 0:
+         static = 1
+ 
+     if static:

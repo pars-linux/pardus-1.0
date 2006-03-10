@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>speex</Name>
+        <Homepage>http://www.speex.org/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>xiph</License>
+        <IsA>app:console</IsA>
+        <Summary>Speex is an Open Source/Free Software patent-free audio compression format designed for speech</Summary>
+        <Summary xml:lang="tr">Speex konuşma için tasarlanmış açık kaynak kodlu bir ses sıkıştırma biçimi</Summary>
+        <Description xml:lang="tr">Speex konuşma için tasarlanmış açık kaynak kodlu bir ses sıkıştırma biçimi</Description>
+        <Description>Speex is an Open Source/Free Software patent-free audio compression format designed for speech</Description>
+        <Archive sha1sum="152213d28152528222752d43b2342d5bf349c3c1" type="targz">http://downloads.xiph.org/releases/speex/speex-1.1.10.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="1.1.0">libogg</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">speex-1.1.10-sse.patch</Patch>
+        </Patches>
+    </Source>
+    
+    <Package>
+        <Name>speex</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="1.1.0">libogg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2005-10-28</Date>
+            <Version>1.1.10</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>glut</Name>
+        <Homepage>http://www.opengl.org/resources/libraries/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>X11</License>
+        <License>GPL-2</License>
+        <IsA>devel</IsA>
+        <IsA>library</IsA>
+        <Summary>The OpenGL Utility Toolkit (GLUT)</Summary>
+        <Summary xml:lang="tr">OpenGL Araç Kiti (GLUT)</Summary>
+        <Description>The OpenGL Utility Toolkit (GLUT)</Description>
+        <Description xml:lang="tr">GLUT, pencere yöneticisinden bağımsız OpenGL programları yazma aracıdır. Basit bir pencereleme APIsi barındırır.</Description>
+        <Archive sha1sum="0ebaa4deaee7ceaf7ab61745d7c09847b3f8eeab" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/glut-3.7.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>xorg</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>glut</Name>
+        <RuntimeDependencies>
+            <Dependency>xorg</Dependency>
+        </RuntimeDependencies>                            
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-08</Date>
+            <Version>3.7.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,835 @@
+Index: kmail/kmmainwin.rc
+===================================================================
+--- kmail/kmmainwin.rc	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/kmmainwin.rc	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -1,5 +1,8 @@
++<!-- This file should be synchronized with kmail_part.rc to provide
++     the same menu entries at the same place in KMail and Kontact  -->
++
+ <!DOCTYPE kpartgui>
+-<kpartgui version="86" name="kmmainwin" >
++<kpartgui version="88" name="kmmainwin" >
+  <MenuBar>
+   <Menu noMerge="1" name="file" >
+    <text>&amp;File</text>
+@@ -129,15 +132,12 @@
+      <text>Mark Thread as</text>
+      <Action name="thread_watched" />
+      <Action name="thread_ignored" />
+-     <Separator/>
+-     <Action name="thread_break" />
+    </Menu>
+    <Separator/>
+    <Action name="create_filter"/>
+    <Menu name="apply_filter_actions" >
+      <text>A&amp;pply Filter</text>
+      <Action name="apply_filters" /> 
+-     <Separator/>
+      <ActionList name="menu_filter_actions" />
+    </Menu>
+   </Menu>
+Index: kmail/kmheaders.cpp
+===================================================================
+--- kmail/kmheaders.cpp	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/kmheaders.cpp	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -1339,7 +1339,11 @@
+     CREATE_TIMER(filter);
+     START_TIMER(filter);
+ 
++    KCursorSaver busy( KBusyPtr::busy() );
++    int counter = 0;
+     for (KMMsgBase* msgBase=msgList->first(); msgBase; msgBase=msgList->next()) {
++      if ( !( ++counter % 20 ) )
++        KApplication::kApplication()->processEvents( 50 );
+       int idx = msgBase->parent()->find(msgBase);
+       assert(idx != -1);
+       KMMessage * msg = msgBase->parent()->getMsg(idx);
+Index: kmail/dcopimap.desktop
+===================================================================
+--- kmail/dcopimap.desktop	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/dcopimap.desktop	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -40,5 +40,4 @@
+ Comment[tg]=Барномаи почтавӣ бо интерфейси DCOP
+ Comment[tr]=DCOP arayüzü ile posta programı
+ Comment[uk]=Програма для роботи з ел. поштою з інтерфейсом DCOP
+-Comment[xx]=xxMail program with a DCOP interfacexx
+ Comment[zh_CN]=具有 DCOP 接口的邮件程序
+Index: kmail/profiles/profile-high-contrast-rc.desktop
+===================================================================
+--- kmail/profiles/profile-high-contrast-rc.desktop	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/profiles/profile-high-contrast-rc.desktop	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -40,7 +40,6 @@
+ Name[tg]=Тазоди баланд
+ Name[tr]=Yüksek Kontrast
+ Name[uk]=Висока контрастність
+-Name[xx]=xxHigh Contrastxx
+ Name[zh_CN]=高对比
+ Comment=Increased font sizes for visually impaired users
+ Comment[ar]=خطوط بأحجام أكبر لضعاف البصر
+@@ -89,7 +88,6 @@
+ Comment[ven]=Saizi ya fontu yo engedzhwaho uitela vhashumisi vha zwauvhona
+ Comment[vi]=Tăng cỡ font cho người dùng tàn tật 
+ Comment[xh]=Ubungakanani bobukhulu begama bunyusiwe kubasebenzisi ababonayo
+-Comment[xx]=xxIncreased font sizes for visually impaired usersxx
+ Comment[zh_CN]=对有视觉障碍的用户增加字体大小
+ Comment[zu]=Abakhushululiweyo osayizi befont kwabantu abayizimpumputhe
+ 
+Index: kmail/profiles/profile-default-rc.desktop
+===================================================================
+--- kmail/profiles/profile-default-rc.desktop	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/profiles/profile-default-rc.desktop	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -55,7 +55,6 @@
+ Name[ven]=Zwi si zwavhudi
+ Name[vi]=Mặc định 
+ Name[xh]=Engagqibekanga
+-Name[xx]=xxDefaultxx
+ Name[zh_CN]=默认
+ Name[zu]=Engaqedekanga
+ Comment=Standard profile
+@@ -110,7 +109,6 @@
+ Comment[ven]=Zwithu zwo doweleaho
+ Comment[vi]=Hồ sơ chuẩn
+ Comment[xh]=Imboniselo yabucala esezantsi
+-Comment[xx]=xxStandard profilexx
+ Comment[zh_CN]=标准配置文件
+ Comment[zu]=Iprofayela Elingeneyo
+ 
+Index: kmail/profiles/profile-html-rc.desktop
+===================================================================
+--- kmail/profiles/profile-html-rc.desktop	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/profiles/profile-html-rc.desktop	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -1,7 +1,6 @@
+ [KMail Profile]
+ Name=HTML
+ Name[bg]=Поддръжка на HTML
+-Name[xx]=xxHTMLxx
+ Comment=Standard profile with HTML preview enabled - less secure!
+ Comment[ar]=تشكيل قياسي مع تمكين استعراض HTML - أقل أمانا!
+ Comment[az]=HTML nümayişli standard - ən az etibarlı!
+@@ -49,7 +48,6 @@
+ Comment[ven]=Profile yo doweleaho irena HTML ya mbonelaphanda yo itwaho - a i ngo tsireledzea!
+ Comment[vi]=Hồ sơ chuẩn cho phép xem trước HTML - I't bảo mật hơn !
+ Comment[xh]=Imboniselo yabucala esezantsi nge HTML imboniso yenziwe - ukhuseleko oluncinane!
+-Comment[xx]=xxStandard profile with HTML preview enabled - less secure!xx
+ Comment[zh_CN]=启用 HTML 预览的标准配置文件 - 更不安全！
+ Comment[zu]=Yenza ngokulingeneyo iprofayela nge HTML okokukhombisa ngaphambili kwenzeliwe - okuncane ukuvikeleka!
+ 
+Index: profiles/profile-purist-rc.desktop
+===================================================================
+--- kmail/profiles/profile-purist-rc.desktop	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/profiles/profile-purist-rc.desktop	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -33,7 +33,6 @@
+ Name[uk]=Пуристичний
+ Name[ven]=Zwo kunaho
+ Name[xh]=isiPurist
+-Name[xx]=xxPuristxx
+ Name[zh_CN]=严格
+ Name[zu]=Okuhlanzekileyo
+ Comment=Most features turned off, KDE global settings are used
+@@ -83,7 +82,6 @@
+ Comment[ven]=Zwithu zwinzhi zwo tsimiwa, mavhekanyelo a KDE a hothe na hothe a khu shumiswa
+ Comment[vi]=Hầu hết các chức năng tắt, Thiết lập toàn cục của KDE được dùng 
+ Comment[xh]=Imisebenzi emininzi icinyiwe, izicwangciso ezingqukuva ze KDE ziyasetyenziswa
+-Comment[xx]=xxMost features turned off, KDE global settings are usedxx
+ Comment[zh_CN]=关闭大多数特性，使用 KDE 全局设置
+ Comment[zu]=Eziningi izinto azikhanyiswanga, ezezizwe izilungiselo ze KDE ziyasetshenziswa
+ 
+Index: kmail/profiles/profile-secure-rc.desktop
+===================================================================
+--- kmail/profiles/profile-secure-rc.desktop	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/profiles/profile-secure-rc.desktop	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -41,7 +41,6 @@
+ Name[tr]=En Güvenli
+ Name[uk]=Найбільш безпечний
+ Name[uz]=Жуда хавфсиз
+-Name[xx]=xxMost Securexx
+ Name[zh_CN]=最安全
+ Comment=Sets all necessary options to achieve maximum security
+ Comment[bg]=Режим, в който всички настройки за сигурност за включени
+@@ -82,7 +81,6 @@
+ Comment[tg]=Тамоми параметрҳоро, ки барои ноилшавии амнияти максималӣ лозим аст, сабт мекунад
+ Comment[tr]=En yüksek güvenliği yakalamak için gerekli bütün takım seçenekleri
+ Comment[uk]=Встановлює всі необхідні параметри для забезпечення максимальної безпеки
+-Comment[xx]=xxSets all necessary options to achieve maximum securityxx
+ Comment[zh_CN]=设置所有必要的选项来达到最大的安全性
+ 
+ [Composer]
+Index: kmail/application_octetstream.desktop
+===================================================================
+--- kmail/application_octetstream.desktop	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/application_octetstream.desktop	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -23,7 +23,6 @@
+ Name[ta]=பயன்பாட்டு எண்மம்
+ Name[tg]=Миқдори зиёди бинарии барномот
+ Name[tr]=Uygulama Sekizli Akışı
+-Name[xx]=xxApplication Octetstreamxx
+ Name[zh_CN]=应用程序 Octetstream
+ Comment=A bodypart formatter plugin for application/octet-stream
+ Comment[bg]=Приставка за форматиране на двоични данни
+@@ -56,7 +55,6 @@
+ Comment[tg]=Модули ба андозадарории application/octet-stream
+ Comment[tr]=application/octet-stream için bir gövde biçimleyici eklentisi
+ Comment[uk]=Втулок для форматування application/octet-stream
+-Comment[xx]=xxA bodypart formatter plugin for application/octet-streamxx
+ Comment[zh_CN]=application/octet-stream 的格式化插件
+ 
+ [Plugin]
+Index: kmail/kmail_config_misc.desktop
+===================================================================
+--- kmail/kmail_config_misc.desktop	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/kmail_config_misc.desktop	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -53,7 +53,6 @@
+ Name[tg]=Ғайра
+ Name[tr]=Çeşitli
+ Name[uk]=Різн
+-Name[xx]=xxMiscxx
+ Name[zh_CN]=杂项
+ Comment=Settings that don't fit elsewhere
+ Comment[bg]=Разни настройки
+@@ -90,7 +89,6 @@
+ Comment[tg]=Дигар танзимотҳо
+ Comment[tr]=Diğer bölümlere uymayan yapılandırma seçenekleri
+ Comment[uk]=Інші параметри
+-Comment[xx]=xxSettings that don't fit elsewherexx
+ Comment[zh_CN]=其它设置
+ Keywords=kmail,misc
+ Keywords[be]=K Пошта,рознае,kmail,misc
+@@ -129,5 +127,4 @@
+ Keywords[tg]=kmail,misc,ғайра,дигар
+ Keywords[tr]=kmail,çeşitli
+ Keywords[uk]=kmail,різн
+-Keywords[xx]=xxkmail,miscxx
+ Keywords[zh_CN]=kmail,misc,杂项
+Index: kmail/kmail_config_composer.desktop
+===================================================================
+--- kmail/kmail_config_composer.desktop	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/kmail_config_composer.desktop	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -51,7 +51,6 @@
+ Name[tg]=Муҳаррири мактубҳо
+ Name[tr]=Düzenleyici
+ Name[uk]=Редактор листів
+-Name[xx]=xxComposerxx
+ Name[zh_CN]=编写器
+ Comment=Phrases & General Behavior
+ Comment[bg]=Настройки на редактора
+@@ -90,7 +89,6 @@
+ Comment[tg]=Ибораҳо ва параметрҳои умумӣ
+ Comment[tr]=Tümcecik ve Genel Davranış
+ Comment[uk]=Фрази і загальні параметри
+-Comment[xx]=xxPhrases & General Behaviorxx
+ Comment[zh_CN]=短语和一般行为
+ Keywords=kmail,composer
+ Keywords[bg]=пощенски, клиент, е-поща, редактор, съставител, форматиране, текст, kmail, komposer
+@@ -127,5 +125,4 @@
+ Keywords[tg]=kmail,composer,мактуб
+ Keywords[tr]=kmail,düzenleyici
+ Keywords[uk]=kmail,редактор
+-Keywords[xx]=xxkmail,composerxx
+ Keywords[zh_CN]=kmail,composer, 编写器
+Index: kmail/kmail_config_identity.desktop
+===================================================================
+--- kmail/kmail_config_identity.desktop	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/kmail_config_identity.desktop	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -52,7 +52,6 @@
+ Name[tg]=Профилҳо
+ Name[tr]=Kimlikler
+ Name[uk]=Профілі
+-Name[xx]=xxIdentitiesxx
+ Name[zh_CN]=身份
+ Comment=Manage Identities
+ Comment[be]=Кіраваньне увасабленьнямі
+@@ -93,7 +92,6 @@
+ Comment[tg]=Идоракунӣ бо профилҳо
+ Comment[tr]=Kimlikleri Düzenle
+ Comment[uk]=Керування профілями
+-Comment[xx]=xxManage Identitiesxx
+ Comment[zh_CN]=管理身份
+ Keywords=kmail,identity
+ Keywords[be]=K Пошта,увасабленьне,kmail,identity
+@@ -132,5 +130,4 @@
+ Keywords[tg]=kmail,identity,профил
+ Keywords[tr]=kmail,kimlikler
+ Keywords[uk]=kmail,профіль
+-Keywords[xx]=xxkmail,identityxx
+ Keywords[zh_CN]=kmail,identity, 身份
+Index: kmail/kmcommands.cpp
+===================================================================
+--- kmail/kmcommands.cpp	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/kmcommands.cpp	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -1464,15 +1464,20 @@
+ 
+ KMCommand::Result KMFilterActionCommand::execute()
+ {
++  KCursorSaver busy( KBusyPtr::busy() );
+   QPtrList<KMMessage> msgList = retrievedMsgs();
+ 
+   for (KMMessage *msg = msgList.first(); msg; msg = msgList.next())
+     if( msg->parent() )
+       kmkernel->filterMgr()->tempOpenFolder(msg->parent());
+ 
++  int counter = 0;
+   for (KMMessage *msg = msgList.first(); msg; msg = msgList.next()) {
+     msg->setTransferInProgress(false);
+ 
++    if ( !( ++counter % 20 ) )
++      KApplication::kApplication()->processEvents( 50 );
++
+     int filterResult = kmkernel->filterMgr()->process(msg, mFilter);
+     if (filterResult == 2) {
+       // something went horribly wrong (out of space?)
+@@ -1496,30 +1501,30 @@
+ 
+ void KMMetaFilterActionCommand::start()
+ {
+-#if 0 // use action scheduler
+-  KMFilterMgr::FilterSet set = KMFilterMgr::All;
+-  QPtrList<KMFilter> filters;
+-  filters.append( mFilter );
+-  ActionScheduler *scheduler = new ActionScheduler( set, filters, mHeaders );
+-  scheduler->setAlwaysMatch( true );
+-  scheduler->setAutoDestruct( true );
++  if (ActionScheduler::isEnabled() ) {
++    // use action scheduler
++    KMFilterMgr::FilterSet set = KMFilterMgr::All;
++    QValueList<KMFilter*> filters;
++    filters.append( mFilter );
++    ActionScheduler *scheduler = new ActionScheduler( set, filters, mHeaders );
++    scheduler->setAlwaysMatch( true );
++    scheduler->setAutoDestruct( true );
+ 
+-  int contentX, contentY;
+-  HeaderItem *nextItem = mHeaders->prepareMove( &contentX, &contentY );
+-  QPtrList<KMMsgBase> msgList = *mHeaders->selectedMsgs(true);
+-  mHeaders->finalizeMove( nextItem, contentX, contentY );
++    int contentX, contentY;
++    HeaderItem *nextItem = mHeaders->prepareMove( &contentX, &contentY );
++    QPtrList<KMMsgBase> msgList = *mHeaders->selectedMsgs(true);
++    mHeaders->finalizeMove( nextItem, contentX, contentY );
+ 
+-
+-  for (KMMsgBase *msg = msgList.first(); msg; msg = msgList.next())
+-    scheduler->execFilters( msg );
+-#else
+-  KMCommand *filterCommand = new KMFilterActionCommand( mMainWidget,
+-  *mHeaders->selectedMsgs(), mFilter);
+-  filterCommand->start();
+-  int contentX, contentY;
+-  HeaderItem *item = mHeaders->prepareMove( &contentX, &contentY );
+-  mHeaders->finalizeMove( item, contentX, contentY );
+-#endif
++    for (KMMsgBase *msg = msgList.first(); msg; msg = msgList.next())
++      scheduler->execFilters( msg );
++  } else {
++    KMCommand *filterCommand = new KMFilterActionCommand( mMainWidget,
++    *mHeaders->selectedMsgs(), mFilter);
++    filterCommand->start();
++    int contentX, contentY;
++    HeaderItem *item = mHeaders->prepareMove( &contentX, &contentY );
++    mHeaders->finalizeMove( item, contentX, contentY );
++  }
+ }
+ 
+ FolderShortcutCommand::FolderShortcutCommand( KMMainWidget *mainwidget,
+Index: kmail/kmail_part.rc
+===================================================================
+--- kmail/kmail_part.rc	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/kmail_part.rc	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -1,5 +1,8 @@
++<!-- This file should be synchronized with kmmainwin.rc to provide
++     the same menu entries at the same place in KMail and Kontact  -->
++
+ <!DOCTYPE kpartgui>
+-<kpartgui version="4" name="kmail_part" >
++<kpartgui version="6" name="kmail_part" >
+  <MenuBar>
+   <Menu noMerge="1" name="file" >
+    <text>&amp;File</text>
+@@ -126,15 +129,12 @@
+      <text>Mark Thread as</text>
+      <Action name="thread_watched" />
+      <Action name="thread_ignored" />
+-     <Separator/>
+-     <Action name="thread_break" />
+    </Menu>
+    <Separator/>
+    <Action name="create_filter"/>
+    <Menu name="apply_filter_actions" >
+      <text>A&amp;pply Filter</text>
+      <Action name="apply_filters" /> 
+-     <Separator/>
+      <ActionList name="menu_filter_actions" />
+    </Menu>
+   </Menu>
+@@ -142,6 +142,7 @@
+    <text>&amp;Tools</text>
+    <Action name="tools_start_certman"/>
+    <Action name="tools_start_kwatchgnupg"/>
++   <Action name="import"/>
+    <Separator/>
+    <Action name="tools_edit_vacation"/>
+    <Separator/>
+Index: kmail/eventsrc
+===================================================================
+--- kmail/eventsrc	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/eventsrc	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -6,7 +6,6 @@
+ Comment[pa]=ਕੇ-ਪੱਤਰ
+ Comment[sv]=Kmail
+ Comment[ta]=kஅஞ்சல்
+-Comment[xx]=xxKMailxx
+ 
+ [new-mail-arrived]
+ Name=New Mail Arrived
+@@ -48,7 +47,6 @@
+ Name[tg]=Почтаи нав қабул шуд
+ Name[tr]=Yeni E-posta Geldi
+ Name[uk]=Отримана нова пошта
+-Name[xx]=xxNew Mail Arrivedxx
+ Name[zh_CN]=新邮件到达
+ Comment=New mail arrived
+ Comment[bg]=Имате ново писмо
+@@ -90,7 +88,6 @@
+ Comment[tg]=Почтаи нав қабул шуд
+ Comment[tr]=Yeni e-posta geldi
+ Comment[uk]=Надійшла нова пошта
+-Comment[xx]=xxNew mail arrivedxx
+ Comment[zh_CN]=新邮件到达
+ default_sound=
+ default_presentation=0
+Index: kmail/kmkernel.cpp
+===================================================================
+--- kmail/kmkernel.cpp	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/kmkernel.cpp	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -1432,11 +1432,11 @@
+   the_msgIndex = 0;
+ #endif
+ 
+-#if 0
++//#if 0
+   the_weaver =  new KPIM::ThreadWeaver::Weaver( this );
+   the_weaverLogger = new KPIM::ThreadWeaver::WeaverThreadLogger(this);
+   the_weaverLogger->attach (the_weaver);
+-#endif
++//#endif
+ 
+   connect( the_folderMgr, SIGNAL( folderRemoved(KMFolder*) ),
+            this, SIGNAL( folderRemoved(KMFolder*) ) );
+Index: kmail/kmmainwidget.cpp
+===================================================================
+--- kmail/kmmainwidget.cpp	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/kmmainwidget.cpp	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -1644,11 +1644,11 @@
+ {
+   if ( GlobalSettings::self()->networkState() == GlobalSettings::EnumNetworkState::Online ) {
+     // if online; then toggle and set it offline.
+-    actionCollection()->action( "online_status" )->setText( i18n("Network State (online)") );
++    actionCollection()->action( "online_status" )->setText( i18n("Go Online") );
+     kmkernel->stopNetworkJobs();
+     BroadcastStatus::instance()->setStatusMsg( i18n("KMail is set to be offline; all network jobs are suspended"));
+   } else {
+-    actionCollection()->action( "online_status" )->setText( i18n("Network State (offline)") );
++    actionCollection()->action( "online_status" )->setText( i18n("Go Offline") );
+     kmkernel->resumeNetworkJobs();
+     BroadcastStatus::instance()->setStatusMsg( i18n("KMail is set to be online; all network jobs resumed"));
+   }
+@@ -3000,9 +3000,9 @@
+     actionCollection()->action( "send_queued" )->setEnabled( kmkernel->outboxFolder()->count() > 0 );
+     actionCollection()->action( "send_queued_via" )->setEnabled( kmkernel->outboxFolder()->count() > 0 );
+     if ( GlobalSettings::self()->networkState() == GlobalSettings::EnumNetworkState::Online )
+-      actionCollection()->action( "online_status" )->setText( i18n("Network State (offline)") );
++      actionCollection()->action( "online_status" )->setText( i18n("Go Offline") );
+     else
+-      actionCollection()->action( "online_status" )->setText( i18n("Network State (online)") );
++      actionCollection()->action( "online_status" )->setText( i18n("Go Online") );
+     if (action( "edit_undo" ))
+       action( "edit_undo" )->setEnabled( mHeaders->canUndo() );
+ 
+@@ -3311,6 +3311,7 @@
+       if(!addedSeparator) {
+         mApplyFilterActionsMenu->popupMenu()->insertSeparator();
+         addedSeparator = !addedSeparator;
++	mFilterMenuActions.append( new KActionSeparator());
+       }
+       filterAction->plug( mApplyFilterActionsMenu->popupMenu() );
+       mFilterMenuActions.append(filterAction);
+Index: kmail/kmfilteraction.cpp
+===================================================================
+--- kmail/kmfilteraction.cpp	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/kmfilteraction.cpp	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -1617,6 +1617,9 @@
+       FILE *p;
+       QByteArray ba;
+ 
++      // backup the serial number in case the header gets lost
++      QString origSerNum = mMsg->headerField( "X-KMail-Filtered" );
++
+       p = popen(QFile::encodeName(mCmd), "r");
+       int len =100;
+       char buffer[100];
+@@ -1630,7 +1633,20 @@
+       pclose(p);
+       if ( !ba.isEmpty() ) {
+         KPIM::ThreadWeaver::debug (1, "PipeJob::run: %s", QString(ba).latin1() );
++        KMFolder *filterFolder =  mMsg->parent();
++        ActionScheduler *handler = MessageProperty::filterHandler( mMsg->getMsgSerNum() );
++
+         mMsg->fromByteArray( ba );
++        if ( !origSerNum.isEmpty() )
++          mMsg->setHeaderField( "X-KMail-Filtered", origSerNum );
++        if ( filterFolder && handler ) {
++          bool oldStatus = handler->ignoreChanges( true );
++          filterFolder->take( filterFolder->find( mMsg ) );
++          filterFolder->addMsg( mMsg );
++          handler->ignoreChanges( oldStatus );
++        } else {
++          kdDebug(5006) << "Warning: Cannot refresh the message from the external filter." << endl;
++        }
+       }
+ 
+       KPIM::ThreadWeaver::debug (1, "PipeJob::run: done.\n" );
+Index: kmail/kmail_view.desktop
+===================================================================
+--- kmail/kmail_view.desktop	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/kmail_view.desktop	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -10,7 +10,6 @@
+ Name[sv]=Kmail
+ Name[ta]=Kஅஞ்சல்
+ Name[th]=จัดการจดหมาย - K
+-Name[xx]=xxKMailxx
+ Type=Application
+ Exec=kmail --view %u
+ Icon=kmail
+Index: kmail/callback.cpp
+===================================================================
+--- kmail/callback.cpp	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/callback.cpp	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -79,7 +79,7 @@
+     // Try and match the receiver with an identity
+     const KPIM::Identity& identity =
+       kmkernel->identityManager()->identityForAddress( receiver() );
+-    if( identity != KPIM::Identity::null )
++    if( identity != KPIM::Identity::null() )
+       // Identity found. Use this
+       msg->setFrom( identity.fullEmailAddr() );
+       msg->setHeaderField("X-KMail-Identity", QString::number( identity.uoid() ));
+@@ -119,7 +119,7 @@
+     int found = 0;
+     for( QStringList::Iterator it = addrs.begin(); it != addrs.end(); ++it ) {
+       if( kmkernel->identityManager()->identityForAddress( *it ) !=
+-          KPIM::Identity::null ) {
++          KPIM::Identity::null() ) {
+ 	// Ok, this could be us
+         ++found;
+         mReceiver = *it;
+Index: kmail/kmail_config_appearance.desktop
+===================================================================
+--- kmail/kmail_config_appearance.desktop	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/kmail_config_appearance.desktop	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -56,7 +56,6 @@
+ Name[tg]=Намуди зоҳирӣ
+ Name[tr]=Görünüm
+ Name[uk]=Вигляд
+-Name[xx]=xxAppearancexx
+ Name[zh_CN]=外观
+ Comment=Customize Visual Appearance
+ Comment[bg]=Настройки на външния вид
+@@ -97,7 +96,6 @@
+ Comment[tg]=Танзимоти намуди зоҳирӣ
+ Comment[tr]=Görsel Görünümü Özelleştir
+ Comment[uk]=Налаштування зовнішнього вигляду
+-Comment[xx]=xxCustomize Visual Appearancexx
+ Comment[zh_CN]=自定义视觉外观
+ Keywords=kmail,appearance
+ Keywords[be]=K Пошта,зьнешні выгляд,kmail,appearance
+@@ -138,5 +136,4 @@
+ Keywords[tg]=kmail,намуди зоҳирӣ
+ Keywords[tr]=kmail,görünüm
+ Keywords[uk]=kmail,вигляд
+-Keywords[xx]=xxkmail,appearancexx
+ Keywords[zh_CN]=kmail,appearance,外观
+Index: kmail/kmfolder.cpp
+===================================================================
+--- kmail/kmfolder.cpp	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/kmfolder.cpp	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -263,8 +263,13 @@
+     }
+   }
+ 
+-  mChild = new KMFolderDir( this, parent(), childName,
+-    (folderType() == KMFolderTypeImap) ? KMImapDir : KMStandardDir);
++  KMFolderDirType newType = KMStandardDir;
++  if( folderType() == KMFolderTypeCachedImap )
++    newType = KMDImapDir;
++  else if( folderType() == KMFolderTypeImap )
++    newType = KMImapDir;
++
++  mChild = new KMFolderDir( this, parent(), childName, newType );
+   if( !mChild )
+     return 0;
+   mChild->reload();
+Index: kmail/actionscheduler.h
+===================================================================
+--- kmail/actionscheduler.h	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/actionscheduler.h	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -77,10 +77,10 @@
+    of messages left to process is empty */
+   void setFilterList( QValueList<KMFilter*> filters );
+ 
+-  /* Set the id of the account associated with this scheduler */
++  /** Set the id of the account associated with this scheduler */
+   void setAccountId( uint id  ) { mAccountId = id; mAccount = true; }
+ 
+-  /* Clear the id of the account associated with this scheduler */
++  /** Clear the id of the account associated with this scheduler */
+   void clearAccountId() { mAccountId = 0; mAccount = false; }
+ 
+   /** Queue a message for filtering */
+@@ -88,9 +88,16 @@
+   void execFilters(const QPtrList<KMMsgBase> msgList);
+   void execFilters(KMMsgBase* msgBase);
+   void execFilters(Q_UINT32 serNum);
++
+   static QString debug();
+   static bool isEnabled();
+ 
++  /** Allow or deny manipulations on the message to be filtered.
++      This is needed when using pipe-through filters, because the
++      changes made by the filter have to be written back.
++      The old value before applying the new value is returned. */
++  bool ignoreChanges( bool ignore );
++
+ signals:
+   /** Emitted when filtering is completed */
+   void result(ReturnCode);
+Index: kmail/KMail.desktop
+===================================================================
+--- kmail/KMail.desktop	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/KMail.desktop	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -10,7 +10,6 @@
+ Name[sv]=Kmail
+ Name[ta]=Kஅஞ்சல்
+ Name[th]=จัดการจดหมาย - K
+-Name[xx]=xxKMailxx
+ Type=Application
+ Exec=kmail -caption "%c" %i %m
+ Icon=kmail
+@@ -71,7 +70,6 @@
+ GenericName[uz]=Хат-хабар клиенти
+ GenericName[ven]=Mushumisani na poso
+ GenericName[xh]=Umxhasi Weposi
+-GenericName[xx]=xxMail Clientxx
+ GenericName[zh_CN]=邮件客户程序
+ GenericName[zu]=Imeyili Yomthengi
+ Terminal=false
+Index: kmail/dcopmail.desktop
+===================================================================
+--- kmail/dcopmail.desktop	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/dcopmail.desktop	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -40,5 +40,4 @@
+ Comment[tg]=Барномаи почтавӣ бо интерфейси DCOP
+ Comment[tr]=DCOP arayüzü ile posta programı
+ Comment[uk]=Програма для роботи з ел. поштою з інтерфейсом DCOP
+-Comment[xx]=xxMail program with a DCOP interfacexx
+ Comment[zh_CN]=具有 DCOP 接口的邮件程序
+Index: kmail/kmail_config_security.desktop
+===================================================================
+--- kmail/kmail_config_security.desktop	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/kmail_config_security.desktop	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -54,7 +54,6 @@
+ Name[tr]=Güvenlik
+ Name[uk]=Безпека
+ Name[uz]=Хавфсизлик
+-Name[xx]=xxSecurityxx
+ Name[zh_CN]=安全
+ Comment=Security & Privacy Settings
+ Comment[be]=Настройкі бясьпекі і прыватнасьці
+@@ -93,7 +92,6 @@
+ Comment[tg]=Танзимоти амният
+ Comment[tr]=Güvenlik ve Gizlilik Ayarlar
+ Comment[uk]=Параметри безпеки і конфіденційності
+-Comment[xx]=xxSecurity & Privacy Settingsxx
+ Comment[zh_CN]=安全和隐私设置
+ Keywords=kmail,security
+ Keywords[be]=K Пошта,бясьпека,kmail,security
+@@ -133,5 +131,4 @@
+ Keywords[tg]=kmail,security,амният
+ Keywords[tr]=kmail,güvenlik
+ Keywords[uk]=kmail,безпека
+-Keywords[xx]=xxkmail,securityxx
+ Keywords[zh_CN]=kmail,security,安全
+Index: kmail/kmail_config_accounts.desktop
+===================================================================
+--- kmail/kmail_config_accounts.desktop	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/kmail_config_accounts.desktop	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -53,7 +53,6 @@
+ Name[tr]=Hesaplar
+ Name[uk]=Рахунки
+ Name[uz]=Ҳисоблар
+-Name[xx]=xxAccountsxx
+ Name[zh_CN]=账户
+ Comment=Setup for Sending and Receiving Messages
+ Comment[bg]=Настройки на мрежата, сървърите и сметките
+@@ -89,7 +88,6 @@
+ Comment[tg]=Танзимоти фиристодан ва қабул кардани иттилоот
+ Comment[tr]=Gönderilen ve Gelen Mesajlar için Yapılandırma
+ Comment[uk]=Налаштування для надсилання і отримання повідомлень
+-Comment[xx]=xxSetup for Sending and Receiving Messagesxx
+ Comment[zh_CN]=收发邮件设置
+ Keywords=kmail,accounts
+ Keywords[bg]=пощенски, клиент, е-поща, kmail, accounts
+@@ -123,5 +121,4 @@
+ Keywords[ta]=கேஅஞ்சல்,கணக்குகள்
+ Keywords[tr]=kmail,hesplar
+ Keywords[uk]=kmail,accounts,пошта,рахунки
+-Keywords[xx]=xxkmail,accountsxx
+ Keywords[zh_CN]=kmail,account,账户
+Index: kmail/actionscheduler.cpp
+===================================================================
+--- kmail/actionscheduler.cpp	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/actionscheduler.cpp	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -570,7 +570,7 @@
+        (!mAccount ||
+ 	(mAccount && (*mFilterIt).applyOnAccount(mAccountId)))) ||
+       ((mSet & KMFilterMgr::Explicit) && (*mFilterIt).applyOnExplicit())) {
+-      
++
+       // filter is applicable
+     if ( FilterLog::instance()->isLogging() ) {
+       QString logText( i18n( "<b>Evaluating filter rules:</b> " ) );
+@@ -646,8 +646,11 @@
+   if (!orgMsg || !orgMsg->parent()) {
+     // Original message is gone, no point filtering it anymore
+     mSrcFolder->removeMsg( mSrcFolder->find( msg ) );
++    kdDebug(5006) << "The original serial number is missing. "
++                  << "Cannot complete the filtering." << endl;
+     mExecutingLock = false;
+     processMessageTimer->start( 0, true );
++    return;
+   } else {
+     if (!folder) // no filter folder specified leave in current place
+       folder = orgMsg->parent();
+@@ -659,7 +662,7 @@
+   mSrcFolder->addMsg( msg );
+   mIgnore = false;
+ 
+-  if (msg && kmkernel->folderIsTrash( folder ))
++  if (msg && folder && kmkernel->folderIsTrash( folder ))
+     KMFilterAction::sendMDN( msg, KMime::MDN::Deleted );
+ 
+   timeOutTime = QTime::currentTime();
+@@ -722,8 +725,6 @@
+ 
+ void ActionScheduler::copyMessageFinished( KMCommand *command )
+ {
+-  // FIXME remove the debug output
+-  kdDebug(5006) << "##### ActionScheduler::copyMessageFinished( KMCommand *command )" << endl;
+   if ( command->result() != KMCommand::OK )
+     actionMessage( KMFilterAction::ErrorButGoOn );
+   else 
+@@ -803,4 +804,11 @@
+     return sEnabled;
+ }
+ 
++bool ActionScheduler::ignoreChanges( bool ignore )
++{
++  bool oldValue = mIgnore;
++  mIgnore = ignore;
++  return oldValue;
++}
++
+ #include "actionscheduler.moc"
+Index: kmail/kmversion.h
+===================================================================
+--- kmail/kmversion.h	(.../tags/KDE/3.5.0/kdepim/kmail)	(revision 487024)
++++ kmail/kmversion.h	(.../branches/KDE/3.5/kdepim/kmail)	(revision 487024)
+@@ -3,6 +3,6 @@
+ #ifndef kmversion_h
+ #define kmversion_h
+ 
+-#define KMAIL_VERSION "1.9"
++#define KMAIL_VERSION "1.9.1"
+ 
+ #endif /*kmversion_h*/
+Index: libkdepim/addresseelineedit.cpp
+===================================================================
+--- libkdepim/addresseelineedit.cpp	(.../tags/KDE/3.5.0/kdepim/libkdepim)	(revision 487069)
++++ libkdepim/addresseelineedit.cpp	(.../branches/KDE/3.5/kdepim/libkdepim)	(revision 487069)
+@@ -805,7 +805,7 @@
+   if ( ( obj == this ) &&
+      ( e->type() == QEvent::AccelOverride ) ) {
+     QKeyEvent *ke = static_cast<QKeyEvent*>( e );
+-    if ( ke->key() == Key_Up || ke->key() == Key_Down ) {
++    if ( ke->key() == Key_Up || ke->key() == Key_Down || ke->key() == Key_Tab ) {
+       ke->accept();
+       return true;
+     }
+@@ -834,7 +834,7 @@
+         }
+         return true;
+       }
+-    } else if ( ke->key() == Key_Down ) {
++    } else if ( ke->key() == Key_Down || ke->key() == Key_Tab ) {
+       // same strategy for downwards
+       //kdDebug() << "EVENTFILTER: Key_Down. currentIndex=" << currentIndex << endl;
+       QListBoxItem *itemBelow = completionBox()->item( currentIndex + 1 );
+Index: libkpimidentities/identity.h
+===================================================================
+--- libkpimidentities/identity.h	(.../tags/KDE/3.5.0/kdepim/libkpimidentities)	(revision 487072)
++++ libkpimidentities/identity.h	(.../branches/KDE/3.5/kdepim/libkpimidentities)	(revision 487072)
+@@ -279,7 +279,7 @@
+   bool isXFaceEnabled() const { return mXFaceEnabled; }
+   void setXFaceEnabled( const bool );
+ 
+-  static const Identity null;
++  static const Identity& null();
+   bool isNull() const;
+ protected:
+   // if you add new members, make sure they have an operator= (or the
+Index: libkpimidentities/identitymanager.cpp
+===================================================================
+--- libkpimidentities/identitymanager.cpp	(.../tags/KDE/3.5.0/kdepim/libkpimidentities)	(revision 487072)
++++ libkpimidentities/identitymanager.cpp	(.../branches/KDE/3.5/kdepim/libkpimidentities)	(revision 487072)
+@@ -275,13 +275,13 @@
+     << "deprecated method IdentityManager::identityForName() called!" << endl;
+   for ( ConstIterator it = begin() ; it != end() ; ++it )
+     if ( (*it).identityName() == name ) return (*it);
+-  return Identity::null;
++  return Identity::null();
+ }
+ 
+ const Identity & IdentityManager::identityForUoid( uint uoid ) const {
+   for ( ConstIterator it = begin() ; it != end() ; ++it )
+     if ( (*it).uoid() == uoid ) return (*it);
+-  return Identity::null;
++  return Identity::null();
+ }
+ 
+ const Identity & IdentityManager::identityForNameOrDefault( const QString & name ) const
+@@ -317,7 +317,7 @@
+       }
+     }
+   }
+-  return Identity::null;
++  return Identity::null();
+ }
+ 
+ bool IdentityManager::thatIsMe( const QString & addressList ) const {
+Index: libkpimidentities/identity.cpp
+===================================================================
+--- libkpimidentities/identity.cpp	(.../tags/KDE/3.5.0/kdepim/libkpimidentities)	(revision 487072)
++++ libkpimidentities/identity.cpp	(.../branches/KDE/3.5/kdepim/libkpimidentities)	(revision 487072)
+@@ -226,7 +226,13 @@
+ }
+ 
+ // ### should use a kstaticdeleter?
+-const Identity Identity::null;
++static Identity* identityNull = 0;
++const Identity& Identity::null()
++{
++    if ( !identityNull )
++        identityNull = new Identity;
++    return *identityNull;
++}
+ 
+ bool Identity::isNull() const {
+   return mIdentity.isEmpty() && mFullName.isEmpty() && mEmailAddr.isEmpty() &&

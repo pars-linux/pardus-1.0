@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>Mail-SPF-Query</Name>
+        <Homepage>http://search.cpan.org/~freeside/Mail-SPF-Query-1.997/Query.pm</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Summary>Query Sender Policy Framework for an IP,email,helo</Summary>
+        <Description>The SPF protocol relies on sender domains to describe their designated outbound mailers in DNS. Given an email address, Mail::SPF::Query determines the legitimacy of an SMTP client IP.</Description>
+        <Archive sha1sum="f13743d02626a7991dc629df7f46fbf7a5abc253" type="targz">http://search.cpan.org/CPAN/authors/id/F/FR/FREESIDE/Mail-SPF-Query-1.997.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+            <Dependency>Net-CIDR-Lite</Dependency>
+            <Dependency>Sys-Hostname-Long</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>Mail-SPF-Query</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+            <Dependency>Net-CIDR-Lite</Dependency>
+            <Dependency>Sys-Hostname-Long</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-10</Date>
+            <Version>1.997</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

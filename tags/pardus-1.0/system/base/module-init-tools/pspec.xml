@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>module-init-tools</Name>
+        <Homepage>http://www.kernel.org/pub/linux/kernel/people/rusty/modules</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Kernel module tools for 2.6.* series kernels</Summary>
+        <Summary xml:lang="tr">2.6.* serisi çekirdekler için modül araçları</Summary>
+        <Description>Kernel module tools for 2.6.* series kernels</Description>
+        <Description xml:lang="tr">2.6.* serisi çekirdekler için modül araçları</Description>
+        <Archive sha1sum="11cefb5bbdae82326980c2b84e49bdc11191735f" type="targz">http://ftp.kernel.org/pub/linux/kernel/people/rusty/modules/old/module-init-tools-3.0.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">01-module-init-tools-0.9.15-legacy-modext-support.patch</Patch>
+            <Patch>02-generate-modprobe-assume-kernel.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>zlib</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <RuntimeDependencies>
+            <Dependency>modutils</Dependency>
+        </RuntimeDependencies>
+        <Name>module-init-tools</Name>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-12</Date>
+            <Version>3.0</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,248 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xorg</Name>
+        <Homepage>http://xorg.freedesktop.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>Adobe-X</License>
+        <License>CID</License>
+        <License>DEC</License>
+        <License>DEC-2</License>
+        <License>IBM-X</License>
+        <License>NVIDIA-X</License>
+        <License>NetBSD</License>
+        <License>SGI</License>
+        <License>UCB-LBL</License>
+        <License>XC-2</License>
+        <License>bigelow-holmes-urw-gmbh-luxi</License>
+        <License>christopher-g-demetriou</License>
+        <License>national-semiconductor</License>
+        <License>nokia</License>
+        <License>tektronix</License>
+        <License>the-open-group</License>
+        <License>todd-c-miller</License>
+        <License>x-truetype</License>
+        <License>xfree86-1.0</License>
+        <License>MIT</License>
+        <License>SGI-B</License>
+        <License>BSD</License>
+        <License>FTL</License>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>An X11 implementation maintained by the X.Org Foundation</Summary>
+        <Summary xml:lang="tr">X iş istasyonu için basit fontlar, programlar ve dökümanlar</Summary>
+        <Description>An X11 implementation maintained by the X.Org Foundation</Description>
+        <Description xml:lang="tr">X.org X11, X Window sisteminin bir açık kaynak uyarlamasıdır. Paket Linux grafiksel arayüz sistemi, kütüphaneler ve fontları içerir</Description>
+        <Archive sha1sum="45a5dd78398ab499b05ad6feadf05415ff382703" type="tarbz2">http://xorg.freedesktop.org/releases/X11R6.9.0/src-single/X11R6.9.0-src.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">0119_all_exports-lib-v2.patch</Patch>
+            <Patch level="1">0127_all_4.3.99-makefile-fastbuild.patch</Patch>
+            <Patch level="1">0128_all_4.2.0-imake-tmpdir-v2.patch</Patch>
+            <Patch level="1">0129_all_startx-nolisten-tcp.patch</Patch>
+            <Patch level="2">0130_all_4.2.1-fix-shared-libXau-link.v2.patch</Patch>
+            <Patch level="1">0131_all_4.2.99.3-Imake-make-icondir-configable-v3.patch</Patch>
+            <Patch level="1">0132_all_4.2.1-libX11-build-order-fix.patch</Patch>
+            <Patch level="1">0160_all_4.2.99.4-IncludeSharedObjectInNormalLib.patch</Patch>
+            <Patch level="1">0165_all_4.2.99.901-dont-install-Xcms.txt.patch</Patch>
+            <Patch level="1">0199_all_4.2.0-die-ugly-pattern-die-die-die-v2.patch</Patch>
+            <Patch level="2">0202_all_4.2.1-gl-matrix-man-fixes.patch</Patch>
+            <Patch level="1">0205_all_6.7.99.1-xman-bzip2-v2.patch</Patch>
+            <Patch level="1">0208_all_4.2.99.901-fix-xfree86-man-version-string.patch</Patch>
+            <Patch level="1">0350_all_4.3.0-xbiff-FHS.patch</Patch>
+            <Patch level="1">1214_all_4.3.0-radeon-disable-VideoRAM-option.patch</Patch>
+            <Patch level="1">4152_all_4.3.0-allow-xdm-server-quotes.patch</Patch>
+            <Patch level="1">5130_all_4.3.0-ati-r128-chip-names-touchup.patch</Patch>
+            <Patch level="1">5800_all_6.7.99.1-tdfx-libglide-name-v2.patch</Patch>
+            <Patch level="1">5850_all_4.2.0-tdfx-disable-dri-on-16Mb-cards-in-hires.patch</Patch>
+            <Patch level="1">9010_all_6.7.99.1-logitech-ps2-plusplus-v2.patch</Patch>
+            <Patch level="1">9016_all_4.3.0-libfontenc-IncludeSharedObjectInNormalLib.patch</Patch>
+            <Patch level="1">9133_all_4.3.0-SDK-add-missing-includes-for-vnc.patch</Patch>
+            <Patch level="1">9250_all_6.8.1.904-respect-xfree86configtools-setting.patch</Patch>
+            <Patch level="1">9395_all_6.7.0-savage-disable-xrandr-for-shadowfb-rotate.patch</Patch>
+            <Patch level="1">9400_all_4.3.0-mkcfm-FHS-install.patch</Patch>
+            <Patch level="1">9820_all_4.3.99.15-AuthLib.patch</Patch>
+            <Patch level="1">9860_all_xorg-xkb_winkeys.patch</Patch>
+            <Patch level="1">9865_all_add-nodeadkeys-to-gb.patch</Patch>
+            <Patch level="1">9980_all_6.7.99.904-fix-encodings.patch</Patch>
+            <Patch level="1">tr_keymap.patch</Patch>
+            <Patch level="1">host.def.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency versionFrom="5.1">ncurses</Dependency>
+            <Dependency versionFrom="1.1.4">zlib</Dependency>
+            <Dependency versionFrom="1.95.8">expat</Dependency>
+            <Dependency versionFrom="2.1.8">freetype</Dependency> 
+            <Dependency versionFrom="2.1">fontconfig</Dependency> 
+            <Dependency versionFrom="3.0.9">ttmkfdir</Dependency>
+            <Dependency>sed</Dependency> 
+            <Dependency>util-linux</Dependency> 
+            <Dependency>perl</Dependency> 
+            <Dependency>libpng</Dependency>
+        </BuildDependencies>
+    </Source>
+   
+    <Package>
+        <Name>xorg-fonts</Name>
+        <Files>
+            <Path fileType="data">/usr/share/fonts/75dpi</Path>
+            <Path fileType="data">/usr/share/fonts/100dpi</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>xorg-doc</Name>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>xorg</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="2.5.4a">flex</Dependency>
+            <Dependency versionFrom="2.1.8">freetype</Dependency> 
+            <Dependency versionFrom="2.1">fontconfig</Dependency> 
+            <Dependency versionFrom="3.0.9">ttmkfdir</Dependency>
+            <Dependency>jimmac-xcursor</Dependency>
+            <Dependency>libpng</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="data">/var</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/libexec</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/cursors</Path>
+            <Path fileType="data">/usr/share/fonts</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/sbin/xorg.py">files/xorg.py</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/libGL.la">lib/libGL.la</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/libGLU.la">lib/libGLU.la</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/libOSMesa.la">lib/libOSMesa.la</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/usr/libexec/opengl-update">files/opengl-update</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/X11/xorg.conf.example">xorg.conf.example</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/X11/chooser.sh">files/chooser.sh</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/X11/startDM.sh">files/startDM.sh</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/X11/Sessions/Xsession">Sessions/Xsession</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/env.d/10xorg">files/10xorg</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/X11/xinit/xinitrc">files/xinitrc</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/X11/xdm/Xsession">files/Xsession</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/xdm">files/xdm.start</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/xprint">files/xprint.init</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/xdm">files/xdm.pamd</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/xserver">files/xserver.pamd</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/var/lib/pisi/scripts/xorg.postinstall">xorg.postinstall</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="14">
+            <Date>2005-12-22</Date>
+            <Version>6.9.0</Version>
+            <Comment>Version bump to stable release, sweet</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="13">
+            <Date>2005-12-21</Date>
+            <Version>6.8.99_rc4</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="12">
+            <Date>2005-12-19</Date>
+            <Version>6.8.99_rc3</Version>
+            <Comment>split fonts and tr keyboard layouts</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="11">
+            <Date>2005-12-09</Date>
+            <Version>6.8.99_rc3</Version>
+            <Comment>Add accelfactor template to xorg.py</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+         <Update release="10">
+            <Date>2005-12-06</Date>
+            <Version>6.8.99_rc3</Version>
+            <Comment>Make sure X starts with solid color background even without a DM</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="9">
+            <Date>2005-12-05</Date>
+            <Version>6.8.99_rc3</Version>
+            <Comment>Change symlink /usr/lib/X11/xkb/compiled, update xorg.py</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="8">
+            <Date>2005-12-05</Date>
+            <Version>6.8.99_rc3</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="7">
+            <Date>2005-11-26</Date>
+            <Version>6.8.99_rc2</Version>
+            <Comment>xorg.py added as an additional file</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-11-11</Date>
+            <Version>6.8.99_rc2</Version>
+            <Comment>Version bump to RC2</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-11-05</Date>
+            <Version>6.8.99_rc1</Version>
+            <Comment>Dep fix, cursor fix</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-10-19</Date>
+            <Version>6.8.99_rc1</Version>
+            <Comment>Version bump to RC1</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-10-14</Date>
+            <Version>6.8.99-20051014</Version>
+            <Comment>Version bump to 2005-10-14 cvs.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-12</Date>
+            <Version>6.8.2</Version>
+            <Comment>dosed functions in action.py fixed.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-28</Date>
+            <Version>6.8.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>poster</Name>
+        <Homepage>http://www.geocities.com/SiliconValley/5682/poster.html</Homepage>
+        <Packager>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Packager>
+        <License>poster</License>
+        <IsA>app:console</IsA>
+        <IsA>plugin</IsA>
+        <Summary>Poster printing utility</Summary>
+        <Description>Poster printing utility.</Description>
+        <Summary xml:lang="tr">Poster yapmak için ufak bir uygulama</Summary>
+        <Description xml:lang="tr">Basılmış büyük bir imajdan, EPS dosyasından ya da tek sayfalık PS dökümanından poster yapmak için kullanılan ufak bir uygulamadır</Description>
+        <Archive sha1sum="70ca6dd53cd5e7d05b06fce834bdf122e95148a0" type="targz">http://www.geocities.com/SiliconValley/5682/poster.tgz</Archive>
+    </Source>
+
+    <Package>
+        <Name>poster</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-05</Date>
+            <Version>0.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

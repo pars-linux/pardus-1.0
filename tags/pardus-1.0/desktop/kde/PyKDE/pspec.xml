@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>PyKDE</Name>
+        <Homepage>http://www.riverbankcomputing.co.uk/pykde/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>set of Python bindings for the KDE libs</Summary>
+        <Description>set of Python bindings for the KDE libs</Description>
+        <Summary xml:lang="tr">KDE kütüphaneleri için python bağlayıcıları</Summary>
+        <Description xml:lang="tr">Yaklaşık 600 sınıf ve 10.000'den fazla methodu destekleyen KDE kütüphaneleri için python bağlayıcıları</Description>
+        <Archive sha1sum="8ccadb28cf397546dc9f3099715f35bc53c063ca" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/PyKDE-snapshot20051013.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">fix-kde-3.5.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>python</Dependency>
+            <Dependency versionFrom="20051013">sip</Dependency>
+            <Dependency versionFrom="20051013">PyQt</Dependency>
+            <Dependency>kdelibs</Dependency>
+        </BuildDependencies>        
+    </Source>
+
+    <Package>
+        <Name>PyKDE</Name>
+        <RuntimeDependencies>
+            <Dependency>sip</Dependency>
+            <Dependency>PyQt</Dependency>
+            <Dependency>kdelibs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/sip</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-16</Date>
+            <Version>20051013</Version>
+            <Comment>Update to 20051013 snapshot</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-09</Date>
+            <Version>2005082</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

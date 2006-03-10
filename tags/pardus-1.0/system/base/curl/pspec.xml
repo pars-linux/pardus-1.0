@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>curl</Name>
+        <Homepage>http://curl.haxx.se/</Homepage>
+        <Packager>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Packager>
+        <License>MIT</License>
+        <License>X11</License>
+        <IsA>app:console</IsA>
+        <Summary>A Client that groks URLs</Summary>
+        <Summary xml:lang="tr">Bir HTTP, HTTPS, FTP veya GOPHER sunucusundan bir dosya alın</Summary>
+        <Description>A Client that groks URLs</Description>
+        <Description xml:lang="tr">curl, desteklenen protokollerden herhangi birini kullanan bir sunucudan dosyalar almaya yarayan bir komuttur. curl, kullanıcı ile bir ilişkisi olmayan (interaktif olmayan) programlar için tasarlanmış bir komuttur.</Description>
+        <Archive sha1sum="2b94192557954bba396bfbb980feed17aadc6295" type="tarbz2">http://curl.haxx.se/download/curl-7.15.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="0.9.6a">openssl</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>libidn</Dependency>
+            <!--FIXME <Dependency>openldap</Dependency>-->
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>curl</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.9.6a">openssl</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>libidn</Dependency>
+            <!--FIXME <Dependency>openldap</Dependency>-->
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include/curl</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+            <Path fileType="man">/usr/share/man/</Path>
+            <Path fileType="data">/usr/share/curl</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3" type="security">
+            <Date>2005-12-22</Date>
+            <Version>7.15.1</Version>
+            <Comment>Fix CVE-2005-4077</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2" type="Security">
+            <Date>2005-10-14</Date>
+            <Version>7.15.0</Version>
+            <Comment>Security fixes</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-12</Date>
+            <Version>7.13.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Update>
+    </History>
+</PISI>

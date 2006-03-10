@@ -1,0 +1,11 @@
+--- xc.orig/extras/Mesa/src/mesa/drivers/dri/tdfx/tdfx_context.c	Wed Dec 12 19:34:21 2001
++++ xc/extras/Mesa/src/mesa/drivers/dri/tdfx/tdfx_context.c	Wed Feb  6 15:59:23 2002
+@@ -494,7 +494,7 @@
+  */
+ GLboolean tdfxInitGlide(tdfxContextPtr tmesa)
+ {
+-   static const char *defaultGlide = "libglide3.so";
++   static const char *defaultGlide = "libglide3.so.3";
+    const char *libName;
+    void *libHandle;
+ 

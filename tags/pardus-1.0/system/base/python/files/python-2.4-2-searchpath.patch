@@ -1,0 +1,11 @@
+diff -ur Python-2.4.2.orig/Lib/site.py Python-2.4.2/Lib/site.py
+--- Python-2.4.2.orig/Lib/site.py	2004-07-20 05:28:28.000000000 +0300
++++ Python-2.4.2/Lib/site.py	2005-10-18 19:15:22.000000000 +0300
+@@ -183,6 +183,7 @@
+                                          "python" + sys.version[:3],
+                                          "site-packages"),
+                             os.path.join(prefix, "lib", "site-python")]
++                sitedirs = [os.path.join(prefix,"lib","pardus")] + sitedirs
+             else:
+                 sitedirs = [prefix, os.path.join(prefix, "lib", "site-packages")]
+             if sys.platform == 'darwin':

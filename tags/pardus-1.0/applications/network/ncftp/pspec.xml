@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ncftp</Name>
+        <Homepage>http://www.ncftp.com/</Homepage>
+        <Packager>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Packager>
+        <License>Clarified-Artistic</License>
+        <IsA>app:console</IsA>
+        <Summary>An extremely configurable ftp client</Summary>
+        <Summary xml:lang="tr">Geniş seçenekleri olan bir ftp istemcisi</Summary>
+        <Description>An extremely configurable ftp client</Description>
+        <Description xml:lang="tr">Bu programla yerel ağınız ya da Internet'teki makinalara dosya gönderip alabilirsiniz. Örneğin, bir web sitesi kurmak için hazırladığınız dosyaları bu programla web sunucunuza gönderebilir ya da oradaki dosyalarınızı güncelleyebilirsiniz.</Description>
+        <Archive sha1sum="fb31144462f73a1f4f71f66c9abc7b01caa53e77" type="tarbz2">http://public.www.planetmirror.com/pub/ncftp/ncftp/ncftp-3.1.8-src.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>ncftp-3.1.8_editcmd.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>ncftp</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+  </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-16</Date>
+            <Version>3.1.8</Version>
+            <Comment>First release.</Comment>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Update>
+    </History>
+</PISI>

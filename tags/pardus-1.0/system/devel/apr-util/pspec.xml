@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>apr-util</Name>
+        <Homepage>http://apr.apache.org/</Homepage>
+        <Packager>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Packager>
+        <License>Apache-2.0</License>
+        <IsA>library</IsA>
+        <Summary>Apache Portable Runtime Library</Summary>
+        <Summary xml:lang="tr">Apache çalışma zamanı kütüphanesi</Summary>
+        <Description>Apache Portable Runtime Library</Description>
+        <Description xml:lang="tr">Apache çalışma zamanı kütüphanesi</Description>
+        <Archive sha1sum="895095963f5376a516c740d55af2318993d76247" type="tarbz2">http://archive.apache.org/dist/apr/apr-util-0.9.7.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>expat</Dependency>
+            <Dependency versionFrom="0.9.7">apr</Dependency>
+            <Dependency>db4</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>apr-util</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/build</Path>
+            <Path fileType="data">/usr/share/apr-0</Path>
+            <Path fileType="man">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-11-12</Date>
+            <Version>0.9.7</Version>
+            <Comment>Version bump. Required for apache-2.0.55.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-15</Date>
+            <Version>0.9.6</Version>
+            <Comment>First release.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+    </History>
+</PISI>

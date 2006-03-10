@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>acx100</Name>
+        <Homepage>http://acx100.sourceforge.net</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>MPL</License>
+        <IsA>library</IsA>
+        <Summary>Driver for Texas Instruments' ACX100/ACX111 wireless network chips</Summary>
+        <Summary xml:lang="tr">Texas Instruments ACX100/ACX111 kablosuz ağ çip sürücüleri</Summary>
+        <Description>Driver for Texas Instruments' ACX100/ACX111 wireless network chips</Description>
+        <Description xml:lang="tr">Texas Instruments ACX100/ACX111 kablosuz ağ çip sürücüleri</Description>
+        <Archive sha1sum="f11438f6c2f650100e92a730b9a03d27ca58e53c" type="tarbz2">http://www.cmartin.tk/acx/acx-20051013.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>kernel-source</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>acx100</Name>
+        <RuntimeDependencies>
+            <Dependency>acx100-firmware</Dependency>
+        </RuntimeDependencies>                    
+        <Files>
+            <Path fileType="library" permanent="true">/lib/modules</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+   </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-10-13</Date>
+            <Version>20051013</Version>
+            <Comment>Fix another network stall bug &amp; some usb fixes</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-11</Date>
+            <Version>20051010</Version>
+            <Comment>Fix network stall bug effecting high speed transfers</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-08</Date>
+            <Version>20051008</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

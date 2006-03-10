@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# Stub script to run mozilla-launcher.  We used to use a symlink here
+# but OOo brokenness makes it necessary to use a stub instead:
+
+export MOZILLA_LAUNCHER=firefox
+exec /usr/libexec/mozilla-launcher "$@"

@@ -1,0 +1,19 @@
+Fix the XFree86 version number in man pages; this patch originally by
+Branden Robinson.
+
+--- xc/config/cf/xfree86.cf.orig	Mon Jan 13 17:31:31 2003
++++ xc/config/cf/xfree86.cf	Mon Jan 13 17:33:13 2003
+@@ -87,6 +87,13 @@
+ #define XVendorManNameString XFree86
+ #endif
+ 
++VENDORMANNAME = XVendorManNameString
++VENDORMANVERSION = XVendorManVersionString
++
++#ifndef VendorManDefs
++#define VendorManDefs -D__vendorversion__="\"Version $(VENDORMANVERSION)\" $(VENDORMANNAME)"
++#endif
++	
+ /*
+  * This enables some settings for developers.
+  */

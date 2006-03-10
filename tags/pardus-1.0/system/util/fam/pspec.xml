@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PSPEC
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+
+    <Source>
+        <Name>fam</Name>
+        <Homepage>http://oss.sgi.com/projects/fam/</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <Summary>FAM, the File Alteration Monitor</Summary>
+        <Summary xml:lang="tr">FAM, Dosya İzleme Aracı</Summary>
+        <Description>FAM, the File Alteration Monitor</Description>
+        <Description xml:lang="tr">FAM, dosyaları ve dizinleri izleyerek, değişiklikleri belirtilen uygulamalara iletir.</Description>
+        <Archive sha1sum="6c2316f02acf89a41c42ffc3d7fd9cf5eada83a8" type="targz">ftp://oss.sgi.com/projects/fam/download/stable/fam-2.7.0.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">fam-2.7.0-dnotify.patch</Patch>
+            <Patch target="ltmain.sh">relink-1.4.1.patch</Patch>
+            <Patch target="ltmain.sh">sed-1.4.0.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>fam</Name>
+        <RuntimeDependencies>
+            <Dependency>portmap</Dependency>
+        </RuntimeDependencies>
+        <Description>FAM, the File Alteration Monitor</Description>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc/</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc/libfame-0.9.0</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-05-05</Date>
+            <Version>2.7.0</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

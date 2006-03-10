@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>ndiswrapper</Name>
+        <Homepage>http://ndiswrapper.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>A driver wrapper</Summary>
+        <Description>Ndiswrapper allows you to use windows XP drivers for that WLAN card without proper Linux drivers.</Description>
+        <Summary xml:lang="tr">Bir sürücü ara yazılımı(wrapper)</Summary>
+        <Description xml:lang="tr">Ndiswrapper, Linux sürücüsü olmayan kablosuz kartların (pcmcia,usb) windows XP sürücüleri kullanılarak çalıştırmasını sağlayan bir programdır</Description>
+        <Archive sha1sum="e5b1e29188aa5679ae4e6950299164a6b7442f27" type="targz">http://puzzle.dl.sourceforge.net/sourceforge/ndiswrapper/ndiswrapper-1.7.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>pciutils</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ndiswrapper</Name>
+        <RuntimeDependencies>
+            <Dependency>wireless-tools</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library" permanent="true">/lib/modules</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-12-22</Date>
+            <Version>1.7</Version>
+            <Comment>Version bump</Comment>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Update>                                                                        
+        <Update release="1">
+            <Date>2005-12-14</Date>
+            <Version>1.6</Version>
+            <Comment>First release.</Comment>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Update>
+    </History>
+</PISI>

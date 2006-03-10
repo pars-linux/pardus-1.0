@@ -1,0 +1,25 @@
+Patch author:	Mike A. Harris <mharris@redhat.com>
+Date:		April 19, 2003
+Purpose:	File Heirarchy Standard 2.2 fixes for xbiff
+Reference:	http://www.pathname.com/fhs/2.2/fhs-5.11.html
+Status:		Not submitted upstream yet
+
+--- xc/programs/xbiff/MailboxP.h.xbiff-file-heirarchy-standard	2003-04-19 08:13:53.000000000 -0400
++++ xc/programs/xbiff/MailboxP.h	2003-04-19 08:33:36.000000000 -0400
+@@ -38,15 +38,13 @@
+ 
+ #if defined(SYSV)
+ #define MAILBOX_DIRECTORY "/usr/mail"
+-#elif defined(SVR4)
++#elif defined(SVR4) || defined(__linux__)
+ #define MAILBOX_DIRECTORY "/var/mail"
+ #elif defined(CSRG_BASED)
+ #include <paths.h>
+ #ifdef _PATH_MAILDIR
+ #define MAILBOX_DIRECTORY _PATH_MAILDIR
+ #endif
+-#elif defined(__linux__)
+-#define MAILBOX_DIRECTORY "/var/spool/mail"
+ #endif
+ 
+ #ifndef MAILBOX_DIRECTORY

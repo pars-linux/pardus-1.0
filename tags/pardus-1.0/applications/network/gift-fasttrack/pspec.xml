@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PSPEC SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gift-fasttrack</Name>
+        <Homepage>https://developer.berlios.de/projects/gift-fasttrack/</Homepage>
+        <Packager>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <IsA>plugin</IsA>
+        <Summary>FastTrack Plugin for giFT</Summary>
+        <Summary xml:lang="tr">giFT için FastTrack eklentisi</Summary>
+        <Description>FastTrack Plugin for giFT</Description>
+        <Description xml:lang="tr">giFT için FastTrack eklentisi</Description>
+        <Archive sha1sum="c44dc2c6a9f9b9a1b3f4c7c4eac7477eaa8439f6" type="targz">http://download.berlios.de/gift-fasttrack/giFT-FastTrack-0.8.9.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>gift-fasttrack</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.11.1">gift</Dependency>
+        </RuntimeDependencies>                      
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/giFT</Path>
+        </Files>                                                                                                                            
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-28</Date>
+            <Version>0.8.9</Version>
+            <Comment>First release.</Comment>
+            <Name>Ali Erdinç Köroğlu</Name>
+            <Email>erdinc@erdinc.info</Email>
+        </Update>
+    </History>
+</PISI>

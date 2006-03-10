@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>rdate</Name>
+        <Homepage>http://www.freshmeat.net/projects/rdate/</Homepage>
+        <Packager>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:console</IsA>
+        <Summary>use TCP or UDP to retrieve the current time of another machine</Summary>
+        <Summary xml:lang="tr">Rdate yerel sistemin tarihini uzaktaki bir makinenin tarihine göre ayarlar</Summary>
+        <Description>use TCP or UDP to retrieve the current time of another machine</Description>
+        <Description xml:lang="tr">Rdate TCP ya da UDP protokollerini kullanarak yerel sistemin tarihini istenilen uzaktaki bir makinenin tarihine göre ayarlar.</Description>
+        <Archive sha1sum="daf3f44874c598746a5d6e0f00c2c04137319c6a" type="targz">ftp://metalab.unc.edu/pub/Linux/system/network/misc/rdate-990821.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="4">sed</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>rdate</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-16</Date>
+            <Version>0.990821</Version>
+            <Comment>First release.</Comment>
+            <Name>Ahmet AYGÜN</Name>
+            <Email>ahmet@zion.gen.tr</Email>
+        </Update>
+    </History>
+</PISI>

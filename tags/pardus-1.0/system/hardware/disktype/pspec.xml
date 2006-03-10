@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>disktype</Name>
+        <Homepage>http://disktype.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Gökçen Eraslan</Name>
+            <Email>gokcene@anadolu.edu.tr</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>app:console</IsA>
+        <Summary xml:lang="en">Detect the content format of a disk or disk image</Summary>
+        <Summary xml:lang="tr">Disk veya disk görüntüsünün biçimsel içeriğini saptar</Summary>
+        <Description xml:lang="en">Detect the content format of a disk or disk image</Description>
+        <Description xml:lang="tr">Disk veya disk görüntüsünün biçimsel içeriğini saptar</Description>
+        <Archive type="targz" sha1sum="a37e87da1139131608fe21ee0265fc352c145456">http://heanet.dl.sourceforge.net/sourceforge/disktype/disktype-8.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>disktype</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-12-01</Date>
+            <Version>8</Version>
+            <Comment>Actions.py fixed, url changed.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-21</Date>
+            <Version>8</Version>
+            <Comment>First release.</Comment>
+            <Name>Gökçen Eraslan</Name>
+            <Email>gokcene@anadolu.edu.tr</Email>
+        </Update>
+    </History>
+</PISI>

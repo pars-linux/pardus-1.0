@@ -1,0 +1,13 @@
+diff -ur kxkb.orig/pixmap.cpp kxkb/pixmap.cpp
+--- kxkb.orig/pixmap.cpp	2005-09-10 11:25:52.000000000 +0300
++++ kxkb/pixmap.cpp	2005-12-19 15:17:00.000000000 +0200
+@@ -52,6 +52,9 @@
+ 
+   QString flag;
+   int pos = code.length();
++  if( code_ == "trq" || code_ == "trf" || code_ == "tralt" )
++    flag = locate("locale", flagTemplate.arg("tr"));
++  else
+   if( code_ == "ar" )	// Arabic - not argentina
+     flag = locate("locale", flagTemplate.arg("C"));
+   else

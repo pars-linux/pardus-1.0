@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>mtools</Name>
+        <Homepage>http://mtools.linux.lu/</Homepage>
+        <Packager>
+            <Name>Gökçen Eraslan</Name>
+            <Email>gokcene@anadolu.edu.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>utilities to access MS-DOS disks from Unix without mounting them</Summary>
+        <Summary xml:lang="tr">Diskinizdeki MS-DOS (Windows) bölümlerine -mount komutu ile bağlamadan- erişebilmek için gereken araçlar.</Summary>
+        <Description>utilities to access MS-DOS disks from Unix without mounting them</Description>
+        <Description xml:lang="tr">Diskinizdeki MS-DOS (Windows) bölümlerine -mount komutu ile bağlamadan- erişebilmek için gereken araçlar.</Description>
+        <Archive sha1sum="47551ee9331527fadaf174cf55952d5113443564" type="targz">ftp://www.tux.org/pub/knaff/mtools/mtools-3.9.9.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>texinfo</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>mtools</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc/mtools</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-14</Date>
+            <Version>3.9.9</Version>
+            <Comment>First release.</Comment>
+            <Name>Gökçen Eraslan</Name>
+            <Email>gokcene@anadolu.edu.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libmal</Name>
+        <Homepage>http://jasonday.home.att.net/code/libmal/libmal.html</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>MPL-1.0</License>
+        <IsA>library</IsA>
+        <Summary>Convenience library of the functions malsync distribution</Summary>
+        <Description>Convenience library of the functions malsync distribution</Description>
+        <Summary xml:lang="tr">Tom Whittaker'in Malsync dağıtımı fonksiyonlarının uygunluk kütüphanesi</Summary>
+        <Description xml:lang="tr">Tom Whittaker'in Malsync dağıtımı fonksiyonlarının uygunluk kütüphanesi</Description>
+        <Archive sha1sum="262a811386826fa290d2bf644941c15dac41d2bb" type="targz">http://jasonday.home.att.net/code/libmal/libmal-0.31.tar.gz</Archive>
+        <BuildDependencies>
+           <Dependency versionFrom="0.11.7">pilot-link</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libmal</Name>
+        <Files>
+           <Path fileType="library">/usr/lib</Path>
+           <Path fileType="header">/usr/include</Path>
+           <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+   </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-06</Date>
+            <Version>0.31</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

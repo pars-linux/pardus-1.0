@@ -1,0 +1,25 @@
+diff -u kdebase-3.4.92.orig/startkde kdebase-3.4.92/startkde
+--- kdebase-3.4.92.orig/startkde	2005-10-10 19:06:23.000000000 +0300
++++ kdebase-3.4.92/startkde	2005-10-24 01:57:31.000000000 +0300
+@@ -257,21 +257,6 @@
+ 
+ echo 'startkde: Starting up...'  1>&2
+ 
+-# run KPersonalizer before the session, if this is the first login
+-if test "$kpersonalizerrc_general_firstlogin" = "true"; then
+-    # start only dcopserver, don't start whole kdeinit (takes too long)
+-    echo 'startkde: Running kpersonalizer...'  1>&2
+-    dcopserver
+-    kwin --lock &
+-    kpersonalizer --before-session
+-    # handle kpersonalizer restarts (language change)
+-    while test $? -eq 1; do
+-        kpersonalizer --r --before-session
+-    done
+-    dcopquit kwin
+-    dcopserver_shutdown --wait
+-fi
+-
+ # the splashscreen and progress indicator
+ case "$ksplashrc_ksplash_theme" in 
+   None)

@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ghostscript</Name>
+        <Homepage>http://www.cups.org/ghostscript.php</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <License>LGPL-2</License>
+        <IsA>library</IsA>
+        <Description>A graphics library for fast image creation</Description>
+        <Description xml:lang="tr">ESP Ghostscript GNU Ghostscript'in yazıcı desteği geliştirilmiş versiyonu</Description>
+        <Summary>A graphics library for fast image creation</Summary>
+        <Summary xml:lang="tr">ESP Ghostscript GNU Ghostscript'in yazıcı desteği geliştirilmiş versiyonu</Summary>  
+        <Archive sha1sum="9d5653d674a074ef6b803ceed4a2aeb40fed852f" type="tarbz2">http://ovh.dl.sourceforge.net/espgs/espgs-7.07.1-source.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency versionFrom="1.2.1">libpng</Dependency>
+            <Dependency versionFrom="1.1.4">zlib</Dependency>
+            <Dependency>cups</Dependency>
+            <Dependency>xorg</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">ghostscript-7.05.6.man.patch</Patch>
+            <Patch>gs7.07.1-ijs.patch</Patch>
+            <Patch level="1">gs7.05.6-gdevpx.patch</Patch>
+            <Patch level="1">gs7.07.1-destdir.patch</Patch>
+            <Patch level="1">gs7.07.1-ijsdestdir.patch</Patch>
+            <Patch level="1">gs7.07.1-tempfile.patch</Patch>
+            <Patch level="1">gs-fix-gc.patch</Patch>
+            <Patch>gs7.07.1-ps2ps.patch</Patch>
+            <Patch>gs7.07.1-nogtk2.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>ghostscript</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="6b">jpeg</Dependency>
+            <Dependency versionFrom="1.2.1">libpng</Dependency>
+            <Dependency>gnu-gs-fonts-std</Dependency>
+            <Dependency>xorg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/cups</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/cups</Path>
+            <Path fileType="data">/usr/share/ghostscript</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="4">
+            <Date>2005-12-13</Date>
+            <Version>7.07.1</Version>
+            <Comment>Remove runtime cups dependency</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-12-03</Date>
+            <Version>7.07.1</Version>
+            <Comment>Add gdi support for Samsung Laser Printers</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-08</Date>
+            <Version>7.07.1</Version>
+            <Comment>fix #687 (-with-x)</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-25</Date>
+            <Version>7.07.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

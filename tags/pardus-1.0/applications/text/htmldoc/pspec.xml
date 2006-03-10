@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>htmldoc</Name>
+        <Homepage>http://www.easysw.com/htmldoc/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL</License>
+        <IsA>app:console</IsA>
+        <Summary>htmldoc converts HTML files and web pages into indexed HTML, PostScript, and PDF files</Summary>
+        <Summary xml:lang="tr">htmldoc; HTML dosyalarını ve web sayfalarını, indexli HTML, PostScript veya PDF dosyalarına dönüştürür</Summary>
+        <Description>htmldoc converts HTML files and web pages into indexed HTML, PostScript, and PDF files</Description>
+        <Description xml:lang="tr">htmldoc; HTML dosyalarını ve web sayfalarını, indexli HTML, PostScript veya PDF dosyalarına dönüştürür</Description>
+        <Archive sha1sum="c37fd227bf96eb44c10622140ba8ef5915092bf2" type="tarbz2">http://ftp.easysw.com/pub/htmldoc/1.8.24/htmldoc-1.8.24-source.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">htmldoc_destdir.diff</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>libpng</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>fltk</Dependency>
+            <Dependency>openssl</Dependency>
+            <Dependency>xorg</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>htmldoc</Name>
+        <RuntimeDependencies>
+            <Dependency>libpng</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>fltk</Dependency>
+            <Dependency>xorg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/htmldoc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-27</Date>
+            <Version>1.8.24</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

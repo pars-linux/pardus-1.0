@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI 
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>hotplug</Name>
+        <Homepage>http://linux-hotplug.sourceforge.net</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>daemon</IsA>
+        <Summary>USB and PCI hotplug scripts</Summary>
+        <Description>USB and PCI hotplug scripts</Description>
+        <Summary xml:lang="tr">USB ve PCI hotplug betikleri</Summary>
+        <Description xml:lang="tr">Tak çalıştır (Plug'n play) olarak nitelendirilebilinir. PCI ve/veya USB 
+        aygıtların sisteme eklenmesi sırasında gerekli çekirdek modüllerinin otomatik yüklenmesini sağlar.</Description>
+        <Archive sha1sum="76da21f14e8652f6b796d0d7ed7dbaa9b2a04b27" type="targz">ftp://ftp.kernel.org/pub/linux/utils/kernel/hotplug/hotplug-2004_09_23.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="2.1.9">pciutils</Dependency>
+            <Dependency versionFrom="0.9">usbutils</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>hotplug</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="2.1.9">pciutils</Dependency>
+            <Dependency versionFrom="0.9">usbutils</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/var/run</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/hotplug/isapnp.rc">isapnp.rc</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/hotplug">hotplug</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/coldplug">coldplug</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/usb">usb</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    
+    <History>
+        <Update release="2">
+            <Date>2005-12-19</Date>
+            <Version>20040923</Version>
+            <Comment>Fix bug #427</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-15</Date>
+            <Version>20040923</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

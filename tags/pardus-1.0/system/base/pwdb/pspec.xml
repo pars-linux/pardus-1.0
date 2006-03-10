@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pwdb</Name>
+        <Homepage>http://www.firstlinux.com/cgi-bin/package/content.cgi?ID=6886</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <Summary>Password database</Summary>
+        <Summary xml:lang="tr">Parola veritabanı</Summary>
+        <Description>Password database</Description>
+        <Description xml:lang="tr">Parola veritabanı</Description>
+        <Archive sha1sum="10997946c087c3afdf9e4cca458eabaa1fac5317" type="targz">http://ftp.belnet.be/mirror/rsync.gentoo.org/gentoo/distfiles/pwdb-0.62.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">pwdb-0.62-use-gcc-as-linker.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>pwdb</Name>
+        <Files>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="header">/usr/include/pwdb</Path>
+            <Path fileType="config">/etc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-30</Date>
+            <Version>0.62</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

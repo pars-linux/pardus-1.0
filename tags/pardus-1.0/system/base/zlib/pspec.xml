@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>zlib</Name>
+        <Homepage>http://www.gzip.org/zlib/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>ZLIB</License>
+        <IsA>library</IsA>
+        <Summary>Standard (de)compression library</Summary>
+        <Description>Standard (de)compression library</Description>
+        <Summary xml:lang="tr">Standart sıkıştırma/açma kütüphanesi</Summary>
+        <Description xml:lang="tr">zlib herhangi bilgisayar donanımı ve işletim sistemi üzerinde çalışabilecek; özgür, yasal, bağımsız, kayıpsız bir veri sıkıştırma kütüphanesi olarak tasarlanmıştır. zlib veri biçiminin kendisi platformlar arası taşınabilirdir. Unix compress (sıkıştır) de kullanılan LZW sıkıştırma yönteminin aksine, zlib de şu anda kullanılmakta olan sıkıştırma yöntemi esasen veriyi asla şişirmez</Description>
+        <Archive sha1sum="60faeaaf250642db5c0ea36cd6dcc9f99c8f3902" type="targz">http://www.zlib.net/zlib-1.2.3.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">zlib-1.2.1-glibc.patch</Patch>
+            <Patch level="1">zlib-1.2.1-build-fPIC.patch</Patch>
+            <Patch>zlib-1.2.2-mapfile.patch</Patch>
+            <Patch>zlib-1.2.1-configure.patch</Patch>
+            <Patch level="1">zlib-1.2.1-fPIC.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>zlib</Name>
+        <Files>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-11-13</Date>
+            <Version>1.2.3</Version>
+            <Comment>Fixed wrong file path specification.</Comment>
+            <Name>Bahadır Kandemir</Name>
+            <Email>bahadir@haftalik.net</Email>
+        </Update>
+        <Update release="2" type="security">
+            <Date>2005-10-27</Date>
+            <Version>1.2.3</Version>
+            <Comment>Update to version 1.2.3 to fix multiple security vulnerabilities</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-25</Date>
+            <Version>1.2.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

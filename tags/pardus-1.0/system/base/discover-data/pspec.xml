@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>discover-data</Name>
+        <Homepage>http://componentizedlinux.org/index.php/Discover</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>data</IsA>
+        <Summary>data for discover. list of pci ids. pnp ids etc.</Summary>
+        <Description>data for discover. list of pci ids. pnp ids etc.</Description>
+        <Summary xml:lang="tr">Discover için veriler</Summary>
+        <Description xml:lang="tr">Discover için PCI IDs, PnP IDs vb. listeleri</Description>
+        <Archive sha1sum="3d51171dd4b31ff59fee7546527bb76a81541b45" type="targz">http://archive.progeny.com/progeny/discover/discover-data-2.2005.02.13.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>discover-data</Name>
+        <Files>
+            <Path fileType="executable">/usr/share/tools</Path>
+            <Path fileType="data">/usr/share/discover</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-29</Date>
+            <Version>2.2005.02.13</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

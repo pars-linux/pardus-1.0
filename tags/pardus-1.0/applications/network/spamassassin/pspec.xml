@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>spamassassin</Name>
+        <Homepage>http://spamassassin.apache.org/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>Apache-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Open-Source Spam Filter</Summary>
+        <Description>Open-Source Spam Filter</Description>
+        <Summary xml:lang="tr">Açık kaynak Spam filtresi</Summary>
+        <Description xml:lang="tr">SpamAssassin, Perl tabanlı yüzlerce kuralı içinde barındıran kural tabanlı bir e-posta spam filtreleme programıdır. Esnek ve gelişmiş programlama arabirimi sayesinde bir çok e-posta sunucusu ve istemcisi ile birlikte çalışabilmektedir.</Description>
+        <Archive sha1sum="0185f076f619dd9e64e94b453017f9b08d4b0f04" type="tarbz2">http://apache.progen.com.tr/dist/spamassassin/source/Mail-SpamAssassin-3.1.0.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+            <Dependency>Digest-SHA1</Dependency>
+            <Dependency>HTML-Parser</Dependency>
+            <Dependency>MIME-Base64</Dependency>
+            <Dependency>Mail-SPF-Query</Dependency>
+            <Dependency>IP-Country</Dependency>
+            <Dependency>libnet-perl</Dependency>
+            <Dependency>Net-DNS</Dependency>
+            <Dependency>Net-Ident</Dependency>
+            <Dependency>IO-Socket-INET6</Dependency>
+            <Dependency>IO-Socket-SSL</Dependency>
+            <Dependency>Time-HiRes</Dependency>
+            <Dependency>DBI</Dependency>
+            <Dependency>libwww-perl</Dependency>
+            <Dependency>Archive-Tar</Dependency>
+            <Dependency>IO-Zlib</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>spamassassin</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+            <Dependency>Digest-SHA1</Dependency>
+            <Dependency>HTML-Parser</Dependency>
+            <Dependency>MIME-Base64</Dependency>
+            <Dependency>Mail-SPF-Query</Dependency>
+            <Dependency>IP-Country</Dependency>
+            <Dependency>libnet-perl</Dependency>
+            <Dependency>Net-DNS</Dependency>
+            <Dependency>Net-Ident</Dependency>
+            <Dependency>IO-Socket-INET6</Dependency>
+            <Dependency>IO-Socket-SSL</Dependency>
+            <Dependency>Time-HiRes</Dependency>
+            <Dependency>DBI</Dependency>
+            <Dependency>libwww-perl</Dependency>
+            <Dependency>Archive-Tar</Dependency>
+            <Dependency>IO-Zlib</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/spamassassin</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="config">/etc/mail</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-16</Date>
+            <Version>3.1.0</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

@@ -1,0 +1,193 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kdelibs</Name>
+        <Homepage>http://www.kde.org/</Homepage>
+        <Packager>
+            <Name>Barış Metin</Name>
+            <Email>baris@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <License>LGPL-2</License>
+        <IsA>libraries</IsA>
+        <Summary>KDE libraries needed by all kde programs</Summary>
+        <Description>KDE libraries needed by all kde programs</Description>
+        <Summary xml:lang="tr">Tüm KDE programlarının ihtiyaç duyduğu KDE kütüphaneleri</Summary>
+        <Description xml:lang="tr">Tüm KDE programlarının ihtiyaç duyduğu KDE kütüphaneleri</Description>
+        <Archive sha1sum="c03bc6b09add3c487b3e28a5fb1d89efd30a9723" type="tarbz2">ftp://ftp.kde.org/pub/kde/stable/3.5/src/kdelibs-3.5.0.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>qt-doc</Dependency>
+            <Dependency versionFrom="3.5.0_rc2">arts</Dependency>
+            <Dependency>bzip2</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency versionFrom="1.1.4">libxslt</Dependency>
+            <Dependency versionFrom="2.6.6">libxml2</Dependency>
+            <Dependency versionFrom="4.2">libpcre</Dependency>
+            <Dependency>libart_lgpl</Dependency>
+            <Dependency>libidn</Dependency>
+            <Dependency>utempter</Dependency>
+            <Dependency versionFrom="0.9.7d">openssl</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency versionFrom="1.1.19">cups</Dependency>
+            <Dependency>tiff</Dependency>
+            <Dependency>aspell</Dependency>
+            <Dependency>jasper</Dependency>
+            <Dependency>mDNSResponder</Dependency>
+            <Dependency>fam</Dependency>
+            <Dependency>ghostscript</Dependency>
+            <Dependency>doxygen</Dependency>
+            <Dependency>gettext</Dependency>
+            <Dependency>perl</Dependency>
+            <Dependency>acl</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>kdelibs-3.5.0-pertty.patch</Patch>
+            <Patch>kdelibs-3.5.0-kio_fish_utf8.patch</Patch>
+            <Patch level="1">kdelibs-3.5.0-default-printer-cups.patch</Patch>
+            <Patch level="1">kdelibs-3.5.0-default-font.patch</Patch>
+            <Patch level="1">kdelibs-3.5.0-konqueror.fonts.patch</Patch>
+            <Patch level="1">kdelibs-3.5.0-kdecore-singleclick.patch</Patch>
+            <Patch level="1">kdelibs-3.5.0-default-style.patch</Patch>
+            <Patch level="1">kdelibs-3.5.0-kdecore-icontheme.patch</Patch>
+            <Patch level="1">kdelibs-3.5.0-kcookiejar.patch</Patch>
+            <Patch>ooo-icons-for-mimetypes.diff</Patch>
+            <Patch>klibloader-utf8-error.diff</Patch>
+            <Patch>kdirlister-kicker-crash.diff</Patch>
+            <Patch>kio-utf8-paste.diff</Patch>
+            <Patch level="1">show-distribution.diff</Patch>
+            <Patch>uludag-bugzilla.diff</Patch>
+        </Patches>
+ 
+    </Source>
+
+    <Package>
+        <Name>kdelibs</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency versionFrom="3.5.0_rc2">arts</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency versionFrom="1.1.4">libxslt</Dependency>
+            <Dependency versionFrom="2.6.6">libxml2</Dependency>
+            <Dependency versionFrom="4.2">libpcre</Dependency>
+            <Dependency>libart_lgpl</Dependency>
+            <Dependency>libidn</Dependency>
+            <Dependency>utempter</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency versionFrom="1.1.19">cups</Dependency>
+            <Dependency>tiff</Dependency>
+            <Dependency>aspell</Dependency>
+            <Dependency>jasper</Dependency>
+            <Dependency>mDNSResponder</Dependency>
+            <Dependency>fam</Dependency>
+            <Dependency>ghostscript</Dependency>
+            <Dependency>acl</Dependency>
+            <Dependency>zpspell</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/kde/3.5/bin</Path>
+            <Path fileType="config">/usr/kde/3.5/etc</Path>
+            <Path fileType="header">/usr/kde/3.5/include</Path>
+            <Path fileType="library">/usr/kde/3.5/lib</Path>
+            <Path fileType="data">/usr/kde/3.5/share</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/kde/3.5/share/apps/kconf_update/pardus-1.0-defaults.upd" permission="0644">pardus-1.0-defaults.upd</AdditionalFile>
+            <AdditionalFile target="/usr/kde/3.5/share/apps/kconf_update/pardus-1.0-kspell-defaults.sh" permission="0755">pardus-1.0-kspell-defaults.sh</AdditionalFile>
+            <AdditionalFile target="/usr/kde/3.5/share/apps/kconf_update/pardus-1.0-arts-defaults.sh" permission="0755">pardus-1.0-arts-defaults.sh</AdditionalFile>
+            <AdditionalFile target="/usr/kde/3.5/share/apps/kconf_update/pardus-1.0-browser-defaults.sh" permission="0755">pardus-1.0-browser-defaults.sh</AdditionalFile>
+            <AdditionalFile target="/usr/kde/3.5/share/apps/kconf_update/pardus-1.0-tr-locale.sh" permission="0755">pardus-1.0-tr-locale.sh</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <Package>
+        <Name>kdelibs-apidox</Name>
+        <Files>
+            <Path fileType="doc">/usr/kde/3.5/share/doc/HTML/en/kdelibs-apidocs</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="11">
+            <Date>2005-12-24</Date>
+            <Version>3.5.0</Version>
+            <Comment>Use Uludag bugzilla to report problems</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="10">
+            <Date>2005-12-12</Date>
+            <Version>3.5.0</Version>
+            <Comment>Fix #895</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="9">
+            <Date>2005-12-08</Date>
+            <Version>3.5.0</Version>
+            <Comment>Fix #933</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="8">
+            <Date>2005-12-05</Date>
+            <Version>3.5.0</Version>
+            <Comment>Fix #972</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="7">
+            <Date>2005-11-29</Date>
+            <Version>3.5.0</Version>
+            <Comment>Version bump to stable release</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-11-25</Date>
+            <Version>3.5.0_rc2</Version>
+            <Comment>Use OpenOffice.org icons for OpenOffice.org documents</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-11-21</Date>
+            <Version>3.5.0_rc2</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-11-25</Date>
+            <Version>3.5.0_rc1</Version>
+            <Comment>Dep fix</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-15</Date>
+            <Version>3.5.0_rc1</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-15</Date>
+            <Version>3.5.0_beta2</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-04</Date>
+            <Version>3.4.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

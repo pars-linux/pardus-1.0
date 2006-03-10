@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>tcsh</Name>
+        <Homepage>http://www.tcsh.org/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>app:console</IsA>
+        <Summary xml:lang="en">Enhanced version of the Berkeley C shell (csh)</Summary>
+        <Description xml:lang="en">Tcsh is an enhanced, but completely compatible version of the Berkeley UNIX C shell (csh). It is a command language interpreter usable both as an interactive login shell and a shell script command processor. It includes a command-line editor, programmable word completion, spelling correction, a history mechanism, job control and a C-like syntax.</Description>
+        <Archive sha1sum="55a08b31a57cfd8631edd1fb7e42f18578d8198a" type="targz">ftp://ftp.astron.com/pub/tcsh/tcsh-6.14.00.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>ncurses</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>tcsh</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/bin</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/csh.cshrc">csh.cshrc</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/csh.login">csh.login</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/profile.d/tcsh-aliases">tcsh-aliases</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/profile.d/tcsh-bindkey">tcsh-bindkey</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/profile.d/tcsh-complete">tcsh-complete</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/profile.d/tcsh-settings">tcsh-settings</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/skel/.tcsh.config">tcsh.config</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-12</Date>
+            <Version>6.14</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

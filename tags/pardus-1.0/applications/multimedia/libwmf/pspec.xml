@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PSPEC
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libwmf</Name>
+        <Homepage>http://wvware.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>Library for converting WMF files</Summary>
+        <Summary xml:lang="tr">Microsoft Word gibi uygulamaların kullandığı WMF (Windows metafile) dosyalarını standart formatlara (PNG, JPEG, PS, EPS, SVG gibi) dönüştürebilmek ve gösterebilmek için gereken kütüphanedir.</Summary>
+        <Description>Library for converting WMF files</Description>
+        <Description xml:lang="tr">Microsoft Word gibi uygulamaların kullandığı WMF (Windows metafile) dosyalarını standart formatlara (PNG, JPEG, PS, EPS, SVG gibi) dönüştürebilmek ve gösterebilmek için gereken kütüphanedir.</Description>
+        <Archive sha1sum="ba8f3af71a40976a1870dcb0b4d43b189f5480e3" type="targz">http://heanet.dl.sourceforge.net/sourceforge/wvware/libwmf-0.2.8.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>ghostscript</Dependency>
+            <Dependency>expat</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency versionFrom="2.0.1">freetype</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency>zlib</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libwmf</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share/libwmf/fonts</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-18</Date>
+            <Version>0.2.8.2</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

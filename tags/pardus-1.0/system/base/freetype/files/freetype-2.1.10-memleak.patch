@@ -1,0 +1,15 @@
+--- freetype-2.1.10/src/cache/ftcimage.c.memleak	2005-08-24 15:40:33.000000000 +0200
++++ freetype-2.1.10/src/cache/ftcimage.c	2005-08-24 15:40:56.000000000 +0200
+@@ -78,6 +78,12 @@
+       /* we will now load the glyph image */
+       error = clazz->family_load_glyph( family, gindex, cache,
+                                         &inode->glyph );
++
++      if ( error )
++      {
++        FTC_INode_Free( inode, cache );
++        inode = NULL;
++      }
+     }
+ 
+     *pinode = inode;

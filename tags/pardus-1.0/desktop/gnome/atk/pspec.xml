@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>atk</Name>
+        <Homepage>http://developer.gnome.org/projects/gap/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2</License>
+        <IsA>library</IsA>
+        <Summary>GTK+ and Gnome Accessibility Toolkit</Summary>
+        <Summary xml:lang="tr">GTK+ ve GNOME erişilebilirlik kütüphanesi</Summary>
+        <Description>GTK+ and Gnome Accessibility Toolkit</Description>
+        <Description xml:lang="tr">GTK+ ve GNOME erişilebilirlik kütüphanesi</Description>
+        <Archive sha1sum="c9c0e86352c960409d361a03884c204f0fe5d044" type="tarbz2">ftp://ftp.gnome.org/pub/gnome/sources/atk/1.10/atk-1.10.2.tar.bz2</Archive>
+        <Patches>
+            <Patch level="1">syntax_error.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency>glib2</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>atk</Name>
+        <RuntimeDependencies>
+            <Dependency>glib2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-16</Date>
+            <Version>1.10.2</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-09-13</Date>
+            <Version>1.8.0</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

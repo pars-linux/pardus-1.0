@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>bc</Name>
+        <Homepage>http://www.gnu.org/software/bc/bc.htm</Homepage>
+        <Packager>
+            <Name>Nihat Ciddi</Name>
+            <Email>nakof@zig.gen.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Handy console-based calculator utility</Summary>
+        <Summary xml:lang="tr">Şık görünümlü bir konsol temelli hesap makinesı</Summary>
+        <Description>Handy console-based calculator utility</Description>
+        <Description xml:lang="tr">Konsolda çalışan şık görünümlü bir hesap makinesı</Description>
+        <Archive sha1sum="c8f258a7355b40a485007c40865480349c157292" type="targz">ftp://ftp.ulak.net.tr/gnu/gnu/bc/bc-1.06.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">bc-1.06-info-fix.diff</Patch>
+            <Patch level="1">bc-1.06-longopts.patch</Patch>
+            <Patch level="1">bc-1.06-readline42.diff</Patch>
+            <Patch level="1">bc-1.06-static-save.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency versionFrom="5.1">ncurses</Dependency>
+            <Dependency versionFrom="4.1">readline</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>bc</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.1">ncurses</Dependency>
+            <Dependency versionFrom="4.1">readline</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-11</Date>
+            <Version>1.06</Version>
+            <Comment>First release.</Comment>
+            <Name>Nihat Ciddi</Name>
+            <Email>nakof@zig.gen.tr</Email>
+        </Update>
+    </History>
+</PISI>

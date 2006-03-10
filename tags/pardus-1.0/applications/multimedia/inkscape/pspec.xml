@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>inkscape</Name>
+        <Homepage>http://www.inkscape.org</Homepage>
+        <Packager>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <License>LGPL-2.1</License>
+        <IsA>app:gui</IsA>
+        <Summary>Vector drawing program</Summary>
+        <Summary xml:lang="tr">Vektör çizim programı</Summary>
+        <Description>SVG based vector drawing program</Description>
+        <Description xml:lang="tr">SVG tabanlı, çok kapsamlı ve gelişmiş bir vektör çizim programı</Description>
+        <Archive sha1sum="b7e93f2ceea795ee434f70261ba19e67985fc292" type="tarbz2">http://heanet.dl.sourceforge.net/sourceforge/inkscape/inkscape-0.43.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>gettext</Dependency>
+            <Dependency versionFrom="2.4.1">gtk2</Dependency>
+            <Dependency versionFrom="2.3.16">libart_lgpl</Dependency>
+            <Dependency versionFrom="2.6.7">libxml2</Dependency>
+            <Dependency versionFrom="1.4">pango</Dependency>
+            <Dependency versionFrom="1.0.15">libxslt</Dependency>
+            <Dependency>XML-Parser</Dependency>
+            <Dependency>popt</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency versionFrom="2.0.3">libsigc++</Dependency>
+            <Dependency>glibmm</Dependency>
+            <Dependency versionFrom="2.4">gtkmm</Dependency>
+            <Dependency>aalib</Dependency>
+            <Dependency>python</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>inkscape-0.43-tr.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>inkscape</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="2.4.1">gtk2</Dependency>
+            <Dependency versionFrom="2.3.16">libart_lgpl</Dependency>
+            <Dependency versionFrom="2.6.7">libxml2</Dependency>
+            <Dependency versionFrom="1.4">pango</Dependency>
+            <Dependency versionFrom="1.0.15">libxslt</Dependency>
+            <Dependency>XML-Parser</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency versionFrom="2.0.3">libsigc++</Dependency>
+            <Dependency>glibmm</Dependency>
+            <Dependency versionFrom="2.4">gtkmm</Dependency>
+            <Dependency>aalib</Dependency>
+            <Dependency>boehm-gc</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="4">
+            <Date>2005-12-17</Date>
+            <Version>0.43</Version>
+            <Comment>Turkish translation update by Serdar Soytetir</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-23</Date>
+            <Version>0.43</Version>
+            <Comment>New upstream version</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-31</Date>
+            <Version>0.42.2</Version>
+            <Comment>boehm-gc added runtime deps</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-15</Date>
+            <Version>0.42.2</Version>
+            <Comment>First release.</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

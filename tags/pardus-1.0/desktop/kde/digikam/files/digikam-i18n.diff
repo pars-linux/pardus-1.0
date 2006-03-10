@@ -1,0 +1,25 @@
+diff -ur digikam-0.8.0/digikam/digikam/digikamfirstrun.cpp digikam-fixed/digikam/digikam/digikamfirstrun.cpp
+--- digikam-0.8.0/digikam/digikam/digikamfirstrun.cpp	2005-11-21 19:14:05.000000000 +0000
++++ digikam-fixed/digikam/digikam/digikamfirstrun.cpp	2005-12-23 19:32:01.000000000 +0000
+@@ -78,7 +78,7 @@
+     config_ = config;
+     ui = new DigikamFirstFirstRunWidget(this);
+     setMainWidget(ui);
+-    ui->path->setURL(QDir::homeDirPath() + "/Pictures");
++    ui->path->setURL(QDir::homeDirPath() + i18n("/Pictures"));
+     ui->path->setMode(KFile::Directory | KFile::LocalOnly);
+ 
+     KIconLoader* iconLoader = KApplication::kApplication()->iconLoader();
+--- digikam-0.8.0/po/tr/digikam.po	2005-11-21 19:14:05.000000000 +0000
++++ digikam-fixed/po/tr/digikam.po	2005-12-23 19:43:41.000000000 +0000
+@@ -4319,6 +4319,10 @@
+ msgid "Download"
+ msgstr "İndir"
+ 
++#: digikam/digikam/digikamfirstrun.cpp:81
++msgid "/Pictures"
++msgstr "/Resimler"
++
+ #, fuzzy
+ #~ msgid "Add/Delete Search Rules"
+ #~ msgstr "Aramayı Sil"

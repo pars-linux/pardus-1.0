@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libxmlpp</Name>
+        <Homepage>http://libxmlplusplus.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>library</IsA>
+        <Summary>C++ wrapper for the libxml XML parser library</Summary>
+        <Description>C++ wrapper for the libxml XML parser library</Description>
+        <Archive sha1sum="9e74448cdf5725153ce4b53a9e825be3e1aa4164" type="tarbz2">http://ftp.gnome.org/pub/GNOME/sources/libxml++/1.0/libxml++-1.0.4.tar.bz2</Archive>
+        <Patches>
+            <Patch>libxmlpp-1.0.4-pc.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+            <Dependency versionFrom="2.5.8">libxml2</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libxmlpp</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="2.5.8">libxml2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/lib/pkgconfig/</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path> 
+        </Files>
+   </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-26</Date>
+            <Version>1.0.4</Version>
+            <Comment>First release.</Comment>
+            <Name>Timu EREN</Name>
+            <Email>selamtux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

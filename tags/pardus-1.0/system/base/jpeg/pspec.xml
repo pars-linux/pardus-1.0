@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>jpeg</Name>
+        <Homepage>http://www.ijg.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>library</IsA>
+        <Summary>Library to load, handle and manipulate images in the JPEG format</Summary>
+        <Summary xml:lang="tr">JPEG türündeki resimleri görüntüleyip işlemeye aracılık eden kitaplık</Summary>
+        <Description>Library to load, handle and manipulate images in the JPEG format</Description>
+        <Description xml:lang="tr">JPEG türündeki resimleri görüntüleyip işlemeye aracılık eden kitaplık</Description>
+        <Archive sha1sum="7079f0d6c42fad0cfba382cf6ad322add1ace8f9" type="targz">ftp://ftp.uu.net/graphics/jpeg/jpegsrc.v6b.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">jpeg-6b-pic.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>jpeg</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-25</Date>
+            <Version>6b</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

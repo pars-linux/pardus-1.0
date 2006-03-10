@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>automake-wrapper</Name>
+        <Homepage>http://www.gentoo.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>category</IsA>
+        <Summary>wrapper for automake to manage multiple automake versions</Summary>
+        <Summary xml:lang="tr">Birden fazla automake sürümünü yönetmek için bir sarmalayıcı</Summary>
+        <Description>wrapper for automake to manage multiple automake versions</Description>
+        <Description xml:lang="tr">Birden fazla automake sürümünü yönetmek için bir sarmalayıcı</Description>
+        <Archive sha1sum="a955c2be3ba184895c214354790d9fe6ecf167c9" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/automake-wrapper.tar.gz</Archive>
+        
+    </Source>
+
+    <Package>
+        <Name>automake-wrapper</Name>
+        <RuntimeDependencies>
+            <Dependency>automake1_4</Dependency>
+            <Dependency>automake1_5</Dependency>
+            <Dependency>automake1_6</Dependency>
+            <Dependency>automake1_7</Dependency>
+            <Dependency>automake1_8</Dependency>
+            <Dependency>automake1_9</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/lib/misc</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+        </Files>
+  </Package>
+
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-12</Date>
+            <Version>1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

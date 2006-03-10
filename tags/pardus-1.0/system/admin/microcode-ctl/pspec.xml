@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>microcode-ctl</Name>
+        <Homepage>http://www.urbanmyth.org/microcode</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary xml:lang="en">Intel IA32 microcode update utility</Summary>
+        <Description xml:lang="en">Intel IA32 microcode update utility</Description>
+        <Archive type="targz" sha1sum="cc37c2fc086021e6f3d3128e67da53affdf94e68">http://www.urbanmyth.org/microcode/microcode_ctl-1.11.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>linux-headers</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>microcode-ctl</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc/microcode-ctl-1.11-1</Path>
+            <Path fileType="man">/usr/share/man/man8</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/microcode_ctl">microcode_ctl.rc</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/microcode_ctl">microcode_ctl.conf.d</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-25</Date>
+            <Version>1.11</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

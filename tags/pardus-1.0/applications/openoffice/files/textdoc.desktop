@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=OpenOffice.org Kelime İşlemci
+Exec=oowriter %U
+Icon=ooo-writer2.0.png
+Terminal=false
+Type=Application
+InitialPreference=15
+Categories=Qt;KDE;Office;
+MimeType=application/vnd.sun.xml.writer;application/vnd.sun.xml.writer.global;application/vnd.sun.xml.writer.template;application/vnd.ms-word;application/x-mswrite;application/vnd.stardivision.writer;application/vnd.wordperfect;application/wordperfect;application/rtf;text/rtf;application/vnd.oasis.opendocument.text;vnd.oasis.opendocument.text-master;application/vnd.oasis.opendocument.text-template;
+

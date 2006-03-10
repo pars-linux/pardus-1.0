@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>psmisc</Name>
+        <Homepage>http://psmisc.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>A set of tools that use the proc filesystem</Summary>
+        <Summary xml:lang="tr">proc dosya sistemi kullanan bir araç takımı</Summary>
+        <Description>A set of tools that use the proc filesystem</Description>
+        <Description xml:lang="tr">proc dosya sistemi kullanan bir araç takımı</Description>
+        <Archive sha1sum="71f16834665031b19633172714344f29a9ff2e0f" type="targz">http://ovh.dl.sourceforge.net/sourceforge/psmisc/psmisc-21.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>psmisc</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-09</Date>
+            <Version>21.5</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,80 @@
+<PISI>
+  <Component>
+    <Description xml:lang="tr">...</Description>
+    <LocalName xml:lang="tr">Çekirdek</LocalName>
+    <Name>kernel</Name>
+    <Summary xml:lang="tr">İşletim sistemi çekirdekleri ve ilgili programlar</Summary>
+  </Component>
+  <Component>
+    <Description xml:lang="tr">...</Description>
+    <LocalName xml:lang="tr">Diğer Paketler</LocalName>
+    <Name>other</Name>
+    <Summary xml:lang="tr">Diğer bileşenlere uymayan paketler</Summary>
+  </Component>
+  <Component>
+    <Description xml:lang="tr">...</Description>
+    <LocalName xml:lang="tr">Programlama Araçları</LocalName>
+    <Name>programming.tools</Name>
+    <Summary xml:lang="tr">Geliştiricilerin kullandıkları araçlar</Summary>
+  </Component>
+  <Component>
+    <Description xml:lang="tr">...</Description>
+    <LocalName xml:lang="tr">Programlama Dilleri</LocalName>
+    <Name>programming.languages</Name>
+    <Summary xml:lang="tr">Çeşitli programlama dillerinin derleyicileri ve yorumcuları</Summary>
+  </Component>
+  <Component>
+    <Description xml:lang="tr">...</Description>
+    <LocalName xml:lang="tr">Programlama Ortamları</LocalName>
+    <Name>programming.environments</Name>
+    <Summary xml:lang="tr">Geliştiriciler için entegre bir çalışma ortamı sağlayan programlar</Summary>
+  </Component>
+  <Component>
+    <Description xml:lang="tr">...</Description>
+    <LocalName xml:lang="tr">Geliştirme Sistemi</LocalName>
+    <Name>system.devel</Name>
+    <Summary xml:lang="tr">Paket derleme ve geliştirme için gerekli araçlar</Summary>
+  </Component>
+  <Component>
+    <Description xml:lang="tr">...</Description>
+    <LocalName xml:lang="tr">Taban Sistem</LocalName>
+    <Name>system.base</Name>
+    <Summary xml:lang="tr">Temel işletim sistemi servisleri</Summary>
+  </Component>
+  <Component>
+    <Description xml:lang="tr">...</Description>
+    <LocalName xml:lang="tr">Uygulamalar</LocalName>
+    <Name>applications</Name>
+    <Summary xml:lang="tr">...</Summary>
+  </Component>
+  <Component>
+    <Description xml:lang="tr">...</Description>
+    <LocalName xml:lang="tr">TeX uygulamaları</LocalName>
+    <Name>applications.tex</Name>
+    <Summary xml:lang="tr">Metin biçimlendirme ve dizgi sistemi</Summary>
+  </Component>
+  <Component>
+    <Description xml:lang="tr">...</Description>
+    <LocalName xml:lang="tr">Mozilla</LocalName>
+    <Name>applications.mozilla</Name>
+    <Summary xml:lang="tr">Mozilla programı ve çevre servisleri</Summary>
+  </Component>
+  <Component>
+    <Description xml:lang="tr">...</Description>
+    <LocalName xml:lang="tr">KDE Masaüstü</LocalName>
+    <Name>desktop.kde</Name>
+    <Summary xml:lang="tr">Kapsamlı ve gelişmiş masaüstü yazılımı</Summary>
+  </Component>
+  <Component>
+    <Description xml:lang="tr">...</Description>
+    <LocalName xml:lang="tr">Gnome Masaüstü</LocalName>
+    <Name>desktop.gnome</Name>
+    <Summary xml:lang="tr">Gnome masaüstüne ait yazılımlar</Summary>
+  </Component>
+  <Component>
+    <Description xml:lang="tr">...</Description>
+    <LocalName xml:lang="tr">Özgür Masaüstü</LocalName>
+    <Name>desktop.freedesktop</Name>
+    <Summary xml:lang="tr">X11 ve diğer temel masaüstü sistemi yazılımları</Summary>
+  </Component>
+</PISI>

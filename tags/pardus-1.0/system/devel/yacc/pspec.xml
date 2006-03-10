@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>yacc</Name>
+        <Homepage>http://http://dinosaur.compilertools.net/#yacc</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>category</IsA>
+        <Summary>Yacc: Yet Another Compiler-Compiler</Summary>
+        <Summary xml:lang="tr">Yacc: Yet Another Compiler-Compiler</Summary>
+        <Description>Yacc: Yet Another Compiler-Compiler</Description>
+        <Description xml:lang="tr">Yacc: Yet Another Compiler-Compiler</Description>
+        <Archive sha1sum="697ea853533e325f47b6b13401d05e7c97012729" type="targz">ftp://metalab.unc.edu/pub/Linux/devel/compiler-tools/yacc-1.9.1.tar.Z</Archive>
+        <Patches>
+            <Patch>mkstemp.patch</Patch>
+        </Patches>
+        
+    </Source>
+
+    <Package>
+        <Name>yacc</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-26</Date>
+            <Version>1.9.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

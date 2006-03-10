@@ -1,0 +1,463 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>glibc</Name>
+        <Homepage>http://www.gnu.org/software/libc/libc.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <License>LGPL-2</License>
+        <IsA>library</IsA>
+        <Summary>GNU libc6 (also called glibc2) C library</Summary>
+        <Description>GNU libc6 (also called glibc2) C library</Description>
+        <Summary xml:lang="tr">GNU libc6 (glibc2 olarak da bilinir) C kütüphanesi.</Summary>
+        <Description xml:lang="tr">GNU glibc, linux üzerinde çalışan hemen hemen tüm uygulamalar için gerekli standart 
+        bir kütüphanedir. Disk ve bellek alanlarının kullanımı gibi işlemleri sağlamanın yanısıra standart C ve matematik 
+        kütüphanesi gibi bir linux üzerinde olmazsa olmaz kütüphaneleri içinde barındırır.</Description>
+        <Archive sha1sum="465cb1f4708dfa88606379cc1ebecb724c65f027" type="tarbz2">http://ftp.gnu.org/gnu/glibc/glibc-2.3.5.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="2.6.5">linux-headers</Dependency>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch compressionType="bz2" level="1">glibc-pardus.patch.bz2</Patch>
+            <Patch level="1">1010_all_2.3.5-initstate-r-checks.patch</Patch>
+            <Patch level="1">1020_all_2.3.5-dl-tls.patch</Patch>
+            <Patch level="1">1030_all_glibc-manual-no-perl.patch</Patch>
+            <Patch level="1">1040_all_2.3.3-localedef-fix-trampoline.patch</Patch>
+            <Patch level="1">1050_all_glibc-2.3.5-PR1078-fwrite-segv.patch</Patch>
+            <Patch level="1">1051_all_glibc-2.3.5-PR524-getaddrinfo-order-fix.patch</Patch>
+            <Patch level="1">1520_all_glibc235-execvp-fix.patch</Patch>
+            <Patch level="1">5000_all_2.3.4-mdns-resolver-20041102.patch</Patch>
+            <Patch>5005_all_enable-multilib-with-cross-compile.patch</Patch>
+            <Patch level="1">5010_all_2.3.4-features-header-fix.patch</Patch>
+            <Patch level="1">5030_all_2.3.4-kd-types.patch</Patch>
+            <Patch level="1">5050_all_2.3.4-locale-no-archive.patch</Patch>
+            <Patch level="1">5070_all_cross-compile-nptl.patch</Patch>
+            <Patch>6400_all_sh-glibc-2.3.2-fpscr_values.patch</Patch>
+            <Patch level="0">6401_all_sh-glibc-2.3.3-sh-nptl-multidir.patch</Patch>
+            <Patch level="0">6402_all_sh-glibc-2.3.3-sh-linux-fcntl_h.patch</Patch>
+            <Patch level="0">6403_all_sh-glibc-2.3.5-memset-fix.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>glibc</Name>
+        <RuntimeDependencies>
+            <Dependency>gettext</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="localedata">/usr/share/i18n</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="data">/usr/share/zoneinfo</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="executable">/sbin</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/nscd.conf">nscd.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/init.d/nscd">nscd</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/host.conf">host.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/nsswitch.conf">nsswitch.conf</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <Package>
+        <Name>glibc-locales</Name>
+        <Files>
+            <Path fileType="localedata">/usr/lib/locale/aa_DJ</Path>
+            <Path fileType="localedata">/usr/lib/locale/aa_ER</Path>
+            <Path fileType="localedata">/usr/lib/locale/aa_ER@saaho</Path>
+            <Path fileType="localedata">/usr/lib/locale/aa_ET</Path>
+            <Path fileType="localedata">/usr/lib/locale/af_ZA</Path>
+            <Path fileType="localedata">/usr/lib/locale/am_ET</Path>
+            <Path fileType="localedata">/usr/lib/locale/an_ES</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_AE</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_AE.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_BH</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_BH.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_DZ</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_DZ.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_EG</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_EG.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_IN</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_IQ</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_IQ.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_JO</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_JO.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_KW</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_KW.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_LB</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_LB.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_LY</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_LY.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_MA</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_MA.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_OM</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_OM.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_QA</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_QA.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_SA</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_SA.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_SD</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_SD.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_SY</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_SY.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_TN</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_TN.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_YE</Path>
+            <Path fileType="localedata">/usr/lib/locale/ar_YE.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/az_AZ.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/be_BY</Path>
+            <Path fileType="localedata">/usr/lib/locale/be_BY.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/bg_BG</Path>
+            <Path fileType="localedata">/usr/lib/locale/bg_BG.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/bn_BD</Path>
+            <Path fileType="localedata">/usr/lib/locale/bn_IN</Path>
+            <Path fileType="localedata">/usr/lib/locale/br_FR</Path>
+            <Path fileType="localedata">/usr/lib/locale/br_FR@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/bs_BA</Path>
+            <Path fileType="localedata">/usr/lib/locale/byn_ER</Path>
+            <Path fileType="localedata">/usr/lib/locale/ca_ES</Path>
+            <Path fileType="localedata">/usr/lib/locale/ca_ES@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/ca_ES.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/cs_CZ</Path>
+            <Path fileType="localedata">/usr/lib/locale/cs_CZ.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/cy_GB</Path>
+            <Path fileType="localedata">/usr/lib/locale/cy_GB.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/da_DK</Path>
+            <Path fileType="localedata">/usr/lib/locale/da_DK.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/de_AT</Path>
+            <Path fileType="localedata">/usr/lib/locale/de_AT@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/de_AT.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/de_BE</Path>
+            <Path fileType="localedata">/usr/lib/locale/de_BE@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/de_BE.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/de_CH</Path>
+            <Path fileType="localedata">/usr/lib/locale/de_CH.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/de_DE</Path>
+            <Path fileType="localedata">/usr/lib/locale/de_DE@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/de_DE.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/de_LU</Path>
+            <Path fileType="localedata">/usr/lib/locale/de_LU@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/de_LU.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/el_GR</Path>
+            <Path fileType="localedata">/usr/lib/locale/el_GR.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_AU</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_AU.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_BW</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_BW.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_CA</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_CA.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_DK</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_DK.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_GB</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_GB.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_HK</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_HK.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_IE</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_IE@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_IE.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_IN</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_NZ</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_NZ.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_PH</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_PH.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_SG</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_SG.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_ZA</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_ZA.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_ZW</Path>
+            <Path fileType="localedata">/usr/lib/locale/en_ZW.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_AR</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_AR.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_BO</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_BO.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_CL</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_CL.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_CO</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_CO.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_CR</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_CR.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_DO</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_DO.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_EC</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_EC.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_ES</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_ES@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_ES.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_GT</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_GT.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_HN</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_HN.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_MX</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_MX.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_NI</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_NI.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_PA</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_PA.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_PE</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_PE.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_PR</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_PR.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_PY</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_PY.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_SV</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_SV.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_US</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_US.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_UY</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_UY.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_VE</Path>
+            <Path fileType="localedata">/usr/lib/locale/es_VE.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/et_EE</Path>
+            <Path fileType="localedata">/usr/lib/locale/et_EE.iso885915</Path>
+            <Path fileType="localedata">/usr/lib/locale/et_EE.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/eu_ES</Path>
+            <Path fileType="localedata">/usr/lib/locale/eu_ES@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/eu_ES.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/fa_IR</Path>
+            <Path fileType="localedata">/usr/lib/locale/fi_FI</Path>
+            <Path fileType="localedata">/usr/lib/locale/fi_FI@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/fi_FI.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/fo_FO</Path>
+            <Path fileType="localedata">/usr/lib/locale/fo_FO.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/fr_BE</Path>
+            <Path fileType="localedata">/usr/lib/locale/fr_BE@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/fr_BE.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/fr_CA</Path>
+            <Path fileType="localedata">/usr/lib/locale/fr_CA.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/fr_CH</Path>
+            <Path fileType="localedata">/usr/lib/locale/fr_CH.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/fr_FR</Path>
+            <Path fileType="localedata">/usr/lib/locale/fr_FR@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/fr_FR.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/fr_LU</Path>
+            <Path fileType="localedata">/usr/lib/locale/fr_LU@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/fr_LU.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ga_IE</Path>
+            <Path fileType="localedata">/usr/lib/locale/ga_IE@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/ga_IE.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/gd_GB</Path>
+            <Path fileType="localedata">/usr/lib/locale/gez_ER</Path>
+            <Path fileType="localedata">/usr/lib/locale/gez_ER@abegede</Path>
+            <Path fileType="localedata">/usr/lib/locale/gez_ET</Path>
+            <Path fileType="localedata">/usr/lib/locale/gez_ET@abegede</Path>
+            <Path fileType="localedata">/usr/lib/locale/gl_ES</Path>
+            <Path fileType="localedata">/usr/lib/locale/gl_ES@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/gl_ES.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/gu_IN</Path>
+            <Path fileType="localedata">/usr/lib/locale/gv_GB</Path>
+            <Path fileType="localedata">/usr/lib/locale/gv_GB.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/he_IL</Path>
+            <Path fileType="localedata">/usr/lib/locale/he_IL.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/hi_IN</Path>
+            <Path fileType="localedata">/usr/lib/locale/hr_HR</Path>
+            <Path fileType="localedata">/usr/lib/locale/hr_HR.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/hu_HU</Path>
+            <Path fileType="localedata">/usr/lib/locale/hu_HU.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/id_ID</Path>
+            <Path fileType="localedata">/usr/lib/locale/id_ID.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/is_IS</Path>
+            <Path fileType="localedata">/usr/lib/locale/is_IS.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/it_CH</Path>
+            <Path fileType="localedata">/usr/lib/locale/it_CH.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/it_IT</Path>
+            <Path fileType="localedata">/usr/lib/locale/it_IT@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/it_IT.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/iw_IL</Path>
+            <Path fileType="localedata">/usr/lib/locale/iw_IL.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ja_JP.eucjp</Path>
+            <Path fileType="localedata">/usr/lib/locale/ja_JP.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ka_GE</Path>
+            <Path fileType="localedata">/usr/lib/locale/kk_KZ</Path>
+            <Path fileType="localedata">/usr/lib/locale/kl_GL</Path>
+            <Path fileType="localedata">/usr/lib/locale/kl_GL.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/kn_IN</Path>
+            <Path fileType="localedata">/usr/lib/locale/ko_KR.euckr</Path>
+            <Path fileType="localedata">/usr/lib/locale/ko_KR.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/kw_GB</Path>
+            <Path fileType="localedata">/usr/lib/locale/kw_GB.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/lg_UG</Path>
+            <Path fileType="localedata">/usr/lib/locale/lo_LA</Path>
+            <Path fileType="localedata">/usr/lib/locale/lt_LT</Path>
+            <Path fileType="localedata">/usr/lib/locale/lt_LT.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/lv_LV</Path>
+            <Path fileType="localedata">/usr/lib/locale/lv_LV.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/mi_NZ</Path>
+            <Path fileType="localedata">/usr/lib/locale/mk_MK</Path>
+            <Path fileType="localedata">/usr/lib/locale/mk_MK.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ml_IN</Path>
+            <Path fileType="localedata">/usr/lib/locale/mn_MN</Path>
+            <Path fileType="localedata">/usr/lib/locale/mr_IN</Path>
+            <Path fileType="localedata">/usr/lib/locale/ms_MY</Path>
+            <Path fileType="localedata">/usr/lib/locale/ms_MY.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/mt_MT</Path>
+            <Path fileType="localedata">/usr/lib/locale/mt_MT.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/nb_NO</Path>
+            <Path fileType="localedata">/usr/lib/locale/nb_NO.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ne_NP</Path>
+            <Path fileType="localedata">/usr/lib/locale/nl_BE</Path>
+            <Path fileType="localedata">/usr/lib/locale/nl_BE@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/nl_BE.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/nl_NL</Path>
+            <Path fileType="localedata">/usr/lib/locale/nl_NL@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/nl_NL.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/nn_NO</Path>
+            <Path fileType="localedata">/usr/lib/locale/nn_NO.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/oc_FR</Path>
+            <Path fileType="localedata">/usr/lib/locale/om_ET</Path>
+            <Path fileType="localedata">/usr/lib/locale/om_KE</Path>
+            <Path fileType="localedata">/usr/lib/locale/pa_IN</Path>
+            <Path fileType="localedata">/usr/lib/locale/pl_PL</Path>
+            <Path fileType="localedata">/usr/lib/locale/pl_PL.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/pt_BR</Path>
+            <Path fileType="localedata">/usr/lib/locale/pt_BR.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/pt_PT</Path>
+            <Path fileType="localedata">/usr/lib/locale/pt_PT@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/pt_PT.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ro_RO</Path>
+            <Path fileType="localedata">/usr/lib/locale/ro_RO.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ru_RU</Path>
+            <Path fileType="localedata">/usr/lib/locale/ru_RU.koi8r</Path>
+            <Path fileType="localedata">/usr/lib/locale/ru_RU.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ru_UA</Path>
+            <Path fileType="localedata">/usr/lib/locale/ru_UA.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/se_NO</Path>
+            <Path fileType="localedata">/usr/lib/locale/sid_ET</Path>
+            <Path fileType="localedata">/usr/lib/locale/sk_SK</Path>
+            <Path fileType="localedata">/usr/lib/locale/sk_SK.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/sl_SI</Path>
+            <Path fileType="localedata">/usr/lib/locale/sl_SI.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/so_DJ</Path>
+            <Path fileType="localedata">/usr/lib/locale/so_ET</Path>
+            <Path fileType="localedata">/usr/lib/locale/so_KE</Path>
+            <Path fileType="localedata">/usr/lib/locale/so_SO</Path>
+            <Path fileType="localedata">/usr/lib/locale/sq_AL</Path>
+            <Path fileType="localedata">/usr/lib/locale/sq_AL.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/st_ZA</Path>
+            <Path fileType="localedata">/usr/lib/locale/st_ZA.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/sv_FI</Path>
+            <Path fileType="localedata">/usr/lib/locale/sv_FI@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/sv_FI.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/sv_SE</Path>
+            <Path fileType="localedata">/usr/lib/locale/sv_SE.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ta_IN</Path>
+            <Path fileType="localedata">/usr/lib/locale/te_IN</Path>
+            <Path fileType="localedata">/usr/lib/locale/tg_TJ</Path>
+            <Path fileType="localedata">/usr/lib/locale/th_TH</Path>
+            <Path fileType="localedata">/usr/lib/locale/th_TH.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ti_ER</Path>
+            <Path fileType="localedata">/usr/lib/locale/ti_ET</Path>
+            <Path fileType="localedata">/usr/lib/locale/tig_ER</Path>
+            <Path fileType="localedata">/usr/lib/locale/tl_PH</Path>
+            <Path fileType="localedata">/usr/lib/locale/tt_RU.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/uk_UA</Path>
+            <Path fileType="localedata">/usr/lib/locale/uk_UA.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/ur_PK</Path>
+            <Path fileType="localedata">/usr/lib/locale/uz_UZ</Path>
+            <Path fileType="localedata">/usr/lib/locale/uz_UZ@cyrillic</Path>
+            <Path fileType="localedata">/usr/lib/locale/vi_VN</Path>
+            <Path fileType="localedata">/usr/lib/locale/vi_VN.tcvn</Path>
+            <Path fileType="localedata">/usr/lib/locale/wa_BE</Path>
+            <Path fileType="localedata">/usr/lib/locale/wa_BE@euro</Path>
+            <Path fileType="localedata">/usr/lib/locale/wa_BE.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/xh_ZA</Path>
+            <Path fileType="localedata">/usr/lib/locale/xh_ZA.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/yi_US</Path>
+            <Path fileType="localedata">/usr/lib/locale/zh_CN</Path>
+            <Path fileType="localedata">/usr/lib/locale/zh_CN.gb18030</Path>
+            <Path fileType="localedata">/usr/lib/locale/zh_CN.gbk</Path>
+            <Path fileType="localedata">/usr/lib/locale/zh_CN.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/zh_HK</Path>
+            <Path fileType="localedata">/usr/lib/locale/zh_HK.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/zh_SG</Path>
+            <Path fileType="localedata">/usr/lib/locale/zh_SG.gbk</Path>
+            <Path fileType="localedata">/usr/lib/locale/zh_TW</Path>
+            <Path fileType="localedata">/usr/lib/locale/zh_TW.euctw</Path>
+            <Path fileType="localedata">/usr/lib/locale/zh_TW.utf8</Path>
+            <Path fileType="localedata">/usr/lib/locale/zu_ZA</Path>
+            <Path fileType="localedata">/usr/lib/locale/zu_ZA.utf8</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="9">
+            <Date>2005-11-28</Date>
+            <Version>2.3.5</Version>
+            <Comment>strip locales</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="8">
+            <Date>2005-11-16</Date>
+            <Version>2.3.5</Version>
+            <Comment>Fix #753</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="7">
+            <Date>2005-11-13</Date>
+            <Version>2.3.5</Version>
+            <Comment>Default timezone is set by util-linux package</Comment>
+            <Name>Gürer Özen</Name>
+            <Email>gurer@uludag.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-11-05</Date>
+            <Version>2.3.5</Version>
+            <Comment>glibc-2.3.5-readahead.diff removed</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-10-30</Date>
+            <Version>2.3.5</Version>
+            <Comment>AdditionalFile permissions fixed</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-10-27</Date>
+            <Version>2.3.5</Version>
+            <Comment>glibc-2.3.5-readahead.diff added (for preloading libraries), with this we'll gain ~%5 extra performance</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-10-10</Date>
+            <Version>2.3.5</Version>
+            <Comment>Our toolchain is young enough for as-needed. So as-needed enabled</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-10-10</Date>
+            <Version>2.3.5</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-08-10</Date>
+            <Version>2.3.4.20041102</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

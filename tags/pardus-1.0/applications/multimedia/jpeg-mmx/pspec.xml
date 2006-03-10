@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>jpeg-mmx</Name>
+        <Homepage>http://mjpeg.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>library</IsA>
+        <Description xml:lang="en">JPEG library with mmx enhancements</Description>
+        <Description xml:lang="tr">Mmx geliştirmeleri yapılmış bir JPEG kütüphanesi</Description>
+        <Summary xml:lang="en">JPEG library with mmx enhancements</Summary>
+        <Summary xml:lang="tr">Mmx geliştirmeleri yapılmış bir JPEG kütüphanesi</Summary>
+        <Archive type="targz" sha1sum="16a3549f729f4ad0631d87492d68948f3bba4983">http://easynews.dl.sourceforge.net/sourceforge/mjpeg/jpeg-mmx-1.1.2.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">jpeg-mmx-1.1.2-gcc34.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>jpeg-mmx</Name>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+       <Update release="2">
+           <Date>2005-10-31</Date>
+           <Version>1.1.2</Version>
+           <Comment>Fix conflicts with normal jpeg</Comment>
+           <Name>Onur Küçük</Name>
+           <Email>onur@uludag.org.tr</Email>
+       </Update>
+       <Update release="1">
+            <Date>2005-10-14</Date>
+            <Version>1.1.2</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

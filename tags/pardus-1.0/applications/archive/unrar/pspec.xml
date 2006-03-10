@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>unrar</Name>
+        <Homepage>http://www.rarlab.com/rar_add.htm</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>unRAR</License>
+        <IsA>app:console</IsA>
+        <Summary>Uncompress rar files</Summary>
+        <Summary xml:lang="tr">Unrar, .rar formatında sıkıştırılmış dosyaları açar.</Summary>
+        <Description>Uncompress rar files</Description>
+        <Description xml:lang="tr">Unrar, .rar formatında sıkıştırılmış dosyaları açar.</Description>
+        <Archive sha1sum="e0bf07f8a36b738b1ed033b767155f27b51fc408" type="targz">http://www.rarlab.com/rar/unrarsrc-3.5.4.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>unrar</Name>
+        <RuntimeDependencies>
+            <Dependency>libstdc++</Dependency>
+        </RuntimeDependencies>
+        <Conflicts>unrar-gpl</Conflicts>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-11-04</Date>
+            <Version>3.5.4</Version>
+            <Comment>Dep fix</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2" type="security">
+            <Date>2005-10-27</Date>
+            <Version>3.5.4</Version>
+            <Comment>Update to to version 3.5.4</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-15</Date>
+            <Version>3.4.3</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

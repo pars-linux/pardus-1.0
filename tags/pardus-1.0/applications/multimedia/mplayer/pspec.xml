@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+
+<PISI>
+    <Source>
+        <Name>mplayer</Name>
+        <Homepage>http://www.mplayerhq.hu/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:gui</IsA>
+        <Description xml:lang="en">Media Player for Linux</Description>
+        <Description xml:lang="tr">Linux için çokluortam oynatıcı</Description>
+        <Summary xml:lang="en">Media Player for Linux</Summary>
+        <Summary xml:lang="tr">Linux için çokluortam oynatıcı</Summary>
+        <Archive type="tarbz2" sha1sum="45088085b668699bab9250e3ea14aaa87c3ce3fd">ftp://ftp.uludag.org.tr/pub/pisi/source/mplayer-20051121.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="0.9.0">xvid</Dependency>
+            <Dependency versionFrom="20030428">divx4linux</Dependency>
+            <Dependency versionFrom="20040412">win32codecs</Dependency>
+            <Dependency>aalib</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>arts</Dependency>
+            <Dependency>DirectFB</Dependency>
+            <Dependency>libdvdread</Dependency>
+            <Dependency>lame</Dependency>
+            <Dependency versionFrom="0.9.5">libdv</Dependency>
+            <Dependency>giflib</Dependency>
+            <Dependency>libungif</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency versionFrom="2.4">gtk2</Dependency>
+            <Dependency versionFrom="2.0">glib2</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>lirc</Dependency>
+            <Dependency>libcaca</Dependency>
+            <Dependency>lzo</Dependency>
+            <Dependency>libmad</Dependency>
+            <Dependency versionFrom="0.7.0">libmatroska</Dependency>
+            <Dependency>faad2</Dependency>
+            <Dependency>gettext</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>samba</Dependency>
+            <Dependency>libsdl</Dependency>
+            <Dependency versionFrom="1.0_alpha5">libtheora</Dependency>
+            <Dependency versionFrom="2.1">freetype</Dependency>
+            <Dependency>ncurses</Dependency>
+            <Dependency>libmpcdec</Dependency>
+            <Dependency>patch</Dependency>
+            <Dependency>live555</Dependency>
+            <Dependency>libcdio</Dependency>
+            <Dependency>libdts</Dependency>
+            <Dependency>twolame</Dependency>
+            <Dependency>nas</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">mplayer-1.0_pre6-locale.patch</Patch>
+            <Patch level="1">mplayer-20051019-no_pause_in_configure.patch</Patch>
+            <Patch level="1">mplayer-20051019-turkish_msg.patch</Patch>
+            <Patch level="1">mplayer_conf.patch</Patch>
+            <Patch level="1">mplayer-20051121-fix_theora_compile.patch</Patch>
+            <Patch level="1">desktop_file.patch</Patch>
+            <Patch>default_get_buffer-overflow.diff</Patch>
+        </Patches>
+ 
+    </Source>
+
+    <Package>
+        <Name>mplayer</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="0.9.0">xvid</Dependency>
+            <Dependency versionFrom="20030428">divx4linux</Dependency>
+            <Dependency versionFrom="20040412">win32codecs</Dependency>
+            <Dependency>aalib</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>arts</Dependency>
+            <Dependency>DirectFB</Dependency>
+            <Dependency>libdvdread</Dependency>
+            <Dependency>lame</Dependency>
+            <Dependency versionFrom="0.9.5">libdv</Dependency>
+            <Dependency>giflib</Dependency>
+            <Dependency>libungif</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency versionFrom="2.4">gtk2</Dependency>
+            <Dependency versionFrom="2.0">glib2</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>lirc</Dependency>
+            <Dependency>libcaca</Dependency>
+            <Dependency>lzo</Dependency>
+            <Dependency>libmad</Dependency>
+            <Dependency versionFrom="0.7.0">libmatroska</Dependency>
+            <Dependency>faad2</Dependency>
+            <Dependency>gettext</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>samba</Dependency>
+            <Dependency>libsdl</Dependency>
+            <Dependency versionFrom="1.0_alpha5">libtheora</Dependency>
+            <Dependency versionFrom="2.1">freetype</Dependency>
+            <Dependency>ncurses</Dependency>
+            <Dependency>libmpcdec</Dependency>
+            <Dependency>live555</Dependency>
+            <Dependency>libcdio</Dependency>
+            <Dependency>libdts</Dependency>
+            <Dependency>twolame</Dependency>
+            <Dependency>nas</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/mplayer</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="12">
+            <Date>2005-12-24</Date>
+            <Version>20051121</Version>
+            <Comment>First search for arts, then for alsa, for some soundcards</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="11">
+            <Date>2005-12-23</Date>
+            <Version>20051121</Version>
+            <Comment>Fix skin language, needs lots of work</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="10">
+            <Date>2005-12-21</Date>
+            <Version>20051121</Version>
+            <Comment>Fix desktop file</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="9">
+            <Date>2005-12-12</Date>
+            <Version>20051121</Version>
+            <Comment>Add lirc support</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="8">
+            <Date>2005-12-05</Date>
+            <Version>20051121</Version>
+            <Comment>Enable nas</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="7" type="security">
+            <Date>2005-12-02</Date>
+            <Version>20051121</Version>
+            <Comment>Apply a patch from upstream to fix possible overflow in default_get_buffer</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2005-11-29</Date>
+            <Version>20051121</Version>
+            <Comment>Removed CFLAG modification, really enable samba</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2005-11-28</Date>
+            <Version>20051121</Version>
+            <Comment>Enable samba</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2005-11-25</Date>
+            <Version>20051121</Version>
+            <Comment>Enable live/libdts/twolame/internal-faad and disable cdparanoia so we can use libcdio for real</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2005-11-24</Date>
+            <Version>20051121</Version>
+            <Comment>Skin improvement</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="2" type="Bug">
+            <Date>2005-11-21</Date>
+            <Version>20051121</Version>
+            <Comment>Version bump</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-19</Date>
+            <Version>20051019</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

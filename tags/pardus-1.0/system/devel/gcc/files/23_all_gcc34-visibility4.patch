@@ -1,0 +1,122 @@
+2005-02-10  Gwenole Beauchesne  <gbeauchesne@mandrakesoft.com>
+
+	* libstdc++-v3/include/bits/allocator.h: Make all declarations
+	have default visibility.
+	* libstdc++-v3/include/bits/basic_string.h: Likewise.
+	* libstdc++-v3/include/std/std_istream.h: Likewise.
+	* libstdc++-v3/include/std/std_ostream.h: Likewise.
+	* libstdc++-v3/include/std/std_fstream.h: Likewise.
+
+2005-02-03  H.J. Lu  <hongjiu.lu@intel.com>
+
+	PR C++/19664
+	* decl2.c (determine_visibility): Don't set visibility to
+	hidden if it has been set explicitly by user.
+
+--- gcc-3.4.4/gcc/cp/decl2.c.visibility4	2005-01-26 05:26:45.000000000 -0500
++++ gcc-3.4.4/gcc/cp/decl2.c	2005-02-10 18:56:04.000000000 -0500
+@@ -1699,8 +1699,12 @@ determine_visibility (tree decl)
+ 	  && DECL_DECLARED_INLINE_P (decl)
+ 	  && visibility_options.inlines_hidden)
+ 	{
+-	  DECL_VISIBILITY (decl) = VISIBILITY_HIDDEN;
+-	  DECL_VISIBILITY_SPECIFIED (decl) = 1;
++	  /* Don't change it if it has been set explicitly by user.  */
++	  if (!DECL_VISIBILITY_SPECIFIED (decl))
++	    {
++	      DECL_VISIBILITY (decl) = VISIBILITY_HIDDEN;
++	      DECL_VISIBILITY_SPECIFIED (decl) = 1;
++	    }
+ 	}
+       else
+ 	{
+--- gcc-3.4.4/libstdc++-v3/include/bits/allocator.h.visibility4	2004-03-18 12:36:46.000000000 -0500
++++ gcc-3.4.4/libstdc++-v3/include/bits/allocator.h	2005-02-10 19:13:31.000000000 -0500
+@@ -51,6 +51,8 @@
+ // Define the base class to std::allocator.
+ #include <bits/c++allocator.h>
+ 
++#pragma GCC visibility push(default)
++
+ namespace std
+ {
+   template<typename _Tp>
+@@ -127,4 +129,6 @@ namespace std
+ #undef ___glibcxx_base_allocator
+ } // namespace std
+ 
++#pragma GCC visibility pop
++
+ #endif
+--- gcc-3.4.4/libstdc++-v3/include/bits/basic_string.h.visibility4	2004-11-10 10:33:37.000000000 -0500
++++ gcc-3.4.4/libstdc++-v3/include/bits/basic_string.h	2005-02-10 19:13:31.000000000 -0500
+@@ -45,6 +45,8 @@
+ #include <bits/atomicity.h>
+ #include <debug/debug.h>
+ 
++#pragma GCC visibility push(default)
++
+ namespace std
+ {
+   /**
+@@ -2348,4 +2350,6 @@ namespace std
+ 	    basic_string<_CharT, _Traits, _Alloc>& __str);
+ } // namespace std
+ 
++#pragma GCC visibility pop
++
+ #endif /* _BASIC_STRING_H */
+--- gcc-3.4.4/libstdc++-v3/include/std/std_istream.h.visibility4	2004-02-11 10:02:03.000000000 -0500
++++ gcc-3.4.4/libstdc++-v3/include/std/std_istream.h	2005-02-10 19:36:32.000000000 -0500
+@@ -45,6 +45,8 @@
+ #include <ios>
+ #include <limits> // For numeric_limits
+ 
++#pragma GCC visibility push(default)
++
+ namespace std
+ {
+   // [27.6.1.1] Template class basic_istream
+@@ -771,4 +773,6 @@ namespace std
+ # include <bits/istream.tcc>
+ #endif
+ 
++#pragma GCC visibility pop
++
+ #endif	/* _GLIBCXX_ISTREAM */
+--- gcc-3.4.4/libstdc++-v3/include/std/std_ostream.h.visibility4	2004-02-11 10:02:03.000000000 -0500
++++ gcc-3.4.4/libstdc++-v3/include/std/std_ostream.h	2005-02-10 19:36:37.000000000 -0500
+@@ -44,6 +44,8 @@
+ 
+ #include <ios>
+ 
++#pragma GCC visibility push(default)
++
+ namespace std
+ {
+   // [27.6.2.1] Template class basic_ostream
+@@ -545,4 +547,6 @@ namespace std
+ # include <bits/ostream.tcc>
+ #endif
+ 
++#pragma GCC visibility pop
++
+ #endif	/* _GLIBCXX_OSTREAM */
+--- gcc-3.4.4/libstdc++-v3/include/std/std_fstream.h.visibility4	2004-10-13 09:30:49.000000000 -0400
++++ gcc-3.4.4/libstdc++-v3/include/std/std_fstream.h	2005-02-11 08:49:11.760873500 -0500
+@@ -49,6 +49,8 @@
+ #include <bits/basic_file.h>
+ #include <bits/gthr.h>
+ 
++#pragma GCC visibility push(default)
++
+ namespace std
+ {
+   // [27.8.1.1] template class basic_filebuf
+@@ -840,4 +842,6 @@ namespace std
+ # include <bits/fstream.tcc>
+ #endif
+ 
++#pragma GCC visibility pop
++
+ #endif /* _GLIBCXX_FSTREAM */

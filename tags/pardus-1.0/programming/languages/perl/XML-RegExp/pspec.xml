@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>XML-RegExp</Name>
+        <Homepage>http://cpan.org/modules/by-module/XML/XML-RegExp-0.03.readme</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Summary>A Perl module which contains some regular expressions for XML tokens</Summary>
+        <Summary xml:lang="tr">Bazı XML işaretleri için düzenli ifadeler barındıran bir Perl modülü</Summary>
+        <Description>Contains regular expressions for the following XML tokens: BaseChar, Ideographic, Letter, Digit, Extender, CombiningChar, NameChar, EntityRef, CharRef, Reference, Name, NmToken, and AttValue</Description>
+        <Description xml:lang="tr">Düzenli ifadeleri bulundurulan XML işaretleri: BaseChar, Ideographic, Letter, Digit, Extender, CombiningChar, NameChar, EntityRef, CharRef, Reference, Name, NmToken, and AttValue</Description>
+        <Archive sha1sum="76850b067670a4bebea7780bd52a1f9505fcf62c" type="targz">http://cpan.org/modules/by-module/XML/TJMATHER/XML-RegExp-0.03.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+            <Dependency versionFrom="2.29">XML-Parser</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>XML-RegExp</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-11-29</Date>
+            <Version>0.03</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

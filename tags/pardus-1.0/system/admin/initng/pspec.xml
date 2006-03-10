@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>initng</Name>
+        <Homepage>http://initng.thinktux.net/index.php/Main_Page</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>daemon</IsA>
+        <Summary>A next generation init replacement</Summary>
+        <Summary xml:lang="tr">Sistem açılırken çalıştırılan programları yöneten yazılım</Summary>
+        <Description>A next generation init replacement</Description>
+        <Description xml:lang="tr">Sistem açılırken çalıştırılan programları yöneten yazılım</Description>
+        <Archive sha1sum="f4276ad37251bc01b98e62cc3db101bb92cfa185" type="targz">http://cekirdek.uludag.org.tr/~caglar/initng/initng-2114.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>sysvinit</Dependency>
+            <Dependency>baselayout</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>initng</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-11-15</Date>
+            <Version>2114</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2005-11-06</Date>
+            <Version>1965</Version>
+            <Comment>Version bump</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-18</Date>
+            <Version>1827</Version>
+            <Comment>This is a special package just for testing, so ill use svn revisions as version</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

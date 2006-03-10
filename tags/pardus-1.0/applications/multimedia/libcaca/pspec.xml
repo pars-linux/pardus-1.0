@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libcaca</Name>
+        <Homepage>http://sam.zoy.org/projects/libcaca</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>library</IsA>
+        <Description>A library that creates colored ASCII-art graphics</Description>
+        <Description xml:lang="tr">Renkli ASCII-sanat grafikleri oluşturan bir kütüphane</Description>
+        <Summary>A library that creates colored ASCII-art graphics</Summary>
+        <Summary xml:lang="tr">Renkli ASCII-sanat grafikleri oluşturan bir kütüphane</Summary>
+        <Archive sha1sum="25615139b0f5938b3e439c777364e7d8cd12634d" type="targz">http://sam.zoy.org/projects/libcaca/libcaca-0.9.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>imlib2</Dependency>
+            <Dependency>xorg</Dependency>
+            <Dependency versionFrom="5.3">ncurses</Dependency>
+            <Dependency versionFrom="1.4.2">slang</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">libcaca-0.9-libtool.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>libcaca</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share/libcaca</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2005-09-21</Date>
+            <Version>0.9</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

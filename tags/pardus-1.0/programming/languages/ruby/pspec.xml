@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ruby</Name>
+        <Homepage>http://www.ruby-lang.org/en/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>Ruby</License>
+        <IsA>devel</IsA>
+        <Summary>An object-oriented scripting language</Summary>
+        <Description>An object-oriented scripting language</Description>
+        <Summary xml:lang="tr">Nesneye dayalı bir dil</Summary>
+        <Description xml:lang="tr">Nesneye dayalı bir dil</Description>
+        <Archive sha1sum="407e70377214fcb812cdbb86a3e1b735e69b7cff" type="targz">ftp://ftp.ruby-lang.org/pub/ruby/ruby-1.8.3.tar.gz</Archive>
+        <BuildDependencies> 
+            <Dependency versionFrom="1.8.0">gdbm</Dependency>
+            <Dependency versionFrom="4.1">readline</Dependency>
+            <Dependency versionFrom="5.2">ncurses</Dependency>
+            <Dependency>findutils</Dependency>
+        </BuildDependencies> 
+    </Source>
+
+    <Package>
+        <Name>ruby</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-10-16</Date>
+            <Version>1.8.3</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

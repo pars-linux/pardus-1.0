@@ -1,0 +1,13 @@
+
+
+--- xc/lib/fontenc/Imakefile.orig	2003-11-24 21:44:15.000000000 +0100
++++ xc/lib/fontenc/Imakefile	2003-11-24 22:39:44.000000000 +0100
+@@ -22,6 +22,8 @@
+ #define IncSubdir X11
+ #define IncSubSubdir fonts
+ 
++#define IncludeSharedObjectInNormalLib
++
+ #include <Library.tmpl>
+ 
+ #if GzipFontCompression

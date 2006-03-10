@@ -1,0 +1,28 @@
+With linux-2.6.10 headers, the following code will fail:
+#include <sys/kd.h>
+#include <linux/byteorder/big_endian.h>
+int main() {
+        return 0;
+}
+
+This is because linux/byteorder/big_endian.h needs linux/types.h for __le66,
+but sys/kd.h defines _LINUX_TYPES_H which prevents it from being included. This
+patch remedies the problem the same way sys/sysctl.h handles it.
+
+--- glibc-2.3.4.orig/sysdeps/unix/sysv/linux/sys/kd.h	2001-07-05 21:56:21.000000000 -0700
++++ glibc-2.3.4.allowtypesh/sysdeps/unix/sysv/linux/sys/kd.h	2005-03-07 03:16:17.068480502 -0800
+@@ -22,8 +22,14 @@
+ /* Make sure the <linux/types.h> header is not loaded.  */
+ #ifndef _LINUX_TYPES_H
+ # define _LINUX_TYPES_H	1
++# define __undef_LINUX_TYPES_H
+ #endif
+ 
+ #include <linux/kd.h>
+ 
++#ifdef __undef_LINUX_TYPES_H
++# undef _LINUX_TYPES_H
++# undef __undef_LINUX_TYPES_H
++#endif
++
+ #endif	/* sys/kd.h */

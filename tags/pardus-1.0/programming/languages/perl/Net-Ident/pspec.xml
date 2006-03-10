@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>Net-Ident</Name>
+        <Homepage>http://search.cpan.org/~jpc/Net-Ident-1.20/Ident.pm</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>category</IsA>
+        <Summary>Lookup the username on the remote end of a TCP/IP connection</Summary>
+        <Description>Lookup the username on the remote end of a TCP/IP connection.</Description>
+        <Archive sha1sum="1780c4048c9f9b49477103bf2a6f6d2ec1aafe52" type="targz">http://search.cpan.org/CPAN/authors/id/J/JP/JPC/Net-Ident-1.20.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </BuildDependencies>
+        
+    </Source>
+
+    <Package>
+        <Name>Net-Ident</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-10</Date>
+            <Version>1.20</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

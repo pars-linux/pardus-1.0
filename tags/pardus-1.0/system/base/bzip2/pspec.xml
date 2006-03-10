@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>bzip2</Name>
+        <Homepage>http://www.bzip.org/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>BZIP2</License>
+        <IsA>app:console</IsA>
+        <Summary>A high-quality data compressor</Summary>
+        <Description>A high-quality data compressor</Description>
+        <Summary xml:lang="tr">Yüksek kaliteli bir veri sıkıştırma uygulaması</Summary>
+        <Description xml:lang="tr">Gzip ile aynı komut satırı emir kiplerine sahip olan yüksek kaliteli bir veri sıkıştırma uygulamasıdır.</Description>
+        <Archive sha1sum="7e749510f65c86fbfff37b97144a02f1b8b8617f" type="targz">http://www.bzip.org/1.0.3/bzip2-1.0.3.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">bzip2-1.0.2-NULL-ptr-check.patch</Patch>
+            <Patch>bzip2-1.0.3-makefile-CFLAGS.patch</Patch>
+            <Patch level="1">bzip2-1.0.3-saneso.patch</Patch>
+            <Patch level="1">bzip2-1.0.2-progress.patch</Patch>
+            <Patch level="1">bzip2-1.0.3-shared-largefile-support.patch</Patch>
+            <Patch level="1">bzip2-1.0.2-chmod.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>bzip2</Name>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="2" type="security">
+            <Date>2005-11-15</Date>
+            <Version>1.0.3</Version>
+            <Comment>Multiple security fixes</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-04</Date>
+            <Version>1.0.2</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>unzip</Name>
+        <Homepage>ftp://ftp.info-zip.org/pub/infozip/UnZip.html</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>Info-ZIP</License>
+        <IsA>app:console</IsA>
+        <Summary>Unzipper for pkzip-compressed files</Summary>
+        <Description>Unzipper for pkzip-compressed files</Description>
+        <Summary xml:lang="tr">pkzip ile sıkıştırılmış dosyalar için açıcı</Summary>
+        <Description xml:lang="tr">Bu paket yardımı ile DOS ve WINDOWS sistemlerinde sıklıkla rastlıyabileceğiniz ZIP arşivinlerindeki dosyaları listeleyebilir, sınayabilir ve açabilirsiniz. unzip Info-ZIP projesinin bir parçasıdır</Description>
+        <Archive sha1sum="1831bd59b9e607a69052f83b263384895e2d4a19" type="targz">ftp://ftp.info-zip.org/pub/infozip/src/unzip552.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>sed</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">CAN-2005-2475.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>unzip</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2005-12-06</Date>
+            <Version>5.52</Version>
+            <Comment>fix #1065</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+        <Update release="2" type="security">
+            <Date>2005-10-27</Date>
+            <Version>5.52</Version>
+            <Comment>Update to 5.52 and fix CAN-2005-2475</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-07-15</Date>
+            <Version>5.50</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

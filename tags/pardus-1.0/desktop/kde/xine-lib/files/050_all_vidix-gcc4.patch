@@ -1,0 +1,24 @@
+diff -x '*~' -ur xine-lib-1.0.1/src/video_out/libdha/sysdep/AsmMacros_generic.h xine-lib-1.0.1-gcc4/src/video_out/libdha/sysdep/AsmMacros_generic.h
+--- src/video_out/libdha/sysdep/AsmMacros_generic.h	2005-04-26 10:09:11.000000000 +0200
++++ src/video_out/libdha/sysdep/AsmMacros_generic.h	2005-05-01 17:38:54.524010720 +0200
+@@ -5,7 +5,7 @@
+ #ifndef __ASM_MACROS_GENERIC_H
+ #define __ASM_MACROS_GENERIC_H
+ 
+-#warn This stuff is not ported on yur system
++#warning This stuff is not ported on yur system
+ 
+ static __inline__ void outb(short port,char val)
+ {
+diff -x '*~' -ur xine-lib-1.0.1/src/video_out/libdha/sysdep/pci_generic_cpu.c xine-lib-1.0.1-gcc4/src/video_out/libdha/sysdep/pci_generic_cpu.c
+--- src/video_out/libdha/sysdep/pci_generic_cpu.c	2005-04-26 10:09:11.000000000 +0200
++++ src/video_out/libdha/sysdep/pci_generic_cpu.c	2005-05-01 17:25:01.756610608 +0200
+@@ -1,7 +1,7 @@
+ /*
+     Generic stuff to compile VIDIX only on any system (SCRATCH)
+ */
+-#warn This stuff is not ported on yur system
++#warning This stuff is not ported on yur system
+ 
+ static int pci_config_type( void )
+ {

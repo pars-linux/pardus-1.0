@@ -1,0 +1,25 @@
+--- source/Makefile.in.orig	2005-10-06 12:41:24.000000000 +0200
++++ source/Makefile.in	2005-10-06 12:42:38.000000000 +0200
+@@ -124,7 +124,7 @@
+ SBIN_PROGS = bin/smbd@EXEEXT@ bin/nmbd@EXEEXT@ bin/swat@EXEEXT@ @EXTRA_SBIN_PROGS@
+ 
+ BIN_PROGS1 = bin/smbclient@EXEEXT@ bin/net@EXEEXT@ bin/smbspool@EXEEXT@ \
+-	bin/testparm@EXEEXT@ bin/smbstatus@EXEEXT@ 
++	bin/testparm@EXEEXT@ bin/smbstatus@EXEEXT@ bin/smbget@EXEEXT@
+ BIN_PROGS2 = bin/smbcontrol@EXEEXT@ bin/smbtree@EXEEXT@ bin/tdbbackup@EXEEXT@ \
+ 	bin/nmblookup@EXEEXT@ bin/pdbedit@EXEEXT@ bin/tdbdump@EXEEXT@ \
+ 	bin/tdbtool@EXEEXT@
+@@ -136,11 +136,11 @@
+ 	bin/masktest@EXEEXT@ bin/locktest@EXEEXT@ \
+ 	bin/locktest2@EXEEXT@ bin/nsstest@EXEEXT@ bin/vfstest@EXEEXT@
+ 
+-BIN_PROGS = $(BIN_PROGS1) $(BIN_PROGS2) $(BIN_PROGS3) @EXTRA_BIN_PROGS@
+-
+ EVERYTHING_PROGS = bin/debug2html@EXEEXT@ bin/smbfilter@EXEEXT@ bin/talloctort@EXEEXT@ \
+ 	bin/log2pcap@EXEEXT@
+ 
++BIN_PROGS = $(BIN_PROGS1) $(BIN_PROGS2) $(BIN_PROGS3) @EXTRA_BIN_PROGS@ $(TORTURE_PROGS) $(EVERYTHING_PROGS)
++
+ SHLIBS = @SHLIB_PROGS@ @LIBSMBCLIENT@ @LIBSMBSHAREMODES@
+ 
+ SCRIPTS = $(srcdir)/script/smbtar $(builddir)/script/findsmb

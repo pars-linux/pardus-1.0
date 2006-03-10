@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>divx4linux</Name>
+        <Homepage>http://www.divx.com/</Homepage>
+        <Packager>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Packager>
+        <License>DIVX</License>
+        <IsA>plugin</IsA>
+        <Description>Binary release of DivX Codec 5.0.5</Description>
+        <Description xml:lang="tr">DivX 5.0.5 Codec'inin ikilik (Binary) versiyonu</Description>
+        <Summary>Binary release of DivX Codec 5.0.5</Summary>
+        <Summary xml:lang="tr">DivX 5.0.5 Codec'inin ikili (binary) versiyonu</Summary>
+        <Archive sha1sum="79a1f34be340b058b838f8668e418ac447d93b06" type="targz">http://download.divx.com/divx/divx4linux-std-20030428.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>divx4linux</Name>
+        <RuntimeDependencies>
+            <Dependency>lib-compat</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-07</Date>
+            <Version>20030428</Version>
+            <Comment>First release.</Comment>
+            <Name>Onur Küçük</Name>
+            <Email>onur@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

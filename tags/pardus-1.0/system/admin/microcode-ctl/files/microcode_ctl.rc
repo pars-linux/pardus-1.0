@@ -1,0 +1,16 @@
+#!/sbin/runscript
+# Copyright © 2005  TUBITAK/UEKAE
+# Licensed under the GNU General Public License, version 2.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+#
+# Original work belongs Gentoo Linux
+
+depend() {
+	need localmount
+}
+
+start() {
+	ebegin "Updating microcode"
+	/usr/sbin/microcode_ctl -qu -d ${MICROCODE_DEV}
+	eend $? "Failed to update microcode via '${MICROCODE_DEV}'"
+}

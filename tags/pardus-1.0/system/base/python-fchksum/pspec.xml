@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>python-fchksum</Name>
+        <Homepage>http://www.dakotacom.net/~donut/programs/fchksum.html</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Summary>Python module to find the checksum of files</Summary>
+        <Summary xml:lang="tr">Dosyaların imzasını denetleyen bir Python modülü</Summary>
+        <Description>Python module to find the checksum of files</Description>
+        <Description xml:lang="tr">Dosyaların imzasını (tutarlılık bilgisini) denetleyerek doğru bir şekilde korunmuş olup olmadığınının sağlamasını yapan bir Python modülü</Description>
+        <Archive sha1sum="b836894599ab7f1f88c7ce2d80fb1ea1245615d6" type="targz">http://www.dakotacom.net/~donut/programs/fchksum/python-fchksum-1.7.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>zlib</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>python-fchksum</Name>
+        <RuntimeDependencies>
+            <Dependency>zlib</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-08-14</Date>
+            <Version>1.7.1</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

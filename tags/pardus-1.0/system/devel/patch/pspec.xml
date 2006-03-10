@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>patch</Name>
+        <Homepage>http://www.gnu.org/software/patch/patch.html</Homepage>
+        <Packager>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Utility to apply diffs to files</Summary>
+        <Summary xml:lang="tr">Farklılıkları dosyalara uygulayan yamalama programı</Summary>
+        <Description>Utility to apply diffs to files</Description>
+        <Description xml:lang="tr">Fark dosyalarını (diff) kaynak dosyalara uygulayan yamalama programı</Description>
+        <Archive sha1sum="9a69f7191576549255f046487da420989d2834a6" type="targz">http://ftp.belnet.be/mirror/rsync.gentoo.org/gentoo/distfiles/patch-2.5.9.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>patch</Name>
+        <Summary>Utility to apply diffs to files</Summary>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-07-27</Date>
+            <Version>2.5.9</Version>
+            <Comment>First release.</Comment>
+            <Name>A. Murat Eren</Name>
+            <Email>meren@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

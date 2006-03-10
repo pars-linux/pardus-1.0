@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libnet-perl</Name>
+        <Homepage>http://search.cpan.org/~gbarr/libnet-1.19/</Homepage>
+        <Packager>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Summary>Network library for Perl</Summary>
+        <Description>Network library for Perl</Description>
+        <Summary xml:lang="tr">Perl için ağ kütüphanesi</Summary>
+        <Description xml:lang="tr">Perl için ağ kütüphanesi</Description>
+        <Archive sha1sum="8da9d05f1ef346e07d9e1c74327174d98b13b13a" type="targz">http://search.cpan.org/CPAN/authors/id/G/GB/GBARR/libnet-1.19.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </BuildDependencies>        
+    </Source>
+
+    <Package>
+        <Name>libnet-perl</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.8.2">perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-12-10</Date>
+            <Version>1.19</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,60 @@
+diff -ur kdebase-3.4.92.orig/kcontrol/style/kcmstyle.cpp kdebase-3.4.92/kcontrol/style/kcmstyle.cpp
+--- kdebase-3.4.92.orig/kcontrol/style/kcmstyle.cpp	2005-10-10 18:03:48.000000000 +0300
++++ kdebase-3.4.92/kcontrol/style/kcmstyle.cpp	2005-10-24 01:30:37.000000000 +0300
+@@ -681,21 +681,21 @@
+ 	switchStyle( currentStyle() );	// make resets visible
+ 
+ 	// Effects..
+-	cbEnableEffects->setChecked(false);
++	cbEnableEffects->setChecked(true);
+ 	comboTooltipEffect->setCurrentItem(0);
+-	comboComboEffect->setCurrentItem(0);
++	comboComboEffect->setCurrentItem(1);
+ 	comboMenuEffect->setCurrentItem(0);
+ 	comboMenuHandle->setCurrentItem(0);
+ 	comboMenuEffectType->setCurrentItem(0);
+ 	slOpacity->setValue(90);
+-	cbMenuShadow->setChecked(false);
++	cbMenuShadow->setChecked(true);
+ 
+ 	// Miscellanous
+ 	cbHoverButtons->setChecked(true);
+ 	cbTransparentToolbars->setChecked(true);
+ 	cbEnableTooltips->setChecked(true);
+ 	comboToolbarIcons->setCurrentItem(0);
+-	cbIconsOnButtons->setChecked(false);
++	cbIconsOnButtons->setChecked(true);
+ 	cbTearOffHandles->setChecked(false);
+ }
+ 
+@@ -903,9 +903,9 @@
+ 	// Load effects.
+ 	config.setGroup("KDE");
+ 
+-	cbEnableEffects->setChecked( config.readBoolEntry( "EffectsEnabled", false) );
++	cbEnableEffects->setChecked( config.readBoolEntry( "EffectsEnabled", true) );
+ 
+-	if ( config.readBoolEntry( "EffectAnimateCombo", false) )
++	if ( config.readBoolEntry( "EffectAnimateCombo", true) )
+ 		comboComboEffect->setCurrentItem( 1 );
+ 	else
+ 		comboComboEffect->setCurrentItem( 0 );
+@@ -958,7 +958,8 @@
+ 	slOpacity->setValue( (int)(100 * settings.readDoubleEntry("/KStyle/Settings/MenuOpacity", 0.90)) );
+ 
+ 	// Menu Drop-shadows...
+-	cbMenuShadow->setChecked( settings.readBoolEntry("/KStyle/Settings/MenuDropShadow", false) );
++	cbMenuShadow->setChecked(
++        settings.readBoolEntry("/KStyle/Settings/MenuDropShadow", true) );
+ 
+ 	if (cbEnableEffects->isChecked()) {
+ 		containerFrame->setEnabled( true );
+@@ -1029,7 +1030,7 @@
+ 		comboToolbarIcons->setCurrentItem(0);
+ 
+ 	config.setGroup("KDE");
+-	cbIconsOnButtons->setChecked(config.readBoolEntry("ShowIconsOnPushButtons", false));
++	cbIconsOnButtons->setChecked(config.readBoolEntry("ShowIconsOnPushButtons", true));
+ 	cbEnableTooltips->setChecked(!config.readBoolEntry("EffectNoTooltip", false));
+ 	cbTearOffHandles->setChecked(config.readBoolEntry("InsertTearOffHandle", false));
+ 

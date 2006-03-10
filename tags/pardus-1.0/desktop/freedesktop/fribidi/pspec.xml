@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>fribidi</Name>
+        <Homepage>http://fribidi.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <IsA>app:console</IsA>
+        <Summary>A free implementation of the unicode bidirectional algorithm</Summary>
+        <Summary xml:lang="tr">Çiftyönlü unikod algoritma'nın özgür bir uyarlaması</Summary>
+        <Description>A free implementation of the unicode bidirectional algorithm</Description>
+        <Description xml:lang="tr">Çiftyönlü unikod algoritma'nın özgür bir uyarlaması</Description>
+        <Archive sha1sum="a77f55797095ea5de6e620370f5968b891aed103" type="tarbz2">http://easynews.dl.sourceforge.net/sourceforge/fribidi/fribidi-0.10.4.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>fribidi</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-07</Date>
+            <Version>0.10.4</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI
+  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libraw1394</Name>
+        <Homepage>http://sourceforge.net/projects/libraw1394/</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Packager>
+        <License>LGPL-2.1</License>
+        <License>GPL-2</License>
+        <IsA>library</IsA>
+        <Description>library that provides direct access to the IEEE 1394 bus</Description>
+        <Description xml:lang="tr">IEEE 1394 veriyoluna direk erişim sağlayan bir kütüphane</Description>
+        <Summary>library that provides direct access to the IEEE 1394 bus</Summary>
+        <Summary xml:lang="tr">IEEE 1394 veriyoluna direk erişim sağlayan bir kütüphane</Summary>
+        <Archive sha1sum="898ad7897083048400470ea07d2edcd706b74bfc" type="targz">http://ovh.dl.sourceforge.net/sourceforge/libraw1394/libraw1394-1.1.0.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>libraw1394</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2005-09-08</Date>
+            <Version>1.1.0</Version>
+            <Comment>First release.</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@uludag.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
