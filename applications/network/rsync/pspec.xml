@@ -7,7 +7,7 @@
         <Homepage>http://rsync.samba.org/</Homepage>
         <Packager>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>daemon</IsA>
@@ -46,14 +46,14 @@
                 Added init scripts and config files for daemon.
             </Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-10-16</Date>
             <Version>2.6.0</Version>
             <Comment>First release.</Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

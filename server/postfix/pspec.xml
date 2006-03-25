@@ -7,7 +7,7 @@
         <Homepage>http://www.postfix.com/</Homepage>
         <Packager>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Packager>
         <License>IPL-1</License>
         <IsA>daemon</IsA>
@@ -65,14 +65,14 @@
             <Version>2.2.5</Version>
             <Comment>Additional dirs. and configuration files.</Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-11-16</Date>
             <Version>2.2.5</Version>
             <Comment>First release.</Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

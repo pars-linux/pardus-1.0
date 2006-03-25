@@ -42,7 +42,7 @@
             <Version>1.2.3</Version>
             <Comment>Fixed wrong file path specification.</Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
         <Update release="2" type="security">
             <Date>2005-10-27</Date>
