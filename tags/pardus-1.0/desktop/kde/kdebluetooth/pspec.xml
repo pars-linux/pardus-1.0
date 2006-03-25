@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>kdebluetooth</Name>
         <Homepage>http://kde-bluetooth.sourceforge.net/</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:gui</IsA>
@@ -45,14 +45,14 @@
             <Version>1.0_beta1</Version>
             <Comment>3.4 to 3.5</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-11-10</Date>
             <Version>1.0_beta1</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

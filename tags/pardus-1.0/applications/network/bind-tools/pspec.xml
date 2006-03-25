@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>bind-tools</Name>
@@ -14,7 +14,7 @@
         <Summary>bind tools: dig, nslookup, and host</Summary>
         <Summary xml:lang="tr">DNS isim çözümleme araçları</Summary>
         <Description>bind tools: dig, nslookup, and host</Description>
-        <Description xml:lang="tr">Verilen isimleri (www.uludag.org.tr gibi) ip adreslerine (193.140.100.210 gibi) çözen araçlardır. En yenisi digdir. Nslookup yerine dig kullanmanız önerilir.</Description>
+        <Description xml:lang="tr">Verilen isimleri (www.pardus.org.tr gibi) ip adreslerine (193.140.100.210 gibi) çözen araçlardır. En yenisi digdir. Nslookup yerine dig kullanmanız önerilir.</Description>
         <Archive sha1sum="99df8014e3b500c4d3a6652ec7b1c3cf7bba6f64" type="targz">ftp://ftp.isc.org/isc/bind9/9.3.1/bind-9.3.1.tar.gz</Archive>
         <Patches>
             <Patch level="1">nslookup-pardus.patch</Patch>

@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>mc</Name>
         <Homepage>http://www.ibiblio.org/mc/</Homepage>
         <Packager>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:console</IsA>
@@ -65,35 +65,35 @@
             <Version>4.6.0</Version>
             <Comment>Lotsa updates and usablity fixes</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
          <Update release="4">
             <Date>2005-11-25</Date>
             <Version>4.6.0</Version>
             <Comment>Fix runtime dependencies</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
          <Update release="3">
             <Date>2005-11-22</Date>
             <Version>4.6.0</Version>
             <Comment>Add profile.d script to make mc pretty on text console</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
          <Update release="2">
             <Date>2005-10-14</Date>
             <Version>4.6.0</Version>
             <Comment>Default options patch to make it more useable out of box.</Comment>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-09-04</Date>
             <Version>4.6.0</Version>
             <Comment>First release.</Comment>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>zpspell</Name>
-        <Homepage>http://www.uludag.org.tr/projeler/masaustu/zemberek-pardus</Homepage>
+        <Homepage>http://www.pardus.org.tr/projeler/masaustu/zemberek-pardus</Homepage>
         <Packager>
             <Name>Barış Metin</Name>
-            <Email>baris@uludag.org.tr</Email>
+            <Email>baris@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>plugin</IsA>
@@ -15,7 +15,7 @@
         <Summary xml:lang="tr">Zemberek-Pardus imla denetimi arayüzü</Summary>
         <Description>Zemberek-Pardus spell checker interface uses zemberek-server.</Description>
         <Description xml:lang="tr">Zemberek sunucusunu kullan zemberek-pardus imla denetleyicisi.</Description>
-        <Archive sha1sum="2d77879f14915869e9626097b782bee9b43d1aea" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/zpspell-0.2.tar.bz2</Archive>
+        <Archive sha1sum="2d77879f14915869e9626097b782bee9b43d1aea" type="tarbz2">ftp://ftp.pardus.org.tr/pub/pisi/source/zpspell-0.2.tar.bz2</Archive>
     </Source>
 
     <Package>
@@ -35,14 +35,14 @@
             <Version>0.2</Version>
             <Comment>New version.</Comment>
             <Name>Barış Metin</Name>
-            <Email>baris@uludag.org.tr</Email>
+            <Email>baris@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-11-26</Date>
             <Version>0.1</Version>
             <Comment>First release.</Comment>
             <Name>Barış Metin</Name>
-            <Email>baris@uludag.org.tr</Email>
+            <Email>baris@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

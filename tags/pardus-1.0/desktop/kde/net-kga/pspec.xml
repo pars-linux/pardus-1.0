@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>net-kga</Name>
-        <Homepage>http://www.uludag.org.tr/</Homepage>
+        <Homepage>http://www.pardus.org.tr/</Homepage>
         <Packager>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:gui</IsA>
@@ -15,7 +15,7 @@
         <Description xml:lang="en">Network configuration gui</Description>
         <Summary xml:lang="tr">Ağ yapılandırma arayüzü</Summary>
         <Description xml:lang="tr">Ağ yapılandırma arayüzü</Description>
-        <Archive sha1sum="c5c886b6b8e1d6254004e60bd1dc14a34d430f28" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/net-kga-1.0.tar.bz2</Archive>
+        <Archive sha1sum="c5c886b6b8e1d6254004e60bd1dc14a34d430f28" type="tarbz2">ftp://ftp.pardus.org.tr/pub/pisi/source/net-kga-1.0.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>python</Dependency>
             <Dependency>PyQt</Dependency>
@@ -47,28 +47,28 @@
             <Version>1.0</Version>
             <Comment>Release</Comment>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-12-25</Date>
             <Version>1.0_beta2</Version>
             <Comment>Beta 2.</Comment>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-12-24</Date>
             <Version>1.0_beta1</Version>
             <Comment>Beta.</Comment>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-12-19</Date>
             <Version>1.0_alpha1</Version>
             <Comment>First release.</Comment>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

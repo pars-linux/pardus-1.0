@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>digikam</Name>
         <Homepage>http://www.digikam.org/</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:gui</IsA>
@@ -56,35 +56,35 @@
             <Version>0.8.0</Version>
             <Comment>Fix i18n problem</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="4">
             <Date>2005-11-26</Date>
             <Version>0.8.0</Version>
             <Comment>New version</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-11-26</Date>
             <Version>0.8.0_beta2</Version>
             <Comment>Dep fix</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-11-21</Date>
             <Version>0.8.0_beta2</Version>
             <Comment>3.4 to 3.5</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-11-10</Date>
             <Version>0.8.0_beta2</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>lame</Name>
         <Homepage>http://lame.sourceforge.net</Homepage>
         <Packager>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Packager>
         <License>LGPL-2.1</License>
         <IsA>app:console</IsA>
@@ -44,21 +44,21 @@
             <Version>3.96.1</Version>
             <Comment>Add largefile support</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-09-07</Date>
             <Version>3.96.1</Version>
             <Comment>Useless gtk1 interface and dep removed</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-09-07</Date>
             <Version>3.96.1</Version>
             <Comment>First release.</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

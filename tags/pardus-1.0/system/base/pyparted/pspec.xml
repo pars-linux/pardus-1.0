@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>pyparted</Name>
         <Homepage>http://fedora.redhat.com</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>library</IsA>
@@ -15,7 +15,7 @@
         <Summary xml:lang="tr">Disk bölümleme tablolarını yönetmek için kullanılan parted kütüphanesine erişim sağlayan Python modülü.</Summary>
         <Description>Python bindings for parted</Description>
         <Description xml:lang="tr">Disk bölümleme tablolarını yönetmek için kullanılan parted kütüphanesine erişim sağlayan Python modülü.</Description>
-        <Archive sha1sum="ed9fd856cc18180b367a6d39e37f33ade918d4bf" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/pyparted-1.6.9.tar.gz</Archive>
+        <Archive sha1sum="ed9fd856cc18180b367a6d39e37f33ade918d4bf" type="targz">ftp://ftp.pardus.org.tr/pub/pisi/source/pyparted-1.6.9.tar.gz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="2.3">python</Dependency>
             <Dependency versionFrom="1.6.9">parted</Dependency>
@@ -40,7 +40,7 @@
             <Version>1.6.9</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

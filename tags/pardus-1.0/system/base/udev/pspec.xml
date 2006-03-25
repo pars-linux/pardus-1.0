@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>udev</Name>
         <Homepage>http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html</Homepage>
         <Packager>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:console</IsA>
@@ -52,35 +52,35 @@
             <Version>072</Version>
             <Comment>Solve #1277 and KIO/Slave problems</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="4">
             <Date>2005-12-06</Date>
             <Version>073</Version>
             <Comment>Generate static udev</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-12-01</Date>
             <Version>073</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="2" type="Bug">
             <Date>2005-10-27</Date>
             <Version>068</Version>
             <Comment>Add tty1 device node and fix COMAR postInstall script to make mknod actually work when udev is running</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-09-02</Date>
             <Version>068</Version>
             <Comment>First release.</Comment>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

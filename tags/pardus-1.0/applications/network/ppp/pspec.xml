@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 
-<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 
 <PISI>
     <Source>
@@ -8,7 +8,7 @@
         <Homepage>http://www.samba.org/ppp</Homepage>
         <Packager>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Packager>
         <License>BSD GPL-2</License>
         <IsA>category</IsA>
@@ -68,21 +68,21 @@
             <Version>2.4.2</Version>
             <Comment>Comar betiği</Comment>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-11-16</Date>
             <Version>2.4.2</Version>
             <Comment>Fix deps</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-10-22</Date>
             <Version>2.4.2</Version>
             <Comment>First release.</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

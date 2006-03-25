@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>Authen-SASL</Name>
         <Homepage>http://search.cpan.org/~gbarr/Authen-SASL/</Homepage>
         <Packager>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Packager>
         <License>Artistic</License>
         <IsA>library</IsA>
@@ -40,7 +40,7 @@
             <Version>2.04</Version>
             <Comment>First release.</Comment>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

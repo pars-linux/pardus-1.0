@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>cdk</Name>
@@ -15,7 +15,7 @@
         <Description xml:lang="tr">Curses parçacıkları için bir kütüphane</Description>
         <Summary>A library of curses widgets</Summary>
         <Summary xml:lang="tr">Curses parçacıkları için bir kütüphane</Summary>
-        <Archive sha1sum="6e80868fa825b8d1d27bc3448d3f3c1313a9dbf8" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/cdk-4.9.10-20020809.tgz</Archive>
+        <Archive sha1sum="6e80868fa825b8d1d27bc3448d3f3c1313a9dbf8" type="targz">ftp://ftp.pardus.org.tr/pub/pisi/source/cdk-4.9.10-20020809.tgz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="5.2">ncurses</Dependency>
         </BuildDependencies>

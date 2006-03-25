@@ -5,7 +5,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*- 
 #
-# A. Murat Eren <meren@uludag.org.tr>
+# A. Murat Eren <meren@pardus.org.tr>
 
 from pisi.actionsapi import shelltools
 from pisi.actionsapi import autotools

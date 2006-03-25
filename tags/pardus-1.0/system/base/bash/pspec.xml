@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>bash</Name>
         <Homepage>http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html</Homepage>
         <Packager>
             <Name>Barış Metin</Name>
-            <Email>baris@uludag.org.tr</Email>
+            <Email>baris@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:console</IsA>
@@ -91,21 +91,21 @@
             <Version>3.0</Version>
             <Comment>Patch for gchistory added (use ctrl-up/ctrl-down to walk in global history, instead of up/down) #727</Comment>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-07-04</Date>
             <Version>3.0</Version>
             <Comment>http://sourceforge.net/projects/bash-gchistory/ added</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-07-04</Date>
             <Version>3.0</Version>
             <Comment>First release.</Comment>
             <Name>Barış Metin</Name>
-            <Email>baris@uludag.org.tr</Email>
+            <Email>baris@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

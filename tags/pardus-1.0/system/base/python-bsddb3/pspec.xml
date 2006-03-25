@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI 
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>python-bsddb3</Name>
         <Homepage>http://pybsddb.sourceforge.net/</Homepage>
         <Packager>
             <Name>Eray Özkural</Name>
-            <Email>eray@uludag.org.tr</Email>
+            <Email>eray@pardus.org.tr</Email>
         </Packager>
         <License>BSD</License>
         <IsA>library</IsA>
@@ -42,7 +42,7 @@
             <Version>4.3.3</Version>
             <Comment>First release.</Comment>
             <Name>Eray Özkural</Name>
-            <Email>eray@uludag.org.tr</Email>
+            <Email>eray@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

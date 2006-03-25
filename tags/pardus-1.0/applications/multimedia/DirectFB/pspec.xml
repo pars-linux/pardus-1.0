@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>DirectFB</Name>
         <Homepage>http://www.directfb.org/</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>LGPL-2.1</License>
         <IsA>library</IsA>
@@ -15,7 +15,7 @@
         <Description xml:lang="tr">Linux framebuffer aygıtlarının üstünde çalışan hafif bir kütüphane</Description>
         <Summary xml:lang="en">Thin library on top of the Linux framebuffer devices</Summary>
         <Summary xml:lang="tr">Linux framebuffer aygıtlarının üstünde çalışan hafif bir kütüphane</Summary>
-        <Archive sha1sum="8ef5eca8a7cf0deb347dc32f5e873bb3c7c246b0" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/DirectFB-0.9.22.tar.gz</Archive>
+        <Archive sha1sum="8ef5eca8a7cf0deb347dc32f5e873bb3c7c246b0" type="targz">ftp://ftp.pardus.org.tr/pub/pisi/source/DirectFB-0.9.22.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>giflib</Dependency> 
             <Dependency>libpng</Dependency>
@@ -55,14 +55,14 @@
             <Version>0.9.22</Version>
             <Comment>Path, URL and SHA1sum fixed</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-10-03</Date>
             <Version>0.9.22</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

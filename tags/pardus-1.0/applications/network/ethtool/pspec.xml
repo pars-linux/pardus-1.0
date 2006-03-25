@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 
-<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 
 <PISI>
     <Source>
@@ -8,7 +8,7 @@
         <Homepage>http://sourceforge.net/projects/gkernel/</Homepage>
         <Packager>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:console</IsA>
@@ -35,7 +35,7 @@ abilir.</Description>
             <Version>3</Version>
             <Comment>First release.</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

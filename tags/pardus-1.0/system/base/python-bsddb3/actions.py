@@ -5,7 +5,7 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 #
-# Eray Özkural <eray@uludag.org.tr>
+# Eray Özkural <eray@pardus.org.tr>
 
 from pisi.actionsapi import pythonmodules
 

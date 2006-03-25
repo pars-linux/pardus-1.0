@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>faad2</Name>
         <Homepage>http://faac.sourceforge.net/</Homepage>
         <Packager>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:console</IsA>
@@ -15,7 +15,7 @@
         <Description xml:lang="tr">AAC dosyalarının MPEG-4 ve MPEG-2 MAIN, LOW, LTP, LD ve ER nesne türlerini düzgün bir şekilde açabilen en hızlı ISO AAC ses çözümleyicisi</Description>
         <Summary xml:lang="en">The fastest ISO AAC audio decoder available, correctly decodes all MPEG-4 and MPEG-2 MAIN, LOW, LTP, LD and ER object type AAC files</Summary>
         <Summary xml:lang="tr">AAC dosyalarının MPEG-4 ve MPEG-2 MAIN, LOW, LTP, LD ve ER nesne türlerini düzgün bir şekilde açabilen en hızlı ISO AAC ses çözümleyicisi</Summary>
-        <Archive sha1sum="7355581de1193b2c92573ecdf2168d9f3155d506" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/faad2-2.0.tar.gz</Archive>
+        <Archive sha1sum="7355581de1193b2c92573ecdf2168d9f3155d506" type="targz">ftp://ftp.pardus.org.tr/pub/pisi/source/faad2-2.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>id3lib</Dependency>
             <Dependency versionFrom="4.0.7">sed</Dependency>
@@ -48,21 +48,21 @@
             <Version>2.0</Version>
             <Comment>dosed function in action.py fixed.</Comment>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-10-10</Date>
             <Version>2.0</Version>
             <Comment>Shall the package be able to compile (fix bootstrap execution)</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-10-03</Date>
             <Version>2.0</Version>
             <Comment>First release.</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>ltrace</Name>
         <Homepage>http://packages.debian.org/unstable/utils/ltrace.html</Homepage>
         <Packager>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:console</IsA>
@@ -43,14 +43,14 @@
             <Version>0.3.36</Version>
             <Comment>Dep fix.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-10-07</Date>
             <Version>0.3.36</Version>
             <Comment>First release.</Comment>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

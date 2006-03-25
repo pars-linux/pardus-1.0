@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>eric</Name>
         <Homepage>http://www.die-offenbachs.de/detlev/eric3.html</Homepage>
         <Packager>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:gui</IsA>
@@ -44,21 +44,21 @@
             <Version>3.8.0</Version>
             <Comment>Update to stable 3.8.0 release</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-11-05</Date>
             <Version>3.8.0_rc2</Version>
             <Comment>update</Comment>
             <Name>Eray Özkural</Name>
-            <Email>eray@uludag.org.tr</Email>
+            <Email>eray@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-10-07</Date>
             <Version>3.7.2</Version>
             <Comment>First release.</Comment>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

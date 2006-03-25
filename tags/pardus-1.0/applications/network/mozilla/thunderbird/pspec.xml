@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 
 <PISI>
     <Source>
@@ -7,7 +7,7 @@
         <Homepage>http://www.mozilla.org/projects/thunderbird/</Homepage>
         <Packager>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Packager>
         <License>MPL-1.1</License>
         <License>NPL-1.1</License>
@@ -81,42 +81,42 @@
             <Version>1.5_rc2</Version>
             <Comment>New release</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="5">
             <Date>2005-11-28</Date>
             <Version>1.5_rc1</Version>
-            <Comment>Really fix http://bugs.uludag.org.tr/show_bug.cgi?id=770</Comment>
+            <Comment>Really fix http://bugs.pardus.org.tr/show_bug.cgi?id=770</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="4">
             <Date>2005-11-25</Date>
             <Version>1.5_rc1</Version>
             <Comment>Default mimetypes for Thunderbird</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-11-18</Date>
             <Version>1.5_rc1</Version>
             <Comment>Fix GTK+ 2.8 problems</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-11-05</Date>
             <Version>1.5_rc1</Version>
             <Comment>Update to version 1.5rc1, update translations and fix #501</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-17-10</Date>
             <Version>1.5_beta2</Version>
             <Comment>Initial import</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

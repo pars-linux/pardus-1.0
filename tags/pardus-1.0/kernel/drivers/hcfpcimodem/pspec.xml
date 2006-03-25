@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 
 <!DOCTYPE PISI 
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 
 <PISI>
     <Source>
@@ -9,7 +9,7 @@
         <Homepage>http://www.linuxant.com/drivers/hcf/index.php</Homepage>
         <Packager>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Packager>
         <License>Conexant</License>
         <IsA>library</IsA>
@@ -43,14 +43,14 @@
             <Version>1.08</Version>
             <Comment>Remve addition of init scripts to runlevels</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-12-08</Date>
             <Version>1.08</Version>
             <Comment>First release.</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

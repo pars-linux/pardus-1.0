@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>jimmac-xcursor</Name>
         <Homepage>http://www.kde-look.org/content/show.php?content=6550</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>plugin</IsA>
@@ -15,7 +15,7 @@
         <Summary xml:lang="tr">Jimmac KDE imleç teması</Summary>
         <Description>X11 mouse theme based on Jimmac's cursors</Description>
         <Description xml:lang="tr">Jimmac KDE imleç teması</Description>
-        <Archive sha1sum="5d09f02777c0c0ff6399a8ebb1991144c445e50c" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/6550-Jimmac.tar.gz</Archive>
+        <Archive sha1sum="5d09f02777c0c0ff6399a8ebb1991144c445e50c" type="targz">ftp://ftp.pardus.org.tr/pub/pisi/source/6550-Jimmac.tar.gz</Archive>
     </Source>
 
     <Package>
@@ -31,7 +31,7 @@
             <Version>0.1</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

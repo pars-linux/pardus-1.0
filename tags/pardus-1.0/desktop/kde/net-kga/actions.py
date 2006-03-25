@@ -5,7 +5,7 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 #
-# Gürer Özen <gurer@uludag.org.tr>
+# Gürer Özen <gurer@pardus.org.tr>
 
 from pisi.actionsapi import pythonmodules
 from pisi.actionsapi import pisitools

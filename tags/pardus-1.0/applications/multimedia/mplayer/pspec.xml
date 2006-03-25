@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 
-<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 
 <PISI>
     <Source>
@@ -8,7 +8,7 @@
         <Homepage>http://www.mplayerhq.hu/</Homepage>
         <Packager>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:gui</IsA>
@@ -16,7 +16,7 @@
         <Description xml:lang="tr">Linux için çokluortam oynatıcı</Description>
         <Summary xml:lang="en">Media Player for Linux</Summary>
         <Summary xml:lang="tr">Linux için çokluortam oynatıcı</Summary>
-        <Archive type="tarbz2" sha1sum="45088085b668699bab9250e3ea14aaa87c3ce3fd">ftp://ftp.uludag.org.tr/pub/pisi/source/mplayer-20051121.tar.bz2</Archive>
+        <Archive type="tarbz2" sha1sum="45088085b668699bab9250e3ea14aaa87c3ce3fd">ftp://ftp.pardus.org.tr/pub/pisi/source/mplayer-20051121.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency versionFrom="0.9.0">xvid</Dependency>
             <Dependency versionFrom="20030428">divx4linux</Dependency>
@@ -128,84 +128,84 @@
             <Version>20051121</Version>
             <Comment>First search for arts, then for alsa, for some soundcards</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
         <Update release="11">
             <Date>2005-12-23</Date>
             <Version>20051121</Version>
             <Comment>Fix skin language, needs lots of work</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
         <Update release="10">
             <Date>2005-12-21</Date>
             <Version>20051121</Version>
             <Comment>Fix desktop file</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
         <Update release="9">
             <Date>2005-12-12</Date>
             <Version>20051121</Version>
             <Comment>Add lirc support</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
         <Update release="8">
             <Date>2005-12-05</Date>
             <Version>20051121</Version>
             <Comment>Enable nas</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="7" type="security">
             <Date>2005-12-02</Date>
             <Version>20051121</Version>
             <Comment>Apply a patch from upstream to fix possible overflow in default_get_buffer</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="6">
             <Date>2005-11-29</Date>
             <Version>20051121</Version>
             <Comment>Removed CFLAG modification, really enable samba</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
         <Update release="5">
             <Date>2005-11-28</Date>
             <Version>20051121</Version>
             <Comment>Enable samba</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="4">
             <Date>2005-11-25</Date>
             <Version>20051121</Version>
             <Comment>Enable live/libdts/twolame/internal-faad and disable cdparanoia so we can use libcdio for real</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-11-24</Date>
             <Version>20051121</Version>
             <Comment>Skin improvement</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
         <Update release="2" type="Bug">
             <Date>2005-11-21</Date>
             <Version>20051121</Version>
             <Comment>Version bump</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-10-19</Date>
             <Version>20051019</Version>
             <Comment>First release.</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

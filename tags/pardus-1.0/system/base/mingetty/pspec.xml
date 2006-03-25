@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>mingetty</Name>
         <Homepage>ftp://rpmfind.net/linux/fedora/core/3/SRPMS</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:console</IsA>
@@ -15,7 +15,7 @@
         <Summary xml:lang="tr">Sadece sanal konsollar için yekpare bir getty programı</Summary>
         <Description>A compact getty program for virtual consoles only</Description>
         <Description xml:lang="tr">Sadece sanal konsollar için yekpare bir getty programı</Description>
-        <Archive sha1sum="c635d7d5c7725284a0ac6109914644638784ab76" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/mingetty-1.00.tar.gz</Archive>
+        <Archive sha1sum="c635d7d5c7725284a0ac6109914644638784ab76" type="targz">ftp://ftp.pardus.org.tr/pub/pisi/source/mingetty-1.00.tar.gz</Archive>
         <Patches>
             <Patch level="1">mingetty-1.00-autologin.patch</Patch>
             <Patch level="1">mingetty-1.00-strerror.patch</Patch>
@@ -39,7 +39,7 @@
             <Version>1.0</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

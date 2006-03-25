@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>kio-slp</Name>
         <Homepage>http://www.suse.de</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>library</IsA>
@@ -14,7 +14,7 @@
         <Summary xml:lang="tr">OpenSLP için KIO-Slave</Summary>
         <Description>KIO-Slave for OpenSLP</Description>
         <Description xml:lang="tr">OpenSLP için KIO-Slave</Description>
-        <Archive sha1sum="553bff744da0ff63b1ef4c5534490b9738620d9f" type="targz">http://cekirdek.uludag.org.tr/~caglar/kio_slp-0.4.1.tar.gz</Archive>
+        <Archive sha1sum="553bff744da0ff63b1ef4c5534490b9738620d9f" type="targz">http://cekirdek.pardus.org.tr/~caglar/kio_slp-0.4.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>kdebase</Dependency>
             <Dependency versionFrom="1.2.1">openslp</Dependency>
@@ -39,14 +39,14 @@
             <Version>0.4.1</Version>
             <Comment>3.4 to 3.5</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-11-10</Date>
             <Version>0.4.1</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

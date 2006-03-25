@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>python</Name>
         <Homepage>http://www.python.org/</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>PSF-2.2</License>
         <IsA>app:console</IsA>
@@ -71,56 +71,56 @@
             <Version>2.4.2</Version>
             <Comment>Do not convert py's to py/[c-o]</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="7">
             <Date>2005-10-26</Date>
             <Version>2.4.2</Version>
             <Comment>Patch for unicode problem in Lib/fileinput.py added (#579)</Comment>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Update>
         <Update release="6">
             <Date>2005-10-26</Date>
             <Version>2.4.2</Version>
             <Comment>Patch added. Fixes #338</Comment>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Update>
         <Update release="5">
             <Date>2005-10-17</Date>
             <Version>2.4.2</Version>
             <Comment>Added patch for changing default encoding to utf-8.</Comment>
             <Name>Barış Metin</Name>
-            <Email>baris@uludag.org.tr</Email>
+            <Email>baris@pardus.org.tr</Email>
         </Update>
         <Update release="4">
             <Date>2005-10-14</Date>
             <Version>2.4.2</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-10-14</Date>
             <Version>2.3.4</Version>
             <Comment>Postinstall script added</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-10-12</Date>
             <Version>2.3.4</Version>
             <Comment>dosed in actions.py fixed.</Comment>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-08-10</Date>
             <Version>2.3.4</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

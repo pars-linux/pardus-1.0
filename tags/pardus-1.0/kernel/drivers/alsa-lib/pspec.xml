@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI 
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>alsa-lib</Name>
         <Homepage>http://www.alsa-project.org/</Homepage>
         <Packager>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>library</IsA>
@@ -44,35 +44,35 @@
             <Version>1.0.10</Version>
             <Comment>Fix https://bugtrack.alsa-project.org/alsa-bug/view.php?id=1559</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="4">
             <Date>2005-11-18</Date>
             <Version>1.0.10</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-11-16</Date>
             <Version>1.0.10_rc3</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-09-02</Date>
             <Version>1.0.8</Version>
             <Comment>Some minor cleanup, dep. fix</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-09-02</Date>
             <Version>1.0.8</Version>
             <Comment>First release.</Comment>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

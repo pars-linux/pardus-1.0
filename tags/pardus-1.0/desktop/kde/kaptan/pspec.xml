@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>kaptan</Name>
-        <Homepage>http://www.uludag.org.tr</Homepage>
+        <Homepage>http://www.pardus.org.tr</Homepage>
         <Packager>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:gui</IsA>
@@ -14,7 +14,7 @@
         <Summary xml:lang="tr">Pardus Kaptan</Summary>
         <Description>Pardus Captain</Description>
         <Description xml:lang="tr">Pardus Kaptan</Description>
-        <Archive sha1sum="4ebaaa7b5a9ed4bdd8b39a7ad7521401e7ae02b6" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/kaptan-1.0.tar.bz2</Archive>
+        <Archive sha1sum="4ebaaa7b5a9ed4bdd8b39a7ad7521401e7ae02b6" type="tarbz2">ftp://ftp.pardus.org.tr/pub/pisi/source/kaptan-1.0.tar.bz2</Archive>
     </Source>
 
     <Package>
@@ -35,7 +35,7 @@
             <Version>1.0</Version>
             <Comment>First release.</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

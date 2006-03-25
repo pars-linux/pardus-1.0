@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>pisi-kga</Name>
-        <Homepage>http://www.uludag.org.tr/</Homepage>
+        <Homepage>http://www.pardus.org.tr/</Homepage>
         <Packager>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:gui</IsA>
@@ -15,7 +15,7 @@
         <Description xml:lang="en">PiSi KGA is a graphical interface for PiSi</Description>
         <Summary xml:lang="tr">PiSi kullanıcı grafik arayüzü</Summary>
         <Description xml:lang="tr">Paket güncelleme, kurma ve kaldırma gibi işlerin TASMA içerisinden, grafik ortamda yapılabilmesini sağlayan bir arayüz</Description>
-        <Archive sha1sum="c59706a15bddcc55a0b36acf008c9bfb598a5ff0" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/pisi-kga-1.0.1.tar.bz2</Archive>
+        <Archive sha1sum="c59706a15bddcc55a0b36acf008c9bfb598a5ff0" type="tarbz2">ftp://ftp.pardus.org.tr/pub/pisi/source/pisi-kga-1.0.1.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>python</Dependency>
             <Dependency>PyQt</Dependency>
@@ -47,63 +47,63 @@
             <Version>1.0.1</Version>
             <Comment>New stable release</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="8">
             <Date>2005-12-19</Date>
             <Version>1.0.1_beta1</Version>
             <Comment>New release</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="7">
             <Date>2005-12-14</Date>
             <Version>1.0</Version>
             <Comment>Update to 1.0 release</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="6">
             <Date>2005-11-30</Date>
             <Version>1.0_rc1</Version>
             <Comment>New release</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="5">
             <Date>2005-11-21</Date>
             <Version>1.0_alpha5</Version>
             <Comment>3.4 to 3.5</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="4">
             <Date>2005-10-31</Date>
             <Version>1.0_alpha5</Version>
             <Comment>Many fixes</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-10-07</Date>
             <Version>1.0_alpha4</Version>
             <Comment>Many fixes</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-10-07</Date>
             <Version>1.0_alpha3</Version>
             <Comment>Fix important bugs</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-10-05</Date>
             <Version>1.0_alpha3</Version>
             <Comment>First release.</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

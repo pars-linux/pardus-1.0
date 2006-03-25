@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 
 <!DOCTYPE PISI 
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 
 <PISI>
     <Source>
@@ -9,13 +9,13 @@
         <Homepage>http://dev.gentoo.org/~spock/projects/gensplash/</Homepage>
         <Packager>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:console</IsA>
         <Summary xml:lang="en">Framebuffer splash utilities.</Summary>
         <Description xml:lang="en">Framebuffer splash utilities.</Description>
-        <Archive type="tarbz2" sha1sum="7c5b5980c36992d12a86caaa60d00334c7242d2a">ftp://ftp.uludag.org.tr/pub/pisi/source/splashutils-1.1.9.10.tar.bz2</Archive>
+        <Archive type="tarbz2" sha1sum="7c5b5980c36992d12a86caaa60d00334c7242d2a">ftp://ftp.pardus.org.tr/pub/pisi/source/splashutils-1.1.9.10.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency versionFrom="2">freetype</Dependency>
             <Dependency versionFrom="1.2.7">libpng</Dependency>
@@ -60,14 +60,14 @@
             <Version>1.1.9.10</Version>
             <Comment>Use Pardus theme</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-10-25</Date>
             <Version>1.1.9.10</Version>
             <Comment>First release.</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>
