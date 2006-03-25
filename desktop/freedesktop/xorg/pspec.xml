@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>xorg</Name>
         <Homepage>http://xorg.freedesktop.org/</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>Adobe-X</License>
         <License>CID</License>
@@ -151,98 +151,98 @@
             <Version>6.9.0</Version>
             <Comment>Version bump to stable release, sweet</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="13">
             <Date>2005-12-21</Date>
             <Version>6.8.99_rc4</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="12">
             <Date>2005-12-19</Date>
             <Version>6.8.99_rc3</Version>
             <Comment>split fonts and tr keyboard layouts</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="11">
             <Date>2005-12-09</Date>
             <Version>6.8.99_rc3</Version>
             <Comment>Add accelfactor template to xorg.py</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
          <Update release="10">
             <Date>2005-12-06</Date>
             <Version>6.8.99_rc3</Version>
             <Comment>Make sure X starts with solid color background even without a DM</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
         <Update release="9">
             <Date>2005-12-05</Date>
             <Version>6.8.99_rc3</Version>
             <Comment>Change symlink /usr/lib/X11/xkb/compiled, update xorg.py</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
         <Update release="8">
             <Date>2005-12-05</Date>
             <Version>6.8.99_rc3</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="7">
             <Date>2005-11-26</Date>
             <Version>6.8.99_rc2</Version>
             <Comment>xorg.py added as an additional file</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="6">
             <Date>2005-11-11</Date>
             <Version>6.8.99_rc2</Version>
             <Comment>Version bump to RC2</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="5">
             <Date>2005-11-05</Date>
             <Version>6.8.99_rc1</Version>
             <Comment>Dep fix, cursor fix</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="4">
             <Date>2005-10-19</Date>
             <Version>6.8.99_rc1</Version>
             <Comment>Version bump to RC1</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-10-14</Date>
             <Version>6.8.99-20051014</Version>
             <Comment>Version bump to 2005-10-14 cvs.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-10-12</Date>
             <Version>6.8.2</Version>
             <Comment>dosed functions in action.py fixed.</Comment>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-08-28</Date>
             <Version>6.8.2</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

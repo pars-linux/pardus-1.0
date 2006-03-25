@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI 
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>wireless-tools</Name>
         <Homepage>http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/Tools.html</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:console</IsA>
@@ -41,28 +41,28 @@
             <Version>28_pre10</Version>
             <Comment>Comar script updated.</Comment>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Update>                                                  
         <Update release="5">
             <Date>2005-12-25</Date>
             <Version>28_pre10</Version>
             <Comment>Comar script updated.</Comment>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Update>                                                  
         <Update release="4">
             <Date>2005-12-24</Date>
             <Version>28_pre10</Version>
             <Comment>Comar script updated.</Comment>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Update>                                                  
         <Update release="3">
             <Date>2005-12-15</Date>
             <Version>28_pre10</Version>
             <Comment>Comar script added.</Comment>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Update>                                                  
         <Update release="2">
             <Date>2005-12-05</Date>
@@ -76,7 +76,7 @@
             <Version>27</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

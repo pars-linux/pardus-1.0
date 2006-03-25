@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>libdts</Name>
         <Homepage>http://developers.videolan.org/libdca.html</Homepage>
         <Packager>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Packager>
         <License>GPL</License>
         <IsA>library</IsA>
@@ -15,7 +15,7 @@
         <Description xml:lang="tr">libdts DTS tutarlı akustik streamlerini çözebilen ücretsiz bir kütüphane</Description>
         <Summary>Library for decoding DTS Coherent Acoustics streams</Summary>
         <Summary xml:lang="tr">libdts DTS tutarlı akustik streamlerini çözebilen ücretsiz bir kütüphane</Summary>
-        <Archive sha1sum="79df99d8726806122ec2c2a5e4f31fe45d2d4ca2" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/libdts-0.0.2.tar.bz2</Archive>
+        <Archive sha1sum="79df99d8726806122ec2c2a5e4f31fe45d2d4ca2" type="tarbz2">ftp://ftp.pardus.org.tr/pub/pisi/source/libdts-0.0.2.tar.bz2</Archive>
     </Source>
     
     <Package>
@@ -32,7 +32,7 @@
             <Version>0.0.2</Version>
             <Comment>First release.</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

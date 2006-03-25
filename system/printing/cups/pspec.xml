@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>cups</Name>
         <Homepage>http://www.cups.org/</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>daemon</IsA>
@@ -69,63 +69,63 @@
             <Version>1.1.23</Version>
             <Comment>Fix CVE-2005-3191/2/3</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="8">
             <Date>2005-12-17</Date>
             <Version>1.1.23</Version>
             <Comment>real fix for #691</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="7">
             <Date>2005-12-06</Date>
             <Version>1.1.23</Version>
             <Comment>fix #691</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="6">
             <Date>2005-12-05</Date>
             <Version>1.1.23</Version>
             <Comment>fix #947</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="5">
             <Date>2005-12-05</Date>
             <Version>1.1.23</Version>
             <Comment>Add dependency to foomatic-db. If user wants a printings system, tho shall have the drivers</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
         <Update release="4">
             <Date>2005-11-18</Date>
             <Version>1.1.23</Version>
             <Comment>Bug fix and some tweak</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-10-14</Date>
             <Version>1.1.23</Version>
             <Comment>Postinstall script added</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-10-11</Date>
             <Version>1.1.23</Version>
             <Comment>dosed function in actions.py and a typo in pspec.xml fixed</Comment>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-08-25</Date>
             <Version>1.1.23</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

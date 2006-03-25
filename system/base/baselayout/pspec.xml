@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 
 <PISI>
     <Source>
         <Name>baselayout</Name>
-        <Homepage>http://www.uludag.org.tr/</Homepage>
+        <Homepage>http://www.pardus.org.tr/</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:console</IsA>
@@ -17,7 +17,7 @@
         <Summary xml:lang="tr">Dosya sisteminin temel planı ve başlangıç betikleri</Summary>
         <Description>Filesystem baselayout and init scripts</Description>
         <Description xml:lang="tr">Dosya sisteminin temel yerleşim planı ve başlangıç betikleri</Description>
-        <Archive sha1sum="3f96990dfcd7e1eaa64b25ac2f5374453a7627a2" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/rc-scripts-0.4.1.tar.gz</Archive>
+        <Archive sha1sum="3f96990dfcd7e1eaa64b25ac2f5374453a7627a2" type="targz">ftp://ftp.pardus.org.tr/pub/pisi/source/rc-scripts-0.4.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>linux-headers</Dependency>
         </BuildDependencies>
@@ -83,49 +83,49 @@
             <Version>0.4.1</Version>
             <Comment>New release</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="6">
             <Date>2005-12-26</Date>
             <Version>0.4</Version>
             <Comment>New release</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="5">
             <Date>2005-12-26</Date>
             <Version>0.3.1</Version>
             <Comment>DNS/hostname comar script</Comment>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Update>
         <Update release="4">
             <Date>2005-12-26</Date>
             <Version>0.3.1</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-12-15</Date>
             <Version>0.3</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-11-29</Date>
             <Version>0.2</Version>
             <Comment>Version bump and end of SATA/SCSI etc. boot story</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-11-26</Date>
             <Version>0.1</Version>
             <Comment>First release with new versioning.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

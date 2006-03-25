@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>gcc</Name>
         <Homepage>http://www.gnu.org/software/gcc/gcc.html</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <License>LGPL-2.1</License>
@@ -103,63 +103,63 @@
             <Version>3.4.5</Version>
             <Comment>Version bump</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="8">
             <Date>2005-11-21</Date>
             <Version>3.4.5_20051120</Version>
             <Comment>Update to GCC 3.4 branch 20051121 snapshot</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="7">
             <Date>2005-11-20</Date>
             <Version>3.4.4</Version>
             <Comment>Fix PCH crashes Gcc bug #14400</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="6">
             <Date>2005-10-30</Date>
             <Version>3.4.4</Version>
             <Comment>05gcc belongs libgcc</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="5">
             <Date>2005-10-26</Date>
             <Version>3.4.4</Version>
             <Comment>Typo fixes, some optimizations by İsmail Dönmez</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="4">
             <Date>2005-10-14</Date>
             <Version>3.4.4</Version>
             <Comment>Postinstall script added to fix libtool files for hardcoded gcc library paths</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-10-12</Date>
             <Version>3.4.4</Version>
             <Comment>dosed function in action.py fixed.</Comment>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-10-10</Date>
             <Version>3.4.4</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-08-11</Date>
             <Version>3.3.5.20050130</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

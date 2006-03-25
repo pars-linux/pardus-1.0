@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>dialog</Name>
@@ -15,7 +15,7 @@
         <Description xml:lang="tr">Kabuktan dialog gösteren bir araç</Description>
         <Summary>Tool to display dialog boxes from a shell</Summary>
         <Summary xml:lang="tr">Kabuktan dialog gösteren bir araç</Summary>
-        <Archive sha1sum="d5d80f43c08dcdc44224da8fedd83d77e6943b3f" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/dialog_1.0-20051107.orig.tar.gz</Archive>
+        <Archive sha1sum="d5d80f43c08dcdc44224da8fedd83d77e6943b3f" type="targz">ftp://ftp.pardus.org.tr/pub/pisi/source/dialog_1.0-20051107.orig.tar.gz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="2.04">bash</Dependency>
             <Dependency versionFrom="5.2">ncurses</Dependency>
@@ -45,7 +45,7 @@
             <Version>1.0-20051030</Version>
             <Comment>Version Upgrade</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-11-05</Date>

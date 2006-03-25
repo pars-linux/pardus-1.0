@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>xcolor</Name>
         <Homepage>http://www.ukern.de/tex/xcolor.html</Homepage>
         <Packager>
             <Name>Barış Metin</Name>
-            <Email>baris@uludag.org.tr</Email>
+            <Email>baris@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>plugin</IsA>
@@ -41,7 +41,7 @@ ilde erişimi sağlayan bir LaTeX paketidir</Description>
             <Version>2.06</Version>
             <Comment>First release.</Comment>
             <Name>Barış Metin</Name>
-            <Email>baris@uludag.org.tr</Email>
+            <Email>baris@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

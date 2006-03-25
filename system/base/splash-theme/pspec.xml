@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!DOCTYPE PISI 
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 
 <PISI>
     <Source>
         <Name>splash-theme</Name>
-        <Homepage>http://www.uludag.org.tr</Homepage>
+        <Homepage>http://www.pardus.org.tr</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>data</IsA>
         <Summary xml:lang="en">Bootsplash theme</Summary>
         <Description xml:lang="en">Bootsplash theme</Description>
-        <Archive type="targz" sha1sum="b40d9b0648fc625eec1a64c23fe34d25496e1ba5">ftp://ftp.uludag.org.tr/pub/pisi/source/splash-theme-0.1.tar.gz</Archive>
+        <Archive type="targz" sha1sum="b40d9b0648fc625eec1a64c23fe34d25496e1ba5">ftp://ftp.pardus.org.tr/pub/pisi/source/splash-theme-0.1.tar.gz</Archive>
     </Source>
 
     <Package>
@@ -30,7 +30,7 @@
             <Version>0.1</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>ffmpeg</Name>
         <Homepage>http://ffmpeg.sourceforge.net</Homepage>
         <Packager>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Packager>
         <License>GPL</License>
         <IsA>app:console</IsA>
@@ -15,7 +15,7 @@
         <Description xml:lang="tr">FFmpeg ses ve görüntü dosyalarını kaydedebilen,dönüştürebilen ve açabilen komple bir çözüm. libavcodec ve birçok popüler ses/görüntü codeclerini içerir.FFmpeg linux altında geliştirilmiş olmasına rağmen windows'un da dahil olduğu birçok işletim sistemi altında derlenip çalıştırılabilir</Description>
         <Summary>FFmpeg is a complete solution to record, convert and stream audio and video</Summary>
         <Summary xml:lang="tr">FFmpeg ses ve görüntü dosyalarını kaydedebilen, dönüştürebilen ve açabilen yazılımdır</Summary>
-        <Archive sha1sum="227d8ef6994a17e6b32fc3dd8ee707a13ffad328" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/ffmpeg-20051122.tar.bz2</Archive>
+        <Archive sha1sum="227d8ef6994a17e6b32fc3dd8ee707a13ffad328" type="tarbz2">ftp://ftp.pardus.org.tr/pub/pisi/source/ffmpeg-20051122.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>faac</Dependency>
             <Dependency>faad2</Dependency>
@@ -73,21 +73,21 @@
             <Version>20051122</Version>
             <Comment>Apply a patch from upstream to fix possible overflow in default_get_buffer</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-11-22</Date>
             <Version>20051122</Version>
             <Comment>Version bump</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-10-16</Date>
             <Version>20051016</Version>
             <Comment>First release.</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

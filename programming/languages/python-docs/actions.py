@@ -5,7 +5,7 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 #
-# Onur Küçük <onur@uludag.org.tr>
+# Onur Küçük <onur@pardus.org.tr>
 
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get

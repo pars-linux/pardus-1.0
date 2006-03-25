@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>tcp-wrappers</Name>
@@ -15,7 +15,7 @@
         <Description>TCP Wrappers</Description>
         <Summary xml:lang="tr">TCP Wrappers</Summary>
         <Description xml:lang="tr">TCP Wrappers, Linux işletim sistemi üzerinde çalışan servislere erişimi kontrol eden bir güvenlik programıdır.</Description>
-        <Archive sha1sum="a7c59950937b409b4cbc4a37b097886c1f733563" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/tcp_wrappers_7.6.tar.gz</Archive>
+        <Archive sha1sum="a7c59950937b409b4cbc4a37b097886c1f733563" type="targz">ftp://ftp.pardus.org.tr/pub/pisi/source/tcp_wrappers_7.6.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>sed</Dependency>
         </BuildDependencies>

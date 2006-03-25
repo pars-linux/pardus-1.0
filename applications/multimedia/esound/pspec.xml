@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>esound</Name>
         <Homepage>http://www.tux.org/~ricdude/EsounD.html</Homepage>
         <Packager>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <License>LGPL-2</License>
@@ -16,7 +16,7 @@
         <Summary xml:lang="tr">Enlightened Ses Sunucusu</Summary>
         <Description>The Enlightened Sound Daemon</Description>
         <Description xml:lang="tr">Bu program birkaç farklı dijital ses akımını bir aygıtta toplayarak farklı sesleri aynı anda duymayı sağlar.</Description>
-        <Archive sha1sum="9fa14a174803844ca0e9d2a9833378de74c6f93d" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/esound-0.2.34.tar.bz2</Archive>
+        <Archive sha1sum="9fa14a174803844ca0e9d2a9833378de74c6f93d" type="tarbz2">ftp://ftp.pardus.org.tr/pub/pisi/source/esound-0.2.34.tar.bz2</Archive>
         <Patches>
         </Patches>
         <BuildDependencies>
@@ -53,7 +53,7 @@
             <Version>0.2.34</Version>
             <Comment>First release.</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

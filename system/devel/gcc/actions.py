@@ -5,7 +5,7 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 #
-# S.Çağlar Onur <caglar@uludag.org.tr>
+# S.Çağlar Onur <caglar@pardus.org.tr>
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
@@ -29,7 +29,7 @@ def setup():
     pisitools.dosed("gcc/config.in", "HAVE_LD_AS_NEEDED", "USE_LD_AS_NEEDED")
     
     # Branding :P
-    pisitools.dosed("gcc/version.c", "<URL:http://gcc.gnu.org/bugs.html>" , "<URL:http://bugs.uludag.org.tr>")
+    pisitools.dosed("gcc/version.c", "<URL:http://gcc.gnu.org/bugs.html>" , "<URL:http://bugs.pardus.org.tr>")
     
     libtools.gnuconfig_update()
 

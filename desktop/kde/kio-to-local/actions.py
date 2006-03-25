@@ -5,7 +5,7 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 #
-# İsmail Dönmez <meren@uludag.org.tr> 
+# İsmail Dönmez <meren@pardus.org.tr> 
 
 from pisi.actionsapi import scons
 from pisi.actionsapi import pisitools

@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI  
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>lib-compat</Name>
-        <Homepage>http://www.uludag.org.tr</Homepage>
+        <Homepage>http://www.pardus.org.tr</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>library</IsA>
@@ -15,7 +15,7 @@
         <Description>Compatibility C++ and libc5 and libc6 libraries for programs new and old</Description>
         <Summary xml:lang="tr">libc5,libc6 ve C++ kütüphaneleri uyumlulukları</Summary>
         <Description xml:lang="tr">Eski ve yeni programlar için libc5,libc6 ve C++ kütüphaneleri uyumlulukları</Description>
-        <Archive sha1sum="b11d170831f0f96674ac4a6d27afc32530c90fe3" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/lib-compat-1.4.tar.gz</Archive>
+        <Archive sha1sum="b11d170831f0f96674ac4a6d27afc32530c90fe3" type="targz">ftp://ftp.pardus.org.tr/pub/pisi/source/lib-compat-1.4.tar.gz</Archive>
     </Source>
 
     <Package>
@@ -32,7 +32,7 @@
             <Version>1.4</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

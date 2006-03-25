@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI 
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>nvidia</Name>
         <Homepage>http://www.nvidia.com</Homepage>
         <Packager>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Packager>
         <License>EULA</License>
         <IsA>library</IsA>
@@ -15,7 +15,7 @@
         <Summary xml:lang="tr">nVIDIA ekran kartı sürücüleri</Summary>
         <Description>nVIDIA kernel and glx drivers giving optimized 2d/3d performance on Linux</Description>
         <Description xml:lang="tr">2B/3B başarımı için gerekli nVIDIA sürücüleri</Description>
-        <Archive sha1sum="d3b43eb3db6769c9c5f3c5f879664ca5bb1222f5" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/NVIDIA-Linux-x86-1.0-8178-pkg1.tar.bz2</Archive>
+        <Archive sha1sum="d3b43eb3db6769c9c5f3c5f879664ca5bb1222f5" type="tarbz2">ftp://ftp.pardus.org.tr/pub/pisi/source/NVIDIA-Linux-x86-1.0-8178-pkg1.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>kernel-source</Dependency>
             <Dependency>xorg</Dependency>
@@ -75,14 +75,14 @@
             <Version>1.0-8178</Version>
             <Comment>New stable release</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-12-06</Date>
             <Version>1.0-8174</Version>
             <Comment>First release.</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>ddcxinfos</Name>
-        <Homepage>http://cekirdek.uludag.org.tr/~onur/</Homepage>
+        <Homepage>http://cekirdek.pardus.org.tr/~onur/</Homepage>
         <Packager>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:console</IsA>
@@ -15,7 +15,7 @@
         <Summary xml:lang="tr">DDC Sorgulayıcı</Summary>
         <Description>A program to probe DDC info of a monitor</Description>
         <Description xml:lang="tr">Ekranların DDC bilgisini sorgulamak-incelemek için bir program</Description>
-        <Archive sha1sum="e8904e96f9a8da4531c3b02922690cbb69403058" type="targz">http://cekirdek.uludag.org.tr/~onur/distfiles/ddcxinfos-0.1.tar.gz</Archive>
+        <Archive sha1sum="e8904e96f9a8da4531c3b02922690cbb69403058" type="targz">http://cekirdek.pardus.org.tr/~onur/distfiles/ddcxinfos-0.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>glibc</Dependency>
         </BuildDependencies>        
@@ -39,7 +39,7 @@
             <Version>0.1</Version>
             <Comment>First release.</Comment>
             <Name>Onur Küçük</Name>
-            <Email>onur@uludag.org.tr</Email>
+            <Email>onur@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

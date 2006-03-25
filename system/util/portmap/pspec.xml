@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>portmap</Name>
         <Homepage>ftp://ftp.porcupine.org/pub/security/index.html</Homepage>
         <Packager>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Packager>
         <License>as-is</License>
         <IsA>daemon</IsA>
@@ -16,7 +16,7 @@
         <Summary xml:lang="tr">Portmap, RPC (remote procedure call) uygulama numaralarını TCP/IP protokolüne göre port numaralarına çevirir</Summary>
         <Description>Netkit - portmapper</Description>
         <Description xml:lang="tr">Portmap, RPC (remote procedure call) uygulama numaralarını tcp/ip protokolüne göre port numaralarına çevirir.</Description>
-        <Archive sha1sum="7f3c61b73eddcf4991571bd0d0a712d411d85833" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/portmap_5b.tar.gz</Archive>
+        <Archive sha1sum="7f3c61b73eddcf4991571bd0d0a712d411d85833" type="targz">ftp://ftp.pardus.org.tr/pub/pisi/source/portmap_5b.tar.gz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="7.6">tcp-wrappers</Dependency>
         </BuildDependencies>
@@ -54,14 +54,14 @@
             <Version>5b</Version>
             <Comment>forgotten additional file added to pspec.xml..</Comment>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-09-30</Date>
             <Version>5b</Version>
             <Comment>First release.</Comment>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

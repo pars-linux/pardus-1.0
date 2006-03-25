@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>qscintilla</Name>
         <Homepage>http://www.riverbankcomputing.co.uk/qscintilla/</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>library</IsA>
@@ -41,28 +41,28 @@
             <Version>1.65_20051103</Version>
             <Comment>Fix the qmake build, now installs .so</Comment>
             <Name>Eray Özkural</Name>
-            <Email>eray@uludag.org.tr</Email>
+            <Email>eray@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-11-04</Date>
             <Version>1.65_20051103</Version>
             <Comment>Update to 20051103 snapshot</Comment>
             <Name>Eray Özkural</Name>
-            <Email>eray@uludag.org.tr</Email>
+            <Email>eray@pardus.org.tr</Email>
         </Update>
     <Update release="2">
             <Date>2005-11-01</Date>
             <Version>1.65_20050924</Version>
             <Comment>Update to 20050924 snapshot</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-09-09</Date>
             <Version>1.65</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

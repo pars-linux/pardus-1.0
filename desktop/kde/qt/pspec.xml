@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>qt</Name>
         <Homepage>http://www.trolltech.com/</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>QPL-1.0</License>
         <License>GPL-2</License>
@@ -98,77 +98,77 @@
             <Version>3.3.5</Version>
             <Comment>Add fontconfig optimization patches from Lubos Lunak</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="10">
             <Date>2005-12-13</Date>
             <Version>3.3.5</Version>
             <Comment>Remove Network Transparency support</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="9">
             <Date>2005-12-05</Date>
             <Version>3.3.5</Version>
             <Comment>Network Transparency support</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="8">
             <Date>2005-11-30</Date>
             <Version>3.3.5</Version>
             <Comment>QListView::clear method doesn't reset d->highlighted to NULL</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="7">
             <Date>2005-11-26</Date>
             <Version>3.3.5</Version>
             <Comment>Backport from 3.3.6 snapshot to disable usage of internal freetype headers</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="6">
             <Date>2005-11-24</Date>
             <Version>3.3.5</Version>
             <Comment>Added a patch to enable WindowsXP/MacOSX like round password characters</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="5">
             <Date>2005-11-17</Date>
             <Version>3.3.5</Version>
             <Comment>Add qt defaults, enable anti-aliasing (fix #634)</Comment>
             <Name>Barış Metin</Name>
-            <Email>baris@uludag.org.tr</Email>
+            <Email>baris@pardus.org.tr</Email>
         </Update>
         <Update release="4">
             <Date>2005-11-11</Date>
             <Version>3.3.5</Version>
             <Comment>Enable sqlite and minor dep fix</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-10-15</Date>
             <Version>3.3.5</Version>
             <Comment>Version bump, sync with qt-copy of KDE</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-10-12</Date>
             <Version>3.3.4</Version>
             <Comment>dosed function in action.py fixed.</Comment>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-08-30</Date>
             <Version>3.3.4</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

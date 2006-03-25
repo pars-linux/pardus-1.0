@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>pisi</Name>
-        <Homepage>http://www.uludag.org.tr/</Homepage>
+        <Homepage>http://www.pardus.org.tr/</Homepage>
         <Packager>
             <Name>Eray Özkural</Name>
-            <Email>eray@uludag.org.tr</Email>
+            <Email>eray@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:console</IsA>
@@ -27,7 +27,7 @@ Bazı ana özellikleri:
    - Bütün işlevleri kullanması kolay bir API ile sağlar
    - Düşük ve yüksek seviyeli paket yönetim işlevlerini birleştirir
         </Description>
-        <Archive sha1sum="ea84af72b84671988f5e86d145e7eb9a515b2a76" type="tarbz2">http://uludag.org.tr/~eray/pisi/pisi-1.0.3.tar.bz2</Archive>
+        <Archive sha1sum="ea84af72b84671988f5e86d145e7eb9a515b2a76" type="tarbz2">http://pardus.org.tr/~eray/pisi/pisi-1.0.3.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>gettext</Dependency>
             <Dependency>python</Dependency>
@@ -65,182 +65,182 @@ Bazı ana özellikleri:
         <Version>1.0.3</Version>
         <Comment>bugfix release.</Comment>
         <Name>Eray Özkural</Name>
-        <Email>eray@uludag.org.tr</Email>
+        <Email>eray@pardus.org.tr</Email>
       </Update>
       <Update release="25">
         <Date>2005-12-25</Date>
         <Version>1.0.2</Version>
         <Comment>bugfix release. add comar rt dep. </Comment>
         <Name>Eray Özkural</Name>
-        <Email>eray@uludag.org.tr</Email>
+        <Email>eray@pardus.org.tr</Email>
       </Update>
       <Update release="24">
         <Date>2005-12-24</Date>
         <Version>1.0.1</Version>
         <Comment>bugfix release</Comment>
         <Name>Eray Özkural</Name>
-        <Email>eray@uludag.org.tr</Email>
+        <Email>eray@pardus.org.tr</Email>
       </Update>
       <Update release="23">
         <Date>2005-12-21</Date>
         <Version>1.0</Version>
         <Comment>1.0 release!</Comment>
         <Name>Eray Özkural</Name>
-        <Email>eray@uludag.org.tr</Email>
+        <Email>eray@pardus.org.tr</Email>
       </Update>
       <Update release="22">
         <Date>2005-12-19</Date>
         <Version>1.0_rc5</Version>
         <Comment>Bugfix release.</Comment>
         <Name>Eray Özkural</Name>
-        <Email>eray@uludag.org.tr</Email>
+        <Email>eray@pardus.org.tr</Email>
       </Update>
       <Update release="21">
         <Date>2005-12-15</Date>
         <Version>1.0_rc4</Version>
         <Comment>Bugfix release. Add translation.</Comment>
         <Name>Eray Özkural</Name>
-        <Email>eray@uludag.org.tr</Email>
+        <Email>eray@pardus.org.tr</Email>
       </Update>
       <Update release="20">
         <Date>2005-12-15</Date>
         <Version>1.0_rc3</Version>
         <Comment>Add additional file patch.</Comment>
         <Name>Barış Metin</Name>
-        <Email>baris@uludag.org.tr</Email>
+        <Email>baris@pardus.org.tr</Email>
       </Update>
       <Update release="19">
         <Date>2005-12-15</Date>
         <Version>1.0_rc3</Version>
         <Comment>Update</Comment>
         <Name>Eray Özkural</Name>
-        <Email>eray@uludag.org.tr</Email>
+        <Email>eray@pardus.org.tr</Email>
       </Update>
         <Update release="18">
           <Date>2005-12-12</Date>
           <Version>1.0_rc2</Version>
           <Comment>Update</Comment>
           <Name>Eray Özkural</Name>
-          <Email>eray@uludag.org.tr</Email>
+          <Email>eray@pardus.org.tr</Email>
         </Update>
         <Update release="17">
           <Date>2005-12-07</Date>
           <Version>1.0_rc1</Version>
           <Comment>Update</Comment>
           <Name>Eray Özkural</Name>
-          <Email>eray@uludag.org.tr</Email>
+          <Email>eray@pardus.org.tr</Email>
         </Update>
         <Update release="16">
             <Date>2005-12-07</Date>
             <Version>1.0_beta3</Version>
             <Comment>add bsddb3 dep</Comment>
             <Name>Eray Özkural</Name>
-            <Email>eray@uludag.org.tr</Email>
+            <Email>eray@pardus.org.tr</Email>
         </Update>
         <Update release="15">
             <Date>2005-11-22</Date>
             <Version>1.0_beta3</Version>
             <Comment>Update</Comment>
             <Name>Eray Özkural</Name>
-            <Email>eray@uludag.org.tr</Email>
+            <Email>eray@pardus.org.tr</Email>
         </Update>
         <Update release="14">
             <Date>2005-11-19</Date>
             <Version>1.0_beta2</Version>
             <Comment>Add 4suite dependency. Run rebuild-db in postinstall.</Comment>
             <Name>Eray Özkural</Name>
-            <Email>eray@uludag.org.tr</Email>
+            <Email>eray@pardus.org.tr</Email>
         </Update>
         <Update release="13">
             <Date>2005-11-17</Date>
             <Version>1.0_beta2</Version>
             <Comment>New release. Get rid of tetex build dependency.</Comment>
             <Name>Eray Özkural</Name>
-            <Email>eray@uludag.org.tr</Email>
+            <Email>eray@pardus.org.tr</Email>
         </Update>
         <Update release="12">
             <Date>2005-11-17</Date>
             <Version>1.0_beta1</Version>
             <Comment>Beta release. script installations are done through setup.py</Comment>
             <Name>Eray Özkural</Name>
-            <Email>eray@uludag.org.tr</Email>
+            <Email>eray@pardus.org.tr</Email>
         </Update>
          <Update release="11">
             <Date>2005-11-13</Date>
             <Version>1.0_alpha9</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="10">
             <Date>2005-11-11</Date>
             <Version>1.0_alpha8</Version>
             <Comment>Dep fix</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="9">
             <Date>2005-10-31</Date>
             <Version>1.0_alpha8</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="8">
             <Date>2005-10-25</Date>
             <Version>1.0_alpha7</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="7">
             <Date>2005-10-18</Date>
             <Version>1.0_alpha6</Version>
             <Comment>Use /usr/lib/pisi patch added...</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="6">
             <Date>2005-10-10</Date>
             <Version>1.0_alpha6</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="5">
             <Date>2005-10-05</Date>
             <Version>1.0_alpha5</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="4">
             <Date>2005-10-02</Date>
             <Version>1.0_alpha4</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-09-29</Date>
             <Version>1.0_alpha3</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-09-27</Date>
             <Version>1.0_alpha2</Version>
             <Comment>Version bump</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-09-26</Date>
             <Version>1.0_alpha1</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

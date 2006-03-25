@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>openoffice</Name>
         <Homepage>http://www.openoffice.org</Homepage>
         <Packager>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Packager>
         <License>LGPL</License>
         <IsA>app:gui</IsA>
@@ -15,7 +15,7 @@
         <Description>OpenOffice.org the product is a multi-platform office productivity suite. It includes the key desktop applications, such as a word processor, spreadsheet, presentation manager, and drawing program, with a user interface and feature set similar to other office suites. Sophisticated and flexible, OpenOffice.org also works transparently with a variety of file formats, including those of Microsoft Office.</Description>
         <Description xml:lang="tr">OpenOffice.org, pek çok farklı işletim sisteminde çalışabilen açık kaynak kodlu bir yazılım projesidir. OpenOffice.org'un tüm arayüzleri ve XML tabanlı dosya biçimi açık standartlara sahiptir. OpenOffice.org ürünleri olan kelime işlemci, hesap tablosu, sunum ve çizim programları, her zaman alışılan ofis programlarıyla tam uyumluluk sağlar. 
         </Description>
-        <Archive sha1sum="7b1ed8d868cf4549321da9011a25d4bc427070db" type="tarbz2">ftp://ftp.uludag.org.tr/pub/pisi/source/ooo-build-2.0.1.tar.bz2</Archive>
+        <Archive sha1sum="7b1ed8d868cf4549321da9011a25d4bc427070db" type="tarbz2">ftp://ftp.pardus.org.tr/pub/pisi/source/ooo-build-2.0.1.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>Archive-Zip</Dependency>
             <Dependency>ant</Dependency>
@@ -110,70 +110,70 @@
             <Version>2.0.1</Version>
             <Comment>2.0.1 final stable release</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="9">
             <Date>2005-12-20</Date>
             <Version>2.0.1_m1</Version>
             <Comment>Version bump</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="8">
             <Date>2005-12-07</Date>
             <Version>2.0.1_rc1</Version>
             <Comment>Version bump</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="7">
             <Date>2005-12-05</Date>
             <Version>2.0.0</Version>
             <Comment>Split OO.org and its clipart</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="6">
             <Date>2005-12-02</Date>
             <Version>2.0.0</Version>
             <Comment>Add media:/, system:/ kioslave support</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="5">
             <Date>2005-11-20</Date>
             <Version>2.0.0</Version>
             <Comment>Fix not starting unless run as root once</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="4">
             <Date>2005-11-01</Date>
             <Version>2.0.0</Version>
             <Comment>Install symlinks under /usr/bin</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-11-01</Date>
             <Version>2.0.0</Version>
             <Comment>Add preload support for rootfs 0.2</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-10-26</Date>
             <Version>2.0.0</Version>
             <Comment>Fix installation of clipart</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-10-14</Date>
             <Version>2.0.0</Version>
             <Comment>Initial import</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

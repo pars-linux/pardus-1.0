@@ -5,7 +5,7 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 #
-# S.Çağlar Onur <caglar@uludag.org.tr>
+# S.Çağlar Onur <caglar@pardus.org.tr>
 
 from pisi.actionsapi import kde
 from pisi.actionsapi import get
@@ -28,5 +28,5 @@ def build():
 
 def install():
     kde.install()
-    # Suid ARts, possible fix of http://bugs.uludag.org.tr/show_bug.cgi?id=262
+    # Suid ARts, possible fix of http://bugs.pardus.org.tr/show_bug.cgi?id=262
     shelltools.chmod("%s/bin/artswrapper" % get.kdeDIR(), 04755)

@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>PyQt</Name>
         <Homepage>http://www.riverbankcomputing.co.uk/pyqt/</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:console</IsA>
@@ -16,7 +16,7 @@
         <Description>set of Python bindings for the Qt 3.x Toolkit</Description>
         <Summary xml:lang="tr">Qt 3.x araçları için python bağlayıcıları</Summary>
         <Description xml:lang="tr">Qt 3.x araçları için python bağlayıcıları</Description>
-        <Archive sha1sum="767e57d99a88bf70695d7f16b9341bfa90785bdf" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/PyQt-x11-gpl-snapshot-20051013.tar.gz</Archive>
+        <Archive sha1sum="767e57d99a88bf70695d7f16b9341bfa90785bdf" type="targz">ftp://ftp.pardus.org.tr/pub/pisi/source/PyQt-x11-gpl-snapshot-20051013.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>qt</Dependency>
             <Dependency>python</Dependency>
@@ -46,21 +46,21 @@
             <Version>20051013</Version>
             <Comment>Update to 20051013 snapshot</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-10-07</Date>
             <Version>3.15</Version>
             <Comment>Fix build problems of Qtext</Comment>
             <Name>Gürer Özen</Name>
-            <Email>gurer@uludag.org.tr</Email>
+            <Email>gurer@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-09-09</Date>
             <Version>3.15</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PSPEC SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PSPEC SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>apollon</Name>
@@ -62,7 +62,7 @@
             <Version>1.0.2.1</Version>
             <Comment>fix dependency.</Comment>
             <Name>Barış Metin</Name>
-            <Email>baris@uludag.org.tr</Email>
+            <Email>baris@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-12-01</Date>

@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PSPEC
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>nano</Name>
         <Homepage>http://www.nano-editor.org/</Homepage>
         <Packager>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:console</IsA>
@@ -45,21 +45,21 @@
             <Version>1.3.9</Version>
             <Comment>Update to version 1.3.9</Comment>
             <Name>İsmail Dönmez</Name>
-            <Email>ismail@uludag.org.tr</Email>
+            <Email>ismail@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-11-06</Date>
             <Version>1.3.7</Version>
             <Comment>Remove the broken and user-hostile configuration changes.</Comment>
             <Name>Eray Özkural</Name>
-            <Email>eray@uludag.org.tr</Email>
+            <Email>eray@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-07-16</Date>
             <Version>1.3.7</Version>
             <Comment>First release.</Comment>
             <Name>A. Murat Eren</Name>
-            <Email>meren@uludag.org.tr</Email>
+            <Email>meren@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

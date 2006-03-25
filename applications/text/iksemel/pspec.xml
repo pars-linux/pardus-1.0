@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE PISI
-  SYSTEM "http://www.uludag.org.tr/projeler/pisi/pisi-spec.dtd">
+  SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>iksemel</Name>
         <Homepage>http://iksemel.jabberstudio.org/</Homepage>
         <Packager>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>category</IsA>
@@ -15,7 +15,7 @@
         <Summary xml:lang="tr">XML ayrıştırma kütüphanesi</Summary>
         <Description>iksemel is an XML (eXtensible Markup Language) parser library designed for Jabber applications</Description>
         <Description xml:lang="tr">iksemel; Jabber uygulamaları için tasarlanmış bir XML ayrıştırma kütüphanesidir</Description>
-        <Archive sha1sum="624d5a7bde9f8e8137316513b95d5313b03f9d06" type="targz">ftp://ftp.uludag.org.tr/pub/pisi/source/iksemel-1.2.tar.gz</Archive>
+        <Archive sha1sum="624d5a7bde9f8e8137316513b95d5313b03f9d06" type="targz">ftp://ftp.pardus.org.tr/pub/pisi/source/iksemel-1.2.tar.gz</Archive>
     </Source>
 
     <Package>
@@ -34,7 +34,7 @@
             <Version>1.2</Version>
             <Comment>First release.</Comment>
             <Name>S.Çağlar Onur</Name>
-            <Email>caglar@uludag.org.tr</Email>
+            <Email>caglar@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>
