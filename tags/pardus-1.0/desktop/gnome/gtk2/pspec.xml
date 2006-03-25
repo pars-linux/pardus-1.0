@@ -7,7 +7,7 @@
         <Homepage>http://www.gtk.org/</Homepage>
         <Packager>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Packager>
         <License>LGPL-2</License>
         <IsA>library</IsA>
@@ -90,7 +90,7 @@
             <Version>2.6.4</Version>
             <Comment>First release.</Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

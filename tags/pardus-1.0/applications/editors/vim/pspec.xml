@@ -7,7 +7,7 @@
         <Homepage>http://www.vim.org/</Homepage>
         <Packager>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:console</IsA>
@@ -75,7 +75,7 @@
             <Version>6.4</Version>
             <Comment>Version bump</Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
         <Update release="7">
             <Date>2005-10-30</Date>
@@ -89,7 +89,7 @@
             <Version>6.3</Version>
             <Comment>Cool vimrc enhancements by A. Murat Eren</Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
         <Update release="5">
             <Date>2005-10-09</Date>
@@ -99,7 +99,7 @@
                 Removed my name from actions.vim :)
             </Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
         <Update release="4">
             <Date>2005-10-08</Date>
@@ -109,14 +109,14 @@
                 Added missing m4 dependency.  
             </Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
         <Update release="3">
             <Date>2005-10-08</Date>
             <Version>6.3</Version>
             <Comment>Added missing directory</Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-10-08</Date>
@@ -127,14 +127,14 @@
                 Fixed broken vi link
              </Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-09-17</Date>
             <Version>6.3</Version>
             <Comment>First release.</Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

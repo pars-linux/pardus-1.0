@@ -7,7 +7,7 @@
         <Homepage>http://www.pcre.org/</Homepage>
         <Packager>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Packager>
         <License>BSD</License>
         <IsA>library</IsA>
@@ -42,7 +42,7 @@
             <Version>5.0</Version>
             <Comment>First release.</Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

@@ -5,7 +5,7 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 #
-# Bahadır Kandemir <bahadir@haftalik.net>
+# Bahadır Kandemir <bahadir@pardus.org.tr>
 
 from pisi.actionsapi import pisitools
 

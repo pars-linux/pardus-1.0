@@ -7,7 +7,7 @@
         <Homepage>http://httpd.apache.org/</Homepage>
         <Packager>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Packager>
         <License>Apache-2.0</License>
         <IsA>daemon</IsA>
@@ -69,7 +69,7 @@
             <Version>2.0.55</Version>
             <Comment>Defaullt web root designed by Serdar Söyletir and Görkem Çetin.</Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
         <Update release="4" type="security">
             <Date>2005-11-10</Date>
@@ -83,21 +83,21 @@
             <Version>2.0.54</Version>
             <Comment>Fixed broken file path in apxs2 script.</Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
         <Update release="2">
             <Date>2005-10-22</Date>
             <Version>2.0.54</Version>
             <Comment>Actions.py should not delete share/build/ dir.</Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
         <Update release="1">
             <Date>2005-10-15</Date>
             <Version>2.0.54</Version>
             <Comment>First release.</Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>

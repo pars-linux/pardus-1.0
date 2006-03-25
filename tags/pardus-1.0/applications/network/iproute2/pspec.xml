@@ -7,7 +7,7 @@
         <Homepage>http://developer.osdl.org/dev/iproute2/</Homepage>
         <Packager>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Packager>
         <License>GPL-2</License>
         <IsA>app:console</IsA>
@@ -40,7 +40,7 @@
             <Version>20051007</Version>
             <Comment>First release.</Comment>
             <Name>Bahadır Kandemir</Name>
-            <Email>bahadir@haftalik.net</Email>
+            <Email>bahadir@pardus.org.tr</Email>
         </Update>
     </History>
 </PISI>
