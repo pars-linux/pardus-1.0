@@ -92,7 +92,7 @@ def install():
     pisitools.dosbin("apache2")
 
     # Tidy
-    pisitools.domove("/usr/sbin/apachectl", "/usr/sbin", "apachec2tl")
+    pisitools.domove("/usr/sbin/apachectl", "/usr/sbin", "apache2ctl")
     pisitools.domove("/usr/sbin/list_hooks.pl", "/usr/sbin", "list_hooks2.pl")
     pisitools.domove("/usr/sbin/logresolve.pl", "/usr/sbin", "logresolve2.pl")
     pisitools.domove("/usr/sbin/ab-ssl", "/usr/sbin", "ab2-ssl")
