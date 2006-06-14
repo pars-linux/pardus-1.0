@@ -14,9 +14,7 @@
         <License>Smart-Link</License>
         <IsA>library</IsA>
         <Summary xml:lang="en">Additional module for Smartlink Modems</Summary>
-        <Summary xml:lang="tr">Smartlink modemler için ek modül</Summary>
         <Description xml:lang="en">A dirty workaround for Smartlink Modems to bypass "device is already grabbed" errors </Description>
-        <Description xml:lang="tr">Smartlik modemler için kullanılan ek bir modül</Description>
         <Archive type="targz" sha1sum="7f85002e33b767c10ec0b280e3560198b636971e">http://linmodems.technion.ac.il/packages/smartlink/ungrab-winmodem.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>kernel-source</Dependency>
